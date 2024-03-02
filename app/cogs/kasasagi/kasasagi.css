@@ -6,10 +6,10 @@ body.narou-tweaker {
   font-size: 14px;
   color: #333;
   font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Meiryo,"Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif !important;
-  background-color: #f1f3f5;
+  background-color: var(--background-screen);
 }
 .narou-tweaker #container{
-	background-color: #fff;
+	background-color: var(--background-front);
 	padding: 10px;
 }
 .narou-tweaker li.chapter-graph-list__item>div>div{
@@ -28,7 +28,7 @@ body.narou-tweaker {
 	position: relative;
 	height: auto;
 	min-height: 1px;
-	background-color: #fff;
+	background-color: var(--background-front);
 	border-bottom: 1px solid rgba(0,0,0,.1);
 }
 .p-header__content {
@@ -102,7 +102,7 @@ body.narou-tweaker {
 
 /* Navigation */
 .p-mainheader {
-	background-color: #fff;
+	background-color: var(--background-front);
 }
 .p-mainheader__tab {
 	overflow: hidden;
@@ -149,7 +149,7 @@ body.narou-tweaker {
 	margin: auto;
 	content: '';
 	border-radius: 2px;
-	background-color: #2299ff;
+	background-color: var(--kasasagi-blue);
 	z-index: 9999;
 	bottom: 0;
 }
@@ -190,7 +190,7 @@ body.narou-tweaker {
 	font-size: 12px;
 	padding: 10px 0;
 	text-align: center;
-	background-color: #2299ff;
+	background-color: var(--kasasagi-blue);
 }
 .p-footer__foot,
 .p-footer__foot a,
@@ -219,7 +219,7 @@ body.narou-tweaker {
 	border: 2px solid #eeeeee;
 }
 .slider-outer .nstSlider .bar {
-	background: #2299ff;
+	background: var(--kasasagi-blue);
 }
 .slider-outer .nstSlider .rightGrip,
 .slider-outer .nstSlider .leftGrip {
@@ -227,7 +227,7 @@ body.narou-tweaker {
 	border-radius: 10px;
 	width: 21px;
 	height: 21px;
-	background: #2299ff;
+	background: var(--kasasagi-blue);
 }
 .slider-outer .leftLabel {
 	position: absolute;
@@ -269,7 +269,7 @@ body.narou-tweaker {
   width: 70px;
 }
 .data-table tr td.bar p.graph {
-  background-color: #2299ff;
+  background-color: var(--kasasagi-blue);
   color: #ffffff;
   text-shadow: 1px 1px #999999;
   height: 1em;
