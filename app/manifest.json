@@ -1,0 +1,76 @@
+{
+  "name": "Narou Tweaker",
+  "description": "Inprove experience of syosetu.com",
+  "default_locale": "en",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_ui": {
+		"page": "cogs/options/options.html"
+	},
+  "action": {
+    "default_popup": "cogs/options/options.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "libs/chart.min.js",
+        "libs/jquery.nstSlider.min.js",
+        "cogs/kasasagi/kasasagi.js"
+      ],
+      "css": [
+        "libs/jquery.nstSlider.min.css",
+        "cogs/kasasagi/kasasagi.css"
+      ],
+      "matches": [
+				"https://kasasagi.hinaproject.com/*"
+			]
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "cogs/mypage/loader.js"
+      ],
+      "css": [
+        "cogs/mypage/mypage.css"
+      ],
+      "matches": [
+				"https://mypage.syosetu.com/*",
+        "https://api.syosetu.com/*"
+			]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+        "resources": [
+          "cogs/mypage/mypage.js",
+          "utils/text.js",
+          "utils/api.js"
+        ],
+        "matches": [
+          "https://mypage.syosetu.com/*",
+          "https://api.syosetu.com/*"
+        ]
+    }
+],
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://syosetu.com/*",
+    "https://mypage.syosetu.com/*",
+    "https://kasasagi.hinaproject.com/*"
+  ]
+}

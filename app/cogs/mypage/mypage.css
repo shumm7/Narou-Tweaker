@@ -1,0 +1,8 @@
+.c-panel__item p {
+    line-height: 1.7;
+    min-height:1em;
+}
+
+.c-panel__headline#user-stats {
+    margin-top: 10%;
+}

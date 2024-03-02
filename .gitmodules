@@ -1,0 +1,4 @@
+[submodule "app/libs/jquery-nstslider"]
+	path = app/libs/jquery-nstslider
+	url = https://github.com/lokku/jquery-nstslider.git
+	branch = origin/main

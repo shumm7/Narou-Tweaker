@@ -1,0 +1,127 @@
+/* JS Error Message */
+#js-failed + form {
+	display: none;
+}
+
+/* Base */
+@media not screen and (width: 400px) {
+	/* Excludes Edge */
+	:root {
+		min-width: 550px;
+	}
+}
+	
+:root {
+	--rgh-red: #cf222e;
+}
+
+html::after {
+	/* Add some extra scroll to the page to reduce section toggle jumps/scroll */
+	content: '';
+	display: block;
+	height: 50vh;
+}
+
+p {
+	margin-top: 0;
+}
+
+ul {
+	padding-left: 0;
+	list-style: none;
+}
+
+li[data-validation] {
+	margin-bottom: 0.3em;
+}
+
+details {
+	margin-bottom: 1em;
+}
+
+output {
+	font-style: italic;
+}
+
+details[open] {
+	--border-left: 4px;
+	border-left: solid var(--border-left) #aaa4;
+	padding-bottom: 1px;
+}
+
+summary {
+	--summary-padding: 10px;
+	background: #aaa1;
+	list-style: none;
+	padding: var(--summary-padding);
+	cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+	/* Just for Safari. Chrome uses `list-style` */
+}
+
+summary:hover {
+	background: #aaa4;
+}
+
+details[open] summary {
+	margin-bottom: 10px;
+	padding-left: calc(var(--summary-padding) - var(--border-left));
+}
+
+details[open]> :not(summary) {
+	margin-left: 10px;
+}
+
+
+/* Toggle */
+input[type="checkbox"].toggle {
+	display: none;
+}
+
+label.toggle {
+	position: relative;
+	padding-left: 60px;
+	cursor: pointer;
+}
+
+label.toggle::before, label.toggle::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	transform: translateY(-50%);
+	border: 1.4px solid rgba(0, 0, 0, .3);
+	border-radius: 50%;
+	transition: .2s;
+}
+
+label.toggle::before {
+	background-color: rgba(27, 142, 243, .1);
+	border: 1.4px solid rgba(0, 0, 0, .3);
+	border-radius: 12px;
+	height: 20px;
+	width: 40px;
+	top: 50%;
+	left: 5px;
+}
+
+label.toggle::after {
+	background-color: #fff;
+	border-radius: 50%;
+	height: 23px;
+	width: 23px;
+	top: 50%;
+	left: 0px;
+}
+
+input.toggle:checked+label.toggle::before {
+	background-color: rgb(27, 142, 243);
+}
+
+input.toggle:checked+label.toggle::after {
+	left: 26px;
+}
