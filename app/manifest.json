@@ -28,6 +28,7 @@
         "cogs/kasasagi/kasasagi.js"
       ],
       "css": [
+        "libs/w3-css/w3.css",
         "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
         "cogs/kasasagi/kasasagi.css"
       ],
