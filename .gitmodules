@@ -2,3 +2,6 @@
 	path = app/libs/jquery-nstslider
 	url = https://github.com/lokku/jquery-nstslider.git
 	branch = origin/main
+[submodule "app/libs/w3-css"]
+	path = app/libs/w3-css
+	url = https://github.com/vitorlans/w3-css.git

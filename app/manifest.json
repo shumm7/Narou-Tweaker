@@ -29,8 +29,9 @@
       ],
       "css": [
         "libs/font-awesome/css/all.css",
-        "common.css",
+        "libs/w3-css/w3.css",
         "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
+        "common.css",
         "cogs/kasasagi/kasasagi.css"
       ],
       "matches": [
