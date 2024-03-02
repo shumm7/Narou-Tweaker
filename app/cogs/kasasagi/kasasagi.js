@@ -25,7 +25,9 @@ chrome.storage.sync.get(null, (options) => {
 
         header_inner.append('<div class="p-header__main"><h1 class="p-header__logo"><a href="https://kasasagi.hinaproject.com/"><img style="max-height: 50px;" src="https://kasasagi.hinaproject.com/view/images/kasasagi_logo.gif" alt="KASASAGI"></a></h1><div class="p-header__description">KASASAGIは株式会社ヒナプロジェクトによって作られた<br>アクセス解析システムです。</div></div>')
         header_inner.append('<div class="p-header__mainnav"><ul class="p-header__mainnav-list"></ul></div>')
-        $("ul.p-header__mainnav-list").prepend('<li class="p-header__mainnav-item"><a href="https://syosetu.com/user/top/">ユーザーホーム</a></li>')
+        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://syosetu.com/user/top/">ユーザーホーム</a></li>')
+        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/novelview/infotop/ncode/'+ncode+'/">作品情報</a></li>')
+        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/'+ncode+'/">作品TOP</a></li>')
 
         /* navigation */
         header.append("<div class='p-mainheader'><div class='p-mainheader__tab'></div></div>")
@@ -33,23 +35,18 @@ chrome.storage.sync.get(null, (options) => {
         header_nav.append('<ul class="p-mainheader__tab-list"></ul>')
 
         var header_nav_ul = $("ul.p-mainheader__tab-list")
-        $("ul.novelview_menu li").each(function(){
-            var a = $(this).children("a");
-            var text = a.text().replace("[", "（").replace("]", "）")
-            var a_t = text
-            a[0].innerHTML = a_t
-            
-            
-            if(a.text()=="作品TOPへ戻る"){
-                $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item">' + a[0].outerHTML +'</li>')
-            }else{
-                if(path==a.attr("href")){
-                    header_nav_ul.append('<li class="p-mainheader__tab-list-item is-active">' + a[0].outerHTML +'</li>')
-                }else{
-                    header_nav_ul.append('<li class="p-mainheader__tab-list-item">' + a[0].outerHTML +'</li>')
-                }
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/top/ncode/'+ncode+'/">総合</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/chapter/ncode/'+ncode+'/">部分別ユニーク</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/daypv/ncode/'+ncode+'/">日別PV</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/dayunique/ncode/'+ncode+'/">日別ユニーク</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/monthpv/ncode/'+ncode+'/">月別PV</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/monthunique/ncode/'+ncode+'/">月別ユニーク</a></li>')
+
+        $(".p-mainheader__tab-list-item").each(function(){
+            if(path==$(this).children("a").attr("href")){
+                $(this).addClass("is-active");
             }
-        })
+        });
         $("#novel_header").remove();
 
         /* Footer */
