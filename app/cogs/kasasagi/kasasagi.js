@@ -1,3 +1,5 @@
+import {addInfoIcon} from "../../utils/ui.js"
+
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
     var ncode = getNcode();
@@ -68,6 +70,8 @@ chrome.storage.sync.get(null, (options) => {
 
             $(".novelview_h3").text("部分別 ユニークアクセス")
             if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+            $(".novelview_h3").append($(addInfoIcon("test")))
+            console.log($(addInfoIcon("test")))
         }
 
         chapterUnique();

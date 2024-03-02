@@ -25,9 +25,11 @@
         "libs/jquery-3.7.1.min.js",
         "libs/chart.min.js",
         "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
-        "cogs/kasasagi/kasasagi.js"
+        "cogs/kasasagi/loader.js"
       ],
       "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
         "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
         "cogs/kasasagi/kasasagi.css"
       ],
@@ -41,6 +43,7 @@
         "cogs/mypage/loader.js"
       ],
       "css": [
+        "common.css",
         "cogs/mypage/mypage.css"
       ],
       "matches": [
@@ -51,17 +54,38 @@
   ],
   "web_accessible_resources": [
     {
+      "resources": [
+        "cogs/kasasagi/kasasagi.js"
+      ],
+      "matches": [
+        "https://kasasagi.hinaproject.com/*"
+      ]
+    },
+    {
         "resources": [
-          "cogs/mypage/mypage.js",
-          "utils/text.js",
-          "utils/api.js"
+          "cogs/mypage/mypage.js"
         ],
         "matches": [
           "https://mypage.syosetu.com/*",
           "https://api.syosetu.com/*"
         ]
+    },
+    {
+      "resources": [
+        "utils/text.js",
+        "utils/api.js",
+        "utils/ui.js"
+      ],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": [
+        "/libs/font-awesome/webfonts/*.ttf",
+        "/libs/font-awesome/webfonts/*.woff2"
+      ],
+      "matches": ["<all_urls>"]
     }
-],
+  ],
   "permissions": [
     "storage",
     "tabs",
