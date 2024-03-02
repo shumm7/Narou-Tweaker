@@ -24,11 +24,11 @@
       "js": [
         "libs/jquery-3.7.1.min.js",
         "libs/chart.min.js",
-        "libs/jquery.nstSlider.min.js",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
         "cogs/kasasagi/kasasagi.js"
       ],
       "css": [
-        "libs/jquery.nstSlider.min.css",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
         "cogs/kasasagi/kasasagi.css"
       ],
       "matches": [
