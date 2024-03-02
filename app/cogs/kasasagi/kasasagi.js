@@ -49,6 +49,9 @@ chrome.storage.sync.get(null, (options) => {
         });
         $("#novel_header").remove();
 
+        /* Date Picker */
+        $("input#datepicker").wrap('<div class="datepicker-outer"><label for="datepicker">日付を指定</label></div>')
+
         /* Footer */
         $("#container").after('<div class="l-footer"><div class="p-footer"></div></div>')
         $("#copyright").addClass("p-footer__foot")

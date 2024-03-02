@@ -240,6 +240,46 @@ body.narou-tweaker {
 	top: 0;
 }
 
+/* Date Picker */
+.datepicker-outer {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+.datepicker-outer {
+	max-width: 18rem;
+	padding: 0 0.5rem;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 2rem;
+}
+.datepicker-outer label {
+	font-size: 0.75rem;
+	font-weight: 400;
+	display: block;
+	margin-bottom: 0.5rem;
+	color: #a1a8ae;
+	border: 1px solid #ECEFF1;
+	padding: 0.3rem 0.5rem;
+	border-radius: 0.5rem;
+}
+.datepicker-outer input {
+	text-align: center;
+	margin: auto;
+	display:block;
+	border: none;
+	border-radius: 0.25rem;
+	border: 1px solid transparent;
+	padding: 0;
+	font-size: 1rem;
+	color: #607D8B;
+	width: 100%;
+	margin-top: 0.5rem;
+}
+.datepicker-outer input:focus {
+	outline: none;
+}
+
 /* Tables */
 .data-table {
   border: 1px solid #cccccc;
