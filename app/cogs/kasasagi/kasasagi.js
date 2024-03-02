@@ -1,4 +1,4 @@
-import {addInfoIcon} from "../../utils/ui.js"
+import {addExclamationIconBalloon} from "../../utils/ui.js"
 
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
@@ -69,9 +69,13 @@ chrome.storage.sync.get(null, (options) => {
             var title = m[1]
 
             $(".novelview_h3").text("部分別 ユニークアクセス")
+            $(".novelview_h3").attr("id", "subtitle")
             if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-            $(".novelview_h3").append($(addInfoIcon("test")))
-            console.log($(addInfoIcon("test")))
+            
+            $("form#datepicker_form").insertAfter(".novelview_h3#subtitle")
+            $(".novelview_h3#subtitle").append(addExclamationIconBalloon("本ページの人数は部分単位のユニークです<br>（部分単位のユニークの合計＝作品全体のユニークではありません）"));
+            $(".novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: 10px;");
+            $(".attention").parent().remove();
         }
 
         chapterUnique();
