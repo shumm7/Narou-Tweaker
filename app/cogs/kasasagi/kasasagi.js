@@ -206,8 +206,57 @@ chrome.storage.sync.get(null, (options) => {
 
             /* Table */
             var old_graph = $('.chapter-graph-list');
-            old_graph.after(makeTable("chapter", ["部分", "ユニーク（人）"], labels, data))
+            function makeTableDiffs(id, label, header, data){
+                const size = Math.max(header.length, data.length)
+                const aryMax = function (a, b) {return Math.max(a, b);}
+                const max_data = data.reduce(aryMax)
+                
+                var outer = $("<table class='data-table'></table>")
+                outer.attr("id", id);
+                var table = outer.append("<tbody></tbody>")
+                table.append("<tr><th>"+label[0]+"</th><th colspan='2'>"+label[1]+"</th><th>"+label[2]+"</th><th>"+label[3]+"</th></tr>")
+        
+                for(let i=0; i<size; i++){
+                    var idx = header[i];
+                    var value = data[i];
+                    var value_temp = value;
+                    if(idx==undefined || idx==null){idx=""}
+                    if(value==undefined || value==null){value=""}
+                    if(value_temp==undefined || value_temp==null){value_temp=0}
+        
+                    var bar = Math.floor(value_temp / max_data * 100);
+        
+                    var rate_before = ""
+                    var rate_declease = ""
+                    var style = ""
+                    if(i>0){
+                        var value_before = data[i-1]
+                        if(value_before==undefined || value_before<=0 || value_before==null){
+                            value_before = 1
+                        }
+        
+                        /* 前部分比 */
+                        rate_before = Math.round(value / value_before * 100)
+                        if(rate_before == undefined){
+                            rate_before = ""
+                        }else{
+                            rate_before = rate_before + "%"
+                        }
+        
+                        /* 離脱数 */
+                        rate_declease = -(value_before - value);
+                        if(rate_declease == undefined){
+                            rate_declease = ""
+                        }
+                    }
+        
+        
+                    table.append("<tr><td class='key'>"+ idx +"</td><td class='value'>"+value+"</td><td class='bar'><p class='graph' style='width:"+bar+"%;'></p></td><td class='rate'>"+rate_before+"</td><td class='rate'>"+rate_declease+"</td></tr>")
+                }
+                return outer;
+            }
 
+            old_graph.after(makeTableDiffs("chapter-unique", ["部分", "ユニーク（人）", "前部分比", "離脱数（人）"], labels, data))
             old_graph.remove();
         }
     }

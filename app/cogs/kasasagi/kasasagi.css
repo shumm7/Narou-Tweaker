@@ -308,6 +308,10 @@ body.narou-tweaker {
   text-align: right;
   width: 70px;
 }
+.data-table tr td.rate {
+	text-align: right;
+	width: 70px;
+  }
 .data-table tr td.bar p.graph {
   background-color: var(--kasasagi-blue);
   color: #ffffff;
@@ -317,6 +321,8 @@ body.narou-tweaker {
   text-align: left;
 }
 
-.data-table#chapter {
+/* Specified Table */
+.data-table#chapter-unique {
   margin: auto;
+  width: 460px;
 }
