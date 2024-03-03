@@ -1,4 +1,5 @@
 import {addExclamationIconBalloon} from "../../utils/ui.js"
+import { saveJson } from "../../utils/misc.js";
 
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
@@ -97,39 +98,54 @@ chrome.storage.sync.get(null, (options) => {
 
     /* Chapter Unique */
     function chapterUnique(){
+        var chapterpv = [];
+        $('.chapter-graph-list__item').each(function() {
+            var text = $(this).text().trim();
+            var res = text.match(/第(\d*)部分:(\d*)人/);
+            if(res!=null){
+                chapterpv[res[1]] = res[2]
+            }
+        });
+
+        var data = []
+        var labels = [];
+        var labels_show = [];
+        const tickCounts = (labels, step) => (Math.ceil(labels / step));
+
+        for(let i=1; i<chapterpv.length; i++) {
+            if(chapterpv[i]==null){
+                data[i-1] = null;
+            }else{
+                data[i-1] = chapterpv[i]
+            }
+        }
+
+        /* Export Button */
+        if(enable_export){
+            $("#chapter_graph").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-chapter-unique"></div>')
+            $("#export-chapter-unique").on("click", function(){
+                var date = $("input[name='date']").attr("value")
+                var raw = {
+                    date: date,
+                    unique: data
+                }
+                saveJson(raw, "date-unique_" + date + ".json");
+            })
+        }
+
+        /* Graph */
         if (enable_graph){
             var unit = "人"
             var old_graph = $('.chapter-graph-list');
 
-            /* Get Data */
-            var chapterpv = [];
-            $('.chapter-graph-list__item').each(function() {
-                var text = $(this).text().trim();
-                var res = text.match(/第(\d*)部分:(\d*)人/);
-                if(res!=null){
-                    chapterpv[res[1]] = res[2]
-                }
-            });
-
-            var data = []
-            var labels = [];
-            var labels_show = [];
-            const tickCounts = (labels, step) => (Math.ceil(labels / step));
-
-            for(let i=1; i<chapterpv.length; i++) {
-                if(chapterpv[i]==null){
-                    data[i-1] = null;
-                }else{
-                    data[i-1] = chapterpv[i]
-                }
-            }
-            
+            /* Data */
             for(let i=0; i<tickCounts(data.length, 5) * 5 ; i++) {
                 labels_show[i] = i+1;
             }
             for(let i=0; i<data.length; i++) {
                 labels[i] = i+1;
             }
+
 
             /* Range Bar */
             old_graph.before('<div class="slider-outer" id="chapter-range"><div class="nstSlider chapter-slider" data-range_min="0" data-range_max="'+String(tickCounts(data.length, 5))+'" data-cur_min="0" data-cur_max="'+String(tickCounts(data.length, 5))+'"><div class="bar"></div><div class="leftGrip"></div><div class="rightGrip"></div></div><div class="leftLabel chapter-slider"></div><div class="rightLabel chapter-slider"></div></div>')

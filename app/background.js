@@ -29,6 +29,13 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             })
         }
         
+    }else if(message.action == "downloads"){
+        if(message.type == "download"){   
+            chrome.downloads.download({
+                url: message.data.url,
+                filename: message.data.filename
+            });
+        }
     }
     return true;
 });
