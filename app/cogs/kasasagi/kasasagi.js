@@ -4,6 +4,7 @@ import { saveJson } from "../../utils/misc.js";
 var enable_css
 var enable_graph
 var enable_export
+var graph_type_chapter_unique
 
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
@@ -15,6 +16,8 @@ chrome.storage.sync.get(null, (options) => {
     if(enable_graph==undefined) {enable_graph = true}
     enable_export = options.enable_kasasagi_export;
     if(enable_export==undefined) {enable_export = true}
+    graph_type_chapter_unique = options.kasasagi_graph_type_chapter_unique;
+    if(graph_type_chapter_unique==undefined) {graph_type_chapter_unique = "bar"}
 
     /* Design */
     if(enable_css){
@@ -156,7 +159,7 @@ function _chapterUnique(){
         var graph = null
         function generateGraph(min, max){
             graph = new Chart(document.getElementById("chapter"), {
-                type: 'bar',
+                type: graph_type_chapter_unique,
                 data: {
                     labels: labels_show,
                     datasets: [
