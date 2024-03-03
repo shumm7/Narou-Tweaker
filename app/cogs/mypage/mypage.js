@@ -8,9 +8,9 @@ chrome.storage.sync.get(null, (options) => {
     if(enable_blog_autourl==undefined) {enable_blog_autourl = true}
     var enable_blog_comment_autourl = options.enable_mypage_blogcomment_autourl;
     if(enable_blog_comment_autourl==undefined) {enable_blog_comment_autourl = false}
-    var enable_profile_detail = options.enable_profile_detail;
+    var enable_profile_detail = options.enable_mypage_profile_detail;
     if(enable_profile_detail==undefined) {enable_profile_detail = true}
-    var enable_profile_autourl = options.enable_profile_autourl;
+    var enable_profile_autourl = options.enable_mypage_profile_autourl;
     if(enable_profile_autourl==undefined) {enable_profile_autourl = true}
 
     /* Blog Page */
@@ -43,7 +43,7 @@ chrome.storage.sync.get(null, (options) => {
                 $.each(lines, function(idx, line) {
                     comment.append("<p>" + line + "</p>");
                 });
-        
+                
                 comment.children("p").each(function (idx, elem) {
                     let str = $(elem).html();
                     replaceUrl(elem)
@@ -88,7 +88,7 @@ chrome.storage.sync.get(null, (options) => {
                 $.each(lines, function(idx, line) {
                     comment.append("<p>" + line + "</p>");
                 });
-        
+                
                 comment.children("p").each(function (idx, elem) {
                     let str = $(elem).html();
                     replaceUrl(elem)
