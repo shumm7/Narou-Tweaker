@@ -93,7 +93,7 @@ chrome.storage.sync.get(null, (options) => {
             $(".novelview_h3#title").text(title)
 
             $("#today_data .caption").text("本日（"+getDateStringJapanese()+"）")
-            $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese()+"）")
+            $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese(getYesterday())+"）")
 
             $(".novelview_h3:not(#title)").attr("id", "subtitle")
             $("#today_yesterday_data .novelview_h3#subtitle").text("アクセス解析（当日・前日）")
