@@ -1,4 +1,6 @@
-
+#js-failed + form {
+	display: none;
+}
 
 /* Base */
 @media not screen and (width: 400px) {
