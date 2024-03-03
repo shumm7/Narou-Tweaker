@@ -1,15 +1,19 @@
 import {addExclamationIconBalloon} from "../../utils/ui.js"
 import { saveJson } from "../../utils/misc.js";
 
+var enable_css
+var enable_graph
+var enable_export
+
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
     var ncode = getNcode();
 
-    var enable_css = options.enable_kasasagi_css;
+    enable_css = options.enable_kasasagi_css;
     if(enable_css==undefined) {enable_css = true}
-    var enable_graph = options.enable_kasasagi_graph;
+    enable_graph = options.enable_kasasagi_graph;
     if(enable_graph==undefined) {enable_graph = true}
-    var enable_export = options.enable_kasasagi_export;
+    enable_export = options.enable_kasasagi_export;
     if(enable_export==undefined) {enable_export = true}
 
     /* Design */
