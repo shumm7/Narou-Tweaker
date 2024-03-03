@@ -3,11 +3,13 @@ import {saveJson} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese} from "../../utils/text.js"
 
 var enable_css
-var enable_graph
-var enable_table
 var enable_export
+var enable_graph_general_day
+var enable_graph_chapter_unique
 var graph_type_general_day
 var graph_type_chapter_unique
+var enable_table_general_day
+var enable_table_chapter_unique
 
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
@@ -15,16 +17,23 @@ chrome.storage.sync.get(null, (options) => {
 
     enable_css = options.enable_kasasagi_css;
     if(enable_css==undefined) {enable_css = true}
-    enable_graph = options.enable_kasasagi_graph;
-    if(enable_graph==undefined) {enable_graph = true}
-    enable_table = options.enable_kasasagi_table;
-    if(enable_table==undefined) {enable_table = true}
     enable_export = options.enable_kasasagi_export;
     if(enable_export==undefined) {enable_export = true}
+
+    enable_graph_general_day = options.enable_kasasagi_graph_general_day;
+    if(enable_graph_general_day==undefined) {enable_graph_general_day = true}
+    enable_graph_chapter_unique = options.enable_kasasagi_graph_chapter_unique;
+    if(enable_graph_chapter_unique==undefined) {enable_graph_chapter_unique = true}
+
     graph_type_general_day = options.kasasagi_graph_type_general_day;
     if(graph_type_general_day==undefined) {graph_type_general_day = "bar"}
     graph_type_chapter_unique = options.kasasagi_graph_type_chapter_unique;
     if(graph_type_chapter_unique==undefined) {graph_type_chapter_unique = "bar"}
+
+    enable_table_general_day = options.enable_kasasagi_table_general_day;
+    if(enable_table_general_day==undefined) {enable_table_general_day = true}
+    enable_table_chapter_unique = options.enable_kasasagi_table_chapter_unique;
+    if(enable_table_chapter_unique==undefined) {enable_table_chapter_unique = true}
 
     /* Design */
     if(enable_css){
@@ -192,7 +201,7 @@ function _general(){
     }
 
     /* Table */
-    if (enable_table){
+    if (enable_table_general_day){
         $("#today_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
         $("#yesterday_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
 
@@ -218,7 +227,7 @@ function _general(){
     }
 
     /* Graph */
-    if (enable_graph){
+    if (enable_graph_general_day){
         $("#yesterday_data").after('<canvas class="access-chart" id="general-day" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
         var graph = null
 
@@ -306,6 +315,7 @@ function _chapterUnique(){
     });
 
     var data = []
+    var labels = [];
     const tickCounts = (labels, step) => (Math.ceil(labels / step));
 
     for(let i=1; i<chapterpv.length; i++) {
@@ -314,6 +324,9 @@ function _chapterUnique(){
         }else{
             data[i-1] = chapterpv[i]
         }
+    }
+    for(let i=0; i<data.length; i++) {
+        labels[i] = i+1;
     }
 
     /* Export Button */
@@ -332,20 +345,15 @@ function _chapterUnique(){
     }
 
     /* Graph */
-    if (enable_graph){
+    if (enable_graph_chapter_unique){
         var unit = "人"
         var old_graph = $('.chapter-graph-list');
-        var labels = [];
         var labels_show = [];
 
         /* Data */
         for(let i=0; i<tickCounts(data.length, 5) * 5 ; i++) {
             labels_show[i] = i+1;
         }
-        for(let i=0; i<data.length; i++) {
-            labels[i] = i+1;
-        }
-
 
         /* Range Bar */
         old_graph.before('<div class="slider-outer" id="chapter-range"><div class="nstSlider chapter-slider" data-range_min="0" data-range_max="'+String(tickCounts(data.length, 5))+'" data-cur_min="0" data-cur_max="'+String(tickCounts(data.length, 5))+'"><div class="bar"></div><div class="leftGrip"></div><div class="rightGrip"></div></div><div class="leftLabel chapter-slider"></div><div class="rightLabel chapter-slider"></div></div>')
@@ -424,7 +432,7 @@ function _chapterUnique(){
     }
 
     /* Table */
-    if(enable_table){
+    if(enable_table_chapter_unique){
         var old_graph = $('.chapter-graph-list');
         function makeTableDiffs(id, label, header, data){
             const size = Math.max(header.length, data.length)
@@ -475,7 +483,6 @@ function _chapterUnique(){
             }
             return outer;
         }
-
         old_graph.after(makeTableDiffs("chapter-unique", ["部分", "ユニーク（人）", "前部分比", "離脱数（人）"], labels, data))
     
         old_graph.remove();
