@@ -1,7 +1,4 @@
-/* JS Error Message */
-#js-failed + form {
-	display: none;
-}
+
 
 /* Base */
 @media not screen and (width: 400px) {
@@ -73,6 +70,19 @@ details[open] summary {
 
 details[open]> :not(summary) {
 	margin-left: 10px;
+}
+
+.section {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 2px dotted #aaa4;
+	border-radius: 10px;
+	padding: 5px 10px;
+}
+
+.section-header{
+	font-weight: bold;
+	margin-bottom: .1em
 }
 
 
