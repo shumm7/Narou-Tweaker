@@ -16,6 +16,19 @@ body.narou-tweaker {
     height:16px !important;
     background:#2299ff !important;
 }
+.narou-tweaker #datepicker_form{
+	padding-left: 10px;
+}
+
+/* モダンレイアウト適用時の総合ページの表示崩れ対策 */
+.narou-tweaker #today_data,
+.narou-tweaker #yesterday_data {
+	width: 450px
+}
+.narou-tweaker .oneday_access_table table,
+.narou-tweaker .oneday_graph table {
+    width: 220px;
+}
 
 /* Header */
 .l-header {

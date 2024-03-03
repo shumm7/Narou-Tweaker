@@ -100,6 +100,11 @@ chrome.storage.sync.get(null, (options) => {
 });
 
 
+/* General */
+function _general(){
+
+}
+
 /* Chapter Unique */
 function _chapterUnique(){
     var chapterpv = [];
@@ -266,7 +271,7 @@ function _chapterUnique(){
                     /* 離脱数 */
                     rate_declease = -(value_before - value);
                     if(rate_declease == undefined){
-                        rate_declease = ""
+                        rate_declease = "";
                     }
                 }
     
@@ -279,11 +284,6 @@ function _chapterUnique(){
         old_graph.after(makeTableDiffs("chapter-unique", ["部分", "ユニーク（人）", "前部分比", "離脱数（人）"], labels, data))
         old_graph.remove();
     }
-}
-
-/* General */
-function _general(){
-
 }
 
 /* Utilities */
