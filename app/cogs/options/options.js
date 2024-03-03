@@ -25,9 +25,12 @@ export function restoreOptions(){
     /* Kasasagi */
     check('#enable_kasasagi_css', options.enable_kasasagi_css, true);
     check('#enable_kasasagi_graph', options.enable_kasasagi_graph, true);
-    $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
+    check('#enable_kasasagi_table', options.enable_kasasagi_table, true);
     check('#enable_kasasagi_export', options.enable_kasasagi_export, true);
-   });
+    $("#kasasagi_graph_type_general_day").val(defaultValue(options.kasasagi_graph_type_general_day, "bar"))
+    $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
+   
+  });
 }
 
 /* Save Options */
@@ -42,8 +45,10 @@ export function saveOptions(){
     /* Kasasagi */
     enable_kasasagi_css: $("#enable_kasasagi_css").prop('checked'),
     enable_kasasagi_graph: $("#enable_kasasagi_graph").prop('checked'),
-    kasasagi_graph_type_chapter_unique: $("#kasasagi_graph_type_chapter_unique").val(),
+    enable_kasasagi_table: $("#enable_kasasagi_table").prop('checked'),
     enable_kasasagi_export: $("#enable_kasasagi_export").prop('checked'),
+    kasasagi_graph_type_general_day: $("#kasasagi_graph_type_general_day").val(),
+    kasasagi_graph_type_chapter_unique: $("#kasasagi_graph_type_chapter_unique").val(),
   }
   chrome.storage.sync.set(options);
 }

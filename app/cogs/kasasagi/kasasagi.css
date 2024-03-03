@@ -23,11 +23,23 @@ body.narou-tweaker {
 /* モダンレイアウト適用時の総合ページの表示崩れ対策 */
 .narou-tweaker #today_data,
 .narou-tweaker #yesterday_data {
-	width: 450px
+	width: 450px;
+	margin-bottom: 1em;
 }
-.narou-tweaker .oneday_access_table table,
+.narou-tweaker .oneday_access_table table {
+    width: 250px;
+	margin: auto;
+}
 .narou-tweaker .oneday_graph table {
-    width: 220px;
+    width: 450px;
+}
+.narou-tweaker #yesterday_data {
+	margin-left: 10px;
+}
+.narou-tweaker .oneday_access_table{
+	float: none;
+	margin-bottom: .5em;
+	margin-left: 5px;
 }
 
 /* Header */
@@ -338,4 +350,7 @@ body.narou-tweaker {
 .data-table#chapter-unique {
   margin: auto;
   width: 460px;
+}
+.oneday_graph table td.bar.sum .graph {
+	background-color: #ffa500;
 }

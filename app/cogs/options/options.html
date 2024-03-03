@@ -67,7 +67,7 @@
 		</div>
 		<div class="section">
 			<p>
-				<span class="section-header">グラフ解析</span>
+				<span class="section-header">解析</span>
 			</p>
 			<p>
 				<input type="checkbox" id="enable_kasasagi_graph" class="options toggle" name="enable_kasasagi_graph">
@@ -75,12 +75,23 @@
 			</p>
 			<p>
 				<div class="dropdown">
+					<select id="kasasagi_graph_type_general_day" class="options" name="kasasagi_graph_type_general_day">
+						<option value="bar">棒グラフ</option>
+						<option value="line">折れ線グラフ</option>
+					</select>	
+				</div>
+				<label for="enable_kasasagi_graph_general_day">グラフ種類（総合 当日・前日）</label>
+				<div class="dropdown">
 					<select id="kasasagi_graph_type_chapter_unique" class="options" name="kasasagi_graph_type_chapter_unique">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
 					</select>	
 				</div>
 				<label for="enable_kasasagi_graph_chapter_unique">グラフ種類（部分別ユニーク）</label>
+			</p>
+			<p>
+				<input type="checkbox" id="enable_kasasagi_table" class="options toggle" name="enable_kasasagi_table">
+				<label for="enable_kasasagi_table" class="toggle">テーブルを表示/改変</label>
 			</p>
 		</div>
 	</details>

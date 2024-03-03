@@ -1,9 +1,12 @@
 import {addExclamationIconBalloon} from "../../utils/ui.js"
-import { saveJson } from "../../utils/misc.js";
+import {saveJson} from "../../utils/misc.js"
+import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese} from "../../utils/text.js"
 
 var enable_css
 var enable_graph
+var enable_table
 var enable_export
+var graph_type_general_day
 var graph_type_chapter_unique
 
 chrome.storage.sync.get(null, (options) => {
@@ -14,8 +17,12 @@ chrome.storage.sync.get(null, (options) => {
     if(enable_css==undefined) {enable_css = true}
     enable_graph = options.enable_kasasagi_graph;
     if(enable_graph==undefined) {enable_graph = true}
+    enable_table = options.enable_kasasagi_table;
+    if(enable_table==undefined) {enable_table = true}
     enable_export = options.enable_kasasagi_export;
     if(enable_export==undefined) {enable_export = true}
+    graph_type_general_day = options.kasasagi_graph_type_general_day;
+    if(graph_type_general_day==undefined) {graph_type_general_day = "bar"}
     graph_type_chapter_unique = options.kasasagi_graph_type_chapter_unique;
     if(graph_type_chapter_unique==undefined) {graph_type_chapter_unique = "bar"}
 
@@ -69,6 +76,23 @@ chrome.storage.sync.get(null, (options) => {
 
     /* Switch */
     if(path.match('/access/top/ncode/.*/')!=null){
+        if(enable_css){
+
+            var m = $(".novelview_h3#title").text().match("『(.*)』")
+            var title = m[1]
+            $(".novelview_h3#title").attr("style", "margin-bottom: 10px;")
+            $(".novelview_h3#title").text(title)
+
+            $("#today_data .caption").text("本日（"+getDateStringJapanese()+"）")
+            $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese()+"）")
+
+            $(".novelview_h3:not(#title)").attr("id", "subtitle")
+            $("#today_yesterday_data .novelview_h3#subtitle").text("アクセス解析（当日・前日）")
+            $("#access_all .novelview_h3#subtitle").text("累計アクセス")
+            $("#access_all .novelview_h3#subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
+            $("#access_all .novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+        }
+
         _general();
 
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
@@ -82,8 +106,8 @@ chrome.storage.sync.get(null, (options) => {
             if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
             
             $("form#datepicker_form").insertAfter(".novelview_h3#subtitle")
-            $(".novelview_h3#subtitle").append(addExclamationIconBalloon("本ページの人数は部分単位のユニークです<br>（部分単位のユニークの合計＝作品全体のユニークではありません）"));
-            $(".novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: 10px;");
+            $(".novelview_h3#subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
+            $(".novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
             $(".attention").parent().remove();
         }
 
@@ -102,7 +126,172 @@ chrome.storage.sync.get(null, (options) => {
 
 /* General */
 function _general(){
+    var hour = [];
+    var today_pv = [];
+    var yesterday_pv = [];
+    var today_pv_sum = [];
+    var yesterday_pv_sum = [];
+    var today_total = {}
+    var yesterday_total = {}
 
+    for(i=0; i<24; i++){
+        hour.push(i);
+    }
+
+    $("#today_data .oneday_graph tr td.pv").each(function() {
+        today_pv.push(parseIntWithComma($(this).text()))
+    });
+    $("#yesterday_data .oneday_graph tr td.pv").each(function() {
+        yesterday_pv.push(parseIntWithComma($(this).text()))
+    });
+
+    var i = 0
+    $.each(today_pv, function(idx, val){
+        if(val==NaN || val==undefined){val=0}
+        i += val;
+        today_pv_sum[idx] = i
+    });
+    var i = 0
+    $.each(yesterday_pv, function(idx, val){
+        if(val==NaN || val==undefined){val=0}
+        i += val;
+        yesterday_pv_sum[idx] = i
+    });
+
+    today_total.total = parseIntWithComma($("#today_data .oneday_access_table tr.highlight td.right").text())
+    today_total.pc = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(3) td.right").text())
+    today_total.smartphone = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(4) td.right").text())
+    yesterday_total.total = parseIntWithComma($("#yesterday_data .oneday_access_table tr.highlight td.right").text())
+    yesterday_total.pc = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(3) td.right").text())
+    yesterday_total.smartphone = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(4) td.right").text())
+
+    /* Export Button */
+    if(enable_export){
+        $("#today_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-chapter-unique"></div>')
+        $("#export-chapter-unique").on("click", function(){
+            var date = getDateString();
+            var raw = {
+                date: date,
+                data: {
+                    today: {
+                        date: date,
+                        highlight: today_total,
+                        pv: today_pv,
+                        sum: today_pv_sum
+                    },
+                    yesterday: {
+                        date: getDateString(getYesterday()),
+                        highlight: yesterday_total,
+                        pv: yesterday_pv,
+                        sum: yesterday_pv_sum
+                    }
+                }
+            }
+            saveJson(raw, "oneday-pv_" + date + ".json");
+        })
+    }
+
+    /* Table */
+    if (enable_table){
+        $("#today_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
+        $("#yesterday_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
+
+        const aryMax = function (a, b) {return Math.max(a, b);}
+
+        var max = today_pv_sum.reduce(aryMax)
+        $("#today_data .oneday_graph tr td.pv").each(function() {
+            var time = parseInt($(this).parent().children(".hour").text().trim());
+            var value = today_pv_sum[time]
+            var bar = Math.floor(value / max * 100)
+            $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
+            $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
+        });
+
+        var max = yesterday_pv_sum.reduce(aryMax)
+        $("#yesterday_data .oneday_graph tr td.pv").each(function() {
+            var time = parseInt($(this).parent().children(".hour").text());
+            var value = yesterday_pv_sum[time]
+            var bar = Math.floor(value / max * 100)
+            $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
+            $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
+        });
+    }
+
+    /* Graph */
+    if (enable_graph){
+        $("#yesterday_data").after('<canvas class="access-chart" id="general-day" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
+        var graph = null
+
+        function generateOnedayGraph(){
+            graph = new Chart(document.getElementById("general-day"), {
+                type: graph_type_general_day,
+                data: {
+                    labels: hour,
+                    datasets: [
+                        {
+                            label: '本日PV',
+                            data: today_pv,
+                            backgroundColor: "#2299ff"
+                        },
+                        {
+                            label: '昨日PV',
+                            data: yesterday_pv,
+                            backgroundColor: "#90ccff"
+                        },
+                        {
+                            label: '本日積算PV',
+                            data: today_pv_sum,
+                            backgroundColor: "#ffa500",
+                            hidden: true
+                        },
+                        {
+                            label: '昨日積算PV',
+                            data: yesterday_pv_sum,
+                            backgroundColor: "#ffd27f",
+                            hidden: true
+                        },
+                    ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: true
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(p){
+                                    return " " + p.raw;
+                                },
+                                title: function(p) {
+                                    var date
+                                    if(p[0].datasetIndex==0 || p[0].datasetIndex==2){
+                                        date = getDateStringJapanese();
+                                    }else if(p[0].datasetIndex==1 || p[0].datasetIndex==3){
+                                        date = getDateStringJapanese(getYesterday());
+                                    }
+                                    return p[0].dataset.label + " （" + date + " " + p[0].label + "時）";
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                stepSize: 10
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                display: true
+                            }
+                        }
+                    },
+                }
+            });
+        }
+
+        generateOnedayGraph()
+    }
 }
 
 /* Chapter Unique */
@@ -117,8 +306,6 @@ function _chapterUnique(){
     });
 
     var data = []
-    var labels = [];
-    var labels_show = [];
     const tickCounts = (labels, step) => (Math.ceil(labels / step));
 
     for(let i=1; i<chapterpv.length; i++) {
@@ -136,9 +323,11 @@ function _chapterUnique(){
             var date = $("input[name='date']").attr("value")
             var raw = {
                 date: date,
-                unique: data
+                data: {
+                    unique: data
+                }
             }
-            saveJson(raw, "date-unique_" + date + ".json");
+            saveJson(raw, "chapter-unique_" + date + ".json");
         })
     }
 
@@ -146,6 +335,8 @@ function _chapterUnique(){
     if (enable_graph){
         var unit = "人"
         var old_graph = $('.chapter-graph-list');
+        var labels = [];
+        var labels_show = [];
 
         /* Data */
         for(let i=0; i<tickCounts(data.length, 5) * 5 ; i++) {
@@ -162,6 +353,7 @@ function _chapterUnique(){
         /* Graph */
         old_graph.before('<canvas class="access-chart" id="chapter" style="width: 100%; margin-bottom:10px;"></canvas>')
         var graph = null
+
         function generateGraph(min, max){
             graph = new Chart(document.getElementById("chapter"), {
                 type: graph_type_chapter_unique,
@@ -229,7 +421,10 @@ function _chapterUnique(){
             }
         });
 
-        /* Table */
+    }
+
+    /* Table */
+    if(enable_table){
         var old_graph = $('.chapter-graph-list');
         function makeTableDiffs(id, label, header, data){
             const size = Math.max(header.length, data.length)
@@ -282,6 +477,7 @@ function _chapterUnique(){
         }
 
         old_graph.after(makeTableDiffs("chapter-unique", ["部分", "ユニーク（人）", "前部分比", "離脱数（人）"], labels, data))
+    
         old_graph.remove();
     }
 }

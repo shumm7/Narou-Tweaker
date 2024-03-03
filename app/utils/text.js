@@ -20,3 +20,29 @@ export function replaceUrl(_elem) {
         }
     });
 }
+
+export function getDateStringJapanese(date){
+    if(date==undefined){date = new Date();}
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1);
+    const day = String(date.getDate());
+    return `${year}年${month}月${day}日`;
+}
+
+export function getDateString(date){
+    if(date==undefined){date = new Date();}
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+export function getYesterday(){
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1)
+    return yesterday
+}
+
+export function parseIntWithComma(text){
+    return parseInt(text.replace(/,/g, ""))
+}
