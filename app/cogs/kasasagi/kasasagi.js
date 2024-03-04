@@ -1,12 +1,14 @@
 import {addExclamationIconBalloon} from "../../utils/ui.js"
 import {saveJson} from "../../utils/misc.js"
-import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese} from "../../utils/text.js"
+import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
 
 var enable_css
 var enable_export
 var enable_graph_general_day
+var enable_graph_general_total
 var enable_graph_chapter_unique
 var graph_type_general_day
+var graph_type_general_total
 var graph_type_chapter_unique
 var enable_table_general_day
 var enable_table_chapter_unique
@@ -22,11 +24,15 @@ chrome.storage.sync.get(null, (options) => {
 
     enable_graph_general_day = options.enable_kasasagi_graph_general_day;
     if(enable_graph_general_day==undefined) {enable_graph_general_day = true}
+    enable_graph_general_total = options.enable_kasasagi_graph_general_total;
+    if(enable_graph_general_total==undefined) {enable_graph_general_total = true}
     enable_graph_chapter_unique = options.enable_kasasagi_graph_chapter_unique;
     if(enable_graph_chapter_unique==undefined) {enable_graph_chapter_unique = true}
 
     graph_type_general_day = options.kasasagi_graph_type_general_day;
     if(graph_type_general_day==undefined) {graph_type_general_day = "bar"}
+    graph_type_general_total = options.kasasagi_graph_type_general_total;
+    if(graph_type_general_total==undefined) {graph_type_general_total = "bar"}
     graph_type_chapter_unique = options.kasasagi_graph_type_chapter_unique;
     if(graph_type_chapter_unique==undefined) {graph_type_chapter_unique = "bar"}
 
@@ -100,8 +106,9 @@ chrome.storage.sync.get(null, (options) => {
             $("#access_all .novelview_h3#subtitle").text("累計アクセス")
             $("#access_all .novelview_h3#subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
             $("#access_all .novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-        }
 
+            $("#access_all .caption").text("直近1週間のPV")
+        }
         _general();
 
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
@@ -119,8 +126,8 @@ chrome.storage.sync.get(null, (options) => {
             $(".novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
             $(".attention").parent().remove();
         }
-
         _chapterUnique();
+
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
         console.log('daypv')
     }else if(path.match('/access/monthpv/ncode/.*/')!=null){
@@ -135,6 +142,7 @@ chrome.storage.sync.get(null, (options) => {
 
 /* General */
 function _general(){
+    /* 当日・前日 */
     var hour = [];
     var today_pv = [];
     var yesterday_pv = [];
@@ -176,11 +184,12 @@ function _general(){
 
     /* Export Button */
     if(enable_export){
-        $("#today_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-chapter-unique"></div>')
-        $("#export-chapter-unique").on("click", function(){
+        $("#today_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
+        $("#export-general-day").on("click", function(){
             var date = getDateString();
             var raw = {
                 date: date,
+                generatedTime: getDatetimeString(),
                 data: {
                     today: {
                         date: date,
@@ -301,6 +310,107 @@ function _general(){
 
         generateOnedayGraph()
     }
+
+
+    /* 累計 */
+    var total_pv = {
+        total: parseIntWithComma($("#access_all .total_access_table tr:nth-child(2) td:nth-child(2)").text()),
+        pc: parseIntWithComma($("#access_all .total_access_table tr:nth-child(3) td:nth-child(2)").text()),
+        smartphone: parseIntWithComma($("#access_all .total_access_table tr:nth-child(4) td:nth-child(2)").text()),
+    }
+    var total_unique = {
+        total: parseIntWithComma($("#access_all .total_access_table tr:nth-child(2) td:nth-child(3)").text()),
+        pc: parseIntWithComma($("#access_all .total_access_table tr:nth-child(3) td:nth-child(3)").text()),
+        smartphone: parseIntWithComma($("#access_all .total_access_table tr:nth-child(4) td:nth-child(3)").text()),
+    }
+    var week_pv = []
+    var week = []
+    $("#access_all .total_graph tr:not(.header)").each(function(){
+        week_pv.push(parseIntWithComma($(this).children("td.pv").text()))
+        week.push($(this).children("td.day").text())
+    })
+
+    /* Export Button */
+    if(enable_export){
+        $("#access_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
+        $("#export-general-total").on("click", function(){
+            var date = getDateString();
+            var raw = {
+                date: date,
+                generatedTime: getDatetimeString(),
+                data: {
+                    highlight: {
+                        pv: total_pv,
+                        unique: total_unique
+                    },
+                    week: {
+                        day: week,
+                        pv: week_pv
+                    }
+                }
+            }
+            saveJson(raw, "access-all_" + date + ".json");
+        })
+    }
+
+    /* Graph */
+    if (enable_graph_general_total){
+        $("#access_all").after('<canvas class="access-chart" id="general-total" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
+        var graph = null
+
+        function generateOnedayGraph(){
+            graph = new Chart(document.getElementById("general-total"), {
+                type: graph_type_general_total,
+                data: {
+                    labels: week,
+                    datasets: [
+                        {
+                            label: '直近1週間のPV',
+                            data: week_pv,
+                            backgroundColor: "#2299ff"
+                        }
+                    ],
+                },
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(p){
+                                    return " " + p.raw;
+                                },
+                                title: function(p) {
+                                    var date
+                                    if(p[0].datasetIndex==0 || p[0].datasetIndex==2){
+                                        date = getDateStringJapanese();
+                                    }else if(p[0].datasetIndex==1 || p[0].datasetIndex==3){
+                                        date = getDateStringJapanese(getYesterday());
+                                    }
+                                    return p[0].label + " （PV）";
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                stepSize: 10
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                display: true
+                            }
+                        }
+                    },
+                }
+            });
+        }
+
+        generateOnedayGraph()
+    }
 }
 
 /* Chapter Unique */
@@ -336,6 +446,7 @@ function _chapterUnique(){
             var date = $("input[name='date']").attr("value")
             var raw = {
                 date: date,
+                generatedTime: getDatetimeString(),
                 data: {
                     unique: data
                 }

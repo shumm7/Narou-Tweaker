@@ -60,8 +60,10 @@
 			<input type="checkbox" id="enable_kasasagi_export" class="options toggle" name="enable_kasasagi_export">
 			<label for="enable_kasasagi_export" class="toggle">データエクスポートボタン</label>
 		</p>
+		
 		<div class="section">
 			<p><span class="section-header">総合</span></p>
+			<p><span class="section-subheader">当日・前日</span></p>
 			<p>
 				<input type="checkbox" id="enable_kasasagi_graph_general_day" class="options toggle" name="enable_kasasagi_graph_general_day">
 				<label for="enable_kasasagi_graph_general_day" class="toggle">グラフを表示</label>
@@ -79,7 +81,23 @@
 				<input type="checkbox" id="enable_kasasagi_table_general_day" class="options toggle" name="enable_kasasagi_table_general_day">
 				<label for="enable_kasasagi_table_general_day" class="toggle">テーブルを表示/改変</label>
 			</p>
+
+			<p><span class="section-subheader">累計</span></p>
+			<p>
+				<input type="checkbox" id="enable_kasasagi_graph_general_total" class="options toggle" name="enable_kasasagi_graph_general_total">
+				<label for="enable_kasasagi_graph_general_total" class="toggle">グラフを表示</label>
+			</p>
+			<p>
+				<div class="dropdown">
+					<select id="kasasagi_graph_type_general_total" class="options" name="kasasagi_graph_type_general_total">
+						<option value="bar">棒グラフ</option>
+						<option value="line">折れ線グラフ</option>
+					</select>	
+				</div>
+				<label for="enable_kasasagi_graph_general_total">グラフの種類</label>
+			</p>
 		</div>
+
 		<div class="section">
 			<p><span class="section-header">部分別ユニーク</span></p>
 			<p>
