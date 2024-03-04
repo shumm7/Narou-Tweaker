@@ -17,7 +17,9 @@ function defaultValue(value, def){
 export function restoreOptions(){
   chrome.storage.sync.get(null, (options) => {
     /* Mypage */
+    check('#enable_mypage_profile_userid', options.enable_mypage_profile_userid, true);
     check('#enable_mypage_profile_detail', options.enable_mypage_profile_detail, true);
+
     check('#enable_mypage_profile_autourl', options.enable_mypage_profile_autourl, true);
     check('#enable_mypage_blog_autourl', options.enable_mypage_blog_autourl, true);
     check('#enable_mypage_blogcomment_autourl', options.enable_mypage_blogcomment_autourl, false);
@@ -25,15 +27,18 @@ export function restoreOptions(){
     /* Kasasagi */
     check('#enable_kasasagi_css', options.enable_kasasagi_css, true);
     check('#enable_kasasagi_export', options.enable_kasasagi_export, true);
+    check('#enable_kasasagi_api_data', options.enable_kasasagi_api_data, true);
+
     check('#enable_kasasagi_graph_general_day', options.enable_kasasagi_graph_general_day, true);
     check('#enable_kasasagi_graph_general_total', options.enable_kasasagi_graph_general_total, false);
     check('#enable_kasasagi_graph_chapter_unique', options.enable_kasasagi_graph_chapter_unique, true);
+
     $("#kasasagi_graph_type_general_day").val(defaultValue(options.kasasagi_graph_type_general_day, "bar"))
     $("#kasasagi_graph_type_general_total").val(defaultValue(options.kasasagi_graph_type_general_total, "bar"))
     $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
+
     check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
     check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
-    check('#enable_kasasagi_api_data', options.enable_kasasagi_api_data, true);
    
   });
 }
@@ -42,7 +47,9 @@ export function restoreOptions(){
 export function saveOptions(){
   var options = {
     /* Mypage */
+    enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
     enable_mypage_profile_detail: $("#enable_mypage_profile_detail").prop('checked'),
+
     enable_mypage_profile_autourl: $("#enable_mypage_profile_autourl").prop('checked'),
     enable_mypage_blog_autourl: $("#enable_mypage_blog_autourl").prop('checked'),
     enable_mypage_blogcomment_autourl: $("#enable_mypage_blogcomment_autourl").prop('checked'),

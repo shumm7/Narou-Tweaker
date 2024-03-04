@@ -3,15 +3,26 @@ import {getUserInfo} from "../../utils/api.js"
 
 chrome.storage.sync.get(null, (options) => {
     var path = location.pathname;
-    
+
+    var enable_profile_detail = options.enable_mypage_profile_detail;
+    if(enable_profile_detail==undefined) {enable_profile_detail = true}
+    var enable_profile_userid = options.enable_mypage_profile_userid;
+    if(enable_profile_userid==undefined) {enable_profile_userid = true}
+
     var enable_blog_autourl = options.enable_mypage_blog_autourl;
     if(enable_blog_autourl==undefined) {enable_blog_autourl = true}
     var enable_blog_comment_autourl = options.enable_mypage_blogcomment_autourl;
     if(enable_blog_comment_autourl==undefined) {enable_blog_comment_autourl = false}
-    var enable_profile_detail = options.enable_mypage_profile_detail;
-    if(enable_profile_detail==undefined) {enable_profile_detail = true}
     var enable_profile_autourl = options.enable_mypage_profile_autourl;
     if(enable_profile_autourl==undefined) {enable_profile_autourl = true}
+
+    /* General */
+    if (enable_profile_userid){
+        var userid = $(".p-userheader__tab .p-userheader__tab-list-item:nth-child(1) a").attr("href").match("https://mypage.syosetu.com/(.*)/")[1].trim()
+        if(userid!=undefined){
+            $(".p-userheader .p-userheader__inner .p-userheader__username").after("<div class='p-userheader__userid'>" + userid + "</div>")
+        }
+    }
 
     /* Blog Page */
     if(path.match('/mypageblog/view/userid/.*/blogkey/.*/')!=null){
