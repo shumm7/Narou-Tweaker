@@ -1,6 +1,11 @@
 /* Info Icon*/
-function balloonGeneral(html, icon){
-    var object = $('<span class="ui-balloon ui-information-balloon"><i class="fa-solid '+icon+' ui-balloon--icon"></i><p class="ui-balloon--text disabled">' + html + '</p></span>')
+function balloonGeneral(html, icon, href){
+    var object
+    if(href==undefined){
+        object = $('<span class="ui-balloon ui-information-balloon"><i class="fa-solid '+icon+' ui-balloon--icon"></i><p class="ui-balloon--text disabled">' + html + '</p></span>')
+    }else{
+        object = $('<span class="ui-balloon ui-information-balloon"><a href="'+href+'"><i class="fa-solid '+icon+' ui-balloon--icon"></i></a><p class="ui-balloon--text disabled">' + html + '</p></span>')
+    }
     object.hover(
         function() {
             var offset = $(this).offset();
@@ -19,14 +24,14 @@ function balloonGeneral(html, icon){
     return object;
 }
 
-export function addInfoIconBalloon(html){
-    return balloonGeneral(html, "fa-circle-info")
+export function addInfoIconBalloon(html, href){
+    return balloonGeneral(html, "fa-circle-info", href)
 }
 
-export function addQuestionIconBalloon(html){
-    return balloonGeneral(html, "fa-circle-question")
+export function addQuestionIconBalloon(html, href){
+    return balloonGeneral(html, "fa-circle-question", href)
 }
 
-export function addExclamationIconBalloon(html){
-    return balloonGeneral(html, "fa-circle-exclamation")
+export function addExclamationIconBalloon(html, href){
+    return balloonGeneral(html, "fa-circle-exclamation", href)
 }

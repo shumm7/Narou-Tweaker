@@ -1,9 +1,11 @@
-import {addExclamationIconBalloon} from "../../utils/ui.js"
+import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
 import {saveJson} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
+import {getNovelInfo, getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
 
 var enable_css
 var enable_export
+var enable_api_data
 var enable_graph_general_day
 var enable_graph_general_total
 var enable_graph_chapter_unique
@@ -21,6 +23,8 @@ chrome.storage.sync.get(null, (options) => {
     if(enable_css==undefined) {enable_css = true}
     enable_export = options.enable_kasasagi_export;
     if(enable_export==undefined) {enable_export = true}
+    enable_api_data = options.enable_kasasagi_api_data;
+    if(enable_api_data==undefined) {enable_api_data = true}
 
     enable_graph_general_day = options.enable_kasasagi_graph_general_day;
     if(enable_graph_general_day==undefined) {enable_graph_general_day = true}
@@ -101,11 +105,11 @@ chrome.storage.sync.get(null, (options) => {
             $("#today_data .caption").text("本日（"+getDateStringJapanese()+"）")
             $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese(getYesterday())+"）")
 
-            $(".novelview_h3:not(#title)").attr("id", "subtitle")
-            $("#today_yesterday_data .novelview_h3#subtitle").text("アクセス解析（当日・前日）")
-            $("#access_all .novelview_h3#subtitle").text("累計アクセス")
-            $("#access_all .novelview_h3#subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
-            $("#access_all .novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+            $(".novelview_h3:not(#title)").addClass("subtitle")
+            $("#today_yesterday_data .novelview_h3.subtitle").text("アクセス解析（当日・前日）")
+            $("#access_all .novelview_h3.subtitle").text("累計アクセス")
+            $("#access_all .novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
+            $("#access_all .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
 
             $("#access_all .caption").text("直近1週間のPV")
         }
@@ -118,12 +122,12 @@ chrome.storage.sync.get(null, (options) => {
             var title = m[1]
 
             $(".novelview_h3").text("部分別 ユニークアクセス")
-            $(".novelview_h3").attr("id", "subtitle")
+            $(".novelview_h3").addClass("subtitle")
             if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
             
-            $("form#datepicker_form").insertAfter(".novelview_h3#subtitle")
-            $(".novelview_h3#subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
-            $(".novelview_h3#subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+            $("form#datepicker_form").insertAfter(".novelview_h3.subtitle")
+            $(".novelview_h3.subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
+            $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
             $(".attention").parent().remove();
         }
         _chapterUnique();
@@ -142,6 +146,8 @@ chrome.storage.sync.get(null, (options) => {
 
 /* General */
 function _general(){
+    var ncode = getNcode();
+
     /* 当日・前日 */
     var hour = [];
     var today_pv = [];
@@ -184,12 +190,13 @@ function _general(){
 
     /* Export Button */
     if(enable_export){
-        $("#today_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
+        $("#today_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
         $("#export-general-day").on("click", function(){
             var date = getDateString();
             var raw = {
                 date: date,
                 generatedTime: getDatetimeString(),
+                ncode: ncode,
                 data: {
                     today: {
                         date: date,
@@ -334,12 +341,13 @@ function _general(){
 
     /* Export Button */
     if(enable_export){
-        $("#access_all").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
+        $("#access_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
         $("#export-general-total").on("click", function(){
             var date = getDateString();
             var raw = {
                 date: date,
                 generatedTime: getDatetimeString(),
+                ncode: ncode,
                 data: {
                     highlight: {
                         pv: total_pv,
@@ -412,11 +420,129 @@ function _general(){
         }
 
         generateOnedayGraph()
+    
     }
+
+
+    /* 作品データ */
+    /* Table */
+    if (enable_api_data){
+        $("#access_all").after("<div id='novel_detail'></div>")
+        $("#novel_detail").append("<p class='novelview_h3'>作品データ</p>")
+        if(enable_css){
+            $("#novel_detail .novelview_h3").addClass("subtitle")
+            $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
+            $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+        }
+        $("#novel_detail").append("<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div>")
+        $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
+        $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
+
+        getNovelInfo(ncode);
+        chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
+
+            if(response.success){
+                var d = response.result[1]
+                if(d!=undefined){
+                    $(".loading-api").remove()
+
+                    /* Info */
+                    $("#novel_detail .novel_info").append("<table class='access-table'><tbody></tbody></table>")
+                    var table = $("#novel_detail .novel_info table tbody")
+                    function addValue(key, desc, value){
+                        if(value==undefined){
+                            table.append("<tr><td>"+key+"</td><td class='right' colspan='2'>"+desc+"</td></tr>")
+                        }else{
+                            table.append("<tr><td>"+key+"</td><td class='right'>"+desc+"</td><td class='right'>"+value+"</td></tr>")
+                        }
+                    }
+                    function getYesNo(state){
+                        if(state==0){
+                            return "いいえ"
+                        }
+                        else if(state==1){
+                            return "はい"
+                        }else{
+                            return ""
+                        }
+                    }
+
+                    table.append("<tr class='header'><th>作品情報</th><th>項目</th><th>データ</th></tr>")
+                    addValue("タイトル", "<a href='https://ncode.syosetu.com/"+ncode+"/'>"+d.title+"</a>")
+                    addValue("Nコード", ncode, d.ncode)
+                    addValue("あらすじ", d.story)
+                    addValue("キーワード", d.keyword)
+                    addValue("作者", "<a href='https://mypage.syosetu.com/"+d.userid+"/'>"+d.writer+"</a>", d.userid)
+                    addValue("大ジャンル", getBigGenre(d.biggenre), d.biggenre)
+                    addValue("ジャンル", getGenre(d.genre), d.genre)
+                    addValue("種類", getNovelType(d.novel_type), d.novel_type)
+                    addValue("連載状態", getNovelEnd(d.end), d.end)
+                    addValue("初回掲載日", d.general_firstup, d.general_firstup)
+                    addValue("最終掲載日", d.general_lastup, d.general_lastup)
+                    addValue("最終更新日", d.novelupdated_at, d.novelupdated_at)
+                    addValue("話数", d.general_all_no.toLocaleString(), d.general_all_no)
+                    addValue("長期連載停止中", getYesNo(d.isstop), d.isstop)
+                    addValue("R15", getYesNo(d.isr15), d.isr15)
+                    addValue("ボーイズラブ", getYesNo(d.isbl), d.isbl)
+                    addValue("ガールズラブ", getYesNo(d.isgl), d.isgl)
+                    addValue("残酷な描写あり", getYesNo(d.iszankoku), d.iszankoku)
+                    addValue("異世界転生", getYesNo(d.istensei), d.istensei)
+                    addValue("異世界転移", getYesNo(d.istenni), d.istenni)
+
+                    /* Statics */
+                    $("#novel_detail .novel_statics").append("<table class='access-table'><tbody></tbody></table>")
+                    table = $("#novel_detail .novel_statics table tbody")
+
+                    table.append("<tr class='header'><th>作品統計</th><th>項目</th><th>データ</th></tr>")
+                    addValue("文字数", d.length.toLocaleString(), d.length)
+                    addValue("読了時間", d.time.toLocaleString() + "分", d.time)
+                    addValue("挿絵数", d.sasie_cnt.toLocaleString(), d.sasie_cnt)
+                    addValue("会話率", d.kaiwaritu + "%", d.kaiwaritu)
+                    addValue("総合ポイント", d.global_point.toLocaleString() + "pt", d.global_point)
+                    addValue("日間ポイント", d.daily_point.toLocaleString() + "pt", d.daily_point)
+                    addValue("週間ポイント", d.weekly_point.toLocaleString() + "pt", d.weekly_point)
+                    addValue("月間ポイント", d.monthly_point.toLocaleString() + "pt", d.monthly_point)
+                    addValue("四半期ポイント", d.quarter_point.toLocaleString() + "pt", d.quarter_point)
+                    addValue("年間ポイント", d.yearly_point.toLocaleString() + "pt", d.yearly_point)
+                    addValue("ブックマーク数", d.fav_novel_cnt.toLocaleString(), d.fav_novel_cnt)
+                    addValue("感想数", d.impression_cnt.toLocaleString(), d.impression_cnt)
+                    addValue("レビュー数", d.review_cnt.toLocaleString(), d.review_cnt)
+                    addValue("評価ポイント", d.all_point.toLocaleString(), d.all_point)
+                    addValue("評価者数", d.all_hyoka_cnt.toLocaleString(), d.all_hyoka_cnt)
+                    addValue("最終更新日時<br>（システム用）", d.updated_at, d.updated_at)
+
+                    /* Export Button */
+                    if(enable_export){
+                        $("#novel_detail").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-api-data"></div>')
+                        $("#export-api-data").on("click", function(){
+                            var date = getDateString();
+                            var raw = {
+                                date: date,
+                                generatedTime: getDatetimeString(),
+                                ncode: ncode,
+                                data: d
+                            }
+                            saveJson(raw, "api-data_" + date + ".json");
+                        })
+                    }
+
+
+                }else{
+                    $(".loading-api").text("情報の取得に失敗しました。")
+                }
+            }else{
+                $(".loading-api").text("情報の取得に失敗しました。")
+            }
+            return true;
+        });
+    }
+    
 }
 
 /* Chapter Unique */
 function _chapterUnique(){
+    var ncode = getNcode();
+
     var chapterpv = [];
     $('.chapter-graph-list__item').each(function() {
         var text = $(this).text().trim();
@@ -449,6 +575,7 @@ function _chapterUnique(){
             var raw = {
                 date: date,
                 generatedTime: getDatetimeString(),
+                ncode: ncode,
                 data: {
                     unique: data
                 }

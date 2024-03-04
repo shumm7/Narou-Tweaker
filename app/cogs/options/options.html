@@ -63,39 +63,52 @@
 		
 		<div class="section">
 			<p><span class="section-header">総合</span></p>
-			<p><span class="section-subheader">当日・前日</span></p>
-			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_general_day" class="options toggle" name="enable_kasasagi_graph_general_day">
-				<label for="enable_kasasagi_graph_general_day" class="toggle">グラフを表示</label>
-			</p>
-			<p>
-				<div class="dropdown">
-					<select id="kasasagi_graph_type_general_day" class="options" name="kasasagi_graph_type_general_day">
-						<option value="bar">棒グラフ</option>
-						<option value="line">折れ線グラフ</option>
-					</select>	
-				</div>
-				<label for="enable_kasasagi_graph_general_day">グラフの種類</label>
-			</p>
-			<p>
-				<input type="checkbox" id="enable_kasasagi_table_general_day" class="options toggle" name="enable_kasasagi_table_general_day">
-				<label for="enable_kasasagi_table_general_day" class="toggle">テーブルを表示/改変</label>
-			</p>
+			<div class="section">
+				<p><span class="section-subheader">当日・前日</span></p>
+				<p>
+					<input type="checkbox" id="enable_kasasagi_graph_general_day" class="options toggle" name="enable_kasasagi_graph_general_day">
+					<label for="enable_kasasagi_graph_general_day" class="toggle">グラフを表示</label>
+				</p>
+				<p>
+					<div class="dropdown">
+						<select id="kasasagi_graph_type_general_day" class="options" name="kasasagi_graph_type_general_day">
+							<option value="bar">棒グラフ</option>
+							<option value="line">折れ線グラフ</option>
+						</select>	
+					</div>
+					<label for="enable_kasasagi_graph_general_day">グラフの種類</label>
+				</p>
+				<p>
+					<input type="checkbox" id="enable_kasasagi_table_general_day" class="options toggle" name="enable_kasasagi_table_general_day">
+					<label for="enable_kasasagi_table_general_day" class="toggle">テーブルを表示/改変</label>
+				</p>
+			</div>
 
-			<p><span class="section-subheader">累計</span></p>
-			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_general_total" class="options toggle" name="enable_kasasagi_graph_general_total">
-				<label for="enable_kasasagi_graph_general_total" class="toggle">グラフを表示</label>
-			</p>
-			<p>
-				<div class="dropdown">
-					<select id="kasasagi_graph_type_general_total" class="options" name="kasasagi_graph_type_general_total">
-						<option value="bar">棒グラフ</option>
-						<option value="line">折れ線グラフ</option>
-					</select>	
-				</div>
-				<label for="enable_kasasagi_graph_general_total">グラフの種類</label>
-			</p>
+			<div class="section">
+				<p><span class="section-subheader">累計</span></p>
+				<p>
+					<input type="checkbox" id="enable_kasasagi_graph_general_total" class="options toggle" name="enable_kasasagi_graph_general_total">
+					<label for="enable_kasasagi_graph_general_total" class="toggle">グラフを表示</label>
+				</p>
+				<p>
+					<div class="dropdown">
+						<select id="kasasagi_graph_type_general_total" class="options" name="kasasagi_graph_type_general_total">
+							<option value="bar">棒グラフ</option>
+							<option value="line">折れ線グラフ</option>
+						</select>	
+					</div>
+					<label for="enable_kasasagi_graph_general_total">グラフの種類</label>
+				</p>
+			</div>
+
+			<div class="section">
+				<p><span class="section-subheader">作品データ</span></p>
+				<p>なろうAPIを利用して、詳細な作品の統計情報を表示します。</p>
+				<p>
+					<input type="checkbox" id="enable_kasasagi_api_data" class="options toggle" name="enable_kasasagi_api_data">
+					<label for="enable_kasasagi_api_data" class="toggle">表示</label>
+				</p>
+			</div>
 		</div>
 
 		<div class="section">

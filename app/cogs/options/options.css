@@ -84,13 +84,12 @@ details[open]> :not(summary) {
 
 .section-header{
 	font-weight: bold;
-	margin-bottom: .1em
+	margin-bottom: .1em;
 }
 
 .section-subheader{
 	font-weight: bold;
 	margin-bottom: .1em;
-	margin-left: .1em;
 	color: #666666;
 }
 

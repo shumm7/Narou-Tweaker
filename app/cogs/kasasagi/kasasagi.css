@@ -19,6 +19,20 @@ body.narou-tweaker {
 .narou-tweaker #datepicker_form{
 	padding-left: 10px;
 }
+.narou-tweaker #access_all {
+	padding-top: 0;
+	margin: 20px 0px 40px 0px;
+}
+#novel_detail {
+	margin: 20px 0px 40px 0px;
+	clear: both;
+	overflow: hidden;
+}
+#novel_detail #novel_data {
+	margin-top: .3em;
+	clear: both;
+	overflow: hidden;
+}
 
 /* モダンレイアウト適用時の総合ページの表示崩れ対策 */
 .narou-tweaker #today_data,
@@ -346,11 +360,61 @@ body.narou-tweaker {
   text-align: left;
 }
 
-/* Specified Table */
-.data-table#chapter-unique {
-  margin: auto;
-  width: 460px;
+.access-table {
+    width: auto;
+    font-size: 80%;
 }
+.access-table {
+    width: auto;
+    font-size: 80%;
+}
+.access-table tr.header {
+    border: 1px solid #cccccc;
+}
+.access-table tr th {
+    background-color: #eeeeee;
+    text-align: center;
+    font-weight: normal;
+    padding: auto 5px;
+}
+.access-table tr.highlight td {
+    background-color: #eeffff;
+    font-weight: bold;
+}
+.access-table tr td {
+    border-bottom: 1px solid #cccccc;
+    padding: 5px;
+}
+table tr td.right {
+    text-align: right;
+}
+
+/* Specified Table */
+
 .oneday_graph table td.bar.sum .graph {
 	background-color: #ffa500;
 }
+
+.novel_info,
+.novel_statics {
+	margin-bottom: 1em;
+	margin-left: 10px;
+	width: 450px;
+	float: left;
+
+}
+.novel_info .access-table,
+.novel_statics .access-table {
+	width: 100%;
+}
+.novel_info .access-table tr td:nth-child(1),
+.novel_statics .access-table tr td:nth-child(1) {
+	width: 20%;
+	font-weight: bold;
+}
+
+
+.data-table#chapter-unique {
+	margin: auto;
+	width: 460px;
+  }

@@ -33,6 +33,7 @@ export function restoreOptions(){
     $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
     check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
     check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
+    check('#enable_kasasagi_api_data', options.enable_kasasagi_api_data, true);
    
   });
 }
@@ -57,6 +58,7 @@ export function saveOptions(){
     kasasagi_graph_type_chapter_unique: $("#kasasagi_graph_type_chapter_unique").val(),
     enable_kasasagi_table_general_day: $("#enable_kasasagi_table_general_day").prop('checked'),
     enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
+    enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
   }
   chrome.storage.sync.set(options);
 }
