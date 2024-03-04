@@ -221,6 +221,7 @@ function _general(){
             var time = parseInt($(this).parent().children(".hour").text().trim());
             var value = today_pv_sum[time]
             var bar = Math.floor(value / max * 100)
+            if(isNaN(bar) || !isFinite(bar)){bar = 0}
             $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
             $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
         });
@@ -230,6 +231,7 @@ function _general(){
             var time = parseInt($(this).parent().children(".hour").text());
             var value = yesterday_pv_sum[time]
             var bar = Math.floor(value / max * 100)
+            if(isNaN(bar) || !isFinite(bar)){bar = 0}
             $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
             $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
         });
@@ -564,6 +566,7 @@ function _chapterUnique(){
                 if(value_temp==undefined || value_temp==null){value_temp=0}
     
                 var bar = Math.floor(value_temp / max_data * 100);
+                if(isNaN(bar) || !isFinite(bar)){bar = 0}
     
                 var rate_before = ""
                 var rate_declease = ""
