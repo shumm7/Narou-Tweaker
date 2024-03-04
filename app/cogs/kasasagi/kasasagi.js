@@ -25,7 +25,7 @@ chrome.storage.sync.get(null, (options) => {
     enable_graph_general_day = options.enable_kasasagi_graph_general_day;
     if(enable_graph_general_day==undefined) {enable_graph_general_day = true}
     enable_graph_general_total = options.enable_kasasagi_graph_general_total;
-    if(enable_graph_general_total==undefined) {enable_graph_general_total = true}
+    if(enable_graph_general_total==undefined) {enable_graph_general_total = false}
     enable_graph_chapter_unique = options.enable_kasasagi_graph_chapter_unique;
     if(enable_graph_chapter_unique==undefined) {enable_graph_chapter_unique = true}
 

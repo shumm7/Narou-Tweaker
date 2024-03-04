@@ -26,7 +26,7 @@ export function restoreOptions(){
     check('#enable_kasasagi_css', options.enable_kasasagi_css, true);
     check('#enable_kasasagi_export', options.enable_kasasagi_export, true);
     check('#enable_kasasagi_graph_general_day', options.enable_kasasagi_graph_general_day, true);
-    check('#enable_kasasagi_graph_general_total', options.enable_kasasagi_graph_general_total, true);
+    check('#enable_kasasagi_graph_general_total', options.enable_kasasagi_graph_general_total, false);
     check('#enable_kasasagi_graph_chapter_unique', options.enable_kasasagi_graph_chapter_unique, true);
     $("#kasasagi_graph_type_general_day").val(defaultValue(options.kasasagi_graph_type_general_day, "bar"))
     $("#kasasagi_graph_type_general_total").val(defaultValue(options.kasasagi_graph_type_general_total, "bar"))
