@@ -66,6 +66,9 @@ function storeOptions(){
     enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
     enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
   }
+  if(debug){
+    $("textarea").text(JSON.stringify(options, null, 3))
+  }
   saveOptions(options);
 }
 
