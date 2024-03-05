@@ -1,0 +1,170 @@
+[
+    {
+        "name": "標準設定〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#fff;",
+                "background-image": "none;",
+                "color": "#444;"
+            },
+            "link": {
+                "color-link": "#03c;",
+                "color-visited": "#857;",
+                "color-hover": "#393;"
+            },
+            "sublist": {
+                "underline": "#444;",
+                "underline-type": "1px solid",
+                "default": "#fff;",
+                "hover": "#9df;"
+            }
+        }
+    },
+    {
+        "name": "ブラックモード1〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#000;",
+                "background-image": "none;",
+                "color": "#fff;"
+            },
+            "link": {
+                "color-link": "#fcf;",
+                "color-visited": "#857;",
+                "color-hover": "#f03;"
+            },
+            "sublist": {
+                "underline": "#fff;",
+                "underline-type": "1px solid",
+                "default": "#000;",
+                "hover": "#f03;"
+            }
+        }
+    },
+    {
+        "name": "ブラックモード2〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#000;",
+                "background-image": "none;",
+                "color": "#ccc;"
+            },
+            "link": {
+                "color-link": "#ff9;",
+                "color-visited": "#857;",
+                "color-hover": "#cf0;"
+            },
+            "sublist": {
+                "underline": "#ccc;",
+                "underline-type": "1px solid",
+                "default": "#000;",
+                "hover": "#cf0;"
+            }
+        }
+    },
+    {
+        "name": "通常1〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#ccf;",
+                "background-image": "none;",
+                "color": "#444;"
+            },
+            "link": {
+                "color-link": "#00f;",
+                "color-visited": "#009;",
+                "color-hover": "#00f;"
+            },
+            "sublist": {
+                "underline": "#444;",
+                "underline-type": "1px solid",
+                "default": "#ccf;",
+                "hover": "#00f;"
+            }
+        }
+    },
+    {
+        "name": "通常2〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#cfc;",
+                "background-image": "none;",
+                "color": "#444;"
+            },
+            "link": {
+                "color-link": "#00f;",
+                "color-visited": "#009;",
+                "color-hover": "#00f;"
+            },
+            "sublist": {
+                "underline": "#444;",
+                "underline-type": "1px solid",
+                "default": "#cfc;",
+                "hover": "#00f;"
+            }
+        }
+    },
+    {
+        "name": "シンプル〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#fafafa;",
+                "background-image": "none;",
+                "color": "#444;"
+            },
+            "link": {
+                "color-link": "#00f;",
+                "color-visited": "#009;",
+                "color-hover": "#393;"
+            },
+            "sublist": {
+                "underline": "#444;",
+                "underline-type": "1px solid",
+                "default": "#fafafa;",
+                "hover": "#393;"
+            }
+        }
+    },
+    {
+        "name": "おすすめ設定〔サイト標準〕",
+        "description": "サイトのデフォルト",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "novel": {
+                "background": "#edf7ff;",
+                "background-image": "none;",
+                "color": "#000;"
+            },
+            "link": {
+                "color-link": "#00f;",
+                "color-visited": "#009;",
+                "color-hover": "#00f;"
+            },
+            "sublist": {
+                "underline": "#444;",
+                "underline-type": "1px solid",
+                "default": "#edf7ff;",
+                "hover": "#00f;"
+            }
+        }
+    }
+]
