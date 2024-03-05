@@ -16,6 +16,10 @@ function defaultValue(value, def){
 /* Restore Options */
 export function restoreOptions(){
   chrome.storage.sync.get(null, (options) => {
+    /* Novel */
+    check('#enable_novel_css', options.enable_novel_css, true);
+    $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"))
+
     /* Mypage */
     check('#enable_mypage_profile_userid', options.enable_mypage_profile_userid, true);
     check('#enable_mypage_profile_detail', options.enable_mypage_profile_detail, true);
@@ -46,6 +50,10 @@ export function restoreOptions(){
 /* Save Options */
 export function saveOptions(){
   var options = {
+    /* Novel */
+    enable_novel_css: $("#enable_novel_css").prop('checked'),
+    novel_header_mode: $("#novel_header_mode").val(),
+
     /* Mypage */
     enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
     enable_mypage_profile_detail: $("#enable_mypage_profile_detail").prop('checked'),

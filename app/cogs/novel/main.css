@@ -1,0 +1,26 @@
+
+/* Header */
+#novel_header.header-mode--absolute,
+#novel_header.header-mode--absolute #novelnavi_right,
+#novel_header.header-mode--absolute #novelnavi_right .toggle,
+#novel_header.header-mode--absolute #novelnavi_right .toggle_menuclose  {
+    position: absolute !important;
+}
+#novel_header.header-mode--scroll,
+#novel_header.header-mode--scroll #novelnavi_right,
+#novel_header.header-mode--scroll #novelnavi_right .toggle,
+#novel_header.header-mode--scroll #novelnavi_right .toggle_menuclose  {
+    position: fixed !important;
+}
+#novel_header.header-mode--fixed,
+#novel_header.header-mode--fixed #novelnavi_right,
+#novel_header.header-mode--fixed #novelnavi_right .toggle,
+#novel_header.header-mode--fixed #novelnavi_right .toggle_menuclose  {
+    position: fixed !important;
+}
+#novel_header.header-mode--scroll {
+    transition: .5s;
+}
+#novel_header.hide.header-mode--scroll {
+    transform:translateY(-60px);
+}

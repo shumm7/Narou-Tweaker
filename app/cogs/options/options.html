@@ -20,6 +20,25 @@
 	<details id="novel" open>
 		<summary><strong>📗 小説ページ</strong></summary>
 		<p>小説本文、および、その詳細ページの設定を変更することが出来ます。</p>
+		<p>
+			<input type="checkbox" id="enable_novel_css" class="options toggle" name="enable_novel_css">
+			<label for="enable_novel_css" class="toggle">モダンなページレイアウト</label>
+		</p>
+
+		<div class="section">
+			<div class="section-header">ヘッダ</div>
+			<p>
+				<div class="dropdown">
+					<select id="novel_header_mode" class="options" name="novel_header_mode">
+						<option value="default">サイトのデフォルト</option>
+						<option value="absolute">上部</option>
+						<option value="fixed">追従</option>
+						<option value="scroll">スクロール</option>
+					</select>	
+				</div>
+				<label for="novel_header_mode">追従モード</label>
+			</p>
+		</div>
 	</details>
 
 	<details id="mypage" open>

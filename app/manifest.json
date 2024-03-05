@@ -23,19 +23,14 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
-        "libs/chart.min.js",
-        "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
-        "cogs/kasasagi/loader.js"
+        "cogs/novel/loader.js"
       ],
       "css": [
-        "libs/font-awesome/css/all.css",
-        "libs/w3-css/w3.css",
-        "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
         "common.css",
-        "cogs/kasasagi/kasasagi.css"
+        "cogs/novel/main.css"
       ],
       "matches": [
-				"https://kasasagi.hinaproject.com/*"
+				"https://ncode.syosetu.com/*"
 			]
     },
     {
@@ -45,31 +40,43 @@
       ],
       "css": [
         "common.css",
-        "cogs/mypage/mypage.css"
+        "cogs/mypage/main.css"
       ],
       "matches": [
-				"https://mypage.syosetu.com/*",
-        "https://api.syosetu.com/*"
+				"https://mypage.syosetu.com/*"
+			]
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "libs/chart.min.js",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
+        "cogs/kasasagi/loader.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "libs/w3-css/w3.css",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
+        "common.css",
+        "cogs/kasasagi/main.css"
+      ],
+      "matches": [
+				"https://kasasagi.hinaproject.com/*"
 			]
     }
   ],
   "web_accessible_resources": [
     {
       "resources": [
-        "cogs/kasasagi/kasasagi.js"
+        "cogs/novel/main.js",
+        "cogs/mypage/main.js",
+        "cogs/kasasagi/main.js"
       ],
       "matches": [
+        "https://ncode.syosetu.com/*",
+        "https://mypage.syosetu.com/*",
         "https://kasasagi.hinaproject.com/*"
       ]
-    },
-    {
-        "resources": [
-          "cogs/mypage/mypage.js"
-        ],
-        "matches": [
-          "https://mypage.syosetu.com/*",
-          "https://api.syosetu.com/*"
-        ]
     },
     {
       "resources": [
@@ -95,6 +102,8 @@
   ],
   "host_permissions": [
     "https://syosetu.com/*",
+    "https://api.syosetu.com/*",
+    "https://ncode.syosetu.com/*",
     "https://mypage.syosetu.com/*",
     "https://kasasagi.hinaproject.com/*"
   ]

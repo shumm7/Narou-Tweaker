@@ -10,3 +10,10 @@ export function saveJson(data, filename){
     );
     return true;
 }
+
+export function defaultValue(value, def){
+    if(value==undefined){
+        return def
+    }
+    return value
+}
