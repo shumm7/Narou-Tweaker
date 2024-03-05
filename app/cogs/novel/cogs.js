@@ -1,3 +1,4 @@
+/* Header */
 export function changeHeaderScrollMode(header_mode){
     $("#novel_header").removeClass("header-mode--fixed")
     $("#novel_header").removeClass("header-mode--absolute")
@@ -20,4 +21,24 @@ export function changeHeaderScrollMode(header_mode){
         }
         pos = $(this).scrollTop();
     });
+}
+
+/* Skin */
+export function removeDefaultSkinClass(){
+    const classList = [
+        "customlayout1",
+        "customlayout2",
+        "customlayout3",
+        "customlayout4",
+        "customlayout5",
+        "customlayout6",
+        "customlayout7",
+    ]
+
+    $.each(classList, function(_, c){
+        $("."+c).each(function(){
+            $(this).removeClass(c);
+        });
+    });
+
 }

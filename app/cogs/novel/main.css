@@ -19,7 +19,7 @@
     position: fixed !important;
 }
 #novel_header.header-mode--scroll {
-    transition: .5s;
+    transition: .2s;
 }
 #novel_header.hide.header-mode--scroll {
     transform:translateY(-60px);

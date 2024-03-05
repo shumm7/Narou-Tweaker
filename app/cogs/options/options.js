@@ -1,17 +1,4 @@
-function check(elm, value, _default) {
-  if(value!=true && value!=false){
-    value = _default;
-  }
-  $(elm).attr('checked', value).prop('checked', value).change();
-}
-
-function defaultValue(value, def){
-  if(value==undefined){
-    return def;
-  }else{
-    return value;
-  }
-}
+import {check, defaultValue} from "../../utils/misc.js"
 
 /* Restore Options */
 export function restoreOptions(){

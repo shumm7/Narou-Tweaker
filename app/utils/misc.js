@@ -17,3 +17,10 @@ export function defaultValue(value, def){
     }
     return value
 }
+
+export function check(elm, value, _default) {
+    if(value!=true && value!=false){
+      value = _default;
+    }
+    $(elm).attr('checked', value).prop('checked', value).change();
+  }

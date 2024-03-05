@@ -85,7 +85,8 @@
         "utils/text.js",
         "utils/api.js",
         "utils/ui.js",
-        "utils/misc.js"
+        "utils/misc.js",
+        "utils/option.js"
       ],
       "matches": ["<all_urls>"]
     },
