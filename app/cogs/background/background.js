@@ -4,7 +4,7 @@ import { applyCSS } from "./novel.js";
 /* Message */
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action == "fetch"){
-        if(message.format == defaultValue(message.format, "json")){
+        if(message.format == "json" || message.format==undefined){
             fetch(message.data.url, message.data.options)
             .then(response => response.json())
             .then(data => {
