@@ -1,7 +1,7 @@
 import {check, defaultValue} from "../../utils/misc.js"
 import { saveOptions } from "../../utils/option.js";
 
-const debug = false
+const debug = true
 
 /* Restore Options */
 export function restoreOptions(){

@@ -1,21 +1,17 @@
 import {replaceUrl} from "../../utils/text.js"
 import {getUserInfo} from "../../utils/api.js"
+import { defaultValue } from "../../utils/misc.js";
 
 chrome.storage.sync.get(["options"], (data) => {
     var options = data.options
     var path = location.pathname;
 
-    var enable_profile_detail = options.enable_mypage_profile_detail;
-    if(enable_profile_detail==undefined) {enable_profile_detail = true}
-    var enable_profile_userid = options.enable_mypage_profile_userid;
-    if(enable_profile_userid==undefined) {enable_profile_userid = true}
+    var enable_profile_detail = defaultValue(options.enable_mypage_profile_detail, true);
+    var enable_profile_userid = defaultValue(options.enable_mypage_profile_userid, true);
 
-    var enable_blog_autourl = options.enable_mypage_blog_autourl;
-    if(enable_blog_autourl==undefined) {enable_blog_autourl = true}
-    var enable_blog_comment_autourl = options.enable_mypage_blogcomment_autourl;
-    if(enable_blog_comment_autourl==undefined) {enable_blog_comment_autourl = false}
-    var enable_profile_autourl = options.enable_mypage_profile_autourl;
-    if(enable_profile_autourl==undefined) {enable_profile_autourl = true}
+    var enable_blog_autourl = defaultValue(options.enable_mypage_blog_autourl, true);
+    var enable_blog_comment_autourl = defaultValue(options.enable_mypage_blogcomment_autourl, false);
+    var enable_profile_autourl = defaultValue(options.enable_mypage_profile_autourl, true);
 
     /* General */
     if (enable_profile_userid){
@@ -69,7 +65,9 @@ chrome.storage.sync.get(["options"], (data) => {
         /* User Detail */
         if(enable_profile_detail){
             getUserInfo(location.pathname.match('/mypage/profile/userid/(.*)/')[1])
+            console.log("activate")
             chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
+                console.log(response)
                 if(response.success){
                     var d = response.result[1]
                     if(d!=undefined){

@@ -1,5 +1,5 @@
 import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
-import {saveJson} from "../../utils/misc.js"
+import {saveJson, defaultValue} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
 import {getNovelInfo, getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
 import {makeTable, getNcode} from "./utils.js"
@@ -16,36 +16,25 @@ var graph_type_chapter_unique
 var enable_table_general_day
 var enable_table_chapter_unique
 
-chrome.storage.sync.get(["options"], (options) => {
+chrome.storage.sync.get(["options"], (data) => {
     var path = location.pathname;
     var ncode = getNcode();
     var options = data.options
 
-    enable_css = options.enable_kasasagi_css;
-    if(enable_css==undefined) {enable_css = true}
-    enable_export = options.enable_kasasagi_export;
-    if(enable_export==undefined) {enable_export = true}
-    enable_api_data = options.enable_kasasagi_api_data;
-    if(enable_api_data==undefined) {enable_api_data = true}
+    enable_css = defaultValue(options.enable_kasasagi_css, true);
+    enable_export = defaultValue(options.enable_kasasagi_export, true);
+    enable_api_data = defaultValue(options.enable_kasasagi_api_data, true);
 
-    enable_graph_general_day = options.enable_kasasagi_graph_general_day;
-    if(enable_graph_general_day==undefined) {enable_graph_general_day = true}
-    enable_graph_general_total = options.enable_kasasagi_graph_general_total;
-    if(enable_graph_general_total==undefined) {enable_graph_general_total = false}
-    enable_graph_chapter_unique = options.enable_kasasagi_graph_chapter_unique;
-    if(enable_graph_chapter_unique==undefined) {enable_graph_chapter_unique = true}
+    enable_graph_general_day = defaultValue(options.enable_kasasagi_graph_general_day, true);
+    enable_graph_general_total = defaultValue(options.enable_kasasagi_graph_general_total, false);
+    enable_graph_chapter_unique = defaultValue(options.enable_kasasagi_graph_chapter_unique, true);
 
-    graph_type_general_day = options.kasasagi_graph_type_general_day;
-    if(graph_type_general_day==undefined) {graph_type_general_day = "bar"}
-    graph_type_general_total = options.kasasagi_graph_type_general_total;
-    if(graph_type_general_total==undefined) {graph_type_general_total = "bar"}
-    graph_type_chapter_unique = options.kasasagi_graph_type_chapter_unique;
-    if(graph_type_chapter_unique==undefined) {graph_type_chapter_unique = "bar"}
+    graph_type_general_day = defaultValue(options.kasasagi_graph_type_general_day, "bar");
+    graph_type_general_total = defaultValue(options.kasasagi_graph_type_general_total, "bar");
+    graph_type_chapter_unique = defaultValue(options.kasasagi_graph_type_chapter_unique, "bar");
 
-    enable_table_general_day = options.enable_kasasagi_table_general_day;
-    if(enable_table_general_day==undefined) {enable_table_general_day = true}
-    enable_table_chapter_unique = options.enable_kasasagi_table_chapter_unique;
-    if(enable_table_chapter_unique==undefined) {enable_table_chapter_unique = true}
+    enable_table_general_day = defaultValue(options.enable_kasasagi_table_general_day, true);
+    enable_table_chapter_unique = defaultValue(options.enable_kasasagi_table_chapter_unique, true);
 
     /* Design */
     if(enable_css){

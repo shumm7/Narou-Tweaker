@@ -1,3 +1,6 @@
+import { defaultSkins } from "../../utils/data/default_skins.js";
+import { defaultValue } from "../../utils/misc.js";
+
 export function applyCSS(tab, index){
     function getRule(key, rules){
         var style = key + "{"
@@ -27,7 +30,6 @@ export function applyCSS(tab, index){
         rule += getRule("dl.novel_sublist2.customlayout1", [{"border-color": s.sublist.default}])
         rule += getRule("dl.novel_sublist2.customlayout1:hover", [{"border-color": s.sublist.hover}])
         
-        console.log(rule)
         chrome.scripting.insertCSS({
             css: rule,
             target: {

@@ -10,7 +10,7 @@
     "128": "assets/icon_128.png"
   },
   "background": {
-    "service_worker": "./cogs/background/main.js",
+    "service_worker": "./cogs/background/background.js",
     "type": "module"
   },
   "options_ui": {
@@ -32,7 +32,8 @@
       ],
       "matches": [
 				"https://ncode.syosetu.com/*"
-			]
+			],
+      "run_at":"document_start"
     },
     {
       "js": [
@@ -45,7 +46,8 @@
       ],
       "matches": [
 				"https://mypage.syosetu.com/*"
-			]
+			],
+      "run_at":"document_start"
     },
     {
       "js": [
@@ -63,7 +65,8 @@
       ],
       "matches": [
 				"https://kasasagi.hinaproject.com/*"
-			]
+			],
+      "run_at":"document_start"
     }
   ],
   "web_accessible_resources": [

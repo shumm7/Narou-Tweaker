@@ -4,7 +4,13 @@ function fetch(url, options){
             action: "fetch",
             data: {url: url, options: options}
         }
-    );
+    ).then( ()=>{
+        
+    }
+    ).catch((error) => {
+        console.log(error);
+        return false;
+    });
 }
 
 export function getNovelInfo(ncode){
