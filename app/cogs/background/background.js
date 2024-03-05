@@ -63,6 +63,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 /* Novel */
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
     if (info.status == 'loading' && tab.url.match("https://ncode.syosetu.com/.*")){
-        applyCSS(tab, 1)
+        applyCSS(tab)
     };
 });

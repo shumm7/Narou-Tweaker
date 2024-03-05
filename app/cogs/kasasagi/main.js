@@ -330,33 +330,9 @@ function _general(){
         week.push($(this).children("td.day").text())
     })
 
-    /* Export Button */
-    if(enable_export){
-        $("#access_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
-        $("#export-general-total").on("click", function(){
-            var date = getDateString();
-            var raw = {
-                date: date,
-                generatedTime: getDatetimeString(),
-                ncode: ncode,
-                data: {
-                    highlight: {
-                        pv: total_pv,
-                        unique: total_unique
-                    },
-                    week: {
-                        day: week,
-                        pv: week_pv
-                    }
-                }
-            }
-            saveJson(raw, "access-all_" + date + ".json");
-        })
-    }
-
     /* Graph */
     if (enable_graph_general_total){
-        $("#access_all").after('<canvas class="access-chart" id="general-total" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
+        $("#access_all").append('<canvas class="access-chart" id="general-total" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
         var graph = null
 
         function generateOnedayGraph(){
@@ -412,6 +388,30 @@ function _general(){
 
         generateOnedayGraph()
     
+    }
+
+    /* Export Button */
+    if(enable_export){
+        $("#access_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
+        $("#export-general-total").on("click", function(){
+            var date = getDateString();
+            var raw = {
+                date: date,
+                generatedTime: getDatetimeString(),
+                ncode: ncode,
+                data: {
+                    highlight: {
+                        pv: total_pv,
+                        unique: total_unique
+                    },
+                    week: {
+                        day: week,
+                        pv: week_pv
+                    }
+                }
+            }
+            saveJson(raw, "access-all_" + date + ".json");
+        })
     }
 
 

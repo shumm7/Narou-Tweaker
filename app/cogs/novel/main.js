@@ -24,7 +24,7 @@ chrome.storage.sync.get(["options"], (data) => {
     
 });
 
-function optionModal(skin){
+function optionModal(){
     
     /* New Header */
     $("#head_nav").after('<div id="novelnavi_right" style="position: absolute;"></div>')
