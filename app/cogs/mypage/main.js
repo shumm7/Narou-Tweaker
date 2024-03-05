@@ -1,7 +1,8 @@
 import {replaceUrl} from "../../utils/text.js"
 import {getUserInfo} from "../../utils/api.js"
 
-chrome.storage.sync.get(null, (options) => {
+chrome.storage.sync.get(["options"], (data) => {
+    var options = data.options
     var path = location.pathname;
 
     var enable_profile_detail = options.enable_mypage_profile_detail;

@@ -5,7 +5,6 @@ function fetch(url, options){
             data: {url: url, options: options}
         }
     );
-    return true;
 }
 
 export function getNovelInfo(ncode){

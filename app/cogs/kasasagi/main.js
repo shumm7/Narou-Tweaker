@@ -16,9 +16,10 @@ var graph_type_chapter_unique
 var enable_table_general_day
 var enable_table_chapter_unique
 
-chrome.storage.sync.get(null, (options) => {
+chrome.storage.sync.get(["options"], (options) => {
     var path = location.pathname;
     var ncode = getNcode();
+    var options = data.options
 
     enable_css = options.enable_kasasagi_css;
     if(enable_css==undefined) {enable_css = true}

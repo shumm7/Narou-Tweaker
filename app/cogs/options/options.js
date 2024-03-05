@@ -1,8 +1,13 @@
 import {check, defaultValue} from "../../utils/misc.js"
+import { saveOptions } from "../../utils/option.js";
+
+const debug = false
 
 /* Restore Options */
 export function restoreOptions(){
-  chrome.storage.sync.get(null, (options) => {
+  chrome.storage.sync.get(["options"], function(data) {
+    var options = data.options
+
     /* Novel */
     check('#enable_novel_css', options.enable_novel_css, true);
     $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"))
@@ -30,12 +35,11 @@ export function restoreOptions(){
 
     check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
     check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
-   
   });
 }
 
 /* Save Options */
-export function saveOptions(){
+function storeOptions(){
   var options = {
     /* Novel */
     enable_novel_css: $("#enable_novel_css").prop('checked'),
@@ -62,15 +66,16 @@ export function saveOptions(){
     enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
     enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
   }
-  chrome.storage.sync.set(options);
+  saveOptions(options);
 }
 
 /* Remove Warning Message */
 $('#js-failed').remove();
+if(!debug){$('#debug').remove()}
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 $(".options").each(function() {
   $(this).on("click", function(){
-    saveOptions();
+    storeOptions();
   });
 });

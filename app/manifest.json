@@ -10,7 +10,7 @@
     "128": "assets/icon_128.png"
   },
   "background": {
-    "service_worker": "background.js",
+    "service_worker": "./cogs/background/main.js",
     "type": "module"
   },
   "options_ui": {
@@ -26,6 +26,7 @@
         "cogs/novel/loader.js"
       ],
       "css": [
+        "libs/font-awesome/css/all.css",
         "common.css",
         "cogs/novel/main.css"
       ],
@@ -86,15 +87,15 @@
         "utils/api.js",
         "utils/ui.js",
         "utils/misc.js",
-        "utils/option.js"
+        "utils/option.js",
+        "utils/data/default_skins.js"
       ],
       "matches": ["<all_urls>"]
     },
     {
       "resources": [
         "/libs/font-awesome/webfonts/*.ttf",
-        "/libs/font-awesome/webfonts/*.woff2",
-        "/assets/default_skin.json"
+        "/libs/font-awesome/webfonts/*.woff2"
       ],
       "matches": ["<all_urls>"]
     }
@@ -102,7 +103,8 @@
   "permissions": [
     "storage",
     "scripting",
-    "downloads"
+    "downloads",
+    "tabs"
   ],
   "host_permissions": [
     "https://syosetu.com/*",

@@ -1,21 +1,91 @@
 
+/* Option Button */
+#novel-option-button {
+	top: .6em;
+	cursor: pointer;
+	font-size: 150%;
+	color: #666666;
+}
+#novel-option-button:hover {
+	color: var(--kasasagi-blue);
+}
+
+/* Option Menu */
+#novel-option {
+    top: 0;
+    right: calc(-250px - env(safe-area-inset-left) - 50px);
+    height: 100%;
+    position: fixed;
+    width: calc(250px + env(safe-area-inset-left));
+    background: #efefef;
+    z-index: 4;
+    filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
+    transition: .3s;
+}
+#novel-option.show {
+    transform: translateX(calc(-250px - env(safe-area-inset-left) - 50px));
+}
+#novel-option--header {
+    height: 70px;
+    background: #ddd;
+}
+
+#novel-option--header ul {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	margin-left: constant(safe-area-inset-left);
+	margin-left: env(safe-area-inset-left);
+    padding-left: 20px;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+#novel-option--header ul li {
+	list-style-type: none;
+	padding: 0 .3em;
+}
+#novel-option--header ul li button {
+	height: 100%;
+	padding-top: 0;
+	padding-bottom: 0;
+	font-size: .9em;
+    background: 0 0;
+    border: none;
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+#novel-option--header ul li button span {
+    display: inline-block;
+	height: 100%;
+	line-height: 60px;
+	border-radius: 0;
+	border: none;
+	border-top: 4px solid transparent;
+	box-sizing: border-box;
+	padding: 0 .5em;
+}
+#novel-option--header ul li.active button span {
+	border-top-color: #222 !important;
+}
+#novel-option--header ul li button span:hover {
+	border-top-color: var(--kasasagi-blue);
+}
+
+
 /* Header */
 #novel_header.header-mode--absolute,
-#novel_header.header-mode--absolute #novelnavi_right,
-#novel_header.header-mode--absolute #novelnavi_right .toggle,
-#novel_header.header-mode--absolute #novelnavi_right .toggle_menuclose  {
+#novel_header.header-mode--absolute #novelnavi_right > * {
     position: absolute !important;
 }
 #novel_header.header-mode--scroll,
-#novel_header.header-mode--scroll #novelnavi_right,
-#novel_header.header-mode--scroll #novelnavi_right .toggle,
-#novel_header.header-mode--scroll #novelnavi_right .toggle_menuclose  {
+#novel_header.header-mode--scroll #novelnavi_right > * {
     position: fixed !important;
 }
 #novel_header.header-mode--fixed,
-#novel_header.header-mode--fixed #novelnavi_right,
-#novel_header.header-mode--fixed #novelnavi_right .toggle,
-#novel_header.header-mode--fixed #novelnavi_right .toggle_menuclose  {
+#novel_header.header-mode--fixed #novelnavi_right > * {
     position: fixed !important;
 }
 #novel_header.header-mode--scroll {

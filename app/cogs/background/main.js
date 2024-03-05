@@ -1,6 +1,11 @@
+import { defaultSkins } from "../../utils/data/default_skins.js";
+import { defaultValue } from "../../utils/misc.js";
+import { applyCSS } from "./novel.js";
+
+/* Message */
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action == "fetch"){
-        if(message.format == "json" || message.format == undefined){
+        if(message.format == defaultValue(message.format, "json")){
             fetch(message.data.url, message.data.options)
             .then(response => response.json())
             .then(data => {
@@ -36,6 +41,28 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 filename: message.data.filename
             });
         }
+    }else if(message.action == "applyCSS"){
+        chrome.tabs.query({}, tabs => {
+            for(let i=0; i<tabs.length; i++){
+                if (tabs[i].url.match("https://ncode.syosetu.com/.*")){
+                    applyCSS(tabs[i], defaultValue(message.data.index, 0))
+                };
+            }
+        });
     }
     return true;
+});
+
+/* Novel */
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+    if (info.status == 'loading' && tab.url.match("https://ncode.syosetu.com/.*")){
+        applyCSS(tab)
+    };
+});
+
+/* Kasasagi */
+chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+    if (info.status == 'loading' && tab.url.match("https://ncode.syosetu.com/.*")){
+        applyCSS(tab)
+    };
 });

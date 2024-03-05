@@ -1,3 +1,6 @@
+import { defaultValue } from "../../utils/misc.js"
+import { defaultSkins } from "../../utils/data/default_skins.js";
+
 /* Header */
 export function changeHeaderScrollMode(header_mode){
     $("#novel_header").removeClass("header-mode--fixed")
@@ -41,4 +44,15 @@ export function removeDefaultSkinClass(){
         });
     });
 
+}
+
+export function applySkin(index){
+    chrome.runtime.sendMessage(
+        {
+            action: "applyCSS",
+            data: {
+                index: index
+            }
+        }
+    );
 }
