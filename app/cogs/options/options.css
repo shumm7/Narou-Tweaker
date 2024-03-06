@@ -114,6 +114,22 @@ details[open]> :not(summary) {
 	color: #555;
 	text-overflow: ellipsis;
 }
+.skin-color-field {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+.skin-detail .color-box {
+	height: 1em;
+	width: 1em;
+	padding: .3em;
+	border: 1px solid #000;
+	margin-left: 1em;
+	background: transparent;
+}
+.skin-detail .skin-color-field input[type="text"] {
+	width: 100%;
+}
 #skin-preview {
 	border: 1px solid #999;
 	padding: 1em;
@@ -122,8 +138,9 @@ details[open]> :not(summary) {
 	padding: 10px 10px 2px 5px;
 	font-size: 95%;
 }
-#skin-preview #subtitle-dummy div a {
-	text-decoration: none;
+#skin-preview #subtitle-dummy #link,
+#skin-preview #subtitle-dummy #link-visited  {
+	cursor: pointer;
 }
 
 /* Toggle */

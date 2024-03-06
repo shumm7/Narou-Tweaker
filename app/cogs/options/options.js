@@ -89,12 +89,4 @@ $(".options").each(function() {
 });
 
 /* Skin Change */
-$("#skin").on("change",() => {
-  var skin = parseInt($("#skin").val())
-  saveSkin(skin)
-  chrome.storage.sync.get(["skin", "skins"], function(data) {
-    restoreSkins(data.skins, data.skin);
-  })
-});
-
 addSkinEditButtonEvent()

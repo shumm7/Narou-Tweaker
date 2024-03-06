@@ -3,11 +3,21 @@ import { defaultValue, getCSSRule } from "../../utils/misc.js";
 
 export function applyCSS(tab, index){
 
-    chrome.storage.sync.get(["skins", "skin"], (data) => {
+    chrome.storage.sync.get(["skins", "skin", "applied_skin"], (data) => {
         const getRule = getCSSRule
         const skin_idx = defaultValue(index, defaultValue(data.skin, 0))
         const skins = defaultValue(data.skins, defaultSkins)
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
+        const applied_skin = data.applied_skin
+
+        if (applied_skin!=undefined){
+            chrome.scripting.removeCSS({
+                css: applied_skin,
+                target: {
+                    tabId: tab.id,
+                }
+            })
+        }
 
         const s = skin.style
         var rule = ""
@@ -27,5 +37,6 @@ export function applyCSS(tab, index){
                 tabId: tab.id,
             }
         })
+        chrome.storage.sync.set({"applied_skin": rule});
     });    
 }

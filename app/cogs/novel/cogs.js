@@ -49,7 +49,7 @@ export function removeDefaultSkinClass(){
 export function applySkin(index){
     chrome.runtime.sendMessage(
         {
-            action: "applyCSS",
+            action: "apply_skin",
             data: {
                 index: index
             }

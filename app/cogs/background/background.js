@@ -48,7 +48,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 filename: message.data.filename
             });
         }
-    }else if(message.action == "applyCSS"){
+    }else if(message.action == "apply_skin"){
         chrome.tabs.query({}, tabs => {
             for(let i=0; i<tabs.length; i++){
                 if (tabs[i].url.match("https://ncode.syosetu.com/.*")){

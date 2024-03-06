@@ -51,7 +51,7 @@
 						<label for="skin">スキン</label>
 					</div>
 					<div id="skin-selection--buttons" style="margin-left: 2em;">
-						<button name="new" type="submit">＋</button>
+						<button name="new" type="button">＋</button>
 					</div>
 				</div>
 			</p>
@@ -59,8 +59,8 @@
 			<div id="skin-option" class="section" style="padding: 1em;">
 				<div id="skin-option--buttons" style="margin-bottom: 1em">
 					<button name="save" type="submit">保存</button>
-					<button name="copy" type="submit">複製</button>
-					<button name="delete" type="submit">削除</button>
+					<button name="copy" type="button">複製</button>
+					<button name="delete" type="button">削除</button>
 					<span id="skin-option--editting">test</span>
 				</div>
 				<div id="skin-option--options">
@@ -78,31 +78,52 @@
 						<div>
 							<div class="textfield skin-detail">
 								<label for="#skin-novel-color">本文 文字色</label>
-								<input name="skin-novel-color" class="option-skin" type="text" id="skin-novel-color"></input>
+								<div class="skin-color-field">
+									<input name="skin-novel-color" class="option-skin" type="text" id="skin-novel-color"></input>
+									<div name="skin-novel-color" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-novel-background">本文 背景色</label>
-								<input name="skin-novel-background" class="option-skin" type="text" id="skin-novel-background"></input>
+								<div class="skin-color-field">
+									<input name="skin-novel-background" class="option-skin" type="text" id="skin-novel-background"></input>
+									<div name="skin-novel-background" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-link-color">リンク色</label>
-								<input name="skin-link-color" class="option-skin" type="text" id="skin-link-color"></input>
+								<div class="skin-color-field">
+									<input name="skin-link-color" class="option-skin" type="text" id="skin-link-color"></input>
+									<div name="skin-link-color" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-link-color-visited">リンク色（クリック済み）</label>
-								<input name="skin-link-color-visited" class="option-skin" type="text" id="skin-link-color-visited"></input>
+								<div class="skin-color-field">
+									<input name="skin-link-color-visited" class="option-skin" type="text" id="skin-link-color-visited"></input>
+									<div name="skin-link-color-visited" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-link-color-hover">リンク色（ホバー時）</label>
-								<input name="skin-link-color-hover" class="option-skin" type="text" id="skin-link-color-hover"></input>
+								<div class="skin-color-field">
+									<input name="skin-link-color-hover" class="option-skin" type="text" id="skin-link-color-hover"></input>
+									<div name="skin-link-color-hover" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-sublist-underline">目次の下線</label>
-								<input name="skin-sublist-underline" class="option-skin" type="text" id="skin-sublist-underline"></input>
+								<div class="skin-color-field">
+									<input name="skin-sublist-underline" class="option-skin" type="text" id="skin-sublist-underline"></input>
+									<div name="skin-sublist-underline" class="color-box"></div>
+								</div>
 							</div>
 							<div class="textfield skin-detail">
 								<label for="#skin-sublist-underline-hover">目次の下線（ホバー時）</label>
-								<input name="skin-sublist-underline-hover" class="option-skin" type="text" id="skin-sublist-underline-hover"></input>
+								<div class="skin-color-field">
+									<input name="skin-sublist-underline-hover" class="option-skin" type="text" 	id="skin-sublist-underline-hover"></input>
+									<div name="skin-sublist-underline-hover" class="color-box"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -112,8 +133,8 @@
 							<p>　Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 							<div style="height: 1em;"></div>
 							<div id="subtitle-dummy">
-								<div id="link"><a href="javascript:void(0)">1.目次テスト</a></div>
-								<div id="link-visited"><a href="javascript:void(0)">2.訪問済み</a></div>
+								<div id="link">1.目次テスト</div>
+								<div id="link-visited">2.訪問済み</div>
 							</div>
 						</div>
 					</div>
@@ -244,6 +265,7 @@
 		<p>
 			<textarea style="width: 100%; height: 10em;"></textarea>
 		</p>
+		<button>Open</button>
 	</details>
 	
 </form>

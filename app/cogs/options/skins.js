@@ -1,26 +1,26 @@
-import { defaultValue } from "../../utils/misc.js";
+import { defaultValue, getCSSRule } from "../../utils/misc.js";
 import { defaultSkins } from "../../utils/data/default_skins.js";
 import { debug_log, debug_logObject } from "./debug.js";
 import { saveSkin, saveSkins } from "../../utils/option.js";
+import { applySkin } from "../novel/cogs.js";
 
 export function resetSkins(){
     saveSkins(defaultSkins)
     saveSkin(0)
 }
 
-export function checkSkinNameDuplicate(skins, name){
+export function checkSkinNameDuplicate(skins, name, selected){
     var res = false
-    $.each(skins, (_, skin)=>{
-        console.log(skin.name==name)
-        if(skin.name==name){
+    $.each(skins, (i, skin)=>{
+        if(skin.name==name && i!=selected){
             res = true;
         }
     })
     return res;
 }
 
-export function generateNoDuplicateName(skins, name){
-    if(checkSkinNameDuplicate(skins, name)){
+export function generateNoDuplicateName(skins, name, selected){
+    if(checkSkinNameDuplicate(skins, name, selected)){
         for(var i=1; i<=10000; i++){
             if(!checkSkinNameDuplicate(skins, name + "("+i+")")){
             name = name + "("+i+")"
@@ -71,6 +71,7 @@ export function restoreSkins(skins, selected){
       $("#skin-option--buttons button[name='save']").prop("disabled", true)
       $("#skin-option--buttons button[name='delete']").prop("disabled", true)
     }
+    showSkinPreview()
   }
 
   export function getSkinData(){
@@ -96,37 +97,70 @@ export function restoreSkins(skins, selected){
       }
     }
   }
+
+export function showSkinPreview() {
+    $("#skin-preview-style").remove()
+    $("head").append('<style id="skin-preview-style" type="text/css">')
+
+    var s = ""
+    const style = getSkinData().style
+
+    s += getCSSRule("#skin-preview", [{"background": style.novel.background}, {"color": style.novel.color}])
+    s += getCSSRule("#skin-preview #link", [{"color": style.link.color_link}])
+    s += getCSSRule("#skin-preview #link-visited", [{"color": style.link.color_visited}])
+    s += getCSSRule("#skin-preview #link:hover, #skin-preview #link-visited:hover", [{"color": style.link.color_hover}])
+    s += getCSSRule("#skin-preview #link-visited", [{"border-bottom": "1px solid " + style.sublist.color}])
+    s += getCSSRule("#skin-preview #link-visited:hover", [{"border-bottom": "1px solid " + style.sublist.hover}])
+    $("#skin-preview-style").text(s)
+
+    $(".skin-color-field div[name='skin-novel-color']").css("background", style.novel.color)
+    $(".skin-color-field div[name='skin-novel-background']").css("background", style.novel.background)
+    $(".skin-color-field div[name='skin-link-color']").css("background", style.link.color_link)
+    $(".skin-color-field div[name='skin-link-color-visited']").css("background", style.link.color_visited)
+    $(".skin-color-field div[name='skin-link-color-hover']").css("background", style.link.color_hover)
+    $(".skin-color-field div[name='skin-sublist-underline']").css("background", style.sublist.color)
+    $(".skin-color-field div[name='skin-sublist-underline-hover']").css("background", style.sublist.hover)
+}
+
+export function saveSelectedSkin(){
+    var skin = getSkinData()
+    var selected = parseInt($("#skin").val())
   
+    chrome.storage.sync.get(["skins"], function(data) {
+      var skins = defaultValue(data.skins, defaultValue)
+      skin.name = generateNoDuplicateName(skins, skin.name, selected)
+      if(skins[selected]!=undefined){
+        if(skins[selected].customizable){
+          skins[selected] = skin
+          saveSkins(skins)
+          restoreSkins(skins, selected)
+          applySkin(selected)
+        }
+      }
+    });
+}
 
 
 export function addSkinEditButtonEvent(){
+    $("#skin").on("change",() => {
+        var skin = parseInt($("#skin").val())
+        saveSkin(skin)
+        applySkin(skin)
+        chrome.storage.sync.get(["skin", "skins"], function(data) {
+          restoreSkins(data.skins, data.skin);
+        })
+      });
+
     $("#skin-selection--buttons button[name='new']").on("click", (e)=>{ /* New Button */
     e.preventDefault()
     chrome.storage.sync.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultSkins)
-      var name = generateNoDuplicateName(skins, "新規スキン")
-  
-      skins.push({
-          "name": name,
-          "description": "",
-          "customizable": true,
-          "show": true,
-          "style": {
-              "novel": {
-                  "background": "#fff",
-                  "color": "#444"
-              },
-              "link": {
-                  "color_link": "#03c",
-                  "color_visited": "#857",
-                  "color_hover": "#393"
-              },
-              "sublist": {
-                  "color": "#444",
-                  "hover": "#9df"
-              }
-          }
-      })
+        
+      var defaultSkin = defaultSkins[0]
+      defaultSkin.customizable = true
+      defaultSkin.name = generateNoDuplicateName(skins, "新規スキン", -1)
+
+      skins.push(defaultSkin)
       saveSkins(skins)
       saveSkin(skins.length-1)
       restoreSkins(skins, skins.length-1)
@@ -135,20 +169,7 @@ export function addSkinEditButtonEvent(){
   
   $("#skin-option--buttons button[name='save']").on("click", (e)=>{ /* Save Button */
     e.preventDefault()
-    var skin = getSkinData()
-    var selected = parseInt($("#skin").val())
-  
-    chrome.storage.sync.get(["skins"], function(data) {
-      var skins = defaultValue(data.skins, defaultValue)
-      skin.name = generateNoDuplicateName(skins, skin.name)
-      if(skins[selected]!=undefined){
-        if(skins[selected].customizable){
-          skins[selected] = skin
-          saveSkins(skins)
-          restoreSkins(skins, selected)
-        }
-      }
-    });
+    saveSelectedSkin()
   })
   
   $("#skin-option--buttons button[name='copy']").on("click", (e)=>{ /* Copy Button */
@@ -158,12 +179,13 @@ export function addSkinEditButtonEvent(){
     chrome.storage.sync.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultValue)
       skin.customizable = true
-      skin.name = generateNoDuplicateName(skins, skin.name + " - コピー")
+      skin.name = generateNoDuplicateName(skins, skin.name + " - コピー", -1)
       skins.push(skin)
 
       saveSkins(skins)
       saveSkin(skins.length - 1)
       restoreSkins(skins, skins.length - 1)
+      applySkin(selected)
     });
   })
   
@@ -182,7 +204,13 @@ export function addSkinEditButtonEvent(){
         saveSkins(skins)
         saveSkin(selected)
         restoreSkins(skins, selected)
+        applySkin(selected)
       }
     });
   })
-  }
+
+  $(".option-skin").change(()=>{
+    showSkinPreview()
+    saveSelectedSkin()
+  });
+}
