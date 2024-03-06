@@ -140,6 +140,7 @@ export function addSkinEditButtonEvent(){
   
     chrome.storage.sync.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultValue)
+      skin.name = generateNoDuplicateName(skins, skin.name)
       if(skins[selected]!=undefined){
         if(skins[selected].customizable){
           skins[selected] = skin
