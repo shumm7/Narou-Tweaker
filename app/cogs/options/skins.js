@@ -1,4 +1,4 @@
-import { defaultValue, getCSSRule } from "../../utils/misc.js";
+import { defaultValue, getCSSRule, saveJson } from "../../utils/misc.js";
 import { defaultSkins } from "../../utils/data/default_skins.js";
 import { debug_log, debug_logObject } from "./debug.js";
 import { saveSkin, saveSkins } from "../../utils/option.js";
@@ -7,6 +7,8 @@ import { applySkin } from "../novel/cogs.js";
 export function resetSkins(){
     saveSkins(defaultSkins)
     saveSkin(0)
+    restoreSkins(defaultSkins, 0)
+    applySkin(0);
 }
 
 export function checkSkinNameDuplicate(skins, name, selected){
@@ -159,6 +161,7 @@ export function addSkinEditButtonEvent(){
       var defaultSkin = defaultSkins[0]
       defaultSkin.customizable = true
       defaultSkin.name = generateNoDuplicateName(skins, "新規スキン", -1)
+      defaultSkin.description = ""
 
       skins.push(defaultSkin)
       saveSkins(skins)
@@ -185,7 +188,7 @@ export function addSkinEditButtonEvent(){
       saveSkins(skins)
       saveSkin(skins.length - 1)
       restoreSkins(skins, skins.length - 1)
-      applySkin(selected)
+      applySkin(skins.length - 1)
     });
   })
   
@@ -207,6 +210,20 @@ export function addSkinEditButtonEvent(){
         applySkin(selected)
       }
     });
+  })
+
+  $("#skin-option--export button[name='export']").on("click", (e)=>{ /* Export Button */
+    e.preventDefault()
+    chrome.storage.sync.get(["skins", "skin"], function(data) {
+        var skins = defaultValue(data.skins, defaultSkins)
+        var skin = defaultValue(data.skin, 0)
+        saveJson(skins[skin], skins[skin].name + ".json")
+    });
+  })
+
+  $("#debug--reset-skin").on("click", (e)=>{
+    e.preventDefault()
+    resetSkins();
   })
 
   $(".option-skin").change(()=>{

@@ -1,6 +1,48 @@
 export const defaultSkins = [
     {
-        "name": "標準設定〔サイト標準〕",
+        "name": "ライトモード〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "link": {
+                "color_hover": "rgb(98, 84, 255)",
+                "color_link": "rgb(26, 13, 171)",
+                "color_visited": "#681da8"
+            },
+            "novel": {
+                "background": "#ffffff",
+                "color": "rgba(0, 0, 0, 0.87)"
+            },
+            "sublist": {
+                "color": "rgba(0, 0, 0, 0.2)",
+                "hover": "rgba(67, 51, 242, 0.7)"
+            }
+        }
+    },
+    {
+        "name": "ダークモード〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "link": {
+                "color_hover": "rgb(152, 189, 235)",
+                "color_link": "rgb(83, 155, 245)",
+                "color_visited": "rgb(135, 122, 245)"
+            },
+            "novel": {
+                "background": "rgb(47, 50, 50)",
+                "color": "rgba(255, 255, 255, 0.92)"
+            },
+            "sublist": {
+                "color": "rgba(255, 255, 255, 0.1)",
+                "hover": "rgba(152, 189, 235, 0.5)"
+            }
+        }
+    },
+    {
+        "name": "標準設定〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -21,7 +63,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "ブラックモード1〔サイト標準〕",
+        "name": "ブラックモード1〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -42,7 +84,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "ブラックモード2〔サイト標準〕",
+        "name": "ブラックモード2〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -63,7 +105,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "通常1〔サイト標準〕",
+        "name": "通常1〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -84,7 +126,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "通常2〔サイト標準〕",
+        "name": "通常2〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -105,7 +147,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "シンプル〔サイト標準〕",
+        "name": "シンプル〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
@@ -126,7 +168,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "おすすめ設定〔サイト標準〕",
+        "name": "おすすめ設定〔小説家になろう 標準〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
