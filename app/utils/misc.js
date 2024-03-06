@@ -24,3 +24,14 @@ export function check(elm, value, _default) {
     }
     $(elm).attr('checked', value).prop('checked', value).change();
   }
+
+export function getCSSRule(key, rules){
+    var style = key + "{"
+    rules.forEach(rule => {
+        Object.keys(rule).forEach(k => {
+            style += k + ":" + rule[k] + " !important;"
+        })
+    })
+    style += "}\n"
+    return style
+}

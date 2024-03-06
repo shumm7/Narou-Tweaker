@@ -1,11 +1,16 @@
+import { defaultSkins } from "../../utils/data/default_skins.js";
 import {check, defaultValue} from "../../utils/misc.js"
-import { saveOptions } from "../../utils/option.js";
+import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
+import { debug_log, debug_logObject } from "./debug.js";
+import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent } from "./skins.js";
 
-const debug = true
+/* Remove Warning Message */
+$('#js-failed').remove();
+if(!debug){$('#debug').remove()}
 
 /* Restore Options */
-export function restoreOptions(){
-  chrome.storage.sync.get(["options"], function(data) {
+function restoreOptions(){
+  chrome.storage.sync.get(["options", "skin", "skins"], function(data) {
     var options = data.options
 
     /* Novel */
@@ -35,6 +40,10 @@ export function restoreOptions(){
 
     check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
     check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
+    
+
+    /* Skins */
+    restoreSkins(data.skins, data.skin)
   });
 }
 
@@ -66,19 +75,26 @@ function storeOptions(){
     enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
     enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
   }
-  if(debug){
-    $("textarea").text(JSON.stringify(options, null, 3))
-  }
   saveOptions(options);
 }
 
-/* Remove Warning Message */
-$('#js-failed').remove();
-if(!debug){$('#debug').remove()}
 
+/* Events */
 document.addEventListener('DOMContentLoaded', restoreOptions);
+
 $(".options").each(function() {
   $(this).on("click", function(){
     storeOptions();
   });
 });
+
+/* Skin Change */
+$("#skin").on("change",() => {
+  var skin = parseInt($("#skin").val())
+  saveSkin(skin)
+  chrome.storage.sync.get(["skin", "skins"], function(data) {
+    restoreSkins(data.skins, data.skin);
+  })
+});
+
+addSkinEditButtonEvent()

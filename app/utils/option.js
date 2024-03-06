@@ -13,7 +13,11 @@ export function saveOptionValue(key, value){
 
 /* Skins */
 export function saveSkins(skins){
-    saveOptionValue("skins", skins)
+    chrome.storage.sync.set({"skins": skins});
+}
+
+export function saveSkin(skin){
+    chrome.storage.sync.set({"skin": skin});
 }
 
 export function loadSkin(index){

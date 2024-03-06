@@ -1,5 +1,6 @@
-#js-failed + form {
+#js-failed + form#options-form {
 	display: none;
+	display: block;
 }
 
 /* Base */
@@ -93,6 +94,37 @@ details[open]> :not(summary) {
 	color: #666666;
 }
 
+#skin-option {
+	display: flex;
+	flex-flow: column;
+}
+#skin-selection,
+#skin-option--options {
+	display: flex;
+	flex-flow: row;
+}
+#skin-option--field,
+#skin-option--preview {
+	width: 50%;
+}
+#skin-option--editting {
+	font-size: 120%;
+	font-weight: bold;
+	margin-left: 1em;
+	color: #555;
+	text-overflow: ellipsis;
+}
+#skin-preview {
+	border: 1px solid #999;
+	padding: 1em;
+}
+#skin-preview #subtitle-dummy div {
+	padding: 10px 10px 2px 5px;
+	font-size: 95%;
+}
+#skin-preview #subtitle-dummy div a {
+	text-decoration: none;
+}
 
 /* Toggle */
 input[type="checkbox"].toggle {
@@ -175,4 +207,49 @@ input.toggle:checked+label.toggle::after {
     color: #333333;
     font-size: 1em;
     cursor: pointer;
+}
+
+/* Text Field */
+.textfield {
+	display: flex;
+	flex-flow: column;
+	font-size: inherit;
+}
+.textfield label {
+	font-size: 90%;
+}
+input[type="text"] {
+	padding: .3em;
+	padding-left: .5em;
+	font-size: inherit;
+	margin: .1em;
+}
+
+/* Button */
+button {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 1.7;
+    display: inline-block;
+    width: auto;
+    cursor: pointer;
+    text-align: center;
+    background-color: rgb(27, 142, 243);
+    appearance: none;
+    transition: all 0.2s ease 0s;
+    white-space: nowrap;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 25px;
+    outline: 0px;
+    padding: .3em 1em !important;
+}
+button:active, button:focus, button:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(51, 154, 244);
+}
+button:disabled {
+    background-color: gray;
 }

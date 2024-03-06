@@ -7,7 +7,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#fff",
-                "background_image": "none",
                 "color": "#444"
             },
             "link": {
@@ -16,9 +15,7 @@ export const defaultSkins = [
                 "color_hover": "#393"
             },
             "sublist": {
-                "underline": "#444",
-                "underline_type": "1px solid",
-                "default": "#fff",
+                "color": "#444",
                 "hover": "#9df"
             }
         }
@@ -31,7 +28,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#000",
-                "background_image": "none",
                 "color": "#fff"
             },
             "link": {
@@ -40,9 +36,7 @@ export const defaultSkins = [
                 "color_hover": "#f03"
             },
             "sublist": {
-                "underline": "#fff",
-                "underline_type": "1px solid",
-                "default": "#000",
+                "color": "#fff",
                 "hover": "#f03"
             }
         }
@@ -55,7 +49,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#000",
-                "background_image": "none",
                 "color": "#ccc"
             },
             "link": {
@@ -64,9 +57,7 @@ export const defaultSkins = [
                 "color_hover": "#cf0"
             },
             "sublist": {
-                "underline": "#ccc",
-                "underline_type": "1px solid",
-                "default": "#000",
+                "color": "#ccc",
                 "hover": "#cf0"
             }
         }
@@ -79,7 +70,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#ccf",
-                "background_image": "none",
                 "color": "#444"
             },
             "link": {
@@ -88,9 +78,7 @@ export const defaultSkins = [
                 "color_hover": "#00f"
             },
             "sublist": {
-                "underline": "#444",
-                "underline_type": "1px solid",
-                "default": "#ccf",
+                "color": "#444",
                 "hover": "#00f"
             }
         }
@@ -103,7 +91,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#cfc",
-                "background_image": "none",
                 "color": "#444"
             },
             "link": {
@@ -112,9 +99,7 @@ export const defaultSkins = [
                 "color_hover": "#00f"
             },
             "sublist": {
-                "underline": "#444",
-                "underline_type": "1px solid",
-                "default": "#cfc",
+                "color": "#444",
                 "hover": "#00f"
             }
         }
@@ -127,7 +112,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#fafafa",
-                "background_image": "none",
                 "color": "#444"
             },
             "link": {
@@ -136,9 +120,7 @@ export const defaultSkins = [
                 "color_hover": "#393"
             },
             "sublist": {
-                "underline": "#444",
-                "underline_type": "1px solid",
-                "default": "#fafafa",
+                "color": "#444",
                 "hover": "#393"
             }
         }
@@ -151,7 +133,6 @@ export const defaultSkins = [
         "style": {
             "novel": {
                 "background": "#edf7ff",
-                "background_image": "none",
                 "color": "#000"
             },
             "link": {
@@ -160,9 +141,7 @@ export const defaultSkins = [
                 "color_hover": "#00f"
             },
             "sublist": {
-                "underline": "#444",
-                "underline_type": "1px solid",
-                "default": "#edf7ff",
+                "color": "#444",
                 "hover": "#00f"
             }
         }
