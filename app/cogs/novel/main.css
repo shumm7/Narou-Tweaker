@@ -94,6 +94,11 @@
 .novel-option--content {
 	padding: .5em
 }
+.novel-option-header {
+	font-weight: bold;
+    font-size: 120%;
+    margin: .3em;
+}
 
 
 /* Header */

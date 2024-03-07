@@ -1,4 +1,4 @@
-import { changeHeaderScrollMode, applySkin } from "./cogs.js";
+import { changeHeaderScrollMode, setOptionContentsDisplay } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
 
 var header_mode
@@ -78,7 +78,7 @@ function optionModal(){
     addTab(1, "表示設定")
     addTab(2, "その他")
     $("#novel-option .novel-option-tab-1").addClass("active")
-    $(".novel-option--content.novel-option-tab-1").text("1")
+    setOptionContentsDisplay()
     $(".novel-option--content.novel-option-tab-2").text("2")
 
 }

@@ -215,7 +215,6 @@ input.toggle:checked+label.toggle::after {
 
 .dropdown select {
     appearance: none;
-    min-width: 200px;
     height: 2.5em;
     padding: .4em calc(.8em + 30px) .4em .8em;
     border: 1px solid #d0d0d0;

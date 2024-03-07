@@ -1,5 +1,6 @@
 import { defaultValue } from "../../utils/misc.js"
 import { defaultSkins } from "../../utils/data/default_skins.js";
+import { saveSkin } from "../../utils/option.js";
 
 /* Header */
 export function changeHeaderScrollMode(header_mode){
@@ -55,4 +56,40 @@ export function applySkin(index){
             }
         }
     );
+}
+
+/* Option */
+function setSkinOptions(skins, selected){
+    skins = defaultValue(skins, defaultSkins)
+    selected = defaultValue(selected, 0)
+
+    $("#novel-option--skin #skin").empty()
+    $.each(skins, function(i, skin){
+        if(skin.show==true){
+            $("#novel-option--skin #skin").append("<option value='"+i+"'>"+skin.name+"</option>")
+        }
+    })
+    $("#skin").val(String(selected))
+    $("#novel-option--skin-description").text(skins[selected].description)
+}
+
+export function setOptionContentsDisplay(){
+    var outer = $(".novel-option--content.novel-option-tab-1")
+
+    /* Skin */
+    outer.append("<div class='novel-option-header'>スキン設定</div>")
+    outer.append('<div id="novel-option--skin"><div class="dropdown" style="width: 100%;"><select id="skin" name="skin"></select></div></div>')
+    outer.append('<div id="novel-option--skin-description"></div>')
+    chrome.storage.sync.get(["skin", "skins"], function(data) {
+        setSkinOptions(data.skins, data.skin)
+    })
+
+    $("#novel-option--skin #skin").on("change",() => {
+        var skin = parseInt($("#skin").val())
+        saveSkin(skin)
+        applySkin(skin)
+        chrome.storage.sync.get(["skin", "skins"], function(data) {
+            setSkinOptions(data.skins, data.skin)
+        })
+    })
 }
