@@ -37,12 +37,31 @@ function optionModal(){
         }else{
             $("#novel-option").addClass("show")
         }
+        if($("#novel-option-background").hasClass("show")){
+            $("#novel-option-background").removeClass("show")
+        }else{
+            $("#novel-option-background").addClass("show")
+        }
     })
 
     /* Option Modal */
     $("#novel_header").after("<aside id='novel-option'></aside>")
+    $("#novel-option").before("<div id='novel-option-background'></div>")
     $("#novel-option").append("<div id='novel-option--header'></div>")
     $("#novel-option").append("<div id='novel-option--ontent'></div>")
+    
+    $("#novel-option-background").on("click", ()=>{
+        if($("#novel-option").hasClass("show")){
+            $("#novel-option").removeClass("show")
+        }else{
+            $("#novel-option").addClass("show")
+        }
+        if($("#novel-option-background").hasClass("show")){
+            $("#novel-option-background").removeClass("show")
+        }else{
+            $("#novel-option-background").addClass("show")
+        }
+    })
 
     /* Modal Header */
     $("#novel-option--header").append("<ul></ul>")
