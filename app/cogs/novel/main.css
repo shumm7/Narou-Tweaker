@@ -85,6 +85,15 @@
 #novel-option--header ul li button span:hover {
 	border-top-color: var(--kasasagi-blue);
 }
+.novel-option--content {
+	display: none;
+}
+.novel-option--content.active {
+	display: block;
+}
+.novel-option--content {
+	padding: .5em
+}
 
 
 /* Header */
