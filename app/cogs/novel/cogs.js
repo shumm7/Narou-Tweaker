@@ -7,6 +7,7 @@ export function changeHeaderScrollMode(header_mode){
     $("#novel_header").removeClass("header-mode--fixed")
     $("#novel_header").removeClass("header-mode--absolute")
     $("#novel_header").removeClass("header-mode--scroll")
+    $("#novel_header").css({"position": ""})
 
     if(header_mode=="fixed"){
         $("#novel_header").addClass("header-mode--fixed")

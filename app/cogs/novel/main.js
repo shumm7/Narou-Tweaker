@@ -1,34 +1,64 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
+import { getEpisode, getNcode } from "./utils.js";
+import { ncodeToIndex } from "../../utils/text.js";
 
 var header_mode
-var novel_skin
+var novel_css
 
 chrome.storage.sync.get(["options"], (data) => {
     var options = data.options
     header_mode = defaultValue(options.novel_header_mode, "scroll");
-    novel_skin = defaultValue(options.enable_novel_css, true)
-
-    /* Remove Default Set */
-    /*
-    $("#novelnavi_right .novelview_navi .color input[name='colorset'][value='0']").click()
-    if($("#novelnavi_right .novelview_navi input[name='fix_menu_bar']").prop('checked')){
-        $("#novelnavi_right .novelview_navi input[name='fix_menu_bar']").click()
-    }
-    */
-    $("#novelnavi_right").remove()
-
-    /* Option Menu */
-    optionModal();
+    novel_css = defaultValue(options.enable_novel_css, true)
 
     /* Header */
     changeHeaderScrollMode(header_mode);
-    
+
+    if(novel_css){
+        /* Header */
+        _header()
+
+        /* Option Menu */
+        _optionModal();
+
+    }
 });
 
-function optionModal(){
+function _header(){
+    var ncode = getNcode()
+    var index = ncodeToIndex(ncode)
+    var episode = getEpisode()
+    var isLogin = false
+    $("#novel_header").before('<div class="novel-tabs"><ul></ul></div>')
+
+    /* Home */
+    if($("#head_nav #login a").prop("href")=="https://syosetu.com/user/top/"){
+        var isLogin = true
+        $(".novel-tabs ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i></a></li>')
+    }else{
+        $(".novel-tabs ul").append('<li class="login"><a href="https://syosetu.com/login/input/"><i class="fa-solid fa-house"></i></a></li>')
+    }
+
+    /* Info */
+    $(".novel-tabs ul").append('<li class="info"><a href="https://ncode.syosetu.com/novelview/infotop/ncode/'+ncode+'/"><i class="fa-solid fa-file-lines"></i></a></li>')
+
+    /* Comment */
+    if(episode==0){
+        $(".novel-tabs ul").append('<li class="comment"><a href="https://novelcom.syosetu.com/impression/list/ncode/'+index+'/"><i class="fa-solid fa-comments"></i></a></li>')
+    }else{
+        $(".novel-tabs ul").append('<li class="comment"><a href="https://novelcom.syosetu.com/impression/list/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-comments"></i></a></li>')
+    }
+
+    /* Review */
+    $(".novel-tabs ul").append('<li class="review"><a href="https://novelcom.syosetu.com/novelreview/list/ncode/'+index+'/"><i class="fa-solid fa-flag"></i></a></li>')
+
+    $("#novel_header").remove()
     
+}
+
+function _optionModal(){
     /* New Header */
+    $("#novelnavi_right").remove()
     $("#head_nav").after('<div id="novelnavi_right" style="position: absolute;"></div>')
 
     /* Option Button */

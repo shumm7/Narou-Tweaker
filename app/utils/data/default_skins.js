@@ -16,7 +16,7 @@ export const defaultSkins = [
                 "color": "rgba(0, 0, 0, 0.87)"
             },
             "sublist": {
-                "color": "rgba(0, 0, 0, 0.2)",
+                "color": "rgba(0, 0, 0, 0.3)",
                 "hover": "rgba(67, 51, 242, 0.7)"
             }
         }
@@ -33,13 +33,13 @@ export const defaultSkins = [
                 "color_visited": "rgb(135, 122, 245)"
             },
             "novel": {
-                "background": "rgb(47, 50, 50)",
-                "background_second": "#1d2020",
+                "background": "#1d2020",
+                "background_second": "rgb(47, 50, 50)",
                 "color": "rgba(255, 255, 255, 0.92)"
             },
             "sublist": {
-                "color": "rgba(255, 255, 255, 0.1)",
-                "hover": "rgba(152, 189, 235, 0.5)"
+                "color": "rgba(255, 255, 255, 0.3)",
+                "hover": "rgba(152, 189, 235, 0.7)"
             }
         }
     },

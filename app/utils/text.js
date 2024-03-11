@@ -52,3 +52,50 @@ export function getYesterday(){
 export function parseIntWithComma(text){
     return parseInt(text.replace(/,/g, ""))
 }
+
+
+/* Ncode Parse */
+/* https://zenn.dev/qnighy/articles/5faa90ddfef843 */
+/* By Masaki Hara (2021/07/17)*/
+const RE_NCODE = /^n(\d{4})([a-z]*)$/i;
+
+function parseBase26(s) {
+    const sl = s.toLowerCase();
+    let ret = 0;
+    for (let i = 0; i < sl.length; i++) {
+        ret = ret * 26 + (sl.charCodeAt(i) - 0x61);
+    }
+    return ret;
+}
+
+function stringifyBase26(n) {
+    if (n === 0) return "a";
+    const digits = [];
+    let m = n;
+    while (m > 0) {
+        digits.push(m % 26 + 0x61);
+        m = (m / 26) | 0;
+    }
+    digits.reverse();
+    return String.fromCharCode(...digits);
+}
+
+export function ncodeToIndex(ncode) {
+    const match = RE_NCODE.exec(ncode);
+    if (!match) throw new Error(`Not an ncode: ${JSON.stringify(ncode)}`);
+    const lo = parseInt(match[1], 10);
+    const hi = parseBase26(match[2]);
+    return hi * 9999 + lo;
+}
+
+export function indexToNcode(index) {
+    const lo = (index - 1) % 9999 + 1;
+    const hi = ((index - 1) / 9999) | 0;
+    let lostr = lo.toString();
+    while (lostr.length < 4) lostr = `0${lostr}`;
+    return `n${lostr}${stringifyBase26(hi)}`;
+}
+
+export function normalizeNcode(ncode) {
+    return indexToNcode(ncodeToIndex(ncode));
+}
