@@ -15,6 +15,7 @@ function restoreOptions(){
 
     /* Novel */
     check('#enable_novel_css', options.enable_novel_css, true);
+    check('#enable_novel_expand_skin', options.enable_novel_expand_skin, true);
     $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"))
 
     /* Mypage */
@@ -52,6 +53,7 @@ function storeOptions(){
   var options = {
     /* Novel */
     enable_novel_css: $("#enable_novel_css").prop('checked'),
+    enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
     novel_header_mode: $("#novel_header_mode").val(),
 
     /* Mypage */

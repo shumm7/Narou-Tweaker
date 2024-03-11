@@ -10,6 +10,12 @@
 		min-width: 550px;
 	}
 }
+
+#options-form {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
 	
 :root {
 	--rgh-red: #cf222e;

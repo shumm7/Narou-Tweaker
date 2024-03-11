@@ -7,14 +7,16 @@ var novel_skin
 chrome.storage.sync.get(["options"], (data) => {
     var options = data.options
     header_mode = defaultValue(options.novel_header_mode, "scroll");
+    novel_skin = defaultValue(options.enable_novel_css, true)
 
     /* Remove Default Set */
-    $("#novelnavi_right .novelview_navi .color input[name='colorset'][value='1']").click()
+    /*
+    $("#novelnavi_right .novelview_navi .color input[name='colorset'][value='0']").click()
     if($("#novelnavi_right .novelview_navi input[name='fix_menu_bar']").prop('checked')){
         $("#novelnavi_right .novelview_navi input[name='fix_menu_bar']").click()
     }
+    */
     $("#novelnavi_right").remove()
-
 
     /* Option Menu */
     optionModal();
