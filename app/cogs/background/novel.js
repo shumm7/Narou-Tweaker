@@ -54,55 +54,85 @@ export function applyCSS(tab, index){
         ])
 
         if(expand_skin){
-            if(tab.url.match(/https:\/\/ncode\.syosetu\.com\/n\d{4}[a-z]{2}\/\d+\//)){ /* 本文ページ */
-                /* Title */
-                rule += getRule(".contents1", [
-                    {"color": defaultValue(s.novel.color, "#444")},
-                    {"background-color": defaultValue(s.novel.background, "#fff")},
-                    {"background-image": "none"}
-                ])
-                rule += getRule(".contents1 a:link", [
-                    {"color": defaultValue(s.link.color_link, "#03c")}
-                ])
-                rule += getRule(".contents1 a:visited", [
-                    {"color": defaultValue(s.link.color_visited, "#857")}
-                ])
-                rule += getRule(".contents1 a:hover", [
-                    {"color": defaultValue(s.link.color_hover, "#393")}
-                ])
-                
-                /* Footer */
-                rule += getRule(".wrap_menu_novelview_after", [
-                    {"background-color": defaultValue(s.novel.background, "#fff")},
-                    {"background-image": "none"},
-                    {"border-top": "1px solid " + defaultValue(s.sublist.color, "#444")},
-                    {"border-bottom": "1px solid " + defaultValue(s.sublist.color, "#444")}
-                ])
-                rule += getRule(".list_menu_novelview_after:first-child", [
-                    {"border-left": "1px solid " + defaultValue(s.sublist.color, "#444")}
-                ])
-                rule += getRule(".list_menu_novelview_after", [
-                    {"border-right": "1px solid " + defaultValue(s.sublist.color, "#444")}
-                ])
-                rule += getRule("..list_menu_novelview_after a:link", [
-                    {"color": defaultValue(s.link.color_link, "#03c")}
-                ])
-                rule += getRule(".list_menu_novelview_after a:visited", [
-                    {"color": defaultValue(s.link.color_visited, "#857")}
-                ])
-                rule += getRule(".list_menu_novelview_after a:hover", [
-                    {"color": defaultValue(s.link.color_hover, "#393")},
-                    {"background": "transparent"}
-                ])
-                rule += getRule(".footerbookmark .booklist .login", [
-                    {"background": "transparent"},
-                    {"border-color": defaultValue(s.sublist.color, "#444")}
-                ])
-                rule += getRule(".footerbookmark .booklist a.login:hover", [
-                    {"background": "transparent"},
-                    {"border-color": defaultValue(s.sublist.hover, "#444")}
-                ])
-            }
+            /*if(tab.url.match(/https:\/\/ncode\.syosetu\.com\/n\d{4}[a-z]{2}\/\d+\//)){ /* 本文ページ */
+            /* Title */
+            rule += getRule(".contents1", [
+                {"color": defaultValue(s.novel.color, "#444")},
+                {"background-color": defaultValue(s.novel.background, "#fff")},
+                {"background-image": "none"}
+            ])
+            rule += getRule(".contents1 a:link", [
+                {"color": defaultValue(s.link.color_link, "#03c")}
+            ])
+            rule += getRule(".contents1 a:visited", [
+                {"color": defaultValue(s.link.color_visited, "#857")}
+            ])
+            rule += getRule(".contents1 a:hover", [
+                {"color": defaultValue(s.link.color_hover, "#393")}
+            ])
+            
+            /* Footer */
+            rule += getRule(".wrap_menu_novelview_after", [
+                {"background-color": defaultValue(s.novel.background, "#fff")},
+                {"background-image": "none"},
+                {"border-top": "1px solid " + defaultValue(s.sublist.color, "#444")},
+                {"border-bottom": "1px solid " + defaultValue(s.sublist.color, "#444")}
+            ])
+            rule += getRule(".list_menu_novelview_after:first-child", [
+                {"border-left": "1px solid " + defaultValue(s.sublist.color, "#444")}
+            ])
+            rule += getRule(".list_menu_novelview_after", [
+                {"border-right": "1px solid " + defaultValue(s.sublist.color, "#444")}
+            ])
+            rule += getRule("..list_menu_novelview_after a:link", [
+                {"color": defaultValue(s.link.color_link, "#03c")}
+            ])
+            rule += getRule(".list_menu_novelview_after a:visited", [
+                {"color": defaultValue(s.link.color_visited, "#857")}
+            ])
+            rule += getRule(".list_menu_novelview_after a:hover", [
+                {"color": defaultValue(s.link.color_hover, "#393")},
+                {"background": "transparent"}
+            ])
+            rule += getRule(".footerbookmark .booklist .login", [
+                {"background": "transparent"},
+                {"border-color": defaultValue(s.sublist.color, "#444")}
+            ])
+            rule += getRule(".footerbookmark .booklist a.login:hover", [
+                {"background": "transparent"},
+                {"border-color": defaultValue(s.sublist.hover, "#444")}
+            ])
+
+            /* Novel Info */
+            rule += getRule("#contents_main", [
+                {"color": defaultValue(s.novel.color, "#444")},
+                {"background-color": defaultValue(s.novel.background, "#fff")},
+                {"background-image": "none"}
+            ])
+            rule += getRule("#contents_main a:link", [
+                {"color": defaultValue(s.link.color_link, "#03c")}
+            ])
+            rule += getRule("#contents_main a:visited", [
+                {"color": defaultValue(s.link.color_visited, "#857")}
+            ])
+            rule += getRule("#contents_main a:hover", [
+                {"color": defaultValue(s.link.color_hover, "#393")}
+            ])
+
+            rule += getRule("#noveltable1 th, #noveltable2 th, #onazi .th", [
+                {"color": defaultValue(s.novel.color, "#444")},
+                {"background": defaultValue(s.novel.background_second, "#fff")}
+            ])
+            rule += getRule("#noveltable1 th, #noveltable2 th, #noveltable1 td, #noveltable2 td, h1, #onazi", [
+                {"border-color": defaultValue(s.sublist.color, "#444")},
+            ])
+
+            /* Attention */
+            rule += getRule("#novel_attention", [
+                {"color": defaultValue(s.novel.color, "#444")},
+                {"background-color": defaultValue(s.novel.background, "#fff")},
+                {"border-color": defaultValue(s.novel.background_second, "#444")}
+            ])
         }
 
         chrome.scripting.insertCSS({

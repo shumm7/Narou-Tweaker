@@ -12,6 +12,7 @@ export const defaultSkins = [
             },
             "novel": {
                 "background": "#ffffff",
+                "background_second": "#eeeeee",
                 "color": "rgba(0, 0, 0, 0.87)"
             },
             "sublist": {
@@ -33,6 +34,7 @@ export const defaultSkins = [
             },
             "novel": {
                 "background": "rgb(47, 50, 50)",
+                "background_second": "#1d2020",
                 "color": "rgba(255, 255, 255, 0.92)"
             },
             "sublist": {
@@ -42,13 +44,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "標準設定〔小説家になろう 標準〕",
+        "name": "標準設定〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#fff",
+                "background_second": "#fff",
                 "color": "#444"
             },
             "link": {
@@ -63,13 +66,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "ブラックモード1〔小説家になろう 標準〕",
+        "name": "ブラックモード1〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#000",
+                "background_second": "#000",
                 "color": "#fff"
             },
             "link": {
@@ -84,13 +88,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "ブラックモード2〔小説家になろう 標準〕",
+        "name": "ブラックモード2〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#000",
+                "background_second": "#000",
                 "color": "#ccc"
             },
             "link": {
@@ -105,13 +110,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "通常1〔小説家になろう 標準〕",
+        "name": "通常1〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#ccf",
+                "background_second": "#ccf",
                 "color": "#444"
             },
             "link": {
@@ -126,13 +132,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "通常2〔小説家になろう 標準〕",
+        "name": "通常2〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#cfc",
+                "background_second": "#cfc",
                 "color": "#444"
             },
             "link": {
@@ -147,13 +154,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "シンプル〔小説家になろう 標準〕",
+        "name": "シンプル〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#fafafa",
+                "background_second": "#fafafa",
                 "color": "#444"
             },
             "link": {
@@ -168,13 +176,14 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "おすすめ設定〔小説家になろう 標準〕",
+        "name": "おすすめ設定〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
         "show": true,
         "style": {
             "novel": {
                 "background": "#edf7ff",
+                "background_second": "#edf7ff",
                 "color": "#000"
             },
             "link": {

@@ -58,6 +58,7 @@ export function restoreSkins(skins, selected){
     $("#skin-description").val(defaultValue(skin.description, ""))
     $("#skin-novel-color").val(defaultValue(style.novel.color, ""))
     $("#skin-novel-background").val(defaultValue(style.novel.background, ""))
+    $("#skin-novel-background-second").val(defaultValue(style.novel.background_second, ""))
     $("#skin-link-color").val(defaultValue(style.link.color_link, ""))
     $("#skin-link-color-visited").val(defaultValue(style.link.color_visited, ""))
     $("#skin-link-color-hover").val(defaultValue(style.link.color_hover, ""))
@@ -85,6 +86,7 @@ export function restoreSkins(skins, selected){
       style: {
         novel: {
           background: $("#skin-novel-background").val(),
+          background_second: $("#skin-novel-background-second").val(),
           color: $("#skin-novel-color").val()
         },
         link: {
@@ -107,7 +109,7 @@ export function showSkinPreview() {
     var s = ""
     const style = getSkinData().style
 
-    s += getCSSRule("#skin-preview", [{"background": style.novel.background}, {"color": style.novel.color}])
+    s += getCSSRule("#skin-preview", [{"background": style.novel.background}, {"color": style.novel.color}, {"border": "3px solid" + style.novel.background_second}])
     s += getCSSRule("#skin-preview #link", [{"color": style.link.color_link}])
     s += getCSSRule("#skin-preview #link-visited", [{"color": style.link.color_visited}])
     s += getCSSRule("#skin-preview #link:hover, #skin-preview #link-visited:hover", [{"color": style.link.color_hover}])
@@ -117,6 +119,7 @@ export function showSkinPreview() {
 
     $(".skin-color-field div[name='skin-novel-color']").css("background", style.novel.color)
     $(".skin-color-field div[name='skin-novel-background']").css("background", style.novel.background)
+    $(".skin-color-field div[name='skin-novel-background-second']").css("background", style.novel.background_second)
     $(".skin-color-field div[name='skin-link-color']").css("background", style.link.color_link)
     $(".skin-color-field div[name='skin-link-color-visited']").css("background", style.link.color_visited)
     $(".skin-color-field div[name='skin-link-color-hover']").css("background", style.link.color_hover)

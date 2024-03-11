@@ -137,7 +137,6 @@ details[open]> :not(summary) {
 	width: 100%;
 }
 #skin-preview {
-	border: 1px solid #999;
 	padding: 1em;
 }
 #skin-preview #subtitle-dummy div {
