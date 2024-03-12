@@ -16,6 +16,7 @@ export function changeHeaderScrollMode(header_mode){
         $(elm).addClass("header-mode--absolute")
     }else if(header_mode=="scroll"){
         $(elm).addClass("header-mode--scroll")
+        $(elm + '.header-mode--scroll').addClass('hide');
     }
 
     var pos = 0;

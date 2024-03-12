@@ -6,23 +6,22 @@
 	width: auto !important;
 	height: auto !important;
 	text-align: center !important;
-	margin: .5em 0;
-	margin-left: 1em;
+	margin: 2em .3em;
 	z-index: 10;
 	background: none !important;
 
 }
 .narou-tweaker #novel_header ul {
 	display: flex;
-	flex-flow: row;
+	flex-flow: column;
 	margin: 0 !important;
 	margin-top: .3em !important;
 	width: auto !important;
 }
 
 .narou-tweaker #novel_header ul li {
-	font-size: 150% !important;
-	min-width: 55px;
+	font-size: 130% !important;
+	min-height: 55px;
 	padding: 0 !important;
 	margin: 0 !important;
 	background: none !important;
@@ -179,5 +178,5 @@
     transition: .2s;
 }
 #novel_header.hide.header-mode--scroll{
-    transform:translateY(-60px);
+    transform:translateX(-80px);
 }

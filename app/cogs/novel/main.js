@@ -77,9 +77,9 @@ function _header(){
     if(elm){
         elm.text("")
         if(elm.hasClass("js-bookmark_setting_button")){
-            elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブック<br>マーク</span>')
+            elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク</span>')
         }else if(elm.hasClass("js-add_bookmark")){
-            elm.append('<i class="fa-solid fa-book"></i><span class="title">ブック<br>マーク</span>')
+            elm.append('<i class="fa-solid fa-book"></i><span class="title">ブックマーク</span>')
         }
     }
 
