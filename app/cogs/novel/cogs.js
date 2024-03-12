@@ -3,8 +3,7 @@ import { defaultSkins } from "../../utils/data/default_skins.js";
 import { saveSkin } from "../../utils/option.js";
 
 /* Header */
-export function changeHeaderScrollMode(header_mode){
-    var elm = "#novel_header"
+export function changeHeaderScrollMode(header_mode, elm){
     $(elm).removeClass("header-mode--fixed")
     $(elm).removeClass("header-mode--absolute")
     $(elm).removeClass("header-mode--scroll")

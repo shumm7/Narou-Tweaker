@@ -143,6 +143,12 @@ export function applyCSS(tab, index){
         rule += getRule("#novel_header ul li a:hover, #novel_header ul li a:active, #novel_header ul li form:hover, #novel_header ul li form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
+        rule += getRule("#novel_header_right ul li a, #novel_header_right ul li a:link, #novel_header_right ul li a:visited, #novel_header_right ul li form", [
+            {"color": defaultValue(s.sublist.color, "#444")},
+        ])
+        rule += getRule("#novel_header_right ul li a:hover, #novel_header_right ul li a:active, #novel_header_right ul li form:hover, #novel_header_right ul li form:active", [
+            {"color": defaultValue(s.sublist.hover, "#444")},
+        ])
 
         chrome.scripting.insertCSS({
             css: rule,

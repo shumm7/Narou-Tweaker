@@ -1,8 +1,8 @@
 /* Header */
-.narou-tweaker #novel_header {
+.narou-tweaker #novel_header,
+.narou-tweaker #novel_header_right {
 	position: absolute;
 	top: 0 !important;
-	left: 0 !important;
 	width: auto !important;
 	height: auto !important;
 	text-align: center !important;
@@ -11,7 +11,15 @@
 	background: none !important;
 
 }
-.narou-tweaker #novel_header ul {
+.narou-tweaker #novel_header {
+	left: 0 !important;
+}
+.narou-tweaker #novel_header_right {
+	right: 0 !important;
+}
+
+.narou-tweaker #novel_header ul,
+.narou-tweaker #novel_header_right ul {
 	display: flex;
 	flex-flow: column;
 	margin: 0 !important;
@@ -19,16 +27,20 @@
 	width: auto !important;
 }
 
-.narou-tweaker #novel_header ul li {
+.narou-tweaker #novel_header ul li,
+.narou-tweaker #novel_header_right ul li {
 	font-size: 130% !important;
 	min-height: 55px;
+	width: 60px;
 	padding: 0 !important;
 	margin: 0 !important;
 	background: none !important;
 	text-indent: inherit !important;
 }
 .narou-tweaker #novel_header ul li a,
-.narou-tweaker #novel_header ul li form {
+.narou-tweaker #novel_header ul li form,
+.narou-tweaker #novel_header_right ul li a,
+.narou-tweaker #novel_header_right ul li form {
 	display: flex !important;
 	flex-flow: column;
 	justify-content: center;
@@ -40,16 +52,20 @@
 	height: auto !important;
 }
 
-.narou-tweaker #novel_header ul li > * {
+.narou-tweaker #novel_header ul li > *,
+.narou-tweaker #novel_header_right ul li > * {
 	border: none !important;
 	background: none !important;
 }
-.narou-tweaker #novel_header ul li form input {
+.narou-tweaker #novel_header ul li form input,
+.narou-tweaker #novel_header_right ul li form input {
 	border: none !important;
 	padding: 0 !important;
 }
 .narou-tweaker #novel_header ul li a span,
-.narou-tweaker #novel_header ul li form input {
+.narou-tweaker #novel_header ul li form input,
+.narou-tweaker #novel_header_right ul li a span,
+.narou-tweaker #novel_header_right ul li form input {
 	margin-top: .5em;
 	text-align: center;
 	font-size: 50%;
@@ -59,15 +75,49 @@
 	color: transparent !important;
 }
 .narou-tweaker #novel_header ul li a:hover,
-.narou-tweaker #novel_header ul li form:hover input {
+.narou-tweaker #novel_header ul li form:hover input,
+.narou-tweaker #novel_header_right ul li a:hover,
+.narou-tweaker #novel_header_right ul li form:hover input {
 	background: none !important;
 }
 .narou-tweaker #novel_header ul li a:hover span,
-.narou-tweaker #novel_header ul li form:hover input {
+.narou-tweaker #novel_header ul li form:hover input,
+.narou-tweaker #novel_header_right ul li a:hover span,
+.narou-tweaker #novel_header_right ul li form:hover input {
 	color: inherit !important;
 	transition: color .2s;
 	font-size: 50%;
 	margin-top: .5em;
+}
+
+/* Header */
+#novel_header.header-mode--absolute,
+#novel_header.header-mode--absolute #novelnavi_right > * 
+#novel_header_right.header-mode--absolute,
+#novel_header_right.header-mode--absolute #novelnavi_right > * {
+    position: absolute !important;
+}
+#novel_header.header-mode--scroll,
+#novel_header.header-mode--scroll #novelnavi_right > * ,
+#novel_header_right.header-mode--scroll,
+#novel_header_right.header-mode--scroll #novelnavi_right > * {
+    position: fixed !important;
+}
+#novel_header.header-mode--fixed,
+#novel_header.header-mode--fixed #novelnavi_right > *,
+#novel_header_right.header-mode--fixed,
+#novel_header_right.header-mode--fixed #novelnavi_right > *{
+    position: fixed !important;
+}
+#novel_header.header-mode--scroll,
+#novel_header_right.header-mode--scroll{
+    transition: .2s;
+}
+#novel_header.hide.header-mode--scroll{
+    transform:translateX(-80px);
+}
+#novel_header_right.hide.header-mode--scroll{
+    transform:translateX(80px);
 }
 
 
@@ -158,25 +208,4 @@
 	font-weight: bold;
     font-size: 120%;
     margin: .3em;
-}
-
-
-/* Header */
-#novel_header.header-mode--absolute,
-#novel_header.header-mode--absolute #novelnavi_right > * {
-    position: absolute !important;
-}
-#novel_header.header-mode--scroll,
-#novel_header.header-mode--scroll #novelnavi_right > * {
-    position: fixed !important;
-}
-#novel_header.header-mode--fixed,
-#novel_header.header-mode--fixed #novelnavi_right > *{
-    position: fixed !important;
-}
-#novel_header.header-mode--scroll{
-    transition: .2s;
-}
-#novel_header.hide.header-mode--scroll{
-    transform:translateX(-80px);
 }
