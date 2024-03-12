@@ -21,6 +21,7 @@ function restoreOptions(){
     /* Mypage */
     check('#enable_mypage_profile_userid', options.enable_mypage_profile_userid, true);
     check('#enable_mypage_profile_detail', options.enable_mypage_profile_detail, true);
+    check('#enable_mypage_profile_booklist', options.enable_mypage_profile_booklist, true);
 
     check('#enable_mypage_profile_autourl', options.enable_mypage_profile_autourl, true);
     check('#enable_mypage_blog_autourl', options.enable_mypage_blog_autourl, true);
@@ -59,6 +60,7 @@ function storeOptions(){
     /* Mypage */
     enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
     enable_mypage_profile_detail: $("#enable_mypage_profile_detail").prop('checked'),
+    enable_mypage_profile_booklist: $("#enable_mypage_profile_booklist").prop('checked'),
 
     enable_mypage_profile_autourl: $("#enable_mypage_profile_autourl").prop('checked'),
     enable_mypage_blog_autourl: $("#enable_mypage_blog_autourl").prop('checked'),

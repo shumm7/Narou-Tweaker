@@ -8,6 +8,7 @@ chrome.storage.sync.get(["options"], (data) => {
 
     var enable_profile_detail = defaultValue(options.enable_mypage_profile_detail, true);
     var enable_profile_userid = defaultValue(options.enable_mypage_profile_userid, true);
+    var enable_profile_booklist = defaultValue(options.enable_mypage_profile_booklist, true);
 
     var enable_blog_autourl = defaultValue(options.enable_mypage_blog_autourl, true);
     var enable_blog_comment_autourl = defaultValue(options.enable_mypage_blogcomment_autourl, false);
@@ -107,7 +108,7 @@ chrome.storage.sync.get(["options"], (data) => {
         }
 
         /* Book List */
-        if(true){
+        if(enable_profile_booklist){
             const max_amount = 5
             var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
             getUserBooks(userid)
@@ -143,8 +144,17 @@ chrome.storage.sync.get(["options"], (data) => {
                     })
 
                     if(list.length>0){
-                        $(".c-panel#introduction").after('<div class="c-panel" id="books"><div class="c-panel__headline" id="book-list">書籍リスト</div><div class="c-panel__body"><div class="c-panel__item"></div></div></div>')
-                        $(".c-panel#books .c-panel__item").append("<div class='p-syuppan-lists'></div>")
+                        $(".c-panel#introduction").after(`
+                            <div class="c-panel" id="books">
+                                <div class="c-panel__headline" id="book-list">書籍リスト</div>
+                                <div class="c-panel__body">
+                                    <div class="c-panel__item">
+                                        <p><a href="https://syosetu.com/syuppan/list/">書報</a>に掲載された作品を最大`+max_amount+`件まで自動的に取得しています。</p>
+                                        <div class='p-syuppan-lists'></div>
+                                    </div>
+                                </div>
+                            </div>
+                        `)
                         $.each(list, (_, book)=>{
                             $(".p-syuppan-lists").append(`
                             <div class='c-card p-syuppan-list'>
