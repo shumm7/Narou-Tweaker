@@ -1,7 +1,8 @@
-function fetch(url, options){
+function fetch(url, options, format){
     chrome.runtime.sendMessage(
         {
             action: "fetch",
+            format: format,
             data: {url: url, options: options}
         }
     )
@@ -136,4 +137,12 @@ export function getNovelEnd(state){
     }else{
         return ""
     }
+}
+
+export function getUserBooks(userid){
+    var url = "https://syosetu.com/syuppan/list/?word=" + userid
+    var options = {
+        'method': 'GET'
+    }
+    fetch(url, options, "text");
 }

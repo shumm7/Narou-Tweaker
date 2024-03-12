@@ -1,5 +1,5 @@
 import {replaceUrl} from "../../utils/text.js"
-import {getUserInfo} from "../../utils/api.js"
+import {getUserBooks, getUserInfo} from "../../utils/api.js"
 import { defaultValue } from "../../utils/misc.js";
 
 chrome.storage.sync.get(["options"], (data) => {
@@ -62,13 +62,13 @@ chrome.storage.sync.get(["options"], (data) => {
 
     /* User Profile */
     else if(path.match('/mypage/profile/userid/.*/')!=null){
+        $(".l-main .c-panel").attr("id", "introduction")
+
         /* User Detail */
         if(enable_profile_detail){
             getUserInfo(location.pathname.match('/mypage/profile/userid/(.*)/')[1])
-            console.log("activate")
             chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
-                console.log(response)
-                if(response.success){
+                if(response.success && response.format=="json"){
                     var d = response.result[1]
                     if(d!=undefined){
                         $(".c-panel__headline").attr("id", "user-detail")
@@ -103,6 +103,66 @@ chrome.storage.sync.get(["options"], (data) => {
                     let str = $(elem).html();
                     replaceUrl(elem)
                 });
+            });
+        }
+
+        /* Book List */
+        if(true){
+            var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
+            getUserBooks(userid)
+            chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
+                if(response.success && response.format=="text"){
+                    var list = []
+                    var body = $($.parseHTML(response.result))
+                    body.find(".p-syuppan-list").each((_, value)=>{
+                        if($(value).find(".p-syuppan-list__spec-item:nth-child(1) a").prop("href")=="https://mypage.syosetu.com/"+userid+"/"){
+                            var title = $(value).find("a.p-syuppan-list__title").text()
+                            var link = $(value).find("a.p-syuppan-list__title").prop("href")
+                            var author = $(value).find(".p-syuppan-list__writer").text()
+                            $(value).find(".p-syuppan-list__spec-item span.c-label").remove()
+                            var publisher = $(value).find(".p-syuppan-list__spec-item:nth-child(2)").text().trim()
+                            var label = $(value).find(".p-syuppan-list__spec-item:nth-child(3)").text().trim()
+                            var date = $(value).find(".p-syuppan-list__spec-item:nth-child(4)").text().trim()
+
+                            list.push({
+                                userid: userid,
+                                author: author,
+                                title: title,
+                                link: link.replace("https://mypage.syosetu.com/", "https://syosetu.com/"),
+                                publisher: publisher,
+                                label: label,
+                                date: date
+                            })
+                        }
+                    })
+                    console.log(list)
+
+                    if(list.length>0){
+                        $(".c-panel#introduction").after('<div class="c-panel" id="books"><div class="c-panel__headline" id="book-list">書籍リスト</div><div class="c-panel__body"><div class="c-panel__item"></div></div></div>')
+                        $(".c-panel#books .c-panel__item").append("<div class='p-syuppan-lists'></div>")
+                        $.each(list, (_, book)=>{
+                            $(".p-syuppan-lists").append(`
+                            <div class='c-card p-syuppan-list'>
+                                <div class="p-syuppan-list__head">
+                                    <a class="p-syuppan-list__title" href="`+book.link+`">`+book.title+`</a>
+                                    <div class="p-syuppan-list__writer">`+book.author+`</div>
+                                </div>
+                                <div class="p-syuppan-list__spec">
+                                    <div class="p-syuppan-list__spec-item">
+                                        <span class="c-label">出版社</span>`+book.publisher+`
+                                    </div>
+                                    <div class="p-syuppan-list__spec-item">
+                                        <span class="c-label">レーベル</span>`+book.label+`
+                                    </div>
+                                    <div class="p-syuppan-list__spec-item">
+                                        <span class="c-label">発売日</span>`+book.date+`
+                                    </div>
+                                </div>
+                            </div>`)
+                        })
+                    }
+                }
+                return true;
             });
         }
     }

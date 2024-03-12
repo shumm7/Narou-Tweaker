@@ -24,3 +24,91 @@
     line-height: 1.7;
     min-height:1em;
 }
+
+
+/* Book List */
+.p-syuppan-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    flex-flow: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.p-syuppan-list__image {
+    display: block;
+    width: 160px;
+    text-align: center;
+    background-color: rgba(0,0,0,.05)
+}
+
+.p-syuppan-list__image img {
+    width: auto;
+    max-width: 100%;
+    max-height: 500px
+}
+
+.p-syuppan-list__image--noimage {
+    background-color: transparent
+}
+
+.p-syuppan-list__head {
+    margin-bottom: 15px
+}
+
+.p-syuppan-list__writer {
+    font-size: 12px
+}
+
+.p-syuppan-list__title {
+    font-size: 16px
+}
+
+.p-syuppan-list__author {
+    font-size: 12px
+}
+
+.p-syuppan-list__info {
+    width: calc(100% - 160px - 10px)
+}
+
+.p-syuppan-list__spec {
+    font-size: 12px
+}
+
+.p-syuppan-list__spec .c-label {
+    margin-right: 5px;
+    width: 6em
+}
+
+.p-syuppan-list__spec-item:not(:last-child) {
+    margin-bottom: 2.5px
+}
+
+.c-card {
+    width: 100%;
+    background: var(--background-screen);
+    padding: 15px 20px;
+}
+
+.c-label {
+    font-size: .85em;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-block;
+    padding: .5em;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: .1em;
+    color: #333;
+    background-color: #e9ecef;
+}
+
