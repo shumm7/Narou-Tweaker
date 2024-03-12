@@ -137,10 +137,10 @@ export function applyCSS(tab, index){
         }
         
         /* Custom CSS */
-        rule += getRule(".novel-tabs ul li a, .novel-tabs ul li a:link, .novel-tabs ul li a:visited", [
+        rule += getRule("#novel_header ul li a, #novel_header ul li a:link, #novel_header ul li a:visited, #novel_header ul li form", [
             {"color": defaultValue(s.sublist.color, "#444")},
         ])
-        rule += getRule(".novel-tabs ul li a:hover, .novel-tabs ul li a:active", [
+        rule += getRule("#novel_header ul li a:hover, #novel_header ul li a:active, #novel_header ul li form:hover, #novel_header ul li form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
 

@@ -11,10 +11,8 @@ chrome.storage.sync.get(["options"], (data) => {
     header_mode = defaultValue(options.novel_header_mode, "scroll");
     novel_css = defaultValue(options.enable_novel_css, true)
 
-    /* Header */
-    changeHeaderScrollMode(header_mode);
-
     if(novel_css){
+        $("body").addClass("narou-tweaker")
         /* Header */
         _header()
 
@@ -22,48 +20,90 @@ chrome.storage.sync.get(["options"], (data) => {
         _optionModal();
 
     }
+
+    /* Header */
+    changeHeaderScrollMode(header_mode);
 });
 
 function _header(){
     var ncode = getNcode()
     var index = ncodeToIndex(ncode)
     var episode = getEpisode()
-    var isLogin = false
-    $("#novel_header").before('<div class="novel-tabs"><ul></ul></div>')
 
-    /* Home */
-    if($("#head_nav #login a").prop("href")=="https://syosetu.com/user/top/"){
-        var isLogin = true
-        $(".novel-tabs ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i></a></li>')
-    }else{
-        $(".novel-tabs ul").append('<li class="login"><a href="https://syosetu.com/login/input/"><i class="fa-solid fa-house"></i></a></li>')
+    var text
+    var elm
+    $("#novel_header #novelnavi_right").remove()
+
+    /* ホーム / ログイン */
+    elm = $("#novel_header li#login a")
+    if(elm){
+        text = elm.text()
+        elm.text("")
+        elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
     }
 
-    /* Info */
-    $(".novel-tabs ul").append('<li class="info"><a href="https://ncode.syosetu.com/novelview/infotop/ncode/'+ncode+'/"><i class="fa-solid fa-file-lines"></i></a></li>')
-
-    /* Comment */
-    if(episode==0){
-        $(".novel-tabs ul").append('<li class="comment"><a href="https://novelcom.syosetu.com/impression/list/ncode/'+index+'/"><i class="fa-solid fa-comments"></i></a></li>')
-    }else{
-        $(".novel-tabs ul").append('<li class="comment"><a href="https://novelcom.syosetu.com/impression/list/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-comments"></i></a></li>')
+    /* 作品情報 */
+    elm = $("#novel_header li a[href^='https://ncode.syosetu.com/novelview/']")
+    if(elm){
+        elm.text("")
+        elm.append('<i class="fa-solid fa-file-lines"></i><span class="title">作品情報</span>')
     }
 
-    /* Review */
-    $(".novel-tabs ul").append('<li class="review"><a href="https://novelcom.syosetu.com/novelreview/list/ncode/'+index+'/"><i class="fa-solid fa-flag"></i></a></li>')
+    /* 感想 */
+    elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/impression/']")
+    if(elm){
+        elm.text("")
+        elm.append('<i class="fa-solid fa-comments"></i><span class="title">感想</span>')
+    }
 
-    $("#novel_header").remove()
-    
-}
+    /* レビュー */
+    elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/novelreview/']")
+    if(elm){
+        elm.text("")
+        elm.append('<i class="fa-solid fa-flag"></i><span class="title">レビュー</span>')
+    }
 
-function _optionModal(){
-    /* New Header */
-    $("#novelnavi_right").remove()
-    $("#head_nav").after('<div id="novelnavi_right" style="position: absolute;"></div>')
+    /* PDF */
+    elm = $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/']")
+    if(elm){
+        elm.prepend('<i class="fa-solid fa-file-pdf"></i>')
+        $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/'] i").on("click", ()=>{
+            $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/'] input[type='submit']").trigger("click")
+        })
+    }
 
-    /* Option Button */
-    $("#novelnavi_right").append('<div id="novel-option-button"><i id="novel-option-button--icon" class="fa-solid fa-gear"></i></div></div>')
-    $("#novel-option-button").on("click", function(){
+    /* ブックマーク */
+    elm = $("#novel_header li.booklist a")
+    if(elm){
+        elm.text("")
+        if(elm.hasClass("js-bookmark_setting_button")){
+            elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブック<br>マーク</span>')
+        }else if(elm.hasClass("js-add_bookmark")){
+            elm.append('<i class="fa-solid fa-book"></i><span class="title">ブック<br>マーク</span>')
+        }
+    }
+
+    /* しおり */
+    elm = $("#novel_header li.bookmark_now a")
+    if(elm){
+        elm.text("")
+        elm.append('<i class="fa-regular fa-bookmark"></i><span class="title">しおり</span>')
+        elm.addClass("siori")
+        $("#novel_header li.set_siori").on("click", ()=>{
+            $("a.siori i.fa-bookmark").removeClass("fa-regular")
+            $("a.siori i.fa-bookmark").addClass("fa-solid")
+            $("a.siori .title").text("しおり中")
+        })
+    }
+
+    elm = $("#novel_header li.bookmark")
+    if(elm){
+        elm.text("")
+        elm.append('<a><i class="fa-solid fa-bookmark"></i><span class="title">しおり中</span></a>')
+    }
+
+    $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
+    $("#novel_header ul .option").on("click", function(){
         if($("#novel-option").hasClass("show")){
             $("#novel-option").removeClass("show")
         }else{
@@ -75,6 +115,9 @@ function _optionModal(){
             $("#novel-option-background").addClass("show")
         }
     })
+}
+
+function _optionModal(){
 
     /* Option Modal */
     $("#novel_header").after("<aside id='novel-option'></aside>")
