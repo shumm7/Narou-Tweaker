@@ -9,14 +9,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             .then(response => response.json())
             .then(data => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, success: true}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "json", success: true}).catch((error) => {
                         console.log(error);
                     });
                 });
             })
             .catch((e) => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, success: false}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "json", success: false}).catch((error) => {
                         console.log(error);
                     });
                 });    
@@ -27,14 +27,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             .then(response => response.text())
             .then(data => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, success: true}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "text", success: true}).catch((error) => {
                         console.log(error);
                     });
                 });
             })
             .catch((e) => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, success: false}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "text", success: false}).catch((error) => {
                         console.log(error);
                     });
                 });    
