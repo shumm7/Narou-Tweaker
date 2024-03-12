@@ -108,13 +108,19 @@ chrome.storage.sync.get(["options"], (data) => {
 
         /* Book List */
         if(true){
+            const max_amount = 5
             var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
             getUserBooks(userid)
+
             chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
                 if(response.success && response.format=="text"){
                     var list = []
                     var body = $($.parseHTML(response.result))
-                    body.find(".p-syuppan-list").each((_, value)=>{
+                    body.find(".p-syuppan-list").each((idx, value)=>{
+                        if(max_amount<=idx){
+                            return false;
+                        }
+
                         if($(value).find(".p-syuppan-list__spec-item:nth-child(1) a").prop("href")=="https://mypage.syosetu.com/"+userid+"/"){
                             var title = $(value).find("a.p-syuppan-list__title").text()
                             var link = $(value).find("a.p-syuppan-list__title").prop("href")
@@ -135,7 +141,6 @@ chrome.storage.sync.get(["options"], (data) => {
                             })
                         }
                     })
-                    console.log(list)
 
                     if(list.length>0){
                         $(".c-panel#introduction").after('<div class="c-panel" id="books"><div class="c-panel__headline" id="book-list">書籍リスト</div><div class="c-panel__body"><div class="c-panel__item"></div></div></div>')
@@ -160,6 +165,7 @@ chrome.storage.sync.get(["options"], (data) => {
                                 </div>
                             </div>`)
                         })
+                        $(".c-panel#books .c-panel__item .p-syuppan-lists").after('<div class="p-syuppan-list__more"><a href="https://syosetu.com/syuppan/list/?word='+userid+'">もっと見る</a></div>')
                     }
                 }
                 return true;
