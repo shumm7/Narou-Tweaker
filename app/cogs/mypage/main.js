@@ -126,11 +126,25 @@ chrome.storage.sync.get(["options"], (data) => {
                             var title = $(value).find("a.p-syuppan-list__title").text()
                             var link = $(value).find("a.p-syuppan-list__title").prop("href")
                             var author = $(value).find(".p-syuppan-list__writer").text()
-                            $(value).find(".p-syuppan-list__spec-item span.c-label").remove()
-                            var publisher = $(value).find(".p-syuppan-list__spec-item:nth-child(2)").text().trim()
-                            var label = $(value).find(".p-syuppan-list__spec-item:nth-child(3)").text().trim()
-                            var date = $(value).find(".p-syuppan-list__spec-item:nth-child(4)").text().trim()
 
+                            var publisher
+                            var label
+                            var date
+                            $(value).find(".p-syuppan-list__spec-item").each((_, l)=>{
+                                var text = $(l).find("span.c-label").text().trim()
+                                if(text=="出版社"){
+                                    $(l).find("span.c-label").remove()
+                                    publisher = $(l).text().trim()
+                                }
+                                else if(text=="レーベル"){
+                                    $(l).find("span.c-label").remove()
+                                    label = $(l).text().trim()
+                                }
+                                else if(text=="発売日"){
+                                    $(l).find("span.c-label").remove()
+                                    date = $(l).text().trim()
+                                }
+                            })
                             list.push({
                                 userid: userid,
                                 author: author,
@@ -156,6 +170,22 @@ chrome.storage.sync.get(["options"], (data) => {
                             </div>
                         `)
                         $.each(list, (_, book)=>{
+                            var ls = ""
+                            if(book.publisher){
+                                ls += `<div class="p-syuppan-list__spec-item">
+                                    <span class="c-label">出版社</span>`+book.publisher+`
+                                </div>`
+                            }
+                            if(book.label){
+                                ls += `<div class="p-syuppan-list__spec-item">
+                                    <span class="c-label">レーベル</span>`+book.label+`
+                                </div>`
+                            }
+                            if(book.date){
+                                ls += `<div class="p-syuppan-list__spec-item">
+                                    <span class="c-label">発売日</span>`+book.date+`
+                                </div>`
+                            }
                             $(".p-syuppan-lists").append(`
                             <div class='c-card p-syuppan-list'>
                                 <div class="p-syuppan-list__head">
@@ -163,15 +193,7 @@ chrome.storage.sync.get(["options"], (data) => {
                                     <div class="p-syuppan-list__writer">`+book.author+`</div>
                                 </div>
                                 <div class="p-syuppan-list__spec">
-                                    <div class="p-syuppan-list__spec-item">
-                                        <span class="c-label">出版社</span>`+book.publisher+`
-                                    </div>
-                                    <div class="p-syuppan-list__spec-item">
-                                        <span class="c-label">レーベル</span>`+book.label+`
-                                    </div>
-                                    <div class="p-syuppan-list__spec-item">
-                                        <span class="c-label">発売日</span>`+book.date+`
-                                    </div>
+                                `+ls+`
                                 </div>
                             </div>`)
                         })
