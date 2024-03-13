@@ -125,21 +125,8 @@ function _header(){
     }
 
     /* Twitter */
-    /*
-    elm = $("#novel_header li:has(iframe[id='twitter-widget-0'])")
-    if(elm){
-        var url = elm
-        console.log(url)
-        if(url){
-            url = url.match(/https:\/\/platform\.twitter\.com\/widgets\/.*#dnt=false&(.*)/)[1]
-            elm.empty()
-            elm.prop("style", "")
-            console.log('https://twitter.com/intent/post?'+url+'')
-            elm.append('<a href="https://twitter.com/intent/post?'+url+'"><i class="fa-brands fa-x-twitter"></i>ポスト</span></a>')
-            elm.addClass("twitter")
-        }
-    }
-    */
+    $("#novel_header li:nth-last-child(1)").remove()
+    
 
     /* 設定 */
     $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
