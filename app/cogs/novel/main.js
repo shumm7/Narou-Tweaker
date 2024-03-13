@@ -55,7 +55,7 @@ function _header(left, right, disabled){
 
     /* ホーム / ログイン */
     elm = $("#novel_header li#login a")
-    if(elm){
+    if(elm.length){
         text = elm.text()
         elm.text("")
         elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
@@ -64,7 +64,7 @@ function _header(left, right, disabled){
 
     /* 作品情報 */
     elm = $("#novel_header li a[href^='https://ncode.syosetu.com/novelview/']")
-    if(elm){
+    if(elm.length){
         elm.text("")
         elm.append('<i class="fa-solid fa-info"></i></i><span class="title">作品情報</span>')
         elm.parent().addClass("info")
@@ -72,7 +72,7 @@ function _header(left, right, disabled){
 
     /* 感想 */
     elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/impression/']")
-    if(elm){
+    if(elm.length){
         elm.text("")
         elm.append('<i class="fa-solid fa-comments"></i><span class="title">感想</span>')
         elm.parent().addClass("impression")
@@ -80,7 +80,7 @@ function _header(left, right, disabled){
 
     /* レビュー */
     elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/novelreview/']")
-    if(elm){
+    if(elm.length){
         elm.text("")
         elm.append('<i class="fa-solid fa-flag"></i><span class="title">レビュー</span>')
         elm.parent().addClass("review")
@@ -88,7 +88,7 @@ function _header(left, right, disabled){
 
     /* PDF */
     elm = $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/']")
-    if(elm){
+    if(elm.length){
         elm.prepend('<i class="fa-solid fa-file-pdf"></i>')
         elm.parent().addClass("pdf")
         $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/'] i").on("click", ()=>{
@@ -98,7 +98,7 @@ function _header(left, right, disabled){
 
     /* ブックマーク */
     elm = $("#novel_header li.booklist a")
-    if(elm){
+    if(elm.length){
         elm.text("")
         if(elm.hasClass("js-bookmark_setting_button")){
             elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（設定変更）</span></span>')
@@ -110,7 +110,7 @@ function _header(left, right, disabled){
 
     /* しおり */
     elm = $("#novel_header li.bookmark_now a")
-    if(elm){
+    if(elm.length){
         elm.text("")
         elm.append('<i class="fa-regular fa-bookmark"></i><span class="title">しおり</span>')
         elm.addClass("siori")
@@ -120,15 +120,26 @@ function _header(left, right, disabled){
             $("a.siori .title").text("しおり中")
         })
         elm.parent().addClass("siori")
-        /*elm.parent().appendTo("#novel_header_right ul")*/
     }
 
     elm = $("#novel_header li.bookmark")
-    if(elm){
+    if(elm.length){
         elm.text("")
         elm.append('<a><i class="fa-solid fa-bookmark"></i><span class="title">しおり中</span></a>')
         elm.addClass("siori")
-        /*elm.appendTo("#novel_header_right ul")*/
+    }
+
+    elm = $("#novel_header li.bookmark")
+    if(location.pathname.match("/"+ncode+"[|/]") && !elm.length){
+        elm = $(".novellingindex_bookmarker_no")
+        if(elm.length){
+            var link = elm.find("a").prop("href")
+            var text = elm.find("a").text()
+            elm.remove()
+            $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'/"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<br><span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
+        }else{
+            $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<br><span style="font-size: 90%;">（なし）</span></span></a></li>')
+        }
     }
 
     /* Twitter */
@@ -172,19 +183,19 @@ function _header(left, right, disabled){
     /* Set Position */
     $.each(disabled, (_, cls)=>{
         var elm = $("#novel_header ul li."+cls)
-        if(elm){
+        if(elm.length){
             elm.remove()
         }
     })
     $.each(right, (_, cls)=>{
         var elm = $("#novel_header ul li."+cls)
-        if(elm){
+        if(elm.length){
             elm.appendTo("#novel_header_right ul")
         }
     })
     $.each(left, (_, cls)=>{
         var elm = $("#novel_header ul li."+cls)
-        if(elm){
+        if(elm.length){
             elm.appendTo("#novel_header ul")
         }
     })
