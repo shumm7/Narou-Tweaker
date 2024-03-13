@@ -31,6 +31,8 @@ function _header(){
     var ncode = getNcode()
     var index = ncodeToIndex(ncode)
     var episode = getEpisode()
+    var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
+    var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
 
     var text
     var elm
@@ -59,14 +61,6 @@ function _header(){
         elm.text("")
         elm.append('<i class="fa-solid fa-file-lines"></i><span class="title">作品情報</span>')
         elm.parent().addClass("info")
-    }
-
-    /* KASASAGI */
-    elm = $("#novel_header ul li.info")
-    if(elm){
-        elm.after('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
-    }else{
-        $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
     }
 
     /* 感想 */
@@ -130,6 +124,23 @@ function _header(){
         /*elm.appendTo("#novel_header_right ul")*/
     }
 
+    /* Twitter */
+    /*
+    elm = $("#novel_header li:has(iframe[id='twitter-widget-0'])")
+    if(elm){
+        var url = elm
+        console.log(url)
+        if(url){
+            url = url.match(/https:\/\/platform\.twitter\.com\/widgets\/.*#dnt=false&(.*)/)[1]
+            elm.empty()
+            elm.prop("style", "")
+            console.log('https://twitter.com/intent/post?'+url+'')
+            elm.append('<a href="https://twitter.com/intent/post?'+url+'"><i class="fa-brands fa-x-twitter"></i>ポスト</span></a>')
+            elm.addClass("twitter")
+        }
+    }
+    */
+
     /* 設定 */
     $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
     $("#novel_header li.option").on("click", function(){
@@ -144,6 +155,42 @@ function _header(){
             $("#novel-option-background").addClass("show")
         }
     })
+
+    /* 作者マイページ */
+    elm = $("#novel_header ul li:nth-child(1)")
+    if(userid){
+        if(elm){
+            elm.after('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        }
+    }
+
+    /* KASASAGI */
+    elm = $("#novel_header ul li:nth-child(2)")
+    if(elm){
+        elm.after('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+    }else{
+        $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+    }
+
+    /* API */
+    elm = $("#novel_header ul li:nth-child(3)")
+    if(elm){
+        elm.after('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+    }else{
+        $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+    }
+
+    /* RSS */
+    elm = $("#novel_header ul li:nth-child(4)")
+    if(atom){
+        if(elm){
+            elm.after('<li class="rss"><a href="'+atom+'/"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="rss"><a href="'+atom+'/"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
+        }
+    }
 }
 
 function _optionModal(){
