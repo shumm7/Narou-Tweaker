@@ -33,7 +33,7 @@
       "matches": [
 				"https://ncode.syosetu.com/*"
 			],
-      "run_at":"document_start"
+      "run_at":"document_end"
     },
     {
       "js": [
@@ -47,7 +47,7 @@
       "matches": [
 				"https://mypage.syosetu.com/*"
 			],
-      "run_at":"document_start"
+      "run_at":"document_end"
     },
     {
       "js": [
@@ -66,7 +66,7 @@
       "matches": [
 				"https://kasasagi.hinaproject.com/*"
 			],
-      "run_at":"document_start"
+      "run_at":"document_end"
     }
   ],
   "web_accessible_resources": [
