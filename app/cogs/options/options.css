@@ -274,3 +274,52 @@ button:active, button:focus, button:hover {
 button:disabled {
     background-color: gray;
 }
+
+/* Header Icons */
+.draggable_area_outer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	padding: 10px;
+	border: 2px solid #aaa4;
+	border-radius: 10px;
+}
+.draggable_area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 110px;
+	min-height: 110px;
+}
+.draggable_area_outer:has(.draggable_area#disabled) {
+	width: 100%;
+}
+.draggable_area#disabled {
+	align-items: start;
+	justify-content: start;
+	flex-direction: row;
+	width: 100%;
+}
+.icon-element {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #aaa;
+	margin: .2em;
+	padding: .2em;
+	width: 70px;
+	height: 70px;
+}
+.icon-element i {
+	font-size: 180%;
+}
+.icon-element .title {
+	margin-top: .5em;
+	font-size: 90%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
