@@ -62,9 +62,9 @@
 	border: none !important;
 	padding: 0 !important;
 }
-.narou-tweaker #novel_header ul li a span,
+.narou-tweaker #novel_header ul li a > span,
 .narou-tweaker #novel_header ul li form input,
-.narou-tweaker #novel_header_right ul li a span,
+.narou-tweaker #novel_header_right ul li a > span,
 .narou-tweaker #novel_header_right ul li form input {
 	margin-top: .5em;
 	text-align: center;
@@ -80,9 +80,9 @@
 .narou-tweaker #novel_header_right ul li form:hover input {
 	background: none !important;
 }
-.narou-tweaker #novel_header ul li a:hover span,
+.narou-tweaker #novel_header ul li a:hover > span,
 .narou-tweaker #novel_header ul li form:hover input,
-.narou-tweaker #novel_header_right ul li a:hover span,
+.narou-tweaker #novel_header_right ul li a:hover > span,
 .narou-tweaker #novel_header_right ul li form:hover input {
 	color: inherit !important;
 	transition: color .2s;

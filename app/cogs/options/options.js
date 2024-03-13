@@ -23,7 +23,7 @@ function restoreOptions(){
     /* Header */
     restoreHeaderIconList(defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"]), "left")
     restoreHeaderIconList(defaultValue(options.novel_header_icon_right, ["siori", "option"]), "right")
-    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss"]), "disabled")
+    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"]), "disabled")
     setSortable()
 
     /* Mypage */
@@ -96,7 +96,6 @@ function storeOptions(){
     enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
   }
   saveOptions(options);
-  debug_logObject(options)
 }
 
 
@@ -111,6 +110,14 @@ $(".options").each(function() {
 
 /* Skin Change */
 addSkinEditButtonEvent()
+$("#debug--reset-skin").on("click", (e)=>{
+  e.preventDefault()
+  resetSkins();
+})
+$("#debug--reset-options").on("click", (e)=>{
+  e.preventDefault()
+  resetOptions()
+})
 
 /* Header */
 function setSortable(){

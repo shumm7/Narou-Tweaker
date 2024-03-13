@@ -20,7 +20,7 @@ export const icon_list = {
         text: "RSS"
     },
     info: {
-        icon: "fa-solid fa-file-lines",
+        icon: "fa-solid fa-info",
         text: "作品情報"
     },
     impression: {
@@ -43,6 +43,10 @@ export const icon_list = {
         icon: "fa-solid fa-bookmark",
         text: "しおり"
     },
+    text: {
+        icon: "fa-solid fa-file-lines",
+        text: "TXT"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"
@@ -62,6 +66,7 @@ export function getHeaderIconList(position){
 export function restoreHeaderIconList(data, position){
     if(position!="right" && position!="left" && position!="disabled") { return }
 
+    $(".draggable_area#"+position).empty()
     $.each(data, (_, icon)=>{
         $(".draggable_area#"+position).append(getIconElement(icon))
     })

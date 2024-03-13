@@ -5,16 +5,22 @@ import { ncodeToIndex } from "../../utils/text.js";
 
 var header_mode
 var novel_css
+var header_left
+var header_right
+var header_disabled
 
 chrome.storage.sync.get(["options"], (data) => {
     var options = data.options
     header_mode = defaultValue(options.novel_header_mode, "scroll");
     novel_css = defaultValue(options.enable_novel_css, true)
+    header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
+    header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
+    header_disabled = defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"])
 
     if(novel_css){
         $("body").addClass("narou-tweaker")
         /* Header */
-        _header()
+        _header(header_left, header_right, header_disabled)
 
         /* Option Menu */
         _optionModal();
@@ -27,7 +33,7 @@ chrome.storage.sync.get(["options"], (data) => {
     changeHeaderScrollMode(header_mode, "#novel_header");
 });
 
-function _header(){
+function _header(left, right, disabled){
     var ncode = getNcode()
     var index = ncodeToIndex(ncode)
     var episode = getEpisode()
@@ -39,6 +45,7 @@ function _header(){
     $("#novel_header #novelnavi_right").remove()
     $("#pageBottom").remove()
     $("#pageTop").remove()
+    $(".wrap_menu_novelview_after").empty()
 
     /* Right Menu Bar */
     $("#novel_header").before(`<div id="novel_header_right">
@@ -59,7 +66,7 @@ function _header(){
     elm = $("#novel_header li a[href^='https://ncode.syosetu.com/novelview/']")
     if(elm){
         elm.text("")
-        elm.append('<i class="fa-solid fa-file-lines"></i><span class="title">作品情報</span>')
+        elm.append('<i class="fa-solid fa-info"></i></i><span class="title">作品情報</span>')
         elm.parent().addClass("info")
     }
 
@@ -94,9 +101,9 @@ function _header(){
     if(elm){
         elm.text("")
         if(elm.hasClass("js-bookmark_setting_button")){
-            elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク</span>')
+            elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（設定変更）</span></span>')
         }else if(elm.hasClass("js-add_bookmark")){
-            elm.append('<i class="fa-solid fa-book"></i><span class="title">ブックマーク</span>')
+            elm.append('<i class="fa-solid fa-book"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（登録）</span></span>')
         }
         elm.parent().addClass("booklist")
     }
@@ -120,7 +127,7 @@ function _header(){
     if(elm){
         elm.text("")
         elm.append('<a><i class="fa-solid fa-bookmark"></i><span class="title">しおり中</span></a>')
-        elm.parent().addClass("siori")
+        elm.addClass("siori")
         /*elm.appendTo("#novel_header_right ul")*/
     }
 
@@ -144,40 +151,44 @@ function _header(){
     })
 
     /* 作者マイページ */
-    elm = $("#novel_header ul li:nth-child(1)")
     if(userid){
-        if(elm){
-            elm.after('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
-        }else{
-            $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
-        }
+        $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
     }
 
     /* KASASAGI */
-    elm = $("#novel_header ul li:nth-child(2)")
-    if(elm){
-        elm.after('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
-    }else{
-        $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
-    }
+    $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
 
     /* API */
-    elm = $("#novel_header ul li:nth-child(3)")
-    if(elm){
-        elm.after('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
-    }else{
-        $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
-    }
+    $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
 
     /* RSS */
-    elm = $("#novel_header ul li:nth-child(4)")
     if(atom){
-        if(elm){
-            elm.after('<li class="rss"><a href="'+atom+'/"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
-        }else{
-            $("#novel_header ul").append('<li class="rss"><a href="'+atom+'/"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
-        }
+        $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
     }
+
+    /* TXT */
+    $("#novel_header ul").append('<li class="text"><a href=https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+
+    /* Set Position */
+    $.each(disabled, (_, cls)=>{
+        var elm = $("#novel_header ul li."+cls)
+        if(elm){
+            elm.remove()
+        }
+    })
+    $.each(right, (_, cls)=>{
+        var elm = $("#novel_header ul li."+cls)
+        if(elm){
+            elm.appendTo("#novel_header_right ul")
+        }
+    })
+    $.each(left, (_, cls)=>{
+        var elm = $("#novel_header ul li."+cls)
+        if(elm){
+            elm.appendTo("#novel_header ul")
+        }
+    })
+
 }
 
 function _optionModal(){

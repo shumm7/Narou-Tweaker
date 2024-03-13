@@ -224,11 +224,6 @@ export function addSkinEditButtonEvent(){
     });
   })
 
-  $("#debug--reset-skin").on("click", (e)=>{
-    e.preventDefault()
-    resetSkins();
-  })
-
   $(".option-skin").change(()=>{
     showSkinPreview()
     saveSelectedSkin()
