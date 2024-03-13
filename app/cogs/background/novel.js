@@ -10,6 +10,7 @@ export function applyCSS(tab, index){
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
         var applied_skin = data.applied_skin
         const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
+        const custom_css = defaultValue(data.options.enable_novel_css, true)
 
         if (applied_skin[tab.id]!=undefined){
             chrome.scripting.removeCSS({
@@ -128,12 +129,26 @@ export function applyCSS(tab, index){
             ])
 
             /* Attention */
-            rule += getRule("#novel_attention", [
+            rule += getRule("#novel_attention, .box_announce_bookmark", [
                 {"color": defaultValue(s.novel.color, "#444")},
                 {"background-color": defaultValue(s.novel.background, "#fff")},
                 {"border-color": defaultValue(s.novel.background_second, "#444")}
             ])
         }
+        
+        /* Custom CSS */
+        rule += getRule("#novel_header ul li a, #novel_header ul li a:link, #novel_header ul li a:visited, #novel_header ul li form", [
+            {"color": defaultValue(s.sublist.color, "#444")},
+        ])
+        rule += getRule("#novel_header ul li a:hover, #novel_header ul li a:active, #novel_header ul li form:hover, #novel_header ul li form:active", [
+            {"color": defaultValue(s.sublist.hover, "#444")},
+        ])
+        rule += getRule("#novel_header_right ul li a, #novel_header_right ul li a:link, #novel_header_right ul li a:visited, #novel_header_right ul li form", [
+            {"color": defaultValue(s.sublist.color, "#444")},
+        ])
+        rule += getRule("#novel_header_right ul li a:hover, #novel_header_right ul li a:active, #novel_header_right ul li form:hover, #novel_header_right ul li form:active", [
+            {"color": defaultValue(s.sublist.hover, "#444")},
+        ])
 
         chrome.scripting.insertCSS({
             css: rule,

@@ -3,10 +3,12 @@ import {check, defaultValue} from "../../utils/misc.js"
 import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
 import { debug_log, debug_logObject } from "./debug.js";
 import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent } from "./skins.js";
+import { restoreHeaderIconList, getHeaderIconList } from "./header.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
 if(!debug){$('#debug').remove()}
+
 
 /* Restore Options */
 function restoreOptions(){
@@ -17,6 +19,12 @@ function restoreOptions(){
     check('#enable_novel_css', options.enable_novel_css, true);
     check('#enable_novel_expand_skin', options.enable_novel_expand_skin, true);
     $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"))
+
+    /* Header */
+    restoreHeaderIconList(defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"]), "left")
+    restoreHeaderIconList(defaultValue(options.novel_header_icon_right, ["siori", "option"]), "right")
+    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"]), "disabled")
+    setSortable()
 
     /* Mypage */
     check('#enable_mypage_profile_userid', options.enable_mypage_profile_userid, true);
@@ -49,6 +57,12 @@ function restoreOptions(){
   });
 }
 
+/* Reset Options */
+function resetOptions(){
+  saveOptions({});
+  restoreOptions();
+}
+
 /* Save Options */
 function storeOptions(){
   var options = {
@@ -56,6 +70,10 @@ function storeOptions(){
     enable_novel_css: $("#enable_novel_css").prop('checked'),
     enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
     novel_header_mode: $("#novel_header_mode").val(),
+
+    novel_header_icon_left: getHeaderIconList("left"),
+    novel_header_icon_right: getHeaderIconList("right"),
+    novel_header_icon_disabled: getHeaderIconList("disabled"),
 
     /* Mypage */
     enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
@@ -94,3 +112,65 @@ $(".options").each(function() {
 
 /* Skin Change */
 addSkinEditButtonEvent()
+$("#debug--reset-skin").on("click", (e)=>{
+  e.preventDefault()
+  resetSkins();
+})
+$("#debug--reset-options").on("click", (e)=>{
+  e.preventDefault()
+  resetOptions()
+})
+
+/* Header */
+function setSortable(){
+  Sortable.create($(".draggable_area#left")[0], {
+      handle: '.icon-element',
+      sort: 1,
+      group: {
+          name: 'header-icon',
+          pull: true,
+          put: true
+      },
+      animation: 150,
+      onAdd: function (e) {
+          storeOptions();
+      },
+      onChange: function (e) {
+        storeOptions();
+      },
+  });
+  Sortable.create($(".draggable_area#right")[0], {
+      handle: '.icon-element',
+      sort: 1,
+      group: {
+          name: 'header-icon',
+          pull: true,
+          put: true
+      },
+      animation: 150,
+      onAdd: function (e) {
+          storeOptions();
+      },
+      onChange: function (e) {
+        storeOptions();
+      },
+  });
+  Sortable.create($(".draggable_area#disabled")[0], {
+      handle: '.icon-element',
+      animation: 150,
+      sort: 1,
+      group: {
+          name: 'header-icon',
+          pull: true,
+          put: true,
+      },
+      animation: 150,
+      onAdd: function (e) {
+        storeOptions();
+      },
+      onChange: function (e) {
+        storeOptions();
+      },
+      
+  });
+}

@@ -3,7 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <base target="_blank">
 <link rel="stylesheet" href="options.css">
+<link rel="stylesheet" href="../../libs/font-awesome/css/all.css">
 <script src="../../libs/jquery-3.7.1.min.js"></script>
+<script src="../../libs/SortableJS/Sortable.min.js"></script>
 <title>Narou Tweaker options</title>
 
 <div id="js-failed">JavaScript failed to load. Your development build failed or your browser has some issue.</div>
@@ -40,6 +42,26 @@
 				</div>
 				<label for="novel_header_mode">追従モード</label>
 			</p>
+			<div class="section">
+				<p><span class="section-subheader">アイコンの配置</span></p>
+				<p>アイコンの配置を指定します。この設定は「モダンなページレイアウト」がオンの時にのみ作用します。</p>
+				<p>
+					<div id="novel_header_icon" style="display: flex; flex-flow: row;">
+						<div class="draggable_area_outer">
+							<div class="title">左</div>
+							<div class="draggable_area" id="left"></div>
+						</div>
+						<div class="draggable_area_outer">
+							<div class="title">右</div>
+							<div class="draggable_area" id="right"></div>
+						</div>
+						<div class="draggable_area_outer">
+							<div class="title">非表示</div>
+							<div class="draggable_area" id="disabled"></div>
+						</div>
+					</div>
+				</p>
+			</div>
 		</div>
 
 		<div class="section">
@@ -287,6 +309,7 @@
 			<textarea style="width: 100%; height: 10em;"></textarea>
 		</p>
 		<button id="debug--reset-skin" type="button">Reset Skin</button>
+		<button id="debug--reset-options" type="button">Reset All Options</button>
 	</details>
 	
 </form>

@@ -13,3 +13,4 @@
 * [jquery/jquery](https://github.com/jquery/jquery) Copyright OpenJS Foundation and other contributors, https://openjsf.org/
 * [chartjs/Chart.js](https://github.com/chartjs/Chart.js) Copyright (c) 2014-2022 Chart.js Contributors
 * [lokku/jquery-nstslider](https://github.com/lokku/jquery-nstslider) Copyright (c) 2014 Lokku Ltd.
+* [SortableJS/Sortable](https://github.com/SortableJS/Sortable) Copyright (c) 2019 All contributors to Sortable
