@@ -295,7 +295,7 @@ function _general(){
                     scales: {
                         y: {
                             ticks: {
-                                stepSize: 10
+                                
                             }
                         },
                         x: {
