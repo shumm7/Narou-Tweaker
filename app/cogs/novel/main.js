@@ -136,7 +136,7 @@ function _header(left, right, disabled){
             var link = elm.find("a").prop("href")
             var text = elm.find("a").text()
             elm.remove()
-            $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'/"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<br><span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
+            $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<br><span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
         }else{
             $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<br><span style="font-size: 90%;">（なし）</span></span></a></li>')
         }
