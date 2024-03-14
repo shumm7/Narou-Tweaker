@@ -84,16 +84,16 @@ export function setOptionContentsDisplay(){
     outer.append("<div class='novel-option-header'>スキン設定</div>")
     outer.append('<div id="novel-option--skin"><div class="dropdown" style="width: 100%;"><select id="skin" name="skin"></select></div></div>')
     outer.append('<div id="novel-option--skin-description"></div>')
-    chrome.storage.sync.get(["skin", "skins"], function(data) {
-        setSkinOptions(data.skins, data.skin)
+    chrome.storage.sync.get(["options", "skins"], function(data) {
+        setSkinOptions(data.skins, data.options.applied_skin)
     })
 
     $("#novel-option--skin #skin").on("change",() => {
         var skin = parseInt($("#skin").val())
         saveSkin(skin)
         applySkin(skin)
-        chrome.storage.sync.get(["skin", "skins"], function(data) {
-            setSkinOptions(data.skins, data.skin)
+        chrome.storage.sync.get(["options", "skins"], function(data) {
+            setSkinOptions(data.skins, data.options.applied_skin)
         })
     })
 }

@@ -3,9 +3,9 @@ import { defaultValue, getCSSRule } from "../../utils/misc.js";
 
 export function applyCSS(tab, index){
 
-    chrome.storage.sync.get(["skins", "skin", "applied_skin", "options"], (data) => {
+    chrome.storage.sync.get(["skins", "applied_skin", "options"], (data) => {
         const getRule = getCSSRule
-        const skin_idx = defaultValue(index, defaultValue(data.skin, 0))
+        const skin_idx = defaultValue(index, defaultValue(data.options.applied_skin, 0))
         const skins = defaultValue(data.skins, defaultSkins)
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
         var applied_skin = data.applied_skin

@@ -12,7 +12,7 @@ if(!debug){$('#debug').remove()}
 
 /* Restore Options */
 function restoreOptions(){
-  chrome.storage.sync.get(["options", "skin", "skins"], function(data) {
+  chrome.storage.sync.get(["options", "skins"], function(data) {
     var options = data.options
 
     /* Novel */
@@ -53,7 +53,7 @@ function restoreOptions(){
     
 
     /* Skins */
-    restoreSkins(data.skins, data.skin)
+    restoreSkins(defaultValue(data.skins, defaultSkins), defaultValue(data.options.applied_skin, 0))
   });
 }
 
@@ -70,6 +70,7 @@ function storeOptions(){
     enable_novel_css: $("#enable_novel_css").prop('checked'),
     enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
     novel_header_mode: $("#novel_header_mode").val(),
+    applied_skin: parseInt($("#skin").val()),
 
     novel_header_icon_left: getHeaderIconList("left"),
     novel_header_icon_right: getHeaderIconList("right"),

@@ -7,9 +7,10 @@ export function saveOptions(options){
 }
 
 export function saveOptionValue(key, value){
-    var options = loadOptions()
-    options[key] = value;
-    saveOptions(options)
+    chrome.storage.sync.get(["options"], function(data) {
+        data.options[key] = value;
+        saveOptions(data.options)
+    })
 }
 
 /* Skins */
@@ -18,5 +19,5 @@ export function saveSkins(skins){
 }
 
 export function saveSkin(skin){
-    chrome.storage.sync.set({"skin": skin});
+    saveOptionValue("applied_skin", skin)
 }
