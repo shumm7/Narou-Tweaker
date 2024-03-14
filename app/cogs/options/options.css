@@ -277,7 +277,7 @@ button:disabled {
 }
 input[type=file] {
 	display: none;
-  }
+}
 
 /* Header Icons */
 .draggable_area_outer {
