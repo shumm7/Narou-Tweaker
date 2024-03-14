@@ -9,14 +9,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             .then(response => response.json())
             .then(data => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "json", success: true}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "json", success: true, id: message.id}).catch((error) => {
                         console.log(error);
                     });
                 });
             })
             .catch((e) => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "json", success: false}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "json", success: false, id: message.id}).catch((error) => {
                         console.log(error);
                     });
                 });    
@@ -27,14 +27,14 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             .then(response => response.text())
             .then(data => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "text", success: true}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "text", success: true, id: message.id}).catch((error) => {
                         console.log(error);
                     });
                 });
             })
             .catch((e) => {
                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "text", success: false}).catch((error) => {
+                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "text", success: false, id: message.id}).catch((error) => {
                         console.log(error);
                     });
                 });    
@@ -48,6 +48,8 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 filename: message.data.filename
             });
         }
+    }else if(message.action == "file_open"){
+
     }else if(message.action == "apply_skin"){
         chrome.tabs.query({}, tabs => {
             for(let i=0; i<tabs.length; i++){

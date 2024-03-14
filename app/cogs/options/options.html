@@ -311,7 +311,14 @@
 			<div class="section-header">エクスポート / インポート</div>
 			<p>本ページで設定した項目を、JSONファイルで取り込み/出力します。</p>
 			<p><button id="export-options" type="button">エクスポート</button></p>
-			<p><button id="import-options" type="button">インポート</button></p>
+			<p>
+				<div class="button-cover">
+					<label id="import-options-label">
+						インポート
+						<input id="import-options" type="file" accept="application/json">
+					</label>
+				</div>
+			</p>
 		</div>
 		<div class="section">
 			<div class="section-header">リセット</div>

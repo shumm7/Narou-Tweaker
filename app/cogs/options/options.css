@@ -247,7 +247,7 @@ input[type="text"] {
 }
 
 /* Button */
-button {
+button, #import-options-label {
     color: rgb(255, 255, 255);
     font-size: 14px;
     line-height: 1.7;
@@ -267,13 +267,17 @@ button {
     outline: 0px;
     padding: .3em 1em !important;
 }
-button:active, button:focus, button:hover {
+button:active, button:focus, button:hover,
+#import-options-label:active, #import-options-label:focus, #import-options-label:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(51, 154, 244);
 }
 button:disabled {
     background-color: gray;
 }
+input[type=file] {
+	display: none;
+  }
 
 /* Header Icons */
 .draggable_area_outer {

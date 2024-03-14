@@ -102,6 +102,21 @@ function storeOptions(){
   saveOptions(options);
 }
 
+function importOptions(options){
+  if(options){
+    if(options.options!=undefined){
+      saveOptions(options.options)
+    }
+    if(options.skin!=undefined){
+      saveSkin(options.skin)
+    }
+    if(options.skins!=undefined){
+      saveSkins(options.skins)
+    }
+    restoreOptions();
+    restoreSkins();
+  }
+}
 
 /* Events */
 document.addEventListener('DOMContentLoaded', restoreOptions);
@@ -124,6 +139,16 @@ $("#export-options").on("click", (e)=>{
   chrome.storage.sync.get(["options", "skins", "skin"], function(data) {
     saveJson(data, "narou-tweaker-options-" + getDateString() + ".json")
   })
+})
+$("#import-options").on("change", (evt)=>{
+  var f = evt.target.files[0]
+  var reader = new FileReader();
+  reader.onload = function(e){
+      var data = JSON.parse(e.target.result)
+      console.log(data)
+      importOptions(data)
+  }
+  reader.readAsText(f);
 })
 
 /* Header */
