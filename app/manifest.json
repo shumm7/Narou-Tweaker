@@ -1,7 +1,7 @@
 {
-  "name": "Narou Tweaker",
-  "description": "Inprove experience of syosetu.com",
-  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "default_locale": "ja",
   "version": "0.0.1",
   "manifest_version": 3,
   "icons": {
