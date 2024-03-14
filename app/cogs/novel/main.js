@@ -110,6 +110,9 @@ function _header(left, right, disabled){
         }
         elm.parent().addClass("booklist")
     }
+    else{
+        $("#novel_header li.booklist").remove()
+    }
 
     /* しおり */
     elm = $("#novel_header li.bookmark_now a")
