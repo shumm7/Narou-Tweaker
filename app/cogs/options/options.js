@@ -1,9 +1,10 @@
 import { defaultSkins } from "../../utils/data/default_skins.js";
-import {check, defaultValue} from "../../utils/misc.js"
+import {check, defaultValue, saveJson} from "../../utils/misc.js"
 import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
 import { debug_log, debug_logObject } from "./debug.js";
 import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent } from "./skins.js";
 import { restoreHeaderIconList, getHeaderIconList } from "./header.js";
+import { getDateString } from "../../utils/text.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
@@ -113,13 +114,16 @@ $(".options").each(function() {
 
 /* Skin Change */
 addSkinEditButtonEvent()
-$("#debug--reset-skin").on("click", (e)=>{
-  e.preventDefault()
+$("#reset-skin").on("click", (e)=>{
   resetSkins();
 })
-$("#debug--reset-options").on("click", (e)=>{
-  e.preventDefault()
+$("#reset-options").on("click", (e)=>{
   resetOptions()
+})
+$("#export-options").on("click", (e)=>{
+  chrome.storage.sync.get(["options", "skins", "skin"], function(data) {
+    saveJson(data, "narou-tweaker-options-" + getDateString() + ".json")
+  })
 })
 
 /* Header */

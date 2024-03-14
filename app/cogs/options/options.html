@@ -301,15 +301,32 @@
 		</div>
 	</details>
 
+	<details id="general" open>
+		<summary><strong>⚙ 総合</strong></summary>
+		<p>
+			Narou Tweakerの総合設定です。<br>
+			<span style="color: red; font-weight: bold;">設定項目がリセットされますので、ご注意ください！</span>
+		</p>
+		<div class="section">
+			<div class="section-header">エクスポート / インポート</div>
+			<p>本ページで設定した項目を、JSONファイルで取り込み/出力します。</p>
+			<p><button id="export-options" type="button">エクスポート</button></p>
+			<p><button id="import-options" type="button">インポート</button></p>
+		</div>
+		<div class="section">
+			<div class="section-header">リセット</div>
+			<p>本ページで設定した項目をリセットできます。</p>
+			<p><button id="reset-skin" type="button">スキン設定をリセット</button></p>
+			<p><button id="reset-options" type="button">設定をリセット</button></p>
+		</div>
+	</details>
 	
     <details id="debug" open>
-		<summary><strong>【 デバッグ 】</strong></summary>
-		<p>デバッグ用項目</p>
+		<summary><strong>🐜 デバッグ</strong></summary>
+		<p>デバッグ用項目。</p>
 		<p>
 			<textarea style="width: 100%; height: 10em;"></textarea>
 		</p>
-		<button id="debug--reset-skin" type="button">Reset Skin</button>
-		<button id="debug--reset-options" type="button">Reset All Options</button>
 	</details>
 	
 </form>
