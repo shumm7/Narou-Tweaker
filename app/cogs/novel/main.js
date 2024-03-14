@@ -34,6 +34,8 @@ chrome.storage.sync.get(["options"], (data) => {
 });
 
 function _header(left, right, disabled){
+    if(!$("#novel_header").length){return}
+
     var ncode = getNcode()
     var index = ncodeToIndex(ncode)
     var episode = getEpisode()
@@ -42,6 +44,7 @@ function _header(left, right, disabled){
 
     var text
     var elm
+
     $("#novel_header #novelnavi_right").remove()
     $("#pageBottom").remove()
     $("#pageTop").remove()
@@ -203,6 +206,7 @@ function _header(left, right, disabled){
 }
 
 function _optionModal(){
+    if(!$("#novel_header").length){return}
 
     /* Option Modal */
     $("#novel_header").after("<aside id='novel-option'></aside>")

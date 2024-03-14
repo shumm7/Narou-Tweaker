@@ -4,6 +4,8 @@ import { saveSkin } from "../../utils/option.js";
 
 /* Header */
 export function changeHeaderScrollMode(header_mode, elm){
+    if(!$(elm).length){return}
+
     $(elm).removeClass("header-mode--fixed")
     $(elm).removeClass("header-mode--absolute")
     $(elm).removeClass("header-mode--scroll")

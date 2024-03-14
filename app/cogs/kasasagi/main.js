@@ -86,42 +86,44 @@ chrome.storage.sync.get(["options"], (data) => {
 
     /* Switch */
     if(path.match('/access/top/ncode/.*/')!=null){
-        if(enable_css){
+        var m = $(".novelview_h3#title")
+        if(m.length){
+            if(enable_css){
+                var title = m.text().match("『(.*)』")[1]
+                $(".novelview_h3#title").attr("style", "margin-bottom: 10px;")
+                $(".novelview_h3#title").text(title)
 
-            var m = $(".novelview_h3#title").text().match("『(.*)』")
-            var title = m[1]
-            $(".novelview_h3#title").attr("style", "margin-bottom: 10px;")
-            $(".novelview_h3#title").text(title)
+                $("#today_data .caption").text("本日（"+getDateStringJapanese()+"）")
+                $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese(getYesterday())+"）")
 
-            $("#today_data .caption").text("本日（"+getDateStringJapanese()+"）")
-            $("#yesterday_data .caption").text("昨日（"+getDateStringJapanese(getYesterday())+"）")
+                $(".novelview_h3:not(#title)").addClass("subtitle")
+                $("#today_yesterday_data .novelview_h3.subtitle").text("アクセス解析（当日・前日）")
+                $("#access_all .novelview_h3.subtitle").text("累計アクセス")
+                $("#access_all .novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
+                $("#access_all .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
 
-            $(".novelview_h3:not(#title)").addClass("subtitle")
-            $("#today_yesterday_data .novelview_h3.subtitle").text("アクセス解析（当日・前日）")
-            $("#access_all .novelview_h3.subtitle").text("累計アクセス")
-            $("#access_all .novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
-            $("#access_all .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-
-            $("#access_all .caption").text("直近1週間のPV")
+                $("#access_all .caption").text("直近1週間のPV")
+            }
+            _general();
         }
-        _general();
 
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
-        if(enable_css){
+        var m = $(".novelview_h3")
+        if(m.length){
+            if(enable_css){
+                var title = m.text().match("『(.*)』 部分別 アクセス解析")[1]
 
-            var m = $(".novelview_h3").text().match("『(.*)』 部分別 アクセス解析")
-            var title = m[1]
-
-            $(".novelview_h3").text("部分別 ユニークアクセス")
-            $(".novelview_h3").addClass("subtitle")
-            if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-            
-            $("form#datepicker_form").insertAfter(".novelview_h3.subtitle")
-            $(".novelview_h3.subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
-            $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-            $(".attention").parent().remove();
+                $(".novelview_h3").text("部分別 ユニークアクセス")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+                
+                $("form#datepicker_form").insertAfter(".novelview_h3.subtitle")
+                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
+                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+                $(".attention").parent().remove();
+            }
+            _chapterUnique();
         }
-        _chapterUnique();
 
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
         console.log('daypv')
