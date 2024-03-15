@@ -12,8 +12,8 @@ var enable_blog_autourl
 var enable_blog_comment_autourl
 var enable_profile_autourl
 
-chrome.storage.sync.get(["options"], (data) => {
-    var options = data.options
+chrome.storage.local.get(["options"], (data) => {
+    var options = defaultValue(data.options, {})
 
     enable_profile_detail = defaultValue(options.enable_mypage_profile_detail, true);
     enable_profile_userid = defaultValue(options.enable_mypage_profile_userid, true);

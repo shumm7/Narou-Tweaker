@@ -13,8 +13,8 @@ if(!debug){$('#debug').remove()}
 
 /* Restore Options */
 function restoreOptions(){
-  chrome.storage.sync.get(["options", "skins", "applied_skin", "applied_font"], function(data) {
-    var options = data.options
+  chrome.storage.local.get(["options", "skins", "applied_skin", "applied_font"], function(data) {
+    var options = defaultValue(data.options, {})
 
     /* Novel */
     check('#enable_novel_css', options.enable_novel_css, true);
@@ -101,6 +101,7 @@ function storeOptions(){
   saveOptions(options);
 }
 
+/* Import Options */
 function importOptions(options){
   if(options){
     if(options.options!=undefined){
@@ -120,6 +121,32 @@ function importOptions(options){
   }
 }
 
+/* Sync */
+function syncSetOptions(){
+  chrome.storage.local.get(["options", "skins", "applied_skin", "applied_font"], (data) => {
+    chrome.storage.sync.set({
+      options: data.options,
+      skins: data.skins,
+      applied_skin: data.applied_skin,
+      applied_font: data.applied_font
+    })
+  })
+}
+
+function syncGetOptions(){
+  chrome.storage.sync.get(["options", "skins", "applied_skin", "applied_font"], (data) => {
+    chrome.storage.local.set({
+      options: data.options,
+      skins: data.skins,
+      applied_skin: data.applied_skin,
+      applied_font: data.applied_font
+    })
+    restoreOptions();
+    restoreSkins();
+  })
+}
+
+
 /* Events */
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
@@ -137,8 +164,14 @@ $("#reset-skin").on("click", (e)=>{
 $("#reset-options").on("click", (e)=>{
   resetOptions()
 })
+$("#sync-set-options").on("click", (e)=>{
+  syncSetOptions()
+})
+$("#sync-get-options").on("click", (e)=>{
+  syncGetOptions()
+})
 $("#export-options").on("click", (e)=>{
-  chrome.storage.sync.get(["options", "skins", "skin"], function(data) {
+  chrome.storage.local.get(["options", "skins", "skin"], function(data) {
     saveJson(data, "narou-tweaker-options-" + getDateString() + ".json")
   })
 })

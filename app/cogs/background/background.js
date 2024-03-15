@@ -53,9 +53,9 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 
     }else if(message.action == "apply_skin"){
         chrome.tabs.query({lastFocusedWindow: true}, tabs => {
-            chrome.tabs.query({}, tabs => {
+            chrome.tabs.query({url: "https://ncode.syosetu.com/*"}, tabs => {
                 for(let i=0; i<tabs.length; i++){
-                    applyCSS(tabs[i], defaultValue(message.data.index, 0), defaultValue(message.data.font, defaultFont))
+                    applyCSS(tabs[i], message.data.index, message.data.font)
                     
                 };
             });

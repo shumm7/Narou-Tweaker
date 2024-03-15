@@ -2,14 +2,14 @@ import { defaultFont, defaultFontSettings } from "../../utils/data/default_font.
 import { defaultSkins } from "../../utils/data/default_skins.js";
 import { defaultValue, getCSSRule } from "../../utils/misc.js";
 
-export function applyCSS(tab, index, font){
+export function applyCSS(tab, _index, _font){
 
-    chrome.storage.sync.get(["skins", "applied_css", "options", "applied_font", "applied_skin"], (data) => {
+    chrome.storage.local.get(["skins", "applied_css", "options", "applied_font", "applied_skin"], (data) => {
         const getRule = getCSSRule
-        const skin_idx = defaultValue(index, defaultValue(data.applied_skin, 0))
+        const skin_idx = defaultValue(_index, defaultValue(data.applied_skin, 0))
         const skins = defaultValue(data.skins, defaultSkins)
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
-        const font = defaultValue(data.applied_font, defaultFont)
+        const font = defaultValue(_font, defaultValue(data.applied_font, defaultFont))
         var applied_css = defaultValue(data.applied_css, {})
         const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
         const custom_css = defaultValue(data.options.enable_novel_css, true)
@@ -189,6 +189,6 @@ export function applyCSS(tab, index, font){
         })
 
         applied_css[tab.id] = rule
-        chrome.storage.sync.set({"applied_css": applied_css});
+        chrome.storage.local.set({"applied_css": applied_css});
     });    
 }

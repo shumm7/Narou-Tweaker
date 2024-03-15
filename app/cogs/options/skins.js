@@ -131,7 +131,7 @@ export function saveSelectedSkin(){
     var skin = getSkinData()
     var selected = parseInt($("#skin").val())
   
-    chrome.storage.sync.get(["skins"], function(data) {
+    chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultValue)
       skin.name = generateNoDuplicateName(skins, skin.name, selected)
       if(skins[selected]!=undefined){
@@ -151,14 +151,14 @@ export function addSkinEditButtonEvent(){
         var skin = defaultValue(parseInt($("#skin").val()), 0)
         saveSkin(skin)
         applySkin(skin)
-        chrome.storage.sync.get(["skins"], function(data) {
+        chrome.storage.local.get(["skins"], function(data) {
           restoreSkins(defaultValue(data.skins, defaultSkins), skin);
         })
       });
 
     $("#skin-selection--buttons button[name='new']").on("click", (e)=>{ /* New Button */
     e.preventDefault()
-    chrome.storage.sync.get(["skins"], function(data) {
+    chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultSkins)
         
       var defaultSkin = defaultSkins[0]
@@ -182,7 +182,7 @@ export function addSkinEditButtonEvent(){
     e.preventDefault()
     var skin = getSkinData()
   
-    chrome.storage.sync.get(["skins"], function(data) {
+    chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultValue)
       skin.customizable = true
       skin.name = generateNoDuplicateName(skins, skin.name + " - コピー", -1)
@@ -199,7 +199,7 @@ export function addSkinEditButtonEvent(){
     e.preventDefault()
     var selected = parseInt($("#skin").val())
   
-    chrome.storage.sync.get(["skins"], function(data) {
+    chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultSkins)
   
       if(skins[selected].customizable==true){
@@ -217,7 +217,7 @@ export function addSkinEditButtonEvent(){
 
   $("#skin-option--export button[name='export']").on("click", (e)=>{ /* Export Button */
     e.preventDefault()
-    chrome.storage.sync.get(["skins", "applied_skin" ], function(data) {
+    chrome.storage.local.get(["skins", "applied_skin" ], function(data) {
         var skins = defaultValue(data.skins, defaultSkins)
         var skin = defaultValue(data.applied_skin, 0)
         saveJson(skins[skin], skins[skin].name + ".json")

@@ -3,11 +3,11 @@ import { defaultValue } from "./misc.js";
 
 /* Options*/
 export function saveOptions(options){
-    chrome.storage.sync.set({"options": options});
+    chrome.storage.local.set({"options": options});
 }
 
 export function saveOptionValue(key, value){
-    chrome.storage.sync.get(["options"], function(data) {
+    chrome.storage.local.get(["options"], function(data) {
         data.options[key] = value;
         saveOptions(data.options)
     })
@@ -15,13 +15,13 @@ export function saveOptionValue(key, value){
 
 /* Skins */
 export function saveSkins(skins){
-    chrome.storage.sync.set({"skins": skins});
+    chrome.storage.local.set({"skins": skins});
 }
 
 export function saveSkin(skin){
-    chrome.storage.sync.set({"applied_skin": skin});
+    chrome.storage.local.set({"applied_skin": skin});
 }
 
 export function saveFont(font){
-    chrome.storage.sync.set({"applied_font": font});
+    chrome.storage.local.set({"applied_font": font});
 }

@@ -271,7 +271,7 @@
 	font-size: 90%;
 }
 
-/* Font Size */
+/* Font Size / Line Height */
 .novel-option--font-number-change-button {
 	display: flex;
 	justify-content: center;
@@ -285,14 +285,16 @@
 .novel-option--font-number-change-button:hover{
 	background: #fafafa;
 }
-#novel-option--font-size {
+#novel-option--font-size,
+#novel-option--line-height {
 	display: flex;
 	flex-flow: row;
 	align-items: center;
 	justify-content: center;
 	margin-bottom: 1em;
 }
-#novel-option--font-size-input {
+#novel-option--font-size-input,
+#novel-option--line-height-input {
 	font-size: 110%;
 	border: 1px solid #ddd;
 	text-align: center;

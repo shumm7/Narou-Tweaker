@@ -2696,7 +2696,7 @@ readers do not read off random characters that represent icons */
 .fa-refresh::before {
   content: "\f021"; }
 
-.fa-sync::before {
+.fa-local::before {
   content: "\f021"; }
 
 .fa-fire-extinguisher::before {
@@ -5462,7 +5462,7 @@ readers do not read off random characters that represent icons */
 .fa-rotate::before {
   content: "\f2f1"; }
 
-.fa-sync-alt::before {
+.fa-local-alt::before {
   content: "\f2f1"; }
 
 .fa-spinner::before {

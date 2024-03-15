@@ -9,9 +9,9 @@ var header_left
 var header_right
 var header_disabled
 
-chrome.storage.sync.get(["options"], (data) => {
-    var options = data.options
-    
+chrome.storage.local.get(["options"], (data) => {
+    var options = defaultValue(data.options, {})
+
     header_mode = defaultValue(options.novel_header_mode, "scroll");
     novel_css = defaultValue(options.enable_novel_css, true)
     header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
@@ -245,9 +245,12 @@ function _optionModal(){
     }
 
     addTab(1, "表示")
-    addTab(2, "文章校正")
-    addTab(3, "統計")
     $("#novel-option .novel-option-tab-1").addClass("active")
     setOptionContentsDisplay()
+
+    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){
+        /*addTab(2, "文章校正")
+        addTab(3, "統計")*/
+    }
 
 }

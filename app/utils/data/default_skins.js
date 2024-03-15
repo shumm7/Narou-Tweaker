@@ -1,6 +1,6 @@
 export const defaultSkins = [
     {
-        "name": "ライトモード〔標準〕",
+        "name": "ライト〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
@@ -22,7 +22,7 @@ export const defaultSkins = [
         }
     },
     {
-        "name": "ダークモード〔標準〕",
+        "name": "ダーク〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
@@ -40,6 +40,28 @@ export const defaultSkins = [
             "sublist": {
                 "color": "rgba(255, 255, 255, 0.3)",
                 "hover": "rgba(152, 189, 235, 0.7)"
+            }
+        }
+    },
+    {
+        "name": "生成り〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": true,
+        "show": true,
+        "style": {
+            "link": {
+                "color_hover": "rgb(98, 84, 255)",
+                "color_link": "rgb(26, 13, 171)",
+                "color_visited": "#681da8"
+            },
+            "novel": {
+                "background": "#f7f6eb",
+                "background_second": "#eeeeee",
+                "color": "rgba(0, 0, 0, 0.87)"
+            },
+            "sublist": {
+                "color": "rgba(0, 0, 0, 0.3)",
+                "hover": "rgba(67, 51, 242, 0.7)"
             }
         }
     },

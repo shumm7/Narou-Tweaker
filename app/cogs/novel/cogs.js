@@ -80,7 +80,7 @@ function setSkinOptions(skins, selected){
 }
 
 export function setOptionContentsDisplay(){
-    chrome.storage.sync.get(["applied_skin", "applied_font", "skins"], (data) => {
+    chrome.storage.local.get(["applied_skin", "applied_font", "skins"], (data) => {
         var outer = $(".novel-option--content.novel-option-tab-1")
 
         /* Skin */
@@ -101,7 +101,7 @@ export function setOptionContentsDisplay(){
             var skin = parseInt($("#skin").val())
             saveSkin(skin)
             applySkin(skin)
-            chrome.storage.sync.get(["applied_skin", "skins"], function(data) {
+            chrome.storage.local.get(["applied_skin", "skins"], function(data) {
                 setSkinOptions(defaultValue(data.skins, defaultSkins), defaultValue(data.applied_skin, 0))
             })
         })
@@ -135,6 +135,12 @@ export function setOptionContentsDisplay(){
                         <div style="margin: 0 .5em;">%</div>
                     </div>
                 <div class='novel-option-subheader'>字間</div>
+                    <div id="novel-option--line-height">
+                        <div class="novel-option--font-number-change-button" id="novel-option--line-height-minus">-</div>
+                        <input name="novel-option--line-height-input" class="novel-option--textfield" type="text" id="novel-option--line-height-input" min="-100" max="200">
+                        <div class="novel-option--font-number-change-button" id="novel-option--line-height-plus">+</div>
+                        <div style="margin: 0 .5em;">%</div>
+                    </div>
             </div>
         `)
 
@@ -147,53 +153,108 @@ export function setOptionContentsDisplay(){
             const key = $(this).parent().prop("id")
             $(".novel-option--font-button.active").removeClass("active")
             $(this).parent().addClass("active")
-            font["font-family"] = key
-            saveFont(font)
-            applySkin(undefined, font)
+            chrome.storage.local.get(["applied_font"], (data) => {
+                var font = defaultValue(data.applied_font, defaultFont)
+                font["font-family"] = key
+                saveFont(font)
+                applySkin(undefined, font)
+            })
         })
 
         /* Font Size */
-        var size = defaultValue(font["font-size"], 0)
-        if(size>0) {size = "+"+size}
-        $("#novel-option--font-size-input").val(size)
-        function setFontSizeValue(size){
-            if(defaultFontSettings["font-size"] + size < 0){
-                size = -defaultFontSettings["font-size"]
-            }else if(defaultFontSettings["font-size"] + size > 300){
-                size = 300 - defaultFontSettings["font-size"]
+        var fSize = defaultValue(font["font-size"], 0)
+        if(fSize>0) {fSize = "+"+fSize}
+        $("#novel-option--font-size-input").val(fSize)
+
+        function setFontSizeValue(value){
+            if(defaultFontSettings["font-size"] + value < 50){
+                value = 50 - defaultFontSettings["font-size"]
+            }else if(defaultFontSettings["font-size"] + value > 300){
+                value = 300 - defaultFontSettings["font-size"]
             }
-            if(size>0){size = "+" + size}
-            $("#novel-option--font-size-input").val(size)
-            font["font-size"] = Number(size)
-            saveFont(font)
-            applySkin(undefined, font)
+            if(value>0){value = "+" + value}
+            $("#novel-option--font-size-input").val(value)
+            chrome.storage.local.get(["applied_font"], (data) => {
+                var font = defaultValue(data.applied_font, defaultFont)
+                font["font-size"] = Number(value)
+                saveFont(font)
+                applySkin(undefined, font)
+            });
         }
 
         $("#novel-option--font-size-minus").click(function(){
-            var size = Number($("#novel-option--font-size-input").val())
-            if(isNaN(size)){
-                size = 0
+            var value = Number($("#novel-option--font-size-input").val())
+            if(isNaN(value)){
+                value = 0
             }else{
-                size -= 10 - Math.abs(size % 10)
+                value -= 10 - Math.abs(value % 10)
             }
             
-            setFontSizeValue(size)
+            setFontSizeValue(value)
         })
         $("#novel-option--font-size-plus").click(function(){
-            var size = Number($("#novel-option--font-size-input").val())
-            if(isNaN(size)){
-                size = 0
+            var value = Number($("#novel-option--font-size-input").val())
+            if(isNaN(value)){
+                value = 0
             }else{
-                size += 10 - Math.abs(size % 10)
+                value += 10 - Math.abs(value % 10)
             }
-            setFontSizeValue(size)
+            setFontSizeValue(value)
         })
         $("#novel-option--font-size-input").change(function(){
-            var size = Number($("#novel-option--font-size-input").val())
-            if(isNaN(size)){
-                size = 0
+            var value = Number($("#novel-option--font-size-input").val())
+            if(isNaN(value)){
+                value = 0
             }
-            setFontSizeValue(size)
+            setFontSizeValue(value)
+        })
+
+        /* Line Height */
+        var lHeight = defaultValue(font["line-height"], 0)
+        if(lHeight>0) {lHeight = "+"+lHeight}
+        $("#novel-option--line-height-input").val(lHeight)
+
+        function setLineHeightValue(value){
+            if(defaultFontSettings["line-height"] + value < 50){
+                value = 50 - defaultFontSettings["line-height"]
+            }else if(defaultFontSettings["line-height"] + value > 300){
+                value = 300 - defaultFontSettings["line-height"]
+            }
+            if(value>0){value = "+" + value}
+            $("#novel-option--line-height-input").val(value)
+            chrome.storage.local.get(["applied_font"], (data) => {
+                var font = defaultValue(data.applied_font, defaultFont)
+                font["line-height"] = Number(value)
+                saveFont(font)
+                applySkin(undefined, font)
+            })
+        }
+
+        $("#novel-option--line-height-minus").click(function(){
+            var value = Number($("#novel-option--line-height-input").val())
+            if(isNaN(value)){
+                value = 0
+            }else{
+                value -= 10 - Math.abs(value % 10)
+            }
+            
+            setLineHeightValue(value)
+        })
+        $("#novel-option--line-height-plus").click(function(){
+            var value = Number($("#novel-option--line-height-input").val())
+            if(isNaN(value)){
+                value = 0
+            }else{
+                value += 10 - Math.abs(value % 10)
+            }
+            setLineHeightValue(value)
+        })
+        $("#novel-option--line-height-input").change(function(){
+            var value = Number($("#novel-option--line-height-input").val())
+            if(isNaN(value)){
+                value = 0
+            }
+            setLineHeightValue(value)
         })
     })
 }
