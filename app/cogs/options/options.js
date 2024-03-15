@@ -2,9 +2,10 @@ import { defaultSkins } from "../../utils/data/default_skins.js";
 import {check, defaultValue, saveJson} from "../../utils/misc.js"
 import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
 import { debug_log, debug_logObject } from "./debug.js";
-import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent } from "./skins.js";
+import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
 import { restoreHeaderIconList, getHeaderIconList } from "./header.js";
 import { getDateString } from "../../utils/text.js";
+import { defaultFont } from "../../utils/data/default_font.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
@@ -18,8 +19,10 @@ function restoreOptions(){
 
     /* Novel */
     check('#enable_novel_css', options.enable_novel_css, true);
+    check('#enable_novel_header', options.enable_novel_header, true);
+    check('#enable_novel_header_scroll_hidden', options.enable_novel_header_scroll_hidden, false);
     check('#enable_novel_expand_skin', options.enable_novel_expand_skin, true);
-    $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"))
+    $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"));
 
     /* Header */
     restoreHeaderIconList(defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"]), "left")
@@ -55,6 +58,7 @@ function restoreOptions(){
 
     /* Skins */
     restoreSkins(defaultValue(data.skins, defaultSkins), defaultValue(data.applied_skin, 0))
+    restoreFont(defaultValue(data.applied_font, defaultFont))
   });
 }
 
@@ -69,8 +73,10 @@ function storeOptions(){
   var options = {
     /* Novel */
     enable_novel_css: $("#enable_novel_css").prop('checked'),
-    enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
+    enable_novel_header: $("#enable_novel_header").prop('checked'),
+    enable_novel_header_scroll_hidden: $("#enable_novel_header_scroll_hidden").prop('checked'),
     novel_header_mode: $("#novel_header_mode").val(),
+    enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
 
     novel_header_icon_left: getHeaderIconList("left"),
     novel_header_icon_right: getHeaderIconList("right"),
@@ -158,6 +164,7 @@ $(".options").each(function() {
 
 /* Skin Change */
 addSkinEditButtonEvent()
+addFontEditButtonEvent()
 $("#reset-skin").on("click", (e)=>{
   resetSkins();
 })

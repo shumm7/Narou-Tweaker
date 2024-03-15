@@ -4,13 +4,15 @@ import { saveSkin, saveFont } from "../../utils/option.js";
 import { defaultFont, defaultFontSettings } from "../../utils/data/default_font.js";
 
 /* Header */
-export function changeHeaderScrollMode(header_mode, elm){
+export function changeHeaderScrollMode(header_mode, elm, hidden_begin){
     if(!$(elm).length){return}
 
     $(elm).removeClass("header-mode--fixed")
     $(elm).removeClass("header-mode--absolute")
     $(elm).removeClass("header-mode--scroll")
     $(elm).css({"position": ""})
+    $("#novelnavi_right").css({"position": ""})
+    $("#novelnavi_right > *").css({"position": ""})
 
     if(header_mode=="fixed"){
         $(elm).addClass("header-mode--fixed")
@@ -18,7 +20,9 @@ export function changeHeaderScrollMode(header_mode, elm){
         $(elm).addClass("header-mode--absolute")
     }else if(header_mode=="scroll"){
         $(elm).addClass("header-mode--scroll")
-        $(elm + '.header-mode--scroll').addClass('hide');
+        if(hidden_begin){
+            $(elm + '.header-mode--scroll').addClass('hide');
+        }
     }
 
     var pos = 0;

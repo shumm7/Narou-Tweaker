@@ -319,3 +319,63 @@ input[type=file] {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+/* Font Button */
+#font-family-select {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+}
+.font-button {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.font-button-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	border: 1px solid #ddd;
+	background: #fff;
+	margin: .5em 1em;
+	cursor: pointer;
+	font-size: 150%;
+}
+.font-button-box:hover {
+	background: #fafafa;
+}
+.font-button.active .font-button-box{
+	border: 1px solid var(--kasasagi-blue);
+}
+.font-number-change-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ddd;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.font-number-change-button:hover{
+	background: #fafafa;
+}
+#font-size,
+#line-height {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+#font-size-input,
+#line-height-input {
+	font-size: 110%;
+	border: 1px solid #ddd;
+	text-align: center;
+	height: 30px;
+	padding: 0;
+}

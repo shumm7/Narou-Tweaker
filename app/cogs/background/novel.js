@@ -12,7 +12,6 @@ export function applyCSS(tab, _index, _font){
         const font = defaultValue(_font, defaultValue(data.applied_font, defaultFont))
         var applied_css = defaultValue(data.applied_css, {})
         const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
-        const custom_css = defaultValue(data.options.enable_novel_css, true)
 
         if (applied_css[tab.id]!=undefined){
             chrome.scripting.removeCSS({

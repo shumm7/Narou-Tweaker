@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <base target="_blank">
+<link rel="stylesheet" href="../../common.css">
 <link rel="stylesheet" href="options.css">
 <link rel="stylesheet" href="../../libs/font-awesome/css/all.css">
 <script src="../../libs/jquery-3.7.1.min.js"></script>
@@ -31,20 +32,29 @@
 		</p>
 
 		<div class="section">
-			<div class="section-header">ヘッダ</div>
+			<div class="section-header" style="margin-bottom: 1em;">ヘッダ</div>
+			<p>
+				<input type="checkbox" id="enable_novel_header" class="options toggle" name="enable_novel_header">
+				<label for="enable_novel_header" class="toggle">モダンなヘッダ</label>
+			</p>
 			<p>
 				<div class="dropdown">
 					<select id="novel_header_mode" class="options" name="novel_header_mode">
 						<option value="absolute">上部</option>
 						<option value="fixed">追従</option>
 						<option value="scroll">スクロール</option>
-					</select>	
+					</select>
 				</div>
-				<label for="novel_header_mode">追従モード</label>
+				<label for="novel_header_mode">ヘッダの追従モード</label>
 			</p>
-			<div class="section">
-				<p><span class="section-subheader">アイコンの配置</span></p>
-				<p>アイコンの配置を指定します。この設定は「モダンなページレイアウト」がオンの時にのみ作用します。</p>
+			<p>
+				<input type="checkbox" id="enable_novel_header_scroll_hidden" class="options toggle" name="enable_novel_header_scroll_hidden">
+				<label for="enable_novel_header_scroll_hidden" class="toggle">ヘッダが「スクロール」のとき、初めはヘッダを非表示にする</label>
+			</p>
+			<div style="margin-top: 2em;">
+				<p>
+					<div class="section-subheader">アイコンの配置</div>
+					アイコンの配置を指定します。この設定は「モダンなヘッダ」がオンの時にのみ作用します。</p>
 				<p>
 					<div id="novel_header_icon" style="display: flex; flex-flow: row;">
 						<div class="draggable_area_outer">
@@ -64,9 +74,57 @@
 			</div>
 		</div>
 
+		
 		<div class="section">
-			<div class="section-header">ページスキン</div>
-			<p style="margin-top: 1em;">
+			<div class="section-header" style="margin-bottom: 1em;">本文</div>
+			<p>
+				<div class="section-subheader">フォント</div>
+				<div id="font-family" style="margin-bottom: 1em;">
+					<div id="font-family-select" style="margin-bottom: 1em;">
+						<div class='font-button' id='gothic'>
+							<div class='font-button-box'>あ亜A</div>
+							<div class='font-button-description'>ゴシック</div>
+						</div>
+						<div class='font-button' id='serif'>
+							<div class='font-button-box'>あ亜A</div>
+							<div class='font-button-description'>明朝体</div>
+						</div>
+						<div class='font-button' id='custom'>
+							<div class='font-button-box'>あ亜A</div>
+							<div class='font-button-description'>カスタム</div>
+						</div>
+					</div>
+					<div id="font-family-custom">
+						<div class="textfield">
+							<label for="#custom-font-family">カスタムフォント</label>
+							<input name="custom-font-family" type="text" id="custom-font-family">
+						</div>
+					</div>
+				</div>
+			</p>
+			<p>
+				<div class="section-subheader">サイズ</div>
+				<div id="font-size">
+					<div class="font-number-change-button" id="font-size-minus">-</div>
+					<input name="font-size-input" type="text" id="font-size-input">
+					<div class="font-number-change-button" id="font-size-plus">+</div>
+					<div style="margin: 0 .5em;">%</div>
+				</div>
+			</p>
+			<p>
+				<div class="section-subheader">字間</div>
+				<div id="line-height">
+					<div class="font-number-change-button" id="line-height-minus">-</div>
+					<input name="line-height-input" type="text" id="line-height-input" min="-100" max="200">
+					<div class="font-number-change-button" id="line-height-plus">+</div>
+					<div style="margin: 0 .5em;">%</div>
+				</div>
+			</p>
+		</div>
+
+		<div class="section">
+			<div class="section-header" style="margin-bottom: 1em;">スキン</div>
+			<p>
 				<input type="checkbox" id="enable_novel_expand_skin" class="options toggle" name="enable_novel_expand_skin">
 				<label for="enable_novel_expand_skin" class="toggle">スキンの適用範囲を拡大（推奨）</label>
 			</p>

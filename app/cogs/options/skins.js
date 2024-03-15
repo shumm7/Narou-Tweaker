@@ -1,14 +1,17 @@
 import { defaultValue, getCSSRule, saveJson } from "../../utils/misc.js";
 import { defaultSkins } from "../../utils/data/default_skins.js";
+import { defaultFont, defaultFontSettings } from "../../utils/data/default_font.js";
 import { debug_log, debug_logObject } from "./debug.js";
-import { saveSkin, saveSkins } from "../../utils/option.js";
+import { saveSkin, saveSkins, saveFont } from "../../utils/option.js";
 import { applySkin } from "../novel/cogs.js";
 
 export function resetSkins(){
     saveSkins(defaultSkins)
     saveSkin(0)
+    saveFont(defaultFont)
     restoreSkins(defaultSkins, 0)
-    applySkin(0);
+    restoreFont(defaultFont)
+    applySkin(0, defaultFont);
 }
 
 export function checkSkinNameDuplicate(skins, name, selected){
@@ -228,4 +231,141 @@ export function addSkinEditButtonEvent(){
     showSkinPreview()
     saveSelectedSkin()
   });
+}
+
+
+export function restoreFont(font){
+  $(".font-button.active").removeClass("active")
+  $(".font-button#"+defaultValue(font["font-family"], "gothic")).addClass("active")
+
+  $("#custom-font-family").val(defaultValue(font["custom-font-family"], defaultFont["custom-font-family"]))
+  
+  var fSize = defaultValue(font["font-size"], 0)
+  if(fSize>0) {fSize = "+"+fSize}
+  $("#font-size-input").val(fSize)
+
+  var lHeight = defaultValue(font["line-height"], 0)
+  if(lHeight>0) {lHeight = "+"+lHeight}
+  $("#line-height-input").val(lHeight)
+
+  showFontPreview(font)
+}
+
+export function showFontPreview(font){
+  $(".font-button#custom").css("font-family", defaultValue(font["custom-font-family"], defaultFont["custom-font-family"]))
+}
+
+export function addFontEditButtonEvent(){
+  $(".font-button#gothic").css("font-family", defaultFontSettings["font-family"].gothic)
+  $(".font-button#serif").css("font-family", defaultFontSettings["font-family"].serif)
+
+  $(".font-button-box").click(function(){
+    const key = $(this).parent().prop("id")
+    $(".font-button.active").removeClass("active")
+    $(this).parent().addClass("active")
+    chrome.storage.local.get(["applied_font"], (data) => {
+        var font = defaultValue(data.applied_font, defaultFont)
+        font["font-family"] = key
+        saveFont(font)
+        applySkin(undefined, font)
+        showFontPreview(font)
+    })
+  })
+
+  $("#custom-font-family").change(function(){
+    const key = $(this).val()
+    chrome.storage.local.get(["applied_font"], (data) => {
+      var font = defaultValue(data.applied_font, defaultFont)
+      font["custom-font-family"] = key
+      saveFont(font)
+      applySkin(undefined, font)
+      showFontPreview(font)
+    })
+  })
+
+  function setFontSizeValue(value){
+    if(defaultFontSettings["font-size"] + value < 50){
+        value = 50 - defaultFontSettings["font-size"]
+    }else if(defaultFontSettings["font-size"] + value > 300){
+        value = 300 - defaultFontSettings["font-size"]
+    }
+    if(value>0){value = "+" + value}
+    $("#font-size-input").val(value)
+    chrome.storage.local.get(["applied_font"], (data) => {
+        var font = defaultValue(data.applied_font, defaultFont)
+        font["font-size"] = Number(value)
+        saveFont(font)
+        applySkin(undefined, font)
+    });
+  }
+
+  $("#font-size-minus").click(function(){
+      var value = Number($("#font-size-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+          value -= 10 - Math.abs(value % 10)
+      }
+      
+      setFontSizeValue(value)
+  })
+  $("#font-size-plus").click(function(){
+      var value = Number($("#font-size-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+          value += 10 - Math.abs(value % 10)
+      }
+      setFontSizeValue(value)
+  })
+  $("#font-size-input").change(function(){
+      var value = Number($("#font-size-input").val())
+      if(isNaN(value)){
+          value = 0
+      }
+      setFontSizeValue(value)
+  })
+
+  function setLineHeightValue(value){
+    if(defaultFontSettings["line-height"] + value < 50){
+        value = 50 - defaultFontSettings["line-height"]
+    }else if(defaultFontSettings["line-height"] + value > 300){
+        value = 300 - defaultFontSettings["line-height"]
+    }
+    if(value>0){value = "+" + value}
+    $("#line-height-input").val(value)
+    chrome.storage.local.get(["applied_font"], (data) => {
+        var font = defaultValue(data.applied_font, defaultFont)
+        font["line-height"] = Number(value)
+        saveFont(font)
+        applySkin(undefined, font)
+    })
+  }
+
+  $("#line-height-minus").click(function(){
+      var value = Number($("#line-height-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+          value -= 10 - Math.abs(value % 10)
+      }
+      
+      setLineHeightValue(value)
+  })
+  $("#line-height-plus").click(function(){
+      var value = Number($("#line-height-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+          value += 10 - Math.abs(value % 10)
+      }
+      setLineHeightValue(value)
+  })
+  $("#line-height-input").change(function(){
+      var value = Number($("#line-height-input").val())
+      if(isNaN(value)){
+          value = 0
+      }
+      setLineHeightValue(value)
+  })
 }

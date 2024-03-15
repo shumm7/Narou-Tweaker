@@ -5,6 +5,8 @@ import { ncodeToIndex } from "../../utils/text.js";
 
 var header_mode
 var novel_css
+var novel_header
+var novel_header_scroll_hidden
 var header_left
 var header_right
 var header_disabled
@@ -14,26 +16,43 @@ chrome.storage.local.get(["options"], (data) => {
 
     header_mode = defaultValue(options.novel_header_mode, "scroll");
     novel_css = defaultValue(options.enable_novel_css, true)
+    novel_header = defaultValue(options.enable_novel_header, true)
+    novel_header_scroll_hidden = defaultValue(options.enable_novel_header_scroll_hidden, false)
     header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
     header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
     header_disabled = defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"])
-
-    $("#novel_header #novelnavi_right").remove()
     
-    if(novel_css){
+    if(novel_header){
         $("body").addClass("narou-tweaker")
+        $("#novelnavi_right").remove()
         /* Header */
         _header(header_left, header_right, header_disabled)
-
-        /* Option Menu */
-        _optionModal();
         
         /* Header */
-        changeHeaderScrollMode(header_mode, "#novel_header_right");
+        changeHeaderScrollMode(header_mode, "#novel_header_right", novel_header_scroll_hidden);
+    }else{
+        $("#novelnavi_right").empty()
+        $("#novelnavi_right").append(`<div class="option" id="menu_on" style="position: fixed;">設定</div>`)
+        $("#novelnavi_right .option").on("click", function(){
+            if($("#novel-option").hasClass("show")){
+                $("#novel-option").removeClass("show")
+            }else{
+                $("#novel-option").addClass("show")
+            }
+            if($("#novel-option-background").hasClass("show")){
+                $("#novel-option-background").removeClass("show")
+            }else{
+                $("#novel-option-background").addClass("show")
+            }
+        })
     }
 
+    
+    /* Option Menu */
+    _optionModal();
+
     /* Header */
-    changeHeaderScrollMode(header_mode, "#novel_header");
+    changeHeaderScrollMode(header_mode, "#novel_header", novel_header_scroll_hidden);
 });
 
 function _header(left, right, disabled){

@@ -9,7 +9,7 @@ export const defaultFontSettings = {
 }
 
 export const defaultFont = {
-    "custom-font-family": defaultFontSettings["font-family"].gothic,
+    "custom-font-family": `"Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
     "font-family": "gothic",
     "font-size": 0,
     "line-height": 0,

@@ -92,21 +92,21 @@
 
 /* Header */
 #novel_header.header-mode--absolute,
-#novel_header.header-mode--absolute #novelnavi_right > * 
 #novel_header_right.header-mode--absolute,
-#novel_header_right.header-mode--absolute #novelnavi_right > * {
+.header-mode--absolute #novelnavi_right,
+.header-mode--absolute #novelnavi_right > * {
     position: absolute !important;
 }
 #novel_header.header-mode--scroll,
-#novel_header.header-mode--scroll #novelnavi_right > * ,
 #novel_header_right.header-mode--scroll,
-#novel_header_right.header-mode--scroll #novelnavi_right > * {
+.header-mode--scroll #novelnavi_right, 
+.header-mode--scroll #novelnavi_right > * {
     position: fixed !important;
 }
 #novel_header.header-mode--fixed,
-#novel_header.header-mode--fixed #novelnavi_right > *,
 #novel_header_right.header-mode--fixed,
-#novel_header_right.header-mode--fixed #novelnavi_right > *{
+.header-mode--fixed #novelnavi_right,
+.header-mode--fixed #novelnavi_right > *{
     position: fixed !important;
 }
 #novel_header.header-mode--scroll,

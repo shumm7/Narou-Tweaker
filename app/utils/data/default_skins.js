@@ -46,7 +46,7 @@ export const defaultSkins = [
     {
         "name": "生成り〔標準〕",
         "description": "Narou Tweaker オリジナル",
-        "customizable": true,
+        "customizable": false,
         "show": true,
         "style": {
             "link": {
