@@ -19,5 +19,9 @@ export function saveSkins(skins){
 }
 
 export function saveSkin(skin){
-    saveOptionValue("applied_skin", skin)
+    chrome.storage.sync.set({"applied_skin": skin});
+}
+
+export function saveFont(font){
+    chrome.storage.sync.set({"applied_font": font});
 }

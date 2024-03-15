@@ -13,7 +13,7 @@ if(!debug){$('#debug').remove()}
 
 /* Restore Options */
 function restoreOptions(){
-  chrome.storage.sync.get(["options", "skins"], function(data) {
+  chrome.storage.sync.get(["options", "skins", "applied_skin", "applied_font"], function(data) {
     var options = data.options
 
     /* Novel */
@@ -54,7 +54,7 @@ function restoreOptions(){
     
 
     /* Skins */
-    restoreSkins(defaultValue(data.skins, defaultSkins), defaultValue(data.options.applied_skin, 0))
+    restoreSkins(defaultValue(data.skins, defaultSkins), defaultValue(data.applied_skin, 0))
   });
 }
 
@@ -71,7 +71,6 @@ function storeOptions(){
     enable_novel_css: $("#enable_novel_css").prop('checked'),
     enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
     novel_header_mode: $("#novel_header_mode").val(),
-    applied_skin: parseInt($("#skin").val()),
 
     novel_header_icon_left: getHeaderIconList("left"),
     novel_header_icon_right: getHeaderIconList("right"),
@@ -107,11 +106,14 @@ function importOptions(options){
     if(options.options!=undefined){
       saveOptions(options.options)
     }
-    if(options.skin!=undefined){
-      saveSkin(options.skin)
+    if(options.applied_skin!=undefined){
+      saveSkin(options.applied_skin)
     }
     if(options.skins!=undefined){
       saveSkins(options.skins)
+    }
+    if(options.applied_font!=undefined){
+      saveFont(options.applied_font)
     }
     restoreOptions();
     restoreSkins();

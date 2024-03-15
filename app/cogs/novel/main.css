@@ -114,9 +114,12 @@
     transition: .2s;
 }
 #novel_header.hide.header-mode--scroll{
+    transform:translateY(-60px);
+}
+.narou-tweaker #novel_header.hide.header-mode--scroll{
     transform:translateX(-80px);
 }
-#novel_header_right.hide.header-mode--scroll{
+.narou-tweaker #novel_header_right.hide.header-mode--scroll{
     transform:translateX(80px);
 }
 
@@ -135,17 +138,17 @@
 }
 #novel-option {
     top: 0;
-    right: calc(-250px - env(safe-area-inset-left) - 50px);
+    right: calc(-300px - env(safe-area-inset-left) - 50px);
     height: 100%;
     position: fixed;
-    width: calc(250px + env(safe-area-inset-left));
+    width: calc(300px + env(safe-area-inset-left));
     background: #efefef;
     z-index: 50;
     filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
     transition: .3s;
 }
 #novel-option.show {
-    transform: translateX(calc(-250px - env(safe-area-inset-left) - 50px));
+    transform: translateX(calc(-300px - env(safe-area-inset-left) - 50px));
 }
 #novel-option--header {
     height: 70px;
@@ -195,17 +198,104 @@
 #novel-option--header ul li button span:hover {
 	border-top-color: var(--kasasagi-blue);
 }
+#novel-option--contents {
+	padding: .5em;
+}
 .novel-option--content {
 	display: none;
+	padding: .5em
+}
+.novel-option--content-inner {
+	margin-bottom: 2em;
 }
 .novel-option--content.active {
 	display: block;
 }
-.novel-option--content {
-	padding: .5em
-}
 .novel-option-header {
 	font-weight: bold;
-    font-size: 120%;
+    font-size: 140%;
     margin: .3em;
+}
+.novel-option-subheader {
+	font-weight: bold;
+    margin: .3em;
+}
+.novel-option--textfield {
+	padding: .3em;
+    font-size: inherit;
+    margin: .1em;
+}
+
+/* Skin */
+#novel-option--skin-description {
+	margin-top: .5em;
+	margin-left: .3em;
+}
+#novel-option--skin-description:before {
+	content: "選択中";
+	font-weight: bold;
+	margin-right: .5em;
+}
+
+/* Font Family */
+#novel-option--font-family {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+.novel-option--font-button {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.novel-option--font-button-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	border: 1px solid #ddd;
+	background: #fff;
+	margin: .5em 1em;
+	cursor: pointer;
+}
+.novel-option--font-button-box:hover {
+	background: #fafafa;
+}
+.novel-option--font-button.active .novel-option--font-button-box{
+	border: 1px solid var(--kasasagi-blue);
+}
+.novel-option--font-button-description {
+	font-size: 90%;
+}
+
+/* Font Size */
+.novel-option--font-number-change-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ddd;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.novel-option--font-number-change-button:hover{
+	background: #fafafa;
+}
+#novel-option--font-size {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+#novel-option--font-size-input {
+	font-size: 110%;
+	border: 1px solid #ddd;
+	text-align: center;
+	height: 30px;
+	padding: 0;
 }

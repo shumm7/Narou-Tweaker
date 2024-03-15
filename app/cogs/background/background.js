@@ -1,3 +1,4 @@
+import { defaultFont } from "../../utils/data/default_font.js";
 import { defaultValue } from "../../utils/misc.js";
 import { applyCSS } from "./novel.js";
 
@@ -51,12 +52,13 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     }else if(message.action == "file_open"){
 
     }else if(message.action == "apply_skin"){
-        chrome.tabs.query({}, tabs => {
-            for(let i=0; i<tabs.length; i++){
-                if (tabs[i].url.match("https://ncode.syosetu.com/.*")){
-                    applyCSS(tabs[i], defaultValue(message.data.index, 0))
+        chrome.tabs.query({lastFocusedWindow: true}, tabs => {
+            chrome.tabs.query({}, tabs => {
+                for(let i=0; i<tabs.length; i++){
+                    applyCSS(tabs[i], defaultValue(message.data.index, 0), defaultValue(message.data.font, defaultFont))
+                    
                 };
-            }
+            });
         });
     }
     return true;

@@ -11,12 +11,15 @@ var header_disabled
 
 chrome.storage.sync.get(["options"], (data) => {
     var options = data.options
+    
     header_mode = defaultValue(options.novel_header_mode, "scroll");
     novel_css = defaultValue(options.enable_novel_css, true)
     header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
     header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
     header_disabled = defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"])
 
+    $("#novel_header #novelnavi_right").remove()
+    
     if(novel_css){
         $("body").addClass("narou-tweaker")
         /* Header */
@@ -45,7 +48,6 @@ function _header(left, right, disabled){
     var text
     var elm
 
-    $("#novel_header #novelnavi_right").remove()
     $("#pageBottom").remove()
     $("#pageTop").remove()
     $(".wrap_menu_novelview_after").empty()
@@ -136,7 +138,7 @@ function _header(left, right, disabled){
     }
 
     elm = $("#novel_header li.bookmark")
-    if(location.pathname.match("/"+ncode+"[|/]") && !elm.length){
+    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/) && !elm.length){
         elm = $(".novellingindex_bookmarker_no")
         if(elm.length){
             var link = elm.find("a").prop("href")
@@ -242,10 +244,10 @@ function _optionModal(){
         })
     }
 
-    addTab(1, "表示設定")
-    addTab(2, "その他")
+    addTab(1, "表示")
+    addTab(2, "文章校正")
+    addTab(3, "統計")
     $("#novel-option .novel-option-tab-1").addClass("active")
     setOptionContentsDisplay()
-    $(".novel-option--content.novel-option-tab-2").text("2")
 
 }

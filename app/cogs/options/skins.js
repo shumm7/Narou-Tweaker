@@ -151,7 +151,7 @@ export function addSkinEditButtonEvent(){
         var skin = defaultValue(parseInt($("#skin").val()), 0)
         saveSkin(skin)
         applySkin(skin)
-        chrome.storage.sync.get(["options", "skins"], function(data) {
+        chrome.storage.sync.get(["skins"], function(data) {
           restoreSkins(defaultValue(data.skins, defaultSkins), skin);
         })
       });
@@ -217,9 +217,9 @@ export function addSkinEditButtonEvent(){
 
   $("#skin-option--export button[name='export']").on("click", (e)=>{ /* Export Button */
     e.preventDefault()
-    chrome.storage.sync.get(["skins", "options" ], function(data) {
+    chrome.storage.sync.get(["skins", "applied_skin" ], function(data) {
         var skins = defaultValue(data.skins, defaultSkins)
-        var skin = defaultValue(data.options.applied_skin, 0)
+        var skin = defaultValue(data.applied_skin, 0)
         saveJson(skins[skin], skins[skin].name + ".json")
     });
   })

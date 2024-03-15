@@ -1,30 +1,35 @@
+import { defaultFont, defaultFontSettings } from "../../utils/data/default_font.js";
 import { defaultSkins } from "../../utils/data/default_skins.js";
 import { defaultValue, getCSSRule } from "../../utils/misc.js";
 
-export function applyCSS(tab, index){
+export function applyCSS(tab, index, font){
 
-    chrome.storage.sync.get(["skins", "applied_skin", "options"], (data) => {
+    chrome.storage.sync.get(["skins", "applied_css", "options", "applied_font", "applied_skin"], (data) => {
         const getRule = getCSSRule
-        const skin_idx = defaultValue(index, defaultValue(data.options.applied_skin, 0))
+        const skin_idx = defaultValue(index, defaultValue(data.applied_skin, 0))
         const skins = defaultValue(data.skins, defaultSkins)
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
-        var applied_skin = data.applied_skin
+        const font = defaultValue(data.applied_font, defaultFont)
+        var applied_css = defaultValue(data.applied_css, {})
         const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
         const custom_css = defaultValue(data.options.enable_novel_css, true)
 
-        if (applied_skin[tab.id]!=undefined){
+        if (applied_css[tab.id]!=undefined){
             chrome.scripting.removeCSS({
-                css: applied_skin[tab.id],
+                css: applied_css[tab.id],
                 target: {
                     tabId: tab.id,
                 }
             })
         }else{
-            applied_skin = {}
+            applied_css = {}
         }
 
         const s = skin.style
+        const f = font
         var rule = ""
+
+        /* Skin */
         rule += getRule("body", [
             {"background-color": defaultValue(s.novel.background, "#fff")},
             {"background-image": "none"}
@@ -54,6 +59,7 @@ export function applyCSS(tab, index){
             {"border-color": defaultValue(s.sublist.hover, "#9df")}
         ])
 
+        /* Expanded Skin */
         if(expand_skin){
             /*if(tab.url.match(/https:\/\/ncode\.syosetu\.com\/n\d{4}[a-z]{2}\/\d+\//)){ /* 本文ページ */
             /* Title */
@@ -137,17 +143,42 @@ export function applyCSS(tab, index){
         }
         
         /* Custom CSS */
-        rule += getRule("#novel_header ul li a, #novel_header ul li a:link, #novel_header ul li a:visited, #novel_header ul li form", [
+        rule += getRule(".narou-tweaker #novel_header ul li a, .narou-tweaker #novel_header ul li a:link, .narou-tweaker #novel_header ul li a:visited, .narou-tweaker #novel_header ul li form", [
             {"color": defaultValue(s.sublist.color, "#444")},
         ])
-        rule += getRule("#novel_header ul li a:hover, #novel_header ul li a:active, #novel_header ul li form:hover, #novel_header ul li form:active", [
+        rule += getRule(".narou-tweaker #novel_header ul li a:hover, .narou-tweaker #novel_header ul li a:active, .narou-tweaker #novel_header ul li form:hover, .narou-tweaker #novel_header ul li form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
-        rule += getRule("#novel_header_right ul li a, #novel_header_right ul li a:link, #novel_header_right ul li a:visited, #novel_header_right ul li form", [
+        rule += getRule(".narou-tweaker #novel_header_right ul li a, .narou-tweaker #novel_header_right ul li a:link, .narou-tweaker #novel_header_right ul li a:visited, .narou-tweaker #novel_header_right ul li form", [
             {"color": defaultValue(s.sublist.color, "#444")},
         ])
-        rule += getRule("#novel_header_right ul li a:hover, #novel_header_right ul li a:active, #novel_header_right ul li form:hover, #novel_header_right ul li form:active", [
+        rule += getRule(".narou-tweaker #novel_header_right ul li a:hover, .narou-tweaker #novel_header_right ul li a:active, .narou-tweaker #novel_header_right ul li form:hover, .narou-tweaker #novel_header_right ul li form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
+        ])
+
+        /* Font */
+        var font_family
+        if(f["font-family"]=="custom"){
+            font_family = defaultValue(f["custom-font-family"], defaultFont["custom-font-family"])
+        }else{
+            font_family = defaultFontSettings["font-family"][defaultValue(f["font-family"], "gothic")]
+        }   
+        rule += getRule("#novel_honbun", [
+            {"line-height": defaultValue(Number(f["line-height"]), 0) + defaultFontSettings["line-height"] + "%"},
+            {"font-size": defaultValue(Number(f["font-size"]), 0) + defaultFontSettings["font-size"] + "%"},
+        ])
+        rule += getRule("body#container, #novel_color", [
+            {"font-family": font_family},
+            {"text-rendering": defaultValue(f["text-rendering"], defaultFontSettings["text-rendering"])}
+        ])
+        rule += getRule(".novel-option--font-button#gothic", [
+            {"font-family": defaultFontSettings["font-family"].gothic},
+        ])
+        rule += getRule(".novel-option--font-button#serif", [
+            {"font-family": defaultFontSettings["font-family"].serif},
+        ])
+        rule += getRule(".novel-option--font-button#custom", [
+            {"font-family": defaultValue(f["custom-font-family"], defaultFont["custom-font-family"])},
         ])
 
         chrome.scripting.insertCSS({
@@ -157,7 +188,7 @@ export function applyCSS(tab, index){
             }
         })
 
-        applied_skin[tab.id] = rule
-        chrome.storage.sync.set({"applied_skin": applied_skin});
+        applied_css[tab.id] = rule
+        chrome.storage.sync.set({"applied_css": applied_css});
     });    
 }
