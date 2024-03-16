@@ -111,7 +111,7 @@ chrome.storage.local.get(["options"], (data) => {
         var m = $(".novelview_h3")
         if(m.length){
             if(enable_css){
-                var title = m.text().match("『(.*)』 部分別 アクセス解析")[1]
+                var title = m.text().match("『(.*)』 エピソード別 アクセス解析")[1]
 
                 $(".novelview_h3").text("部分別 ユニークアクセス")
                 $(".novelview_h3").addClass("subtitle")
@@ -539,7 +539,7 @@ function _chapterUnique(){
     var chapterpv = [];
     $('.chapter-graph-list__item').each(function() {
         var text = $(this).text().trim();
-        var res = text.match(/第(\d*)部分:(\d*)人/);
+        var res = text.match(/ep.(\d*): (\d*)人/);
         if(res!=null){
             chapterpv[res[1]] = res[2]
         }
@@ -619,7 +619,7 @@ function _chapterUnique(){
                                     return p.dataset.label + ": " + p.raw + unit;
                                 },
                                 title: function(p) {
-                                    return "第" + p[0].label + "部分";
+                                    return "ep." + p[0].label;
                                 }
                             }
                         }
@@ -717,7 +717,7 @@ function _chapterUnique(){
             }
             return outer;
         }
-        old_graph.after(makeTableDiffs("chapter-unique", ["部分", "ユニーク（人）", "前部分比", "離脱数（人）"], labels, data))
+        old_graph.after(makeTableDiffs("chapter-unique", ["ep.", "ユニーク（人）", "前EP比", "離脱数"], labels, data))
     
         old_graph.remove();
     }
