@@ -1,7 +1,7 @@
 import { defaultSkins } from "../../utils/data/default_skins.js";
 import {check, defaultValue, saveJson} from "../../utils/misc.js"
 import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
-import { debug_log, debug_logObject } from "./debug.js";
+import { debug_log, debug_logObject, debug } from "./debug.js";
 import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
 import { restoreHeaderIconList, getHeaderIconList } from "./header.js";
 import { getDateString } from "../../utils/text.js";
@@ -10,6 +10,7 @@ import { defaultFont } from "../../utils/data/default_font.js";
 /* Remove Warning Message */
 $('#js-failed').remove();
 if(!debug){$('#debug').remove()}
+if(!debug){$('#general').remove()}
 
 
 /* Restore Options */

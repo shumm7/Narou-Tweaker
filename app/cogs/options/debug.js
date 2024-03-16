@@ -1,4 +1,4 @@
-const debug = true
+export const debug = false
 
 /* Debug */
 export function debug_log(text){
