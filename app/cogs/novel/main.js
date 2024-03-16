@@ -23,7 +23,7 @@ chrome.storage.local.get(["options"], (data) => {
     header_disabled = defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"])
     
     if(novel_header){
-        $("body").addClass("narou-tweaker")
+        $("body").addClass("narou-tweaker-header")
         $("#novelnavi_right").remove()
         /* Header */
         _header(header_left, header_right, header_disabled)
@@ -53,6 +53,14 @@ chrome.storage.local.get(["options"], (data) => {
 
     /* Header */
     changeHeaderScrollMode(header_mode, "#novel_header", novel_header_scroll_hidden);
+
+    if(novel_css){
+        $("body").addClass("narou-tweaker")
+
+        if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){
+            _novelPage()
+        }
+    }
 });
 
 function _header(left, right, disabled){
@@ -272,4 +280,43 @@ function _optionModal(){
         addTab(3, "統計")*/
     }
 
+}
+
+function _novelPage(){
+    var ncode = getNcode()
+    var episode = parseInt(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)[1])
+    var title = $("#container .contents1 a[href='/"+ncode+"/']")
+    var chapter = $("#container .contents1 .chapter_title")
+    if(chapter.length){
+        chapter = chapter.text()
+    }else{
+        chapter = undefined
+    }
+
+    var d = `<div class="novel-titles" id="ep-`+episode+`"></div>`
+    var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
+    var d_2
+
+    title.remove()
+    if($("#container .contents1 a").length){
+        var author = $("#container .contents1 a")
+        d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
+    }else{
+        var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
+        d_2 = `<div class="novel-author">`+author+`</div>`
+    }
+    if(chapter){
+        $("#novel_no").after("<div class='novel-chapter'>"+chapter+"</div>")
+    }
+    
+    $("#container .contents1").empty()
+    $("#container .contents1").append(d)
+    $("#container .contents1 .novel-titles").append(d_1 + d_2)
+
+
+    if(episode==1){
+        
+    }else if(episode>1){
+
+    }
 }

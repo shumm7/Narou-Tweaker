@@ -12,6 +12,7 @@ export function applyCSS(tab, _index, _font){
         const font = defaultValue(_font, defaultValue(data.applied_font, defaultFont))
         var applied_css = defaultValue(data.applied_css, {})
         const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
+        const novel_css = defaultValue(data.options.enable_novel_css, true)
 
         if (applied_css[tab.id]!=undefined){
             chrome.scripting.removeCSS({
@@ -138,6 +139,17 @@ export function applyCSS(tab, _index, _font){
                 {"color": defaultValue(s.novel.color, "#444")},
                 {"background-color": defaultValue(s.novel.background, "#fff")},
                 {"border-color": defaultValue(s.novel.background_second, "#444")}
+            ])
+        }
+        if(novel_css) {
+            rule += getRule(".narou-tweaker .novel-titles a", [
+                {"color": "inherit"}
+            ])
+            rule += getRule(".narou-tweaker .novel-titles .novel-title, .narou-tweaker .novel-titles .novel-author, .narou-tweaker .novel-chapter", [
+                {"color": "#999999"}
+            ])
+            rule += getRule(".narou-tweaker .novel-titles#ep-1 .novel-title", [
+                {"color": "inherit"}
             ])
         }
         

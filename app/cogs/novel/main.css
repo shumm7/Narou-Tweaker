@@ -1,6 +1,6 @@
 /* Header */
-.narou-tweaker #novel_header,
-.narou-tweaker #novel_header_right {
+.narou-tweaker-header #novel_header,
+.narou-tweaker-header #novel_header_right {
 	position: absolute;
 	top: 0 !important;
 	width: auto !important;
@@ -11,15 +11,15 @@
 	background: none !important;
 
 }
-.narou-tweaker #novel_header {
+.narou-tweaker-header #novel_header {
 	left: 0 !important;
 }
-.narou-tweaker #novel_header_right {
+.narou-tweaker-header #novel_header_right {
 	right: 0 !important;
 }
 
-.narou-tweaker #novel_header ul,
-.narou-tweaker #novel_header_right ul {
+.narou-tweaker-header #novel_header ul,
+.narou-tweaker-header #novel_header_right ul {
 	display: flex;
 	flex-flow: column;
 	margin: 0 !important;
@@ -27,8 +27,8 @@
 	width: auto !important;
 }
 
-.narou-tweaker #novel_header ul li,
-.narou-tweaker #novel_header_right ul li {
+.narou-tweaker-header #novel_header ul li,
+.narou-tweaker-header #novel_header_right ul li {
 	font-size: 130% !important;
 	min-height: 55px;
 	width: 60px;
@@ -37,10 +37,10 @@
 	background: none !important;
 	text-indent: inherit !important;
 }
-.narou-tweaker #novel_header ul li a,
-.narou-tweaker #novel_header ul li form,
-.narou-tweaker #novel_header_right ul li a,
-.narou-tweaker #novel_header_right ul li form {
+.narou-tweaker-header #novel_header ul li a,
+.narou-tweaker-header #novel_header ul li form,
+.narou-tweaker-header #novel_header_right ul li a,
+.narou-tweaker-header #novel_header_right ul li form {
 	display: flex !important;
 	flex-flow: column;
 	justify-content: center;
@@ -52,20 +52,20 @@
 	height: auto !important;
 }
 
-.narou-tweaker #novel_header ul li > *,
-.narou-tweaker #novel_header_right ul li > * {
+.narou-tweaker-header #novel_header ul li > *,
+.narou-tweaker-header #novel_header_right ul li > * {
 	border: none !important;
 	background: none !important;
 }
-.narou-tweaker #novel_header ul li form input,
-.narou-tweaker #novel_header_right ul li form input {
+.narou-tweaker-header #novel_header ul li form input,
+.narou-tweaker-header #novel_header_right ul li form input {
 	border: none !important;
 	padding: 0 !important;
 }
-.narou-tweaker #novel_header ul li a > span,
-.narou-tweaker #novel_header ul li form input,
-.narou-tweaker #novel_header_right ul li a > span,
-.narou-tweaker #novel_header_right ul li form input {
+.narou-tweaker-header #novel_header ul li a > span,
+.narou-tweaker-header #novel_header ul li form input,
+.narou-tweaker-header #novel_header_right ul li a > span,
+.narou-tweaker-header #novel_header_right ul li form input {
 	margin-top: .5em;
 	text-align: center;
 	font-size: 50%;
@@ -74,16 +74,16 @@
 	transition: color .2s;
 	color: transparent !important;
 }
-.narou-tweaker #novel_header ul li a:hover,
-.narou-tweaker #novel_header ul li form:hover input,
-.narou-tweaker #novel_header_right ul li a:hover,
-.narou-tweaker #novel_header_right ul li form:hover input {
+.narou-tweaker-header #novel_header ul li a:hover,
+.narou-tweaker-header #novel_header ul li form:hover input,
+.narou-tweaker-header #novel_header_right ul li a:hover,
+.narou-tweaker-header #novel_header_right ul li form:hover input {
 	background: none !important;
 }
-.narou-tweaker #novel_header ul li a:hover > span,
-.narou-tweaker #novel_header ul li form:hover input,
-.narou-tweaker #novel_header_right ul li a:hover > span,
-.narou-tweaker #novel_header_right ul li form:hover input {
+.narou-tweaker-header #novel_header ul li a:hover > span,
+.narou-tweaker-header #novel_header ul li form:hover input,
+.narou-tweaker-header #novel_header_right ul li a:hover > span,
+.narou-tweaker-header #novel_header_right ul li form:hover input {
 	color: inherit !important;
 	transition: color .2s;
 	font-size: 50%;
@@ -116,10 +116,10 @@
 #novel_header.hide.header-mode--scroll{
     transform:translateY(-60px);
 }
-.narou-tweaker #novel_header.hide.header-mode--scroll{
+.narou-tweaker-header #novel_header.hide.header-mode--scroll{
     transform:translateX(-80px);
 }
-.narou-tweaker #novel_header_right.hide.header-mode--scroll{
+.narou-tweaker-header #novel_header_right.hide.header-mode--scroll{
     transform:translateX(80px);
 }
 
@@ -300,4 +300,37 @@
 	text-align: center;
 	height: 30px;
 	padding: 0;
+}
+
+
+/* Novel Page*/
+.narou-tweaker .novel-titles {
+    line-height: normal;
+	word-break: break-word;
+	text-align: left;
+}
+.narou-tweaker .novel-titles .novel-title {
+    line-height: normal;
+	font-weight: bold;
+}
+.narou-tweaker .novel-titles .novel-author {
+	margin-top: .5em;
+	font-size: 90%;
+}
+.narou-tweaker .novel-titles#ep-1 {
+	text-align: center;
+	margin-top: 4em;
+	margin-bottom: 4em;
+}
+.narou-tweaker .novel-titles#ep-1 .novel-title {
+	font-size: 3em;
+}
+.narou-tweaker .novel-titles#ep-1 .novel-author {
+	text-align: center;
+	font-size: 2em;
+	margin-top: .5em;
+}
+.narou-tweaker .novel-chapter {
+	text-align: center;
+	font-size: 90%;
 }
