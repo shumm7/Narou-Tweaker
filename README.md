@@ -1,4 +1,4 @@
-# <img src="app/assets/icon.png" width="45" align="left" style="margin-right: 10px"> Narou Tweaks
+# <img src="app/assets/icon.png" width="45" align="left" style="margin-right: 10px"> Narou Tweaker
 
 > 「[小説家になろう](https://syosetu.com/)」の機能やデザインを改善します。
 
