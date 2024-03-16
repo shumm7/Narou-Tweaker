@@ -117,7 +117,7 @@ function _profile(){
     if(enable_profile_autourl){
         $('.c-panel__item').each(function(_) {
             var comment = $(this)
-            lines = comment.html().split(/<br\s*\/?>/i);
+            var lines = comment.html().split(/<br\s*\/?>/i);
     
             comment.empty();
             $.each(lines, function(idx, line) {
