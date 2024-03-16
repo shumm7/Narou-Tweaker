@@ -1,3 +1,4 @@
 .cache
 app/temp
 *.code-workspace
+conversion.txt

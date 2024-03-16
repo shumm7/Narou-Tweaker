@@ -1,0 +1,123 @@
+{
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "default_locale": "ja",
+  "version": "0.0.1",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/icon_16.png",
+    "48": "assets/icon_48.png",
+    "128": "assets/icon_128.png"
+  },
+  "background": {
+    "scripts": ["./cogs/background/background.js"]
+  },
+  "options_ui": {
+		"page": "cogs/options/options.html"
+	},
+  "action": {
+    "default_popup": "cogs/options/options.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "cogs/novel/loader.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
+        "cogs/novel/main.css"
+      ],
+      "matches": [
+				"https://ncode.syosetu.com/*"
+			],
+      "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "cogs/mypage/loader.js"
+      ],
+      "css": [
+        "common.css",
+        "cogs/mypage/main.css"
+      ],
+      "matches": [
+				"https://mypage.syosetu.com/*"
+			],
+      "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "libs/chart.min.js",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
+        "cogs/kasasagi/loader.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "libs/w3-css/w3.css",
+        "libs/jquery-nstslider/dist/jquery.nstSlider.min.css",
+        "common.css",
+        "cogs/kasasagi/main.css"
+      ],
+      "matches": [
+				"https://kasasagi.hinaproject.com/*"
+			],
+      "run_at":"document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "cogs/novel/main.js",
+        "cogs/novel/cogs.js",
+        "cogs/novel/utils.js",
+        "cogs/mypage/main.js",
+        "cogs/kasasagi/main.js",
+        "cogs/kasasagi/utils.js"
+      ],
+      "matches": [
+        "https://ncode.syosetu.com/*",
+        "https://mypage.syosetu.com/*",
+        "https://kasasagi.hinaproject.com/*"
+      ]
+    },
+    {
+      "resources": [
+        "utils/text.js",
+        "utils/api.js",
+        "utils/ui.js",
+        "utils/misc.js",
+        "utils/option.js",
+        "utils/data/default_skins.js",
+        "utils/data/default_font.js"
+      ],
+      "matches": ["<all_urls>"]
+    },
+    {
+      "resources": [
+        "/libs/font-awesome/webfonts/*.ttf",
+        "/libs/font-awesome/webfonts/*.woff2"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "scripting",
+    "downloads",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://syosetu.com/*",
+    "https://api.syosetu.com/*",
+    "https://ncode.syosetu.com/*",
+    "https://mypage.syosetu.com/*",
+    "https://kasasagi.hinaproject.com/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": { "id": "{29c0c2f1-2092-4808-9709-6aa5fb8562d7}" }
+  }
+}
