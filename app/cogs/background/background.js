@@ -9,56 +9,37 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             fetch(message.data.url, message.data.options)
             .then(response => response.json())
             .then(data => {
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "json", success: true, id: message.id}).catch((error) => {
-                        console.log(error);
-                    });
-                });
+                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id});
             })
             .catch((e) => {
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "json", success: false, id: message.id}).catch((error) => {
-                        console.log(error);
-                    });
-                });    
+                console.log(e)
+                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id});   
             })
             
         }else if(message.format == "text"){
             fetch(message.data.url, message.data.options)
             .then(response => response.text())
             .then(data => {
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: data, format: "text", success: true, id: message.id}).catch((error) => {
-                        console.log(error);
-                    });
-                });
+                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id});
             })
             .catch((e) => {
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    chrome.tabs.sendMessage(tabs[0].id, {action: "fetch", result: e, format: "text", success: false, id: message.id}).catch((error) => {
-                        console.log(error);
-                    });
-                });    
+                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id});    
             })
         }
         
     }else if(message.action == "downloads"){
-        if(message.type == "download"){   
-            chrome.downloads.download({
-                url: message.data.url,
-                filename: message.data.filename
-            });
-        }
-    }else if(message.action == "file_open"){
-
+        chrome.downloads.download({
+            url: message.data.url,
+            filename: message.data.filename
+        }, function(downloadId){
+            sendResponse({action: "downloads", id: downloadId});
+        });
     }else if(message.action == "apply_skin"){
-        chrome.tabs.query({lastFocusedWindow: true}, tabs => {
-            chrome.tabs.query({url: "https://ncode.syosetu.com/*"}, tabs => {
-                for(let i=0; i<tabs.length; i++){
-                    applyCSS(tabs[i], message.data.index, message.data.font)
-                    
-                };
-            });
+        chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {
+            for(let i=0; i<tabs.length; i++){
+                applyCSS(tabs[i], message.data.index, message.data.font)
+            };
+            sendResponse({action: "apply_skin"});
         });
     }
     return true;

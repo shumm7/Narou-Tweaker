@@ -1,29 +1,3 @@
-function fetch(url, options, format){
-    chrome.runtime.sendMessage(
-        {
-            action: "fetch",
-            format: format,
-            data: {url: url, options: options}
-        }
-    )
-}
-
-export function getNovelInfo(ncode){
-    var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
-    var options = {
-        'method': 'GET'
-    }
-    fetch(url, options);
-}
-
-export function getUserInfo(userid){
-    var url = "https://api.syosetu.com/userapi/api/?out=json&libtype=2&userid=" + userid
-    var options = {
-        'method': 'GET'
-    }
-    fetch(url, options);
-}
-
 export function getBigGenre(genre){
     if(genre==1){
         return "恋愛"
@@ -137,12 +111,4 @@ export function getNovelEnd(state){
     }else{
         return ""
     }
-}
-
-export function getUserBooks(userid){
-    var url = "https://syosetu.com/syuppan/list/?word=" + userid
-    var options = {
-        'method': 'GET'
-    }
-    fetch(url, options, "text");
 }

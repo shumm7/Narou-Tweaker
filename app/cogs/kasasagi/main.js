@@ -1,7 +1,7 @@
 import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
 import {saveJson, defaultValue} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
-import {getNovelInfo, getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
+import {getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
 import {makeTable, getNcode, makeGraph} from "./utils.js"
 
 var enable_css
@@ -496,9 +496,8 @@ function _general(){
         $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
         $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
 
-        getNovelInfo(ncode);
-        chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
-
+        chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode, options: {'method': 'GET'}}}, function(response){
+        if(response){
             if(response.success){
                 var d = response.result[1]
                 if(d!=undefined){
@@ -593,6 +592,7 @@ function _general(){
             }
             return true;
         });
+    }
     }
     
 }

@@ -1,5 +1,4 @@
 import {replaceUrl} from "../../utils/text.js"
-import {getUserBooks, getUserInfo} from "../../utils/api.js"
 import { defaultValue } from "../../utils/misc.js";
 
 var path = location.pathname;
@@ -91,8 +90,9 @@ function _profile(){
 
     /* User Detail */
     if(enable_profile_detail){
-        getUserInfo(location.pathname.match('/mypage/profile/userid/(.*)/')[1])
-        chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
+        var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
+        chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/userapi/api/?out=json&libtype=2&userid=" + userid, options: {'method': 'GET'}}}, function(response) {
+        if(response){
             if(response.success && response.format=="json"){
                 var d = response.result[1]
                 if(d!=undefined){
@@ -110,6 +110,7 @@ function _profile(){
                 }
             }
             return true;
+        }
         });
     }
 
@@ -135,9 +136,9 @@ function _profile(){
     if(enable_profile_booklist){
         const max_amount = 5
         var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
-        getUserBooks(userid)
-
-        chrome.runtime.onMessage.addListener(function(response, sender, sendResponse) {
+        
+        chrome.runtime.sendMessage ({action: "fetch", format: "text", data: {url: "https://syosetu.com/syuppan/list/?word=" + userid, options: {'method': 'GET'}}}, function(response) {
+        if(response){   
             if(response.success && response.format=="text"){
                 var list = []
                 var body = $($.parseHTML(response.result))
@@ -225,6 +226,7 @@ function _profile(){
                 }
             }
             return true;
+        }
         });
     }
 }

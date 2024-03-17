@@ -57,15 +57,9 @@ export function removeDefaultSkinClass(){
 }
 
 export function applySkin(index, font){
-    chrome.runtime.sendMessage(
-        {
-            action: "apply_skin",
-            data: {
-                index: index,
-                font: font
-            }
-        }
-    );
+    chrome.runtime.sendMessage({action: "apply_skin", format: "json", data: {index: index,font: font}}, function(response){
+        
+    });
 }
 
 /* Option */
