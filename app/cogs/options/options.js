@@ -48,10 +48,18 @@ function restoreOptions(){
     check('#enable_kasasagi_graph_general_day', options.enable_kasasagi_graph_general_day, true);
     check('#enable_kasasagi_graph_general_total', options.enable_kasasagi_graph_general_total, false);
     check('#enable_kasasagi_graph_chapter_unique', options.enable_kasasagi_graph_chapter_unique, true);
+    check('#enable_kasasagi_graph_day_pv', options.enable_kasasagi_graph_day_pv, true);
+    check('#enable_kasasagi_graph_day_unique', options.enable_kasasagi_graph_day_unique, true);
+    check('#enable_kasasagi_graph_month_pv', options.enable_kasasagi_graph_month_pv, true);
+    check('#enable_kasasagi_graph_month_unique', options.enable_kasasagi_graph_month_unique, true);
 
     $("#kasasagi_graph_type_general_day").val(defaultValue(options.kasasagi_graph_type_general_day, "bar"))
     $("#kasasagi_graph_type_general_total").val(defaultValue(options.kasasagi_graph_type_general_total, "bar"))
     $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
+    $("#kasasagi_graph_type_day_pv").val(defaultValue(options.kasasagi_graph_type_day_pv, "bar"))
+    $("#kasasagi_graph_type_day_unique").val(defaultValue(options.kasasagi_graph_type_day_unique, "bar"))
+    $("#kasasagi_graph_type_month_pv").val(defaultValue(options.kasasagi_graph_type_month_pv, "bar"))
+    $("#kasasagi_graph_type_month_unique").val(defaultValue(options.kasasagi_graph_type_month_unique, "bar"))
 
     check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
     check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
@@ -98,9 +106,17 @@ function storeOptions(){
     enable_kasasagi_graph_general_day: $("#enable_kasasagi_graph_general_day").prop('checked'),
     enable_kasasagi_graph_general_total: $("#enable_kasasagi_graph_general_total").prop('checked'),
     enable_kasasagi_graph_chapter_unique: $("#enable_kasasagi_graph_chapter_unique").prop('checked'),
+    enable_kasasagi_graph_day_pv: $("#enable_kasasagi_graph_day_pv").prop('checked'),
+    enable_kasasagi_graph_day_unique: $("#enable_kasasagi_graph_day_unique").prop('checked'),
+    enable_kasasagi_graph_month_pv: $("#enable_kasasagi_graph_month_pv").prop('checked'),
+    enable_kasasagi_graph_month_unique: $("#enable_kasasagi_graph_month_unique").prop('checked'),
     kasasagi_graph_type_general_day: $("#kasasagi_graph_type_general_day").val(),
     kasasagi_graph_type_general_total: $("#kasasagi_graph_type_general_total").val(),
     kasasagi_graph_type_chapter_unique: $("#kasasagi_graph_type_chapter_unique").val(),
+    kasasagi_graph_type_day_pv: $("#kasasagi_graph_type_day_pv").val(),
+    kasasagi_graph_type_day_unique: $("#kasasagi_graph_type_day_unique").val(),
+    kasasagi_graph_type_month_pv: $("#kasasagi_graph_type_month_pv").val(),
+    kasasagi_graph_type_month_unique: $("#kasasagi_graph_type_month_unique").val(),
     enable_kasasagi_table_general_day: $("#enable_kasasagi_table_general_day").prop('checked'),
     enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
     enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),

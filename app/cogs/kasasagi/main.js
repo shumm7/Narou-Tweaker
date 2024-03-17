@@ -2,7 +2,7 @@ import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.
 import {saveJson, defaultValue} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
 import {getNovelInfo, getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
-import {makeTable, getNcode} from "./utils.js"
+import {makeTable, getNcode, makeGraph} from "./utils.js"
 
 var enable_css
 var enable_export
@@ -10,9 +10,17 @@ var enable_api_data
 var enable_graph_general_day
 var enable_graph_general_total
 var enable_graph_chapter_unique
+var enable_graph_day_pv
+var enable_graph_day_unique
+var enable_graph_month_pv
+var enable_graph_month_unique
 var graph_type_general_day
 var graph_type_general_total
 var graph_type_chapter_unique
+var graph_type_day_pv
+var graph_type_day_unique
+var graph_type_month_pv
+var graph_type_month_unique
 var enable_table_general_day
 var enable_table_chapter_unique
 
@@ -28,10 +36,19 @@ chrome.storage.local.get(["options"], (data) => {
     enable_graph_general_day = defaultValue(options.enable_kasasagi_graph_general_day, true);
     enable_graph_general_total = defaultValue(options.enable_kasasagi_graph_general_total, false);
     enable_graph_chapter_unique = defaultValue(options.enable_kasasagi_graph_chapter_unique, true);
+    enable_graph_day_pv = defaultValue(options.enable_kasasagi_graph_day_pv, true);
+    enable_graph_day_unique = defaultValue(options.enable_kasasagi_graph_day_unique, true);
+    enable_graph_month_pv = defaultValue(options.enable_kasasagi_graph_month_pv, true);
+    enable_graph_month_unique = defaultValue(options.enable_kasasagi_graph_month_unique, true);
 
     graph_type_general_day = defaultValue(options.kasasagi_graph_type_general_day, "bar");
     graph_type_general_total = defaultValue(options.kasasagi_graph_type_general_total, "bar");
     graph_type_chapter_unique = defaultValue(options.kasasagi_graph_type_chapter_unique, "bar");
+    graph_type_day_pv = defaultValue(options.kasasagi_graph_type_day_pv, "bar");
+    graph_type_day_unique = defaultValue(options.kasasagi_graph_type_day_unique, "bar");
+    graph_type_month_pv = defaultValue(options.kasasagi_graph_type_month_pv, "bar");
+    graph_type_month_unique = defaultValue(options.kasasagi_graph_type_month_unique, "bar");
+
 
     enable_table_general_day = defaultValue(options.enable_kasasagi_table_general_day, true);
     enable_table_chapter_unique = defaultValue(options.enable_kasasagi_table_chapter_unique, true);
@@ -126,13 +143,61 @@ chrome.storage.local.get(["options"], (data) => {
         }
 
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
-        console.log('daypv')
+        if($(".novelview_h3").length){
+            if(enable_css){
+                var m = $(".novelview_h3")
+                var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(PV\)/)[2]
+
+                $(".novelview_h3").text("日別（PV）")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+            }
+            _dayPV()
+        }
     }else if(path.match('/access/monthpv/ncode/.*/')!=null){
-        console.log('monthpv')
+        if($(".novelview_h3").length){
+            if(enable_css){
+                var m = $(".novelview_h3")
+                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(PV\)/)[2]
+
+                $(".novelview_h3").text("月別（PV）")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+            }
+            _monthPV()
+        }
     }else if(path.match('/access/dayunique/ncode/.*/')!=null){
-        console.log('dayunique')
+        if($(".novelview_h3").length){
+            if(enable_css){
+                var m = $(".novelview_h3")
+                var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
+
+                $(".novelview_h3").text("日別（ユニーク）")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+
+                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
+                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+                $(".attention").parent().remove();
+            }
+            _dayUnique()
+        }
     }else if(path.match('/access/monthunique/ncode/.*/')!=null){
-        console.log('monthunique')
+        if($(".novelview_h3").length){
+            if(enable_css){
+                var m = $(".novelview_h3")
+                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
+
+                $(".novelview_h3").text("月別（ユニーク）")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+
+                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
+                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+                $(".attention").parent().remove();
+            }
+            _monthUnique()
+        }
     }
 });
 
@@ -720,5 +785,37 @@ function _chapterUnique(){
         old_graph.after(makeTableDiffs("chapter-unique", ["ep.", "ユニーク（人）", "前EP比", "離脱数"], labels, data))
     
         old_graph.remove();
+    }
+}
+
+/* Day PV */
+function _dayPV(){
+    if(enable_graph_day_pv){
+        $("form").after('<canvas class="access-chart" id="day_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
+        makeGraph("day_pv", graph_type_day_pv, "日別（PV）")
+    }
+}
+
+/* Day Unique */
+function _dayUnique(){
+    if(enable_graph_day_unique){
+        $("form").after('<canvas class="access-chart" id="day_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
+        makeGraph("day_unique", graph_type_day_unique, "日別（ユニーク）")
+    }
+}
+
+/* Month PV */
+function _monthPV(){
+    if(enable_graph_day_pv){
+        $("#access_all").after('<canvas class="access-chart" id="month_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
+        makeGraph("month_pv", graph_type_month_pv, "月別（PV）")
+    }
+}
+
+/* Month Unique */
+function _monthUnique(){
+    if(enable_graph_day_unique){
+        $("#access_all").after('<canvas class="access-chart" id="month_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
+        makeGraph("month_unique", graph_type_month_unique, "月別（ユニーク）")
     }
 }
