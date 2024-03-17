@@ -28,7 +28,7 @@ function restoreOptions(){
     /* Header */
     restoreHeaderIconList(defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"]), "left")
     restoreHeaderIconList(defaultValue(options.novel_header_icon_right, ["siori", "option"]), "right")
-    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"]), "disabled")
+    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text", "edit"]), "disabled")
     setSortable()
 
     /* Mypage */

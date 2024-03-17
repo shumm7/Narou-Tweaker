@@ -39,6 +39,10 @@ export const icon_list = {
         icon: "fa-solid fa-book-bookmark",
         text: "ブックマーク"
     },
+    edit: {
+        icon: "fa-solid fa-pen-to-square",
+        text: "編集"
+    },
     siori: {
         icon: "fa-solid fa-bookmark",
         text: "しおり"

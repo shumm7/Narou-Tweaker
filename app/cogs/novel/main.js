@@ -139,8 +139,17 @@ function _header(left, right, disabled){
         }
         elm.parent().addClass("booklist")
     }
-    else{
+    else if($("#novel_header li.booklist .button_bookmark.logout").length){
+        /*
+        elm = $("#novel_header li.booklist")
+        elm.find(".button_bookmark.logout").remove()
+        elm.prepend('<a><i class="fa-solid fa-book"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（未ログイン）</span></span></a>')
+        */
+    } else {
         $("#novel_header li.booklist").remove()
+
+        /* 作品詳細ページ */
+        $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
     }
 
     /* しおり */
