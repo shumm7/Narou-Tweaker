@@ -12,7 +12,6 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
                 sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id});
             })
             .catch((e) => {
-                console.log(e)
                 sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id});   
             })
             

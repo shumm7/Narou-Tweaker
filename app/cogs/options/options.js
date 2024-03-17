@@ -204,7 +204,7 @@ $("#import-options").on("change", (evt)=>{
   var reader = new FileReader();
   reader.onload = function(e){
       var data = JSON.parse(e.target.result)
-      console.log(data)
+      //console.log(data)
       importOptions(data)
   }
   reader.readAsText(f);
