@@ -6,6 +6,7 @@ export function applyCSS(tab, _index, _font){
 
     chrome.storage.local.get(["skins", "applied_css", "options", "applied_font", "applied_skin"], (data) => {
         const getRule = getCSSRule
+        data.options = defaultValue(data.options, {})
         const skin_idx = defaultValue(_index, defaultValue(data.applied_skin, 0))
         const skins = defaultValue(data.skins, defaultSkins)
         const skin = defaultValue(skins[skin_idx], defaultSkins[0])
