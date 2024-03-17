@@ -4,7 +4,7 @@
   "description": "__MSG_extDescription__",
   "author": "しゅう",
   "default_locale": "ja",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 3,
   "icons": {
     "16": "assets/icon_16.png",
