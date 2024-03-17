@@ -2,6 +2,9 @@
   "extName": {
     "message": "Narou Tweaker"
   },
+  "extShortName": {
+    "message": "Narou Tweaker"
+  },
   "extDescription": {
     "message": "小説家になろうのユーザー体験を向上させます"
   }
