@@ -94,6 +94,7 @@
         "utils/ui.js",
         "utils/misc.js",
         "utils/option.js",
+        "utils/header.js",
         "utils/data/default_skins.js",
         "utils/data/default_font.js"
       ],
