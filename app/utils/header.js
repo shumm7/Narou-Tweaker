@@ -57,6 +57,23 @@ export const icon_list = {
     }
 }
 
+export function getExceptedIcon(lists){
+    var v = []
+    $.each(lists, function(_, list){
+        $.each(list, function(_, key){
+            v.push(key)
+        })
+    })
+
+    var ret = []
+    $.each(icon_list, function(key, _){
+        if(!v.includes(key)){
+            ret.push(key)
+        }
+    })
+    return ret;
+}
+
 export function getHeaderIconList(position){
     if(position!="right" && position!="left" && position!="disabled") { return }
 

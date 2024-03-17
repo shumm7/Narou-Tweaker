@@ -2,6 +2,7 @@ import { changeHeaderScrollMode, setOptionContentsDisplay } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
 import { getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
+import { getExceptedIcon } from "../../utils/header.js";
 
 var header_mode
 var novel_css
@@ -9,7 +10,6 @@ var novel_header
 var novel_header_scroll_hidden
 var header_left
 var header_right
-var header_disabled
 
 chrome.storage.local.get(["options"], (data) => {
     var options = defaultValue(data.options, {})
@@ -20,13 +20,12 @@ chrome.storage.local.get(["options"], (data) => {
     novel_header_scroll_hidden = defaultValue(options.enable_novel_header_scroll_hidden, false)
     header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
     header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
-    header_disabled = defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text"])
     
     if(novel_header){
         $("body").addClass("narou-tweaker-header")
         $("#novelnavi_right").remove()
         /* Header */
-        _header(header_left, header_right, header_disabled)
+        _header(header_left, header_right)
         
         /* Header */
         changeHeaderScrollMode(header_mode, "#novel_header_right", novel_header_scroll_hidden);
@@ -63,7 +62,7 @@ chrome.storage.local.get(["options"], (data) => {
     }
 });
 
-function _header(left, right, disabled){
+function _header(left, right){
     if(!$("#novel_header").length){return}
 
     var ncode = getNcode()
@@ -129,6 +128,7 @@ function _header(left, right, disabled){
     }
 
     /* ブックマーク */
+    var is_logined_and_self = false
     elm = $("#novel_header li.booklist a")
     if(elm.length){
         elm.text("")
@@ -147,9 +147,7 @@ function _header(left, right, disabled){
         */
     } else {
         $("#novel_header li.booklist").remove()
-
-        /* 作品詳細ページ */
-        $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
+        is_logined_and_self = true
     }
 
     /* しおり */
@@ -224,8 +222,13 @@ function _header(left, right, disabled){
     /* TXT */
     $("#novel_header ul").append('<li class="text"><a href=https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
 
+    /* 編集 */
+    if(is_logined_and_self){
+        $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
+    }
+
     /* Set Position */
-    $.each(disabled, (_, cls)=>{
+    $.each(getExceptedIcon([right, left]), (_, cls)=>{
         var elm = $("#novel_header ul li."+cls)
         if(elm.length){
             elm.remove()

@@ -3,9 +3,9 @@ import {check, defaultValue, saveJson} from "../../utils/misc.js"
 import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
 import { debug_log, debug_logObject, debug } from "./debug.js";
 import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
-import { restoreHeaderIconList, getHeaderIconList } from "./header.js";
 import { getDateString } from "../../utils/text.js";
 import { defaultFont } from "../../utils/data/default_font.js";
+import { getExceptedIcon, restoreHeaderIconList, getHeaderIconList } from "../../utils/header.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
@@ -26,9 +26,11 @@ function restoreOptions(){
     $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"));
 
     /* Header */
-    restoreHeaderIconList(defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"]), "left")
-    restoreHeaderIconList(defaultValue(options.novel_header_icon_right, ["siori", "option"]), "right")
-    restoreHeaderIconList(defaultValue(options.novel_header_icon_disabled, ["author", "kasasagi", "narou-api", "rss", "text", "edit"]), "disabled")
+    var right_header = defaultValue(options.novel_header_icon_right, ["siori", "option"])
+    var left_header = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
+    restoreHeaderIconList(left_header, "left")
+    restoreHeaderIconList(right_header, "right")
+    restoreHeaderIconList(getExceptedIcon([left_header, right_header]), "disabled")
     setSortable()
 
     /* Mypage */
@@ -89,7 +91,6 @@ function storeOptions(){
 
     novel_header_icon_left: getHeaderIconList("left"),
     novel_header_icon_right: getHeaderIconList("right"),
-    novel_header_icon_disabled: getHeaderIconList("disabled"),
 
     /* Mypage */
     enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
