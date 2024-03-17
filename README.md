@@ -7,6 +7,9 @@
 
 各ブラウザにインストールするだけで有効化でき、オプション画面からその機能のオン/オフを変更できます。
 
+## Download
+* [FireFox](https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/)
+
 ## Dependencies
 * [Font Awesome](https://fontawesome.com/) [Font Awesome Free License](https://fontawesome.com/license/free)
 * [W3.CSS](https://www.w3schools.com/w3css/w3css_downloads.asp)
