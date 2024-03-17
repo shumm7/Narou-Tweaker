@@ -294,27 +294,27 @@ input[type=file] {
 	flex-direction: column;
 	align-items: center;
 	flex-wrap: wrap;
-	width: 110px;
+	width: 120px;
 	height: 100%;
 	min-height: 110px;
 }
 .icon-element {
 	display: flex;
-	flex-flow: column;
-	justify-content: center;
+	flex-flow: row;
 	align-items: center;
 	border: 1px solid #aaa;
 	margin: .2em;
-	padding: .2em;
-	width: 70px;
-	height: 70px;
+	padding: .4em;
+	width: 100px;
+	cursor: pointer;
 }
 .icon-element i {
-	font-size: 180%;
+	text-align: center;
+	width: 15px;
 }
 .icon-element .title {
-	margin-top: .5em;
-	font-size: 90%;
+	margin-left: .5em;
+	font-size: 100%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

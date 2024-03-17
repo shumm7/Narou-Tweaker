@@ -155,16 +155,16 @@ export function applyCSS(tab, _index, _font){
         }
         
         /* Custom CSS */
-        rule += getRule(".narou-tweaker #novel_header ul li a, .narou-tweaker #novel_header ul li a:link, .narou-tweaker #novel_header ul li a:visited, .narou-tweaker #novel_header ul li form", [
+        rule += getRule(".narou-tweaker #novel_header ul li > a, .narou-tweaker #novel_header ul li > a:link, .narou-tweaker #novel_header ul li > a:visited, .narou-tweaker #novel_header ul li > form", [
             {"color": defaultValue(s.sublist.color, "#444")},
         ])
-        rule += getRule(".narou-tweaker #novel_header ul li a:hover, .narou-tweaker #novel_header ul li a:active, .narou-tweaker #novel_header ul li form:hover, .narou-tweaker #novel_header ul li form:active", [
+        rule += getRule(".narou-tweaker #novel_header ul li a:hover, .narou-tweaker #novel_header ul li a:active, .narou-tweaker #novel_header ul li > form:hover, .narou-tweaker #novel_header ul li > form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
-        rule += getRule(".narou-tweaker #novel_header_right ul li a, .narou-tweaker #novel_header_right ul li a:link, .narou-tweaker #novel_header_right ul li a:visited, .narou-tweaker #novel_header_right ul li form", [
+        rule += getRule(".narou-tweaker #novel_header_right ul li > a, .narou-tweaker #novel_header_right ul li > a:link, .narou-tweaker #novel_header_right ul li > a:visited, .narou-tweaker #novel_header_right ul li > form", [
             {"color": defaultValue(s.sublist.color, "#444")},
         ])
-        rule += getRule(".narou-tweaker #novel_header_right ul li a:hover, .narou-tweaker #novel_header_right ul li a:active, .narou-tweaker #novel_header_right ul li form:hover, .narou-tweaker #novel_header_right ul li form:active", [
+        rule += getRule(".narou-tweaker #novel_header_right ul li > a:hover, .narou-tweaker #novel_header_right ul li > a:active, .narou-tweaker #novel_header_right ul li > form:hover, .narou-tweaker #novel_header_right ul li > form:active", [
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
 

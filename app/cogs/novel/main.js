@@ -70,6 +70,8 @@ function _header(left, right){
     var episode = getEpisode()
     var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
     var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
+    const disabled = getExceptedIcon([right, left])
+    const isDisabled = key => {return disabled.includes(key)}
 
     var text
     var elm
@@ -189,46 +191,83 @@ function _header(left, right){
     
 
     /* 設定 */
-    $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
-    $("#novel_header li.option").on("click", function(){
-        if($("#novel-option").hasClass("show")){
-            $("#novel-option").removeClass("show")
-        }else{
-            $("#novel-option").addClass("show")
-        }
-        if($("#novel-option-background").hasClass("show")){
-            $("#novel-option-background").removeClass("show")
-        }else{
-            $("#novel-option-background").addClass("show")
-        }
-    })
+    if(!isDisabled("option")){
+        $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
+        $("#novel_header li.option").on("click", function(){
+            if($("#novel-option").hasClass("show")){
+                $("#novel-option").removeClass("show")
+            }else{
+                $("#novel-option").addClass("show")
+            }
+            if($("#novel-option-background").hasClass("show")){
+                $("#novel-option-background").removeClass("show")
+            }else{
+                $("#novel-option-background").addClass("show")
+            }
+        })
+    }
 
     /* 作者マイページ */
-    if(userid){
+    if(userid && !isDisabled("author")){
         $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
     }
 
     /* KASASAGI */
-    $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+    if(!isDisabled("kasasagi")){
+        $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+    }
 
     /* API */
-    $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+    if(!isDisabled("narou-api")){
+        $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+    }
 
     /* RSS */
-    if(atom){
+    if(atom && !isDisabled("rss")){
         $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
     }
 
     /* TXT */
-    $("#novel_header ul").append('<li class="text"><a href=https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+    if(!isDisabled("text")){
+        $("#novel_header ul").append('<li class="text"><a href=https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+    }
 
     /* 編集 */
-    if(is_logined_and_self){
+    if(is_logined_and_self && !isDisabled("edit")){
         $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
     }
 
+    /* 検索 */
+    if(!isDisabled("search")){
+        $("#novel_header ul").append('<li class="search"><a><i class="fa-solid fa-magnifying-glass"></i><span class="title">検索</span></a></li>')
+        $("li.search").append(`
+        <div id="novel_header_search_box">
+            <form>
+                <input type="text" id="novel_header_search_field">
+                <button id="novel_header_search_button">検索</button>
+            </form>
+        </div>
+        `)
+        $("#novel_header ul li.search>a").on("click", function(){
+            if($(this).parent().hasClass("show")){
+                $(this).parent().removeClass("show")
+            }else{
+                $(this).parent().addClass("show")
+            }
+        })
+        $("#novel_header_search_box > form").submit(function(){
+            var keyword = $("#novel_header_search_field").val().trim()
+            if(keyword.length == 0){
+                return false
+            }else{
+                var url = "https://yomou.syosetu.com/search.php?word=" + keyword
+                window.open(url);
+            }
+        })
+    }
+
     /* Set Position */
-    $.each(getExceptedIcon([right, left]), (_, cls)=>{
+    $.each(disabled, (_, cls)=>{
         var elm = $("#novel_header ul li."+cls)
         if(elm.length){
             elm.remove()

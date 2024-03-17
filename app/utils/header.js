@@ -51,11 +51,16 @@ export const icon_list = {
         icon: "fa-solid fa-file-lines",
         text: "TXT"
     },
+    search: {
+        icon: "fa-solid fa-magnifying-glass",
+        text: "検索"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"
     }
 }
+// https://fontawesome.com/search?o=r&m=free
 
 export function getExceptedIcon(lists){
     var v = []
