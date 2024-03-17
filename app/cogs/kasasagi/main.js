@@ -591,10 +591,9 @@ function _general(){
                 $(".loading-api").text("情報の取得に失敗しました。")
             }
             return true;
+        }
         });
     }
-    }
-    
 }
 
 /* Chapter Unique */
