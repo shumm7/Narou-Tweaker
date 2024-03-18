@@ -1,4 +1,4 @@
-import { changeHeaderScrollMode, setOptionContentsDisplay } from "./cogs.js";
+import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
 import { getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
@@ -326,10 +326,10 @@ function _optionModal(){
     $("#novel-option .novel-option-tab-1").addClass("active")
     setOptionContentsDisplay()
 
-    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){
-        /*addTab(2, "文章校正")
-        addTab(3, "統計")*/
-    }
+    addTab(2, "文章校正")
+    setOptionContentsCorrection()
+
+    //addTab(3, "統計")
 
 }
 

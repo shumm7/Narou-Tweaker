@@ -114,3 +114,53 @@ input[type="submit"].ui-button {
     font-size: 1em;
     cursor: pointer;
 }
+
+/* Toggle */
+input[type="checkbox"].toggle {
+	display: none;
+}
+
+label.toggle {
+	position: relative;
+	padding-left: 60px;
+	cursor: pointer;
+}
+
+label.toggle::before, label.toggle::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 50%;
+	left: 0px;
+	transform: translateY(-50%);
+	border: 1.4px solid rgba(0, 0, 0, .3);
+	border-radius: 50%;
+	transition: .2s;
+}
+
+label.toggle::before {
+	background-color: rgba(27, 142, 243, .1);
+	border: 1.4px solid rgba(0, 0, 0, .3);
+	border-radius: 12px;
+	height: 20px;
+	width: 40px;
+	top: 50%;
+	left: 5px;
+}
+
+label.toggle::after {
+	background-color: #fff;
+	border-radius: 50%;
+	height: 23px;
+	width: 23px;
+	top: 50%;
+	left: 0px;
+}
+
+input.toggle:checked+label.toggle::before {
+	background-color: rgb(27, 142, 243);
+}
+
+input.toggle:checked+label.toggle::after {
+	left: 26px;
+}

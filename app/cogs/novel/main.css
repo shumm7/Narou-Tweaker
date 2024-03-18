@@ -332,6 +332,16 @@ li.search #novel_header_search_field {
 }
 
 
+/* Correction */
+#novel-option--correction-syntax,
+#novel-option--correction-symbols {
+	margin-bottom: 1em;
+}
+.novel-option--toggle {
+	margin-bottom: .7em;
+	text-wrap: nowrap;
+}
+
 /* Novel Page*/
 .narou-tweaker .novel-titles {
     line-height: normal;
@@ -362,4 +372,7 @@ li.search #novel_header_search_field {
 .narou-tweaker .novel-chapter {
 	text-align: center;
 	font-size: 90%;
+}
+#novel_honbun > p.original{
+	display: none;
 }

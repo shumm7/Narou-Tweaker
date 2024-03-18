@@ -76,6 +76,7 @@
       "resources": [
         "cogs/novel/main.js",
         "cogs/novel/cogs.js",
+        "cogs/novel/correction.js",
         "cogs/novel/utils.js",
         "cogs/mypage/main.js",
         "cogs/kasasagi/main.js",
