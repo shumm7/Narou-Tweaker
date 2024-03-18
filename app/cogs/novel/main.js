@@ -55,6 +55,7 @@ chrome.storage.local.get(["options"], (data) => {
 
     if(novel_css){
         $("body").addClass("narou-tweaker")
+        $("#footer").remove()
 
         if($("#novel_honbun").length){
             _novelPage()
