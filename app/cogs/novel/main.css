@@ -37,6 +37,10 @@
 	background: none !important;
 	text-indent: inherit !important;
 }
+.narou-tweaker-header #novel_header ul li.disabled,
+.narou-tweaker-header #novel_header_right ul li.disabled {
+	display:none;
+}
 .narou-tweaker-header #novel_header ul li > a,
 .narou-tweaker-header #novel_header ul li > form,
 .narou-tweaker-header #novel_header_right ul li > a,
