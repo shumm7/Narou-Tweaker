@@ -8,6 +8,7 @@
 各ブラウザにインストールするだけで有効化でき、オプション画面からその機能のオン/オフを変更できます。
 
 ## Download
+* [Chrome](https://chromewebstore.google.com/detail/ihenjmpgnkmihnoogkokhgboafifphlp)
 * [FireFox](https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/)
 
 ## Dependencies
