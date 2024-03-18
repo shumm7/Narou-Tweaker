@@ -175,7 +175,7 @@ function _header(left, right){
     }
 
     elm = $("#novel_header li.bookmark")
-    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/) && !elm.length){
+    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/) && !elm.length && !$("#novel_honbun").length){
         elm = $(".novellingindex_bookmarker_no")
         if(elm.length){
             var link = elm.find("a").prop("href")
@@ -219,7 +219,17 @@ function _header(left, right){
     $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
 
     /* TXT */
-    $("#novel_header ul").append('<li class="text"><a href=https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+    $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+
+    /* 誤字報告 */
+    if(episode==0 && $("#novel_honbun").length){
+        $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+    }else if(episode>0){
+        $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+    }
+
+    /* 情報提供 */
+    $("#novel_header ul").append('<li class="report"><a href="https://syosetu.com/ihantsuhou/input/ncode/'+index+'/"><i class="fa-solid fa-bullhorn"></i><span class="title">情報提供</span></a></li>')
 
     /* 編集 */
     $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')

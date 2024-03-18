@@ -55,6 +55,14 @@ export const icon_list = {
         icon: "fa-solid fa-magnifying-glass",
         text: "検索"
     },
+    typo: {
+        icon: "fa-solid fa-keyboard",
+        text: "誤字報告"
+    },
+    report: {
+        icon: "fa-solid fa-bullhorn",
+        text: "情報提供"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"
