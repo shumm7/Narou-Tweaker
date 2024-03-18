@@ -56,7 +56,7 @@ chrome.storage.local.get(["options"], (data) => {
     if(novel_css){
         $("body").addClass("narou-tweaker")
 
-        if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){
+        if($("#novel_honbun").length){
             _novelPage()
         }
     }
@@ -335,34 +335,71 @@ function _optionModal(){
 
 function _novelPage(){
     var ncode = getNcode()
-    var episode = parseInt(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)[1])
-    var title = $("#container .contents1 a[href='/"+ncode+"/']")
-    var chapter = $("#container .contents1 .chapter_title")
-    if(chapter.length){
-        chapter = chapter.text()
+    var episode = location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)
+    if(episode==null){
+        episode=0
     }else{
-        chapter = undefined
+        episode = parseInt(episode[1])
+    }
+    var title
+    var chapter = undefined
+    
+    if(episode==0){
+        title = $(".novel_title")
+    }else{
+        title = $("#container .contents1 a[href='/"+ncode+"/']")
+        chapter = $("#container .contents1 .chapter_title")
+        if(chapter.length){
+            chapter = chapter.text()
+        }
+
     }
 
-    var d = `<div class="novel-titles" id="ep-`+episode+`"></div>`
-    var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
-    var d_2
+    if(episode==0){
+        var d_1 = `<div class="novel-title">`+title.text()+`</div>`
+        var d_2
 
-    title.remove()
-    if($("#container .contents1 a").length){
-        var author = $("#container .contents1 a")
-        d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
+        if($("#novel_contents .novel_writername a").length){
+            var author = $("#novel_contents .novel_writername a")
+            d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
+        }else{
+            var author = $("#novel_contents .novel_writername").text().trim().match(/作者：(.*)/)[1]
+            d_2 = `<div class="novel-author">`+author+`</div>`
+        }
+
+        $("#novel_contents").before(`
+        <div class="contents1">
+            <div class="novel-titles" id="ep-`+episode+`">
+                `+d_1+`
+                `+d_2+`
+            </div>
+        </div>
+        `)
+        $(".novel_title").remove()
+        $(".novel_writername").remove()
+
     }else{
-        var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
-        d_2 = `<div class="novel-author">`+author+`</div>`
-    }
-    if(chapter){
-        $("#novel_no").after("<div class='novel-chapter'>"+chapter+"</div>")
+        title.remove()
+        var d = `<div class="novel-titles" id="ep-`+episode+`"></div>`
+        var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
+        var d_2
+
+        if($("#container .contents1 a").length){
+            var author = $("#container .contents1 a")
+            d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
+        }else{
+            var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
+            d_2 = `<div class="novel-author">`+author+`</div>`
+        }
+        if(chapter){
+            $("#novel_no").after("<div class='novel-chapter'>"+chapter+"</div>")
+        }
+        
+        $("#container .contents1").empty()
+        $("#container .contents1").append(d)
+        $("#container .contents1 .novel-titles").append(d_1 + d_2)
     }
     
-    $("#container .contents1").empty()
-    $("#container .contents1").append(d)
-    $("#container .contents1 .novel-titles").append(d_1 + d_2)
 
 
     if(episode==1){

@@ -142,6 +142,8 @@ export function applyCSS(tab, _index, _font){
                 {"border-color": defaultValue(s.novel.background_second, "#444")}
             ])
         }
+
+        /* Novel Page */
         if(novel_css) {
             rule += getRule(".narou-tweaker .novel-titles a", [
                 {"color": "inherit"}
@@ -149,7 +151,7 @@ export function applyCSS(tab, _index, _font){
             rule += getRule(".narou-tweaker .novel-titles .novel-title, .narou-tweaker .novel-titles .novel-author, .narou-tweaker .novel-chapter", [
                 {"color": "#999999"}
             ])
-            rule += getRule(".narou-tweaker .novel-titles#ep-1 .novel-title", [
+            rule += getRule(".narou-tweaker .novel-titles#ep-0 .novel-title, .narou-tweaker .novel-titles#ep-1 .novel-title", [
                 {"color": "inherit"}
             ])
         }

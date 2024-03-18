@@ -356,14 +356,17 @@ li.search #novel_header_search_field {
 	margin-top: .5em;
 	font-size: 90%;
 }
+.narou-tweaker .novel-titles#ep-0,
 .narou-tweaker .novel-titles#ep-1 {
 	text-align: center;
 	margin-top: 4em;
 	margin-bottom: 4em;
 }
+.narou-tweaker .novel-titles#ep-0 .novel-title,
 .narou-tweaker .novel-titles#ep-1 .novel-title {
 	font-size: 3em;
 }
+.narou-tweaker .novel-titles#ep-0 .novel-author,
 .narou-tweaker .novel-titles#ep-1 .novel-author {
 	text-align: center;
 	font-size: 2em;

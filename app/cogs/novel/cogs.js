@@ -319,7 +319,7 @@ export function setOptionContentsCorrection(){
         })
 
         function correction(mode){
-            if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){
+            if($("#novel_honbun").length){
                 var mode = defaultValue(mode, {})
 
                 resetCorrection()
