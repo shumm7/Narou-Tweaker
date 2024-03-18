@@ -4,9 +4,15 @@
 }
 
 /* Base */
+:root {
+    max-width: 450px;
+	--rgh-red: #cf222e;
+}
+
 @media not screen and (width: 400px) {
 	/* Excludes Edge */
 	:root {
+		max-width: none;
 		min-width: 550px;
 	}
 }
@@ -15,10 +21,6 @@
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
-}
-	
-:root {
-	--rgh-red: #cf222e;
 }
 
 html::after {
