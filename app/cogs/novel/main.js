@@ -258,7 +258,6 @@ function _header(left, right){
     function resetHeader(left, right){
         $("#novel_header ul li.disabled").removeClass("disabled")
         $("#novel_header_right ul li.disabled").removeClass("disabled")
-        console.log(right)
         $.each(getExceptedIcon([right, left]), (_, cls)=>{
             var elm = $("#novel_header ul li."+cls+", #novel_header_right ul li."+cls)
             if(elm.length){
