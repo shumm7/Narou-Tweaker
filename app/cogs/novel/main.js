@@ -314,8 +314,8 @@ function _header(left, right){
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.novelCustomHeaderLeft!=undefined || changes.novelCustomHeaderRight!=undefined){
             chrome.storage.local.get(["novelCustomHeaderLeft", "novelCustomHeaderRight"], (data) => {
-                header_left = defaultValue(data.novelCustomHeaderLeft, defaultOption.novelCustomHeaderLeft)
-                header_right = defaultValue(data.novelCustomHeaderRight, defaultOption.novelCustomHeaderRight)
+                var header_left = defaultValue(data.novelCustomHeaderLeft, defaultOption.novelCustomHeaderLeft)
+                var header_right = defaultValue(data.novelCustomHeaderRight, defaultOption.novelCustomHeaderRight)
                 resetHeader(header_left, header_right)
             })
         }
