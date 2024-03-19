@@ -80,6 +80,78 @@ export const icon_list = {
 }
 // https://fontawesome.com/search?o=r&m=free
 
+export function setSortable(){
+    Sortable.create($(".draggable_area#left")[0], {
+        handle: '.icon-element',
+        sort: 1,
+        group: {
+            name: 'header-icon',
+            pull: true,
+            put: true
+        },
+        animation: 150,
+        onAdd: function (e) {
+            storeCustomHeader();
+        },
+        onChange: function (e) {
+          storeCustomHeader();
+        },
+    });
+    Sortable.create($(".draggable_area#right")[0], {
+        handle: '.icon-element',
+        sort: 1,
+        group: {
+            name: 'header-icon',
+            pull: true,
+            put: true
+        },
+        animation: 150,
+        onAdd: function (e) {
+          storeCustomHeader();
+        },
+        onChange: function (e) {
+          storeCustomHeader();
+        },
+    });
+    Sortable.create($(".draggable_area#disabled")[0], {
+        handle: '.icon-element',
+        animation: 150,
+        sort: 1,
+        group: {
+            name: 'header-icon',
+            pull: true,
+            put: true,
+        },
+        animation: 150,
+        onAdd: function (e) {
+          storeCustomHeader();
+        },
+        onChange: function (e) {
+          storeCustomHeader();
+        },
+        
+    });
+  }
+
+export function storeCustomHeader(){
+    chrome.storage.local.set(
+        {
+            novelCustomHeaderLeft: getHeaderIconList("left"),
+            novelCustomHeaderRight: getHeaderIconList("right")
+        }
+    )
+
+    function getHeaderIconList(position){
+        if(position!="right" && position!="left" && position!="disabled") { return }
+    
+        var list = []
+        $(".draggable_area#"+position+" .icon-element").each((_, icon)=>{
+            list.push($(icon).attr("id"))
+        })
+        return list;
+    }
+}
+
 export function getExceptedIcon(lists){
     var v = []
     $.each(lists, function(_, list){
@@ -96,24 +168,17 @@ export function getExceptedIcon(lists){
     })
     return ret;
 }
+export function restoreHeaderIconList(left, right){
+    restore(left, "left")
+    restore(right, "right")
+    restore(getExceptedIcon([left, right]), "disabled")
 
-export function getHeaderIconList(position){
-    if(position!="right" && position!="left" && position!="disabled") { return }
-
-    var list = []
-    $(".draggable_area#"+position+" .icon-element").each((_, icon)=>{
-        list.push($(icon).attr("id"))
-    })
-    return list;
-}
-
-export function restoreHeaderIconList(data, position){
-    if(position!="right" && position!="left" && position!="disabled") { return }
-
-    $(".draggable_area#"+position).empty()
-    $.each(data, (_, icon)=>{
-        $(".draggable_area#"+position).append(getIconElement(icon))
-    })
+    function restore(data, position){
+        $(".draggable_area#"+position).empty()
+        $.each(data, (_, icon)=>{
+            $(".draggable_area#"+position).append(getIconElement(icon))
+        })
+    }
 }
 
 function getIconElement(id){

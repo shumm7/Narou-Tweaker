@@ -11,7 +11,7 @@
 
 <div id="js-failed">JavaScript failed to load. Your development build failed or your browser has some issue.</div>
 <form id="options-form" class="detail-view-container">
-	<details id="info" open>
+	<details id="welcome" name="optionPageDetailsWelcome" class="options">
 		<summary><strong>😆 ようこそ</strong></summary>
 		<p>
 		このページでは、Narou Tweakerの設定を変更することが出来ます。<br/>
@@ -23,23 +23,23 @@
 		</p>
 	</details>
 
-	<details id="novel" open>
+	<details id="novel" name="optionPageDetailsNovel" class="options">
 		<summary><strong>📗 小説ページ</strong></summary>
 		<p>小説本文、および、その詳細ページの設定を変更することが出来ます。</p>
 		<p>
-			<input type="checkbox" id="enable_novel_css" class="options toggle" name="enable_novel_css">
+			<input type="checkbox" id="enable_novel_css" class="options toggle" name="novelCustomStyle">
 			<label for="enable_novel_css" class="toggle">モダンなページレイアウト</label>
 		</p>
 
 		<div class="section">
 			<div class="section-header" style="margin-bottom: 1em;">ヘッダ</div>
 			<p>
-				<input type="checkbox" id="enable_novel_header" class="options toggle" name="enable_novel_header">
+				<input type="checkbox" id="enable_novel_header" class="options toggle" name="novelCustomHeader">
 				<label for="enable_novel_header" class="toggle">モダンなヘッダ</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="novel_header_mode" class="options" name="novel_header_mode">
+					<select id="novel_header_mode" class="options" name="novelCustomHeaderMode">
 						<option value="absolute">上部</option>
 						<option value="fixed">追従</option>
 						<option value="scroll">スクロール</option>
@@ -48,7 +48,7 @@
 				<label for="novel_header_mode">ヘッダの追従モード</label>
 			</p>
 			<p>
-				<input type="checkbox" id="enable_novel_header_scroll_hidden" class="options toggle" name="enable_novel_header_scroll_hidden">
+				<input type="checkbox" id="enable_novel_header_scroll_hidden" class="options toggle" name="novelCustomHeaderScrollHidden">
 				<label for="enable_novel_header_scroll_hidden" class="toggle">ヘッダが「スクロール」のとき、初めはヘッダを非表示にする</label>
 			</p>
 			<div style="margin-top: 2em;">
@@ -125,7 +125,7 @@
 		<div class="section">
 			<div class="section-header" style="margin-bottom: 1em;">スキン</div>
 			<p>
-				<input type="checkbox" id="enable_novel_expand_skin" class="options toggle" name="enable_novel_expand_skin">
+				<input type="checkbox" id="enable_novel_expand_skin" class="options toggle" name="novelExpandSkin">
 				<label for="enable_novel_expand_skin" class="toggle">スキンの適用範囲を拡大（推奨）</label>
 			</p>
 			<p>
@@ -145,7 +145,7 @@
 			
 			<div id="skin-option" class="section" style="padding: 1em;">
 				<div id="skin-option--buttons" style="margin-bottom: 1em">
-					<button name="save" type="submit">保存</button>
+					<!--<button name="save" type="button">保存</button>-->
 					<button name="copy" type="button">複製</button>
 					<button name="delete" type="button">削除</button>
 					<span id="skin-option--editting">test</span>
@@ -240,19 +240,19 @@
 		</div>
 	</details>
 
-	<details id="mypage" open>
+	<details id="mypage" name="optionPageDetailsMypage" class="options">
 		<summary><strong>👤 ユーザページ</strong></summary>
 		<p>ユーザページの設定を変更することが出来ます。</p>
 		<p>
-			<input type="checkbox" id="enable_mypage_profile_userid" class="options toggle" name="enable_mypage_profile_userid">
+			<input type="checkbox" id="enable_mypage_profile_userid" class="options toggle" name="mypageShowUserId">
 			<label for="enable_mypage_profile_userid" class="toggle">ユーザIDを表示</label>
 		</p>
 		<p>
-			<input type="checkbox" id="enable_mypage_profile_detail" class="options toggle" name="enable_mypage_profile_detail">
+			<input type="checkbox" id="enable_mypage_profile_detail" class="options toggle" name="mypageProfileStatics">
 			<label for="enable_mypage_profile_detail" class="toggle">ユーザ統計を表示</label>
 		</p>
 		<p>
-			<input type="checkbox" id="enable_mypage_profile_booklist" class="options toggle" name="enable_mypage_profile_booklist">
+			<input type="checkbox" id="enable_mypage_profile_booklist" class="options toggle" name="mypageProfileBooklist">
 			<label for="enable_mypage_profile_booklist" class="toggle">書報を表示</label>
 		</p>
 		<div class="section">
@@ -261,29 +261,29 @@
 				特定の場所に含まれるURLを、自動的にリンク化します。
 			</p>	
 			<p>
-				<input type="checkbox" id="enable_mypage_profile_autourl" class="options toggle" name="enable_mypage_profile_autourl">
+				<input type="checkbox" id="enable_mypage_profile_autourl" class="options toggle" name="mypageProfileAutoURL">
 				<label for="enable_mypage_profile_autourl" class="toggle">プロフィール</label>
 			</p>
 			<p>
-				<input type="checkbox" id="enable_mypage_blog_autourl" class="options toggle" name="enable_mypage_blog_autourl">
+				<input type="checkbox" id="enable_mypage_blog_autourl" class="options toggle" name="mypageBlogAutoURL">
 				<label for="enable_mypage_blog_autourl" class="toggle">活動報告の本文</label>
 			</p>
 			<p>
-				<input type="checkbox" id="enable_mypage_blogcomment_autourl" class="options toggle" name="enable_mypage_blogcomment_autourl">
+				<input type="checkbox" id="enable_mypage_blogcomment_autourl" class="options toggle" name="mypageBlogCommentAutoURL">
 				<label for="enable_mypage_blogcomment_autourl" class="toggle">活動報告のコメント</label>
 			</p>
 		</div>
 	</details>
 
-    <details id="kasasagi" open>
+    <details id="kasasagi" name="optionPageDetailsKasasagi" class="options">
 		<summary><strong>📊 KASASAGI</strong></summary>
 		<p>KASASAGI（アクセス解析ページ）の設定を変更することが出来ます。</p>
 		<p>
-			<input type="checkbox" id="enable_kasasagi_css" class="options toggle" name="enable_kasasagi_css">
+			<input type="checkbox" id="enable_kasasagi_css" class="options toggle" name="kasasagiCustomStyle">
 			<label for="enable_kasasagi_css" class="toggle">モダンなページレイアウト</label>
 		</p>
 		<p>
-			<input type="checkbox" id="enable_kasasagi_export" class="options toggle" name="enable_kasasagi_export">
+			<input type="checkbox" id="enable_kasasagi_export" class="options toggle" name="kasasagiExportButton">
 			<label for="enable_kasasagi_export" class="toggle">データエクスポートボタン</label>
 		</p>
 		
@@ -292,12 +292,12 @@
 			<div class="section">
 				<p><span class="section-subheader">当日・前日</span></p>
 				<p>
-					<input type="checkbox" id="enable_kasasagi_graph_general_day" class="options toggle" name="enable_kasasagi_graph_general_day">
+					<input type="checkbox" id="enable_kasasagi_graph_general_day" class="options toggle" name="kasasagiShowGraph_GeneralDay">
 					<label for="enable_kasasagi_graph_general_day" class="toggle">グラフを表示</label>
 				</p>
 				<p>
 					<div class="dropdown">
-						<select id="kasasagi_graph_type_general_day" class="options" name="kasasagi_graph_type_general_day">
+						<select id="kasasagi_graph_type_general_day" class="options" name="kasasagiGraphType_GeneralDay">
 							<option value="bar">棒グラフ</option>
 							<option value="line">折れ線グラフ</option>
 						</select>	
@@ -305,7 +305,7 @@
 					<label for="enable_kasasagi_graph_general_day">グラフの種類</label>
 				</p>
 				<p>
-					<input type="checkbox" id="enable_kasasagi_table_general_day" class="options toggle" name="enable_kasasagi_table_general_day">
+					<input type="checkbox" id="enable_kasasagi_table_general_day" class="options toggle" name="kasasagiShowTable_GeneralDay">
 					<label for="enable_kasasagi_table_general_day" class="toggle">テーブルを表示/改変</label>
 				</p>
 			</div>
@@ -313,12 +313,12 @@
 			<div class="section">
 				<p><span class="section-subheader">累計</span></p>
 				<p>
-					<input type="checkbox" id="enable_kasasagi_graph_general_total" class="options toggle" name="enable_kasasagi_graph_general_total">
+					<input type="checkbox" id="enable_kasasagi_graph_general_total" class="options toggle" name="kasasagiShowGraph_GeneralTotal">
 					<label for="enable_kasasagi_graph_general_total" class="toggle">グラフを表示</label>
 				</p>
 				<p>
 					<div class="dropdown">
-						<select id="kasasagi_graph_type_general_total" class="options" name="kasasagi_graph_type_general_total">
+						<select id="kasasagi_graph_type_general_total" class="options" name="kasasagiGraphType_GeneralDay">
 							<option value="bar">棒グラフ</option>
 							<option value="line">折れ線グラフ</option>
 						</select>	
@@ -331,21 +331,21 @@
 				<p><span class="section-subheader">作品データ</span></p>
 				<p>なろうAPIを利用して、詳細な作品の統計情報を表示します。</p>
 				<p>
-					<input type="checkbox" id="enable_kasasagi_api_data" class="options toggle" name="enable_kasasagi_api_data">
+					<input type="checkbox" id="enable_kasasagi_api_data" class="options toggle" name="kasasagiShowTable_API">
 					<label for="enable_kasasagi_api_data" class="toggle">表示</label>
 				</p>
 			</div>
 		</div>
 
 		<div class="section">
-			<p><span class="section-header">部分別ユニーク</span></p>
+			<p><span class="section-header">エピソード別ユニーク</span></p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_chapter_unique" class="options toggle" name="enable_kasasagi_graph_chapter_unique">
+				<input type="checkbox" id="enable_kasasagi_graph_chapter_unique" class="options toggle" name="kasasagiShowGraph_ChapterUnique">
 				<label for="enable_kasasagi_graph_chapter_unique" class="toggle">グラフを表示</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="kasasagi_graph_type_chapter_unique" class="options" name="kasasagi_graph_type_chapter_unique">
+					<select id="kasasagi_graph_type_chapter_unique" class="options" name="kasasagiGraphType_ChapterUnique">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
 					</select>	
@@ -353,7 +353,7 @@
 				<label for="kasasagi_graph_chapter_unique">グラフの種類</label>
 			</p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_table_chapter_unique" class="options toggle" name="enable_kasasagi_table_chapter_unique">
+				<input type="checkbox" id="enable_kasasagi_table_chapter_unique" class="options toggle" name="kasasagiShowTable_ChapterUnique">
 				<label for="enable_kasasagi_table_chapter_unique" class="toggle">テーブルを表示/改変</label>
 			</p>
 		</div>
@@ -361,12 +361,12 @@
 		<div class="section">
 			<p><span class="section-header">日別PV</span></p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_day_pv" class="options toggle" name="enable_kasasagi_graph_day_pv">
+				<input type="checkbox" id="enable_kasasagi_graph_day_pv" class="options toggle" name="kasasagiShowGraph_DayPV">
 				<label for="enable_kasasagi_graph_day_pv" class="toggle">グラフを表示</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="kasasagi_graph_type_day_pv" class="options" name="kasasagi_graph_type_day_pv">
+					<select id="kasasagi_graph_type_day_pv" class="options" name="asasagiGraphType_DayPV">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
 					</select>	
@@ -378,12 +378,12 @@
 		<div class="section">
 			<p><span class="section-header">日別ユニーク</span></p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_day_unique" class="options toggle" name="enable_kasasagi_graph_day_unique">
+				<input type="checkbox" id="enable_kasasagi_graph_day_unique" class="options toggle" name="kasasagiShowGraph_DayUnique">
 				<label for="enable_kasasagi_graph_day_unique" class="toggle">グラフを表示</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="kasasagi_graph_type_day_unique" class="options" name="kasasagi_graph_type_day_unique">
+					<select id="kasasagi_graph_type_day_unique" class="options" name="kasasagiGraphType_DayUnique">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
 					</select>	
@@ -395,12 +395,12 @@
 		<div class="section">
 			<p><span class="section-header">月別PV</span></p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_month_pv" class="options toggle" name="enable_kasasagi_graph_month_pv">
+				<input type="checkbox" id="enable_kasasagi_graph_month_pv" class="options toggle" name="kasasagiShowGraph_MonthPV">
 				<label for="enable_kasasagi_graph_month_pv" class="toggle">グラフを表示</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="kasasagi_graph_type_month_pv" class="options" name="kasasagi_graph_type_month_pv">
+					<select id="kasasagi_graph_type_month_pv" class="options" name="kasasagiGraphType_MonthPV">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
 					</select>	
@@ -412,15 +412,15 @@
 		<div class="section">
 			<p><span class="section-header">月別ユニーク</span></p>
 			<p>
-				<input type="checkbox" id="enable_kasasagi_graph_month_unique" class="options toggle" name="enable_kasasagi_graph_month_unique">
+				<input type="checkbox" id="enable_kasasagi_graph_month_unique" class="options toggle" name="kasasagiShowGraph_MonthUnique">
 				<label for="enable_kasasagi_graph_month_unique" class="toggle">グラフを表示</label>
 			</p>
 			<p>
 				<div class="dropdown">
-					<select id="kasasagi_graph_type_month_unique" class="options" name="kasasagi_graph_type_month_unique">
+					<select id="kasasagi_graph_type_month_unique" class="options" name="kasasagiGraphType_MonthUnique">
 						<option value="bar">棒グラフ</option>
 						<option value="line">折れ線グラフ</option>
-					</select>	
+					</select>
 				</div>
 				<label for="kasasagi_graph_month_unique">グラフの種類</label>
 			</p>
@@ -428,7 +428,7 @@
 
 	</details>
 
-	<details id="general" open>
+	<details id="general" name="optionPageDetailsGeneral" class="options">
 		<summary><strong>⚙ 総合</strong></summary>
 		<p>
 			Narou Tweakerの総合設定です。<br>
@@ -461,7 +461,7 @@
 		</div>
 	</details>
 	
-    <details id="debug" open>
+    <details id="debug" name="optionPageDetailsDebug" class="options">
 		<summary><strong>🐜 デバッグ</strong></summary>
 		<p>デバッグ用項目。</p>
 		<p>

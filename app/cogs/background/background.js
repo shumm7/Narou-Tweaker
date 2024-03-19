@@ -1,6 +1,4 @@
-import { defaultFont } from "../../utils/data/default_font.js";
-import { defaultValue } from "../../utils/misc.js";
-import { applyCSS } from "./novel.js";
+import { applyFont, applySkin } from "./novel.js";
 
 /* Message */
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
@@ -33,20 +31,33 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         }, function(downloadId){
             sendResponse({action: "downloads", id: downloadId});
         });
-    }else if(message.action == "apply_skin"){
-        chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {
-            for(let i=0; i<tabs.length; i++){
-                applyCSS(tabs[i], message.data.index, message.data.font)
-            };
-            sendResponse({action: "apply_skin"});
-        });
     }
     return true;
 });
 
-/* Novel */
+/* First Load */
 chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
     if (info.status == 'loading' && tab.url.match(/^https:\/\/ncode.syosetu.com\/*.*/)){
-        applyCSS(tab)
+        applySkin(tab)
+        applyFont(tab)
     };
 });
+
+/* Storage Listener */
+chrome.storage.local.onChanged.addListener(function(changes){
+    if(changes.skins!=undefined || changes.selectedSkin!=undefined){
+        chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {
+            for(let i=0; i<tabs.length; i++){
+                applySkin(tabs[i])
+            };
+        });
+    }
+    if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined){
+        chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {
+            for(let i=0; i<tabs.length; i++){
+                applyFont(tabs[i])
+            };
+        });
+    }
+})
+

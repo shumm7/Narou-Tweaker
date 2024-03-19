@@ -1,60 +1,18 @@
 import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
-import {saveJson, defaultValue} from "../../utils/misc.js"
+import {saveJson} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
 import {getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
 import {makeTable, getNcode, makeGraph} from "./utils.js"
 
-var enable_css
-var enable_export
-var enable_api_data
-var enable_graph_general_day
-var enable_graph_general_total
-var enable_graph_chapter_unique
-var enable_graph_day_pv
-var enable_graph_day_unique
-var enable_graph_month_pv
-var enable_graph_month_unique
-var graph_type_general_day
-var graph_type_general_total
-var graph_type_chapter_unique
-var graph_type_day_pv
-var graph_type_day_unique
-var graph_type_month_pv
-var graph_type_month_unique
-var enable_table_general_day
-var enable_table_chapter_unique
+var option
 
-chrome.storage.local.get(["options"], (data) => {
+chrome.storage.local.get(null, (data) => {
     var path = location.pathname;
     var ncode = getNcode();
-    var options = defaultValue(data.options, {})
-
-    enable_css = defaultValue(options.enable_kasasagi_css, true);
-    enable_export = defaultValue(options.enable_kasasagi_export, true);
-    enable_api_data = defaultValue(options.enable_kasasagi_api_data, true);
-
-    enable_graph_general_day = defaultValue(options.enable_kasasagi_graph_general_day, true);
-    enable_graph_general_total = defaultValue(options.enable_kasasagi_graph_general_total, false);
-    enable_graph_chapter_unique = defaultValue(options.enable_kasasagi_graph_chapter_unique, true);
-    enable_graph_day_pv = defaultValue(options.enable_kasasagi_graph_day_pv, true);
-    enable_graph_day_unique = defaultValue(options.enable_kasasagi_graph_day_unique, true);
-    enable_graph_month_pv = defaultValue(options.enable_kasasagi_graph_month_pv, true);
-    enable_graph_month_unique = defaultValue(options.enable_kasasagi_graph_month_unique, true);
-
-    graph_type_general_day = defaultValue(options.kasasagi_graph_type_general_day, "bar");
-    graph_type_general_total = defaultValue(options.kasasagi_graph_type_general_total, "bar");
-    graph_type_chapter_unique = defaultValue(options.kasasagi_graph_type_chapter_unique, "bar");
-    graph_type_day_pv = defaultValue(options.kasasagi_graph_type_day_pv, "bar");
-    graph_type_day_unique = defaultValue(options.kasasagi_graph_type_day_unique, "bar");
-    graph_type_month_pv = defaultValue(options.kasasagi_graph_type_month_pv, "bar");
-    graph_type_month_unique = defaultValue(options.kasasagi_graph_type_month_unique, "bar");
-
-
-    enable_table_general_day = defaultValue(options.enable_kasasagi_table_general_day, true);
-    enable_table_chapter_unique = defaultValue(options.enable_kasasagi_table_chapter_unique, true);
+    option = data
 
     /* Design */
-    if(enable_css){
+    if(option.kasasagiCustomStyle){
         $("body").addClass("narou-tweaker")
 
         /* Header */
@@ -105,7 +63,7 @@ chrome.storage.local.get(["options"], (data) => {
     if(path.match('/access/top/ncode/.*/')!=null){
         var m = $(".novelview_h3#title")
         if(m.length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var title = m.text().match("『(.*)』")[1]
                 $(".novelview_h3#title").attr("style", "margin-bottom: 10px;")
                 $(".novelview_h3#title").text(title)
@@ -127,7 +85,7 @@ chrome.storage.local.get(["options"], (data) => {
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
         var m = $(".novelview_h3")
         if(m.length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var title = m.text().match("『(.*)』 エピソード別 アクセス解析")[1]
 
                 $(".novelview_h3").text("部分別 ユニークアクセス")
@@ -144,7 +102,7 @@ chrome.storage.local.get(["options"], (data) => {
 
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
         if($(".novelview_h3").length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
                 var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(PV\)/)[2]
 
@@ -156,7 +114,7 @@ chrome.storage.local.get(["options"], (data) => {
         }
     }else if(path.match('/access/monthpv/ncode/.*/')!=null){
         if($(".novelview_h3").length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
                 var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(PV\)/)[2]
 
@@ -168,7 +126,7 @@ chrome.storage.local.get(["options"], (data) => {
         }
     }else if(path.match('/access/dayunique/ncode/.*/')!=null){
         if($(".novelview_h3").length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
                 var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
 
@@ -184,7 +142,7 @@ chrome.storage.local.get(["options"], (data) => {
         }
     }else if(path.match('/access/monthunique/ncode/.*/')!=null){
         if($(".novelview_h3").length){
-            if(enable_css){
+            if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
                 var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
 
@@ -247,7 +205,7 @@ function _general(){
     yesterday_total.smartphone = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(4) td.right").text())
 
     /* Export Button */
-    if(enable_export){
+    if(option.kasasagiExportButton){
         $("#today_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
         $("#export-general-day").on("click", function(){
             var date = getDateString();
@@ -275,7 +233,7 @@ function _general(){
     }
 
     /* Table */
-    if (enable_table_general_day){
+    if (option.kasasagiShowTable_GeneralDay){
         $("#today_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
         $("#yesterday_data .oneday_graph tr:nth-child(1) th[colspan='2']").after('<th colspan="2">積算PV</th>')
 
@@ -303,13 +261,13 @@ function _general(){
     }
 
     /* Graph */
-    if (enable_graph_general_day){
+    if (option.kasasagiShowGraph_GeneralDay){
         $("#yesterday_data").after('<canvas class="access-chart" id="general-day" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
         var graph = null
 
         function generateOnedayGraph(){
             graph = new Chart(document.getElementById("general-day"), {
-                type: graph_type_general_day,
+                type: option.kasasagiGraphType_GeneralDay,
                 data: {
                     labels: hour,
                     datasets: [
@@ -398,13 +356,13 @@ function _general(){
     })
 
     /* Graph */
-    if (enable_graph_general_total){
+    if (option.kasasagiShowGraph_GeneralTotal){
         $("#access_all").append('<canvas class="access-chart" id="general-total" style="width: 100%; margin-top:10px; margin-bottom:10px;"></canvas>')
         var graph = null
 
         function generateOnedayGraph(){
             graph = new Chart(document.getElementById("general-total"), {
-                type: graph_type_general_total,
+                type: option.kasasagiGraphType_GeneralTotal,
                 data: {
                     labels: week,
                     datasets: [
@@ -458,7 +416,7 @@ function _general(){
     }
 
     /* Export Button */
-    if(enable_export){
+    if(option.kasasagiExportButton){
         $("#access_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-total"></div>')
         $("#export-general-total").on("click", function(){
             var date = getDateString();
@@ -484,10 +442,10 @@ function _general(){
 
     /* 作品データ */
     /* Table */
-    if (enable_api_data){
+    if (option.kasasagiShowTable_API){
         $("#access_all").after("<div id='novel_detail'></div>")
         $("#novel_detail").append("<p class='novelview_h3'>作品データ</p>")
-        if(enable_css){
+        if(option.kasasagiCustomStyle){
             $("#novel_detail .novelview_h3").addClass("subtitle")
             $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
             $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
@@ -569,7 +527,7 @@ function _general(){
                     addValue("最終更新日時<br>（システム用）", d.updated_at, d.updated_at)
 
                     /* Export Button */
-                    if(enable_export){
+                    if(option.kasasagiExportButton){
                         $("#novel_detail").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-api-data"></div>')
                         $("#export-api-data").on("click", function(){
                             var date = getDateString();
@@ -625,7 +583,7 @@ function _chapterUnique(){
     }
 
     /* Export Button */
-    if(enable_export){
+    if(option.kasasagiExportButton){
         $("#chapter_graph").after('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-chapter-unique"></div>')
         $("#export-chapter-unique").on("click", function(){
             var date = $("input[name='date']").attr("value")
@@ -642,7 +600,7 @@ function _chapterUnique(){
     }
 
     /* Graph */
-    if (enable_graph_chapter_unique){
+    if (option.kasasagiShowGraph_ChapterUnique){
         var unit = "人"
         var old_graph = $('.chapter-graph-list');
         var labels_show = [];
@@ -661,7 +619,7 @@ function _chapterUnique(){
 
         function generateGraph(min, max){
             graph = new Chart(document.getElementById("chapter"), {
-                type: graph_type_chapter_unique,
+                type: option.kasasagiGraphType_ChapterUnique,
                 data: {
                     labels: labels_show,
                     datasets: [
@@ -729,7 +687,7 @@ function _chapterUnique(){
     }
 
     /* Table */
-    if(enable_table_chapter_unique){
+    if(option.kasasagiShowTable_ChapterUnique){
         var old_graph = $('.chapter-graph-list');
         function makeTableDiffs(id, label, header, data){
             const size = Math.max(header.length, data.length)
@@ -789,32 +747,32 @@ function _chapterUnique(){
 
 /* Day PV */
 function _dayPV(){
-    if(enable_graph_day_pv){
+    if(option.kasasagiShowGraph_DayPV){
         $("form").after('<canvas class="access-chart" id="day_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("day_pv", graph_type_day_pv, "日別（PV）")
+        makeGraph("day_pv", option.kasasagiGraphType_DayPV, "日別（PV）")
     }
 }
 
 /* Day Unique */
 function _dayUnique(){
-    if(enable_graph_day_unique){
+    if(option.kasasagiShowGraph_DayUnique){
         $("form").after('<canvas class="access-chart" id="day_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("day_unique", graph_type_day_unique, "日別（ユニーク）")
+        makeGraph("day_unique", option.kasasagiGraphType_DayUnique, "日別（ユニーク）")
     }
 }
 
 /* Month PV */
 function _monthPV(){
-    if(enable_graph_day_pv){
+    if(option.kasasagiShowGraph_DayPV){
         $("#access_all").after('<canvas class="access-chart" id="month_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("month_pv", graph_type_month_pv, "月別（PV）")
+        makeGraph("month_pv", option.kasasagiGraphType_MonthPV, "月別（PV）")
     }
 }
 
 /* Month Unique */
 function _monthUnique(){
-    if(enable_graph_day_unique){
+    if(option.kasasagiShowGraph_DayUnique){
         $("#access_all").after('<canvas class="access-chart" id="month_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("month_unique", graph_type_month_unique, "月別（ユニーク）")
+        makeGraph("month_unique", option.kasasagiGraphType_MonthUnique, "月別（ユニーク）")
     }
 }

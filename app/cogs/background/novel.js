@@ -1,33 +1,27 @@
-import { defaultFont, defaultFontSettings } from "../../utils/data/default_font.js";
-import { defaultSkins } from "../../utils/data/default_skins.js";
 import { defaultValue, getCSSRule } from "../../utils/misc.js";
+import { defaultOption, localSkins, localFont } from "../../utils/option.js";
 
-export function applyCSS(tab, _index, _font){
-
-    chrome.storage.local.get(["skins", "applied_css", "options", "applied_font", "applied_skin"], (data) => {
+export function applySkin(tab){
+    chrome.storage.local.get(null, (data) => {
         const getRule = getCSSRule
-        data.options = defaultValue(data.options, {})
-        const skin_idx = defaultValue(_index, defaultValue(data.applied_skin, 0))
-        const skins = defaultValue(data.skins, defaultSkins)
-        const skin = defaultValue(skins[skin_idx], defaultSkins[0])
-        const font = defaultValue(_font, defaultValue(data.applied_font, defaultFont))
-        var applied_css = defaultValue(data.applied_css, {})
-        const expand_skin = defaultValue(data.options.enable_novel_expand_skin, true)
-        const novel_css = defaultValue(data.options.enable_novel_css, true)
 
-        if (applied_css[tab.id]!=undefined){
+        const skin_idx = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
+        const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
+        const skin = skins[skin_idx]
+
+        const expand_skin = data.novelExpandSkin
+        const novel_css = data.novelCustomStyle
+
+        if (data.appliedSkinCSS!=undefined){
             chrome.scripting.removeCSS({
-                css: applied_css[tab.id],
+                css: data.appliedSkinCSS,
                 target: {
                     tabId: tab.id,
                 }
             })
-        }else{
-            applied_css = {}
         }
 
         const s = skin.style
-        const f = font
         var rule = ""
 
         /* Skin */
@@ -170,39 +164,69 @@ export function applyCSS(tab, _index, _font){
             {"color": defaultValue(s.sublist.hover, "#444")},
         ])
 
-        /* Font */
-        var font_family
-        if(f["font-family"]=="custom"){
-            font_family = defaultValue(f["custom-font-family"], defaultFont["custom-font-family"])
-        }else{
-            font_family = defaultFontSettings["font-family"][defaultValue(f["font-family"], "gothic")]
-        }   
-        rule += getRule("#novel_honbun", [
-            {"line-height": defaultValue(Number(f["line-height"]), 0) + defaultFontSettings["line-height"] + "%"},
-            {"font-size": defaultValue(Number(f["font-size"]), 0) + defaultFontSettings["font-size"] + "%"},
-        ])
-        rule += getRule("body#container, #novel_color", [
-            {"font-family": font_family},
-            {"text-rendering": defaultValue(f["text-rendering"], defaultFontSettings["text-rendering"])}
-        ])
-        rule += getRule(".novel-option--font-button#gothic", [
-            {"font-family": defaultFontSettings["font-family"].gothic},
-        ])
-        rule += getRule(".novel-option--font-button#serif", [
-            {"font-family": defaultFontSettings["font-family"].serif},
-        ])
-        rule += getRule(".novel-option--font-button#custom", [
-            {"font-family": defaultValue(f["custom-font-family"], defaultFont["custom-font-family"])},
-        ])
-
         chrome.scripting.insertCSS({
             css: rule,
             target: {
                 tabId: tab.id,
             }
         })
-
-        applied_css[tab.id] = rule
-        chrome.storage.local.set({"applied_css": applied_css});
+        data.appliedSkinCSS = rule
+        chrome.storage.local.set({appliedSkinCSS: data.appliedSkinCSS});
     });    
+}
+
+export function applyFont(tab){
+    chrome.storage.local.get(null, (data) => {
+        const getRule = getCSSRule
+        var rule = ""
+
+        if (data.appliedFontCSS!=undefined){
+            chrome.scripting.removeCSS({
+                css: data.appliedFontCSS,
+                target: {
+                    tabId: tab.id,
+                }
+            })
+        }
+
+        var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
+        var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
+        var fontFamily_Current 
+        var fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
+        var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
+        var textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
+
+        if(fontFamily=="custom"){
+            fontFamily_Current = fontFamily_Custom
+        }else{
+            fontFamily_Current = localFont["font-family"][fontFamily]
+        }
+        rule += getRule("#novel_honbun", [
+            {"line-height": lineHeight + "%"},
+            {"font-size": fontSize + "%"},
+        ])
+        rule += getRule("body#container, #novel_color", [
+            {"font-family": fontFamily},
+            {"text-rendering": textRendering}
+        ])
+        rule += getRule(".novel-option--font-button#gothic", [
+            {"font-family": localFont["font-family"].gothic},
+        ])
+        rule += getRule(".novel-option--font-button#serif", [
+            {"font-family": localFont["font-family"].serif},
+        ])
+        rule += getRule(".novel-option--font-button#custom", [
+            {"font-family": fontFamily_Custom},
+        ])
+
+        
+        chrome.scripting.insertCSS({
+            css: rule,
+            target: {
+                tabId: tab.id,
+            }
+        })
+        data.appliedFontCSS = rule
+        chrome.storage.local.set({appliedFontCSS: data.appliedFontCSS});
+    })
 }

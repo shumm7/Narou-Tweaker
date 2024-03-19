@@ -1,11 +1,9 @@
-import { defaultSkins } from "../../utils/data/default_skins.js";
 import {check, defaultValue, saveJson} from "../../utils/misc.js"
-import { saveOptions, saveSkin, saveSkins } from "../../utils/option.js";
+import { defaultOption, updateOption } from "../../utils/option.js";
 import { debug_log, debug_logObject, debug } from "./debug.js";
-import { restoreSkins, restoreSkin, getSkinData, checkSkinNameDuplicate, resetSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
+import { restoreSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
 import { getDateString } from "../../utils/text.js";
-import { defaultFont } from "../../utils/data/default_font.js";
-import { getExceptedIcon, restoreHeaderIconList, getHeaderIconList } from "../../utils/header.js";
+import { restoreHeaderIconList, setSortable } from "../../utils/header.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
@@ -15,179 +13,98 @@ if(!debug){$('#general').remove()}
 
 /* Restore Options */
 function restoreOptions(){
-  chrome.storage.local.get(["options", "skins", "applied_skin", "applied_font"], function(data) {
-    var options = defaultValue(data.options, {})
+  var currentOptionVersion = defaultOption.optionsVersion
 
-    /* Novel */
-    check('#enable_novel_css', options.enable_novel_css, true);
-    check('#enable_novel_header', options.enable_novel_header, true);
-    check('#enable_novel_header_scroll_hidden', options.enable_novel_header_scroll_hidden, false);
-    check('#enable_novel_expand_skin', options.enable_novel_expand_skin, true);
-    $("#novel_header_mode").val(defaultValue(options.novel_header_mode, "scroll"));
+  chrome.storage.local.get(null, function(data) {
+    if(currentOptionVersion != data.optionsVersion){
+      data = updateOption(data)
+    }
 
-    /* Header */
-    var right_header = defaultValue(options.novel_header_icon_right, ["siori", "option"])
-    var left_header = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
-    restoreHeaderIconList(left_header, "left")
-    restoreHeaderIconList(right_header, "right")
-    restoreHeaderIconList(getExceptedIcon([left_header, right_header]), "disabled")
+    $.each(data, function(name, value){
+      var elm = $(".options[name='"+name+"']")
+      if(elm.length){
+        const tagName = elm.prop("tagName").toLowerCase()
+        const type = elm.prop("type")
+        
+        if(tagName == "input" && type=="checkbox"){ // Toggle
+          check("#" + elm.prop("id"), value, defaultOption[name])
+        }
+        else if(tagName=="select"){ // DropDown
+          elm.val(defaultValue(value, defaultOption[name]))
+        }
+        else if(tagName=="details"){ // Details
+          elm.prop("open", defaultValue(value, defaultOption[name]))
+        }
+      }
+    })
+
+    var right_header = defaultValue(data.novelCustomHeaderRight, defaultOption["novelCustomHeaderRight"])
+    var left_header = defaultValue(data.novelCustomHeaderLeft, defaultOption["novelCustomHeaderLeft"])
+    restoreHeaderIconList(left_header, right_header)
     setSortable()
 
-    /* Mypage */
-    check('#enable_mypage_profile_userid', options.enable_mypage_profile_userid, true);
-    check('#enable_mypage_profile_detail', options.enable_mypage_profile_detail, true);
-    check('#enable_mypage_profile_booklist', options.enable_mypage_profile_booklist, true);
-
-    check('#enable_mypage_profile_autourl', options.enable_mypage_profile_autourl, true);
-    check('#enable_mypage_blog_autourl', options.enable_mypage_blog_autourl, true);
-    check('#enable_mypage_blogcomment_autourl', options.enable_mypage_blogcomment_autourl, false);
-
-    /* Kasasagi */
-    check('#enable_kasasagi_css', options.enable_kasasagi_css, true);
-    check('#enable_kasasagi_export', options.enable_kasasagi_export, true);
-    check('#enable_kasasagi_api_data', options.enable_kasasagi_api_data, true);
-
-    check('#enable_kasasagi_graph_general_day', options.enable_kasasagi_graph_general_day, true);
-    check('#enable_kasasagi_graph_general_total', options.enable_kasasagi_graph_general_total, false);
-    check('#enable_kasasagi_graph_chapter_unique', options.enable_kasasagi_graph_chapter_unique, true);
-    check('#enable_kasasagi_graph_day_pv', options.enable_kasasagi_graph_day_pv, true);
-    check('#enable_kasasagi_graph_day_unique', options.enable_kasasagi_graph_day_unique, true);
-    check('#enable_kasasagi_graph_month_pv', options.enable_kasasagi_graph_month_pv, true);
-    check('#enable_kasasagi_graph_month_unique', options.enable_kasasagi_graph_month_unique, true);
-
-    $("#kasasagi_graph_type_general_day").val(defaultValue(options.kasasagi_graph_type_general_day, "bar"))
-    $("#kasasagi_graph_type_general_total").val(defaultValue(options.kasasagi_graph_type_general_total, "bar"))
-    $("#kasasagi_graph_type_chapter_unique").val(defaultValue(options.kasasagi_graph_type_chapter_unique, "bar"))
-    $("#kasasagi_graph_type_day_pv").val(defaultValue(options.kasasagi_graph_type_day_pv, "bar"))
-    $("#kasasagi_graph_type_day_unique").val(defaultValue(options.kasasagi_graph_type_day_unique, "bar"))
-    $("#kasasagi_graph_type_month_pv").val(defaultValue(options.kasasagi_graph_type_month_pv, "bar"))
-    $("#kasasagi_graph_type_month_unique").val(defaultValue(options.kasasagi_graph_type_month_unique, "bar"))
-
-    check('#enable_kasasagi_table_general_day', options.enable_kasasagi_table_general_day, true);
-    check('#enable_kasasagi_table_chapter_unique', options.enable_kasasagi_table_chapter_unique, true);
-    
-
     /* Skins */
-    restoreSkins(defaultValue(data.skins, defaultSkins), defaultValue(data.applied_skin, 0))
-    restoreFont(defaultValue(data.applied_font, defaultFont))
+    restoreSkins(data.skins, data.selectedSkin)
+
+    /* Font */
+    restoreFont()
   });
-}
-
-/* Reset Options */
-function resetOptions(){
-  saveOptions({});
-  restoreOptions();
-}
-
-/* Save Options */
-function storeOptions(){
-  var options = {
-    /* Novel */
-    enable_novel_css: $("#enable_novel_css").prop('checked'),
-    enable_novel_header: $("#enable_novel_header").prop('checked'),
-    enable_novel_header_scroll_hidden: $("#enable_novel_header_scroll_hidden").prop('checked'),
-    novel_header_mode: $("#novel_header_mode").val(),
-    enable_novel_expand_skin: $("#enable_novel_expand_skin").prop('checked'),
-
-    novel_header_icon_left: getHeaderIconList("left"),
-    novel_header_icon_right: getHeaderIconList("right"),
-
-    /* Mypage */
-    enable_mypage_profile_userid: $("#enable_mypage_profile_userid").prop('checked'),
-    enable_mypage_profile_detail: $("#enable_mypage_profile_detail").prop('checked'),
-    enable_mypage_profile_booklist: $("#enable_mypage_profile_booklist").prop('checked'),
-
-    enable_mypage_profile_autourl: $("#enable_mypage_profile_autourl").prop('checked'),
-    enable_mypage_blog_autourl: $("#enable_mypage_blog_autourl").prop('checked'),
-    enable_mypage_blogcomment_autourl: $("#enable_mypage_blogcomment_autourl").prop('checked'),
-
-    /* Kasasagi */
-    enable_kasasagi_css: $("#enable_kasasagi_css").prop('checked'),
-    enable_kasasagi_export: $("#enable_kasasagi_export").prop('checked'),
-    enable_kasasagi_graph_general_day: $("#enable_kasasagi_graph_general_day").prop('checked'),
-    enable_kasasagi_graph_general_total: $("#enable_kasasagi_graph_general_total").prop('checked'),
-    enable_kasasagi_graph_chapter_unique: $("#enable_kasasagi_graph_chapter_unique").prop('checked'),
-    enable_kasasagi_graph_day_pv: $("#enable_kasasagi_graph_day_pv").prop('checked'),
-    enable_kasasagi_graph_day_unique: $("#enable_kasasagi_graph_day_unique").prop('checked'),
-    enable_kasasagi_graph_month_pv: $("#enable_kasasagi_graph_month_pv").prop('checked'),
-    enable_kasasagi_graph_month_unique: $("#enable_kasasagi_graph_month_unique").prop('checked'),
-    kasasagi_graph_type_general_day: $("#kasasagi_graph_type_general_day").val(),
-    kasasagi_graph_type_general_total: $("#kasasagi_graph_type_general_total").val(),
-    kasasagi_graph_type_chapter_unique: $("#kasasagi_graph_type_chapter_unique").val(),
-    kasasagi_graph_type_day_pv: $("#kasasagi_graph_type_day_pv").val(),
-    kasasagi_graph_type_day_unique: $("#kasasagi_graph_type_day_unique").val(),
-    kasasagi_graph_type_month_pv: $("#kasasagi_graph_type_month_pv").val(),
-    kasasagi_graph_type_month_unique: $("#kasasagi_graph_type_month_unique").val(),
-    enable_kasasagi_table_general_day: $("#enable_kasasagi_table_general_day").prop('checked'),
-    enable_kasasagi_table_chapter_unique: $("#enable_kasasagi_table_chapter_unique").prop('checked'),
-    enable_kasasagi_api_data: $("#enable_kasasagi_api_data").prop('checked'),
-  }
-  saveOptions(options);
 }
 
 /* Import Options */
 function importOptions(options){
-  if(options){
-    if(options.options!=undefined){
-      saveOptions(options.options)
-    }
-    if(options.applied_skin!=undefined){
-      saveSkin(options.applied_skin)
-    }
-    if(options.skins!=undefined){
-      saveSkins(options.skins)
-    }
-    if(options.applied_font!=undefined){
-      saveFont(options.applied_font)
-    }
-    restoreOptions();
-    restoreSkins();
-  }
+  // WIP
 }
 
 /* Sync */
 function syncSetOptions(){
-  chrome.storage.local.get(["options", "skins", "applied_skin", "applied_font"], (data) => {
-    chrome.storage.sync.set({
-      options: data.options,
-      skins: data.skins,
-      applied_skin: data.applied_skin,
-      applied_font: data.applied_font
-    })
+  chrome.storage.local.get(null, (data) => {
+    chrome.storage.sync.set(data)
   })
 }
 
 function syncGetOptions(){
-  chrome.storage.sync.get(["options", "skins", "applied_skin", "applied_font"], (data) => {
-    chrome.storage.local.set({
-      options: data.options,
-      skins: data.skins,
-      applied_skin: data.applied_skin,
-      applied_font: data.applied_font
-    })
-    restoreOptions();
-    restoreSkins();
-  })
+  // WIP
 }
 
-
 /* Events */
+/* First Load */
 document.addEventListener('DOMContentLoaded', restoreOptions);
-
-$(".options").each(function() {
-  $(this).on("click", function(){
-    storeOptions();
-  });
-});
 
 /* Skin Change */
 addSkinEditButtonEvent()
 addFontEditButtonEvent()
+
+/* On Click Elements */
+$(".options").on("click", function(){
+  const name = $(this).prop("name")
+  const tagName = $(this).prop("tagName").toLowerCase()
+  const type = $(this).prop("type")
+
+  var value = {}
+  if(tagName=="input" && type=="checkbox"){
+    value[name] = $(this).prop('checked')
+  }else if(tagName=="select"){
+    value[name] = $(this).val()
+  }else if(tagName=="details"){
+    value[name] = !$(this).prop("open")
+  }
+
+  if(value[name]!=undefined){
+    chrome.storage.local.set(value);
+  }
+});
+
+/* Buttons */
 $("#reset-skin").on("click", (e)=>{
-  resetSkins();
+  chrome.storage.local.set({selectedSkin: defaultOption.selectedSkin, skins: defaultOption.skins}, function(data) {
+    restoreSkins(defaultOption.Skin, defaultOption.selectedSkin)
+  })
 })
 $("#reset-options").on("click", (e)=>{
-  resetOptions()
+  chrome.storage.local.set(defaultOption, function(e){
+    restoreOptions();
+  })
 })
 $("#sync-set-options").on("click", (e)=>{
   syncSetOptions()
@@ -205,62 +122,7 @@ $("#import-options").on("change", (evt)=>{
   var reader = new FileReader();
   reader.onload = function(e){
       var data = JSON.parse(e.target.result)
-      //console.log(data)
       importOptions(data)
   }
   reader.readAsText(f);
 })
-
-/* Header */
-function setSortable(){
-  Sortable.create($(".draggable_area#left")[0], {
-      handle: '.icon-element',
-      sort: 1,
-      group: {
-          name: 'header-icon',
-          pull: true,
-          put: true
-      },
-      animation: 150,
-      onAdd: function (e) {
-          storeOptions();
-      },
-      onChange: function (e) {
-        storeOptions();
-      },
-  });
-  Sortable.create($(".draggable_area#right")[0], {
-      handle: '.icon-element',
-      sort: 1,
-      group: {
-          name: 'header-icon',
-          pull: true,
-          put: true
-      },
-      animation: 150,
-      onAdd: function (e) {
-          storeOptions();
-      },
-      onChange: function (e) {
-        storeOptions();
-      },
-  });
-  Sortable.create($(".draggable_area#disabled")[0], {
-      handle: '.icon-element',
-      animation: 150,
-      sort: 1,
-      group: {
-          name: 'header-icon',
-          pull: true,
-          put: true,
-      },
-      animation: 150,
-      onAdd: function (e) {
-        storeOptions();
-      },
-      onChange: function (e) {
-        storeOptions();
-      },
-      
-  });
-}

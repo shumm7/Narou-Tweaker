@@ -3,24 +3,10 @@ import { defaultValue } from "../../utils/misc.js";
 
 var path = location.pathname;
 
-var enable_profile_detail
-var enable_profile_userid
-var enable_profile_booklist
+var option
 
-var enable_blog_autourl
-var enable_blog_comment_autourl
-var enable_profile_autourl
-
-chrome.storage.local.get(["options"], (data) => {
-    var options = defaultValue(data.options, {})
-
-    enable_profile_detail = defaultValue(options.enable_mypage_profile_detail, true);
-    enable_profile_userid = defaultValue(options.enable_mypage_profile_userid, true);
-    enable_profile_booklist = defaultValue(options.enable_mypage_profile_booklist, true);
-
-    enable_blog_autourl = defaultValue(options.enable_mypage_blog_autourl, true);
-    enable_blog_comment_autourl = defaultValue(options.enable_mypage_blogcomment_autourl, false);
-    enable_profile_autourl = defaultValue(options.enable_mypage_profile_autourl, true);
+chrome.storage.local.get(null, (data) => {
+    option = data
 
     if($(".p-userheader__tab").length){
         /* General */
@@ -39,7 +25,7 @@ chrome.storage.local.get(["options"], (data) => {
 }); 
 
 function _general(){
-    if (enable_profile_userid){
+    if (option.mypageShowUserId){
         var userid = $(".p-userheader__tab .p-userheader__tab-list-item:nth-child(1) a").attr("href").match("https://mypage.syosetu.com/(.*)/")[1].trim()
         if(userid!=undefined){
             $(".p-userheader .p-userheader__inner .p-userheader__username").after("<div class='p-userheader__userid'>" + userid + "</div>")
@@ -49,7 +35,7 @@ function _general(){
 
 function _blog(){
     /* Blog Auto Url */
-    if(enable_blog_autourl){
+    if(option.mypageBlogAutoURL){
         var header = $('.p-blogview__info')[0].outerHTML;
         $('.p-blogview__info').remove()
         var lines = $('.c-panel__item').html().split(/<br\s*\/?>/i);
@@ -67,7 +53,7 @@ function _blog(){
     }
 
     /* Blog Comment Auto Url */
-    if(enable_blog_comment_autourl){
+    if(option.mypageBlogCommentAutoURL){
         $('.p-blogview__comment-main').each(function(_) {
             var comment = $(this)
             lines = comment.html().split(/<br\s*\/?>/i);
@@ -89,7 +75,7 @@ function _profile(){
     $(".l-main .c-panel").attr("id", "introduction")
 
     /* User Detail */
-    if(enable_profile_detail){
+    if(option.mypageProfileStatics){
         var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
         chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/userapi/api/?out=json&libtype=2&userid=" + userid, options: {'method': 'GET'}}}, function(response) {
         if(response){
@@ -115,7 +101,7 @@ function _profile(){
     }
 
     /* Auto Url */
-    if(enable_profile_autourl){
+    if(option.mypageProfileAutoURL){
         $('.c-panel__item').each(function(_) {
             var comment = $(this)
             var lines = comment.html().split(/<br\s*\/?>/i);
@@ -133,7 +119,7 @@ function _profile(){
     }
 
     /* Book List */
-    if(enable_profile_booklist){
+    if(option.mypageProfileBooklist){
         const max_amount = 5
         var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
         
