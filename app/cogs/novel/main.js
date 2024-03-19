@@ -57,7 +57,7 @@ chrome.storage.local.get(["options"], (data) => {
         $("body").addClass("narou-tweaker")
         $("#footer").remove()
 
-        if(pageType=="novel"){
+        if(checkPageDetail()=="novel"){
             _novelPage()
         }
     }
