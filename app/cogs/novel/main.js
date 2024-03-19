@@ -1,6 +1,6 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
-import { getEpisode, getNcode } from "./utils.js";
+import { checkPageDetail, getEpisode, getNcode, showToast } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
 
@@ -57,7 +57,7 @@ chrome.storage.local.get(["options"], (data) => {
         $("body").addClass("narou-tweaker")
         $("#footer").remove()
 
-        if($("#novel_honbun").length){
+        if(pageType=="novel"){
             _novelPage()
         }
     }
@@ -69,6 +69,7 @@ function _header(left, right){
     var ncode = getNcode()
     var index = ncodeToIndex(ncode)
     var episode = getEpisode()
+    var pageType = checkPageDetail()
     var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
     var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
     const disabled = getExceptedIcon([right, left])
@@ -175,7 +176,7 @@ function _header(left, right){
     }
 
     elm = $("#novel_header li.bookmark")
-    if(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/) && !elm.length && !$("#novel_honbun").length){
+    if(pageType=="top" && !elm.length){
         elm = $(".novellingindex_bookmarker_no")
         if(elm.length){
             var link = elm.find("a").prop("href")
@@ -222,9 +223,9 @@ function _header(left, right){
     $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
 
     /* 誤字報告 */
-    if(episode==0 && $("#novel_honbun").length){
+    if(episode==0 && pageType=="novel"){
         $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
-    }else if(episode>0){
+    }else if(pageType=="novel"){
         $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
     }
 
@@ -264,6 +265,37 @@ function _header(left, right){
         }
     })
 
+    /* Socials */
+    var meta_title = $("head meta[property='og:title']").prop("content")
+    var meta_url = $("head meta[property='og:url']").prop("content")
+
+    /* Twitter */
+    if(meta_title!=undefined && meta_url!=undefined){
+        var uri
+        if(pageType=="novel"){
+            uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
+        }else if(pageType=="top" || pageType=="novel" && episode==0){
+            uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
+        }else if(pageType=="info"){
+            uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=「`+meta_title+`」読んだ！&url=`+meta_url
+        }
+
+        if(uri!=undefined){
+            $("#novel_header ul").append('<li class="twitter"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-x-twitter"></i><span class="title">ポスト</span></a></li>')
+        }
+    }
+
+    /* コピー */
+    /*
+    if(meta_url!=undefined){
+        $("#novel_header ul").append('<li class="copy-url"><a><i class="fa-solid fa-link"></i><span class="title">URLをコピー</span></a></li>')
+        $("#novel_header ul li.copy-url>a").on("click", function(){
+            navigator.clipboard.writeText(meta_url)
+            showToast("コピーしました")
+        })
+    }
+    */
+    
     /* Set Position */
     function resetHeader(left, right){
         $("#novel_header ul li.disabled").removeClass("disabled")

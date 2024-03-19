@@ -63,6 +63,16 @@ export const icon_list = {
         icon: "fa-solid fa-bullhorn",
         text: "情報提供"
     },
+    /*
+    "copy-url": {
+        icon: "fa-solid fa-link",
+        text: "URLをコピー"
+    },
+    */
+    twitter: {
+        icon: "fa-brands fa-x-twitter",
+        text: "X"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"
