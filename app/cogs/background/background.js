@@ -1,4 +1,14 @@
+import { updateOption } from "../../utils/option.js";
 import { applyFont, applySkin } from "./novel.js";
+
+/* Update Option Data */
+updateOption()
+chrome.storage.local.onChanged.addListener(function(changes){
+    if(changes.optionsVersion!=undefined){
+        console.log("Narou Tweaker's option was updated: "+changes.optionsVersion.oldValue+" -> "+changes.optionsVersion.newValue)
+        console.log(changes)
+    }
+})
 
 /* Message */
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
@@ -43,7 +53,7 @@ chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
     };
 });
 
-/* Storage Listener */
+/* Storage Listener ( for Skin ) */
 chrome.storage.local.onChanged.addListener(function(changes){
     if(changes.skins!=undefined || changes.selectedSkin!=undefined){
         chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {

@@ -1,5 +1,5 @@
 export const defaultOption = {
-    optionsVersion: 1,
+    optionsVersion: 0,
 
     /* Option Page */
     optionPageDetailsWelcome: true,
@@ -8,7 +8,6 @@ export const defaultOption = {
     optionPageDetailsKasasagi: false,
     optionPageDetailsGeneral: false,
     optionPageDetailsDebug: false,
-
 
     /* Novel */
     novelCustomStyle: true,
@@ -310,15 +309,22 @@ export const localFont = {
     "text-rendering": "optimizeLegibility"
 }
 
-export function updateOption(data){
-    var o = defaultOption
-    $.each(o, function(key, value){
-        if(data[key]!=undefined){
-            if( typeof(value) == typeof(data[key]) )
-            o[key] = data[key]
+export function updateOption(force){
+    chrome.storage.local.get(null, function(data) {
+        var currentOptionVersion = defaultOption.optionsVersion
+        if(currentOptionVersion != data.optionsVersion || force){
+            var o = defaultOption
+            Object.keys(o).forEach(function(key){
+                if(data[key]!=undefined){
+                    if( typeof(o[key]) == typeof(data[key]) ){
+                        o[key] = data[key]
+                    }
+                }
+            })
+
+            chrome.storage.local.set(o, function(){})
         }
     })
-    return o
 }
 
 export function saveFont(font){
