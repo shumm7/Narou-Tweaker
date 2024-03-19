@@ -77,6 +77,7 @@
         "cogs/novel/main.js",
         "cogs/novel/cogs.js",
         "cogs/novel/utils.js",
+        "cogs/novel/correction.js",
         "cogs/mypage/main.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js"
