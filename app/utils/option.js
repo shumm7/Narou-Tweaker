@@ -65,6 +65,7 @@ export const defaultOption = {
     fontLineHeight: 0,
     fontFontFamily_Custom: `"Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
     fontTextRendering: "optimizeLegibility",
+    fontWidth: 1,
 
     /* Correction */
     correctionIndent: false,
@@ -306,7 +307,8 @@ export const localFont = {
     },
     "font-size": 100,
     "line-height": 180,
-    "text-rendering": "optimizeLegibility"
+    "text-rendering": "optimizeLegibility",
+    "width": 600
 }
 
 export function updateOption(force){

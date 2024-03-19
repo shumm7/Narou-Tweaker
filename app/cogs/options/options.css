@@ -285,7 +285,8 @@ input[type=file] {
 	background: #fafafa;
 }
 #font-size,
-#line-height {
+#line-height,
+#page-width {
 	display: flex;
 	flex-flow: row;
 	align-items: center;
@@ -293,7 +294,8 @@ input[type=file] {
 	margin-bottom: 1em;
 }
 #font-size-input,
-#line-height-input {
+#line-height-input,
+#page-width-input {
 	font-size: 110%;
 	border: 1px solid #ddd;
 	text-align: center;

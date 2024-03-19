@@ -85,7 +85,8 @@ function restoreSkinOptions(skins, selected){
     $("#novel-option--skin-description").text(defaultValue(skins[selected], {}).description)
 }
 
-function restoreFontOptions(fontFamily, fontSize, lineHeight){
+/* フォント設定の値を設定 */
+function restoreFontOptions(fontFamily, fontSize, lineHeight, width){
     $(".novel-option--font-button.active").removeClass("active")
     $(".novel-option--font-button#"+defaultValue(fontFamily, defaultOption.fontFontFamily)).addClass("active")
 
@@ -96,6 +97,9 @@ function restoreFontOptions(fontFamily, fontSize, lineHeight){
     var lHeight = defaultValue(lineHeight, defaultOption.fontLineHeight)
     if(lHeight>0) {lHeight = "+"+lHeight}
     $("#novel-option--line-height-input").val(lHeight)
+
+    var pWidth = defaultValue(width, defaultOption.fontWidth)
+    $("#novel-option--page-width-input").val(Number((pWidth * 100).toFixed(1)))
 }
 
 export function setOptionContentsDisplay(id){
@@ -142,22 +146,32 @@ export function setOptionContentsDisplay(id){
                         </div>
                     <div class='novel-option-subheader'>サイズ</div>
                         <div id="novel-option--font-size">
+                            <div style="margin: 0 .5em;">+</div>
                             <div class="novel-option--font-number-change-button" id="novel-option--font-size-minus">-</div>
-                            <input name="novel-option--font-size-input" class="novel-option--textfield" type="text" id="novel-option--font-size-input" min="-100" max="200">
+                            <input name="fontFontSize" class="novel-option--textfield" type="text" id="novel-option--font-size-input">
                             <div class="novel-option--font-number-change-button" id="novel-option--font-size-plus">+</div>
                             <div style="margin: 0 .5em;">%</div>
                         </div>
-                    <div class='novel-option-subheader'>字間</div>
+                    <div class='novel-option-subheader'>行間</div>
                         <div id="novel-option--line-height">
+                            <div style="margin: 0 .5em;">+</div>
                             <div class="novel-option--font-number-change-button" id="novel-option--line-height-minus">-</div>
-                            <input name="novel-option--line-height-input" class="novel-option--textfield" type="text" id="novel-option--line-height-input" min="-100" max="200">
+                            <input name="fontLineHeight" class="novel-option--textfield" type="text" id="novel-option--line-height-input">
                             <div class="novel-option--font-number-change-button" id="novel-option--line-height-plus">+</div>
+                            <div style="margin: 0 .5em;">%</div>
+                        </div>
+                    <div class='novel-option-subheader'>横幅</div>
+                        <div id="novel-option--page-width">
+                            <div style="margin: 0 .5em;">×</div>
+                            <div class="novel-option--font-number-change-button" id="novel-option--page-width-minus">-</div>
+                            <input name="fontWidth" class="novel-option--textfield" type="text" id="novel-option--page-width-input">
+                            <div class="novel-option--font-number-change-button" id="novel-option--page-width-plus">+</div>
                             <div style="margin: 0 .5em;">%</div>
                         </div>
                 </div>
             </div>
         `)
-        restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight)
+        restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
 
         /* Font Family */
         $(".novel-option--font-button-box").click(function() {
@@ -186,7 +200,7 @@ export function setOptionContentsDisplay(id){
             if(isNaN(value)){
                 value = 0
             }else{
-                value -= 10 - Math.abs(value % 10)
+                value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
             }
             
             setFontSizeValue(value)
@@ -196,7 +210,7 @@ export function setOptionContentsDisplay(id){
             if(isNaN(value)){
                 value = 0
             }else{
-                value += 10 - Math.abs(value % 10)
+                value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
             }
             setFontSizeValue(value)
         })
@@ -226,7 +240,7 @@ export function setOptionContentsDisplay(id){
             if(isNaN(value)){
                 value = 0
             }else{
-                value -= 10 - Math.abs(value % 10)
+                value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
             }
             
             setLineHeightValue(value)
@@ -236,7 +250,7 @@ export function setOptionContentsDisplay(id){
             if(isNaN(value)){
                 value = 0
             }else{
-                value += 10 - Math.abs(value % 10)
+                value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
             }
             setLineHeightValue(value)
         })
@@ -247,13 +261,52 @@ export function setOptionContentsDisplay(id){
             }
             setLineHeightValue(value)
         })
+
+        /* Width */
+        function setWidthValue(value){
+            if(value < 0){
+                value = 0
+            }else if(value > 1000){
+                value = 100
+            }
+            $("#novel-option--page-width-input").val(value)
+
+            chrome.storage.local.set({fontWidth: Number(value)/100}, () => {})
+        }
+
+        $("#novel-option--page-width-minus").click(function(){
+            var value = Number($("#novel-option--page-width-input").val())
+            if(isNaN(value)){
+                value = 0
+            }else{
+                value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
+            }
+            
+            setWidthValue(value)
+        })
+        $("#novel-option--page-width-plus").click(function(){
+            var value = Number($("#novel-option--page-width-input").val())
+            if(isNaN(value)){
+                value = 0
+            }else{
+                value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
+            }
+            setWidthValue(value)
+        })
+        $("#novel-option--page-width-input").change(function(){
+            var value = Number($("#novel-option--page-width-input").val())
+            if(isNaN(value)){
+                value = 0
+            }
+            setWidthValue(value)
+        })
     })
 
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined){
+        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
             chrome.storage.local.get(null, (data)=>{
-                restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight)
+                restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
             })
         }
     })

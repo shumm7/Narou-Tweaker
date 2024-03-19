@@ -195,6 +195,7 @@ export function applyFont(tab){
         var fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
         var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
         var textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
+        var width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
 
         if(fontFamily=="custom"){
             fontFamily_Current = fontFamily_Custom
@@ -218,6 +219,11 @@ export function applyFont(tab){
         rule += getRule(".novel-option--font-button#custom", [
             {"font-family": fontFamily_Custom},
         ])
+        rule += getRule("#novel_color, #novel_honbun", [
+            {"max-width": "100vw"},
+            {"width": width + "px"}
+        ])
+        
 
         
         chrome.scripting.insertCSS({

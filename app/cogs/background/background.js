@@ -62,7 +62,7 @@ chrome.storage.local.onChanged.addListener(function(changes){
             };
         });
     }
-    if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined){
+    if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
         chrome.tabs.query({lastFocusedWindow: true, url: "https://ncode.syosetu.com/*"}, tabs => {
             for(let i=0; i<tabs.length; i++){
                 applyFont(tabs[i])

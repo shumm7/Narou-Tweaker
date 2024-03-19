@@ -240,6 +240,9 @@ export function restoreFont(){
     var lHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight)
     if(lHeight>0) {lHeight = "+"+lHeight}
     $("#line-height-input").val(lHeight)
+
+    var pWidth = defaultValue(data.fontWidth, defaultOption.fontWidth)
+    $("#page-width-input").val(Number((pWidth * 100).toFixed(1)))
   })
 
   showFontPreview()
@@ -289,7 +292,7 @@ export function addFontEditButtonEvent(){
       if(isNaN(value)){
           value = 0
       }else{
-          value -= 10 - Math.abs(value % 10)
+        value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
       }
       
       setFontSizeValue(value)
@@ -299,7 +302,7 @@ export function addFontEditButtonEvent(){
       if(isNaN(value)){
           value = 0
       }else{
-          value += 10 - Math.abs(value % 10)
+        value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
       }
       setFontSizeValue(value)
   })
@@ -339,7 +342,7 @@ export function addFontEditButtonEvent(){
       if(isNaN(value)){
           value = 0
       }else{
-          value += 10 - Math.abs(value % 10)
+        value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
       }
       setLineHeightValue(value)
   })
@@ -351,9 +354,48 @@ export function addFontEditButtonEvent(){
       setLineHeightValue(value)
   })
 
+  /* Width */
+  function setWidthValue(value){
+    if(value < 0){
+        value = 0
+    }else if(value > 1000){
+        value = 100
+    }
+    $("#page-width-input").val(value)
+
+    chrome.storage.local.set({fontWidth: Number(value)/100}, function(){});
+  }
+
+  $("#page-width-minus").click(function(){
+      var value = Number($("#page-width-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+        value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
+      }
+      
+      setWidthValue(value)
+  })
+  $("#page-width-plus").click(function(){
+      var value = Number($("#page-width-input").val())
+      if(isNaN(value)){
+          value = 0
+      }else{
+        value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
+      }
+      setWidthValue(value)
+  })
+  $("#page-width-input").change(function(){
+      var value = Number($("#page-width-input").val())
+      if(isNaN(value)){
+          value = 0
+      }
+      setWidthValue(value)
+  })
+
   /* Storage Listener */
   chrome.storage.local.onChanged.addListener(function(changes){
-    if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined){
+    if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
       restoreFont()
     }
   })
