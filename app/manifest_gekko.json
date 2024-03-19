@@ -117,9 +117,7 @@
   "host_permissions": [
     "https://syosetu.com/*",
     "https://api.syosetu.com/*",
-    "https://ncode.syosetu.com/*",
-    "https://mypage.syosetu.com/*",
-    "https://kasasagi.hinaproject.com/*"
+    "https://ncode.syosetu.com/*"
   ],
   "browser_specific_settings": {
     "gecko": { "id": "{29c0c2f1-2092-4808-9709-6aa5fb8562d7}" }

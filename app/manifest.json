@@ -117,8 +117,6 @@
   "host_permissions": [
     "https://syosetu.com/*",
     "https://api.syosetu.com/*",
-    "https://ncode.syosetu.com/*",
-    "https://mypage.syosetu.com/*",
-    "https://kasasagi.hinaproject.com/*"
+    "https://ncode.syosetu.com/*"
   ]
 }
