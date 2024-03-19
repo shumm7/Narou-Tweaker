@@ -172,10 +172,10 @@ li.search #novel_header_search_field {
 }
 #novel-option {
     top: 0;
-    right: calc(-300px - env(safe-area-inset-left) - 50px);
+    right: calc(min(-300px, -33vw) - env(safe-area-inset-left) - 50px);
     height: 100%;
     position: fixed;
-    width: calc(300px + env(safe-area-inset-left));
+    width: calc(max(300px, 33vw) + env(safe-area-inset-left));
     background: #efefef;
     z-index: 50;
     filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
@@ -183,7 +183,7 @@ li.search #novel_header_search_field {
 	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 }
 #novel-option.show {
-    transform: translateX(calc(-300px - env(safe-area-inset-left) - 50px));
+    transform: translateX(calc(min(-300px, -33vw) - env(safe-area-inset-left) - 50px));
 }
 #novel-option--header {
     height: 70px;
