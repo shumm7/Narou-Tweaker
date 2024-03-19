@@ -222,9 +222,9 @@ function _header(left, right){
     $("#novel_header ul").append('<li class="report"><a href="https://syosetu.com/ihantsuhou/input/ncode/'+index+'/"><i class="fa-solid fa-bullhorn"></i><span class="title">情報提供</span></a></li>')
 
     /* 編集 */
-    $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
-    if(!is_logined_and_self || isDisabled("edit")){
-        $("#novel_header ul li.edit").addClass("disabled")
+    
+    if(!is_logined_and_self){
+        $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
     }
 
     /* 検索 */
