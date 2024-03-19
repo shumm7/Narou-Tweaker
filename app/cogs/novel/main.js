@@ -393,9 +393,8 @@ function _novelPage(){
         title = $(".novel_title")
     }else{
         title = $("#container .contents1 a[href='/"+ncode+"/']")
-        chapter = $("#container .contents1 .chapter_title")
-        if(chapter.length){
-            chapter = chapter.text()
+        if($("#container .contents1 .chapter_title").length){
+            chapter = $("#container .contents1 .chapter_title").text()
         }
 
     }
