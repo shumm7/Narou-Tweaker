@@ -24,26 +24,26 @@ export function changeHeaderScrollMode(header_mode, elm, hidden_begin){
                 $(elm + '.header-mode--scroll').addClass('hide');
             }
         }
-
-        var pos = $(window).scrollTop();
-        $(window).on("scroll", function(){
-            if(Math.abs($(this).scrollTop() - pos)>100 ){
-                if($(this).scrollTop() < pos ){
-                    $(elm + '.header-mode--scroll').removeClass('hide'); /* Scroll Up */
-                }else{
-                    $(elm + '.header-mode--scroll').addClass('hide'); /* Scroll Down */
-                    $("li.search.show").removeClass("show")
-                }
-                pos = $(this).scrollTop();
-            }
-        });
     }
     changeMode(header_mode, elm, hidden_begin)
+
+    var pos = $(window).scrollTop();
+    $(window).on("scroll", function(){
+        if(Math.abs($(this).scrollTop() - pos)>100 ){
+            if($(this).scrollTop() < pos ){
+                $(elm + '.header-mode--scroll').removeClass('hide'); /* Scroll Up */
+            }else{
+                $(elm + '.header-mode--scroll').addClass('hide'); /* Scroll Down */
+                $("li.search.show").removeClass("show")
+            }
+            pos = $(this).scrollTop();
+        }
+    });
 
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.novelCustomHeaderMode!=undefined){
             chrome.storage.local.get(["novelCustomHeaderMode", "novelCustomHeaderScrollHidden"], function(data){
-                changeMode(data.novelCustomHeaderMode.newValue, elm, data.novelCustomHeaderScrollHidden)
+                changeMode(data.novelCustomHeaderMode, elm, data.novelCustomHeaderScrollHidden)
             })
         }
     })
