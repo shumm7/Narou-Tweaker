@@ -3,32 +3,21 @@ import { defaultValue, check } from "../../utils/misc.js";
 import { checkPageDetail, getEpisode, getNcode, showToast } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
+import { defaultOption } from "../../utils/option.js";
 
-var header_mode
-var novel_css
-var novel_header
-var novel_header_scroll_hidden
-var header_left
-var header_right
+var option
 
-chrome.storage.local.get(["options"], (data) => {
-    var options = defaultValue(data.options, {})
-
-    header_mode = defaultValue(options.novel_header_mode, "scroll");
-    novel_css = defaultValue(options.enable_novel_css, true)
-    novel_header = defaultValue(options.enable_novel_header, true)
-    novel_header_scroll_hidden = defaultValue(options.enable_novel_header_scroll_hidden, false)
-    header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
-    header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
+chrome.storage.local.get(null, (data) => {
+    option = data
     
-    if(novel_header){
+    if(option.novelCustomHeader){
         $("body").addClass("narou-tweaker-header")
         $("#novelnavi_right").remove()
         /* Header */
-        _header(header_left, header_right)
+        _header(option.novelCustomHeaderLeft, option.novelCustomHeaderRight)
         
         /* Header */
-        changeHeaderScrollMode(header_mode, "#novel_header_right", novel_header_scroll_hidden);
+        changeHeaderScrollMode(option.novelCustomHeaderMode, "#novel_header_right", option.novelCustomHeaderScrollHidden);
     }else{
         $("#novelnavi_right").empty()
         $("#novelnavi_right").append(`<div class="option" id="menu_on" style="position: fixed;">設定</div>`)
@@ -51,9 +40,9 @@ chrome.storage.local.get(["options"], (data) => {
     _optionModal();
 
     /* Header */
-    changeHeaderScrollMode(header_mode, "#novel_header", novel_header_scroll_hidden);
+    changeHeaderScrollMode(option.novelCustomHeaderMode, "#novel_header", option.novelCustomHeaderScrollHidden);
 
-    if(novel_css){
+    if(option.novelCustomStyle){
         $("body").addClass("narou-tweaker")
         $("#footer").remove()
 
@@ -72,7 +61,7 @@ function _header(left, right){
     var pageType = checkPageDetail()
     var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
     var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
-    const disabled = getExceptedIcon([right, left])
+    const disabled = getExceptedIcon([left, right])
     const isDisabled = key => {return disabled.includes(key)}
 
     var text
@@ -319,16 +308,17 @@ function _header(left, right){
             }
         })
     }
-
     
     resetHeader(left, right)
-    chrome.storage.onChanged.addListener(function(changes, areaName){
-        chrome.storage.local.get(["options"], (data) => {
-            var options = defaultValue(data.options, {})
-            header_left = defaultValue(options.novel_header_icon_left, ["home", "info", "impression", "review", "pdf", "booklist"])
-            header_right = defaultValue(options.novel_header_icon_right, ["siori", "option"])
-            resetHeader(header_left, header_right)
-        })
+
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.novelCustomHeaderLeft!=undefined || changes.novelCustomHeaderRight!=undefined){
+            chrome.storage.local.get(["novelCustomHeaderLeft", "novelCustomHeaderRight"], (data) => {
+                header_left = defaultValue(data.novelCustomHeaderLeft, defaultOption.novelCustomHeaderLeft)
+                header_right = defaultValue(data.novelCustomHeaderRight, defaultOption.novelCustomHeaderRight)
+                resetHeader(header_left, header_right)
+            })
+        }
     })
 
 }
@@ -361,20 +351,25 @@ function _optionModal(){
         $("#novel-option--header ul").append("<li class='novel-option--header-tab novel-option-tab-"+index+"'><button type='button'><span class='novel-option--header-tab'>"+title+"</span></button></li>")
         $("#novel-option--contents").append("<div class='novel-option--content novel-option-tab-"+index+"'></div>")
         $(".novel-option--header-tab.novel-option-tab-"+index+" button").on("click", ()=>{
-            $("#novel-option .novel-option--header-tab").removeClass("active")
-            $("#novel-option .novel-option--content").removeClass("active")
-            $("#novel-option .novel-option-tab-" + index).addClass("active")
+            chrome.storage.local.set({"novelOptionModalSelected": index}, function(){
+                $("#novel-option .novel-option--header-tab").removeClass("active")
+                $("#novel-option .novel-option--content").removeClass("active")
+                $("#novel-option .novel-option-tab-" + index).addClass("active")
+            })
         })
     }
 
-    addTab(1, "表示")
-    $("#novel-option .novel-option-tab-1").addClass("active")
-    setOptionContentsDisplay()
+    addTab(0, "表示")
+    setOptionContentsDisplay(0)
 
-    addTab(2, "文章校正")
-    setOptionContentsCorrection()
+    addTab(1, "文章校正")
+    setOptionContentsCorrection(1)
 
-    //addTab(3, "統計")
+    //addTab(2, "統計")
+
+    chrome.storage.local.get(["novelOptionModalSelected"], function(data){
+        $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, defaultOption.novelOptionModalSelected)).addClass("active")
+    })
 
 }
 
@@ -393,9 +388,8 @@ function _novelPage(){
         title = $(".novel_title")
     }else{
         title = $("#container .contents1 a[href='/"+ncode+"/']")
-        chapter = $("#container .contents1 .chapter_title")
-        if(chapter.length){
-            chapter = chapter.text()
+        if($("#container .contents1 .chapter_title").length){
+            chapter = $("#container .contents1 .chapter_title").text()
         }
 
     }

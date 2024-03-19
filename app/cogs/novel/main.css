@@ -319,7 +319,8 @@ li.search #novel_header_search_field {
 	background: #fafafa;
 }
 #novel-option--font-size,
-#novel-option--line-height {
+#novel-option--line-height,
+#novel-option--page-width {
 	display: flex;
 	flex-flow: row;
 	align-items: center;
@@ -327,8 +328,10 @@ li.search #novel_header_search_field {
 	margin-bottom: 1em;
 }
 #novel-option--font-size-input,
-#novel-option--line-height-input {
+#novel-option--line-height-input,
+#novel-option--page-width-input {
 	font-size: 110%;
+	width: 50%;
 	border: 1px solid #ddd;
 	text-align: center;
 	height: 30px;

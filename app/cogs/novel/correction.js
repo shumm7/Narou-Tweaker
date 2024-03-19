@@ -1,20 +1,19 @@
 import { check, defaultValue } from "../../utils/misc.js"
+import { defaultOption } from "../../utils/option.js";
 
 const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
 const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
-export function restoreCorrectionMode(e){
-    chrome.storage.local.get(["correction_mode"], (data) => {
-        var mode = defaultValue(data.correction_mode, {})
-
-        check("#novel-option--correction-indent", mode.indent, false)
-        check("#novel-option--correction-normalize-ellipses", mode.normalize_ellipses, false)
-        check("#novel-option--correction-normalize-dash", mode.normalize_dash, false)
-        check("#novel-option--correction-repeated-symbols", mode.repeated_symbols, false)
-        check("#novel-option--correction-period-with-brackets", mode.period_with_brackets, false)
-        check("#novel-option--correction-no-space-exclamation", mode.no_space_exclamation, false)
-        check("#novel-option--correction-odd-ellipses-and-dash", mode.odd_ellipses_and_dash, false)
+export function restoreCorrectionMode(){
+    chrome.storage.local.get(null, (data) => {
+        check("#novel-option--correction-indent", data.correctionIndent, defaultOption.correctionIndent)
+        check("#novel-option--correction-normalize-ellipses", data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)
+        check("#novel-option--correction-normalize-dash", data.correctionNormalizeDash, defaultOption.correctionNormalizeDash)
+        check("#novel-option--correction-repeated-symbols", data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)
+        check("#novel-option--correction-period-with-brackets", data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)
+        check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
+        check("#novel-option--correction-odd-ellipses-and-dash", data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)
     });
 }
 
