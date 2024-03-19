@@ -90,8 +90,20 @@ $(".options").on("click", function(){
     value[name] = $(this).prop('checked')
   }else if(tagName=="select"){
     value[name] = $(this).val()
-  }else if(tagName=="details"){
-    value[name] = !$(this).prop("open")
+  }
+
+  if(value[name]!=undefined){
+    chrome.storage.local.set(value);
+  }
+});
+$("details.options").on("toggle", function(){
+  const name = $(this).prop("name")
+  const tagName = $(this).prop("tagName").toLowerCase()
+  const type = $(this).prop("type")
+
+  var value = {}
+  if(tagName=="details"){
+    value[name] = $(this).prop("open")
   }
 
   if(value[name]!=undefined){
