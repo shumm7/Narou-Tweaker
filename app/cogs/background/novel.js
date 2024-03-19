@@ -206,7 +206,7 @@ export function applyFont(tab){
             {"line-height": lineHeight + "%"},
             {"font-size": fontSize + "%"},
         ])
-        rule += getRule("body#container, #novel_color", [
+        rule += getRule("body#container, #novel_color, #contents_main", [
             {"font-family": fontFamily},
             {"text-rendering": textRendering}
         ])

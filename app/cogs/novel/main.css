@@ -9,6 +9,7 @@
 	margin: 2em .3em;
 	z-index: 10;
 	background: none !important;
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 
 }
 .narou-tweaker-header #novel_header {
@@ -179,6 +180,7 @@ li.search #novel_header_search_field {
     z-index: 50;
     filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
     transition: .3s;
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 }
 #novel-option.show {
     transform: translateX(calc(-300px - env(safe-area-inset-left) - 50px));
