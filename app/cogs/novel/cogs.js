@@ -1,6 +1,6 @@
 import { defaultValue } from "../../utils/misc.js"
 import { localFont, localSkins, defaultOption } from "../../utils/option.js";
-import { correctionIndent, correctionNoSpaceExclamation, correctionNormalizeDash, correctionNormalizeEllipses, correctionOddEllipsesAndDash, correctionPeriodWithBrackets, correctionRepeatedSymbols, resetCorrection, restoreCorrectionMode } from "./correction.js";
+import { correction, restoreCorrectionMode } from "./correction.js";
 
 /* Header */
 export function changeHeaderScrollMode(header_mode, elm, hidden_begin){
@@ -368,37 +368,20 @@ export function setOptionContentsCorrection(id){
         })
     })
 
-    function correction(){
-        if($("#novel_honbun").length){
-            chrome.storage.local.get(null, (data) => {
-                resetCorrection()
-                if(defaultValue(data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)){
-                    correctionNormalizeEllipses()
-                }
-                if(defaultValue(data.correctionNormalizeDash, defaultOption.correctionNormalizeDash)){
-                    correctionNormalizeDash()
-                }
-                if(defaultValue(data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)){
-                    correctionRepeatedSymbols()
-                }
-                if(defaultValue(data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)){
-                    correctionPeriodWithBrackets()
-                }
-                if(defaultValue(data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)){
-                    correctionNoSpaceExclamation()
-                }
-                if(defaultValue(data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)){
-                    correctionOddEllipsesAndDash()
-                }
-
-                
-                if(defaultValue(data.correctionIndent, defaultOption.correctionIndent)){
-                    correctionIndent()
-                }
-            })
+    /* Storage Listener */
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.correctionIndent!=undefined ||
+            changes.correctionNormalizeEllipses!=undefined ||
+            changes.correctionNormalizeDash!=undefined ||
+            changes.correctionRepeatedSymbols!=undefined ||
+            changes.correctionPeriodWithBrackets!=undefined ||
+            changes.correctionNoSpaceExclamation!=undefined ||
+            changes.correctionOddEllipsesAndDash!=undefined ||
+            changes.correctionReplacePatterns!=undefined 
+        ){
+            restoreCorrectionMode()
+            correction()
         }
-    }
-
-
+    })
     
 }

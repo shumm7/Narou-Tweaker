@@ -12,27 +12,37 @@ if(!debug){$('#general').remove()}
 
 
 /* Restore Options */
+function restoreValues(data){
+  $.each(data, function(name, value){
+    var elm = $(".options[name='"+name+"']")
+    if(elm.length){
+      const tagName = elm.prop("tagName").toLowerCase()
+      const type = elm.prop("type")
+      
+      if(tagName == "input" && type=="checkbox"){ // Toggle
+        check("#" + elm.prop("id"), value, defaultOption[name])
+      }
+      else if(tagName=="select"){ // DropDown
+        elm.val(defaultValue(value, defaultOption[name]))
+      }
+      else if(tagName=="details"){ // Details
+        elm.prop("open", defaultValue(value, defaultOption[name]))
+      }
+    }
+  })
+}
+
 function restoreOptions(){
   updateOption()
 
-  chrome.storage.local.get(null, function(data) {
-    $.each(data, function(name, value){
-      var elm = $(".options[name='"+name+"']")
-      if(elm.length){
-        const tagName = elm.prop("tagName").toLowerCase()
-        const type = elm.prop("type")
-        
-        if(tagName == "input" && type=="checkbox"){ // Toggle
-          check("#" + elm.prop("id"), value, defaultOption[name])
-        }
-        else if(tagName=="select"){ // DropDown
-          elm.val(defaultValue(value, defaultOption[name]))
-        }
-        else if(tagName=="details"){ // Details
-          elm.prop("open", defaultValue(value, defaultOption[name]))
-        }
-      }
+  chrome.storage.local.onChanged.addListener(function(changes){
+    chrome.storage.local.get(null, function(data) {
+      restoreValues(data)
     })
+  })
+
+  chrome.storage.local.get(null, function(data) {
+    restoreValues(data)
 
     var right_header = defaultValue(data.novelCustomHeaderRight, defaultOption["novelCustomHeaderRight"])
     var left_header = defaultValue(data.novelCustomHeaderLeft, defaultOption["novelCustomHeaderLeft"])

@@ -5,6 +5,37 @@ const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
 const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
+export function correction(){
+    if($("#novel_honbun").length){
+        chrome.storage.local.get(null, (data) => {
+            resetCorrection()
+            if(defaultValue(data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)){
+                correctionNormalizeEllipses()
+            }
+            if(defaultValue(data.correctionNormalizeDash, defaultOption.correctionNormalizeDash)){
+                correctionNormalizeDash()
+            }
+            if(defaultValue(data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)){
+                correctionRepeatedSymbols()
+            }
+            if(defaultValue(data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)){
+                correctionPeriodWithBrackets()
+            }
+            if(defaultValue(data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)){
+                correctionNoSpaceExclamation()
+            }
+            if(defaultValue(data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)){
+                correctionOddEllipsesAndDash()
+            }
+
+            
+            if(defaultValue(data.correctionIndent, defaultOption.correctionIndent)){
+                correctionIndent()
+            }
+        })
+    }
+}
+
 export function restoreCorrectionMode(){
     chrome.storage.local.get(null, (data) => {
         check("#novel-option--correction-indent", data.correctionIndent, defaultOption.correctionIndent)
@@ -44,7 +75,8 @@ function replaceText(_elem, regexp, replace, func) {
     });
 }
 
-export function correctionIndent(){
+
+function correctionIndent(){
     /* 行頭の段落下げ */
     $("#novel_honbun > p.replaced").each(function(){
         var text = $(this).text()
@@ -64,7 +96,7 @@ export function correctionIndent(){
     })
 }
 
-export function correctionNormalizeEllipses(){
+function correctionNormalizeEllipses(){
     /* 中点を用いた三点リーダー(・・・) → 三点リーダー（……） */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match(/・{2,}/)){
@@ -80,7 +112,7 @@ export function correctionNormalizeEllipses(){
     })
 }
 
-export function correctionNormalizeDash(){
+function correctionNormalizeDash(){
     /* 罫線を用いたダッシュ(─) → 全角ダッシュ（―） */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match(/─/)){
@@ -89,7 +121,7 @@ export function correctionNormalizeDash(){
     })
 }
 
-export function correctionRepeatedSymbols(){
+function correctionRepeatedSymbols(){
     /* 句読点の繰り返し（。。/、、） */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match(/、{2,}/)){
@@ -100,7 +132,7 @@ export function correctionRepeatedSymbols(){
     })
 }
 
-export function correctionPeriodWithBrackets(){
+function correctionPeriodWithBrackets(){
     /* 句点と括弧（。」） */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match(new RegExp(`[。]([`+bracket_end+`])`))){
@@ -109,7 +141,7 @@ export function correctionPeriodWithBrackets(){
     })
 }
 
-export function correctionNoSpaceExclamation(){
+function correctionNoSpaceExclamation(){
     /* 空白を開けない感嘆符（！） */
     $("#novel_honbun > p.replaced").each(function(){
         const id = $(this).prop("id")
@@ -119,7 +151,7 @@ export function correctionNoSpaceExclamation(){
     })
 }
 
-export function correctionOddEllipsesAndDash(){
+function correctionOddEllipsesAndDash(){
     /* 奇数個の三点リーダー・ダッシュ */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match( /…+/ )){ //三点リーダー …

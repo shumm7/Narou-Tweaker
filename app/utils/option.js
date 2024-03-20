@@ -51,10 +51,10 @@ export const defaultOption = {
     kasasagiShowTable_API: true,
     kasasagiShowTable_GeneralDay: true,
     kasasagiShowTable_ChapterUnique: true,
-    kasasagiShowTable_DayPV: true, //Disabled
-    kasasagiShowTable_DayUnique: true, //Disabled
-    kasasagiShowTable_MonthPV: true, //Disabled
-    kasasagiShowTable_MonthUnique: true, //Disabled
+    kasasagiShowTable_DayPV: true, //Unused
+    kasasagiShowTable_DayUnique: true, //Unused
+    kasasagiShowTable_MonthPV: true, //Unused
+    kasasagiShowTable_MonthUnique: true, //Unused
 
     /* Skin */
     skins: [],
@@ -76,6 +76,7 @@ export const defaultOption = {
     correctionPeriodWithBrackets: false,
     correctionNoSpaceExclamation: false,
     correctionOddEllipsesAndDash: false,
+    correctionReplacePatterns: [],
 }
 
 export const localSkins = [
