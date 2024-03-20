@@ -1,8 +1,32 @@
-export function replaceUrl(_elem) {
+import { narouNetwrokUrlPattern } from "./option.js";
+
+export function replaceUrl(_elem, isWarning) {
+
+    function isUrlWhitelisted(url){
+        const whitelist = narouNetwrokUrlPattern
+        var res = false
+        $.each(whitelist, function(_, value){
+            if(url.match(value)){
+                res = true
+                return false
+            }
+        })
+        return res
+    }
+
     function replaceUrlHtml(str){
         let regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g;
         let regexp_makeLink = function(all, url, h, href) {
-            return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+            if(isWarning){
+                if(isUrlWhitelisted(url)){
+                    return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+                }else{
+                    href = "https://mypage.syosetu.com/?jumplink=h" + encodeURI(href)
+                    return '<a href="'+href+'" target="_blank">' + url + '</a>';
+                }
+            }else{
+                return '<a href="h' + href + '" target="_blank">' + url + '</a>';
+            }
         }
         
         return str.replace(regexp_url, regexp_makeLink);

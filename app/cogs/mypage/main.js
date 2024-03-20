@@ -13,22 +13,33 @@ chrome.storage.local.get(null, (data) => {
         _general()
 
         /* Blog Page */
-        if(path.match('/mypageblog/view/userid/.*/blogkey/.*/')!=null){
+        if(path.match('/mypageblog/view/userid/.*/blogkey/.*/*')!=null){
             _blog()
         }
 
         /* User Profile */
-        else if(path.match('/mypage/profile/userid/.*/')!=null){
+        else if(path.match('/mypage/profile/userid/.*/*')!=null){
             _profile()
         }
     }
 }); 
 
 function _general(){
+    /* Show User ID */
     if (option.mypageShowUserId){
         var userid = $(".p-userheader__tab .p-userheader__tab-list-item:nth-child(1) a").attr("href").match("https://mypage.syosetu.com/(.*)/")[1].trim()
         if(userid!=undefined){
             $(".p-userheader .p-userheader__inner .p-userheader__username").after("<div class='p-userheader__userid'>" + userid + "</div>")
+        }
+    }
+    
+    /* Disable External Link Warning */
+    if (option.mypageDisableExternalURLWarning){
+        var span = $(".p-userheader__tooltip .p-userheader__tooltip-item a > span.p-icon--earth")
+        if(span.length){
+            var url = decodeURIComponent(span.parent().prop("href"))
+            url = url.replace(/^https:\/\/mypage\.syosetu\.com\/\?jumplink\=(.*)/g, "$1")
+            span.parent().prop("href", url)
         }
     }
 }
@@ -48,7 +59,7 @@ function _blog(){
 
         $('.c-panel__item p').each(function (idx, elem) {
             let str = $(elem).html();
-            replaceUrl(elem)
+            replaceUrl(elem, !option.mypageDisableExternalURLWarning)
         });
     }
 
@@ -65,7 +76,7 @@ function _blog(){
             
             comment.children("p").each(function (idx, elem) {
                 let str = $(elem).html();
-                replaceUrl(elem)
+                replaceUrl(elem, !option.mypageDisableExternalURLWarning)
             });
         });
     }
@@ -73,6 +84,16 @@ function _blog(){
 
 function _profile(){
     $(".l-main .c-panel").attr("id", "introduction")
+
+    /* Disable External Link Warning */
+    if (option.mypageDisableExternalURLWarning){
+        var elm = $(".c-side-list .c-side-list__item dl dd a")
+        if(elm.length){
+            var url = decodeURIComponent(elm.prop("href"))
+            url = url.replace(/^https:\/\/mypage\.syosetu\.com\/\?jumplink\=(.*)/g, "$1")
+            elm.prop("href", url)
+        }
+    }
 
     /* User Detail */
     if(option.mypageProfileStatics){
@@ -82,13 +103,13 @@ function _profile(){
             if(response.success && response.format=="json"){
                 var d = response.result[1]
                 if(d!=undefined){
-                    $(".c-panel__headline").attr("id", "user-detail")
+                    $(".c-panel__headline").attr("id", "user-detail-header")
                     $(".c-side-list").attr("id", "user-detail")
                     $(".c-side-list#user-detail").prepend('<div class="c-side-list__item"><dl><dt>ヨミガナ</dt><dd>'+d.yomikata+'</dd></dl></div>')
                     $(".c-side-list#user-detail").prepend('<div class="c-side-list__item"><dl><dt>ユーザ名</dt><dd>'+d.name+'</dd></dl></div>')
                     
-                    $(".c-side-list#user-detail").after("<div class='c-panel__headline' id='user-stats'>ユーザ統計</div>")
-                    $(".c-panel__headline#user-stats").after("<div class='c-side-list' id='user-stats'></div>")
+                    $(".c-side-list#user-detail").after("<div class='c-panel__headline' id='user-stats-header'>ユーザ統計</div>")
+                    $(".c-panel__headline#user-stats-header").after("<div class='c-side-list' id='user-stats'></div>")
                     $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>作品数</dt><dd>'+d.novel_cnt.toLocaleString()+'</dd></dl></div>')
                     $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>レビュー数</dt><dd>'+d.review_cnt.toLocaleString()+'</dd></dl></div>')
                     $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>総文字数</dt><dd>'+d.novel_length.toLocaleString()+'</dd></dl></div>')
@@ -113,7 +134,7 @@ function _profile(){
             
             comment.children("p").each(function (idx, elem) {
                 let str = $(elem).html();
-                replaceUrl(elem)
+                replaceUrl(elem, !option.mypageDisableExternalURLWarning)
             });
         });
     }

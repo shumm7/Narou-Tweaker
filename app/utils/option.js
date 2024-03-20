@@ -1,5 +1,5 @@
 export const defaultOption = {
-    optionsVersion: 0,
+    optionsVersion: 1,
 
     /* Option Page */
     optionPageDetailsWelcome: true,
@@ -23,6 +23,7 @@ export const defaultOption = {
     mypageShowUserId: true,
     mypageProfileStatics: true,
     mypageProfileBooklist: true,
+    mypageDisableExternalURLWarning: false,
     mypageProfileAutoURL: true,
     mypageBlogAutoURL: true,
     mypageBlogCommentAutoURL: false,
@@ -310,6 +311,11 @@ export const localFont = {
     "text-rendering": "optimizeLegibility",
     "width": 600
 }
+
+export const narouNetwrokUrlPattern = [
+    /^(h?)(ttps?:\/\/(.*)\.syosetu\.com)/,
+    /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
+]
 
 export function updateOption(force){
     chrome.storage.local.get(null, function(data) {
