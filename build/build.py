@@ -48,7 +48,7 @@ def replaceText(codeDir, before, after):
     for current_dir, sub_dirs, files_list in os.walk(codeDir): 
         for file_name in files_list: 
             ext = os.path.splitext(file_name)[1].lower()
-            if(not current_dir.startswith(f"{codeDir}libs")):
+            if(not current_dir.startswith(f"{codeDir}libs") or current_dir.startswith(f"{codeDir}libs\\font-awesome")):
                 if(ext==".js" or ext==".css"):
                     replaceWordsInFile(os.path.join(current_dir,file_name), before, after)
 
