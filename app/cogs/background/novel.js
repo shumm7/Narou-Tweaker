@@ -219,9 +219,13 @@ export function applyFont(tab){
         rule += getRule(".novel-option--font-button#custom", [
             {"font-family": fontFamily_Custom},
         ])
-        rule += getRule("#novel_color, #novel_honbun", [
+        rule += getRule("#novel_honbun, #novel_a, #novel_p", [
             {"max-width": "100vw"},
             {"width": width + "px"}
+        ])
+        rule += getRule("#novel_color, .contents1", [
+            {"max-width": "100vw"},
+            {"width": "calc(max("+width+"px, 730px))"}
         ])
         
 
