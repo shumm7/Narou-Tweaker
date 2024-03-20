@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             sendResponse({action: "downloads", id: downloadId});
         });
     }
-    return true;
+    sendResponse({})
 });
 
 /* First Load */
