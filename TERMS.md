@@ -1,12 +1,12 @@
 # Terms and Privacy Policy
-These Terms of Use define the terms and conditions of use for the browser extension "Narou Tweaker".
-この利用規約は、ブラウザ拡張機能「Narou Tweaker」の利用条件を定めるものです。
-
-Please read this these Terms carefully. IF YOU DO NOT AGREE WITH THE TERMS, PLEASE DO NOT ACCESS THE APPLICATION.
-本ソフトウェアを利用される場合は、本規約をよくお読みください。ご同意いただけない場合は、本アプリケーションにアクセスしないでください。
-
-Please also refer to the [Terms of Use](https://syosetu.com/site/rule/) and [Privacy Policy](https://syosetu.com/site/privacy/) of [Novelist](https://syosetu.com/) and its related sites.
-また「[小説家になろう](https://syosetu.com/)」及びその関連サイトの[利用規約](https://syosetu.com/site/rule/)、[プライバシーポリシー](https://syosetu.com/site/privacy/)も併せてご確認ください。
+These Terms of Use define the terms and conditions of use for the browser extension "Narou Tweaker".  
+この利用規約は、ブラウザ拡張機能「Narou Tweaker」の利用条件を定めるものです。  
+  
+Please read this these Terms carefully. IF YOU DO NOT AGREE WITH THE TERMS, PLEASE DO NOT ACCESS THE APPLICATION.  
+本ソフトウェアを利用される場合は、本規約をよくお読みください。ご同意いただけない場合は、本アプリケーションにアクセスしないでください。  
+  
+Please also refer to the [Terms of Use](https://syosetu.com/site/rule/) and [Privacy Policy](https://syosetu.com/site/privacy/) of [Novelist](https://syosetu.com/) and its related sites.  
+また「[小説家になろう](https://syosetu.com/)」及びその関連サイトの[利用規約](https://syosetu.com/site/rule/)、[プライバシーポリシー](https://syosetu.com/site/privacy/)も併せてご確認ください。  
 
 ## Privacy
 * This software does NOT collect or store any personal information.<br>この拡張機能は、個人情報を収集・保存することはありません。
