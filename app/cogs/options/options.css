@@ -302,3 +302,67 @@ input[type=file] {
 	height: 30px;
 	padding: 0;
 }
+
+/* Replace Patterns (Correction) */
+.correction-replace--pattern-box,
+#correction-replace--pattern-box-addition {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	max-width: 100%;
+	padding: .5em;
+	margin: .5em 0;
+	background: #eee;
+	border-radius: .5em;
+}
+#correction-replace--pattern-box-addition {
+	justify-content: center;
+}
+#correction-replace--pattern-box-addition:hover {
+	transition: background-color .3s ease;
+	background-color:#ddd;
+	cursor: pointer;
+}
+
+.correction-replace--fields {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.correction-replace--fields span {
+	margin: 0 .3em;
+	font-size: 16px;
+}
+.correction-replace--move-buttons {
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+	margin: 0 .3em;
+}
+.correction-replace--move-buttons .correction-replace--move-back {
+	margin-top: -50%;
+}
+.correction-replace--icons {
+	transition: color .3s ease;
+	color:#bbb;
+	font-size: 16px;
+	margin: 0 .2em;
+	cursor: pointer;
+}
+.correction-replace--icons:hover {
+	color:#999;
+}
+.correction-replace--icons.enabled {
+	color:rgb(51, 154, 244);
+}
+.correction-replace--icons.enabled:hover {
+	color:rgb(0, 58, 133);
+}
+.correction-replace--active-button {
+	margin-left: .5em;
+	margin-right: .3em;
+}
+.correction-replace--remove-button {
+	margin-left: auto;
+	margin-right: .5em;
+}
