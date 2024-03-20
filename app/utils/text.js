@@ -45,6 +45,22 @@ export function replaceUrl(_elem, isWarning) {
     });
 }
 
+export function escapeHtml(string){
+    if(typeof string !== 'string') {
+        return string;
+    }
+    return string.replace(/[&'`"<>]/g, function(match) {
+        return {
+        '&': '&amp;',
+        "'": '&#x27;',
+        '`': '&#x60;',
+        '"': '&quot;',
+        '<': '&lt;',
+        '>': '&gt;',
+        }[match]
+    });
+}
+
 export function getDateStringJapanese(date){
     if(date==undefined){date = new Date();}
     const year = date.getFullYear();

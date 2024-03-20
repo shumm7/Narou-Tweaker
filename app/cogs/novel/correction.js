@@ -1,5 +1,6 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption } from "../../utils/option.js";
+import { escapeHtml } from "../../utils/text.js";
 
 const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
 const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
@@ -191,9 +192,9 @@ function correctionReplaceFromPatterns(patterns){
             if(pattern.active){
                 if(pattern.pattern.trim().length>0){
                     if(pattern.regex){
-                        replaceText(this, new RegExp(pattern.pattern, "g"), pattern.replacement) 
+                        replaceText(this, new RegExp(pattern.pattern, "g"), escapeHtml(pattern.replacement)) 
                     }else{
-                        replaceText(this, pattern.pattern, pattern.replacement, true)
+                        replaceText(this, pattern.pattern, escapeHtml(pattern.replacement), true)
                     }
                 }
             }
