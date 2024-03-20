@@ -25,6 +25,7 @@ def create_source(type: str, codeDir: str):
 
 
 def get_manifest(codeDir: str):
+    notice("general", f"Read {codeDir}manifest.json")
     m = JSON.read(codeDir + "manifest.json")
     if(m.get("manifest_version")==None):
         raise FileNotFoundError
@@ -33,6 +34,7 @@ def get_manifest(codeDir: str):
 
 def set_manifest(codeDir: str, manifest: dict):
     JSON.save(codeDir + "manifest.json", manifest)
+    notice("general", f"Saved {codeDir}manifest.json")
 
 def replaceText(codeDir, before, after):
     def replaceWordsInFile(fileName, before, after):
