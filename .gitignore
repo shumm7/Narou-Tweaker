@@ -2,3 +2,5 @@
 app/temp
 *.code-workspace
 conversion.txt
+/dist
+**/__pycache__/**
