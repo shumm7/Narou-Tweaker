@@ -234,7 +234,11 @@ li.search #novel_header_search_field {
 	border-top-color: var(--kasasagi-blue);
 }
 #novel-option--contents {
+	overflow-y: scroll;
 	padding: .5em;
+}
+#novel-option--contents::-webkit-scrollbar{
+	display: none;
 }
 .novel-option--content {
 	display: none;
@@ -349,6 +353,88 @@ li.search #novel_header_search_field {
 .novel-option--toggle {
 	margin-bottom: .7em;
 	text-wrap: nowrap;
+}
+
+/* Replace Patterns (Correction) */
+#novel-option--correction-replace--patterns {
+	height: 10em;
+	overflow-y: scroll;
+	background: #f8f8f8;
+    border-radius: .5em;
+    padding: .3em .3em;
+}
+#novel-option--correction-replace--patterns::-webkit-scrollbar{
+	display: none;
+}
+.novel-option--correction-replace--pattern-box,
+#novel-option--correction-replace--pattern-box-addition {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	max-width: 100%;
+	padding: .5em;
+	margin: .5em 0;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: .5em;
+}
+#novel-option--correction-replace--pattern-box-addition {
+	justify-content: center;
+}
+#novel-option--correction-replace--pattern-box-addition:hover {
+	transition: background-color .3s ease;
+	background: #fafafa;
+	cursor: pointer;
+}
+
+.novel-option--correction-replace--fields {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.novel-option--correction-replace--fields input {
+	width: 45%;
+	padding: .1em .3em;
+}
+.novel-option--correction-replace--fields span {
+	font-size: 12px;
+	margin: 0 .2em;
+}
+.novel-option--correction-replace--index {
+	font-size: 12px;
+	color: #999;
+	padding: .1em;
+}
+.novel-option--correction-replace--move-buttons {
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+}
+.novel-option--correction-replace--move-buttons .novel-option--correction-replace--move-back {
+	margin-top: -50%;
+}
+.novel-option--correction-replace--icons {
+	transition: color .3s ease;
+	color:#bbb;
+	font-size: 14px;
+	margin: 0 .2em;
+	cursor: pointer;
+}
+.novel-option--correction-replace--icons:hover {
+	color:#999;
+}
+.novel-option--correction-replace--icons.enabled {
+	color:rgb(51, 154, 244);
+}
+.novel-option--correction-replace--icons.enabled:hover {
+	color:rgb(0, 58, 133);
+}
+.novel-option--correction-replace--active-button {
+	margin-right: 0 .2em;
+}
+.novel-option--correction-replace--remove-button {
+	margin-left: auto;
+	margin-right: .2em;
 }
 
 /* Novel Page*/

@@ -313,6 +313,13 @@ export const localFont = {
     "width": 600
 }
 
+export const replacePattern = {
+    pattern: "",
+    replacement: "",
+    regex: false,
+    active: true
+}
+
 export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/(.*)\.syosetu\.com)/,
     /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/

@@ -1,9 +1,4 @@
-const replacePattern = {
-    pattern: "",
-    replacement: "",
-    regex: false,
-    active: true
-}
+import { replacePattern } from "../../utils/option.js"
 
 export function restoreReplacePattern(){
     chrome.storage.local.get(["correctionReplacePatterns"], function(data){
