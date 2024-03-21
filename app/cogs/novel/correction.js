@@ -1,5 +1,6 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption } from "../../utils/option.js";
+import { escapeHtml } from "../../utils/text.js";
 
 const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
 const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
@@ -32,6 +33,10 @@ export function correction(){
             if(defaultValue(data.correctionIndent, defaultOption.correctionIndent)){
                 correctionIndent()
             }
+
+            if(defaultValue(data.correctionReplacePatterns, defaultOption.correctionReplacePatterns).length>0){
+                correctionReplaceFromPatterns(defaultValue(data.correctionReplacePatterns, defaultOption.correctionReplacePatterns))
+            }
         })
     }
 }
@@ -57,8 +62,11 @@ export function resetCorrection(){
     })
 }
 
-function replaceText(_elem, regexp, replace, func) {
+function replaceText(_elem, regexp, replace, isReplaceAll) {
     function replaceHtml(str){
+        if(isReplaceAll){
+            return str.replaceAll(regexp, replace)
+        }
         return str.replace(regexp, replace)
     }
 
@@ -173,5 +181,23 @@ function correctionOddEllipsesAndDash(){
                 }
             })
         }
+    })
+}
+
+
+/* Replace Text from Patterns */
+function correctionReplaceFromPatterns(patterns){
+    $.each(patterns, function(_, pattern){
+        $("#novel_honbun > p.replaced").each(function(){
+            if(pattern.active){
+                if(pattern.pattern.trim().length>0){
+                    if(pattern.regex){
+                        replaceText(this, new RegExp(pattern.pattern, "g"), escapeHtml(pattern.replacement)) 
+                    }else{
+                        replaceText(this, pattern.pattern, escapeHtml(pattern.replacement), true)
+                    }
+                }
+            }
+        })
     })
 }

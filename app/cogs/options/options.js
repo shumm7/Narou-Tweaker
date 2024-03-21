@@ -4,6 +4,7 @@ import { debug_log, debug_logObject, debug } from "./debug.js";
 import { restoreSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
 import { getDateString } from "../../utils/text.js";
 import { restoreHeaderIconList, setSortable } from "../../utils/header.js";
+import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "./correction.js";
 
 /* Remove Warning Message */
 $('#js-failed').remove();
@@ -54,6 +55,9 @@ function restoreOptions(){
 
     /* Font */
     restoreFont()
+
+    /* Correction */
+    restoreReplacePattern()
   });
 }
 
@@ -88,6 +92,7 @@ document.addEventListener('DOMContentLoaded', restoreOptions);
 /* Skin Change */
 addSkinEditButtonEvent()
 addFontEditButtonEvent()
+addReplacePatternEditButtonEvent()
 
 /* On Click Elements */
 $(".options").on("click", function(){
