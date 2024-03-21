@@ -90,15 +90,13 @@ function correctionIndent(){
         var text = $(this).text()
 
         if(text.trim().length>0){
-            var firstChar = text.substr(0,1)
-
-            if(text.substr(0,1)!="　"){
-                var isSymbol = firstChar.match( new RegExp(`^[`+symbols+`]+`) )
-                if(isSymbol==null || text.substr(0,2)=="――" || text.substr(0,2)=="……"){
-                    $(this)[0].innerHTML = "　" + $(this)[0].innerHTML
+            var m = text.match(new RegExp(`^(\\s*)([${symbols}]*)(.*)`))
+            if(m!=null){
+                if(m[2].length==0 || m[2].match(/^(――|……)/)){
+                    text = $(this)[0].innerHTML
+                    $(this)[0].innerHTML = "　" + text.match(new RegExp(`^(\\s*)(.*)`))[2]
                 }
             }
-
             
         }
     })
