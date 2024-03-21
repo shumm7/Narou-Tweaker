@@ -162,6 +162,11 @@ export function applySkin(tab){
             .narou-tweaker .novel-titles#ep-0 .novel-title, .narou-tweaker .novel-titles#ep-1 .novel-title {
                 color: inherit !important;
             }
+            #novel_contents #novel_footer ul li a,
+            #novel_contents #novel_footer ul li form,
+            #novel_contents #novel_footer ul li form * {
+                color: ${s.novel.color} !important;
+            }
             `
         }
         

@@ -1,4 +1,5 @@
 /* Header */
+
 .narou-tweaker-header #novel_header,
 .narou-tweaker-header #novel_header_right {
 	position: absolute;
@@ -6,11 +7,15 @@
 	width: auto !important;
 	height: auto !important;
 	text-align: center !important;
-	margin: 2em .3em;
+	padding: 2em .3em;
 	z-index: 10;
 	background: none !important;
 	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
-
+}
+#novel_header::-webkit-scrollbar,
+#novel_header ul::-webkit-scrollbar,
+#novel_header_right::-webkit-scrollbar {
+	display: none;
 }
 .narou-tweaker-header #novel_header {
 	left: 0 !important;
@@ -18,7 +23,19 @@
 .narou-tweaker-header #novel_header_right {
 	right: 0 !important;
 }
-
+:not(.narou-tweaker-header) #novel_header ul {
+	display: flex;
+	flex-flow: row;
+	flex-wrap: nowrap;
+	overflow-x: scroll;
+	overflow-y: hidden;
+}
+:not(.narou-tweaker-header) #novel_footer ul {
+	display:flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1em 0;
+}
 .narou-tweaker-header #novel_header ul,
 .narou-tweaker-header #novel_header_right ul {
 	display: flex;
@@ -26,8 +43,8 @@
 	margin: 0 !important;
 	margin-top: .3em !important;
 	width: auto !important;
+	align-items: center;
 }
-
 .narou-tweaker-header #novel_header ul li,
 .narou-tweaker-header #novel_header_right ul li {
 	font-size: 130% !important;
@@ -38,9 +55,21 @@
 	background: none !important;
 	text-indent: inherit !important;
 }
-.narou-tweaker-header #novel_header ul li.disabled,
-.narou-tweaker-header #novel_header_right ul li.disabled {
+.narou-tweaker-header #novel_header ul li:nth-last-child(1),
+.narou-tweaker-header #novel_header_right ul li:nth-last-child(1) {
+	margin-bottom: 3em !important;
+}
+#novel_header ul li {
+	text-wrap: nowrap;
+}
+#novel_header ul li.disabled,
+#novel_header_right ul li.disabled,
+#novel_footer ul li.disabled {
 	display:none;
+}
+:not(.narou-tweaker-header) #novel_header ul li i,
+#novel_footer ul.undernavi li i {
+	margin-right: .3em;
 }
 .narou-tweaker-header #novel_header ul li > a,
 .narou-tweaker-header #novel_header ul li > form,
@@ -61,6 +90,12 @@
 .narou-tweaker-header #novel_header_right ul li > * {
 	border: none !important;
 	background: none !important;
+}
+:not(.narou-tweaker-header) #novel_header ul li > * {
+	cursor: pointer;
+}
+:not(.narou-tweaker-header) #novel_footer ul li > * {
+	cursor: pointer;
 }
 .narou-tweaker-header #novel_header ul li > form > input,
 .narou-tweaker-header #novel_header_right ul li > form > input {
@@ -94,6 +129,102 @@
 	font-size: 50%;
 	margin-top: .5em;
 }
+:not(.narou-tweaker-header) ul li.pdf .pdflilnk {
+    padding: 0;
+    border-left: none;
+}
+:not(.narou-tweaker-header) #novel_header ul li.pdf form {
+	display: flex;
+	align-items: center;
+    padding: 5px 10px;
+	border-left: 1px solid #eeeeee;
+	color: #666666;
+}
+#novel_footer ul li.pdf form {
+	display: flex;
+	align-items: center;
+}
+:not(.narou-tweaker-header) ul li.siori > *:hover {
+	background: transparent !important;
+}
+#novel_footer ul li.pdf form > *:hover {
+	background: transparent;
+}
+#novel_footer ul li.pdf form > * {
+	font-size: inherit !important;
+}
+#novel_header ul li.booklist {
+	margin: 0 5px !important;
+}
+
+:not(.narou-tweaker-header) #novel_header ul li.siori,
+:not(.narou-tweaker-header) #novel_header ul li.bookmark {
+	width: auto !important;
+	text-indent: inherit !important;
+	background: none !important;
+	padding: 11px 0 0 0 !important;
+	margin: 0 !important;
+}
+:not(.narou-tweaker-header) #novel_header ul li.siori > a:hover,
+:not(.narou-tweaker-header) #novel_header ul li.bookmark > a:hover {
+	background: #fafafa !important;
+}
+:not(.narou-tweaker-header) #novel_header ul li.siori > * {
+	font-size: 13px !important;
+	font-weight: bold !important;
+	padding: 5px 10px !important;
+	color: #666666 !important;
+}
+:not(.narou-tweaker-header) ul li.bookmark > a,
+:not(.narou-tweaker-header) ul li.siori > a {
+	display: block !important; 
+}
+:not(.narou-tweaker-header) #novel_header ul li.bookmark > a,
+:not(.narou-tweaker-header) #novel_header ul li.siori > a {
+	border-left: 1px solid #cccccc !important;
+}
+
+li.search {
+	position: relative;
+}
+li.search.show #novel_header_search_box {
+	opacity: 100%;
+	pointer-events: all;
+}
+li.search #novel_header_search_box {
+	position: absolute;
+    pointer-events: none;
+	transition: opacity .2s;
+	opacity: 0;
+}
+li.search #novel_header_search_box {
+	top: 0;
+	left: 100%;
+}
+#novel_header li.search #novel_header_search_box {
+	top: 8vh;
+    left: 0;
+}
+#novel_footer li.search #novel_header_search_box {
+	top: -8vh;
+    left: 0;
+}
+li.search #novel_header_search_box > form {
+	display: flex;
+	flex-direction: row;
+	padding: .5em 1em;
+    background: rgba(0, 0, 0, .4);
+    border-radius: .4em;
+}
+li.search #novel_header_search_button {
+	text-wrap: nowrap;
+	padding: 0 .5em;
+	margin-left: .5em;
+}
+li.search #novel_header_search_field {
+	text-wrap: nowrap;
+	padding: 0 .5em;
+}
 
 /* Header */
 #novel_header.header-mode--absolute,
@@ -114,6 +245,13 @@
 .header-mode--fixed #novelnavi_right > *{
     position: fixed !important;
 }
+.narou-tweaker-header #novel_header.header-mode--scroll,
+.narou-tweaker-header #novel_header_right.header-mode--scroll,
+.narou-tweaker-header #novel_header.header-mode--fixed,
+.narou-tweaker-header #novel_header_right.header-mode--fixed {
+	overflow-y: scroll;
+	max-height: 100vh;
+}
 #novel_header.header-mode--scroll,
 #novel_header_right.header-mode--scroll{
     transition: .2s;
@@ -126,35 +264,6 @@
 }
 .narou-tweaker-header #novel_header_right.hide.header-mode--scroll{
     transform:translateX(80px);
-}
-
-li.search {
-	position: relative;
-}
-li.search.show #novel_header_search_box {
-	opacity: 100%;
-	pointer-events: all;
-}
-li.search #novel_header_search_box {
-	position: absolute;
-	top: 0;
-	left: 100%;
-    pointer-events: none;
-	transition: opacity .2s;
-	opacity: 0;
-}
-li.search #novel_header_search_box > form {
-	display: flex;
-	flex-direction: row;
-}
-li.search #novel_header_search_button {
-	text-wrap: nowrap;
-	padding: 0 .5em;
-	margin-left: .5em;
-}
-li.search #novel_header_search_field {
-	text-wrap: nowrap;
-	padding: 0 .5em;
 }
 
 

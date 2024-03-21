@@ -3,29 +3,34 @@ import { localFont, localSkins, defaultOption, replacePattern } from "../../util
 import { correction, restoreCorrectionMode } from "./correction.js";
 
 /* Header */
-export function changeHeaderScrollMode(header_mode, elm, hidden_begin){
-    function changeMode(header_mode, elm, hidden_begin){
-        if(!$(elm).length){return}
+export function changeHeaderScrollMode(elm){
+        
+    function changeMode(elm){
+        chrome.storage.local.get(null, (data) => {
+            const header_mode = data.novelCustomHeaderMode
+            const hidden_begin = data.novelCustomHeaderScrollHidden
+            if(!$(elm).length){return}
 
-        $(elm).removeClass("header-mode--fixed")
-        $(elm).removeClass("header-mode--absolute")
-        $(elm).removeClass("header-mode--scroll")
-        $(elm).css({"position": ""})
-        $("#novelnavi_right").css({"position": ""})
-        $("#novelnavi_right > *").css({"position": ""})
+            $(elm).removeClass("header-mode--fixed")
+            $(elm).removeClass("header-mode--absolute")
+            $(elm).removeClass("header-mode--scroll")
+            $(elm).css({"position": ""})
+            $("#novelnavi_right").css({"position": ""})
+            $("#novelnavi_right > *").css({"position": ""})
 
-        if(header_mode=="fixed"){
-            $(elm).addClass("header-mode--fixed")
-        }else if(header_mode=="absolute"){
-            $(elm).addClass("header-mode--absolute")
-        }else if(header_mode=="scroll"){
-            $(elm).addClass("header-mode--scroll")
-            if(hidden_begin){
-                $(elm + '.header-mode--scroll').addClass('hide');
+            if(header_mode=="fixed"){
+                $(elm).addClass("header-mode--fixed")
+            }else if(header_mode=="absolute"){
+                $(elm).addClass("header-mode--absolute")
+            }else if(header_mode=="scroll"){
+                $(elm).addClass("header-mode--scroll")
+                if(hidden_begin){
+                    $(elm + '.header-mode--scroll').addClass('hide');
+                }
             }
-        }
+        })
     }
-    changeMode(header_mode, elm, hidden_begin)
+    changeMode(elm)
 
     var pos = $(window).scrollTop();
     $(window).on("scroll", function(){
@@ -41,10 +46,8 @@ export function changeHeaderScrollMode(header_mode, elm, hidden_begin){
     });
 
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.novelCustomHeaderMode!=undefined){
-            chrome.storage.local.get(["novelCustomHeaderMode", "novelCustomHeaderScrollHidden"], function(data){
-                changeMode(data.novelCustomHeaderMode, elm, data.novelCustomHeaderScrollHidden)
-            })
+        if(changes.novelCustomHeaderMode!=undefined || changes.novelCustomHeaderScrollHidden!=undefined){
+            changeMode(elm)
         }
     })
 }
