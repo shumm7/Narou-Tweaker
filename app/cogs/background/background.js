@@ -17,21 +17,23 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             fetch(message.data.url, message.data.options)
             .then(response => response.json())
             .then(data => {
-                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id});
+                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id})
             })
             .catch((e) => {
-                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id});   
+                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id})
             })
+            return true
             
         }else if(message.format == "text"){
             fetch(message.data.url, message.data.options)
             .then(response => response.text())
             .then(data => {
-                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id});
+                sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id})
             })
             .catch((e) => {
-                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id});    
+                sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id})
             })
+            return true
         }
         
     }else if(message.action == "downloads"){
@@ -40,9 +42,11 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
             filename: message.data.filename
         }, function(downloadId){
             sendResponse({action: "downloads", id: downloadId});
+            return true;
         });
     }
-    sendResponse({})
+    sendResponse()
+    return
 });
 
 /* First Load */

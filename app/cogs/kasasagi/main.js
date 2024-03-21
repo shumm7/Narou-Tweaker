@@ -456,7 +456,7 @@ function _general(){
 
         chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode, options: {'method': 'GET'}}}, function(response){
         if(response){
-            if(response.success){
+            if(response.success && response.action=="fetch"){
                 var d = response.result[1]
                 if(d!=undefined){
                     $(".loading-api").remove()

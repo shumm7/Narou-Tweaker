@@ -100,7 +100,7 @@ function _profile(){
         var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
         chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/userapi/api/?out=json&libtype=2&userid=" + userid, options: {'method': 'GET'}}}, function(response) {
         if(response){
-            if(response.success && response.format=="json"){
+            if(response.success && response.action=="fetch"){
                 var d = response.result[1]
                 if(d!=undefined){
                     $(".c-panel__headline").attr("id", "user-detail-header")
@@ -116,7 +116,6 @@ function _profile(){
                     $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>総獲得pt</dt><dd>'+d.sum_global_point.toLocaleString()+'</dd></dl></div>')
                 }
             }
-            return true;
         }
         });
     }
@@ -146,7 +145,7 @@ function _profile(){
         
         chrome.runtime.sendMessage ({action: "fetch", format: "text", data: {url: "https://syosetu.com/syuppan/list/?word=" + userid, options: {'method': 'GET'}}}, function(response) {
         if(response){   
-            if(response.success && response.format=="text"){
+            if(response.success && response.action=="fetch"){
                 var list = []
                 var body = $($.parseHTML(response.result))
                 body.find(".p-syuppan-list").each((idx, value)=>{
