@@ -314,7 +314,6 @@ export function setOptionContentsDisplay(id){
 
 function restoreReplacePattern(){
     chrome.storage.local.get(["correctionReplacePatterns"], function(data){
-        console.log(data)
         var elementsAmount = $(".novel-option--correction-replace--pattern-box").length
         var listLength = data.correctionReplacePatterns.length
         if(listLength<elementsAmount){
