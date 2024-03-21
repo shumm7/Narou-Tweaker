@@ -37,9 +37,10 @@ export function changeHeaderScrollMode(elm){
         if(Math.abs($(this).scrollTop() - pos)>100 ){
             if($(this).scrollTop() < pos ){
                 $(elm + '.header-mode--scroll').removeClass('hide'); /* Scroll Up */
+                $("#novel_header_search_box.show").removeClass("show")
             }else{
                 $(elm + '.header-mode--scroll').addClass('hide'); /* Scroll Down */
-                $("li.search.show").removeClass("show")
+                $("#novel_header_search_box.show").removeClass("show")
             }
             pos = $(this).scrollTop();
         }

@@ -247,7 +247,7 @@ function _header(){
 
         /* 検索 */
         $("#novel_header ul").append('<li class="search"><a><i class="fa-solid fa-magnifying-glass"></i><span class="title">検索</span></a></li>')
-        $("li.search").append(`
+        $("body").prepend(`
         <div id="novel_header_search_box">
             <form>
                 <input type="text" id="novel_header_search_field">
@@ -256,10 +256,37 @@ function _header(){
         </div>
         `)
         $("#novel_header ul li.search>a").on("click", function(){
-            if($(this).parent().hasClass("show")){
-                $(this).parent().removeClass("show")
+            var position = $("li.search").offset()
+            position.left -= $(window).scrollLeft()
+            position.top -= $(window).scrollTop()
+            var box = $("#novel_header_search_box")
+            if(box.hasClass("show")){
+                console.log
+                box.removeClass("show")
             }else{
-                $(this).parent().addClass("show")
+                if(isCustomHeader){
+                    if($(window).width()/2<position.left){
+                        var top = position.top
+                        var left = position.left - box.width()
+                        box.css({top: `calc(${top}px - .5em)`, left: `calc(${left}px)`})
+                    }else{
+                        var top = position.top
+                        var left = position.left
+                        box.css({top: `calc(${top}px - .5em)`, left: `calc(${left}px + 4em)`})
+                    }
+                }else{
+                    if($(window).height()/2<position.top){
+                        var top = position.top - box.height()
+                        var left = position.left - box.width()/2
+                        box.css({top: `calc(${top}px)`, left: `calc(${left}px + 2em)`})
+                    }else{
+                        var top = position.top
+                        var left = position.left - box.width()/2
+                        box.css({top: `calc(${top}px + 4em)`, left: `calc(${left}px + 2em)`})
+                    }
+                }
+                box.addClass("show")
+
             }
         })
         $("#novel_header_search_box > form").submit(function(){

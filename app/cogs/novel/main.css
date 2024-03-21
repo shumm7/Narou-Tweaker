@@ -184,44 +184,30 @@
 	border-left: 1px solid #cccccc !important;
 }
 
-li.search {
-	position: relative;
-}
-li.search.show #novel_header_search_box {
+#novel_header_search_box.show {
 	opacity: 100%;
 	pointer-events: all;
 }
-li.search #novel_header_search_box {
-	position: absolute;
+#novel_header_search_box {
+	position: fixed;
     pointer-events: none;
 	transition: opacity .2s;
 	opacity: 0;
+	z-index: 999999;
 }
-li.search #novel_header_search_box {
-	top: 0;
-	left: 100%;
-}
-#novel_header li.search #novel_header_search_box {
-	top: 8vh;
-    left: 0;
-}
-#novel_footer li.search #novel_header_search_box {
-	top: -8vh;
-    left: 0;
-}
-li.search #novel_header_search_box > form {
+#novel_header_search_box > form {
 	display: flex;
 	flex-direction: row;
 	padding: .5em 1em;
     background: rgba(0, 0, 0, .4);
     border-radius: .4em;
 }
-li.search #novel_header_search_button {
+#novel_header_search_button {
 	text-wrap: nowrap;
 	padding: 0 .5em;
 	margin-left: .5em;
 }
-li.search #novel_header_search_field {
+#novel_header_search_field {
 	text-wrap: nowrap;
 	padding: 0 .5em;
 }
