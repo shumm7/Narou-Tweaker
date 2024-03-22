@@ -43,7 +43,7 @@ function _header(){
 
         $("#pageBottom").remove()
         $("#pageTop").remove()
-        $(".wrap_menu_novelview_after").empty()
+        //$(".wrap_menu_novelview_after").empty()
 
         /* Right Menu Bar */
         if(isCustomHeader){
@@ -54,7 +54,7 @@ function _header(){
                 <ul id="head_nav">
                 </ul>
             </div>`)
-            $("#novel_footer").remove()
+            $(".wrap_menu_novelview_after").empty()
         }else{
             $("#novelnavi_right").empty()
             $("#novelnavi_right").append(`<div class="option" id="menu_on" style="position: fixed;">設定</div>`)
@@ -71,8 +71,9 @@ function _header(){
                 }
             })
 
-            $("#novel_footer .undernavi").empty()
+            $(".wrap_menu_novelview_after ul").empty()
         }
+        $("#novel_footer").remove()
 
         /* ホーム / ログイン */
         elm = $("#novel_header li#login a")
@@ -334,27 +335,38 @@ function _header(){
         function resetHeader(left, right){
             $("#novel_header ul li.disabled").removeClass("disabled")
             $("#novel_header_right ul li.disabled").removeClass("disabled")
-            $("#novel_footer ul li.disabled").removeClass("disabled")
+            $(".box_menu_novelview_after ul.menu_novelview_after li.disabled").removeClass("disabled")
             $.each(getExceptedIcon([right, left]), (_, cls)=>{
-                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, #novel_footer ul li.${cls}`)
+                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, .box_menu_novelview_after ul.menu_novelview_after li.${cls}`)
                 if(elm.length){
                     elm.addClass("disabled")
                 }
             })
             $.each(right, (_, cls)=>{
-                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, #novel_footer ul li.${cls}`)
+                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, .box_menu_novelview_after ul.menu_novelview_after li.${cls}`)
                 if(elm.length){
+                    var ext
                     if(isCustomHeader){
-                        elm.appendTo("#novel_header_right ul")
+                        ext = "#novel_header_right ul"
                     }else{
-                        elm.appendTo("#novel_footer .undernavi")
+                        ext = ".box_menu_novelview_after .menu_novelview_after"
+                    }
+                    if($(ext).length){
+                        elm.appendTo(ext)
+                    }else{
+                        elm.addClass("disabled")
                     }
                 }
             })
             $.each(left, (_, cls)=>{
-                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, #novel_footer ul li.${cls}`)
+                var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, .box_menu_novelview_after ul.menu_novelview_after li.${cls}`)
                 if(elm.length){
-                    elm.appendTo("#novel_header ul")
+                    var ext = "#novel_header ul"
+                    if($(ext).length){
+                        elm.appendTo(ext)
+                    }else{
+                        elm.addClass("disabled")
+                    }
                 }
             })
         }
@@ -364,19 +376,31 @@ function _header(){
         /* Header Scroll */
         if(isCustomHeader){
             const scrollElement = document.querySelector("#novel_header, #novel_header_right");
-            scrollElement.addEventListener("wheel", (e) => {
-                if(scrollElement.classList.contains("header-mode--fixed") || scrollElement.classList.contains("header-mode--scroll")){
-                    e.preventDefault();
-                    scrollElement.scrollTop += e.deltaY;
-                }
-            });
+            if(scrollElement!=null){
+                scrollElement.addEventListener("wheel", (e) => {
+                    if(scrollElement.classList.contains("header-mode--fixed") || scrollElement.classList.contains("header-mode--scroll")){
+                        e.preventDefault();
+                        scrollElement.scrollTop += e.deltaY;
+                    }
+                });
+            }
         }else{
             const scrollElement = document.querySelector("#novel_header ul");
-            scrollElement.addEventListener("wheel", (e) => {
-                if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
-                e.preventDefault();
-                scrollElement.scrollLeft += e.deltaY;
-            });
+            if(scrollElement!=null){
+                scrollElement.addEventListener("wheel", (e) => {
+                    if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+                    e.preventDefault();
+                    scrollElement.scrollLeft += e.deltaY;
+                });
+            }
+            const scrollElementFooter = document.querySelector(".box_menu_novelview_after ul");
+            if(scrollElementFooter!=null){
+                scrollElementFooter.addEventListener("wheel", (e) => {
+                    if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+                    e.preventDefault();
+                    scrollElementFooter.scrollLeft += e.deltaY;
+                });
+            }
         }
 
         /* Storage Listener */

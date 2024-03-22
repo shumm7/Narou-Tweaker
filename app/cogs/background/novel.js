@@ -25,176 +25,266 @@ export function applySkin(tab){
         /* Skin */
         console.log(s.novel.background)
         rule += `
-        body {
-            background-color: ${s.novel.background} !important;
-            background-image: none !important;
+        html body,
+        html body[class^="customlayout"] {
+            /* ボディー背景色*/
+            background-color: ${s.novel.background};
+            background-image: none;
         }
-        #novel_color {
-            color: ${s.novel.color} !important;
+        body #novel_color,
+        body #novel_color[class^="customlayout"] {
+            /* 本文文字色*/
+            color: ${s.novel.color};
         }
-        #novel_contents div.novelrankingtag,
-        #novel_contents .customlayout-color {
-            color: ${s.novel.color} !important;
-        }
-
-        #novel_contents a:link,
-        #novel_contents .customlayout-color a:link {
-            color: ${s.link.color_link} !important;
-        }
-        #novel_contents a:visited,
-        #novel_contents .customlayout-color a:visited {
-            color: ${s.link.color_visited} !important;
+        body #novel_contents div.novelrankingtag,
+        body #novel_contents .customlayout-color,
+        body #novel_contents[class^="customlayout"] div.novelrankingtag,
+        body #novel_contents[class^="customlayout"] .customlayout-color {
+            /* ランキングタグ / 評価欄 文字色*/
+            color: ${s.novel.color};
         }
 
-        #novel_contents a:hover,
-        #novel_contents .customlayout-color a:hover {
-            color: ${s.link.color_hover} !important;
+        body #novel_contents a:link,
+        body #novel_contents .customlayout-color a:link,
+        body #novel_contents[class^="customlayout"] a:link,
+        body #novel_contents[class^="customlayout"] .customlayout-color a:link  {
+            /* リンク色 */
+            color: ${s.link.color_link};
         }
-        .novel_sublist2.underline {
-            border-bottom: 1px solid ${s.sublist.color} !important;
+        body #novel_contents a:visited,
+        body #novel_contents .customlayout-color a:visited,
+        body #novel_contents[class^="customlayout"] a:visited,
+        body #novel_contents[class^="customlayout"] .customlayout-color a:visited {
+            /* リンク色（訪問済み） */
+            color: ${s.link.color_visited};
         }
-        dl.novel_sublist2 {
-            border-color: transparent !important;
+        body #novel_contents a:hover,
+        body #novel_contents .customlayout-color a:hover,
+        body #novel_contents[class^="customlayout"] a:hover,
+        body #novel_contents[class^="customlayout"] .customlayout-color a:hover {
+            /* リンク色（ホバー） */
+            color: ${s.link.color_hover};
         }
-        dl.novel_sublist2:hover {
-            border-color: ${s.sublist.hover} !important;
+        body .index_box dl.novel_sublist2.underline,
+        body .index_box dl.novel_sublist2.underline[class^="customlayout"] {
+            /* 目次の下線（しおりあり） */
+            border-bottom: 1px solid ${s.sublist.color};
+        }
+        body .index_box dl.novel_sublist2,
+        body .index_box dl.novel_sublist2[class^="customlayout"] {
+            /* 目次の下線（デフォルトは非表示） */
+            border-color: transparent;
+        }
+        body .index_box dl.novel_sublist2:hover,
+        body .index_box dl.novel_sublist2:hover[class^="customlayout"] {
+            /* 目次の下線（ホバー） */
+            border-color: ${s.sublist.hover};
         }
         `
 
         /* Expanded Skin */
         if(expand_skin){
-            /*if(tab.url.match(/https:\/\/ncode\.syosetu\.com\/n\d{4}[a-z]{2}\/\d+\//)){ /* 本文ページ */
-            /* Title */
+            /* 作品トップページ */
             rule += `
-            .contents1 {
-                color: ${s.novel.color} !important;
-                background-color: ${s.novel.background} !important;
-                background-image: none !important;
+            body .contents1 {
+                /* 文字色 / 背景色 */
+                color: ${s.novel.color};
+                background-color: ${s.novel.background};
+                background-image: none;
             }
-            .contents1 a:link {
-                color: ${s.link.color_link} !important;
+            body .contents1 a:link {
+                /* リンク色 */
+                color: ${s.link.color_link};
             }
-            .contents1 a:visited {
-                color: ${s.link.color_visited} !important;
+            body .contents1 a:visited {
+                /* リンク色（訪問済み） */
+                color: ${s.link.color_visited};
             }
-            .contents1 a:hover {
-                color: ${s.link.color_hover} !important;
+            body .contents1 a:hover {
+                /* リンク色（ホバー） */
+                color: ${s.link.color_hover};
             }
-            
-            /* Footer */
-            .wrap_menu_novelview_after {
-                background-color: ${s.novel.background} !important;
-                background-image: none !important;
-                border-top: 1px solid ${s.sublist.color} !important;
-                border-bottom: 1px solid ${s.sublist.color} !important;
-            }
-            .list_menu_novelview_after:first-child {
-                border-left: 1px solid ${s.sublist.color} !important;
-            }
-            .list_menu_novelview_after {
-                border-right: 1px solid ${s.sublist.color} !important;
-            }
-            .list_menu_novelview_after a:link {
-                color: ${s.link.color_link} !important;
-            }
-            .list_menu_novelview_after a:visited {
-                color: ${s.link.color_visited} !important;
-            }
-            .list_menu_novelview_after a:hover {
-                color: ${s.link.color_hover} !important;
-                background: transparent !important;
-            }
-            .footerbookmark .booklist .login {
-                background: transparent !important;
-                border-color: ${s.sublist.color} !important;
-            }
-            .footerbookmark .booklist a.login:hover {
-                background: transparent !important;
-                border-color: ${s.sublist.hover} !important;
-            }
-
-            /* Novel Info */
-            #contents_main {
-                color: ${s.novel.color} !important;
-                background-color: ${s.novel.background} !important;
-                background-image: none !important;
-            }
-            #contents_main a:link {
-                color: ${s.link.color_link} !important;
-            }
-            #contents_main a:visited {
-                color: ${s.link.color_visited} !important;
-            }
-            #contents_main a:hover {
-                color: ${s.link.color_hover} !important;
-            }
-
-            #noveltable1 th, #noveltable2 th, #onazi .th {
-                color: ${s.novel.color} !important;
-                background: ${s.novel.background_second} !important;
-            }
-            #noveltable1 th, #noveltable2 th,
-            #noveltable1 td, #noveltable2 td,
-            h1,
-            #onazi {
-                border-color: ${s.sublist.color} !important;
-            }
-
-            /* Attention */
-            #novel_attention,
-            .box_announce_bookmark {
-                color: ${s.novel.color} !important;
-                background-color: ${s.novel.background} !important;
-                border-color: ${s.novel.background_second} !important;
+            body #novel_attention,
+            body .box_announce_bookmark {
+                /* Attention */
+                color: ${s.novel.color};
+                background-color: transparent;
+                border-color: ${s.novel.background_second};
             }
             `
-        }
-
-        /* Novel Page */
-        if(novel_css) { //WIP
+            
+            /* 作品情報ページ */
             rule += `
-            .narou-tweaker .novel-titles a {
-                color: inherit !important;
+            body #contents_main {
+                color: ${s.novel.color};
+                background-color: ${s.novel.background};
+                background-image: none;
             }
-            .narou-tweaker .novel-titles .novel-title, .narou-tweaker .novel-titles .novel-author, .narou-tweaker .novel-chapter {
-                color: #999999 !important;
+            body #contents_main a:link {
+                color: ${s.link.color_link};
             }
-            .narou-tweaker .novel-titles#ep-0 .novel-title, .narou-tweaker .novel-titles#ep-1 .novel-title {
-                color: inherit !important;
+            body #contents_main a:visited {
+                color: ${s.link.color_visited};
             }
-            #novel_contents #novel_footer ul li a,
-            #novel_contents #novel_footer ul li form,
-            #novel_contents #novel_footer ul li form * {
-                color: ${s.novel.color} !important;
+            body #contents_main a:hover {
+                color: ${s.link.color_hover};
+            }
+
+            body #noveltable1 th,
+            body #noveltable2 th, #onazi .th {
+                color: ${s.novel.color};
+                background: ${s.novel.background_second};
+            }
+            body #noveltable1 th, body #noveltable2 th,
+            body #noveltable1 td, body #noveltable2 td,
+            body h1,
+            body #onazi {
+                border-color: ${s.sublist.color};
+            }
+            `
+
+            /* 小説本文ページ */
+            if(novel_css) {
+                rule += `
+                body.narou-tweaker .novel-titles a {
+                    color: inherit;
+                }
+                body.narou-tweaker .novel-titles .novel-title, .narou-tweaker .novel-titles .novel-author, .narou-tweaker .novel-chapter {
+                    color: ${s.sublist.color};
+                }
+                body.narou-tweaker .novel-titles#ep-0 .novel-title, .narou-tweaker .novel-titles#ep-1 .novel-title {
+                    color: inherit;
+                }
+                `
+            }
+
+            /* 感想 */
+            rule +=
+            `
+            body #contents_main .waku {
+                /* 感想の枠 */
+                border: 1px solid ${s.sublist.color};
+            }
+            body #contents_main .comment_h2 {
+                /* ヘッダ（一言、気になる点など） */
+                background: ${s.novel.background_second};
+                border-top: 2px solid ${s.sublist.color};
+            }
+            body #contents_main .comment_authorbox {
+                /* 投稿者ボックス */
+                border-top: 1px solid ${s.sublist.color};
+            }
+            body #contents_main .box_novelno .no_posted_impression {
+                /* エピソード番号 */
+                background: ${s.novel.background_second};
+            }
+            body #contents_main #hyoukalan #impression,
+            body #contents_main #hyoukalan #review {
+                /* 感想ボックスの文字をもとに戻す */
+                font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+                font-size: 14px;
+                color: #444444;
+            }
+            `
+
+            /* レビュー */
+            rule += `
+            body #contents_main .review_waku {
+                /* レビューの枠 */
+                border: 1px solid ${s.sublist.color};
+                background: transparent;
+            }
+            body #contents_main .review_waku .hyoukawaku_in {
+                /* レビューの内枠 */
+                background: transparent;
+            }
+            body #contents_main .review_waku .hyoukawaku_in .review_user {
+                /* 投稿者ボックス */
+                border-bottom: 1px solid ${s.sublist.color};
+            }
+            body #contents_main .review_waku .hyoukawaku_in .review_user .comment_authorbox {
+                /* 投稿者ボックス */
+                border-top: 1px solid ${s.sublist.color};
+            }
+            `
+
+            /* 縦書きPDF */
+            rule += `
+            article.verticalpdf,
+            main.verticalpdf-main {
+                color: ${s.novel.color};
+            }
+            .verticalpdf-main .verticalpdf-info{
+                border-bottom: 1px solid ${s.sublist.color};
+            }
+            .verticalpdf-main .verticalpdf-info dt,
+            .verticalpdf-main .verticalpdf-info dd {
+                border-top: 1px solid ${s.sublist.color};
+            }
+            .verticalpdf-main .verticalpdf-warning {
+                border: 1px solid ${s.sublist.color};
+            }
+            .verticalpdf-main .verticalpdf-create--created {
+                background: ${s.novel.background_second};
             }
             `
         }
         
         /* Custom CSS */
         rule += `
-        .narou-tweaker-header #novel_header ul li > a,
-        .narou-tweaker-header #novel_header ul li > a:link,
-        .narou-tweaker-header #novel_header ul li > a:visited,
-        .narou-tweaker-header #novel_header ul li > form {
-            color: ${s.sublist.color} !important;
+        body.narou-tweaker-header #novel_header ul li > a,
+        body.narou-tweaker-header #novel_header ul li > a:link,
+        body.narou-tweaker-header #novel_header ul li > a:visited,
+        body.narou-tweaker-header #novel_header ul li > form,
+        body.narou-tweaker-header #novel_header_right ul li > a,
+        body.narou-tweaker-header #novel_header_right ul li > a:link,
+        body.narou-tweaker-header #novel_header_right ul li > a:visited,
+        body.narou-tweaker-header #novel_header_right ul li > form {
+            color: ${s.sublist.color};
         }
-        .narou-tweaker-header #novel_header ul li a:hover,
-        .narou-tweaker-header #novel_header ul li a:active,
-        .narou-tweaker-header #novel_header ul li > form:hover,
-        .narou-tweaker-header #novel_header ul li > form:active {
+        body.narou-tweaker-header #novel_header ul li a:hover,
+        body.narou-tweaker-header #novel_header ul li a:active,
+        body.narou-tweaker-header #novel_header ul li > form:hover,
+        body.narou-tweaker-header #novel_header ul li > form:active,
+        body.narou-tweaker-header #novel_header_right ul li > a:hover,
+        body.narou-tweaker-header #novel_header_right ul li > a:active,
+        body.narou-tweaker-header #novel_header_right ul li > form:hover,
+        body.narou-tweaker-header #novel_header_right ul li > form:active {
             color: ${s.sublist.hover} !important;
         }
-        .narou-tweaker-header #novel_header_right ul li > a,
-        .narou-tweaker-header #novel_header_right ul li > a:link,
-        .narou-tweaker-header #novel_header_right ul li > a:visited,
-        .narou-tweaker-header #novel_header_right ul li > form {
-            color: ${s.sublist.color} !important;
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after {
+            /* 背景色 */
+            background-color: transparent;
+            background-image: none;
+            border-top: 1px solid ${s.sublist.color};
+            border-bottom: 1px solid ${s.sublist.color};
         }
-        .narou-tweaker-header #novel_header_right ul li > a:hover,
-        .narou-tweaker-header #novel_header_right ul li > a:active,
-        .narou-tweaker-header #novel_header_right ul li > form:hover,
-        .narou-tweaker-header #novel_header_right ul li > form:active {
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after ul li:first-child {
+            border-left: 1px solid ${s.sublist.color};
+        }
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li {
+            border-right: 1px solid ${s.sublist.color};
+            color: ${s.sublist.color};
+        }
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
+            color: ${s.novel.color} !important;
+        }
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:hover,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:active,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover > *,
+        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
             color: ${s.sublist.hover} !important;
+            background: transparent;
         }
         `
 
@@ -237,35 +327,41 @@ export function applyFont(tab){
             fontFamily_Current = localFont["font-family"][fontFamily]
         }
         rule += `
-        #novel_honbun {
+        body #novel_honbun {
             line-height: ${lineHeight}% !important;
             font-size: ${fontSize}% !important;
         }
-        body#container, #novel_color, #contents_main {
-            font-family: ${fontFamily_Current} !important;
-            text-rendering: ${textRendering} !important;
+        html body#container, body #novel_color, body #contents_main {
+            font-family: ${fontFamily_Current};
+            text-rendering: ${textRendering};
         }
-        .novel-option--font-button#gothic {
-            font-family: ${localFont["font-family"].gothic} !important;
+        body #novel_honbun,
+        body #novel_a,
+        body #novel_p {
+            /* 本文 あとがき まえがき*/
+            max-width: 100vw;
+            width: ${width}px;
         }
-        .novel-option--font-button#serif {
-            font-family: ${localFont["font-family"].serif} !important;
-        }
-        .novel-option--font-button#custom {
-            font-family: ${fontFamily_Custom} !important;
-        }
-        #novel_honbun,
-        #novel_a,
-        #novel_p {
-            max-width: 100vw !important;
-            width: ${width}px !important;
-        }
-        #novel_color,
-        .contents1 {
-            max-width: 100vw !important;
-            width: calc(max(${width}px, 730px)) !important;
+        body #novel_color,
+        body .contents1 {
+            max-width: 100vw;
+            width: calc(max(${width}px, 730px));
         }
         `
+
+        /* Option Modal */
+        rule += `
+        body .novel-option--font-button#gothic {
+            font-family: ${localFont["font-family"].gothic};
+        }
+        body .novel-option--font-button#serif {
+            font-family: ${localFont["font-family"].serif};
+        }
+        body .novel-option--font-button#custom {
+            font-family: ${fontFamily_Custom};
+        }
+        `
+
         chrome.scripting.insertCSS({
             css: rule,
             target: {
