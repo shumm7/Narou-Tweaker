@@ -170,9 +170,15 @@ export function applySkin(tab){
                 background: ${s.novel.background_second};
                 border-top: 2px solid ${s.sublist.color};
             }
-            body #contents_main .comment_authorbox {
+            body #contents_main .comment_authorbox,
+            body #contents_main .comment_info {
                 /* 投稿者ボックス */
                 border-top: 1px solid ${s.sublist.color};
+            }
+            body #contents_main .res {
+                /* 返信 */
+                background: ${s.novel.background_second};
+                border: 1px solid ${s.sublist.color};
             }
             body #contents_main .box_novelno .no_posted_impression {
                 /* エピソード番号 */
