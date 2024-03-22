@@ -1,3 +1,5 @@
+import { escapeHtml } from "../../../utils/text.js";
+
 chrome.storage.session.onChanged.addListener((changes) =>{
     if(changes.ncode!=undefined){
         setNovelData()
@@ -17,14 +19,14 @@ function setNovelData(){
 
         if(!data){return}
         if(!data.ncode){return}
-        
+
         $(".index-title").append(`
-            <span class="index-header--title">${data.title}</span>
-            <input type="text" style="display:none;" value="https://ncode.syosetu.com/${data.ncode}/"></input>
+            <span class="index-header--title">${escapeHtml(data.title)}</span>
+            <input type="text" style="display:none;" value="https://ncode.syosetu.com/${escapeHtml(data.ncode)}/"></input>
         `)
         $(".index-author").append(`
-            <span class="index-header--author">${data.author}</span>
-            <input type="text" style="display:none;" value="https://mypage.syosetu.com/${data.userid}/"></input>
+            <span class="index-header--author">${escapeHtml(data.author)}</span>
+            <input type="text" style="display:none;" value="https://mypage.syosetu.com/${escapeHtml(data.userid)}/"></input>
         `)
 
         episodes = []
@@ -99,7 +101,7 @@ function setNovelData(){
             if(section.title!=null){
                 s = `
                 <div class="index-section">
-                    <span class="index-section--title">${section.title}</span>
+                    <span class="index-section--title">${escapeHtml(section.title)}</span>
                     <span class="index-section--icon"><i class="fa-solid fa-angle-up"></i></span>
                 </div>`
             }
@@ -108,8 +110,8 @@ function setNovelData(){
             for(var i=section.startIndex; i<=section.endIndex; i++){
                 n += `
                     <div class="index-novel" id="episode-${i}">
-                        <div class="index-novel--episode-title">${episodes[i-1].title}</div>
-                        <input type="text" style="display:none;" value="https://ncode.syosetu.com/${data.ncode}/${i}/">
+                        <div class="index-novel--episode-title">${escapeHtml(episodes[i-1].title)}</div>
+                        <input type="text" style="display:none;" value="https://ncode.syosetu.com/${escapeHtml(data.ncode)}/${i}/">
                     </div>
                 `
            }
@@ -130,6 +132,7 @@ function setNovelData(){
 
 function setCurrentEpisode(episode){
     $(".index-novel").removeClass("active")
+    episode = parseInt(episode)
 
     if(!episode){
         $(".index-item#section-1").removeClass("hide")
