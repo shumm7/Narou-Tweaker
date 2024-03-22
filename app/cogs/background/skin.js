@@ -211,12 +211,24 @@ function applySkin(tab){
                 /* エピソード番号 */
                 background: ${s.novel.background_second};
             }
+            body #contents_main .rescomment {
+                /* 返信 */
+                border: 1px solid ${s.sublist.color};
+                background: ${s.novel.background_second};
+            }
+            body #contents_main div#rescomment {
+                /* 返信 送信確認画面 */
+                background: ${s.novel.background_second};
+            }
             body #contents_main #hyoukalan #impression,
             body #contents_main #hyoukalan #review {
                 /* 感想ボックスの文字をもとに戻す */
                 font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
                 font-size: 14px;
                 color: #444444;
+            }
+            body #contents_main .nothing {
+                background: ${s.novel.background_second};
             }
             `
 
@@ -238,6 +250,12 @@ function applySkin(tab){
             body #contents_main .review_waku .hyoukawaku_in .review_user .comment_authorbox {
                 /* 投稿者ボックス */
                 border-top: 1px solid ${s.sublist.color};
+            }
+            body #contents_main #hyoukalan {
+                /* ボックスの文字をもとに戻す */
+                font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+                font-size: 14px;
+                color: #444444;
             }
             `
 
