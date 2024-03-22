@@ -17,18 +17,19 @@ function setNovelData(){
 
         if(!data){return}
         if(!data.ncode){return}
+        
+        $(".index-title").append(`
+            <span class="index-header--title">${data.title}</span>
+            <input type="text" style="display:none;" value="https://ncode.syosetu.com/${data.ncode}/"></input>
+        `)
+        $(".index-author").append(`
+            <span class="index-header--author">${data.author}</span>
+            <input type="text" style="display:none;" value="https://mypage.syosetu.com/${data.userid}/"></input>
+        `)
 
         episodes = []
         sections = []
         if(data.type==1){
-            $(".index-title").append(`
-                <span class="index-header--title">${data.title}</span>
-                <input type="text" style="display:none;" value="https://ncode.syosetu.com/${data.ncode}/"></input>
-            `)
-            $(".index-author").append(`
-                <span class="index-header--author">${data.author}</span>
-                <input type="text" style="display:none;" value="https://mypage.syosetu.com/${data.userid}/"></input>
-            `)
 
             var section_now = 1
             var index = 1
@@ -82,16 +83,15 @@ function setNovelData(){
                     sections[sections.length-1].endIndex = index - 1
                 }
             })
-        }
-    
-        /* 章が存在しない作品の場合 */
-        if(sections.length == 0){
-            sections.push({
-                title: "",
-                startIndex: 1,
-                endIndex: episodes.length
-            })
-            episodes[0].startIndex = 1
+            /* 章が存在しない作品の場合 */
+            if(sections.length == 0){
+                sections.push({
+                    title: "",
+                    startIndex: 1,
+                    endIndex: episodes.length
+                })
+                episodes[0].startIndex = 1
+            }
         }
     
         $.each(sections, function(num, section){

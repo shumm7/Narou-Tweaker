@@ -61,7 +61,6 @@ export function sidepanelListener(){
     })
 
     chrome.tabs.onActivated.addListener(function(activeInfo){
-        console.log("activated")
         chrome.tabs.get(activeInfo.tabId, function(tab){
             chrome.storage.session.get(null, function(data){
                 const ncode = getNcode(tab.url)
@@ -79,7 +78,6 @@ export function sidepanelListener(){
     })
 
     chrome.contextMenus.onClicked.addListener((data, tab) => {
-        console.log("context")
         chrome.storage.session.set({ ncode: null });
         chrome.sidePanel.setOptions({
             tabId: tab.id,
@@ -92,7 +90,6 @@ export function sidepanelListener(){
     });
 
     chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-        console.log("updated")
         if (!tab.url) return;
         const url = new URL(tab.url);
         const detail = checkPageDetail(url)
