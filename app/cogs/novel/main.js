@@ -43,7 +43,6 @@ function _header(){
 
         $("#pageBottom").remove()
         $("#pageTop").remove()
-        //$(".wrap_menu_novelview_after").empty()
 
         /* Right Menu Bar */
         if(isCustomHeader){
@@ -56,6 +55,10 @@ function _header(){
             </div>`)
             $(".wrap_menu_novelview_after").empty()
         }else{
+            if(!data.novelLegacyHeaderIcon){
+                $("body").addClass("narou-tweaker-header--hide-icon") //アイコンを隠す
+            }
+
             $("#novelnavi_right").empty()
             $("#novelnavi_right").append(`<div class="option" id="menu_on" style="position: fixed;">設定</div>`)
             $("#novelnavi_right .option").on("click", function(){
@@ -408,6 +411,14 @@ function _header(){
             if(changes.novelCustomHeaderLeft!=undefined || changes.novelCustomHeaderRight!=undefined){
                 chrome.storage.local.get(["novelCustomHeaderLeft", "novelCustomHeaderRight"], (data) => {
                     resetHeader(data.novelCustomHeaderLeft, data.novelCustomHeaderRight)
+                })
+            }else if(changes.novelLegacyHeaderIcon != undefined){
+                chrome.storage.local.get(["novelLegacyHeaderIcon"], (data) => {
+                    if(!data.novelLegacyHeaderIcon){
+                        $("body").addClass("narou-tweaker-header--hide-icon")
+                    }else{
+                        $("body").removeClass("narou-tweaker-header--hide-icon")
+                    }
                 })
             }
         })

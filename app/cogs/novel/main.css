@@ -15,9 +15,16 @@
 }
 #novel_header ul li.disabled,
 #novel_header_right ul li.disabled,
-#novel_footer ul li.disabled 
+#novel_footer ul li.disabled,
 .wrap_menu_novelview_after ul li.disabled {
 	/* disabledタグの付いたliを非表示 */
+	display:none !important;
+}
+body.narou-tweaker-header--hide-icon #novel_header ul li i,
+body.narou-tweaker-header--hide-icon #novel_header_right ul li i,
+body.narou-tweaker-header--hide-icon #novel_footer ul li i,
+body.narou-tweaker-header--hide-icon .wrap_menu_novelview_after ul li i {
+	/* アイコンの非表示設定 */
 	display:none !important;
 }
 

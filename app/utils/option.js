@@ -1,5 +1,5 @@
 export const defaultOption = {
-    optionsVersion: 1,
+    optionsVersion: 2,
 
     /* Option Page */
     optionPageDetailsWelcome: true,
@@ -12,6 +12,7 @@ export const defaultOption = {
     /* Novel */
     novelCustomStyle: true,
     novelCustomHeader: true,
+    novelLegacyHeaderIcon: true,
     novelExpandSkin: true,
     novelCustomHeaderScrollHidden: false,
     novelCustomHeaderMode: "scroll",
