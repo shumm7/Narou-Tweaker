@@ -466,9 +466,9 @@ function _general(){
                     var table = $("#novel_detail .novel_info table tbody")
                     function addValue(key, desc, value){
                         if(value==undefined){
-                            table.append("<tr><td>"+key+"</td><td class='right' colspan='2'>"+desc+"</td></tr>")
+                            table.append(`<tr><td>${key}</td><td class='right' colspan='2'>${escapeHtml(desc)}</td></tr>`)
                         }else{
-                            table.append("<tr><td>"+key+"</td><td class='right'>"+desc+"</td><td class='right'>"+value+"</td></tr>")
+                            table.append(`<tr><td>${key}</td><td class='right'>${escapeHtml(desc)}</td><td class='right'>${escapeHtml(value)}</td></tr>`)
                         }
                     }
                     function getYesNo(state){

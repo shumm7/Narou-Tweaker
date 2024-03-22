@@ -105,15 +105,48 @@ function _profile(){
                 if(d!=undefined){
                     $(".c-panel__headline").attr("id", "user-detail-header")
                     $(".c-side-list").attr("id", "user-detail")
-                    $(".c-side-list#user-detail").prepend('<div class="c-side-list__item"><dl><dt>ヨミガナ</dt><dd>'+d.yomikata+'</dd></dl></div>')
-                    $(".c-side-list#user-detail").prepend('<div class="c-side-list__item"><dl><dt>ユーザ名</dt><dd>'+d.name+'</dd></dl></div>')
+                    $(".c-side-list#user-detail").prepend(`
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>ユーザ名</dt>
+                                <dd>${escapeHtml(d.name)}</dd>
+                            </dl>
+                        </div>
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>ヨミガナ</dt>
+                                <dd>${escapeHtml(d.yomikata)}</dd>
+                            </dl>
+                        </div>`)
                     
                     $(".c-side-list#user-detail").after("<div class='c-panel__headline' id='user-stats-header'>ユーザ統計</div>")
                     $(".c-panel__headline#user-stats-header").after("<div class='c-side-list' id='user-stats'></div>")
-                    $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>作品数</dt><dd>'+d.novel_cnt.toLocaleString()+'</dd></dl></div>')
-                    $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>レビュー数</dt><dd>'+d.review_cnt.toLocaleString()+'</dd></dl></div>')
-                    $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>総文字数</dt><dd>'+d.novel_length.toLocaleString()+'</dd></dl></div>')
-                    $(".c-side-list#user-stats").append('<div class="c-side-list__item"><dl><dt>総獲得pt</dt><dd>'+d.sum_global_point.toLocaleString()+'</dd></dl></div>')
+                    $(".c-side-list#user-stats").append(`
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>作品数</dt>
+                                <dd>${escapeHtml(d.novel_cnt.toLocaleString())}</dd>
+                            </dl>
+                        </div>
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>レビュー数</dt>
+                                <dd>${escapeHtml(d.review_cnt.toLocaleString())}</dd>
+                            </dl>
+                        </div>
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>総文字数</dt>
+                                <dd>${escapeHtml(d.novel_length.toLocaleString())}</dd>
+                            </dl>
+                        </div>
+                        <div class="c-side-list__item">
+                            <dl>
+                                <dt>総獲得pt</dt>
+                                <dd>${escapeHtml(d.sum_global_point.toLocaleString())}</dd>
+                            </dl>
+                        </div>
+                    `)
                 }
             }
         }
