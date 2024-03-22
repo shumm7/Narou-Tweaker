@@ -1,102 +1,102 @@
 import { indexToNcode } from "../../utils/text.js"
 
-export function getNcode(){
-    if(location.hostname=="ncode.syosetu.com"){
-        if (location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
-            return location.pathname.match(/^\/([n|N]\d{4}[a-zA-Z]{2})\/\d+\/*$/)[1].toLowerCase()
+export function getNcode(url){
+    if(url==undefined){
+        url = location
+    }else{
+        try{
+            url = new URL(url)
+        }catch(e){
+            return
         }
-        else if (location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
-            return location.pathname.match(/^\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
+    }
+
+    if(url.hostname=="ncode.syosetu.com"){
+        if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
+            return url.pathname.match(/^\/([n|N]\d{4}[a-zA-Z]{2})\/\d+\/*$/)[1].toLowerCase()
         }
-        else if (location.pathname.match(/\/novelview\/infotop\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*/)){ /* Novel Info */
-            return location.pathname.match(/\/novelview\/infotop\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*/)[1].toLowerCase()
+        else if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
+            return url.pathname.match(/^\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
         }
-        else if(location.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* PDF */
-            return location.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
+        else if (url.pathname.match(/\/novelview\/infotop\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*/)){ /* Novel Info */
+            return url.pathname.match(/\/novelview\/infotop\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*/)[1].toLowerCase()
         }
-        else if(location.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
-            return location.pathname.match(/^\/txtdownload\/top\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
+        else if(url.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* PDF */
+            return url.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
         }
-    }else if(location.hostname=="novelcom.syosetu.com"){
-        if (location.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
-            return indexToNcode(location.pathname.match(/^\/impression\/list\/ncode\/(\d+)\/*.*$/)[1])
+        else if(url.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
+            return url.pathname.match(/^\/txtdownload\/top\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
         }
-        else if (location.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)){ /* Review */
-            return indexToNcode(location.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)[1])
+    }else if(url.hostname=="novelcom.syosetu.com"){
+        if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
+            return indexToNcode(url.pathname.match(/^\/impression\/list\/ncode\/(\d+)\/*.*$/)[1])
+        }
+        else if (url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)){ /* Review */
+            return indexToNcode(url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)[1])
         }
     }   
 }
 
-export function getEpisode(){
-    if(location.hostname=="ncode.syosetu.com"){
-        if (location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
-            return parseInt(location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)[1])
+export function getEpisode(url){
+    if(url==undefined){
+        url = location
+    }else{
+        try{
+            url = new URL(url)
+        }catch(e){
+            return
+        }
+    }
+
+    if(url.hostname=="ncode.syosetu.com"){
+        if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
+            return parseInt(url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)[1])
         }
     }
     return 0
 }
 
-export function checkPageDetail(){
-    if(location.hostname=="ncode.syosetu.com"){
-        if (location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
+export function checkPageDetail(url){
+    if(url==undefined){
+        url = location
+    }else{
+        try{
+            url = new URL(url)
+        }catch(e){
+            return
+        }
+    }
+
+    if(url.hostname=="ncode.syosetu.com"){
+        if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
             return "novel"
         }
-        else if (location.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
-            if($("#novel_honbun").length){
-                return "novel"
+        else if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
+            if((typeof $)!=="undefined"){
+                if($("#novel_honbun").length){
+                    return "novel"
+                }else{
+                    return "top"
+                }
             }else{
-                return "top"
+                return "novel"
             }
         }
-        else if (location.pathname.match(/\/novelview\/infotop\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*/)){ /* Novel Info */
+        else if (url.pathname.match(/\/novelview\/infotop\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*/)){ /* Novel Info */
             return "info"
         }
-        else if(location.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* PDF */
+        else if(url.pathname.match(/^\/novelpdf\/creatingpdf\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* PDF */
             return "pdf"
         }
-        else if(location.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
+        else if(url.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
             return "txt"
         }
-    }else if(location.hostname=="novelcom.syosetu.com"){
-        if (location.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
+    }else if(url.hostname=="novelcom.syosetu.com"){
+        if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
             return "impression"
         }
-        else if (location.pathname.match(/^\/novelreview\/list\/ncode\/\d+\/*.*$/)){ /* Review */
+        else if (url.pathname.match(/^\/novelreview\/list\/ncode\/\d+\/*.*$/)){ /* Review */
             return "review"
         }
-    }
-}
-
-export function showToast(message){
-    var tippy_option ={
-        html: false,
-        position: 'bottom',
-        trigger: 'manual',
-        hideOnClick: false,
-        delay: 2000,
-        hideDelay: 1000,
-        theme: '',
-        interactive: 'true',
-    }
-
-    $('#toaster_success').html('<strong>' + message + '</strong>');
-    tippy_option['html'] = '#toaster_success';
-
-    var instance = new Tippy('.toast',tippy_option);
-    var popper = instance.getPopperElement(document.querySelector('#'+rand_id));
-
-    // tippy トーストを表示
-    tippyShowAndHide(instance,popper);
-
-
-    function tippyShowAndHide(instance,popper,displayTime){
-        if (displayTime == null) {
-            displayTime = 2000;
-        }
-        instance.show(popper);
-        tippy_instance = instance;
-        tippy_popper = popper;
-    
-        setTimeout(tippiyjsHide, displayTime,popper,instance);
     }
 }

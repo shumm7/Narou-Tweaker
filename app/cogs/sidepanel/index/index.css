@@ -1,0 +1,127 @@
+html{
+    scroll-behavior: smooth;
+}
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Headers */
+.index-title {
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 150%;
+    font-weight: bold;
+    text-align: center;
+    margin: .5em 0;
+}
+.index-author {
+    cursor: pointer;
+    font-size: 150%;
+    text-align: center;
+    margin: .5em 0;
+}
+.index-title:hover,
+.index-author:hover {
+    color: #666;
+}
+
+/* Buttons */
+.index-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: .3em 0;
+    font-size: 150%;
+}
+.index-button {
+    padding: .3em .7em;
+    margin: 0 .3em;
+    background: #eee;
+    cursor: pointer;
+}
+.index-button:hover {
+    background: #f0f0f0;;
+}
+.index-button .icon {
+    margin-right: .2em;
+}
+
+/* Items */
+.index-section {
+    padding: .2em .5em;
+    margin-top: .5em;
+    margin-bottom: .2em;
+    background: #eee;
+    font-weight: bold;
+    font-size: 180%;
+    cursor: pointer;
+}
+.index-section:hover{
+    background: #f0f0f0;
+}
+.hide .index-novels {
+    padding: 0 .5em;
+    margin: 0 0;
+    line-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      line-height .3s ease-out,
+      opacity     .1s linear,
+      visibility  .1s linear,
+      padding .1s linear;
+}
+.index-novels {
+    background: #fafafa;
+    font-size: 150%;
+    margin: .1em 0;
+
+    line-height: 1.5;
+    opacity: 1;
+    visibility: visible;
+    padding: .2em .5em;
+    transition:
+      line-height .3s ease-out,
+      opacity     .1s linear .1s,
+      visibility  .1s linear .1s,
+      padding .1s linear,
+      margin .1s linear;
+
+}
+
+.hide .index-novel {
+    margin: 0 0;
+    padding: 0 .5em;
+    transition: padding .1s linear;
+    border-bottom-width: 0;
+}
+.index-novel {
+    border-bottom: 1px solid #eee;
+    margin: .1em 0;
+    cursor: pointer;
+    overflow: hidden;
+    transition:
+        padding .1s linear,
+        margin .1s linear,
+        border-bottom-width .1s linear;
+    padding: .2em .5em;
+
+}
+.index-novel:hover{
+    background: #f0f0f0;
+}
+.index-novel.active {
+    background: #eee;
+    font-weight: bold;
+}
+.index-novel:nth-last-child(1) {
+    border-bottom-color: transparent;
+}
+
+.index-section--icon i {
+    font-size: 80%;
+    transition: .2s ease-in-out;
+}
+.hide .index-section--icon i {
+    transform: rotate(180deg); 
+}

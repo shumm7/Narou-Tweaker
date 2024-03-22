@@ -1,7 +1,35 @@
 import { defaultValue, getCSSRule } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
 
-export function applySkin(tab){
+export function skinUpdateListener(){
+    /* First Load */
+    chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+        if (info.status == 'loading' && tab.url.match(/^https:\/\/(ncode|novelcom).syosetu.com\/*.*/)){
+            applySkin(tab)
+            applyFont(tab)
+        };
+    });
+
+    /* Storage Listener ( for Skin ) */
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.skins!=undefined || changes.selectedSkin!=undefined){
+            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+                for(let i=0; i<tabs.length; i++){
+                    applySkin(tabs[i])
+                };
+            });
+        }
+        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
+            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+                for(let i=0; i<tabs.length; i++){
+                    applyFont(tabs[i])
+                };
+            });
+        }
+    })
+}
+
+function applySkin(tab){
     chrome.storage.local.get(null, (data) => {
         const skin_idx = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
@@ -23,7 +51,6 @@ export function applySkin(tab){
         var rule = ""
 
         /* Skin */
-        console.log(s.novel.background)
         rule += `
         html body,
         html body[class^="customlayout"] {
@@ -306,7 +333,7 @@ export function applySkin(tab){
     });    
 }
 
-export function applyFont(tab){
+function applyFont(tab){
     chrome.storage.local.get(null, (data) => {
         var rule = ""
 

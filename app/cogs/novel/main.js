@@ -1,6 +1,6 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
-import { checkPageDetail, getEpisode, getNcode, showToast } from "./utils.js";
+import { checkPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
 import { defaultOption } from "../../utils/option.js";
