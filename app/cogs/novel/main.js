@@ -1,6 +1,6 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection } from "./cogs.js";
 import { defaultValue, check } from "../../utils/misc.js";
-import { checkPageDetail, getEpisode, getNcode, showToast } from "./utils.js";
+import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
 import { defaultOption } from "../../utils/option.js";
@@ -20,7 +20,7 @@ chrome.storage.local.get(null, (data) => {
         $("body").addClass("narou-tweaker")
         $("#footer").remove()
 
-        if(checkPageDetail()=="novel"){
+        if(checkNovelPageDetail()=="novel"){
             _novelPage()
         }
     }
@@ -34,7 +34,7 @@ function _header(){
         var ncode = getNcode()
         var index = ncodeToIndex(ncode)
         var episode = getEpisode()
-        var pageType = checkPageDetail()
+        var pageType = checkNovelPageDetail()
         var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
         var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
 

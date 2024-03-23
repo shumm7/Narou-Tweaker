@@ -1,7 +1,35 @@
 import { defaultValue, getCSSRule } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
 
-export function applySkin(tab){
+export function skinUpdateListener(){
+    /* First Load */
+    chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
+        if (info.status == 'loading' && tab.url.match(/^https:\/\/(ncode|novelcom).syosetu.com\/*.*/)){
+            applySkin(tab)
+            applyFont(tab)
+        };
+    });
+
+    /* Storage Listener ( for Skin ) */
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.skins!=undefined || changes.selectedSkin!=undefined){
+            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+                for(let i=0; i<tabs.length; i++){
+                    applySkin(tabs[i])
+                };
+            });
+        }
+        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
+            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+                for(let i=0; i<tabs.length; i++){
+                    applyFont(tabs[i])
+                };
+            });
+        }
+    })
+}
+
+function applySkin(tab){
     chrome.storage.local.get(null, (data) => {
         const skin_idx = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
@@ -23,7 +51,6 @@ export function applySkin(tab){
         var rule = ""
 
         /* Skin */
-        console.log(s.novel.background)
         rule += `
         html body,
         html body[class^="customlayout"] {
@@ -184,12 +211,24 @@ export function applySkin(tab){
                 /* エピソード番号 */
                 background: ${s.novel.background_second};
             }
+            body #contents_main .rescomment {
+                /* 返信 */
+                border: 1px solid ${s.sublist.color};
+                background: ${s.novel.background_second};
+            }
+            body #contents_main div#rescomment {
+                /* 返信 送信確認画面 */
+                background: ${s.novel.background_second};
+            }
             body #contents_main #hyoukalan #impression,
             body #contents_main #hyoukalan #review {
                 /* 感想ボックスの文字をもとに戻す */
                 font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
                 font-size: 14px;
                 color: #444444;
+            }
+            body #contents_main .nothing {
+                background: ${s.novel.background_second};
             }
             `
 
@@ -211,6 +250,12 @@ export function applySkin(tab){
             body #contents_main .review_waku .hyoukawaku_in .review_user .comment_authorbox {
                 /* 投稿者ボックス */
                 border-top: 1px solid ${s.sublist.color};
+            }
+            body #contents_main #hyoukalan {
+                /* ボックスの文字をもとに戻す */
+                font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+                font-size: 14px;
+                color: #444444;
             }
             `
 
@@ -306,7 +351,7 @@ export function applySkin(tab){
     });    
 }
 
-export function applyFont(tab){
+function applyFont(tab){
     chrome.storage.local.get(null, (data) => {
         var rule = ""
 

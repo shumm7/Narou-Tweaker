@@ -21,6 +21,9 @@
   "action": {
     "default_popup": "cogs/options/options.html"
   },
+  "side_panel": {
+    "default_path": "cogs/sidepanel/index/index.html"
+  },
   "content_scripts": [
     {
       "js": [
@@ -114,7 +117,9 @@
     "storage",
     "scripting",
     "downloads",
-    "tabs"
+    "tabs",
+    "contextMenus",
+    "sidePanel"
   ],
   "host_permissions": [
     "https://syosetu.com/*",
