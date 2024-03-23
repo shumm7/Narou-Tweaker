@@ -78,6 +78,10 @@ function _header(){
         }
         $("#novel_footer").remove()
 
+        
+        /* Twitter シェアボタンを削除 */
+        $("#novel_header li:nth-last-child(1)").remove()
+
         /* ホーム / ログイン */
         elm = $("#novel_header li#login a")
         if(elm.length){
@@ -122,6 +126,7 @@ function _header(){
         }
 
         /* ブックマーク */
+        var is_login = true
         var is_logined_and_self = false
         elm = $("#novel_header li.booklist a")
         if(elm.length){
@@ -142,18 +147,22 @@ function _header(){
             elm.parent().addClass("booklist")
         }
         else if($("#novel_header li.booklist .button_bookmark.logout").length){ //非ログイン状態
+            is_login = false
             if(isCustomHeader){
-
-            }else{
                 elm = $("#novel_header li.booklist")
                 elm.find(".button_bookmark.logout").remove()
-                elm.prepend('<a><i class="fa-solid fa-book"></i><span class="title">ブックマーク<span style="font-size: 90%;">（要ログイン）</span></span></a>')
+                elm.prepend('<a><i class="fa-solid fa-book"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（要ログイン）</span></span></a>')
+            }else{
             }
         } else { //ログイン済み（自分の作品）
             if(isCustomHeader){
                 $("#novel_header li.booklist").remove()
             }else{
-                
+                $("#novel_header ul").append(`
+                    <li class="booklist">
+                        <span class="button_bookmark logout">ブックマークに追加</span>
+                    </li>
+                `)
             }
             is_logined_and_self = true
         }
@@ -200,10 +209,6 @@ function _header(){
             }
         }
 
-        /* Twitter */
-        $("#novel_header li:nth-last-child(1)").remove()
-        
-
         /* 設定 */
         $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
         $("#novel_header li.option").on("click", function(){
@@ -218,6 +223,16 @@ function _header(){
                 $("#novel-option-background").addClass("show")
             }
         })
+
+        /* 小説家になろう */
+        $("#novel_header ul").append('<li class="narou"><a href="https://syosetu.com/"><i class="fa-solid fa-pen-nib"></i><span class="title">小説家になろう</span></a></li>')
+
+        /* ログイン/ログアウト */
+        if(is_login){
+            $("#novel_header ul").append('<li class="login"><a href="https://syosetu.com/login/logout/"><i class="fa-solid fa-right-from-bracket"></i><span class="title">ログアウト</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="login"><a href="https://syosetu.com/login/input/"><i class="fa-solid fa-right-to-bracket"></i><span class="title">ログイン</span></a></li>')
+        }
 
         /* 作者マイページ */
         $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')

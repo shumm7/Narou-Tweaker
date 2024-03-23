@@ -3,6 +3,14 @@ export const icon_list = {
         icon: "fa-solid fa-house",
         text: "ホーム"
     },
+    narou: {
+        icon: "fa-solid fa-pen-nib",
+        text: "トップページ"
+    },
+    login: {
+        icon: "fa-solid fa-right-to-bracket",
+        text: "ログイン"
+    },
     author: {
         icon: "fa-solid fa-user",
         text: "作者"
