@@ -65,11 +65,25 @@ export function sidepanelListener(){
 
     /* サイドパネルのON/OFF検知 */
     chrome.runtime.onConnect.addListener(function (port) {
-        active = true
+
         if (port.name === 'sidePanelIndex') {
-          port.onDisconnect.addListener(async () => {
-            active = false
-          });
+            active = true
+            port.onDisconnect.addListener(async () => {
+                active = false
+            });
+
+            chrome.tabs.query({active: true, lastFocusedWindow: true, currentWindow: true},function(tabs){
+                if(tabs[0]!=undefined){
+                    chrome.storage.session.get(null, function(data){
+                        const ncode = getNcode(tabs[0].url)
+                        const episode = getEpisode(tabs[0].url)
+                        if(data.ncode==ncode){
+                            setSidepanelData(ncode, episode)
+                        }
+                    })
+                }
+            })
+            
         }
       });
 

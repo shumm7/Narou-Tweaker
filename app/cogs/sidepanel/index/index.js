@@ -137,7 +137,6 @@ function setNovelData(){
 function setCurrentEpisode(episode){
     $(".index-novel").removeClass("active")
     episode = parseInt(episode)
-
     if(!episode){
         $(".index-item#section-1").removeClass("hide")
     }else if(episode>0 && episodes.length>0){
@@ -160,7 +159,7 @@ function setEventDetails(){
     })
 
     /* 要素クリック（ページ遷移） */
-    $(".index-novel, .index-title, .index-author").on("click", function(e){
+    $(".index-novel, .index-title, .index-author").on("click", function(e){ //左クリック
         const url = $(this).find("input").val()
         chrome.tabs.query({active: true, lastFocusedWindow: true, currentWindow: true},function(tabs){
             if(tabs[0]!=undefined){
@@ -169,6 +168,14 @@ function setEventDetails(){
                 })
             }
         })
+    })
+    $(".index-novel, .index-title, .index-author").on("mousedown", function(e){ //ホイールクリック
+        if(e.button==1){
+            const url = $(this).find("input").val()
+            chrome.tabs.create({
+                url: url
+            });
+        }
     })
 
     /* 操作ボタン */
