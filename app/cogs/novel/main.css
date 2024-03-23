@@ -196,6 +196,9 @@ body:not(.narou-tweaker-header) #novel_header ul li.pdf form {
 	border-left: 1px solid #eeeeee;
 	color: #666666;
 }
+body:not(.narou-tweaker-header) ul li form:has(.pdflilnk):hover {
+    background: #fafafa;
+}
 #novel_footer ul li.pdf form > *:hover,
 .wrap_menu_novelview_after ul li.pdf form > *:hover {
 	background: transparent;
