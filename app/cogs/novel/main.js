@@ -312,7 +312,7 @@ function _header(){
             var uri
             if(pageType=="novel"){
                 uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
-            }else if(pageType=="top" || pageType=="novel" && episode==0){
+            }else if(pageType=="top"){
                 uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
             }else if(pageType=="info"){
                 uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=「`+meta_title+`」読んだ！&url=`+meta_url
@@ -321,6 +321,18 @@ function _header(){
             if(uri!=undefined){
                 $("#novel_header ul").append('<li class="twitter"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-x-twitter"></i><span class="title">ポスト</span></a></li>')
             }
+        }
+
+        /* Facebook */
+        if(meta_url!=undefined){
+            var uri = "https://www.facebook.com/share.php?u=" + meta_url
+            $("#novel_header ul").append('<li class="facebook"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-facebook"></i><span class="title">シェア</span></a></li>')
+        }
+
+        /* LINE */
+        if(meta_url!=undefined){
+            var uri = "https://social-plugins.line.me/lineit/share?url=" + meta_url
+            $("#novel_header ul").append('<li class="line"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-line"></i><span class="title">シェア</span></a></li>')
         }
 
         /* コピー */

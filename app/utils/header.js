@@ -73,6 +73,14 @@ export const icon_list = {
         icon: "fa-brands fa-x-twitter",
         text: "X"
     },
+    facebook: {
+        icon: "fa-brands fa-facebook",
+        text: "Facebook"
+    },
+    line: {
+        icon: "fa-brands fa-line",
+        text: "LINE"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"
