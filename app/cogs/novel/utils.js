@@ -56,7 +56,7 @@ export function getEpisode(url){
     return 0
 }
 
-export function checkPageDetail(url){
+export function checkNovelPageDetail(url){
     if(url==undefined){
         url = location
     }else{

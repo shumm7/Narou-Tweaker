@@ -1,5 +1,9 @@
 import { escapeHtml } from "../../../utils/text.js";
 
+/* Connect（サイドパネル開閉検知用） */
+chrome.runtime.connect({ name: 'sidePanelIndex' });
+
+/* Storage Listener */
 chrome.storage.session.onChanged.addListener((changes) =>{
     if(changes.ncode!=undefined){
         setNovelData()
@@ -137,7 +141,7 @@ function setCurrentEpisode(episode){
     if(!episode){
         $(".index-item#section-1").removeClass("hide")
     }else if(episode>0 && episodes.length>0){
-        var section = episodes[episode-1].section - 1
+        var section = episodes[episode-1].section
         $(".index-item#section-"+section).removeClass("hide")
         $(window).scrollTop($(".index-novel#episode-"+episode).position().top - 10);
 

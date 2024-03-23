@@ -1,4 +1,4 @@
-import { checkPageDetail, getEpisode, getNcode } from "../novel/utils.js";
+import { checkNovelPageDetail, getEpisode, getNcode } from "../novel/utils.js";
 
 function setupContextMenu() {
     chrome.contextMenus.create({
@@ -10,6 +10,7 @@ function setupContextMenu() {
 }
 
 function setSidepanelData(ncode, episode){
+    if(!ncode){return}
     chrome.storage.session.set({ncode: null, episode: null});
 
     fetch(`https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=${ncode}`, {'method': 'GET'})
@@ -54,18 +55,33 @@ function setSidepanelData(ncode, episode){
 
 
 export function sidepanelListener(){
-    
+    var active = false
+
+    /* On Installed */
     chrome.runtime.onInstalled.addListener(() => {
         chrome.storage.session.set({ncode: null, episode: null})
         setupContextMenu();
     })
 
+    /* サイドパネルのON/OFF検知 */
+    chrome.runtime.onConnect.addListener(function (port) {
+        active = true
+        if (port.name === 'sidePanelIndex') {
+          port.onDisconnect.addListener(async () => {
+            active = false
+          });
+        }
+      });
+
+
+    /* タブ有効化時 */
     chrome.tabs.onActivated.addListener(function(activeInfo){
         chrome.tabs.get(activeInfo.tabId, function(tab){
             chrome.storage.session.get(null, function(data){
                 const ncode = getNcode(tab.url)
                 const episode = getEpisode(tab.url)
                 if(data.ncode!=ncode){
+                    if(!active){return}
                     setSidepanelData(ncode, episode)
                 }
                 else{
@@ -77,6 +93,7 @@ export function sidepanelListener(){
         })
     })
 
+    /* コンテキストメニュークリック時 */
     chrome.contextMenus.onClicked.addListener((data, tab) => {
         chrome.storage.session.set({ ncode: null });
         chrome.sidePanel.setOptions({
@@ -87,13 +104,14 @@ export function sidepanelListener(){
             tabId: tab.id
         })
         setSidepanelData(getNcode(tab.url), getEpisode(tab.url))
+        active = true
     });
 
+    /* リロード時 */
     chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
         if (!tab.url) return;
         const url = new URL(tab.url);
-        const detail = checkPageDetail(url)
-        if (detail=="novel" || detail=="top" || detail=="info" || detail=="review" || detail=="impression") {
+        if (url.hostname.match(/^(.+\.|)syosetu\.com/)) {
             chrome.sidePanel.setOptions({
                 tabId,
                 path: 'cogs/sidepanel/index/index.html',
@@ -104,6 +122,7 @@ export function sidepanelListener(){
             const episode = getEpisode(tab.url)
             chrome.storage.session.get(null, function(data){
                 if(data.ncode!=ncode){
+                    if(!active){return}
                     setSidepanelData(ncode, episode)
                 }
                 else{
