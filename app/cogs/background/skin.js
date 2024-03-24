@@ -1,5 +1,6 @@
 import { defaultValue, getCSSRule } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
+import { checkNovelPageDetail } from "../novel/utils.js";
 
 export function skinUpdateListener(){
     /* First Load */
@@ -293,6 +294,15 @@ function applySkin(tab){
         body.narou-tweaker-header #novel_header_right ul li > form {
             color: ${s.sublist.color};
         }
+        /* クリック済みのアイコン */
+        body.narou-tweaker-header #novel_header ul li.typo a:visited, /*誤字報告*/
+        body.narou-tweaker-header #novel_header ul li.impression a:visited, /* 感想 */
+        body.narou-tweaker-header #novel_header ul li.review a:visited, /*レビュー */
+        body.narou-tweaker-header #novel_header_right ul li.typo a:visited, /*誤字報告*/
+        body.narou-tweaker-header #novel_header_right ul li.impression a:visited, /* 感想 */
+        body.narou-tweaker-header #novel_header_right ul li.review a:visited /*レビュー */ {
+            color: ${s.sublist.visited};
+        }
         body.narou-tweaker-header #novel_header ul li a:hover,
         body.narou-tweaker-header #novel_header ul li a:active,
         body.narou-tweaker-header #novel_header ul li > form:hover,
@@ -317,23 +327,26 @@ function applySkin(tab){
             border-right: 1px solid ${s.sublist.color};
             color: ${s.sublist.color};
         }
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
-            color: ${s.novel.color} !important;
+        
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *{
+            color: ${s.sublist.visited};
         }
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:hover,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:active,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover > *,
-        body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
+            color: ${s.sublist.color};
+        }
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:hover,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:active,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover > *,
+        body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
             color: ${s.sublist.hover} !important;
             background: transparent;
         }
@@ -377,22 +390,29 @@ function applyFont(tab){
         }else{
             fontFamily_Current = localFont["font-family"][fontFamily]
         }
+
+        if(checkNovelPageDetail=="novel"){
         rule += `
-        body #novel_honbun {
-            line-height: ${lineHeight}% !important;
-            font-size: ${fontSize}% !important;
+            body #novel_honbun {
+                line-height: ${lineHeight}% !important;
+                font-size: ${fontSize}% !important;
+            }
+            body #novel_honbun,
+            body #novel_a,
+            body #novel_p {
+                /* 本文 あとがき まえがき*/
+                max-width: 100vw;
+                width: ${width}px;
+            }
+            `
         }
+        
+        rule += `
         html body#container, body #novel_color, body #contents_main {
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
-        body #novel_honbun,
-        body #novel_a,
-        body #novel_p {
-            /* 本文 あとがき まえがき*/
-            max-width: 100vw;
-            width: ${width}px;
-        }
+        
         body #novel_color,
         body .contents1 {
             max-width: 100vw;

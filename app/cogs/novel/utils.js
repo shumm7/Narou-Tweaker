@@ -34,6 +34,9 @@ export function getNcode(url){
         else if (url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)){ /* Review */
             return indexToNcode(url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)[1])
         }
+        else if (url.pathname.match(/^\/novelreport\/input\/ncode\/(\d+)\/*.*$/)){ /* Review */
+            return indexToNcode(url.pathname.match(/^\/novelreport\/input\/ncode\/(\d+)\/*.*$/)[1])
+        }
     }   
 }
 
@@ -97,6 +100,9 @@ export function checkNovelPageDetail(url){
         }
         else if (url.pathname.match(/^\/novelreview\/list\/ncode\/\d+\/*.*$/)){ /* Review */
             return "review"
+        }
+        else if (url.pathname.match(/^\/novelreport\/input\/ncode\/\d+\/*.*$/)){ /* 誤字報告 */
+            return "report"
         }
     }
 }

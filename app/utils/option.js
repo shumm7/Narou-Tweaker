@@ -98,8 +98,9 @@ export const localSkins = [
                 "color": "rgba(0, 0, 0, 0.87)"
             },
             "sublist": {
-                "color": "rgba(0, 0, 0, 0.3)",
-                "hover": "rgba(67, 51, 242, 0.7)"
+                "color": "rgba(0, 0, 0, 0.5)",
+                "hover": "rgba(67, 51, 242, 0.7)",
+                "visited": "rgba(50, 38, 181, 0.7)"
             }
         }
     },
@@ -121,7 +122,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "rgba(255, 255, 255, 0.3)",
-                "hover": "rgba(152, 189, 235, 0.7)"
+                "hover": "rgba(152, 189, 235, 0.7)",
+                "visited": "rgba(114, 142, 176, 0.7)"
             }
         }
     },
@@ -143,7 +145,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "rgba(0, 0, 0, 0.3)",
-                "hover": "rgba(67, 51, 242, 0.7)"
+                "hover": "rgba(67, 51, 242, 0.7)",
+                "visited": "rgba(50, 38, 181, 0.7)"
             }
         }
     },
@@ -165,7 +168,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#444",
-                "hover": "#9df"
+                "hover": "#9df",
+                "visited": "#73a6bf"
             }
         }
     },
@@ -187,7 +191,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#fff",
-                "hover": "#f03"
+                "hover": "#f03",
+                "visited": "#bf0026"
             }
         }
     },
@@ -209,7 +214,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#ccc",
-                "hover": "#cf0"
+                "hover": "#cf0",
+                "visited": "#99bf00"
             }
         }
     },
@@ -231,7 +237,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#444",
-                "hover": "#00f"
+                "hover": "#00f",
+                "visited": "#0000bf"
             }
         }
     },
@@ -253,7 +260,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#444",
-                "hover": "#00f"
+                "hover": "#00f",
+                "visited": "#0000bf"
             }
         }
     },
@@ -275,7 +283,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#444",
-                "hover": "#393"
+                "hover": "#393",
+                "visited": "#267326"
             }
         }
     },
@@ -297,7 +306,8 @@ export const localSkins = [
             },
             "sublist": {
                 "color": "#444",
-                "hover": "#00f"
+                "hover": "#00f",
+                "visited": "#0000bf"
             }
         }
     }

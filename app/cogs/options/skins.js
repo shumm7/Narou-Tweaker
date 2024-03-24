@@ -55,6 +55,7 @@ export function restoreSkins(skins, selected){
   $("#skin-link-color-hover").val(defaultValue(style.link.color_hover, ""))
   $("#skin-sublist-underline").val(defaultValue(style.sublist.color, ""))
   $("#skin-sublist-underline-hover").val(defaultValue(style.sublist.hover, ""))
+  $("#skin-sublist-underline-visited").val(defaultValue(style.sublist.visited, ""))
   
   if(skin.customizable){
     $(".option-skin").prop("disabled", false)
@@ -89,7 +90,8 @@ function getSkinData(){
       },
       sublist: {
         color: $("#skin-sublist-underline").val(),
-        hover: $("#skin-sublist-underline-hover").val()
+        hover: $("#skin-sublist-underline-hover").val(),
+        visited: $("#skin-sublist-underline-visited").val()
       }
     }
   }
@@ -119,6 +121,7 @@ function showSkinPreview() {
     $(".skin-color-field div[name='skin-link-color-hover']").css("background", style.link.color_hover)
     $(".skin-color-field div[name='skin-sublist-underline']").css("background", style.sublist.color)
     $(".skin-color-field div[name='skin-sublist-underline-hover']").css("background", style.sublist.hover)
+    $(".skin-color-field div[name='skin-sublist-underline-visited']").css("background", style.sublist.visited)
 }
 
 /* 選択中のスキンを保存 */
