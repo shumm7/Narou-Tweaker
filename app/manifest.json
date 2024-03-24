@@ -52,7 +52,7 @@
         "cogs/workspace/main.css"
       ],
       "matches": [
-				"https://syosetu.com//*"
+				"https://syosetu.com/*"
 			],
       "run_at":"document_end"
     },

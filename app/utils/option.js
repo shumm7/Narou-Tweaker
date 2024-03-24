@@ -1,9 +1,10 @@
 export const defaultOption = {
-    optionsVersion: 2,
+    optionsVersion: 3,
 
     /* Option Page */
     optionPageDetailsWelcome: true,
     optionPageDetailsNovel: false,
+    optionPageDetailsWorkspace: false,
     optionPageDetailsMypage: false,
     optionPageDetailsKasasagi: false,
     optionPageDetailsGeneral: false,
@@ -19,6 +20,9 @@ export const defaultOption = {
     novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "booklist"],
     novelCustomHeaderRight: ["siori", "option"],
     novelOptionModalSelected: 0,
+
+    /* Workspace */
+    workspaceBookmarkLayout: "0",
     
     /* Mypage */
     mypageShowUserId: true,
@@ -158,7 +162,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#fff",
-                "background_second": "#fff",
+                "background_second": "#dfdfdf",
                 "color": "#444"
             },
             "link": {
@@ -181,7 +185,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#000",
-                "background_second": "#000",
+                "background_second": "#202020",
                 "color": "#fff"
             },
             "link": {
@@ -204,7 +208,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#000",
-                "background_second": "#000",
+                "background_second": "#202020",
                 "color": "#ccc"
             },
             "link": {
@@ -227,7 +231,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#ccf",
-                "background_second": "#ccf",
+                "background_second": "#d9d9ff",
                 "color": "#444"
             },
             "link": {
@@ -250,7 +254,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#cfc",
-                "background_second": "#cfc",
+                "background_second": "#b3dfb3",
                 "color": "#444"
             },
             "link": {
@@ -273,7 +277,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#fafafa",
-                "background_second": "#fafafa",
+                "background_second": "#dbdbdb",
                 "color": "#444"
             },
             "link": {
@@ -296,7 +300,7 @@ export const localSkins = [
         "style": {
             "novel": {
                 "background": "#edf7ff",
-                "background_second": "#edf7ff",
+                "background_second": "#cfd8df",
                 "color": "#000"
             },
             "link": {

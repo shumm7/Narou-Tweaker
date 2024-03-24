@@ -1,4 +1,4 @@
-import { defaultValue, getCSSRule } from "../../utils/misc.js"
+import { check, defaultValue, getCSSRule } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
 import { checkNovelPageDetail } from "../novel/utils.js";
 
@@ -280,6 +280,25 @@ function applySkin(tab){
                 background: ${s.novel.background_second};
             }
             `
+
+            /* 誤字報告 */
+            rule += `
+            table.table_novelreport {
+                border: 1px solid ${s.sublist.color};
+            }
+            table.table_novelreport th {
+                background: ${s.novel.background_second};
+            }
+            #novel_honbun.novelreport_novelview {
+                border: 1px solid ${s.sublist.color};
+            }
+            #novel_honbun.novelreport_novelview {
+                border: 1px solid ${s.sublist.color};
+            }
+            #novel_honbun.novelreport_novelview p[data-original] span:hover {
+                background: ${s.novel.background_second};
+            }
+            `
         }
         
         /* Custom CSS */
@@ -391,21 +410,19 @@ function applyFont(tab){
             fontFamily_Current = localFont["font-family"][fontFamily]
         }
 
-        if(checkNovelPageDetail=="novel"){
         rule += `
-            body #novel_honbun {
-                line-height: ${lineHeight}% !important;
-                font-size: ${fontSize}% !important;
-            }
-            body #novel_honbun,
-            body #novel_a,
-            body #novel_p {
-                /* 本文 あとがき まえがき*/
-                max-width: 100vw;
-                width: ${width}px;
-            }
-            `
+        body #novel_honbun:not(.novelreport_novelview) {
+            line-height: ${lineHeight}% !important;
+            font-size: ${fontSize}% !important;
         }
+        body #novel_honbun:not(.novelreport_novelview),
+        body #novel_a,
+        body #novel_p {
+            /* 本文 あとがき まえがき*/
+            max-width: 100vw;
+            width: ${width}px;
+        }
+        `
         
         rule += `
         html body#container, body #novel_color, body #contents_main {

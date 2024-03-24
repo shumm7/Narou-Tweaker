@@ -1,0 +1,139 @@
+
+/* ブックマーク */
+/* コンテンツ要素をモードによって非表示 */
+body.narou-tweaker-bookmark-layout-0 .narou-tweaker-bookmark-layout-1--item,
+body.narou-tweaker-bookmark-layout-0 .narou-tweaker-bookmark-layout-2--item {
+    display: none;
+}
+body.narou-tweaker-bookmark-layout-1 .narou-tweaker-bookmark-layout-0--item,
+body.narou-tweaker-bookmark-layout-1 .narou-tweaker-bookmark-layout-2--item {
+    display: none;
+}
+body.narou-tweaker-bookmark-layout-2 .narou-tweaker-bookmark-layout-0--item,
+body.narou-tweaker-bookmark-layout-2 .narou-tweaker-bookmark-layout-1--item {
+    display: none;
+}
+
+/* アウター設定 */
+body.narou-tweaker-bookmark-layout-1 .c-up-panel__list-item {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border: 1px solid #eee;
+}
+body.narou-tweaker-bookmark-layout-1 .c-up-chk-item__content.c-up-chk-item__content--nochk {
+    padding-left: 10px;
+}
+body.narou-tweaker-bookmark-layout-1 .c-up-panel__list-item.p-up-bookmark-item--siori:not(.p-up-bookmark-item--notice) {
+    background: -webkit-linear-gradient(90deg, #D1E8FC .7em, transparent .7em);
+    background: -moz-linear-gradient(90deg, #D1E8FC .7em, transparent .7em);
+    background: linear-gradient(90deg, #D1E8FC .7em, transparent .7em);
+}
+body.narou-tweaker-bookmark-layout-1 .c-up-panel__list-item.p-up-bookmark-item--notice {
+    background: -webkit-linear-gradient(90deg, #ffa94d .7em, transparent .7em);
+    background: -moz-linear-gradient(90deg, #ffa94d .7em, transparent .7em);
+    background: linear-gradient(90deg, #ffa94d .7em, transparent .7em);
+}
+body.narou-tweaker-bookmark-layout-1  .c-up-chk-item__check {
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+/* 小説基本情報（タイトル/作者等） */
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__header,
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__info-button {
+    justify-content: flex-start;
+    padding: .2em 0;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__header a:link {
+    color: #0A3861;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__header a:visited {
+    color: #7A5A80;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__header a:hover,
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__header a:active {
+    color: #1263AA;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__description__title {
+    font-weight: bold;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__description__author {
+    font-size: 12px;
+    min-width: 10%;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__description__author:before {
+    content: "（";
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__description__author:after {
+    content: "）";
+}
+
+/* 小説更新情報 */
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__date {
+    color: #333;
+    margin-right: 1em;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+    min-width: 30%;
+    text-align: left;
+    margin-left: auto;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode a {
+    font-weight: bold;
+    font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__siori:after {
+    margin: 0 .5em;
+    content: "‐";
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__latest {
+    margin-right: .5em;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__complete {
+    font-weight: 600;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__complete.p-up-bookmark-item__complete-hidden {
+    opacity: 0;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__siori .p-icon--siori:before {
+    display: inline-block;
+    font-size: 18px;
+    margin-right: .1em;
+    background: -webkit-linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
+    background: -moz-linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
+    background: linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 小説ステータス / 設定*/
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__option-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__notice {
+    color: #ffa94d;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 1em;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__notice:before{
+    margin-right: .1em;
+    font-size: 12px;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__private {
+    color: #999;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 1em;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__private:before {
+    color: #999;
+    margin-right: .1em;
+    font-size: 12px;
+}
