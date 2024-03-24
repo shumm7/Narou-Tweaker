@@ -1,6 +1,5 @@
-import { check, defaultValue, getCSSRule } from "../../utils/misc.js"
+import { defaultValue } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
-import { checkNovelPageDetail } from "../novel/utils.js";
 
 export function skinUpdateListener(){
     /* First Load */
