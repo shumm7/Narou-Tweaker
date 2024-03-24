@@ -4,7 +4,7 @@
   "description": "__MSG_extDescription__",
   "author": "__MSG_extAuthor__",
   "default_locale": "ja",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "manifest_version": 3,
   "icons": {
     "16": "assets/icon_16.png",
@@ -38,6 +38,21 @@
       "matches": [
 				"https://ncode.syosetu.com/*",
         "https://novelcom.syosetu.com/*"
+			],
+      "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "cogs/workspace/loader.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
+        "cogs/workspace/main.css"
+      ],
+      "matches": [
+				"https://syosetu.com//*"
 			],
       "run_at":"document_end"
     },
@@ -82,14 +97,16 @@
         "cogs/novel/cogs.js",
         "cogs/novel/correction.js",
         "cogs/novel/utils.js",
+        "cogs/workspace/main.js",
+        "cogs/workspace/utils.js",
+        "cogs/workspace/social.js",
         "cogs/mypage/main.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js"
       ],
       "matches": [
-        "https://ncode.syosetu.com/*",
+        "https://syosetu.com/*",
         "https://*.syosetu.com/*",
-        "https://mypage.syosetu.com/*",
         "https://kasasagi.hinaproject.com/*"
       ]
     },
