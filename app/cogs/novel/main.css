@@ -245,6 +245,13 @@ body:not(.narou-tweaker-header) #novel_header ul li.siori > a {
 	border-left: 1px solid #cccccc !important;
 }
 
+/* クリック済みのアイコン */
+body:not(.narou-tweaker-header) #novel_header ul li.typo a:visited, /*誤字報告*/
+body:not(.narou-tweaker-header) #novel_header ul li.impression a:visited, /* 感想 */
+body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュー */ {
+	color: #999;
+}
+
 /* 検索ボックス */
 #novel_header_search_box.show {
 	opacity: 100%;

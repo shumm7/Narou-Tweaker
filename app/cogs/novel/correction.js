@@ -1,13 +1,14 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption } from "../../utils/option.js";
 import { escapeHtml } from "../../utils/text.js";
+import { checkNovelPageDetail } from "./utils.js";
 
 const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
 const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
 export function correction(){
-    if($("#novel_honbun").length){
+    if($("#novel_honbun").length && checkNovelPageDetail=="novel"){
         chrome.storage.local.get(null, (data) => {
             resetCorrection()
             if(defaultValue(data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)){
