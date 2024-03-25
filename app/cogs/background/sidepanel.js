@@ -55,6 +55,7 @@ function setSidepanelData(ncode, episode){
 
 
 export function sidepanelListener(){
+    if(typeof chrome.sidePanel == "undefined"){return} //Only Chrome
     var active = false
 
     /* On Installed */

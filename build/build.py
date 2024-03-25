@@ -100,7 +100,15 @@ def build_gecko():
     manifest["browser_specific_settings"] = {
         "gecko": { "id": "{29c0c2f1-2092-4808-9709-6aa5fb8562d7}" }
     }
+    manifest.pop("side_panel")
+    manifest["permissions"].remove("contextMenus")
+    manifest["permissions"].remove("sidePanel")
     set_manifest(codeDir, manifest)
+
+    # Remove Files
+    if(os.path.exists(codeDir+"cogs/sidepanel")):
+        shutil.rmtree(codeDir+"cogs/sidepanel")
+        notice(type, f"Removed old files.")
 
 
     # Make Zip
