@@ -8,3 +8,6 @@
 [submodule "app/libs/SortableJS"]
 	path = app/libs/SortableJS
 	url = https://github.com/SortableJS/Sortable.git
+[submodule "app/libs/Coloris"]
+	path = app/libs/Coloris
+	url = https://github.com/mdbassit/Coloris.git
