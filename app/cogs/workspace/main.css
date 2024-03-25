@@ -102,6 +102,7 @@ body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__siori .p-icon
     display: inline-block;
     font-size: 18px;
     margin-right: .1em;
+    color: #FC342B;
     background: -webkit-linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
     background: -moz-linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
     background: linear-gradient(90deg, #FC342B 38%, #FDADAA 38%, #FDADAA 62%, #FC342B 62%);
