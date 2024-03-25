@@ -280,7 +280,6 @@ function _header(){
             position.top -= $(window).scrollTop()
             var box = $("#novel_header_search_box")
             if(box.hasClass("show")){
-                console.log
                 box.removeClass("show")
             }else{
                 if(isCustomHeader){

@@ -2,7 +2,6 @@ import { replacePattern } from "../../utils/option.js"
 
 export function restoreReplacePattern(){
     chrome.storage.local.get(["correctionReplacePatterns"], function(data){
-        console.log(data)
         var elementsAmount = $(".correction-replace--pattern-box").length
         var listLength = data.correctionReplacePatterns.length
         if(listLength<elementsAmount){

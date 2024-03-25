@@ -45,12 +45,10 @@ function setNovelData(){
                 body.find("#novel_contents .index_box > *").each((idx, value)=>{
                     if($(value).hasClass("chapter_title")){
                         /* 章のデータを取得 */
-                        //console.log("\t\t"+$(value).text())
                         section = $(value).text()
                         section_now += 1
                     }else if($(value).hasClass("novel_sublist2")){
                         /* エピソードのデータを取得 */
-                        //console.log($(value).find(".subtitle a").text())
                         var episode = {
                             title: $(value).find(".subtitle a").text(),
                             index: index,

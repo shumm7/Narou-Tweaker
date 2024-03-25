@@ -13,7 +13,7 @@ if(!debug){$('#general').remove()}
 
 
 /* Restore Options */
-function restoreValues(data){
+function restoreValues(data, ignore){
   $.each(data, function(name, value){
     var elm = $(".options[name='"+name+"']")
     if(elm.length){
@@ -26,7 +26,7 @@ function restoreValues(data){
       else if(tagName=="select"){ // DropDown
         elm.val(defaultValue(value, defaultOption[name]))
       }
-      else if(tagName=="details"){ // Details
+      else if(tagName=="details" && !ignore){ // Details
         elm.prop("open", defaultValue(value, defaultOption[name]))
       }
     }
@@ -38,7 +38,7 @@ function restoreOptions(){
 
   chrome.storage.local.onChanged.addListener(function(changes){
     chrome.storage.local.get(null, function(data) {
-      restoreValues(data)
+      restoreValues(data, true)
     })
   })
 
@@ -118,6 +118,7 @@ $("details.options").on("toggle", function(){
 
   var value = {}
   if(tagName=="details"){
+    console.log(value[name] = $(this).prop("open"))
     value[name] = $(this).prop("open")
   }
 
