@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function(){
         Coloris({
             el: '.option-skin-color',
             theme: 'polaroid',
-            alpha: true,
             formatToggle: true,
+            alpha: true,
             closeButton: true,
             clearButton: true,
             clearLabel: 'クリア',
