@@ -54,6 +54,10 @@ def replaceText(codeDir, before, after):
                 if(ext==".js" or ext==".css"):
                     replaceWordsInFile(os.path.join(current_dir,file_name), before, after)
 
+def removeDebugMode(codeDir):
+    with open(codeDir + "debug_mode.js", 'w', encoding='utf-8') as f:
+        f.write("export const debug = false")
+
 
 def init():
     for p in glob.glob('dist/*.zip', recursive=True):
@@ -70,6 +74,9 @@ def build_chrome():
     # Manifest
     manifest = get_manifest(codeDir)
     version = manifest["version"]
+
+    # Remove Debug
+    removeDebugMode(codeDir)
 
     # Make Zip
     notice(type, f"Freezing files.")
@@ -104,6 +111,9 @@ def build_gecko():
     manifest["permissions"].remove("contextMenus")
     manifest["permissions"].remove("sidePanel")
     set_manifest(codeDir, manifest)
+
+    # Remove Debug
+    removeDebugMode(codeDir)
 
     # Remove Files
     if(os.path.exists(codeDir+"cogs/sidepanel")):
