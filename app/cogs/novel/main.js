@@ -286,8 +286,14 @@ function _header(){
             }
         });
         $("#scroll-down").on("click", function(){
-            var height = $(".wrap_menu_novelview_after").offset().top
-            $(window).scrollTop(height)
+            if($(".wrap_menu_novelview_after").length){
+                var height = $(".wrap_menu_novelview_after").offset().top
+                $(window).scrollTop(height)
+            }else{
+                var a = document.documentElement;
+                var y = a.scrollHeight - a.clientHeight;
+                window.scroll(0, y);
+            }
         })
         $("#scroll-up").on("click", function(){
             $(window).scrollTop(0)
