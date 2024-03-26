@@ -71,6 +71,10 @@ export const icon_list = {
         icon: "fa-solid fa-bullhorn",
         text: "情報提供"
     },
+    scroll: {
+        icon: "fa-solid fa-angles-up",
+        text: "スクロール"
+    },
     /*
     "copy-url": {
         icon: "fa-solid fa-link",
