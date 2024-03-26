@@ -1,6 +1,6 @@
 import {check, defaultValue, saveJson} from "../../utils/misc.js"
 import { defaultOption, updateOption } from "../../utils/option.js";
-import { debug_log, debug_logObject, debug } from "./debug.js";
+import { debug_log, debug_logObject, debug } from "../../utils/debug.js";
 import { restoreSkins, addSkinEditButtonEvent, addFontEditButtonEvent, restoreFont } from "./skins.js";
 import { getDateString } from "../../utils/text.js";
 import { restoreHeaderIconList, setSortable } from "../../utils/header.js";
