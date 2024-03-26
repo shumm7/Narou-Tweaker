@@ -13,14 +13,14 @@ export function skinUpdateListener(){
     /* Storage Listener ( for Skin ) */
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){
-            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+            chrome.tabs.query({url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
                 for(let i=0; i<tabs.length; i++){
                     applySkin(tabs[i])
                 };
             });
         }
         if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
-            chrome.tabs.query({lastFocusedWindow: true, url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
+            chrome.tabs.query({url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
                 for(let i=0; i<tabs.length; i++){
                     applyFont(tabs[i])
                 };
