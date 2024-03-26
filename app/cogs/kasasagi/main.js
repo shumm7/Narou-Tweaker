@@ -9,6 +9,7 @@ var option
 chrome.storage.local.get(null, (data) => {
     var path = location.pathname;
     var ncode = getNcode();
+    if(ncode==null){return}
     option = data
 
     /* Design */

@@ -2,7 +2,11 @@ import { parseIntWithComma } from "../../utils/text.js";
 
 /* Utilities */
 export function getNcode(){
-    return location.pathname.match('/access/.*/ncode/(.*)/')[1];
+    try{
+        return location.pathname.match('/access/.*/ncode/(.*)/')[1];
+    }catch(e){
+        return null
+    }
 }
 
 export function makeTable(id, label, header, data){
