@@ -20,6 +20,18 @@ document.addEventListener('DOMContentLoaded', function(){
     restoreFont()
     chrome.storage.local.get(null, function(data) {
         restoreSkins(data.skins, data.selectedSkin)
+        
+        Coloris({
+            el: '.option-skin-color',
+            theme: 'polaroid',
+            alpha: true,
+            formatToggle: true,
+            closeButton: true,
+            clearButton: true,
+            clearLabel: 'クリア',
+            closeLabel: '閉じる'
+          
+        });
     })
     restoreReplacePattern()
 });

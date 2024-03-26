@@ -5,15 +5,17 @@
 		<title>環境設定 - 📗 小説ページ（Narou Tweaker）</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<base target="_blank">
-		<link rel="stylesheet" href="../../../common.css">
-		<link rel="stylesheet" href="../general.css">
-		<link rel="stylesheet" href="c_novel.css">
-		<link rel="stylesheet" href="../../../libs/font-awesome/css/all.css">
-		<link rel="stylesheet" href="../../../libs/Coloris/dist/coloris.min.css">
+		<link rel="stylesheet" type="text/css" href="../../../common.css">
+		<link rel="stylesheet" type="text/css" href="../general.css">
+		<link rel="stylesheet" type="text/css" href="c_novel.css">
+		<link rel="stylesheet" type="text/css" href="../../../libs/font-awesome/css/all.css">
+		<link rel="stylesheet" type="text/css" href="../../../libs/Coloris/dist/coloris.min.css">
 		<script src="../../../libs/jquery-3.7.1.min.js"></script>
 		<script src="../../../libs/SortableJS/Sortable.min.js"></script>
 		<script src="../../../libs/Coloris/dist/coloris.min.js"></script>
 		<script src="c_novel.js" type="module"></script>
+		<script src="coloris_setup.js"></script>
+		
 	</head>
 	<body>
 		<div id="container">
@@ -157,6 +159,7 @@
 							</div>
 						</div>
 					</div>
+
 					<!-- スキン -->
 					<div class="contents-container novel-skin button-hide-target button-hide--hidden" name="header">
 						<div class="contents-wide">
@@ -195,7 +198,7 @@
 											</div>
 										</div>
 										<div id="skin-option--export" style="margin-top: 1em; float: left;">
-											<button name="export" type="button">エクスポート</button>
+											<button name="export" type="button" class="button">エクスポート</button>
 										</div>
 									</div>
 								</div>
@@ -210,13 +213,13 @@
 												<label for="skin">スキン</label>
 											</div>
 											<div id="skin-selection--buttons" style="margin-left: 2em;">
-												<button name="new" type="button">＋</button>
+												<button name="new" type="button" class="button">＋</button>
 											</div>
 										</div>
 										<div id="skin-option--buttons" style="margin-bottom: 1em">
-											<!--<button name="save" type="button">保存</button>-->
-											<button name="copy" type="button">複製</button>
-											<button name="delete" type="button">削除</button>
+											<!--<button name="save" type="button" class="button">保存</button>-->
+											<button name="copy" type="button" class="button">複製</button>
+											<button name="delete" type="button" class="button">削除</button>
 											<span id="skin-option--editting">test
 											</span>
 										</div>
@@ -239,73 +242,64 @@
 													<div class="textfield skin-detail">
 														<label for="#skin-novel-color">本文 文字色</label>
 														<div class="skin-color-field">
-															<input name="skin-novel-color" class="option-skin" type="text" id="skin-novel-color">
+															<input name="skin-novel-color" class="option-skin option-skin-color" type="text" id="skin-novel-color" data-coloris>
 															</input>
-															<div name="skin-novel-color" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-novel-background">本文 背景色</label>
 														<div class="skin-color-field">
-															<input name="skin-novel-background" class="option-skin" type="text" id="skin-novel-background">
+															<input name="skin-novel-background" class="option-skin option-skin-color" type="text" id="skin-novel-background" data-coloris>
 															</input>
-															<div name="skin-novel-background" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-novel-background-second">本文 背景色（サブ）</label>
 														<div class="skin-color-field">
-															<input name="skin-novel-background-second" class="option-skin" type="text" id="skin-novel-background-second">
+															<input name="skin-novel-background-second" class="option-skin option-skin-color" type="text" id="skin-novel-background-second" data-coloris>
 															</input>
-															<div name="skin-novel-background-second" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-link-color">リンク色</label>
 														<div class="skin-color-field">
-															<input name="skin-link-color" class="option-skin" type="text" id="skin-link-color">
+															<input name="skin-link-color" class="option-skin option-skin-color" type="text" id="skin-link-color" data-coloris>
 															</input>
-															<div name="skin-link-color" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-link-color-visited">リンク色（クリック済み）</label>
 														<div class="skin-color-field">
-															<input name="skin-link-color-visited" class="option-skin" type="text" id="skin-link-color-visited">
+															<input name="skin-link-color-visited" class="option-skin option-skin-color" type="text" id="skin-link-color-visited" data-coloris>
 															</input>
-															<div name="skin-link-color-visited" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-link-color-hover">リンク色（ホバー時）</label>
 														<div class="skin-color-field">
-															<input name="skin-link-color-hover" class="option-skin" type="text" id="skin-link-color-hover">
+															<input name="skin-link-color-hover" class="option-skin option-skin-color" type="text" id="skin-link-color-hover" data-coloris>
 															</input>
-															<div name="skin-link-color-hover" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-sublist-underline">目次の下線 / ヘッダアイコン</label>
 														<div class="skin-color-field">
-															<input name="skin-sublist-underline" class="option-skin" type="text" id="skin-sublist-underline">
+															<input name="skin-sublist-underline" class="option-skin option-skin-color" type="text" id="skin-sublist-underline" data-coloris>
 															</input>
-															<div name="skin-sublist-underline" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-sublist-underline-hover">目次の下線 / ヘッダアイコン（ホバー時）</label>
 														<div class="skin-color-field">
-															<input name="skin-sublist-underline-hover" class="option-skin" type="text" id="skin-sublist-underline-hover">
+															<input name="skin-sublist-underline-hover" class="option-skin option-skin-color" type="text" id="skin-sublist-underline-hover" data-coloris>
 															</input>
-															<div name="skin-sublist-underline-hover" class="color-box"></div>
 														</div>
 													</div>
 													<div class="textfield skin-detail">
 														<label for="#skin-sublist-underline-visited">目次の下線 / ヘッダアイコン（訪問時）</label>
 														<div class="skin-color-field">
-															<input name="skin-sublist-underline-visited" class="option-skin" type="text" id="skin-sublist-underline-visited">
+															<input name="skin-sublist-underline-visited" class="option-skin option-skin-color" type="text" id="skin-sublist-underline-visited" data-coloris>
 															</input>
-															<div name="skin-sublist-underline-visited" class="color-box"></div>
 														</div>
 													</div>
 												</div>
@@ -316,6 +310,7 @@
 							</div>
 						</div>
 					</div>
+
 					<!-- フォント -->
 					<div class="contents-container novel-font button-hide-target button-hide--hidden" name="header">
 						<div class="contents-wide">
@@ -420,6 +415,7 @@
 							</div>
 						</div>
 					</div>
+
 					<!-- 文章校正 -->
 					<div class="contents-container novel-correction button-hide-target button-hide--hidden" name="header">
 						<div class="contents-wide">

@@ -40,7 +40,7 @@ input[type="text"] {
 }
 
 /* Button */
-button, #import-options-label {
+.button, #import-options-label {
     color: rgb(255, 255, 255);
     font-size: 14px;
     line-height: 1.7;
@@ -60,12 +60,12 @@ button, #import-options-label {
     outline: 0px;
     padding: .3em 1em !important;
 }
-button:active, button:focus, button:hover,
+.button:active, .button:focus, .button:hover,
 #import-options-label:active, #import-options-label:focus, #import-options-label:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(51, 154, 244);
 }
-button:disabled {
+.button:disabled {
     background-color: gray;
 }
 input[type=file] {

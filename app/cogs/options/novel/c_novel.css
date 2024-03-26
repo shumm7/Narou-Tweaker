@@ -70,21 +70,19 @@
 	color: #555;
 	text-overflow: ellipsis;
 }
-.skin-color-field {
-	display: flex;
-	flex-flow: row;
-	align-items: center;
+.skin-color-field .clr-field {
+	display: block;
 }
-.skin-detail .color-box {
-	height: 1em;
-	width: 1em;
-	padding: .3em;
-	border: 1px solid #000;
-	margin-left: 1em;
-	background: transparent;
+.skin-color-field .clr-field input {
+	margin: .1em;
+	box-sizing: border-box;
+    width: 100%;
 }
-.skin-detail .skin-color-field input[type="text"] {
-	width: 100%;
+.skin-color-field .clr-field button {
+    height: 20px;
+	width: 40px;
+	margin-right: 5px;
+    border-radius: 5px;
 }
 #skin-preview {
 	padding: 1em;

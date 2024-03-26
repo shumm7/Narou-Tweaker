@@ -46,6 +46,7 @@ export function restoreSkins(skins, selected){
 
   $("#skin-name").val(defaultValue(skin.name, ""))
   $("#skin-description").val(defaultValue(skin.description, ""))
+
   $("#skin-novel-color").val(defaultValue(style.novel.color, ""))
   $("#skin-novel-background").val(defaultValue(style.novel.background, ""))
   $("#skin-novel-background-second").val(defaultValue(style.novel.background_second, ""))
@@ -55,6 +56,9 @@ export function restoreSkins(skins, selected){
   $("#skin-sublist-underline").val(defaultValue(style.sublist.color, ""))
   $("#skin-sublist-underline-hover").val(defaultValue(style.sublist.hover, ""))
   $("#skin-sublist-underline-visited").val(defaultValue(style.sublist.visited, ""))
+  document.querySelectorAll('.option-skin-color').forEach(input => {
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+  });
   
   if(skin.customizable){
     $(".option-skin").prop("disabled", false)
@@ -214,6 +218,7 @@ export function addSkinEditButtonEvent(){
   $(".option-skin").change(()=>{ /* Auto Save */
     saveSelectedSkin()
   });
+
 
   /* Storage Listener */
   chrome.storage.local.onChanged.addListener(function(changes){
