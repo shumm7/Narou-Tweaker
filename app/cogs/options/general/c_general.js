@@ -35,7 +35,10 @@ function exportOptionText() {
 function removeOptionData(){
     $("#removeOptionData").on("click", function(){
         if(window.confirm('スキンを含む、保存されているデータが全てリセットされます。')){
-            chrome.storage.local.set(defaultOption)
+            chrome.storage.local.clear(()=>{
+                chrome.storage.local.set(defaultOption)
+                console.log("Reset all options.")
+            })
         }
     })
 }
