@@ -264,6 +264,41 @@ function _header(){
             $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
         }
 
+        /* スクロール */
+        $("#novel_header ul").append(`
+            <li class="scroll" id="scroll-icon">
+                <a id="scroll-down" class="scroll-icon-inner">
+                    <i class="fa-solid fa-angles-down"></i>
+                    <span class="title">下へ移動</span>
+                </a>
+                <a id="scroll-up" class="scroll-icon-inner disabled">
+                    <i class="fa-solid fa-angles-up"></i>
+                    <span class="title">上へ移動</span>
+                </a>
+            </li>
+        `)
+        $(window).on("scroll", function () {
+            $("#scroll-icon .scroll-icon-inner").removeClass("disabled");
+            if ($(window).scrollTop() > 500) {
+                $("#scroll-icon #scroll-down").addClass("disabled");
+            } else {
+                $("#scroll-icon #scroll-up").addClass("disabled");
+            }
+        });
+        $("#scroll-down").on("click", function(){
+            if($(".wrap_menu_novelview_after").length){
+                var height = $(".wrap_menu_novelview_after").offset().top
+                $(window).scrollTop(height)
+            }else{
+                var a = document.documentElement;
+                var y = a.scrollHeight - a.clientHeight;
+                window.scroll(0, y);
+            }
+        })
+        $("#scroll-up").on("click", function(){
+            $(window).scrollTop(0)
+        })
+
         /* 検索 */
         $("#novel_header ul").append('<li class="search"><a><i class="fa-solid fa-magnifying-glass"></i><span class="title">検索</span></a></li>')
         $("body").prepend(`

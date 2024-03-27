@@ -38,14 +38,16 @@ function applySkin(tab){
         const expand_skin = data.novelExpandSkin
         const novel_css = data.novelCustomStyle
 
-        if (data.appliedSkinCSS!=undefined){
-            chrome.scripting.removeCSS({
-                css: data.appliedSkinCSS,
-                target: {
-                    tabId: tab.id,
-                }
-            })
-        }
+        chrome.storage.session.get(["appliedSkinCSS"], (s) =>{
+            if (s.appliedSkinCSS!=undefined){
+                chrome.scripting.removeCSS({
+                    css: s.appliedSkinCSS,
+                    target: {
+                        tabId: tab.id,
+                    }
+                })
+            }
+        })
 
         const s = skin.style
         var rule = ""
@@ -376,8 +378,7 @@ function applySkin(tab){
                 tabId: tab.id,
             }
         }, function(){
-            data.appliedSkinCSS = rule
-            chrome.storage.local.set({appliedSkinCSS: data.appliedSkinCSS});
+            chrome.storage.session.set({appliedSkinCSS: rule});
         })
     });    
 }
@@ -386,14 +387,16 @@ function applyFont(tab){
     chrome.storage.local.get(null, (data) => {
         var rule = ""
 
-        if (data.appliedFontCSS!=undefined){
-            chrome.scripting.removeCSS({
-                css: data.appliedFontCSS,
-                target: {
-                    tabId: tab.id,
-                }
-            })
-        }
+        chrome.storage.session.get(["appliedFontCSS"], (s)=>{
+            if (s.appliedFontCSS!=undefined){
+                chrome.scripting.removeCSS({
+                    css: s.appliedFontCSS,
+                    target: {
+                        tabId: tab.id,
+                    }
+                })
+            }
+        })
 
         var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
         var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
@@ -455,7 +458,6 @@ function applyFont(tab){
                 tabId: tab.id,
             }
         })
-        data.appliedFontCSS = rule
-        chrome.storage.local.set({appliedFontCSS: data.appliedFontCSS})
+        chrome.storage.session.set({appliedFontCSS: rule})
     })
 }

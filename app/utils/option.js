@@ -1,5 +1,7 @@
+import { getExtensionVersion } from "./misc.js"
+
 export const defaultOption = {
-    optionsVersion: 3,
+    optionsVersion: getExtensionVersion(),
 
     /* Extension */
     extAdvancedSettings: false,

@@ -8,7 +8,7 @@ const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
 export function correction(){
-    if($("#novel_honbun").length && checkNovelPageDetail=="novel"){
+    if($("#novel_honbun").length && checkNovelPageDetail()=="novel"){
         chrome.storage.local.get(null, (data) => {
             resetCorrection()
             if(defaultValue(data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)){
