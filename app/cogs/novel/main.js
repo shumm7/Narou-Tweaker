@@ -4,6 +4,9 @@ import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
 import { defaultOption } from "../../utils/option.js";
+import { skinUpdateListener } from "./skin.js";
+
+skinUpdateListener()
 
 chrome.storage.local.get(null, (data) => {
     /* Header */

@@ -8,8 +8,10 @@ import { skinUpdateListener } from "./skin.js";
 updateOption()
 chrome.storage.local.onChanged.addListener(function(changes){
     if(changes.optionsVersion!=undefined){
-        console.log("Narou Tweaker's option was updated: "+changes.optionsVersion.oldValue+" -> "+changes.optionsVersion.newValue)
-        console.log(changes)
+        if(typeof changes.optionsVersion.newValue != "undefined"){
+            console.log("Narou Tweaker's option was updated: "+changes.optionsVersion.oldValue+" -> "+changes.optionsVersion.newValue)
+            console.log(changes)
+        }
     }
 })
 
@@ -18,9 +20,6 @@ actionListener()
 
 /* Message */
 messageListener()
-
-/* Skin */
-skinUpdateListener()
 
 /* Sidepanel */
 sidepanelListener()

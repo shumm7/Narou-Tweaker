@@ -2,34 +2,49 @@ import { defaultValue } from "../../utils/misc.js"
 import { defaultOption, localSkins, localFont } from "../../utils/option.js"
 
 export function skinUpdateListener(){
-    /* First Load */
-    chrome.tabs.onUpdated.addListener((tabId, info, tab) => {
-        if (info.status == 'loading' && tab.url.match(/^https:\/\/(ncode|novelcom).syosetu.com\/*.*/)){
-            applySkin(tab)
-            applyFont(tab)
-        };
-    });
+    applySkin()
+    applyFont()
 
     /* Storage Listener ( for Skin ) */
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){
-            chrome.tabs.query({url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
-                for(let i=0; i<tabs.length; i++){
-                    applySkin(tabs[i])
-                };
-            });
+            applySkin()
         }
         if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
-            chrome.tabs.query({url: ["https://ncode.syosetu.com/*", "https://novelcom.syosetu.com/*"]}, tabs => {
-                for(let i=0; i<tabs.length; i++){
-                    applyFont(tabs[i])
-                };
-            });
+            applyFont()
         }
     })
 }
 
-function applySkin(tab){
+function applySkin(){
+    chrome.storage.session.get(["appliedSkinCSS"], (data)=>{
+        try{
+            if(!data.appliedSkinCSS){
+                makeSkin()
+                $("#narou-tweaker-style--skin").remove()
+                $("html").append(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style">${data.appliedSkinCSS}</style>`)
+            }
+        }catch(e){
+            makeSkin()
+        }
+    })
+}
+
+function applyFont(){
+    chrome.storage.session.get(["appliedFontCSS"], (data)=>{
+        try{
+            if(!data.appliedFontCSS){
+                makeFont()
+            }
+            $("#narou-tweaker-style--font").remove()
+            $("html").append(`<style type="text/css" id="narou-tweaker-style--font" class="narou-tweaker-style">${data.appliedFontCSS}</style>`)
+        }catch(e){
+            makeFont()
+        }
+    })
+}
+
+function makeSkin(){
     chrome.storage.local.get(null, (data) => {
         const skin_idx = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
@@ -37,17 +52,6 @@ function applySkin(tab){
 
         const expand_skin = data.novelExpandSkin
         const novel_css = data.novelCustomStyle
-
-        chrome.storage.session.get(["appliedSkinCSS"], (s) =>{
-            if (s.appliedSkinCSS!=undefined){
-                chrome.scripting.removeCSS({
-                    css: s.appliedSkinCSS,
-                    target: {
-                        tabId: tab.id,
-                    }
-                })
-            }
-        })
 
         const s = skin.style
         var rule = ""
@@ -372,31 +376,16 @@ function applySkin(tab){
         }
         `
 
-        chrome.scripting.insertCSS({
-            css: rule,
-            target: {
-                tabId: tab.id,
-            }
-        }, function(){
-            chrome.storage.session.set({appliedSkinCSS: rule});
+        chrome.storage.session.set({appliedSkinCSS: rule}, function(){
+            $("#narou-tweaker-style--skin").remove()
+            $("html").append(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style">${rule}</style>`)
         })
     });    
 }
 
-function applyFont(tab){
+function makeFont(){
     chrome.storage.local.get(null, (data) => {
         var rule = ""
-
-        chrome.storage.session.get(["appliedFontCSS"], (s)=>{
-            if (s.appliedFontCSS!=undefined){
-                chrome.scripting.removeCSS({
-                    css: s.appliedFontCSS,
-                    target: {
-                        tabId: tab.id,
-                    }
-                })
-            }
-        })
 
         var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
         var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
@@ -452,12 +441,9 @@ function applyFont(tab){
         }
         `
 
-        chrome.scripting.insertCSS({
-            css: rule,
-            target: {
-                tabId: tab.id,
-            }
+        chrome.storage.session.set({appliedFontCSS: rule}, function(){
+            $("#narou-tweaker-style--font").remove()
+            $("html").append(`<style type="text/css" id="narou-tweaker-style--font" class="narou-tweaker-style">${rule}</style>`)
         })
-        chrome.storage.session.set({appliedFontCSS: rule})
     })
 }

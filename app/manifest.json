@@ -96,6 +96,7 @@
         "cogs/novel/cogs.js",
         "cogs/novel/correction.js",
         "cogs/novel/utils.js",
+        "cogs/novel/skin.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/social.js",

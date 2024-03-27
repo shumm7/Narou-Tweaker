@@ -18,7 +18,7 @@ export const defaultOption = {
     novelOptionModalSelected: 0,
 
     /* Workspace */
-    workspaceBookmarkLayout: "1",
+    workspaceBookmarkLayout: "0",
     
     /* Mypage */
     mypageShowUserId: true,
