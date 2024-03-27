@@ -63,7 +63,14 @@ export function resetCorrection(){
         const text = $(this).text()
         const lineType = checkLineType(text)
 
-        $(this).after(`<p id='${id}' class='replaced ${lineType}'>${$(this)[0].innerHTML}</p>`)
+        var p = $(`<p id='${id}' class='replaced'>${$(this)[0].innerHTML}</p>`)
+        p.addClass(lineType)
+
+        if($(this).find("img").length){
+            p.addClass("sasie")
+        }
+
+        $(this).after(p)
     })
 }
 
