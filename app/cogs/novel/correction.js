@@ -3,8 +3,9 @@ import { defaultOption } from "../../utils/option.js";
 import { escapeHtml } from "../../utils/text.js";
 import { checkNovelPageDetail } from "./utils.js";
 
-const bracket_end = `」】』\\\]］〉》〕）\\\)〛〟»›”>`
-const symbols = `！-／：-＠［-｀｛-～、-〜”’・`
+const bracket_begin = `「『＜《〈≪【（”“’‘\\\(\\\'`
+const bracket_end = `」』＞》〉≫】）”’\\\)\\\'`
+const symbols = `!-/:-@\\\[-\`{-~！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
 export function correction(){
@@ -59,8 +60,29 @@ export function resetCorrection(){
     $("#novel_honbun > p").addClass("original")
     $("#novel_honbun > p.original").each(function(){
         const id = $(this).prop("id")
-        $(this).after("<p id='"+id+"' class='replaced'>" + $(this)[0].innerHTML + "</p>")
+        const text = $(this).text()
+        const lineType = checkLineType(text)
+
+        $(this).after(`<p id='${id}' class='replaced ${lineType}'>${$(this)[0].innerHTML}</p>`)
     })
+}
+
+function checkLineType(string){
+    string = string.trim()
+    if(string.match(new RegExp(`^[${symbols}\\s]*$`, "g"))){
+        return ""
+    }else if(string.match(new RegExp(`^\\s*[${bracket_begin}].*$`))){ //括弧で始まる文章
+        var m = string.match(new RegExp(`^\\s*[${bracket_begin}](.*)$`))[1]
+        if(m.match(new RegExp(`^.*[${bracket_end}]\\s*$`), "g")){ //括弧で終わる
+            return "kaiwabun"
+        }else if(!m.match(new RegExp(`[${bracket_end}]`))){ //括弧が含まれない
+            return "kaiwabun"
+        }else{
+            return "jinobun"
+        }
+    }else{
+        return "jinobun"
+    }
 }
 
 function replaceText(_elem, regexp, replace, isReplaceAll) {
@@ -88,18 +110,9 @@ function replaceText(_elem, regexp, replace, isReplaceAll) {
 function correctionIndent(){
     /* 行頭の段落下げ */
     $("#novel_honbun > p.replaced").each(function(){
-        var text = $(this).text()
-
-        if(text.trim().length>0){
-            var m = text.match(new RegExp(`^(\\s*)([${symbols}]*)(.*)`))
-            if(m!=null){
-                if(m[2].length==0 || m[2].match(/^(――|……)/)){
-                    text = $(this)[0].innerHTML
-                    $(this)[0].innerHTML = "　" + text.match(new RegExp(`^(\\s*)(.*)`))[2]
-                }
-            }
-            
-        }
+        if(!$(this).hasClass("jinobun")){return}
+        var text = $(this)[0].innerHTML
+        $(this)[0].innerHTML = "　" + text.match(new RegExp(`^(\\s*)(.*)`))[2]
     })
 }
 
