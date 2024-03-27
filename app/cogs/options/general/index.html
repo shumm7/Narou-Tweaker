@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>環境設定 - ユーザホーム ｜ Narou Tweaker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<base target="_blank">
+		<link rel="stylesheet" type="text/css" href="/common.css">
+		<link rel="stylesheet" type="text/css" href="../general.css">
+		<link rel="stylesheet" type="text/css" href="c_general.css">
+		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<script src="/libs/jquery-3.7.1.min.js"></script>
+		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="c_general.js" type="module"></script>
+		
+	</head>
+	<body>
+		<div id="container">
+			<div id="sidebar"></div>
+			<div id="contents">
+				<div id="header">
+					<div id="header-title">
+						<div id="header-title--heading">
+							<i class="fa-solid fa-gear"></i>
+							<span class="title">全般</span>
+						</div>
+						<div id="header-title--description">
+							<p>Narou Tweaker全体の設定を変更することが出来ます。
+							</p>
+						</div>
+					</div>
+					<div id="header-menu">
+						<div class="header-menu-left">
+							<ul id="header-menu-left-items">
+								<li class="header-menu-item button-hide selected" name="header" data-for=".general-main" data="selected">
+									<span class="header-menu-item--title">Narou Tweaker</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".general-config" data="selected">
+									<span class="header-menu-item--title">環境設定</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".general-version" data="selected">
+									<span class="header-menu-item--title">パッチノート</span>
+								</li>
+								<!--
+								<li class="header-menu-item button-hide" name="header" data-for=".general-help" data="selected">
+									<span class="header-menu-item--title">ヘルプ</span>
+								</li>
+								-->
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div id="main">
+					<!-- 全般 -->
+					<div class="contents-container general-main button-hide-target" name="header">
+						<!--ヘッダ-->
+						<div class="contents-wide">
+							<div id="intro">
+								<img src="https://github.com/shumm7/Narou-Tweaker/blob/main/key/ja/prm-large.png?raw=true">
+								<span class="title">Narou Tweaker</span>
+								<div class="subtitle">
+									<span class="version extension-version"></span>
+								</div>
+							</div>
+						</div>
+
+						<!--Narou Tweakerとは-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">Narou Tweakerとは</div>
+									<div class="contents-item--description"></div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="description">
+										<p>
+											Narou Tweakerは「小説家になろう」のユーザー体験を向上させることを目的に開発された、ブラウザ拡張機能です。
+										</p>
+										<p>
+											幅広い拡張性と高いユーザビリティで、より快適に小説を楽しむことが出来ます。
+										</p>
+										<div id="downloads">
+											<div class="download-item">
+												<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
+													<span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
+													<span class="download-item--title">Chrome</span>
+												</a>
+											</div>
+											<div class="download-item">
+												<a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
+													<span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
+													<span class="download-item--title">FireFox</span>
+												</a>
+											</div>
+										</div>
+									</div>
+                                </div>
+							</div>
+						</div>
+
+						<!--プライバシーポリシー-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">プライバシーポリシー</div>
+									<div class="contents-item--description"></div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="description">
+										<p>
+											Narou Tweakerを利用される際には、<a href="https://github.com/shumm7/Narou-Tweaker/blob/main/TERMS.md">利用規約・プライバシーポリシー</a>をご確認ください。
+										</p>
+										<p>
+											ご同意いただけない場合は、本アプリケーションにアクセスしないでください。
+										</p>
+									</div>
+                                </div>
+							</div>
+						</div>
+
+						<!--ライセンス-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">ライセンス</div>
+									<div class="contents-item--description"></div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="description">
+										<p>
+											Narou Tweakerのソースコードは、<a href="https://github.com/shumm7/Narou-Tweaker/blob/main/LICENSE">MIT License</a>で提供されています。
+										</p>
+										<p>
+											詳しくは<a href="https://github.com/shumm7/Narou-Tweaker"><i class="fa-brands fa-github"></i> GitHubリポジトリ</a>をご確認ください。
+										</p>
+									</div>
+                                </div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- 環境設定 -->
+					<div class="contents-container general-config button-hide-target button-hide--hidden" name="header">
+						<!--パッチノートについて-->
+						<div class="contents-wide">
+							<p>
+								Narou Tweaker全体に影響する設定を変更します。<br>
+								<span style="color: red; font-weight: bold;">すべての設定がリセットされる場合があります。操作にはご注意ください。</span>
+							</p>
+						</div>
+
+						<!--高度な設定-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">高度な設定</div>
+									<div class="contents-item--description">上級者向けの設定項目を表示します。通常では不要です。</div>
+								</div>
+
+								<div class="contents-option-content">
+									<input type="checkbox" id="extAdvancedSettings" class="options toggle">
+                                    <label for="extAdvancedSettings" class="toggle"></label>
+                                </div>
+							</div>
+						</div>
+
+						<!--設定をリセット-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">設定をリセット</div>
+									<div class="contents-item--description">保存されている設定データをすべて初期値に戻します。</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="export-option-text">
+										<button class="button" id="removeOptionData" type="button">リセット</button>
+									</div>
+                                </div>
+							</div>
+						</div>
+
+						<!--設定データを閲覧-->
+						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">設定データを閲覧</div>
+									<div class="contents-item--description">現在保存されている設定データを文字列で表示します。<br>（storage.localのデータを表示しています）</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="export-option-text">
+										<textarea id="exportOptionText_Output"></textarea>
+									</div>
+                                </div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- パッチノート -->
+					<div class="contents-container general-version button-hide-target button-hide--hidden" name="header">
+						<!--パッチノートについて-->
+						<div class="contents-wide">
+							<p>
+								Narou Tweakerの更新履歴を表示します。<br>
+								現在のバージョンは、<span class="extension-version"></span>です。
+							</p>
+						</div>
+
+						<!--0.0.9-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.9">0.0.9</a></div>
+									<div class="contents-item--description">
+										2024/03/27
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>新しいヘッダのアイコンを追加（スクロール）</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>その他不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.8-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.8">0.0.8</a></div>
+									<div class="contents-item--description">
+										2024/03/25
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>🖊️ ユーザホーム</b>
+											<ul>
+												<li>ブックマークのレイアウトを変更できるように</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>FireFoxアドオン向けの調整</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.7-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.7">0.0.7</a></div>
+									<div class="contents-item--description">
+										2024/03/24
+										<i class="fa-brands fa-chrome"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>【Chrome限定】目次を表示できるサイドパネルを追加（コンテキストメニューからサイドパネルを開くことが出来ます）</li>
+												<li>新しいヘッダのアイコンを追加（小説家になろうトップページ、ログイン、LINE、Facebook）</li>
+												<li>一部のヘッダイアコンが訪問時に色が変化するように</li>
+												<li>誤字報告ページが正常に使用できない問題を修正</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>その他不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.6-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.6">0.0.6</a></div>
+									<div class="contents-item--description">
+										2024/03/23
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>感想、レビュー、縦書きPDFページにスキンが適用されるように</li>
+												<li>スキン機能で使用されるCSSを調整</li>
+												<li>「モダンなヘッダ」オフ時のヘッダの表示位置が変更</li>
+												<li>「モダンなヘッダ」オフ時に、アイコンを非表示にできる設定を追加</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li><span style="font-weight: bold;">重要なセキュリティアップデート</span></li>
+												<li>その他不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.5-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.5">0.0.5</a></div>
+									<div class="contents-item--description">
+										2024/03/22
+										<i class="fa-brands fa-chrome"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>文字列置換機能が追加。任意のテキスト（あるいは、正規表現）で小説内の文字列を置換できるようになりました。</li>
+												<li>「モダンなヘッダ」をオフにした状態でも、ヘッダの項目がカスタマイズできるように。</li>
+												<li>文章校閲機能の「段落下げ」の動作方法を調整。</li>
+											</ul>
+										</p>
+										<p>
+											<b>👤 ユーザページ</b>
+											<ul>
+												<li>外部URLの警告を有効化/無効化する機能を追加</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>オプションデータの処理方法を変更</li>
+												<li>その他不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.4-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.4">0.0.4</a></div>
+									<div class="contents-item--description">
+										2024/03/20
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>横幅設定機能を追加</li>
+												<li>作品情報ページの表示を調整</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>オプションのシステムを変更</li>
+												<li>オプションデータの自動更新機能を追加</li>
+												<li>必要な権限を変更</li>
+												<li>その他不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.3.1-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.3">0.0.3.1</a></div>
+									<div class="contents-item--description">
+										2024/03/19
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>不具合修正</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.3-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.3">0.0.3</a></div>
+									<div class="contents-item--description">
+										2024/03/19
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📗 小説ページ</b>
+											<ul>
+												<li>文章校閲機能を追加</li>
+												<li>ヘッダアイコンを新たに追加（編集、検索、情報提供、誤字報告、Xポスト）</li>
+												<li>ヘッダアイコンの配置が常時反映されるように</li>
+												<li>ヘッダの表示モード「スクロール」の挙動を調整</li>
+												<li>短編小説での画面表示の不具合を修正</li>
+												<li>フッターが非表示に</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.2-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.2">0.0.2</a></div>
+									<div class="contents-item--description">
+										2024/03/17
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											<b>📊 KASASAGI</b>
+											<ul>
+												<li>日別、月別でグラフを表示できるようになりました。</li>
+											</ul>
+										</p>
+										<p>
+											<b>⚙ 全般</b>
+											<ul>
+												<li>不具合修正を実施しました。</li>
+											</ul>
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--0.0.1-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading"><a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/0.0.1">0.0.1</a></div>
+									<div class="contents-item--description">
+										2024/03/16
+										<i class="fa-brands fa-chrome"></i>
+										<i class="fa-brands fa-firefox-browser"></i>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="version">
+										<p>
+											リリース
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div id="footer">
+                    <div id="js-failed">
+                        JavaScript failed to load. Your development build failed or your browser has some issue.
+                    </div>
+                </div>
+			</div>
+		</div>
+	</body>
+</html>

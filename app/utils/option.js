@@ -1,6 +1,9 @@
 export const defaultOption = {
     optionsVersion: 3,
 
+    /* Extension */
+    extAdvancedSettings: false,
+
     /* Novel */
     novelCustomStyle: true,
     novelCustomHeader: true,

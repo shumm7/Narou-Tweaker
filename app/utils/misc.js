@@ -35,3 +35,11 @@ export function getCSSRule(key, rules){
     style += "}\n"
     return style
 }
+
+export function getExtensionVersion(){
+    return chrome.runtime.getManifest().version
+}
+
+export function getExtensionAuthor(){
+    return chrome.i18n.getMessage("extAuthor")
+}

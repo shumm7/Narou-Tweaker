@@ -2,9 +2,13 @@
     margin: 0;
     padding: 0;
 }
+a {
+    text-decoration: none;
+}
 html::-webkit-scrollbar {
     display: none;
 }
+
 #container {
     display: flex;
     flex-direction: row;
@@ -179,6 +183,7 @@ input[type=file] {
 .contents-wide {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     width: 100%;
     margin: 10px 10px;
     padding: 10px 0 20px 0;
@@ -194,6 +199,7 @@ input[type=file] {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    flex-grow: 1;
 }
 .contents-wide-column .contents-option {
     border-bottom: 1px solid #eee;
@@ -211,14 +217,15 @@ input[type=file] {
     
 }
 .contents-option-head {
-    width: 40%;
+    width: 25%;
     min-width: 200px;
     margin-right: 20px;
 }
 .contents-option-content {
     display: flex;
     align-items: center;
-    width: 60%;
+    width: 75%;
+    padding-right: 20px;
 }
 .contents-item--heading {
     font-weight: bold;
