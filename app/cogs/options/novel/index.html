@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>環境設定 - 小説ページ ｜ Narou Tweaker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<base target="_blank">
+		<link rel="stylesheet" type="text/css" href="/common.css">
+		<link rel="stylesheet" type="text/css" href="../general.css">
+		<link rel="stylesheet" type="text/css" href="c_novel.css">
+		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<link rel="stylesheet" type="text/css" href="/libs/Coloris/dist/coloris.min.css">
+		<script src="/libs/jquery-3.7.1.min.js"></script>
+		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="/libs/Coloris/dist/coloris.min.js"></script>
+		<script src="c_novel.js" type="module"></script>
+		
+	</head>
+	<body>
+		<div id="container">
+			<div id="sidebar"></div>
+			<div id="contents">
+				<div id="header">
+					<div id="header-title">
+						<div id="header-title--heading">
+							<i class="fa-solid fa-book"></i>
+							<span class="title">小説ページ
+							</span>
+						</div>
+						<div id="header-title--description">
+							<p>小説本文やその関連ページの設定を変更することが出来ます。
+								<br>
+								<span style="font-size:80%;">対象ページ：ncode.syosetu.com / novelcom.syosetu.com 
+							</p>
+						</div>
+					</div>
+					<div id="header-menu">
+						<div class="header-menu-left">
+							<ul id="header-menu-left-items">
+								<li class="header-menu-item button-hide selected" name="header" data-for=".novel-general" data="selected">
+									<span class="header-menu-item--title">全般
+									</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".novel-skin" data="selected">
+									<span class="header-menu-item--title">スキン
+									</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".novel-font" data="selected">
+									<span class="header-menu-item--title">書体
+									</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".novel-correction" data="selected">
+									<span class="header-menu-item--title">文章校正
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="main">
+					<!-- 全般 -->
+					<div class="contents-container novel-general button-hide-target" name="header">
+						<div class="contents-wide">
+							<p>小説ページ全体に影響する設定を変更します。 </p>
+						</div>
+						<!--デザインを調整-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">デザインを調整（推奨）</div>
+									<div class="contents-item--description">全体的なページのデザインを調整します。</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="novelCustomStyle" class="options toggle">
+									<label for="novelCustomStyle" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+						<!--シンプルなヘッダ-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">シンプルなヘッダ</div>
+									<div class="contents-item--description">ページに表示されるヘッダを、シンプルなデザインに変更します。</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="novelCustomHeader" class="options toggle">
+									<label for="novelCustomHeader" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+						<!--ヘッダの追従モード-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">ヘッダの追従モード</div>
+									<div class="contents-item--description">ヘッダの配置場所を設定します。
+										<br>
+										<span style="font-size: 80%;">・上部：ページ上部に固定
+										<br>・追従：スクロールしても常に表示
+										<br>・スクロール：基本は非表示、上にスクロールした時だけ表示 
+										</span>
+									</div>
+								</div>
+								<div class="contents-option-content">
+									<div class="dropdown">
+										<select id="novelCustomHeaderMode" class="options">
+											<option value="absolute">上部</option>
+											<option value="fixed">追従</option>
+											<option value="scroll">スクロール</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--スクロールのとき、ヘッダを非表示-->
+						<div class="contents-wide option-hide" data-for="novelCustomHeaderMode" data="scroll" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">ページ読み込み時にヘッダを隠す</div>
+									<div class="contents-item--description">オンの場合、ページ読み込み時にヘッダを隠します。
+										<br>
+										<span style="font-size: 80%;">（ヘッダの追従モードが「スクロール」でのみ有効）
+										</span>
+									</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="novelCustomHeaderScrollHidden" class="options toggle">
+									<label for="novelCustomHeaderScrollHidden" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+						<!--ヘッダのアイテム-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">ヘッダのアイテム配置</div>
+									<div class="contents-item--description">ヘッダに表示するアイテムを指定します。</div>
+								</div>
+								<div class="contents-option-content">
+									<div id="novel_header_icon" style="display: flex; flex-flow: row;">
+										<div class="draggable_area_outer">
+											<div class="title option-hide" data-for="novelCustomHeader" data="true">左</div>
+											<div class="title option-hide" data-for="novelCustomHeader" data="false">上部</div>
+											<div class="draggable_area" id="left"></div>
+										</div>
+										<div class="draggable_area_outer">
+											<div class="title option-hide" data-for="novelCustomHeader" data="true">右</div>
+											<div class="title option-hide" data-for="novelCustomHeader" data="false">下部</div>
+											<div class="draggable_area" id="right"></div>
+										</div>
+										<div class="draggable_area_outer">
+											<div class="title">非表示</div>
+											<div class="draggable_area" id="disabled"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- スキン -->
+					<div class="contents-container novel-skin button-hide-target button-hide--hidden" name="header">
+						<div class="contents-wide">
+							<p>ページの外観を変更します。
+								<br>
+								<span style="color: #999; font-size: 80%;">これらの設定は、小説ページ内から直接変更できます。
+								</span>
+							</p>
+						</div>
+						<!--スキンの適用範囲を拡大-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">スキンの適用範囲を拡大（推奨）</div>
+									<div class="contents-item--description">スキンの適用範囲を拡大し、小説本文ページ以外でも外観を変更できるようにします。</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="novelExpandSkin" class="options toggle">
+									<label for="novelExpandSkin" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+						<!--スキン-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">スキン設定</div>
+									<div id="skin-option--preview">
+										<div id="skin-preview">
+											<p>　この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</p>
+											<p>　Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+											<div style="height: 1em;"></div>
+											<div id="subtitle-dummy">
+												<div id="link">1.目次テスト</div>
+												<div id="link-visited">2.訪問済み</div>
+											</div>
+										</div>
+										<div id="skin-option--export" style="margin-top: 1em; float: left;">
+											<button name="export" type="button" class="button">エクスポート</button>
+										</div>
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div id="skin-option" class="section" style="padding: 1em;">
+										<div id="skin-selection">
+											<div id="skin-selection--dropdown">
+												<div class="dropdown">
+													<select id="skin" name="skin"></select>
+												</div>
+												<label for="skin">スキン</label>
+											</div>
+											<div id="skin-selection--buttons" style="margin-left: 2em;">
+												<button name="new" type="button" class="button">＋</button>
+											</div>
+										</div>
+										<div id="skin-option--buttons" style="margin-bottom: 1em">
+											<!--<button name="save" type="button" class="button">保存</button>-->
+											<button name="copy" type="button" class="button">複製</button>
+											<button name="delete" type="button" class="button">削除</button>
+											<span id="skin-option--editting">test
+											</span>
+										</div>
+
+										<div id="skin-option--options">
+											<div id="skin-option--field">
+												<div style="margin-bottom: 1em;">
+													<div class="textfield">
+														<label for="#skin-name">名前</label>
+														<input name="skin-name" class="option-skin" type="text" id="skin-name">
+														</input>
+													</div>
+													<div class="textfield">
+														<label for="#skin-description">概要</label>
+														<input name="skin-description" class="option-skin" type="text" id="skin-description">
+														</input>
+													</div>
+												</div>
+												<div>
+													<div class="textfield skin-detail">
+														<label for="#skin-novel-color">本文 文字色</label>
+														<div class="skin-color-field">
+															<input name="skin-novel-color" class="option-skin option-skin-color" type="text" id="skin-novel-color" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-novel-background">本文 背景色</label>
+														<div class="skin-color-field">
+															<input name="skin-novel-background" class="option-skin option-skin-color" type="text" id="skin-novel-background" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-novel-background-second">本文 背景色（サブ）</label>
+														<div class="skin-color-field">
+															<input name="skin-novel-background-second" class="option-skin option-skin-color" type="text" id="skin-novel-background-second" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-link-color">リンク色</label>
+														<div class="skin-color-field">
+															<input name="skin-link-color" class="option-skin option-skin-color" type="text" id="skin-link-color" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-link-color-visited">リンク色（クリック済み）</label>
+														<div class="skin-color-field">
+															<input name="skin-link-color-visited" class="option-skin option-skin-color" type="text" id="skin-link-color-visited" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-link-color-hover">リンク色（ホバー時）</label>
+														<div class="skin-color-field">
+															<input name="skin-link-color-hover" class="option-skin option-skin-color" type="text" id="skin-link-color-hover" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-sublist-underline">目次の下線 / ヘッダアイコン</label>
+														<div class="skin-color-field">
+															<input name="skin-sublist-underline" class="option-skin option-skin-color" type="text" id="skin-sublist-underline" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-sublist-underline-hover">目次の下線 / ヘッダアイコン（ホバー時）</label>
+														<div class="skin-color-field">
+															<input name="skin-sublist-underline-hover" class="option-skin option-skin-color" type="text" id="skin-sublist-underline-hover" data-coloris>
+															</input>
+														</div>
+													</div>
+													<div class="textfield skin-detail">
+														<label for="#skin-sublist-underline-visited">目次の下線 / ヘッダアイコン（訪問時）</label>
+														<div class="skin-color-field">
+															<input name="skin-sublist-underline-visited" class="option-skin option-skin-color" type="text" id="skin-sublist-underline-visited" data-coloris>
+															</input>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- フォント -->
+					<div class="contents-container novel-font button-hide-target button-hide--hidden" name="header">
+						<div class="contents-wide">
+							<p>フォントや行間などの文章レイアウトを変更します。
+								<br>
+								<span style="color: #999; font-size: 80%;">これらの設定は、小説ページ内から直接変更できます。
+								</span>
+							</p>
+						</div>
+						<!--フォント-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">フォント</div>
+								</div>
+								<div class="contents-option-content">
+									<div id="font-family" style="margin-bottom: 1em;">
+										<div id="font-family-select" style="margin-bottom: 1em;">
+											<div class='font-button' id='gothic'>
+												<div class='font-button-box'>あ亜A</div>
+												<div class='font-button-description'>ゴシック</div>
+											</div>
+											<div class='font-button' id='serif'>
+												<div class='font-button-box'>あ亜A</div>
+												<div class='font-button-description'>明朝体</div>
+											</div>
+											<div class='font-button' id='custom'>
+												<div class='font-button-box'>あ亜A</div>
+												<div class='font-button-description'>カスタム</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--カスタムフォント-->
+						<div class="contents-wide option-hide" data-for="fontFontFamily" data="custom" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">カスタムフォント設定</div>
+									<div class="contents-item--description">フォントが「カスタム」の時に適用される設定です。</div>
+								</div>
+								<div class="contents-option-content">
+									<div class="textfield" style="width: 300px;">
+										<input name="custom-font-family" type="text" id="custom-font-family">
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--サイズ-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">文字サイズ</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<div id="font-size">
+										<div style="margin: 0 .5em;">+</div>
+										<div class="font-number-change-button" id="font-size-minus">-</div>
+										<input name="fontFontSize" type="text" id="font-size-input">
+										<div class="font-number-change-button" id="font-size-plus">+</div>
+										<div style="margin: 0 .5em;">%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--行間-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">行間</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<div id="line-height">
+										<div style="margin: 0 .5em;">+</div>
+										<div class="font-number-change-button" id="line-height-minus">-</div>
+										<input name="fontLineHeight" type="text" id="line-height-input">
+										<div class="font-number-change-button" id="line-height-plus">+</div>
+										<div style="margin: 0 .5em;">%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--横幅-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">横幅</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<div id="page-width">
+										<div style="margin: 0 .5em;">×</div>
+										<div class="font-number-change-button" id="page-width-minus">-</div>
+										<input name="fontWidth" type="text" id="page-width-input">
+										<div class="font-number-change-button" id="page-width-plus">+</div>
+										<div style="margin: 0 .5em;">%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 文章校正 -->
+					<div class="contents-container novel-correction button-hide-target button-hide--hidden" name="header">
+						<div class="contents-wide">
+							<p>小説本文を指定した方法で校正します。
+								<br>
+								<span style="color: #999; font-size: 80%;">これらの設定は、小説ページ内から直接変更できます。
+								</span>
+							</p>
+						</div>
+						<!--文法-->
+						<div class="contents-wide">
+							<div class="contents-option-head">
+								<div class="contents-item--heading">文法</div>
+							</div>
+							<div class="contents-wide-column">
+								<!--段落下げ-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">段落下げ</div>
+										<div class="contents-item--description">地の文の行頭に全角スペースを1つ追加します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionIndent" class="options toggle">
+										<label for="correctionIndent" class="toggle"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--記号-->
+						<div class="contents-wide">
+							<div class="contents-option-head">
+								<div class="contents-item--heading">記号</div>
+							</div>
+							<div class="contents-wide-column">
+								<!--中点の三点リーダー-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">三点リーダー</div>
+										<div class="contents-item--description">
+                                            中点でできた三点リーダーを修正します。
+                                            「・・・」→「…………」
+                                        </div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionNormalizeEllipses" class="options toggle">
+										<label for="correctionNormalizeEllipses" class="toggle"></label>
+									</div>
+								</div>
+								<!--罫線のダッシュ-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">ダッシュ</div>
+										<div class="contents-item--description">罫線・ハイフンなどでできたダッシュを全角ダッシュへ変換します。
+											<br>「──」→「――」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionNormalizeDash" class="options toggle">
+										<label for="correctionNormalizeDash" class="toggle"></label>
+									</div>
+								</div>
+								<!--句読点の連続-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">連続する句読点</div>
+										<div class="contents-item--description">連続で現れる句読点を1つに修正します。
+											<br>「、、、」→「、」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionRepeatedSymbols" class="options toggle">
+										<label for="correctionRepeatedSymbols" class="toggle"></label>
+									</div>
+								</div>
+								<!--括弧の後の句点-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">括弧の後の句点</div>
+										<div class="contents-item--description">括弧の後に現れる句点を削除します。
+											<br>「。』」→「』」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionPeriodWithBrackets" class="options toggle">
+										<label for="correctionPeriodWithBrackets" class="toggle"></label>
+									</div>
+								</div>
+								<!--後ろに空白の無い感嘆符-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">後ろに空白の無い感嘆符</div>
+										<div class="contents-item--description">感嘆符の後ろに全角スペースを追加します。
+											<br>「！あ」→「！　あ」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionNoSpaceExclamation" class="options toggle">
+										<label for="correctionNoSpaceExclamation" class="toggle"></label>
+									</div>
+								</div>
+								<!--奇数の三点リーダー/ダッシュ-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">奇数の三点リーダー/ダッシュ</div>
+										<div class="contents-item--description">奇数個連続する三点リーダーとダッシュを偶数個に修正します。
+											<br>「…」→「……」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionOddEllipsesAndDash" class="options toggle">
+										<label for="correctionOddEllipsesAndDash" class="toggle"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--置換-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">置換</div>
+									<div class="contents-item--description">任意の文字列を置換します。 
+										<br>「＊」アイコンをオンにすると正規表現が利用できます。 
+									</div>
+								</div>
+								<div class="contents-option-content" style="width: 100%; flex-shrink: 0; align-items: flex-start;">
+									<div id="correction-replace--patterns">
+										<div id="correction-replace--pattern-box-addition">
+											<i class="fa-solid fa-plus"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="footer">
+                    <div id="js-failed">
+                        JavaScript failed to load. Your development build failed or your browser has some issue.
+                    </div>
+                </div>
+			</div>
+		</div>
+	</body>
+</html>

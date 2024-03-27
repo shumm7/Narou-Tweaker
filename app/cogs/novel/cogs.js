@@ -471,7 +471,7 @@ export function setOptionContentsCorrection(id){
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-period-with-brackets" class="correction_mode toggle" name="correctionPeriodWithBrackets">
-                    <label for="novel-option--correction-period-with-brackets" class="toggle">括弧の後の句読点（。」）</label>
+                    <label for="novel-option--correction-period-with-brackets" class="toggle">括弧の後の句点（。」）</label>
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-no-space-exclamation" class="correction_mode toggle" name="correctionNoSpaceExclamation">

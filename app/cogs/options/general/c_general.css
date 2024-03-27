@@ -1,0 +1,88 @@
+#intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+#intro img {
+    max-width: 100%;
+    width: 700px;
+    height:auto;
+}
+#intro .title {
+    font-weight: bold;
+    font-size: 200%;
+    margin: 10px;
+}
+#intro .version,
+#intro .version a {
+    color: #999;
+    text-decoration: none;
+}
+#intro .version a:hover {
+    color: #bbb;
+}
+
+.description p {
+    padding-bottom: 5px;
+    text-indent: 1em;
+}
+
+.version p {
+    padding-bottom: 5px;
+}
+.version ul {
+    margin-bottom: .2em;
+}
+.version ul li {
+    list-style: none;
+    color: #666;
+    margin-bottom: .1em;
+}
+.version ul li:before {
+    content: "-";
+    font-weight: bold;
+    margin: 0 .3em;
+}
+.version b {
+    font-size: 110%;
+    padding-bottom: 5px;
+}
+
+#downloads {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+.download-item > a {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5em;
+    color: #666;
+}
+.download-item > a:hover{
+    color: #999;
+}
+.download-item--icon {
+    font-size: 300%;
+}
+.download-item--title {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+
+/* Export Option Text */
+#exportOptionText_Output {
+    margin-top: 10px;
+    width: 400px;
+    max-width: 55vw;
+    height: 200px;
+    resize: vertical;
+}

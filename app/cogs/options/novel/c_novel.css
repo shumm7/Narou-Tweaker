@@ -1,0 +1,230 @@
+/* Draggable (Header) */
+.draggable_area_outer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	padding: 10px;
+	border: 2px solid #aaa4;
+	border-radius: 10px;
+}
+.draggable_area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 120px;
+	height: 100%;
+	min-height: 110px;
+}
+.draggable_area_outer:has(.draggable_area#disabled) {
+    background-color: #fafafa;
+}
+.icon-element {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	border: 1px solid #aaa;
+	margin: .2em;
+	padding: .4em;
+	width: 100px;
+	cursor: pointer;
+}
+.icon-element i {
+	text-align: center;
+	width: 15px;
+}
+.icon-element .title {
+	margin-left: .5em;
+	font-size: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+/* Skin */
+#skin-option {
+	display: flex;
+	flex-flow: column;
+}
+#skin-selection {
+	display: flex;
+	flex-flow: row;
+	margin-bottom: 10px;
+}
+#skin-option--options {
+	display: flex;
+	flex-flow: row;
+}
+#skin-option--field {
+	width: 100%;
+}
+#skin-option--preview {
+	margin-top: 20px;
+}
+#skin-option--editting {
+	font-size: 120%;
+	font-weight: bold;
+	margin-left: 1em;
+	color: #555;
+	text-overflow: ellipsis;
+}
+.skin-color-field .clr-field {
+	display: block;
+}
+.skin-color-field .clr-field input {
+	margin: .1em;
+	box-sizing: border-box;
+    width: 100%;
+}
+.skin-color-field .clr-field button {
+    height: 20px;
+	width: 40px;
+	margin-right: 5px;
+    border-radius: 5px;
+}
+#skin-preview {
+	padding: 1em;
+}
+#skin-preview #subtitle-dummy div {
+	padding: 10px 10px 2px 5px;
+	font-size: 95%;
+}
+#skin-preview #subtitle-dummy #link,
+#skin-preview #subtitle-dummy #link-visited  {
+	cursor: pointer;
+}
+
+
+/* Font Button */
+#font-family-select {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+}
+.font-button {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.font-button-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 60px;
+	border: 1px solid #ddd;
+	background: #fff;
+	margin: .5em 1em;
+	cursor: pointer;
+	font-size: 130%;
+	text-wrap: nowrap;
+	overflow: hidden;
+}
+.font-button-box:hover {
+	background: #fafafa;
+}
+.font-button.active .font-button-box{
+	border: 1px solid var(--kasasagi-blue);
+}
+.font-number-change-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #ddd;
+	background: #fff;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.font-number-change-button:hover{
+	background: #fafafa;
+}
+#font-size,
+#line-height,
+#page-width {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1em;
+}
+#font-size-input,
+#line-height-input,
+#page-width-input {
+	font-size: 110%;
+	border: 1px solid #ddd;
+	text-align: center;
+	height: 30px;
+	padding: 0;
+}
+
+
+/* Replace Patterns (Correction) */
+.correction-replace--pattern-box,
+#correction-replace--pattern-box-addition {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 100%;
+	padding: .5em;
+	margin: .5em 0;
+	background: #eee;
+	border-radius: .5em;
+}
+#correction-replace--patterns {
+	min-width: 500px;
+}
+#correction-replace--pattern-box-addition {
+	justify-content: center;
+}
+#correction-replace--pattern-box-addition:hover {
+	transition: background-color .3s ease;
+	background-color:#ddd;
+	cursor: pointer;
+}
+
+.correction-replace--fields {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.correction-replace--fields span {
+	margin: 0 .3em;
+	font-size: 16px;
+}
+.correction-replace--move-buttons {
+	display: flex;
+	flex-direction: column;
+	font-size: 16px;
+	margin: 0 .3em;
+}
+.correction-replace--move-buttons .correction-replace--move-back {
+	margin-top: -50%;
+}
+.correction-replace--icons {
+	transition: color .3s ease;
+	color:#bbb;
+	font-size: 16px;
+	margin: 0 .2em;
+	cursor: pointer;
+}
+.correction-replace--icons:hover {
+	color:#999;
+}
+.correction-replace--icons.enabled {
+	color:rgb(51, 154, 244);
+}
+.correction-replace--icons.enabled:hover {
+	color:rgb(0, 58, 133);
+}
+.correction-replace--active-button {
+	margin-left: .5em;
+	margin-right: .3em;
+}
+.correction-replace--remove-button {
+	margin-left: auto;
+	margin-right: .5em;
+}

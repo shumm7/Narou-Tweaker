@@ -39,3 +39,7 @@ export function getCSSRule(key, rules){
 export function getExtensionVersion(){
     return chrome.runtime.getManifest().version
 }
+
+export function getExtensionAuthor(){
+    return chrome.i18n.getMessage("extAuthor")
+}

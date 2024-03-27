@@ -2,26 +2,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <base target="_blank">
-<link rel="stylesheet" href="../../common.css">
-<link rel="stylesheet" href="options.css">
-<link rel="stylesheet" href="../../libs/font-awesome/css/all.css">
-<link rel="stylesheet" href="../../libs/Coloris/dist/coloris.min.css">
-<script src="../../libs/jquery-3.7.1.min.js"></script>
-<script src="../../libs/SortableJS/Sortable.min.js"></script>
-<script src="../../libs/Coloris/dist/coloris.min.js"></script>
-<title>Narou Tweaker options</title>
+<link rel="stylesheet" type="text/css" href="/common.css">
+<link rel="stylesheet" type="text/css" href="../general.css">
+<link rel="stylesheet" type="text/css" href="c_popup.css">
+<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+<script src="/libs/jquery-3.7.1.min.js"></script>
+<script src="/libs/SortableJS/Sortable.min.js"></script>
+<script src="c_popup.js" type="module"></script>
+<title>Narou Tweaker</title>
 
 <div id="js-failed">JavaScript failed to load. Your development build failed or your browser has some issue.</div>
 <form id="options-form" class="detail-view-container">
-	<details id="welcome" name="optionPageDetailsWelcome" class="options">
+	<details id="welcome" name="optionPageDetailsWelcome" class="options" open>
 		<summary><strong>😆 ようこそ</strong></summary>
 		<p>
-		このページでは、Narou Tweakerの設定を変更することが出来ます。<br/>
-        一部の設定の反映には、ページの再読み込みかブラウザの再起動が必要になることがあります。<br/>
-        ご不明な点は<a href="">こちら</a>からご確認ください。
-		</p>
-		<p>
-			<a href=""><button type="button">設定画面をページで開く</button></a>
+			このページでは、Narou Tweakerの設定の一部を変更することが出来ます。<br>
+			全ての設定項目を確認するには、以下のボタンをクリックしてください。<br>
+			<br>
+			<a href="../general/index.html"><button type="button" class="button">詳細設定</button></a>
 		</p>
 	</details>
 
@@ -38,10 +36,6 @@
 			<p>
 				<input type="checkbox" id="enable_novel_header" class="options toggle" name="novelCustomHeader">
 				<label for="enable_novel_header" class="toggle">モダンなヘッダ</label>
-			</p>
-			<p>
-				<input type="checkbox" id="enable_novel_legacy_header_icon" class="options toggle" name="novelLegacyHeaderIcon">
-				<label for="enable_novel_legacy_header_icon" class="toggle">「モダンなヘッダ」がオフのとき、アイコンを表示する</label>
 			</p>
 			<p>
 				<div class="dropdown">
@@ -514,47 +508,5 @@
 		</div>
 
 	</details>
-
-	<details id="general" name="optionPageDetailsGeneral" class="options">
-		<summary><strong>⚙ 総合</strong></summary>
-		<p>
-			Narou Tweakerの総合設定です。<br>
-			<span style="color: red; font-weight: bold;">設定項目がリセットされますので、ご注意ください！</span>
-		</p>
-		<div class="section">
-			<div class="section-header">ブラウザ同期</div>
-			<p>本ページで設定した項目を、ブラウザで同期します。ログインした状態であれば、他のデバイスにも保存されたデータを共有できます。</p>
-			<p><button id="sync-set-options" type="button">このデバイスのデータを他へ共有</button></p>
-			<p><button id="sync-get-options" type="button">他のデバイスのデータを取得</button></p>
-		</div>
-		<div class="section">
-			<div class="section-header">エクスポート / インポート</div>
-			<p>本ページで設定した項目を、JSONファイルで取り込み/出力します。</p>
-			<p><button id="export-options" type="button">エクスポート</button></p>
-			<p>
-				<div class="button-cover">
-					<label id="import-options-label">
-						インポート
-						<input id="import-options" type="file" accept="application/json">
-					</label>
-				</div>
-			</p>
-		</div>
-		<div class="section">
-			<div class="section-header">リセット</div>
-			<p>本ページで設定した項目をリセットできます。</p>
-			<p><button id="reset-skin" type="button">スキン設定をリセット</button></p>
-			<p><button id="reset-options" type="button">設定をリセット</button></p>
-		</div>
-	</details>
-	
-    <details id="debug" name="optionPageDetailsDebug" class="options">
-		<summary><strong>🐜 デバッグ</strong></summary>
-		<p>デバッグ用項目。</p>
-		<p>
-			<textarea style="width: 100%; height: 10em;"></textarea>
-		</p>
-	</details>
 	
 </form>
-<script src="options.js" type="module"></script>

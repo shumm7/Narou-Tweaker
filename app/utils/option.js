@@ -3,14 +3,8 @@ import { getExtensionVersion } from "./misc.js"
 export const defaultOption = {
     optionsVersion: getExtensionVersion(),
 
-    /* Option Page */
-    optionPageDetailsWelcome: true,
-    optionPageDetailsNovel: false,
-    optionPageDetailsWorkspace: false,
-    optionPageDetailsMypage: false,
-    optionPageDetailsKasasagi: false,
-    optionPageDetailsGeneral: false,
-    optionPageDetailsDebug: false,
+    /* Extension */
+    extAdvancedSettings: false,
 
     /* Novel */
     novelCustomStyle: true,
@@ -342,8 +336,9 @@ export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
 ]
 
-export function updateOption(force){
-    chrome.storage.local.get(null, function(data) {
+export function updateOption(force, data){
+
+    function update(data){
         var currentOptionVersion = defaultOption.optionsVersion
         if(currentOptionVersion != data.optionsVersion || force){
             var o = defaultOption
@@ -357,15 +352,13 @@ export function updateOption(force){
 
             chrome.storage.local.set(o, function(){})
         }
-    })
-}
+    }
 
-export function saveFont(font){
-    chrome.storage.local.set({"applied_font": font});
-}
-export function saveSkin(skin){
-    chrome.storage.local.set({"applied_skin": skin});
-}
-export function saveSkins(skins){
-    chrome.storage.local.set({"skins": skins});
+    if(data){
+        update(data)
+    }else{
+        chrome.storage.local.get(null, function(data) {
+            update(data)
+        })
+    }
 }

@@ -37,7 +37,7 @@ chrome.storage.local.get(null, (data) => {
 
         var header_nav_ul = $("ul.p-mainheader__tab-list")
         header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/top/ncode/'+ncode+'/">総合</a></li>')
-        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/chapter/ncode/'+ncode+'/">部分別ユニーク</a></li>')
+        header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/chapter/ncode/'+ncode+'/">エピソード別ユニーク</a></li>')
         header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/daypv/ncode/'+ncode+'/">日別PV</a></li>')
         header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/dayunique/ncode/'+ncode+'/">日別ユニーク</a></li>')
         header_nav_ul.append('<li class="p-mainheader__tab-list-item"><a href="/access/monthpv/ncode/'+ncode+'/">月別PV</a></li>')
@@ -89,12 +89,12 @@ chrome.storage.local.get(null, (data) => {
             if(option.kasasagiCustomStyle){
                 var title = m.text().match("『(.*)』 エピソード別 アクセス解析")[1]
 
-                $(".novelview_h3").text("部分別 ユニークアクセス")
+                $(".novelview_h3").text("エピソード別 ユニークアクセス")
                 $(".novelview_h3").addClass("subtitle")
                 if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
                 
                 $("form#datepicker_form").insertAfter(".novelview_h3.subtitle")
-                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("部分単位のユニークの合計＝作品全体のユニークではありません"));
+                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("エピソード単位のユニークの合計＝作品全体のユニークではありません"));
                 $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
                 $(".attention").parent().remove();
             }
@@ -720,7 +720,7 @@ function _chapterUnique(){
                         value_before = 1
                     }
     
-                    /* 前部分比 */
+                    /* 前エピソード比 */
                     rate_before = Math.round(value / value_before * 100)
                     if(rate_before == undefined){
                         rate_before = ""
