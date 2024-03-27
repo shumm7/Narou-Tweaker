@@ -7,9 +7,9 @@
   "version": "0.0.8",
   "manifest_version": 3,
   "icons": {
-    "16": "assets/icon_16.png",
-    "48": "assets/icon_48.png",
-    "128": "assets/icon_128.png"
+    "16": "assets/icons/icon_16.png",
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
   },
   "background": {
     "service_worker": "./cogs/background/background.js",

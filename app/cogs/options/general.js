@@ -46,7 +46,7 @@ export function setupDOM(){
     <div id="footer-contents">
         <div class="footer-contents--image">
             <a href="https://github.com/shumm7/Narou-Tweaker">
-                <img src="../../../assets/icon.png" width="30" height="30">
+                <img src="/assets/icons/icon.png" width="30" height="30">
             </a>
         </div>
         <div class="footer-contents--text">Narou Tweaker v${manifest.version}</div>
