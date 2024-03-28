@@ -355,6 +355,9 @@ function makeSkin(){
         }
         `
 
+        /* Skin CSS */
+        rule += defaultValue(skin.css, "")
+
         /* Font */
         var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
         var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)

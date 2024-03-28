@@ -56,6 +56,7 @@ export function restoreSkins(skins, selected){
   $("#skin-sublist-underline").val(defaultValue(style.sublist.color, ""))
   $("#skin-sublist-underline-hover").val(defaultValue(style.sublist.hover, ""))
   $("#skin-sublist-underline-visited").val(defaultValue(style.sublist.visited, ""))
+  $("#skin-additional-style").val(defaultValue(skin.css, ""))
   document.querySelectorAll('.option-skin-color').forEach(input => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
   });
@@ -96,7 +97,8 @@ function getSkinData(){
         hover: $("#skin-sublist-underline-hover").val(),
         visited: $("#skin-sublist-underline-visited").val()
       }
-    }
+    },
+    css: $("#skin-additional-style").val()
   }
 }
 

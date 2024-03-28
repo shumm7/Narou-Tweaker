@@ -95,7 +95,12 @@
 #skin-preview #subtitle-dummy #link-visited  {
 	cursor: pointer;
 }
-
+#skin-additional-style {
+	width: 100%;
+    height: 200px;
+	margin: 0;
+	box-sizing: border-box;
+}
 
 /* Font Button */
 #font-family-select {

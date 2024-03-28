@@ -104,7 +104,8 @@ export const localSkins = [
                 "hover": "rgba(67, 51, 242, 0.7)",
                 "visited": "rgba(50, 38, 181, 0.7)"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "ダーク〔標準〕",
@@ -127,7 +128,8 @@ export const localSkins = [
                 "hover": "rgba(152, 189, 235, 0.7)",
                 "visited": "rgba(114, 142, 176, 0.7)"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "生成り〔標準〕",
@@ -150,7 +152,8 @@ export const localSkins = [
                 "hover": "rgba(67, 51, 242, 0.7)",
                 "visited": "rgba(50, 38, 181, 0.7)"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "標準設定〔小説家になろう〕",
@@ -173,7 +176,8 @@ export const localSkins = [
                 "hover": "#9df",
                 "visited": "#73a6bf"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "ブラックモード1〔小説家になろう〕",
@@ -196,7 +200,8 @@ export const localSkins = [
                 "hover": "#f03",
                 "visited": "#bf0026"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "ブラックモード2〔小説家になろう〕",
@@ -219,7 +224,8 @@ export const localSkins = [
                 "hover": "#cf0",
                 "visited": "#99bf00"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "通常1〔小説家になろう〕",
@@ -242,7 +248,8 @@ export const localSkins = [
                 "hover": "#00f",
                 "visited": "#0000bf"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "通常2〔小説家になろう〕",
@@ -265,7 +272,8 @@ export const localSkins = [
                 "hover": "#00f",
                 "visited": "#0000bf"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "シンプル〔小説家になろう〕",
@@ -288,7 +296,8 @@ export const localSkins = [
                 "hover": "#393",
                 "visited": "#267326"
             }
-        }
+        },
+        "css": ""
     },
     {
         "name": "おすすめ設定〔小説家になろう〕",
@@ -311,7 +320,8 @@ export const localSkins = [
                 "hover": "#00f",
                 "visited": "#0000bf"
             }
-        }
+        },
+        "css": ""
     }
 ]
 
