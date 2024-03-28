@@ -43,6 +43,17 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "cogs/novel/skin/main.js"
+      ],
+      "matches": [
+				"https://ncode.syosetu.com/*",
+        "https://novelcom.syosetu.com/*"
+			],
+      "run_at":"document_start"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
         "cogs/workspace/loader.js"
       ],
       "css": [
@@ -96,7 +107,6 @@
         "cogs/novel/cogs.js",
         "cogs/novel/correction.js",
         "cogs/novel/utils.js",
-        "cogs/novel/skin.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/social.js",
