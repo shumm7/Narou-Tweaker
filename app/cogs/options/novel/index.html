@@ -113,6 +113,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!--スクロールのとき、ヘッダを非表示-->
 						<div class="contents-wide option-hide" data-for="novelCustomHeaderMode" data="scroll" mode="show">
 							<div class="contents-option">
@@ -130,6 +131,7 @@
 								</div>
 							</div>
 						</div>
+
 						<!--ヘッダのアイテム-->
 						<div class="contents-wide">
 							<div class="contents-option">
@@ -157,6 +159,26 @@
 								</div>
 							</div>
 						</div>
+
+						<!--追加CSS-->
+						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">追加CSS</div>
+									<div class="contents-item--description">
+										任意のCSSをページに追加することができます。<br>
+										このスタイルは、スキンよりも後に読み込まれます。
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div class="export-option-text">
+										<textarea class="textarea options" id="additionalCSS"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 					<!-- スキン -->
@@ -348,21 +370,61 @@
 							</div>
 						</div>
 
-						<!--追加CSS-->
-						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
+						<!--作者スキン-->
+						<div class="contents-wide option-hide" data-for="novelCustomHeaderMode" data="scroll" mode="show">
 							<div class="contents-option">
 								<div class="contents-option-head">
-									<div class="contents-item--heading">追加CSS</div>
-									<div class="contents-item--description">任意のスタイルを小説ページに追加することができます。</div>
+									<div class="contents-item--heading">作者スキン</div>
+									<div class="contents-item--description">専用バナーが小説の「ランキングタグ」に配置されている場合、作者が設定したスキンが反映されます。</div>
 								</div>
-
 								<div class="contents-option-content">
-									<div class="export-option-text">
-										<textarea class="textarea options" id="additionalCSS"></textarea>
+									<input type="checkbox" id="novelAuthorCustomSkin" class="options toggle">
+									<label for="novelAuthorCustomSkin" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+						<!--作者スキンバナーを作成-->
+						<div class="contents-wide option-hide" data-for="novelAuthorCustomSkin" data="true" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">作者スキンバナーを作成</div>
+									<div class="contents-item--description">
+										現在選択中のスキンから、作者設定スキンバナーを生成します。
+									</div>
+								</div>
+								<div class="contents-option-content">
+									<div id="skin-author">
+										<div id="skin-author-description">
+											<p>
+												このバナーを貼り付けると、作者側で小説のスキンを指定することができます。<br>
+												ただし「作者設定スキン」を有効にしたNarou Tweakerユーザーにしか影響しません。
+											</p>
+										</div>
+										<div id="skin-author-inputs">
+											<div class="dropdown">
+												<select id="skin-author-export--type">
+													<option value="tiny-light">極小（ライト）</option>
+													<option value="small-light">小（ライト）</option>
+													<option value="medium-light">中（ライト）</option>
+													<option value="big-light">大（ライト）</option>
+													<option value="tiny-dark">極小（ダーク）</option>
+													<option value="small-dark">小（ダーク）</option>
+													<option value="medium-dark">中（ダーク）</option>
+													<option value="big-dark">大 （ダーク）</option>
+												</select>
+											</div>
+											<button id="skin-author-export--submit" type="button" class="button">バナーを生成</button>
+										</div>
+										<div id="skin-author-export">
+											<textarea class="textarea" id="skin-author-export--field" readonly></textarea>
+											<p>このコードをランキングタグへコピーしてください。</p>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+
 					</div>
 
 					<!-- フォント -->

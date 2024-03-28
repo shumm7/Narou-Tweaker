@@ -60,6 +60,7 @@ export const defaultOption = {
     skins: [],
     selectedSkin: 0,
     additionalCSS: "",
+    novelAuthorCustomSkin: true,
 
     /* Font */
     fontFontFamily: "gothic",

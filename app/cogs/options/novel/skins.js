@@ -1,5 +1,6 @@
 import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
 import { localSkins, defaultOption, formatSkinData } from "../../../utils/option.js";
+import { escapeHtml } from "../../../utils/text.js";
 
 /* 重複しないスキン名を作成 */
 function generateNoDuplicateName(skins, name, selected){
@@ -293,6 +294,70 @@ export function addSkinEditButtonEvent(){
         $("#skin-import-input--field").val("")
       })
     })
+  })
+
+  /* Author Skin */
+  const authorSkinImage = {
+    "tiny-light": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/tiny_light.png?raw=true",
+      width: 88,
+      height: 31
+    },
+    "small-light":{
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/small_light.png?raw=true",
+      width: 135,
+      height: 35
+    },
+    "medium-light":{
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/medium_light.png?raw=true",
+      width: 200,
+      height: 40
+    },
+    "big-light": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/big_light.png?raw=true",
+      width: 300,
+      height: 55
+    },
+    "tiny-dark": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/tiny_dark.png?raw=true",
+      width: 88,
+      height: 31
+    },
+    "small-dark": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/small_dark.png?raw=true",
+      width: 135,
+      height: 35
+    },
+    "medium-dark": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/medium_dark.png?raw=true",
+      width: 200,
+      height: 40
+    },
+    "big-dark": {
+      src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/big_dark.png?raw=true",
+      width: 300,
+      height: 55
+    }
+  }
+  $("#skin-author-export--submit").on("click", (e)=>{
+    chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
+      var skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
+      var idx = defaultValue(data.selectedSkin, 0)
+      var skin = skins[idx]
+
+      delete skin.name
+      delete skin.description
+      delete skin.show
+      delete skin.customizable
+
+      var selected = defaultValue($("#skin-author-export--type").val(), "tiny-light")
+      const image = authorSkinImage[selected]
+      const text = JSON.stringify(skin)
+      
+      $("#skin-author-export--field").val(
+        `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker" /><span><!--${text}--></span></a>`
+      )
+    });
   })
 
   /* Auto Save */

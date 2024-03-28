@@ -1,4 +1,4 @@
-import {replaceUrl} from "../../utils/text.js"
+import {escapeHtml, replaceUrl} from "../../utils/text.js"
 import { defaultValue } from "../../utils/misc.js";
 
 var path = location.pathname;
