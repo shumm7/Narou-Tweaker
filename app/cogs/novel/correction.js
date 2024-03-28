@@ -8,6 +8,12 @@ const bracket_end = `」』＞》〉≫】）”’\\\)\\\'`
 const symbols = `!-/:-@\\\[-\`{-~！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
+const className = {
+    img: "sasie",
+    talk: "kaiwabun",
+    word: "jinobun"
+}
+
 export function correction(){
     if($("#novel_honbun").length && checkNovelPageDetail()=="novel"){
         chrome.storage.local.get(null, (data) => {
@@ -67,7 +73,7 @@ export function resetCorrection(){
         p.addClass(lineType)
 
         if($(this).find("img").length){
-            p.addClass("sasie")
+            p.addClass(className.img)
         }
 
         $(this).after(p)
@@ -81,14 +87,14 @@ function checkLineType(string){
     }else if(string.match(new RegExp(`^\\s*[${bracket_begin}].*$`))){ //括弧で始まる文章
         var m = string.match(new RegExp(`^\\s*[${bracket_begin}](.*)$`))[1]
         if(m.match(new RegExp(`^.*[${bracket_end}]\\s*$`), "g")){ //括弧で終わる
-            return "kaiwabun"
+            return className.talk
         }else if(!m.match(new RegExp(`[${bracket_end}]`))){ //括弧が含まれない
-            return "kaiwabun"
+            return className.talk
         }else{
-            return "jinobun"
+            return className.word
         }
     }else{
-        return "jinobun"
+        return className.word
     }
 }
 
