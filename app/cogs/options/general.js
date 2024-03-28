@@ -65,7 +65,7 @@ function restoreValues(data, ignore){
         if(tagName == "input" && type=="checkbox"){ // Toggle
           check("#" + elm.prop("id"), value, defaultOption[name])
         }
-        else if(tagName=="select"){ // DropDown
+        else if(tagName=="select" || tagName=="textarea"){ // DropDown / TextArea
           elm.val(defaultValue(value, defaultOption[name]))
         }
       }
@@ -95,6 +95,22 @@ export function restoreOptions(){
         if(tagName=="input" && type=="checkbox"){
             value[name] = $(this).prop('checked')
         }else if(tagName=="select"){
+            value[name] = $(this).val()
+        }
+    
+        if(value[name]!=undefined){
+            chrome.storage.local.set(value);
+        }
+    });
+
+    /* On Change Elements */
+    $(".options").on("change", function(){
+        const name = $(this).prop("id")
+        const tagName = $(this).prop("tagName").toLowerCase()
+        const type = $(this).prop("type")
+    
+        var value = {}
+        if(tagName=="textarea"){
             value[name] = $(this).val()
         }
     

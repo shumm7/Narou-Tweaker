@@ -10,7 +10,6 @@ export const defaultOption = {
     novelCustomStyle: true,
     novelCustomHeader: true,
     novelLegacyHeaderIcon: true,
-    novelExpandSkin: true,
     novelCustomHeaderScrollHidden: false,
     novelCustomHeaderMode: "scroll",
     novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "booklist"],
@@ -60,6 +59,7 @@ export const defaultOption = {
     /* Skin */
     skins: [],
     selectedSkin: 0,
+    additionalCSS: "",
 
     /* Font */
     fontFontFamily: "gothic",

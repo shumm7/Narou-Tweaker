@@ -43,6 +43,18 @@ input[type="text"] {
 	margin: .1em;
 }
 
+/* Textarea */
+.textarea {
+    padding: 5px;
+    margin-top: 10px;
+    width: 400px;
+    max-width: 55vw;
+    height: 200px;
+    resize: vertical;
+    font-size: 16px;
+    font-family: inherit;
+}
+
 /* Button */
 .button, #import-options-label {
     color: rgb(255, 255, 255);

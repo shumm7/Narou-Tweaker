@@ -25,7 +25,6 @@ function makeSkin(){
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
         const skin = skins[skin_idx]
 
-        const expand_skin = data.novelExpandSkin
         const novel_css = data.novelCustomStyle
 
         const s = skin.style

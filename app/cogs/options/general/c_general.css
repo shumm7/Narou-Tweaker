@@ -76,13 +76,3 @@
     font-size: 120%;
     font-weight: bold;
 }
-
-
-/* Export Option Text */
-#exportOptionText_Output {
-    margin-top: 10px;
-    width: 400px;
-    max-width: 55vw;
-    height: 200px;
-    resize: vertical;
-}
