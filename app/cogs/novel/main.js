@@ -651,6 +651,7 @@ function _authorSkin(){
     function userSkinActive(){
         $("body").prepend(`
         <div id="author-skin-warning">
+            <i class="fa-solid fa-triangle-exclamation"></i>
             作者スキン有効（小説の作者によってスキンが強制されています）<br>
             <span style="font-size: 80%;">
                 Narou Tweakerの設定 → [小説ページ] → [スキン] → [作者スキン] から無効化できます。
