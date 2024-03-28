@@ -1,4 +1,4 @@
-import { getExtensionVersion } from "./misc.js"
+import { defaultValue, getExtensionVersion } from "./misc.js"
 
 export const defaultOption = {
     optionsVersion: getExtensionVersion(),
@@ -372,5 +372,44 @@ export function updateOption(force, data){
         chrome.storage.local.get(null, function(data) {
             update(data)
         })
+    }
+}
+
+export function formatSkinData(raw){
+  
+    // name
+    if("name" in raw === false){raw.name = "" }
+    if(typeof raw.name != typeof ""){raw.name = "" }
+    if(raw.name.trim().length==0){raw.name="新規スキン"}
+
+    // style
+    if("style" in raw === false){raw.style = {}}
+    if("novel" in raw.style === false){raw.style.novel = {}}
+    if("link" in raw.style === false){raw.style.link = {}}
+    if("sublist" in raw.style === false){raw.style.sublist = {}}
+
+    return {
+        name: raw.name,
+        description: defaultValue(raw.description, ""),
+        show: true,
+        customizable: true,
+        style: {
+        novel: {
+            background: defaultValue(raw.style.novel.background, "#fff"),
+            background_second: defaultValue(raw.style.novel.background_second, "#dfdfdf"),
+            color: defaultValue(raw.style.novel.color, "#444")
+        },
+        link: {
+            color_link: defaultValue(raw.style.link.color_link, "#03c"),
+            color_visited: defaultValue(raw.style.link.color_visited, "#857"),
+            color_hover: defaultValue(raw.style.link.color_visited, "#393"),
+        },
+        sublist: {
+            color: defaultValue(raw.style.sublist.color, "#444"),
+            hover: defaultValue(raw.style.sublist.hover, "#9df"),
+            visited: defaultValue(raw.style.sublist.visited, "#73a6bf"),
+        }
+        },
+        css: defaultValue(raw.css, ""),
     }
 }

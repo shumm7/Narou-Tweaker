@@ -1,5 +1,5 @@
 import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
-import { localSkins, defaultOption } from "../../../utils/option.js";
+import { localSkins, defaultOption, formatSkinData } from "../../../utils/option.js";
 
 /* 重複しないスキン名を作成 */
 function generateNoDuplicateName(skins, name, selected){
@@ -137,6 +137,7 @@ function saveSelectedSkin(){
   
     chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultOption.skins)
+      if(skinData.name.trim().length==0){skinData.name="新規スキン"}
       skinData.name = generateNoDuplicateName(localSkins.concat(skins), skinData.name, selectedSkin)
 
       var key = selectedSkin - localSkins.length
@@ -158,7 +159,8 @@ export function addSkinEditButtonEvent(){
     })
   });
 
-  $("#skin-selection--buttons button[name='new']").on("click", (e)=>{ /* New Button */
+  /* New Button */
+  $("#skin-selection--buttons button[name='new']").on("click", (e)=>{
     saveSelectedSkin()
 
     chrome.storage.local.get(["skins"], function(data) {
@@ -166,33 +168,36 @@ export function addSkinEditButtonEvent(){
         
       var defaultSkin = Object.assign(localSkins[0])
       defaultSkin.customizable = true
-      defaultSkin.name = generateNoDuplicateName(skins, "新規スキン", -1)
+      defaultSkin.name = generateNoDuplicateName(localSkins.concat(skins), "新規スキン", -1)
       defaultSkin.description = ""
 
       skins.push(defaultSkin)
       chrome.storage.local.set({skins: skins, selectedSkin: localSkins.length + skins.length - 1}, function(){})
     });
   })
-  
-  $("#skin-option--buttons button[name='save']").on("click", (e)=>{ /* Save Button */
+
+  /* Save Button */
+  $("#skin-option--buttons button[name='save']").on("click", (e)=>{
     saveSelectedSkin()
   })
-  
-  $("#skin-option--buttons button[name='copy']").on("click", (e)=>{ /* Copy Button */
+
+  /* Copy Button */
+  $("#skin-option--buttons button[name='copy']").on("click", (e)=>{
     saveSelectedSkin()
     var skin = getSkinData()
   
     chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultOption.skins)
       skin.customizable = true
-      skin.name = generateNoDuplicateName(skins, skin.name + " - コピー", -1)
+      skin.name = generateNoDuplicateName(localSkins.concat(skins), skin.name + " - コピー", -1)
       skins.push(skin)
 
       chrome.storage.local.set({skins: skins, selectedSkin: localSkins.length + skins.length - 1}, function(){})
     });
   })
-  
-  $("#skin-option--buttons button[name='delete']").on("click", (e)=>{ /* Delete Button */
+
+   /* Delete Button */
+  $("#skin-option--buttons button[name='delete']").on("click", (e)=>{
     chrome.storage.local.get(["skins", "selectedSkin"], function(data) {
       var selectedSkin = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
       var key = selectedSkin - localSkins.length
@@ -207,17 +212,91 @@ export function addSkinEditButtonEvent(){
       }
     });
   })
-
-  $("#skin-option--export button[name='export']").on("click", (e)=>{ /* Export Button */
-    e.preventDefault()
+  /* Export Button */
+  $("#skin-export-json").on("click", (e)=>{
     chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
         var skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
         var skin = defaultValue(data.selectedSkin, 0)
         saveJson(skins[skin], skins[skin].name + ".json")
     });
   })
+  $("#skin-export-text").on("click", (e)=>{
+    $("#skin-export-output").css("display", "block")
+    chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
+        var skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
+        var skin = defaultValue(data.selectedSkin, 0)
+        $("#skin-export-output--field").val(JSON.stringify(skins[skin], null, "\t"))
+    });
+  })
 
-  $(".option-skin").change(()=>{ /* Auto Save */
+  /* Import Button */
+  $("#skin-import-json").on("change", (evt)=>{
+    $("#skin-import-warnings").empty()
+
+    try{
+      var f = evt.target.files[0]
+      var reader = new FileReader();
+      reader.onload = function(e){
+          try{
+            $("#skin-import-input--field").val(e.target.result)
+          }catch(e){
+            console.warn(e)
+          }
+      }
+      reader.readAsText(f);
+    }catch(e){}
+  })
+  $('#skin-import').on('dragenter', function(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+  });
+  $('#skin-import').on('dragover', function(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+  });
+  $("#skin-import").on("drop", (evt)=>{
+    evt.stopPropagation();
+    evt.preventDefault();
+    $("#skin-import-warnings").empty()
+
+    try{
+      var f = evt.originalEvent.dataTransfer.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e){
+          try{
+            $("#skin-import-input--field").val(e.target.result)
+          }catch(e){
+            console.warn(e)
+          }
+      }
+      reader.readAsText(f);
+    }catch(e){}
+  })
+  $("#skin-import-input--submit").on("click", (e)=>{
+    $("#skin-import-warnings").empty()
+    var raw
+    try{
+      raw = JSON.parse($("#skin-import-input--field").val())
+    }catch(e){
+      $("#skin-import-warnings").append(`<div class="skin-import-warning">データの読み取りに失敗しました。</div>`)
+      console.warn(e)
+      return
+    }
+
+    chrome.storage.local.get(["skins"], function(data) {
+      var skins = defaultValue(data.skins, defaultOption.skins)
+      raw = formatSkinData(raw)
+      raw.name = generateNoDuplicateName(localSkins.concat(skins), raw.name, -1)
+      skins.push(raw)
+
+      chrome.storage.local.set({skins: skins, selectedSkin: localSkins.length + skins.length - 1}, function(){
+        $("#skin-import-input--field").val("")
+      })
+    })
+  })
+
+  /* Auto Save */
+  $(".option-skin").change(()=>{ 
     saveSelectedSkin()
   });
 

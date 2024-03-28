@@ -184,9 +184,6 @@
 												<div id="link-visited">2.訪問済み</div>
 											</div>
 										</div>
-										<div id="skin-option--export" style="margin-top: 1em; float: left;">
-											<button name="export" type="button" class="button">エクスポート</button>
-										</div>
 									</div>
 								</div>
 
@@ -296,6 +293,55 @@
 													</div>
 												</div>
 											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--スキンのエクスポート-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">スキンのエクスポート</div>
+									<div class="contents-item--description">現在、選択中のスキンをデータとして出力します。</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div id="skin-export">
+										<div id="skin-export-buttons">
+											<button id="skin-export-json" type="button" class="button"><i class="fa-solid fa-download"></i> JSONファイル</button>
+											<button id="skin-export-text" type="button" class="button"><i class="fa-solid fa-align-left"></i> テキスト</button>
+										</div>
+										<div id="skin-export-output" style="display: none;" >
+											<textarea class="textarea" id="skin-export-output--field" readonly></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!--スキンのインポート-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">スキンのインポート</div>
+									<div class="contents-item--description">外部からスキンを取り込むことができます。</div>
+								</div>
+
+								<div class="contents-option-content">
+									<div id="skin-import">
+										<div id="skin-import-buttons">
+											<label id="import-options-label">
+												<i class="fa-solid fa-upload"></i> ファイルから読み込む
+												<input id="skin-import-json" type="file" accept="application/json">
+											</label>
+										</div>
+										<div id="skin-import-input">
+											<textarea class="textarea" id="skin-import-input--field" placeholder="ファイルをドロップ"></textarea>
+											<button id="skin-import-input--submit" type="button" class="button"><i class="fa-solid fa-file-import"></i> 取り込む</button>
+										</div>
+										<div id="skin-import-warnings">
 										</div>
 									</div>
 								</div>

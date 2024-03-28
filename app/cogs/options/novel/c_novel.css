@@ -102,6 +102,33 @@
 	box-sizing: border-box;
 }
 
+/* Skin Export, Import */
+#skin-export,
+#skin-import {
+	display: flex;
+	flex-direction: column;
+}
+#skin-import-input {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: flex-start;
+}
+#skin-export-buttons,
+#skin-import-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 150px;
+}
+#skin-import-buttons {
+	align-items: flex-start;
+}
+.skin-import-warning {
+	font-weight: bold;
+	color: red;
+}
+
 /* Font Button */
 #font-family-select {
 	display: flex;
