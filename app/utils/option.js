@@ -78,6 +78,8 @@ export const defaultOption = {
     correctionNoSpaceExclamation: false,
     correctionOddEllipsesAndDash: false,
     correctionReplacePatterns: [],
+    correctionShowIllustration: true,
+    correctionRemoveIllustrationLink: false,
 }
 
 export const localSkins = [

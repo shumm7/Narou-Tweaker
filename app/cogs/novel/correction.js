@@ -18,32 +18,39 @@ export function correction(){
     if($("#novel_honbun").length && checkNovelPageDetail()=="novel"){
         chrome.storage.local.get(null, (data) => {
             resetCorrection()
-            if(defaultValue(data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)){
+            if(data.correctionNormalizeEllipses){
                 correctionNormalizeEllipses()
             }
-            if(defaultValue(data.correctionNormalizeDash, defaultOption.correctionNormalizeDash)){
+            if(data.correctionNormalizeDash){
                 correctionNormalizeDash()
             }
-            if(defaultValue(data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)){
+            if(data.correctionRepeatedSymbols){
                 correctionRepeatedSymbols()
             }
-            if(defaultValue(data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)){
+            if(data.correctionPeriodWithBrackets){
                 correctionPeriodWithBrackets()
             }
-            if(defaultValue(data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)){
+            if(data.correctionNoSpaceExclamation){
                 correctionNoSpaceExclamation()
             }
-            if(defaultValue(data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)){
+            if(data.correctionOddEllipsesAndDash){
                 correctionOddEllipsesAndDash()
             }
 
             
-            if(defaultValue(data.correctionIndent, defaultOption.correctionIndent)){
+            if(data.correctionIndent){
                 correctionIndent()
             }
 
-            if(defaultValue(data.correctionReplacePatterns, defaultOption.correctionReplacePatterns).length>0){
-                correctionReplaceFromPatterns(defaultValue(data.correctionReplacePatterns, defaultOption.correctionReplacePatterns))
+            if(data.correctionReplacePatterns.length>0){
+                correctionReplaceFromPatterns(data.correctionReplacePatterns)
+            }
+
+            if(!data.correctionShowIllustration){
+                removeIllustration()
+            }
+            if(data.correctionRemoveIllustrationLink){
+                removeIllustrationLink()
             }
         })
     }
@@ -58,6 +65,7 @@ export function restoreCorrectionMode(){
         check("#novel-option--correction-period-with-brackets", data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)
         check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
         check("#novel-option--correction-odd-ellipses-and-dash", data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)
+        check("#novel-option--correction-show-illustration", data.correctionShowIllustration, defaultOption.correctionShowIllustration)
     });
 }
 
@@ -207,6 +215,16 @@ function correctionOddEllipsesAndDash(){
             })
         }
     })
+}
+
+function removeIllustration(){
+    $("#novel_honbun > p.replaced."+className.img).css("display", "none")
+}
+
+function removeIllustrationLink(){
+    var link = $("#novel_honbun > p.replaced."+className.img + " a")
+    link.prop("href", "javascript:void(0)")
+    link.prop("target", "")
 }
 
 

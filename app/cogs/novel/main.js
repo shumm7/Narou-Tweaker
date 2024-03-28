@@ -529,6 +529,14 @@ function _optionModal(){
     setOptionContentsCorrection(1)
 
     //addTab(2, "統計")
+    
+    const scrollElement = document.querySelector("#novel-option--contents");
+    if(scrollElement!=null){
+        scrollElement.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            scrollElement.scrollTop += e.deltaY;
+        });
+    }
 
     chrome.storage.local.get(["novelOptionModalSelected"], function(data){
         $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, defaultOption.novelOptionModalSelected)).addClass("active")

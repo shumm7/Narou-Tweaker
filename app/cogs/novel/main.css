@@ -408,6 +408,7 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 	border-top-color: var(--kasasagi-blue);
 }
 #novel-option--contents {
+	height: 100%;
 	overflow-y: scroll;
 	padding: .5em;
 }
@@ -518,6 +519,10 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 	padding: 0;
 }
 
+/* Header */
+.novel-option--content-inner#option-header {
+	margin-bottom: 200px;
+}
 
 /* Correction */
 #novel-option--correction-syntax,

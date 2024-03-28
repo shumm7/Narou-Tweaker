@@ -177,6 +177,26 @@ export function setOptionContentsDisplay(id){
         `)
         restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
 
+        /* Header */
+        outer.append(`
+            <div class='novel-option--content-inner' id='option-header'>
+                <div class='novel-option-header'>ヘッダ</div>
+                <div class='novel-option-subheader'>追従モード</div>
+                <div id="novel-option--header-scroll-mode">
+                    <div class="dropdown" style="width: 100%;">
+                        <select id="novelCustomHeaderMode">
+                            <option value="absolute">上部</option>
+                            <option value="fixed">追従</option>
+                            <option value="scroll">スクロール</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        `)
+        chrome.storage.local.get(["novelCustomHeaderMode"], (data)=>{
+            $("#novelCustomHeaderMode").val(data.novelCustomHeaderMode)
+        })
+
         /* Font Family */
         $(".novel-option--font-button-box").click(function() {
             const key = $(this).parent().prop("id")
@@ -459,11 +479,11 @@ export function setOptionContentsCorrection(id){
             <div id="novel-option--correction-symbols">
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-normalize-ellipses" class="correction_mode toggle" name="correctionNormalizeEllipses">
-                    <label for="novel-option--correction-normalize-ellipses" class="toggle">中点の三点リーダー（・・・）</label>
+                    <label for="novel-option--correction-normalize-ellipses" class="toggle">三点リーダーを修正（・・・）</label>
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-normalize-dash" class="correction_mode toggle" name="correctionNormalizeDash">
-                    <label for="novel-option--correction-normalize-dash" class="toggle">罫線のダッシュ（――）</label>
+                    <label for="novel-option--correction-normalize-dash" class="toggle">ダッシュを修正（――）</label>
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-repeated-symbols" class="correction_mode toggle" name="correctionRepeatedSymbols">
@@ -480,6 +500,14 @@ export function setOptionContentsCorrection(id){
                 <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-odd-ellipses-and-dash" class="correction_mode toggle" name="correctionOddEllipsesAndDash">
                     <label for="novel-option--correction-odd-ellipses-and-dash" class="toggle">奇数の三点リーダー/ダッシュ</label>
+                </div>
+            </div>
+
+            <div class='novel-option-header'>その他</div>
+            <div id="novel-option--correction-others">
+                <div class="novel-option--toggle novel-option--correction-mode">
+                    <input type="checkbox" id="novel-option--correction-show-illustration" class="correction_mode toggle" name="correctionShowIllustration">
+                    <label for="novel-option--correction-show-illustration" class="toggle">挿絵を表示</label>
                 </div>
             </div>
 
@@ -524,7 +552,9 @@ export function setOptionContentsCorrection(id){
             changes.correctionPeriodWithBrackets!=undefined ||
             changes.correctionNoSpaceExclamation!=undefined ||
             changes.correctionOddEllipsesAndDash!=undefined ||
-            changes.correctionReplacePatterns!=undefined 
+            changes.correctionReplacePatterns!=undefined  ||
+            changes.correctionShowIllustration!=undefined ||
+            changes.correctionRemoveIllustrationLink!=undefined 
         ){
             restoreCorrectionMode()
             restoreReplacePattern()
