@@ -3,7 +3,8 @@ import { defaultValue, check } from "../../utils/misc.js";
 import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { getExceptedIcon } from "../../utils/header.js";
-import { defaultOption } from "../../utils/option.js";
+import { defaultOption, formatSkinData } from "../../utils/option.js";
+import { makeSkinCSS } from "../../utils/skin.js";
 
 chrome.storage.local.get(null, (data) => {
     /* Header */
@@ -24,6 +25,9 @@ chrome.storage.local.get(null, (data) => {
             _novelPage()
         }
     }
+    
+    /* Author Skin */
+    _authorSkin()
 });
 
 function _header(){
@@ -616,5 +620,41 @@ function _novelPage(){
         
     }else if(episode>1){
 
+    }
+}
+
+function _authorSkin(){
+    var banner = $(".novelrankingtag a:has(img[alt^='Narou Tweaker'])")
+    if(banner.length){
+        var span = banner.find("span")
+        if(span.length){
+            try{
+                // Escape HTML Tags
+                var p = $("<p>")
+                p.text(span.get(0).firstChild.nodeValue)
+                var text = p.text()
+                
+                // Parse to Tags
+                var skinData = formatSkinData(JSON.parse(text))
+                chrome.storage.local.get("novelCustomStyle", (data)=>{
+                    const style = makeSkinCSS(skinData, data.novelCustomStyle)
+                    $("style#narou-tweaker-style--author-css").text(style)
+                    userSkinActive()
+                })
+
+            }catch(e){
+                console.warn(e)
+            }
+        }
+    }
+
+    function userSkinActive(){
+        $("body").prepend(`
+        <div id="author-skin-warning">
+            作者スキン有効（小説の作者によってスキンが強制されています）<br>
+            <span style="font-size: 80%;">
+                Narou Tweakerの設定 → [小説ページ] → [スキン] → [作者スキン] から無効化できます。
+            </span>
+        </div>`)
     }
 }

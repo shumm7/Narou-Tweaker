@@ -300,45 +300,54 @@ export function addSkinEditButtonEvent(){
   const authorSkinImage = {
     "tiny-light": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/tiny_light.png?raw=true",
+      local_src: "/assets/banner/tiny_light.png",
       width: 88,
       height: 31
     },
     "small-light":{
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/small_light.png?raw=true",
+      local_src: "/assets/banner/small_light.png",
       width: 135,
       height: 35
     },
     "medium-light":{
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/medium_light.png?raw=true",
+      local_src: "/assets/banner/medium_light.png",
       width: 200,
       height: 40
     },
     "big-light": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/big_light.png?raw=true",
+      local_src: "/assets/banner/big_light.png",
       width: 300,
       height: 55
     },
     "tiny-dark": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/tiny_dark.png?raw=true",
+      local_src: "/assets/banner/tiny_dark.png",
       width: 88,
       height: 31
     },
     "small-dark": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/small_dark.png?raw=true",
+      local_src: "/assets/banner/small_dark.png",
       width: 135,
       height: 35
     },
     "medium-dark": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/medium_dark.png?raw=true",
+      local_src: "/assets/banner/medium_dark.png",
       width: 200,
       height: 40
     },
     "big-dark": {
       src: "https://github.com/shumm7/Narou-Tweaker/blob/main/app/assets/banner/big_dark.png?raw=true",
+      local_src: "/assets/banner/big_dark.png",
       width: 300,
       height: 55
     }
   }
+  showAuthorSkinBanner()
   $("#skin-author-export--submit").on("click", (e)=>{
     chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
       var skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
@@ -355,10 +364,29 @@ export function addSkinEditButtonEvent(){
       const text = JSON.stringify(skin)
       
       $("#skin-author-export--field").val(
-        `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker" /><span><!--${text}--></span></a>`
+        `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker"/><span><!--${text}--></span></a>`
       )
     });
   })
+  $("#skin-author-export--type").on("change", function(e){ 
+    showAuthorSkinBanner()
+    $("#skin-author-export--field").val("")
+  })
+  function showAuthorSkinBanner(){
+    var selected = defaultValue($("#skin-author-export--type").val(), "tiny-light")
+
+    const image = authorSkinImage[selected]
+    if($("#skin-author-export--image").length){
+      var img = $("#skin-author-export--image")
+      img.prop("src", image.local_src)
+      img.prop("width", image.width)
+      img.prop("height", image.height)
+    }else{
+      $("#skin-author-export").append(`
+        <img id="skin-author-export--image" src="${image.local_src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker"/>
+      `)
+    }
+  }
 
   /* Auto Save */
   $(".option-skin").change(()=>{ 

@@ -1,5 +1,6 @@
 
 chrome.storage.local.get(["appliedSkinCSS", "additionalCSS"], (data)=>{
+    /* Skin */
     if("appliedSkinCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style"></style>`)
         l.text(data.appliedSkinCSS)
@@ -7,6 +8,11 @@ chrome.storage.local.get(["appliedSkinCSS", "additionalCSS"], (data)=>{
     }else{
         $("html").append(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style"></style>`)
     }
+
+    /* Author CSS */
+    $("html").append(`<style type="text/css" id="narou-tweaker-style--author-css" class="narou-tweaker-style"></style>`)
+
+    /* User CSS */
     if("additionalCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--user-css" class="narou-tweaker-style"></style>`)
         l.text(data.additionalCSS)

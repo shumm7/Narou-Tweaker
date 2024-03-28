@@ -616,6 +616,15 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 	margin-right: .2em;
 }
 
+/* Author Skin */
+#author-skin-warning {
+	margin: 10px;
+	font-weight: bold;
+	text-align: center;
+	font-size: 13px;
+	filter: invert(100%) grayscale(100%) contrast(100);
+}
+
 /* Novel Page*/
 .narou-tweaker .novel-titles {
     line-height: normal;
