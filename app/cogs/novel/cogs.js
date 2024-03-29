@@ -1,6 +1,9 @@
-import { defaultValue } from "../../utils/misc.js"
+import { check, defaultValue } from "../../utils/misc.js"
 import { localFont, localSkins, defaultOption, replacePattern } from "../../utils/option.js";
+import { formatSkinData, generateNoDuplicateName } from "../../utils/skin.js";
+import { escapeHtml, getDateString, getDateStringJapanese, getDatetimeString } from "../../utils/text.js";
 import { correction, restoreCorrectionMode } from "./correction.js";
+import { getNcode } from "./utils.js";
 
 /* Header */
 export function changeHeaderScrollMode(elm){
@@ -333,6 +336,11 @@ export function setOptionContentsDisplay(id){
                 restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
             })
         }
+        if(changes.skins!=undefined || changes.selectedSkin!=undefined){
+            chrome.storage.local.get(null, (data)=>{
+                restoreSkinOptions(data.skins, data.selectedSkin)
+            })
+        }
     })
 }
 
@@ -562,4 +570,95 @@ export function setOptionContentsCorrection(id){
         }
     })
     
+}
+
+export function setOptionContentsAuthorSkin(id){
+    var outer = $(".novel-option--content.novel-option-tab-"+id)
+
+    /* Author Skin */
+    outer.append(`
+        <div class='novel-option--content-inner' id='option-skin'>
+            <div class='novel-option-header'>作者スキン</div>
+            <p style="font-weight: bold;">この小説は、作者によってスキンが設定されています。</p>
+            <div id="novel-option--author-skin" style="margin-top: 20px;">
+                <input type="checkbox" id="novel-option--novel-author-skin" class="toggle" name="novelAuthorCustomSkin">
+                <label for="novel-option--novel-author-skin" class="toggle">作者スキン</label>
+            </div>
+            <div class="novel-option--import-author-skin" style="margin-top: 20px;">
+                <button type="button" id="novel-option--import-author-skin-button">この作者スキンをインポート</button>
+                <div id="novel-option--import-author-skin-notice" style="margin-top: 10px;"></div>
+            </div>
+        </div>
+    `)
+
+    /* Restore Values */
+    restoreAuthorSkin()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.novelAuthorCustomSkin!=undefined){
+            restoreAuthorSkin()
+        }
+    })
+
+    function restoreAuthorSkin(){
+        chrome.storage.local.get(null, (data) => {
+            check("#novel-option--novel-author-skin", data.novelAuthorCustomSkin, defaultOption.novelAuthorCustomSkin)
+        })
+    }
+
+    /* Event */
+    // Click Toggle
+    $("#novel-option--novel-author-skin").on("click", function(e){
+        chrome.storage.local.set({novelAuthorCustomSkin: $(this).prop("checked")})
+    })
+
+    // Import Button
+    $("#novel-option--import-author-skin-button").on("click", function(e){
+        var banner = $(".novelrankingtag a:has(img[alt='Narou Tweaker 作者スキン'])")
+        if(banner.length){
+            var span = banner.find("span")
+            if(span.length){
+                try{
+                    // Escape HTML Tags
+                    var p = $("<p>")
+                    p.text(span.get(0).firstChild.nodeValue)
+                    var text = p.text()
+                    
+                    // Parse to Tags
+                    var l = JSON.parse(text)
+                    l.name = `インポートされた作者スキン-${getNcode().toUpperCase()}-${getDatetimeString()}`
+                    l.description = `${getDatetimeString()} に ${getNcode()} でインポートされた作者スキン`
+                    var raw = formatSkinData(l)
+
+                    // Import Skin
+                    chrome.storage.local.get(["skins"], function(data) {
+                        var skins = defaultValue(data.skins, defaultOption.skins)
+                        raw.name = generateNoDuplicateName(localSkins.concat(skins), raw.name, -1)
+                        console.log(raw)
+                        skins.push(raw)
+                        
+                        chrome.storage.local.set({skins: skins}, function(){
+                            pushSkinImportInfo(`インポートに成功しました (${raw.name})`, "info")
+                        })
+                    })
+
+                }catch(e){
+                    pushSkinImportInfo(`インポートに失敗しました`, "warn")
+                    console.warn(e)
+                }
+            }
+        }
+    })
+
+    function pushSkinImportInfo(message, type){
+        $("#novel-option--import-author-skin-notice").empty()
+        if(type=="warn"){
+            $("#novel-option--import-author-skin-notice").append(`
+                <div class="novel-option--import-author-skin--notice-warn"><i class="fa-solid fa-triangle-exclamation"></i> ${escapeHtml(message)}</div>
+            `)
+        }else{
+            $("#novel-option--import-author-skin-notice").append(`
+                <div class="novel-option--import-author-skin--notice-info"><i class="fa-solid fa-circle-check"></i> ${escapeHtml(message)}</div>
+            `)
+        }
+    }
 }

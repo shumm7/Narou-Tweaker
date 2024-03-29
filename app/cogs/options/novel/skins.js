@@ -1,29 +1,7 @@
 import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
-import { localSkins, defaultOption, formatSkinData } from "../../../utils/option.js";
+import { localSkins, defaultOption } from "../../../utils/option.js";
+import { generateNoDuplicateName, formatSkinData } from "../../../utils/skin.js";
 import { escapeHtml } from "../../../utils/text.js";
-
-/* 重複しないスキン名を作成 */
-function generateNoDuplicateName(skins, name, selected){
-    if(checkSkinNameDuplicate(skins, name, selected)){
-        for(var i=1; i<=10000; i++){
-            if(!checkSkinNameDuplicate(skins, name + "("+i+")")){
-            name = name + "("+i+")"
-            break
-            }
-        }
-    }
-    return name
-
-    function checkSkinNameDuplicate(skins, name, selected){
-      var res = false
-      $.each(skins, (i, skin)=>{
-          if(skin.name==name && i!=selected){
-              res = true;
-          }
-      })
-      return res;
-  }
-}
 
 /* 指定したスキンを表示 */
 export function restoreSkins(skins, selected){
@@ -364,7 +342,7 @@ export function addSkinEditButtonEvent(){
       const text = JSON.stringify(skin)
       
       $("#skin-author-export--field").val(
-        `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker"/><span><!--${text}--></span></a>`
+        `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker 作者スキン"/><span><!--${text}--></span></a>`
       )
     });
   })

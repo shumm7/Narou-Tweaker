@@ -617,6 +617,32 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 }
 
 /* Author Skin */
+#novel-option--import-author-skin-button {
+    display: inline-block;
+    width: auto;
+    cursor: pointer;
+    text-align: center;
+    appearance: none;
+    transition: all 0.2s ease 0s;
+    white-space: nowrap;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(221, 221, 221);
+    border-image: initial;
+    border-radius: 0.5em;
+    padding: .3em 1em;
+}
+#novel-option--import-author-skin-button:active,
+#novel-option--import-author-skin-button:focus,
+#novel-option--import-author-skin-button:hover {
+    background-color: rgb(250, 250, 250);
+}
+.novel-option--import-author-skin--notice-warn {
+	font-weight: bold;
+	color: red;
+}
+.novel-option--import-author-skin--notice-info {
+	font-weight: bold;
+}
 #author-skin-warning {
 	margin: 10px;
 	font-weight: bold;
