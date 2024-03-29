@@ -1,6 +1,6 @@
 import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
 import {saveJson} from "../../utils/misc.js"
-import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString} from "../../utils/text.js"
+import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString, escapeHtml} from "../../utils/text.js"
 import {getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
 import {makeTable, getNcode, makeGraph} from "./utils.js"
 
@@ -52,6 +52,11 @@ chrome.storage.local.get(null, (data) => {
 
         /* Date Picker */
         $("input#datepicker").wrap('<div class="datepicker-outer"><label for="datepicker">日付を指定</label></div>')
+
+        /* Select */
+        var s = $("form:has(select)")
+        s.before("<br>")
+        s.addClass("dropdown")
 
         /* Footer */
         $("#container").after('<div class="l-footer"><div class="p-footer"></div></div>')
