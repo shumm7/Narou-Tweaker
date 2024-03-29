@@ -1,7 +1,6 @@
 import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
 import { localSkins, defaultOption } from "../../../utils/option.js";
 import { generateNoDuplicateName, formatSkinData } from "../../../utils/skin.js";
-import { escapeHtml } from "../../../utils/text.js";
 
 /* 指定したスキンを表示 */
 export function restoreSkins(skins, selected){
