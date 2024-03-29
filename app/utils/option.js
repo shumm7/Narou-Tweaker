@@ -1,5 +1,12 @@
 import { defaultValue, getExtensionVersion } from "./misc.js"
 
+export const ignoreOptions = [
+    "optionsVersion",
+    "extOptionSidePanelShow",
+    "novelOptionModalSelected",
+    "appliedSkinCSS",
+]
+
 export const defaultOption = {
     optionsVersion: getExtensionVersion(),
 
@@ -360,7 +367,9 @@ export function updateOption(force, data){
             Object.keys(o).forEach(function(key){
                 if(data[key]!=undefined){
                     if( typeof(o[key]) == typeof(data[key]) ){
-                        o[key] = data[key]
+                        if(key in ignoreOptions==false){
+                            o[key] = data[key]
+                        }
                     }
                 }
             })

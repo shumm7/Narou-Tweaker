@@ -101,12 +101,19 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+.export-option-text,
+#skin-author {
+	flex-shrink: 0;
+	width: 100%;
+}
 
 /* Skin Export, Import */
 #skin-export,
 #skin-import {
 	display: flex;
 	flex-direction: column;
+	flex-shrink: 0;
+	width: 100%;
 }
 #skin-import-input {
 	display: flex;
