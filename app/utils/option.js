@@ -5,6 +5,7 @@ export const defaultOption = {
 
     /* Extension */
     extAdvancedSettings: false,
+    extOptionSidePanelShow: true,
 
     /* Novel */
     novelCustomStyle: true,

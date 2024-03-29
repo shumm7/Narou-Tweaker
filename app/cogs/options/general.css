@@ -90,13 +90,28 @@ input[type=file] {
 
 /* Sidebar */
 #sidebar {
+    position: sticky;
     width: 200px;
-    height: auto;
+    height: 100vh;
+    top: 0;
     background: #f2f1f0;
     flex-shrink: 0;
+    white-space: nowrap;
+    transition: width 0.2s ease-in-out;
+    font-size: 16px;
+}
+#sidebar.hide {
+    width: 0px;
+    transition: width 0.2s ease-in-out;
+}
+#sidebar-inner {
+    height: 100%;
+    width: 100%;
+    contain: paint;
 }
 #sidebar-items {
-    margin-top: 70px;
+    position: fixed;
+    top: 70px;
 }
 .sidebar-item {
     margin: 15px 0 15px 0;
@@ -117,6 +132,72 @@ input[type=file] {
 }
 .sidebar-item .sidebar-item--title {
     margin-left: .3em;
+}
+
+#sidebar-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+    top: 10px;
+    width: inherit;
+}
+#sidebar-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: fixed;
+    bottom: 10px;
+    width: inherit;
+}
+.sidebar-icon {
+    cursor: pointer;
+}
+.sidebar-icon:hover {
+    color: var(--kasasagi-blue);
+}
+#sidebar-icon--hide {
+    font-size: 110%;
+    margin: 0 15px;
+}
+#sidebar-icon--help {
+    font-size: 110%;
+    margin-left: 15px;
+}
+#sidebar-icon--help a {
+    color: inherit;
+}
+#sidebar-version {
+    color: #666;
+    margin-left: 15px;
+}
+#sidebar-open {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border: 1px solid #fafafa;
+    font-size: 20px;
+    border-radius: .5em;
+    opacity: 0;
+    transition: all .2s ease-in;
+    visibility: hidden;
+}
+#sidebar.hide #sidebar-open {
+    opacity: 0.8;
+    visibility: visible;
+    transition: all .2s ease-in;
+    cursor: pointer;
+}
+#sidebar-open:hover{
+    background: #ddd;
+    color: var(--kasasagi-blue);
+    transition: all .2s ease-in;
 }
 
 /* Contents */
@@ -189,7 +270,7 @@ input[type=file] {
 
 /* Contents */
 .contents-container {
-    padding: 5px 10px;
+    padding: 10px 20px;
     height: 100%;
 }
 .contents-wide {

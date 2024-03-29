@@ -1,40 +1,58 @@
-import { check, defaultValue } from "../../utils/misc.js"
+import { check, defaultValue, getExtensionVersion } from "../../utils/misc.js"
 import { defaultOption, updateOption } from "../../utils/option.js"
 
 export function setupDOM(){
     $('#js-failed').remove();
 
     var sidebar = $(`
-        <div id="sidebar-items">
-            <div class="sidebar-item" name="general">
-                <a href="/cogs/options/general/index.html" target="_self">
-                <i class="fa-solid fa-gear"></i>
-                    <span class="sidebar-item--title">全般</span>
-                </a>
+        <div id="sidebar-inner">
+            <div id="sidebar-header">
+                <div class="sidebar-icon" id="sidebar-icon--help">
+                    <a href="/cogs/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>
+                </div>
             </div>
-            <div class="sidebar-item" name="novel">
-                <a href="/cogs/options/novel/index.html" target="_self">
-                    <i class="fa-solid fa-book"></i>
-                    <span class="sidebar-item--title">小説ページ</span>
-                </a>
+            <div id="sidebar-items">
+                <div class="sidebar-item" name="general">
+                    <a href="/cogs/options/general/index.html" target="_self">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="sidebar-item--title">全般</span>
+                    </a>
+                </div>
+                <div class="sidebar-item" name="novel">
+                    <a href="/cogs/options/novel/index.html" target="_self">
+                        <i class="fa-solid fa-book"></i>
+                        <span class="sidebar-item--title">小説ページ</span>
+                    </a>
+                </div>
+                <div class="sidebar-item" name="workspace">
+                    <a href="/cogs/options/workspace/index.html" target="_self">
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <span class="sidebar-item--title">ユーザホーム</span>
+                    </a>
+                </div>
+                <div class="sidebar-item" name="mypage">
+                    <a href="/cogs/options/mypage/index.html" target="_self">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="sidebar-item--title">マイページ</span>
+                    </a>
+                </div>
+                <div class="sidebar-item" name="kasasagi">
+                    <a href="/cogs/options/kasasagi/index.html" target="_self">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="sidebar-item--title">KASASAGI</span>
+                    </a>
+                </div>
             </div>
-            <div class="sidebar-item" name="workspace">
-                <a href="/cogs/options/workspace/index.html" target="_self">
-                    <i class="fa-solid fa-pen-nib"></i>
-                    <span class="sidebar-item--title">ユーザホーム</span>
-                </a>
+            <div id="sidebar-bottom">
+                <div id="sidebar-version">build. ${getExtensionVersion()}</div>
+                <div class="sidebar-icon" id="sidebar-icon--hide">
+                    <i class="fa-solid fa-angles-left"></i>
+                </div>
             </div>
-            <div class="sidebar-item" name="mypage">
-                <a href="/cogs/options/mypage/index.html" target="_self">
-                    <i class="fa-solid fa-user"></i>
-                    <span class="sidebar-item--title">マイページ</span>
-                </a>
-            </div>
-            <div class="sidebar-item" name="kasasagi">
-                <a href="/cogs/options/kasasagi/index.html" target="_self">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <span class="sidebar-item--title">KASASAGI</span>
-                </a>
+        </div>
+        <div id="sidebar-open">
+            <div class="sidebar-icon" id="sidebar-icon--show">
+                <i class="fa-solid fa-angles-right"></i>
             </div>
         </div>
     `)
@@ -52,6 +70,29 @@ export function setupDOM(){
         <div class="footer-contents--text">Narou Tweaker v${manifest.version}</div>
     </div>
     `)
+
+    /* Events */
+    chrome.storage.local.get("extOptionSidePanelShow", function(data){
+        _sidepanelHide(data.extOptionSidePanelShow)
+    })
+    $("#sidebar-icon--hide").on("click", function(){
+        chrome.storage.local.set({extOptionSidePanelShow: false}, function(){})
+    })
+    $("#sidebar-open").on("click", function(){
+        chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extOptionSidePanelShow!=undefined){
+            _sidepanelHide(changes.extOptionSidePanelShow.newValue)
+        }
+    })
+    function _sidepanelHide(mode){
+        if(mode){
+            $("#sidebar").removeClass("hide")
+        }else{
+            $("#sidebar").addClass("hide")
+        }
+    }
 }
 
 /* Restore Options */
