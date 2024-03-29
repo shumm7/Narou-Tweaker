@@ -106,6 +106,9 @@ function restoreValues(data, ignore){
         if(tagName == "input" && type=="checkbox"){ // Toggle
           check("#" + elm.prop("id"), value, defaultOption[name])
         }
+        if(tagName == "input" && type=="text"){ // Input Text
+            elm.val(defaultValue(value, defaultOption[name]))
+        }
         else if(tagName=="select" || tagName=="textarea"){ // DropDown / TextArea
           elm.val(defaultValue(value, defaultOption[name]))
         }
@@ -152,6 +155,8 @@ export function restoreOptions(){
     
         var value = {}
         if(tagName=="textarea"){
+            value[name] = $(this).val()
+        }else if(tagName=="input" && type=="text"){
             value[name] = $(this).val()
         }
     

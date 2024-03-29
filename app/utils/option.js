@@ -1,18 +1,19 @@
 import { defaultValue, getExtensionVersion } from "./misc.js"
 
 export const ignoreOptions = [
-    "optionsVersion",
+    "extOptionsVersion",
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
     "appliedSkinCSS",
 ]
 
 export const defaultOption = {
-    optionsVersion: getExtensionVersion(),
+    extOptionsVersion: getExtensionVersion(),
 
     /* Extension */
     extAdvancedSettings: false,
     extOptionSidePanelShow: true,
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins",
 
     /* Novel */
     novelCustomStyle: true,
@@ -361,8 +362,8 @@ export const narouNetwrokUrlPattern = [
 export function updateOption(force, data){
 
     function update(data){
-        var currentOptionVersion = defaultOption.optionsVersion
-        if(currentOptionVersion != data.optionsVersion || force){
+        var currentOptionVersion = defaultOption.extOptionsVersion
+        if(currentOptionVersion != data.extOptionsVersion || force){
             var o = defaultOption
             Object.keys(o).forEach(function(key){
                 if(data[key]!=undefined){

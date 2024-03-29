@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function(){
 function exportOptionText() {
     function change(){
         chrome.storage.local.get(null, (data)=>{
+            const ignores = data.extIgnoreOptionIndex.split(/\s/)
+            $.each(ignores, function(_, elm){
+                if(elm in data){
+                    delete data[elm]
+                }
+            })
+
             var text = JSON.stringify(data, null, 4)
             $("#exportOptionText_Output").text(text)
         })
