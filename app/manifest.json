@@ -144,7 +144,6 @@
   ],
   "permissions": [
     "storage",
-    "scripting",
     "downloads",
     "tabs",
     "contextMenus",
