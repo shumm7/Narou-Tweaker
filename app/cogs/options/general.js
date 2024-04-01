@@ -8,7 +8,7 @@ export function setupDOM(){
         <div id="sidebar-inner">
             <div id="sidebar-header">
                 <div class="sidebar-icon" id="sidebar-icon--help">
-                    <a href="/cogs/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>
+                    <!--<a href="/cogs/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>
             </div>
             <div id="sidebar-items">
