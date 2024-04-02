@@ -93,6 +93,14 @@ export const icon_list = {
         icon: "fa-brands fa-line",
         text: "LINE"
     },
+    "hatena-bookmark": {
+        icon: "fa-brands fa-hatena-bookmark",
+        text: "はてなブックマーク"
+    },
+    feedly: {
+        icon: "fa-brands fa-feedly",
+        text: "Feedly"
+    },
     qrcode: {
         icon: "fa-solid fa-qrcode",
         text: "QRコード"
@@ -119,4 +127,31 @@ export function getExceptedIcon(lists){
         }
     })
     return ret;
+}
+
+export function addFontAwesomeOriginaIcons(){
+    /* はてなブックマーク */
+    FontAwesome.library.add({
+        prefix: 'fab',
+        iconName: 'hatena-bookmark',
+        icon: [ 
+            512,
+            512,
+            [],
+            'xxxx',
+            'M509 0h-94v284h94V0ZM4 426h136s67 0 96-6c48-9 102-37 102-116 0-83-59-105-96-108 55-13 77-43 77-92 0-61-45-95-115-101a1131 1131 0 0 0-104-3H4v426Zm172-169h1c6 1 27 3 38 12 11 10 13 25 13 35 0 20-6 33-32 41-13 3-27 4-33 4a2462 2462 0 0 1-51 0v-93l64 1ZM119 94a285 285 0 0 1 60 4c13 3 31 8 31 41 0 31-24 36-38 39-14 2-60 2-60 2V94h7Zm397 278a54 54 0 1 1-108 0 54 54 0 0 1 108 0Z'
+        ]
+    })
+
+    FontAwesome.library.add({
+            prefix: 'fab',
+            iconName: 'feedly',
+            icon: [ 
+                512,
+                512,
+                [],
+                'xxxx',
+                'M296 17a56 56 0 0 0-80 0L16 221a58 58 0 0 0 0 81l143 145c10 9 23 14 37 14h120a56 56 0 0 0 40-17l140-142a58 58 0 0 0 0-81L296 17Zm-6 372-20 20a8 8 0 0 1-6 3h-17l-5-2-20-21a8 8 0 0 1 0-12l28-29a8 8 0 0 1 12 0l28 30a8 8 0 0 1 0 11Zm0-122-80 82a8 8 0 0 1-5 2h-17l-6-2-20-21a8 8 0 0 1 0-11l88-90a8 8 0 0 1 12 0l28 29a8 8 0 0 1 0 11Zm0-121L151 288a8 8 0 0 1-6 2h-17l-5-2-21-21a8 8 0 0 1 0-11l148-151a8 8 0 0 1 12 0l28 29a8 8 0 0 1 0 12Z'
+            ]
+        })
 }

@@ -2,7 +2,7 @@ import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorr
 import { defaultValue, check } from "../../utils/misc.js";
 import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
-import { getExceptedIcon } from "../../utils/header.js";
+import { addFontAwesomeOriginaIcons, getExceptedIcon } from "../../utils/header.js";
 import { defaultOption } from "../../utils/option.js";
 import { formatSkinData, makeSkinCSS } from "../../utils/skin.js";
 
@@ -31,6 +31,8 @@ chrome.storage.local.get(null, (data) => {
 });
 
 function _header(){
+    addFontAwesomeOriginaIcons()
+
     chrome.storage.local.get(null, (data) => {
         if(!$("#novel_header").length){return}
         const isCustomHeader = data.novelCustomHeader
@@ -405,6 +407,30 @@ function _header(){
         if(meta_url!=undefined){
             var uri = "https://social-plugins.line.me/lineit/share?url=" + meta_url
             $("#novel_header ul").append('<li class="line"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-line"></i><span class="title">'+txt+'</span></a></li>')
+        }
+
+        /* はてなブックマーク */
+        var txt
+        if(data.novelCustomHeaderSocialShowsBrandName){
+            txt = "はてな<br>ブックマーク"
+        }else{
+            txt = "ブックマーク"
+        }
+        if(meta_title!=undefined && meta_url!=undefined){
+            var uri = "https://b.hatena.ne.jp/entry/panel/?url=" + meta_url + "&btitle=" + meta_title
+            $("#novel_header ul").append('<li class="hatena-bookmark"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-hatena-bookmark"></i><span class="title">'+txt+'</span></a></li>')
+        }
+
+        /* Feedly */
+        var txt
+        if(data.novelCustomHeaderSocialShowsBrandName){
+            txt = "Feedly"
+        }else{
+            txt = "フォロー"
+        }
+        if(atom!=undefined){
+            var uri = "https://feedly.com/i/subscription/feed/" + atom
+            $("#novel_header ul").append('<li class="feedly"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         if(meta_url!=undefined){

@@ -1,5 +1,5 @@
 import { restoreOptions, setupDOM } from "../general.js";
-import { getExceptedIcon, icon_list } from "../../../utils/header.js"
+import { addFontAwesomeOriginaIcons, getExceptedIcon, icon_list } from "../../../utils/header.js"
 import { buttonHide, optionHide } from "../utils.js";
 import { addFontEditButtonEvent, restoreFont } from "./font.js";
 import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "./correction.js";
@@ -11,6 +11,7 @@ optionHide()
 addFontEditButtonEvent()
 addSkinEditButtonEvent()
 addReplacePatternEditButtonEvent()
+addFontAwesomeOriginaIcons()
 
 document.addEventListener('DOMContentLoaded', function(){
     restoreOptions()
