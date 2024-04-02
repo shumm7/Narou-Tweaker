@@ -29,6 +29,7 @@
       "js": [
         "libs/jquery-3.7.1.min.js",
         "libs/qrcodejs/qrcode.min.js",
+        "libs/font-awesome/js/fontawesome.min.js",
         "cogs/novel/loader.js"
       ],
       "css": [
