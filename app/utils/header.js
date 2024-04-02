@@ -93,6 +93,10 @@ export const icon_list = {
         icon: "fa-brands fa-line",
         text: "LINE"
     },
+    qrcode: {
+        icon: "fa-solid fa-qrcode",
+        text: "QRコード"
+    },
     option: {
         icon: "fa-solid fa-gear",
         text: "設定"

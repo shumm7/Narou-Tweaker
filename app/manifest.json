@@ -28,6 +28,7 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "libs/qrcodejs/qrcode.min.js",
         "cogs/novel/loader.js"
       ],
       "css": [

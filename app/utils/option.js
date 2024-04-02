@@ -23,6 +23,8 @@ export const defaultOption = {
     novelCustomHeaderMode: "scroll",
     novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "booklist"],
     novelCustomHeaderRight: ["siori", "option"],
+    novelCustomHeaderSocialShowsBrandName: false,
+    novelCustomHeaderQRCodeCurrentLocation: true,
     novelOptionModalSelected: 0,
 
     /* Workspace */

@@ -356,6 +356,7 @@ function _header(){
             }
         })
 
+
         /* Socials */
         var meta_title = $("head meta[property='og:title']").prop("content")
         var meta_url = $("head meta[property='og:url']").prop("content")
@@ -371,33 +372,84 @@ function _header(){
                 uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=「`+meta_title+`」読んだ！&url=`+meta_url
             }
 
+            var txt
+            if(data.novelCustomHeaderSocialShowsBrandName){
+                txt = "X"
+            }else{
+                txt = "ポスト"
+            }
             if(uri!=undefined){
-                $("#novel_header ul").append('<li class="twitter"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-x-twitter"></i><span class="title">ポスト</span></a></li>')
+                $("#novel_header ul").append('<li class="twitter"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-x-twitter"></i><span class="title">'+txt+'</span></a></li>')
             }
         }
 
         /* Facebook */
+        var txt
+        if(data.novelCustomHeaderSocialShowsBrandName){
+            txt = "Facebook"
+        }else{
+            txt = "シェア"
+        }
         if(meta_url!=undefined){
             var uri = "https://www.facebook.com/share.php?u=" + meta_url
-            $("#novel_header ul").append('<li class="facebook"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-facebook"></i><span class="title">シェア</span></a></li>')
+            $("#novel_header ul").append('<li class="facebook"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-facebook"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         /* LINE */
+        var txt
+        if(data.novelCustomHeaderSocialShowsBrandName){
+            txt = "LINE"
+        }else{
+            txt = "シェア"
+        }
         if(meta_url!=undefined){
             var uri = "https://social-plugins.line.me/lineit/share?url=" + meta_url
-            $("#novel_header ul").append('<li class="line"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-line"></i><span class="title">シェア</span></a></li>')
+            $("#novel_header ul").append('<li class="line"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-line"></i><span class="title">'+txt+'</span></a></li>')
         }
 
-        /* コピー */
-        /*
         if(meta_url!=undefined){
+            /* コピー */
+            /*
             $("#novel_header ul").append('<li class="copy-url"><a><i class="fa-solid fa-link"></i><span class="title">URLをコピー</span></a></li>')
             $("#novel_header ul li.copy-url>a").on("click", function(){
                 navigator.clipboard.writeText(meta_url)
                 showToast("コピーしました")
             })
+            */
         }
-        */
+
+        /* QRコード */
+        $("#novel_header").before(`<div id='qrcode-background'><div id="qrcode-display"></div></div>`)
+        $("#qrcode-background").on("click", function(){
+            $("#qrcode-background").removeClass("show")
+        })
+
+        var qrcode
+        if(data.novelCustomHeaderQRCodeCurrentLocation){
+            $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
+            qrcode = new QRCode(document.getElementById("qrcode-display"), {text: location.href});
+        }else{
+            if(meta_url!=undefined){
+                $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
+                qrcode = new QRCode(document.getElementById("qrcode-display"), {text: meta_url});
+            }else if(ncode!=undefined){
+                $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
+                if(episode){
+                    qrcode = new QRCode(document.getElementById("qrcode-display"), {text: `https://ncode.syosetu.com/${ncode}/`});
+                }else{
+                    qrcode = new QRCode(document.getElementById("qrcode-display"), {text: `https://ncode.syosetu.com/${ncode}/${episode}/`});
+                }
+            }
+        }
+
+        $("#novel_header ul li.qrcode").on("click", function(){
+            var elm = $("#qrcode-background")
+            if(elm.hasClass("show")){
+                elm.removeClass("show")
+            }else{
+                elm.addClass("show")
+            }
+        })
         
         /* Set Position */
         function resetHeader(left, right){
