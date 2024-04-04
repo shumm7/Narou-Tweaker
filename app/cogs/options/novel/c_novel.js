@@ -8,10 +8,10 @@ import { addSkinEditButtonEvent, restoreSkins } from "./skins.js";
 setupDOM()
 buttonHide()
 optionHide()
+addFontAwesomeOriginaIcons()
 addFontEditButtonEvent()
 addSkinEditButtonEvent()
 addReplacePatternEditButtonEvent()
-addFontAwesomeOriginaIcons()
 
 document.addEventListener('DOMContentLoaded', function(){
     restoreOptions()

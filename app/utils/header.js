@@ -75,12 +75,10 @@ export const icon_list = {
         icon: "fa-solid fa-angles-up",
         text: "スクロール"
     },
-    /*
     "copy-url": {
         icon: "fa-solid fa-link",
         text: "URLをコピー"
     },
-    */
     twitter: {
         icon: "fa-brands fa-x-twitter",
         text: "X"

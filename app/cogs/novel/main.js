@@ -433,16 +433,34 @@ function _header(){
             $("#novel_header ul").append('<li class="feedly"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
         }
 
-        if(meta_url!=undefined){
-            /* コピー */
-            /*
-            $("#novel_header ul").append('<li class="copy-url"><a><i class="fa-solid fa-link"></i><span class="title">URLをコピー</span></a></li>')
-            $("#novel_header ul li.copy-url>a").on("click", function(){
+        /* コピー */
+        let copy_animation_timer = null;
+        $("#novel_header ul").append('<li class="copy-url"><a><i class="fa-solid fa-link"></i><span class="title">URLをコピー</span></a></li>')
+        $("#novel_header ul li.copy-url>a").on("click", function(){
+            if(meta_url!=undefined){
                 navigator.clipboard.writeText(meta_url)
-                showToast("コピーしました")
-            })
-            */
-        }
+            }else{
+                navigator.clipboard.writeText(location.href)
+            }
+            var icon = $("li.copy-url>a i")
+            var text = $("li.copy-url>a span.title")
+            if(copy_animation_timer!=null){
+                clearTimeout(copy_animation_timer)
+                icon.removeClass("fa-check")
+                icon.addClass("fa-link")
+                text.text("URLをコピー")
+            }
+
+            icon.removeClass("fa-link")
+            icon.addClass("fa-check")
+            text.text("コピーしました")
+
+            copy_animation_timer = setTimeout(function() {
+                icon.removeClass("fa-check")
+                icon.addClass("fa-link")
+                text.text("URLをコピー")
+            }, 3000);
+        })
 
         /* QRコード */
         $("#novel_header").before(`<div id='qrcode-background'><div id="qrcode-display"></div></div>`)
