@@ -5,6 +5,21 @@ import { checkNovelPageDetail } from "./utils.js";
 
 const bracket_begin = `「『＜《〈≪【（”“’‘\\\(\\\'`
 const bracket_end = `」』＞》〉≫】）”’\\\)\\\'`
+const brackets = [
+    {begin: "「", end: "」"},
+    {begin: "『", end: "』"},
+    {begin: "＜", end: "＞"},
+    {begin: "《", end: "》"},
+    {begin: "≪", end: "≫"},
+    {begin: "【", end: "】"},
+    {begin: "（", end: "）"},
+    {begin: "”", end: "”"},
+    {begin: "“", end: "”"},
+    {begin: "’", end: "’"},
+    {begin: "‘", end: "’"},
+    {begin: "(", end: ")"},
+    {begin: "'", end: "'"},
+]
 const symbols = `!-/:-@\\\[-\`{-~！-／：-＠［-｀｛-～、-〜”’・`
 const exclamation = `！？!?‼⁇⁉⁈`
 
@@ -93,10 +108,23 @@ function checkLineType(string){
     if(string.match(new RegExp(`^[${symbols}\\s]*$`, "g"))){
         return ""
     }else if(string.match(new RegExp(`^\\s*[${bracket_begin}].*$`))){ //括弧で始まる文章
-        var m = string.match(new RegExp(`^\\s*[${bracket_begin}](.*)$`))[1]
-        if(m.match(new RegExp(`^.*[${bracket_end}]\\s*$`), "g")){ //括弧で終わる
-            return className.talk
-        }else if(!m.match(new RegExp(`[${bracket_end}]`))){ //括弧が含まれない
+        var m = string.match(new RegExp(`^\\s*([${bracket_begin}])(.*)$`))
+        var bracket = m[1]
+        var line = m[2]
+
+        m = line.match(new RegExp(`^.*([${bracket_end}])\\s*$`), "g")
+        if(m){ //括弧で終わる
+            var ret = className.word
+            $.each(brackets, function(_, b){
+                if(b.begin==bracket){
+                    if(b.end==m[1]){
+                        ret = className.talk //括弧の種類が同じ
+                        return
+                    }
+                }
+            })
+            return ret
+        }else if(!line.match(new RegExp(`[${bracket_end}]`))){ //括弧が含まれない
             return className.talk
         }else{
             return className.word
@@ -156,8 +184,21 @@ function correctionNormalizeEllipses(){
 function correctionNormalizeDash(){
     /* 罫線を用いたダッシュ(─) → 全角ダッシュ（―） */
     $("#novel_honbun > p.replaced").each(function(){
-        if($(this).text().match(/─/)){
-            $(this).after(replaceText(this, /─/g, "―"))
+        if($(this).text().match(/─/)){ //罫線
+            $(this).after(
+                replaceText(this, /─{2,}/g, function(s){
+                    var l = s.length
+                    return "―".repeat(l)
+                })
+            )
+        }
+        if($(this).text().match(/－{2,}/)){ //全角ハイフン
+            $(this).after(
+                replaceText(this, /－{2,}/g, function(s){
+                    var l = s.length
+                    return "―".repeat(l)
+                })
+            )
         }
     })
 }
