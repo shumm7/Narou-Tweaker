@@ -63,7 +63,8 @@
       "css": [
         "libs/font-awesome/css/all.css",
         "common.css",
-        "cogs/workspace/main.css"
+        "cogs/workspace/main.css",
+        "cogs/workspace/_bookmark.css"
       ],
       "matches": [
 				"https://syosetu.com/*"
@@ -113,7 +114,8 @@
         "cogs/novel/utils.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
-        "cogs/workspace/social.js",
+        "cogs/workspace/_bookmark.js",
+        "cogs/workspace/_header.js",
         "cogs/mypage/main.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js"

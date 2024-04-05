@@ -28,6 +28,9 @@ export const defaultOption = {
     novelOptionModalSelected: 0,
 
     /* Workspace */
+    workspaceCustomHeader: ["user", "message", "home", "menu"],
+    workspaceCustomHeaderScrollHidden: false,
+    workspaceCustomHeaderMode: "absolute",
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
     workspaceBookmarkTopPager: true,
