@@ -30,6 +30,7 @@ export const defaultOption = {
     /* Workspace */
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
+    workspaceBookmarkTopPager: true,
     
     /* Mypage */
     mypageShowUserId: true,
