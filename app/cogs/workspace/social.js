@@ -1,6 +1,11 @@
 const path = location.pathname
 
 export function _bookmark(){
+    bookmarkLayout()
+    bookmarkCategoryLayout()
+}
+
+function bookmarkLayout(){
     chrome.storage.local.get(null, function(data){
         // ブックマークページのレイアウト調整
         function resetTags(layout){
@@ -104,6 +109,66 @@ export function _bookmark(){
         chrome.storage.local.onChanged.addListener(function(changes){
             if(changes.workspaceBookmarkLayout!=undefined){
                 resetTags(changes.workspaceBookmarkLayout.newValue)
+            }
+        })
+    })
+}
+
+function bookmarkCategoryLayout(){
+    chrome.storage.local.get(null, function(data){
+        // ブックマークページのカテゴリのレイアウト調整
+        function resetTags(layout){
+            layout = parseInt(layout)
+            $("body").removeClass("narou-tweaker-bookmark-category-layout-0")
+            $("body").removeClass("narou-tweaker-bookmark-category-layout-1")
+            $("body").removeClass("narou-tweaker-bookmark-category-layout-2")
+
+            if(layout==1){ // サイドバー
+                $("body").addClass("narou-tweaker-bookmark-category-layout-1")
+            }
+            else if(layout==2){ //両方
+                $("body").addClass("narou-tweaker-bookmark-category-layout-2")
+            }
+            else{ //デフォルト
+                $("body").addClass("narou-tweaker-bookmark-category-layout-0")
+            }
+        }
+        resetTags(data.workspaceBookmarkCategoryLayout)
+
+        if($(".p-up-bookmark-category").length){
+            $(".l-sidebar .c-ad").before(`
+                <div class="c-up-aside" id="bookmark-category">
+                    <div class="c-up-aside__box">
+                        <div class="c-up-aside__nav">
+                            <div class="c-up-aside__nav-headline">カテゴリ選択</div>
+                            <ul class="c-up-aside__nav-list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `)
+
+            $(".p-up-bookmark-category select option").each(function(){
+                var href = $(this).val()
+                var selected = $(this).prop("selected")
+                var title = $(this).text()
+
+                var c = $(`
+                    <li class="c-up-aside__nav-item">
+                        <a href="${href}">${title}</a>
+                    </li>
+                `)
+                if(selected){
+                    c.addClass("is-selected")
+                }
+
+                $("#bookmark-category ul.c-up-aside__nav-list").append(c)
+            })
+        }
+
+        chrome.storage.local.onChanged.addListener(function(changes){
+            if(changes.workspaceBookmarkCategoryLayout!=undefined){
+                resetTags(changes.workspaceBookmarkCategoryLayout.newValue)
             }
         })
     })

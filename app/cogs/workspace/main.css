@@ -138,3 +138,13 @@ body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__private:before {
     margin-right: .1em;
     font-size: 12px;
 }
+
+
+/* ブックマークカテゴリ */
+/* コンテンツ要素をモードによって非表示 */
+body.narou-tweaker-bookmark-category-layout-0 #bookmark-category {
+    display: none;
+}
+body.narou-tweaker-bookmark-category-layout-1 .p-up-bookmark-category {
+    display: none;
+}
