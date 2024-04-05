@@ -470,11 +470,17 @@ function _general(){
                     /* Info */
                     $("#novel_detail .novel_info").append("<table class='access-table'><tbody></tbody></table>")
                     var table = $("#novel_detail .novel_info table tbody")
-                    function addValue(key, desc, value){
+                    function addValue(key, desc, value, noEscape){
+                        if(!noEscape){
+                            desc = escapeHtml(desc)
+                            if(value){
+                                value = escapeHtml(value)
+                            }
+                        }
                         if(value==undefined){
-                            table.append(`<tr><td>${key}</td><td class='right' colspan='2'>${escapeHtml(desc)}</td></tr>`)
+                            table.append(`<tr><td>${key}</td><td class='right' colspan='2'>${desc}</td></tr>`)
                         }else{
-                            table.append(`<tr><td>${key}</td><td class='right'>${escapeHtml(desc)}</td><td class='right'>${escapeHtml(value)}</td></tr>`)
+                            table.append(`<tr><td>${key}</td><td class='right'>${desc}</td><td class='right'>${value}</td></tr>`)
                         }
                     }
                     function getYesNo(state){
@@ -489,11 +495,11 @@ function _general(){
                     }
 
                     table.append("<tr class='header'><th>作品情報</th><th>項目</th><th>データ</th></tr>")
-                    addValue("タイトル", "<a href='https://ncode.syosetu.com/"+ncode+"/'>"+d.title+"</a>")
+                    addValue("タイトル", "<a href='https://ncode.syosetu.com/"+ncode+"/'>"+escapeHtml(d.title)+"</a>", null, true)
                     addValue("Nコード", ncode, d.ncode)
                     addValue("あらすじ", d.story)
                     addValue("キーワード", d.keyword)
-                    addValue("作者", "<a href='https://mypage.syosetu.com/"+d.userid+"/'>"+d.writer+"</a>", d.userid)
+                    addValue("作者", "<a href='https://mypage.syosetu.com/"+d.userid+"/'>"+escapeHtml(d.writer)+"</a>", escapeHtml(d.userid), true)
                     addValue("大ジャンル", getBigGenre(d.biggenre), d.biggenre)
                     addValue("ジャンル", getGenre(d.genre), d.genre)
                     addValue("種類", getNovelType(d.novel_type), d.novel_type)
