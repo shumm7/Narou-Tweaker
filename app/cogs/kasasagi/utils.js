@@ -63,7 +63,12 @@ export function makeGraph(_id, _graph_type, _graph_name){
         $.each(legends, function(idx, value){
             var num = table.find("tr."+value+" td.item").text()
             if(value_type=="ユニーク"){
-                num = parseIntWithComma(num.match(/(.*)人/)[1])
+                var m = num.match(/(.*)人/)
+                if(m==null){
+                    num = 0
+                }else{
+                    num = parseIntWithComma(m[1])
+                }
             }else if(value_type=="PV"){
                 num = parseIntWithComma(num)
             }
