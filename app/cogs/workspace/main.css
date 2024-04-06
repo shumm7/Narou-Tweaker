@@ -1,10 +1,10 @@
 /* ヘッダ */
 /* スクロールモード */
 .l-header {
-    z-index: 55;
+    z-index: 9;
     width: 100vw;
 }
-.l-header ~ div{
+body > div.top{
     margin-top: 67.225px;
 }
 

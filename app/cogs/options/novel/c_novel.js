@@ -1,5 +1,5 @@
 import { restoreOptions, setupDOM } from "../general.js";
-import { addFontAwesomeOriginaIcons, getExceptedIcon, icon_list } from "../../../utils/header.js"
+import { addFontAwesomeOriginaIcons, getExceptedIcon, novelIconList } from "../../../utils/header.js"
 import { buttonHide, optionHide } from "../utils.js";
 import { addFontEditButtonEvent, restoreFont } from "./font.js";
 import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "./correction.js";
@@ -111,7 +111,7 @@ function storeCustomHeader(){
 
 function restoreHeaderIconList(){
     function getIconElement(id){
-        let icon = icon_list[id]
+        let icon = novelIconList[id]
         return `
         <div id="`+id+`" class="icon-element" draggable="true">
             <i class="`+icon.icon+`"></i>

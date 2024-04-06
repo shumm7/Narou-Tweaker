@@ -1,11 +1,17 @@
 export function _header(){
     headerIcons()
     changeHeaderScrollMode()
-
 }
 
 function changeHeaderScrollMode(){
     var elm = ".l-header"
+
+    $("body > div").each(function(){
+        if(!$(this).hasClass("l-header")){
+            $(this).addClass("top")
+            return false
+        }
+    })
 
     function changeMode(elm){
         chrome.storage.local.get(null, (data) => {
@@ -49,67 +55,28 @@ function changeHeaderScrollMode(){
     });
 
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.novelCustomHeaderMode!=undefined || changes.novelCustomHeaderScrollHidden!=undefined){
+        if(workspaceCustomHeaderMode!=undefined || changes.workspaceCustomHeaderScrollHidden!=undefined){
             changeMode(elm)
         }
     })
 }
 
-const icon_list = {
-    user: {
-        icon: "fa-solid fa-user",
-        text: "ユーザ"
-    },
-    message: {
-        icon: "fa-regular fa-envelope",
-        text: "メッセージ"
-    },
-    home: {
-        icon: "fa-solid fa-house",
-        text: "ユーザホーム"
-    },
-    menu: {
-        icon: "fa-solid fa-bars",
-        text: "メニュー"
-    },
-    favorite: {
-        icon: "fa-regular fa-star",
-        text: "お気に入り"
-    },
-    edit: {
-        icon: "fa-solid fa-pen",
-        text: "投稿"
-    },
-    blog: {
-        icon: "fa-regular fa-newspaper",
-        text: "活動報告"
-    },
-    reaction: {
-        icon: "fa-regular fa-comment",
-        text: "リアクション"
-    },
-    "block-mute": {
-        icon: "fa-solid fa-ban",
-        text: "ブロック・ミュート"
-    },
-    "x-home": {
-        icon: "fa-solid fa-house",
-        text: "ホーム↔Xホーム"
-    },
-    find: {
-        icon: "fa-solid fa-magnifying-glass",
-        text: "作品を探す"
-    },
-    support: {
-        icon: "fa-regular fa-circle-question",
-        text: "お困りの方は"
-    }
-}
-
 function headerIcons(){
     var headerParent = $(".p-up-header-pc .p-up-header-pc__nav")
     function getLink(selector){
-        return $(".p-up-header-pc__gmenu-list").find(selector)[0].outerHTML
+        var g = $(".p-up-header-pc__gmenu-list").find(selector)
+        if(g.length){
+            return g.clone()[0].outerHTML
+        }
+        return ``
+    }
+
+    function getList(selector){
+        var g = $(".p-up-header-pc__gmenu-list").find(selector)
+        if(g.length){
+            return "<li>" + g.clone()[0].outerHTML + "</li>"
+        }
+        return ``
     }
 
     // ユーザ
@@ -146,13 +113,31 @@ function headerIcons(){
                 </span>
                 <div class="p-up-header-pc__account-menu">
                     <ul class="p-up-header-pc__account-menu-list">
-                        <li>${getLink("a[href='https://syosetu.com/favnovelmain/list/'], a[href='https://syosetu.com/favnovelmain18/list/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/favuser/list/'], a[href='https://syosetu.com/favuser18/list/']")}</li>
+                        ${getList("a[href='https://syosetu.com/favnovelmain/list/'], a[href='https://syosetu.com/favnovelmain18/list/']")}
+                        ${getList("a[href='https://syosetu.com/favuser/list/'], a[href='https://syosetu.com/favuser18/list/']")}
                     </ul>
                 </div>
             </div>
         </li>
     `)
+
+    //ブックマーク
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item favnovel">
+            ${getLink("a[href='https://syosetu.com/favnovelmain/list/'], a[href='https://syosetu.com/favnovelmain18/list/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-solid fa-book-bookmark"></i>`)
+    headerParent.append(elm)
+
+    //お気に入りユーザ
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item favuser">
+            ${getLink("a[href='https://syosetu.com/favuser/list/'], a[href='https://syosetu.com/favuser18/list/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-solid fa-heart"></i>`)
+    headerParent.append(elm)
 
     //投稿
     headerParent.append(`
@@ -163,15 +148,33 @@ function headerIcons(){
                 </span>
                 <div class="p-up-header-pc__account-menu">
                     <ul class="p-up-header-pc__account-menu-list">
-                        <li>${getLink("a[href='https://syosetu.com/usernovel/list/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/novelseriesmanage/list/'], a[href='https://syosetu.com/novelseries18manage/list/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/novelinitialsetting/updateinput/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/userwrittingnovel/backup/']")}</li>
+                        ${getList("a[href='https://syosetu.com/usernovel/list/']")}
+                        ${getList("a[href='https://syosetu.com/novelseriesmanage/list/'], a[href='https://syosetu.com/novelseries18manage/list/']")}
+                        ${getList("a[href='https://syosetu.com/novelinitialsetting/updateinput/']")}
+                        ${getList("a[href='https://syosetu.com/userwrittingnovel/backup/']")}
                     </ul>
                 </div>
             </div>
         </li>
     `)
+
+    //作品の作成・編集
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item usernovel">
+            ${getLink("a[href='https://syosetu.com/usernovel/list/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<span class="p-icon p-icon--plus p-up-header-pc__nav-icon" aria-hidden="true"></span>`)
+    headerParent.append(elm)
+
+    //シリーズ設定
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item novelseries">
+            ${getLink("a[href='https://syosetu.com/novelseriesmanage/list/'], a[href='https://syosetu.com/novelseries18manage/list/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<span class="p-icon p-icon--list-ul p-up-header-pc__nav-icon" aria-hidden="true"></span>`)
+    headerParent.append(elm)
 
     //活動報告
     var elm = $(`
@@ -191,15 +194,51 @@ function headerIcons(){
                 </span>
                 <div class="p-up-header-pc__account-menu">
                     <ul class="p-up-header-pc__account-menu-list">
-                        <li>${getLink("a[href='https://syosetu.com/usernovelimpression/passivelist/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/usernovelreview/passivelist/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/userblogcomment/passivelist/'], a[href='https://syosetu.com/userxblogcomment/passivelist/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/usernovelreport/passivelist/']")}</li>
+                        ${getList("a[href='https://syosetu.com/usernovelimpression/passivelist/']")}
+                        ${getList("a[href='https://syosetu.com/usernovelreview/passivelist/']")}
+                        ${getList("a[href='https://syosetu.com/userblogcomment/passivelist/'], a[href='https://syosetu.com/userxblogcomment/passivelist/']")}
+                        ${getList("a[href='https://syosetu.com/usernovelreport/passivelist/']")}
                     </ul>
                 </div>
             </div>
         </li>
     `)
+
+    //感想
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item impression">
+            ${getLink("a[href='https://syosetu.com/usernovelimpression/passivelist/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<span class="p-icon p-icon--comment-square-pen p-up-header-pc__nav-icon" aria-hidden="true"></span>`)
+    headerParent.append(elm)
+
+    //イチオシレビュー
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item review">
+            ${getLink("a[href='https://syosetu.com/usernovelreview/passivelist/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-solid fa-flag"></i>`)
+    headerParent.append(elm)
+
+    //活動報告コメント
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item blogcomment">
+            ${getLink("a[href='https://syosetu.com/userblogcomment/passivelist/'], a[href='https://syosetu.com/userxblogcomment/passivelist/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-regular fa-newspaper"></i>`)
+    headerParent.append(elm)
+
+    //誤字報告
+    var elm = $(`
+        <li class="p-up-header-pc__nav-item novelreport">
+            ${getLink("a[href='https://syosetu.com/usernovelreport/passivelist/']")}
+        </li>
+    `)
+    elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-solid fa-keyboard"></i>`)
+    headerParent.append(elm)
 
     //ブロック・ミュート
     headerParent.append(`
@@ -210,8 +249,8 @@ function headerIcons(){
                 </span>
                 <div class="p-up-header-pc__account-menu">
                     <ul class="p-up-header-pc__account-menu-list">
-                        <li>${getLink("a[href='https://syosetu.com/userblock/list/'], a[href='https://syosetu.com/xuserblock/list/']")}</li>
-                        <li>${getLink("a[href='https://syosetu.com/mute/list/'], a[href='https://syosetu.com/mute18/list/']")}</li>
+                        ${getList("a[href='https://syosetu.com/userblock/list/'], a[href='https://syosetu.com/xuserblock/list/']")}
+                        ${getList("a[href='https://syosetu.com/mute/list/'], a[href='https://syosetu.com/mute18/list/']")}
                     </ul>
                 </div>
             </div>
@@ -226,17 +265,72 @@ function headerIcons(){
     `)
     elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<span class="p-icon p-icon--home p-up-header-pc__nav-icon" aria-hidden="true"></span>`)
     headerParent.append(elm)
+    
+    //作品を探す
+    headerParent.append(`
+        <li class="p-up-header-pc__nav-item find">
+            <div class="p-up-header-pc__account">
+                <span class="p-up-header-pc__nav-label p-up-header-pc__username">
+                    <span class="p-icon p-icon--search p-up-header-pc__nav-icon" aria-hidden="true"></span>作品を探す
+                </span>
+                <div class="p-up-header-pc__account-menu">
+                    <ul class="p-up-header-pc__account-menu-list">
+                        ${getList("a[href='https://yomou.syosetu.com/search.php']")}
+                        ${getList("a[href='https://yomou.syosetu.com/rireki/list/']")}
+                        ${getList("a[href='https://yomou.syosetu.com/rank/top/']")}
+                        ${getList("a[href='https://yomou.syosetu.com/reviewlist/list/']")}
+                        ${getList("a[href='https://syosetu.com/pickup/list/']")}
+                        ${getList("a[href='https://noc.syosetu.com/top/top/']")}
+                        ${getList("a[href='https://mnlt.syosetu.com/top/top/']")}
+                        ${getList("a[href='https://mid.syosetu.com/top/top/']")}
+                        ${getList("a[href='https://noc.syosetu.com/rireki/list/']")}
+                        ${getList("a[href='https://mnlt.syosetu.com/rireki/list/']")}
+                        ${getList("a[href='https://mid.syosetu.com/rireki/list/']")}
+                    </ul>
+                </div>
+            </div>
+        </li>
+    `)
+
+    //お困りの方は
+    headerParent.append(`
+        <li class="p-up-header-pc__nav-item support">
+            <div class="p-up-header-pc__account">
+                <span class="p-up-header-pc__nav-label p-up-header-pc__username">
+                    <span class="p-icon p-icon--question p-up-header-pc__nav-icon" aria-hidden="true"></span>お困りの方は
+                </span>
+                <div class="p-up-header-pc__account-menu">
+                    <ul class="p-up-header-pc__account-menu-list">
+                        ${getList("a[href='https://syosetu.com/helpcenter/top/']")}
+                        ${getList("a[href='https://syosetu.com/bbs/top/'], a[href='https://nl.syosetu.com/bbs/top/']")}
+                        ${getList("a[href='https://syosetu.com/inquire/input/']")}
+                    </ul>
+                </div>
+            </div>
+        </li>
+    `)
+
 
 
     //ヘッダ設定
-    $(".p-up-header-pc__nav .p-up-header-pc__nav-item").addClass("disabled")
-    chrome.storage.local.get(null, (data) => {
-        $.each(data.workspaceCustomHeader, function(_, key){
-            var elm = $(".p-up-header-pc__nav-item."+key)
-            if(elm.length){
-                elm.removeClass("disabled")
-                $(".p-up-header-pc__nav").append(elm)
-            }
+    function resetHeader(){
+        $(".p-up-header-pc__nav .p-up-header-pc__nav-item").addClass("disabled")
+        chrome.storage.local.get(null, (data) => {
+            $.each(data.workspaceCustomHeader, function(_, key){
+                var elm = $(".p-up-header-pc__nav-item."+key)
+                if(elm.length){
+                    elm.removeClass("disabled")
+                    $(".p-up-header-pc__nav").append(elm)
+                }
+            })
         })
+    }
+    resetHeader()
+
+    /* Storage Listener */
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.workspaceCustomHeader!=undefined){
+            resetHeader()
+        }
     })
 }

@@ -1,5 +1,5 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection, setOptionContentsAuthorSkin } from "./cogs.js";
-import { defaultValue, check } from "../../utils/misc.js";
+import { defaultValue } from "../../utils/misc.js";
 import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { addFontAwesomeOriginaIcons, getExceptedIcon } from "../../utils/header.js";

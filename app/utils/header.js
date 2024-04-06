@@ -1,4 +1,6 @@
-export const icon_list = {
+import { defaultValue } from "./misc.js"
+
+export const novelIconList = {
     home: {
         icon: "fa-solid fa-house",
         text: "ホーム"
@@ -110,7 +112,98 @@ export const icon_list = {
 }
 // https://fontawesome.com/search?o=r&m=free
 
-export function getExceptedIcon(lists){
+export const workspaceIconList = {
+    user: {
+        icon: "fa-solid fa-user",
+        text: "ユーザ",
+        isDropdown: true
+    },
+    message: {
+        icon: "fa-regular fa-envelope",
+        text: "メッセージ"
+    },
+    home: {
+        icon: "fa-solid fa-house",
+        text: "ユーザホーム"
+    },
+    menu: {
+        icon: "fa-solid fa-bars",
+        text: "メニュー",
+        isDropdown: true
+    },
+    favorite: {
+        icon: "fa-regular fa-star",
+        text: "お気に入り",
+        isDropdown: true
+    },
+    favuser: {
+        icon: "fa-solid fa-heart",
+        text: "お気に入りユーザ"
+    },
+    favnovel: {
+        icon: "fa-solid fa-book-bookmark",
+        text: "ブックマーク"
+    },
+    edit: {
+        icon: "fa-solid fa-pen",
+        text: "投稿",
+        isDropdown: true
+    },
+    usernovel: {
+        icon: "fa-solid fa-plus",
+        text: "作品の作成・編集"
+    },
+    novelseries: {
+        icon: "fa-solid fa-list",
+        text: "シリーズ設定"
+    },
+    blog: {
+        icon: "fa-regular fa-newspaper",
+        text: "活動報告"
+    },
+    reaction: {
+        icon: "fa-regular fa-comment-dots",
+        text: "リアクション",
+        isDropdown: true
+    },
+    impression: {
+        icon: "fa-regular fa-comment",
+        text: "感想"
+    },
+    review: {
+        icon: "fa-solid fa-flag",
+        text: "イチオシレビュー"
+    },
+    blogcomment: {
+        icon: "fa-regular fa-newspaper",
+        text: "活動報告コメント"
+    },
+    novelreport: {
+        icon: "fa-solid fa-keyboard",
+        text: "誤字報告"
+    },
+    "block-mute": {
+        icon: "fa-solid fa-ban",
+        text: "ブロック・ミュート",
+        isDropdown: true
+    },
+    "x-home": {
+        icon: "fa-solid fa-house",
+        text: "ホーム↔Xホーム"
+    },
+    find: {
+        icon: "fa-solid fa-magnifying-glass",
+        text: "作品を探す",
+        isDropdown: true
+    },
+    support: {
+        icon: "fa-regular fa-circle-question",
+        text: "お困りの方は",
+        isDropdown: true
+    }
+}
+
+export function getExceptedIcon(lists, parent){
     var v = []
     $.each(lists, function(_, list){
         $.each(list, function(_, key){
@@ -118,8 +211,10 @@ export function getExceptedIcon(lists){
         })
     })
 
+    parent = defaultValue(parent, novelIconList)
+
     var ret = []
-    $.each(icon_list, function(key, _){
+    $.each(parent, function(key, _){
         if(!v.includes(key)){
             ret.push(key)
         }
