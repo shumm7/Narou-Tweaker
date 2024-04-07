@@ -112,3 +112,21 @@ export function getNovelEnd(state){
         return ""
     }
 }
+
+export function getNocgenre(genre){
+    if(genre==1){
+        return "ノクターンノベルズ(男性向け)"
+    }
+    else if(genre==2){
+        return "ムーンライトノベルズ(女性向け)"
+    }
+    else if(genre==3){
+        return "ムーンライトノベルズ(BL)"
+    }
+    else if(genre==4){
+        return "ミッドナイトノベルズ(大人向け)"
+    }
+    else{
+        return ""
+    }
+}

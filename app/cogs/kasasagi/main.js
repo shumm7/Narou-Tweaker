@@ -1,16 +1,30 @@
 import {addExclamationIconBalloon, addQuestionIconBalloon} from "../../utils/ui.js"
 import {saveJson} from "../../utils/misc.js"
 import {getDateString, parseIntWithComma, getYesterday, getDateStringJapanese, getDatetimeString, escapeHtml} from "../../utils/text.js"
-import {getBigGenre, getGenre, getNovelType, getNovelEnd} from "../../utils/api.js"
+import {getBigGenre, getGenre, getNovelType, getNovelEnd, getNocgenre} from "../../utils/api.js"
 import {makeTable, getNcode, makeGraph} from "./utils.js"
 
 var option
+var r18 = false
 
 chrome.storage.local.get(null, (data) => {
     var path = location.pathname;
     var ncode = getNcode();
     if(ncode==null){return}
     option = data
+
+    var novelLink = $(`.novelview_menu li a[href$='.syosetu.com/${ncode}/']`)
+    if(novelLink.length){
+        var link = new URL(novelLink.prop("href"))
+        try{
+            link = new URL(link)
+            if(link.hostname=="novel18.syosetu.com"){
+                r18 = true
+            }
+        }catch(e){
+
+        }
+    }
 
     /* Design */
     if(option.kasasagiCustomStyle){
@@ -26,9 +40,15 @@ chrome.storage.local.get(null, (data) => {
 
         header_inner.append('<div class="p-header__main"><h1 class="p-header__logo"><a href="https://kasasagi.hinaproject.com/"><img style="max-height: 50px;" src="https://kasasagi.hinaproject.com/view/images/kasasagi_logo.gif" alt="KASASAGI"></a></h1><div class="p-header__description">KASASAGIは株式会社ヒナプロジェクトによって作られた<br>アクセス解析システムです。</div></div>')
         header_inner.append('<div class="p-header__mainnav"><ul class="p-header__mainnav-list"></ul></div>')
-        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://syosetu.com/user/top/">ユーザーホーム</a></li>')
-        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/novelview/infotop/ncode/'+ncode+'/">作品情報</a></li>')
-        $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/'+ncode+'/">作品TOP</a></li>')
+        if(!r18){
+            $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://syosetu.com/user/top/">ユーザーホーム</a></li>')
+            $("ul.p-header__mainnav-list").append(`<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/novelview/infotop/ncode/${ncode}/">作品情報</a></li>`)
+            $("ul.p-header__mainnav-list").append(`<li class="p-header__mainnav-item"><a href="https://ncode.syosetu.com/${ncode}/">作品TOP</a></li>`)
+        }else{
+            $("ul.p-header__mainnav-list").append('<li class="p-header__mainnav-item"><a href="https://syosetu.com/xuser/top/">Xユーザーホーム</a></li>')
+            $("ul.p-header__mainnav-list").append(`<li class="p-header__mainnav-item"><a href="https://novel18.syosetu.com/novelview/infotop/ncode/${ncode}/">作品情報</a></li>`)
+            $("ul.p-header__mainnav-list").append(`<li class="p-header__mainnav-item"><a href="https://novel18.syosetu.com/${ncode}/">作品TOP</a></li>`)
+        }
 
         /* navigation */
         header.append("<div class='p-mainheader'><div class='p-mainheader__tab'></div></div>")
@@ -460,8 +480,14 @@ function _general(){
         $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
         $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
 
-        chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode, options: {'method': 'GET'}}}, function(response){
+        var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
+        if(r18){
+            url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
+        }
+
+        chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
         if(response){
+            console.log(response)
             if(response.success && response.action=="fetch"){
                 var d = response.result[1]
                 if(d!=undefined){
@@ -499,17 +525,26 @@ function _general(){
                     addValue("Nコード", ncode, d.ncode)
                     addValue("あらすじ", d.story)
                     addValue("キーワード", d.keyword)
-                    addValue("作者", "<a href='https://mypage.syosetu.com/"+d.userid+"/'>"+escapeHtml(d.writer)+"</a>", escapeHtml(d.userid), true)
+                    if(!r18){
+                        addValue("作者", "<a href='https://mypage.syosetu.com/"+d.userid+"/'>"+escapeHtml(d.writer)+"</a>", escapeHtml(d.userid), true)
+                    }else{
+                        addValue("作者", d.writer)
+                    }
                     addValue("大ジャンル", getBigGenre(d.biggenre), d.biggenre)
                     addValue("ジャンル", getGenre(d.genre), d.genre)
                     addValue("種類", getNovelType(d.novel_type), d.novel_type)
+                    if(r18){
+                        addValue("掲載サイト", getNocgenre(d.nocgenre), d.nocgenre)
+                    }
                     addValue("連載状態", getNovelEnd(d.end), d.end)
                     addValue("初回掲載日", d.general_firstup, d.general_firstup)
                     addValue("最終掲載日", d.general_lastup, d.general_lastup)
                     addValue("最終更新日", d.novelupdated_at, d.novelupdated_at)
                     addValue("話数", d.general_all_no.toLocaleString(), d.general_all_no)
                     addValue("長期連載停止中", getYesNo(d.isstop), d.isstop)
-                    addValue("R15", getYesNo(d.isr15), d.isr15)
+                    if(!r18){
+                        addValue("R15", getYesNo(d.isr15), d.isr15)
+                    }
                     addValue("ボーイズラブ", getYesNo(d.isbl), d.isbl)
                     addValue("ガールズラブ", getYesNo(d.isgl), d.isgl)
                     addValue("残酷な描写あり", getYesNo(d.iszankoku), d.iszankoku)
@@ -531,7 +566,11 @@ function _general(){
                     addValue("月間ポイント", d.monthly_point.toLocaleString() + "pt", d.monthly_point)
                     addValue("四半期ポイント", d.quarter_point.toLocaleString() + "pt", d.quarter_point)
                     addValue("年間ポイント", d.yearly_point.toLocaleString() + "pt", d.yearly_point)
-                    addValue("ブックマーク数", d.fav_novel_cnt.toLocaleString(), d.fav_novel_cnt)
+                    if(!r18){
+                        addValue("ブックマーク数", d.fav_novel_cnt.toLocaleString(), d.fav_novel_cnt)
+                    }else{
+                        addValue("Xブックマーク数", d.fav_novel_cnt.toLocaleString(), d.fav_novel_cnt)
+                    }
                     addValue("感想数", d.impression_cnt.toLocaleString(), d.impression_cnt)
                     addValue("レビュー数", d.review_cnt.toLocaleString(), d.review_cnt)
                     addValue("評価ポイント", d.all_point.toLocaleString(), d.all_point)
