@@ -106,3 +106,22 @@ export function checkNovelPageDetail(url){
         }
     }
 }
+
+export function isR18(url){
+    if(url==undefined){
+        url = location
+    }else{
+        try{
+            url = new URL(url)
+        }catch(e){
+            return
+        }
+    }
+
+    if(url.hostname=="ncode.syosetu.com" || url.hostname=="novelcom.syosetu.com"){
+        return false
+    }
+    else if(url.hostname=="novelcom18.syosetu.com" || url.hostname=="novel18.syosetu.com"){
+        return true
+    }
+}

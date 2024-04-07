@@ -1,6 +1,6 @@
 import { changeHeaderScrollMode, setOptionContentsDisplay, setOptionContentsCorrection, setOptionContentsAuthorSkin } from "./cogs.js";
 import { defaultValue } from "../../utils/misc.js";
-import { checkNovelPageDetail, getEpisode, getNcode } from "./utils.js";
+import { checkNovelPageDetail, getEpisode, getNcode, isR18 } from "./utils.js";
 import { ncodeToIndex } from "../../utils/text.js";
 import { addFontAwesomeOriginaIcons, getExceptedIcon } from "../../utils/header.js";
 import { defaultOption } from "../../utils/option.js";
@@ -43,13 +43,14 @@ function _header(){
         var pageType = checkNovelPageDetail()
         var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
         var userid
-        var r18 = false
+        var r18 = isR18()
         if(location.hostname == "ncode.syosetu.com"){
             userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
         }else if(location.hostname == "novel18.syosetu.com"){
             userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(x\d+[a-z]+)\.Atom/)[1]
-            r18 = true
         }
+
+        
 
         var text
         var elm
