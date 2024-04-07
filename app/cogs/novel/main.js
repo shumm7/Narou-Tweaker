@@ -373,16 +373,36 @@ function _header(){
         /* Socials */
         var meta_title = $("head meta[property='og:title']").prop("content")
         var meta_url = $("head meta[property='og:url']").prop("content")
+        if(meta_url && r18){
+            meta_url = meta_url.replace(/ncode\.syosetu\.com/, "novel18.syosetu.com")
+        }
 
         /* Twitter */
         if(meta_title!=undefined && meta_url!=undefined){
+            var prefix = ""
+            var host = "ncode"
+            if(r18){
+                prefix = "【R18】"
+                host = "novel18"
+            }
+
             var uri
-            if(pageType=="novel"){
-                uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
-            }else if(pageType=="top"){
-                uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=`+meta_title+`&url=`+meta_url
-            }else if(pageType=="info"){
-                uri = `https://twitter.com/intent/post?hashtags=narou,narou`+ncode.toUpperCase()+`&original_referer=https://ncode.syosetu.com/&text=「`+meta_title+`」読んだ！&url=`+meta_url
+            if(!r18){
+                if(pageType=="novel"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://ncode.syosetu.com/&text=${meta_title}&url=${meta_url}`
+                }else if(pageType=="top"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://ncode.syosetu.com/&text=${meta_title}&url=${meta_url}`
+                }else if(pageType=="info"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://ncode.syosetu.com/&text=「${meta_title}」読んだ！&url=${meta_url}`
+                }
+            }else{
+                if(pageType=="novel"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://novel18.syosetu.com/&text=【R18】${meta_title}&url=${meta_url}`
+                }else if(pageType=="top"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://novel18.syosetu.com/&text=【R18】${meta_title}&url=${meta_url}`
+                }else if(pageType=="info"){
+                    uri = `https://twitter.com/intent/post?hashtags=narou,narou${ncode.toUpperCase()}&original_referer=https://novel18.syosetu.com/&text=【R18】「${meta_title}」読んだ！&url=${meta_url}`
+                }
             }
 
             var txt
@@ -428,7 +448,12 @@ function _header(){
             txt = "ブックマーク"
         }
         if(meta_title!=undefined && meta_url!=undefined){
-            var uri = "https://b.hatena.ne.jp/entry/panel/?url=" + meta_url + "&btitle=" + meta_title
+            var uri
+            if(!r18){
+                uri = `https://b.hatena.ne.jp/entry/panel/?url=${meta_url}&btitle=${meta_title}`
+            }else{
+                uri = `https://b.hatena.ne.jp/entry/panel/?url=${meta_url}&btitle=【R18】${meta_title}`
+            }
             $("#novel_header ul").append('<li class="hatena-bookmark"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-hatena-bookmark"></i><span class="title">'+txt+'</span></a></li>')
         }
 
@@ -440,7 +465,7 @@ function _header(){
             txt = "フォロー"
         }
         if(atom!=undefined){
-            var uri = "https://feedly.com/i/subscription/feed/" + atom
+            var uri = `https://feedly.com/i/subscription/feed/${atom}`
             $("#novel_header ul").append('<li class="feedly"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
         }
 
@@ -474,31 +499,40 @@ function _header(){
         })
 
         /* QRコード */
-        $("#novel_header").before(`<div id='qrcode-background'><div id="qrcode-display"></div></div>`)
+        if(data.novelCustomHeaderQRCodeShowURL){
+            $("#novel_header").before(`<div id='qrcode-outer'><div id="qrcode-background"></div><div id="qrcode-display"><div id="qrcode-text"></div></div></div>`)
+        }else{
+            $("#novel_header").before(`<div id='qrcode-outer'><div id="qrcode-background"></div><div id="qrcode-display"></div></div>`)
+        }
         $("#qrcode-background").on("click", function(){
-            $("#qrcode-background").removeClass("show")
+            $("#qrcode-outer").removeClass("show")
         })
 
         var qrcode
         if(data.novelCustomHeaderQRCodeCurrentLocation){
             $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
             qrcode = new QRCode(document.getElementById("qrcode-display"), {text: location.href});
+            $("#qrcode-text").text(location.href)
         }else{
             if(meta_url!=undefined){
                 $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
                 qrcode = new QRCode(document.getElementById("qrcode-display"), {text: meta_url});
+                $("#qrcode-text").text(meta_url)
             }else if(ncode!=undefined){
                 $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
+                var url
                 if(episode){
-                    qrcode = new QRCode(document.getElementById("qrcode-display"), {text: `https://ncode.syosetu.com/${ncode}/`});
+                    url = `https://ncode.syosetu.com/${ncode}/${episode}/`
                 }else{
-                    qrcode = new QRCode(document.getElementById("qrcode-display"), {text: `https://ncode.syosetu.com/${ncode}/${episode}/`});
+                    url = `https://ncode.syosetu.com/${ncode}/`
                 }
+                qrcode = new QRCode(document.getElementById("qrcode-display"), {text: url});
+                $("#qrcode-text").text(url)
             }
         }
 
         $("#novel_header ul li.qrcode").on("click", function(){
-            var elm = $("#qrcode-background")
+            var elm = $("#qrcode-outer")
             if(elm.hasClass("show")){
                 elm.removeClass("show")
             }else{

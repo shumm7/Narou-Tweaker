@@ -25,6 +25,7 @@ export const defaultOption = {
     novelCustomHeaderRight: ["siori", "option"],
     novelCustomHeaderSocialShowsBrandName: false,
     novelCustomHeaderQRCodeCurrentLocation: true,
+    novelCustomHeaderQRCodeShowURL: false,
     novelOptionModalSelected: 0,
 
     /* Workspace */

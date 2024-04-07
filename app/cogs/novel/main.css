@@ -292,31 +292,52 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 }
 
 /* QRコード */
-#qrcode-background {
+#qrcode-outer {
+	position: fixed;
 	opacity: 0;
 	visibility: hidden;
+	transition: 0.2s all ease-in;
+	z-index: 500;
+}
+#qrcode-outer.show {
+	opacity: 1;
+	visibility: visible;
+	transition: 0.2s all ease-in;
+}
+#qrcode-background {
     position: fixed;
     top: 0;
 	width: 100vw;
 	height: 100vh;
     z-index: 49;
 	transition: 0.2s all ease-in;
+	z-index: 501;
 }
-#qrcode-background.show {
-	opacity: 1;
+.show #qrcode-background {
 	background: rgba(0,0,0,.7);
-	visibility: visible;
 	transition: 0.2s all ease-in;
 }
 #qrcode-display {
 	display: flex;
+	position: fixed;
+	flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    height: 100%;
+	top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+	z-index: 502;
 }
 #qrcode-display img {
 	border: 10px solid #fff;
 
+}
+#qrcode-text {
+	color: #666;
+	background: #fafafa;
+	margin-top: .5em;
+	padding: .3em 1em;
+	border-radius: .5em;
 }
 
 
