@@ -19,3 +19,4 @@
 * [lokku/jquery-nstslider](https://github.com/lokku/jquery-nstslider) Copyright (c) 2014 Lokku Ltd.
 * [SortableJS/Sortable](https://github.com/SortableJS/Sortable) Copyright (c) 2019 All contributors to Sortable
 * [mdbassit/Coloris](https://github.com/mdbassit/Coloris) Copyright (c) 2021 Mohammed Bassit
+* [davidshimjs/qrcodejs](https://github.com/davidshimjs/qrcodejs) Copyright (c) 2012 davidshimjs
