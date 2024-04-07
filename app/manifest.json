@@ -40,7 +40,9 @@
       ],
       "matches": [
 				"https://ncode.syosetu.com/*",
-        "https://novelcom.syosetu.com/*"
+        "https://novel18.syosetu.com/*",
+        "https://novelcom.syosetu.com/*",
+        "https://novelcom18.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -51,7 +53,9 @@
       ],
       "matches": [
 				"https://ncode.syosetu.com/*",
-        "https://novelcom.syosetu.com/*"
+        "https://novel18.syosetu.com/*",
+        "https://novelcom.syosetu.com/*",
+        "https://novelcom18.syosetu.com/*"
 			],
       "run_at":"document_start"
     },

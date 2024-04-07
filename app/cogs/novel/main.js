@@ -42,7 +42,14 @@ function _header(){
         var episode = getEpisode()
         var pageType = checkNovelPageDetail()
         var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
-        var userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
+        var userid
+        var r18 = false
+        if(location.hostname == "ncode.syosetu.com"){
+            userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
+        }else if(location.hostname == "novel18.syosetu.com"){
+            userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(x\d+[a-z]+)\.Atom/)[1]
+            r18 = true
+        }
 
         var text
         var elm
@@ -98,7 +105,7 @@ function _header(){
         }
 
         /* 作品情報 */
-        elm = $("#novel_header li a[href^='https://ncode.syosetu.com/novelview/']")
+        elm = $("#novel_header li a[href^='https://ncode.syosetu.com/novelview/'], #novel_header li a[href^='https://novel18.syosetu.com/novelview/']")
         if(elm.length){
             elm.text("")
             elm.append('<i class="fa-solid fa-circle-info"></i><span class="title">作品情報</span>')
@@ -106,7 +113,7 @@ function _header(){
         }
 
         /* 感想 */
-        elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/impression/']")
+        elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/impression/'], #novel_header li a[href^='https://novelcom18.syosetu.com/impression/']")
         if(elm.length){
             elm.text("")
             elm.append('<i class="fa-solid fa-comments"></i><span class="title">感想</span>')
@@ -114,7 +121,7 @@ function _header(){
         }
 
         /* レビュー */
-        elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/novelreview/']")
+        elm = $("#novel_header li a[href^='https://novelcom.syosetu.com/novelreview/'], #novel_header li a[href^='https://novelcom18.syosetu.com/novelreview/']")
         if(elm.length){
             elm.text("")
             elm.append('<i class="fa-solid fa-flag"></i><span class="title">レビュー</span>')
@@ -122,7 +129,7 @@ function _header(){
         }
 
         /* PDF */
-        elm = $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/']")
+        elm = $("#novel_header li form[action^='https://ncode.syosetu.com/novelpdf/'], #novel_header li form[action^='https://novel18.syosetu.com/novelpdf/']")
         if(elm.length){
             elm.prepend('<i class="fa-solid fa-file-pdf"></i>')
             elm.parent().addClass("pdf")
@@ -241,7 +248,11 @@ function _header(){
         }
 
         /* 作者マイページ */
-        $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        if(!r18){
+            $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="author"><a href="https://xmypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        }
 
         /* KASASAGI */
         $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')

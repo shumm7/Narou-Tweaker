@@ -11,7 +11,7 @@ export function getNcode(url){
         }
     }
 
-    if(url.hostname=="ncode.syosetu.com"){
+    if(url.hostname=="ncode.syosetu.com" || url.hostname=="novel18.syosetu.com"){
         if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
             return url.pathname.match(/^\/([n|N]\d{4}[a-zA-Z]{2})\/\d+\/*$/)[1].toLowerCase()
         }
@@ -27,7 +27,7 @@ export function getNcode(url){
         else if(url.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
             return url.pathname.match(/^\/txtdownload\/top\/ncode\/([n|N]\d{4}[a-zA-Z]{2})\/*$/)[1].toLowerCase()
         }
-    }else if(url.hostname=="novelcom.syosetu.com"){
+    }else if(url.hostname=="novelcom.syosetu.com" || url.hostname == "novelcom18.syosetu.com"){
         if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
             return indexToNcode(url.pathname.match(/^\/impression\/list\/ncode\/(\d+)\/*.*$/)[1])
         }
@@ -51,7 +51,7 @@ export function getEpisode(url){
         }
     }
 
-    if(url.hostname=="ncode.syosetu.com"){
+    if(url.hostname=="ncode.syosetu.com" || url.hostname=="novel18.syosetu.com"){
         if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
             return parseInt(url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/(\d+)\/*$/)[1])
         }
@@ -70,7 +70,7 @@ export function checkNovelPageDetail(url){
         }
     }
 
-    if(url.hostname=="ncode.syosetu.com"){
+    if(url.hostname=="ncode.syosetu.com" || url.hostname=="novel18.syosetu.com"){
         if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/\d+\/*$/)){ /* Story */
             return "novel"
         }
@@ -94,7 +94,7 @@ export function checkNovelPageDetail(url){
         else if(url.pathname.match(/^\/txtdownload\/top\/ncode\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* TXT */
             return "txt"
         }
-    }else if(url.hostname=="novelcom.syosetu.com"){
+    }else if(url.hostname=="novelcom.syosetu.com" || url.hostname=="novelcom18.syosetu.com"){
         if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
             return "impression"
         }
