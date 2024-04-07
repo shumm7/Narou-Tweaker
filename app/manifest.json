@@ -85,7 +85,8 @@
         "cogs/mypage/main.css"
       ],
       "matches": [
-				"https://mypage.syosetu.com/*"
+				"https://mypage.syosetu.com/*",
+				"https://xmypage.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -121,6 +122,7 @@
         "cogs/workspace/_bookmark.js",
         "cogs/workspace/_header.js",
         "cogs/mypage/main.js",
+        "cogs/mypage/utils.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js"
       ],
@@ -160,7 +162,6 @@
   ],
   "host_permissions": [
     "https://syosetu.com/*",
-    "https://api.syosetu.com/*",
     "https://*.syosetu.com/*"
   ]
 }
