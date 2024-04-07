@@ -258,19 +258,34 @@ function _header(){
         $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
 
         /* API */
-        $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
-
+        if(!r18){
+            $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novel18api/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+        }
         /* RSS */
         $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
 
         /* TXT */
-        $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+        if(!r18){
+            $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+        }else{
+            $("#novel_header ul").append('<li class="text"><a href="https://novel18.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+        }
 
         /* 誤字報告 */
-        if(episode==0 && pageType=="novel"){
-            $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
-        }else if(pageType=="novel"){
-            $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+        if(!r18){
+            if(episode==0 && pageType=="novel"){
+                $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }else if(pageType=="novel"){
+                $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }
+        }else{
+            if(episode==0 && pageType=="novel"){
+                $("#novel_header ul").append('<li class="typo"><a href="https://novelcom18.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }else if(pageType=="novel"){
+                $("#novel_header ul").append('<li class="typo"><a href="https://novelcom18.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }
         }
 
         /* 情報提供 */
@@ -521,10 +536,18 @@ function _header(){
             }else if(ncode!=undefined){
                 $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
                 var url
-                if(episode){
-                    url = `https://ncode.syosetu.com/${ncode}/${episode}/`
+                if(!r18){
+                    if(episode){
+                        url = `https://ncode.syosetu.com/${ncode}/${episode}/`
+                    }else{
+                        url = `https://ncode.syosetu.com/${ncode}/`
+                    }
                 }else{
-                    url = `https://ncode.syosetu.com/${ncode}/`
+                    if(episode){
+                        url = `https://novel18.syosetu.com/${ncode}/${episode}/`
+                    }else{
+                        url = `https://novel18.syosetu.com/${ncode}/`
+                    }
                 }
                 qrcode = new QRCode(document.getElementById("qrcode-display"), {text: url});
                 $("#qrcode-text").text(url)
