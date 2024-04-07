@@ -141,20 +141,23 @@ function _header(){
         /* ブックマーク */
         var is_login = true
         var is_logined_and_self = false
+        var text = "ブックマーク"
+        if(r18){text = "Xブックマーク"}
+
         elm = $("#novel_header li.booklist a")
         if(elm.length){
             elm.text("")
             if(elm.hasClass("js-bookmark_setting_button")){ //ブックマーク登録済み
                 if(isCustomHeader){
-                    elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（設定変更）</span></span>')
+                    elm.append(`<i class="fa-solid fa-book-bookmark"></i><span class="title">${text}<br><span style="font-size: 90%;">（設定変更）</span></span>`)
                 }else{
-                    elm.append('<i class="fa-solid fa-book-bookmark"></i><span class="title">ブックマーク<span style="font-size: 90%;">（設定変更）</span></span>')
+                    elm.append(`<i class="fa-solid fa-book-bookmark"></i><span class="title">${text}<span style="font-size: 90%;">（設定変更）</span></span>`)
                 }
             }else if(elm.hasClass("js-add_bookmark")){ //ブックマーク未登録
                 if(isCustomHeader){
-                    elm.append('<i class="fa-solid fa-book"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（登録）</span></span>')
+                    elm.append(`<i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（登録）</span></span>`)
                 }else{
-                    elm.append('<i class="fa-solid fa-book"></i><span class="title">ブックマーク<span style="font-size: 90%;">（登録）</span></span>')
+                    elm.append(`<i class="fa-solid fa-book"></i><span class="title">${text}<span style="font-size: 90%;">（登録）</span></span>`)
                 }
             }
             elm.parent().addClass("booklist")
@@ -164,7 +167,7 @@ function _header(){
             if(isCustomHeader){
                 elm = $("#novel_header li.booklist")
                 elm.find(".button_bookmark.logout").remove()
-                elm.prepend('<a><i class="fa-solid fa-book"></i><span class="title">ブックマーク<br><span style="font-size: 90%;">（要ログイン）</span></span></a>')
+                elm.prepend(`<a><i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（要ログイン）</span></span></a>`)
             }else{
             }
         } else { //ログイン済み（自分の作品）
@@ -173,7 +176,7 @@ function _header(){
             }else{
                 $("#novel_header ul").append(`
                     <li class="booklist">
-                        <span class="button_bookmark logout">ブックマークに追加</span>
+                        <span class="button_bookmark logout">${text}に追加</span>
                     </li>
                 `)
             }
