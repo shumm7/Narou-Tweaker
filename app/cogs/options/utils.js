@@ -63,4 +63,28 @@ export function optionHide(){
             }
         })
     })
+
+    
+    $(".experimental-hide").each(function(){
+        var elm = $(this)
+
+        function change(value){
+            if(value){
+                elm.removeClass("option-hide--hidden")
+            }else{
+                elm.addClass("option-hide--hidden")
+            }
+        }
+            
+        chrome.storage.local.get(["extExperimentalFeatures"], function(data){
+            change(data.extExperimentalFeatures)
+        })
+
+        chrome.storage.local.onChanged.addListener(function(changes){
+            if(changes.extExperimentalFeatures!=undefined){
+                change(changes.extExperimentalFeatures.newValue)
+            }
+        })
+    })
 }
+

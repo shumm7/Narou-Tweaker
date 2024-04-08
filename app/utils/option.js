@@ -12,6 +12,7 @@ export const defaultOption = {
 
     /* Extension */
     extAdvancedSettings: false,
+    extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
     extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins",
 

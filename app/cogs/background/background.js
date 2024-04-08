@@ -13,6 +13,11 @@ chrome.storage.local.onChanged.addListener(function(changes){
             console.log(changes)
         }
     }
+    else if(changes.extAdvancedSettings!=undefined){
+        if(changes.extAdvancedSettings.newValue==false){
+            chrome.storage.local.set({extExperimentalFeatures: false}, function(){})
+        }
+    }
 })
 
 /* Action */
