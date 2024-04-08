@@ -1,6 +1,7 @@
 export function _header(){
     headerIcons()
     changeHeaderScrollMode()
+    addMenuLink()
 }
 
 function changeHeaderScrollMode(){
@@ -55,7 +56,7 @@ function changeHeaderScrollMode(){
     });
 
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(workspaceCustomHeaderMode!=undefined || changes.workspaceCustomHeaderScrollHidden!=undefined){
+        if(changes.workspaceCustomHeaderMode!=undefined || changes.workspaceCustomHeaderScrollHidden!=undefined){
             changeMode(elm)
         }
     })
@@ -331,6 +332,169 @@ function headerIcons(){
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.workspaceCustomHeader!=undefined){
             resetHeader()
+        }
+    })
+}
+
+function addMenuLink(){
+    function getLink(parent, selector, callback){
+        var g = parent.find(selector)
+        if(g.length){
+            var ret = g.clone()
+            if(callback!=undefined){
+                callback(ret)
+            }
+            return ret[0].outerHTML
+        }
+        return ``
+    }
+
+    function getHeadlineType(elm){
+        if(elm.find(".p-icon--star-line").length){
+            return "favorite"
+        }
+        else if(elm.find(".p-icon--pen").length){
+            return "edit"
+        }
+        else if(elm.find(".p-icon--article").length){
+            return "blog"
+        }
+        else if(elm.find(".p-icon--comment-dots-line").length){
+            return "reaction"
+        }
+        else if(elm.find(".p-icon--block").length){
+            return "block-mute"
+        }
+        else if(elm.find(".p-icon--home").length){
+            return "x-home"
+        }
+        else if(elm.find(".p-icon--search").length){
+            return "find"
+        }
+        else if(elm.find(".p-icon--question").length){
+            return "support"
+        }
+    }
+    var parents = $(".p-up-header-pc__nav-item .p-up-header-pc__gmenu-list")
+
+    // Set Wrapper Class
+    parents.append(`<div class="p-up-header-pc__gmenu-column" id="p-up-header-pc__gmenu-column--hidden"></div>`)
+    var parentLeft = parents.find(".p-up-header-pc__gmenu-column:nth-child(1)")
+    var parentMiddle = parents.find(".p-up-header-pc__gmenu-column:nth-child(2)")
+    var parentRight = parents.find(".p-up-header-pc__gmenu-column:nth-child(3)")
+    var parentHidden = parents.find(".p-up-header-pc__gmenu-column#p-up-header-pc__gmenu-column--hidden")
+    parentLeft.prop("id", "p-up-header-pc__gmenu-column--left")
+    parentMiddle.prop("id", "p-up-header-pc__gmenu-column--middle")
+    parentRight.prop("id", "p-up-header-pc__gmenu-column--right")
+
+    // Set Elements
+    parents.find(".p-up-header-pc__gmenu-column").each(function(){
+        var column = $(this)
+        var tag = null
+        column.find(".p-up-header-pc__gmenu-headline, .p-up-header-pc__gmenu-item").each(function(){
+            if($(this).hasClass("p-up-header-pc__gmenu-headline")){
+                if(tag!=null){
+                    $(`.p-up-header-pc__gmenu-column .p-up-header-pc__temporary-class-${tag}`).wrapAll(`<div class="p-up-header-pc__gmenu-list-items ${tag}">`)
+                    $(`.p-up-header-pc__gmenu-column .p-up-header-pc__temporary-class-${tag}`).removeClass(`p-up-header-pc__temporary-class-${tag}`)
+                }
+
+                tag = getHeadlineType($(this))
+                $(this).addClass(`p-up-header-pc__temporary-class-${tag}`)
+            }
+            else if($(this).hasClass("p-up-header-pc__gmenu-item")){
+                $(this).addClass(`p-up-header-pc__temporary-class-${tag}`)
+            }
+        })
+
+        $(`.p-up-header-pc__gmenu-column .p-up-header-pc__temporary-class-${tag}`).wrapAll(`<div class="p-up-header-pc__gmenu-list-items ${tag}">`)
+        $(`.p-up-header-pc__gmenu-column .p-up-header-pc__temporary-class-${tag}`).removeClass(`p-up-header-pc__temporary-class-${tag}`)
+    })
+
+    // User
+    parentHidden.append(`
+        <div class="p-up-header-pc__gmenu-list-items user">
+            <div class="p-up-header-pc__gmenu-headline">
+                <span class="p-icon p-icon--user" aria-hidden="true"></span>ユーザ
+            </div>
+            <div class="p-up-header-pc__gmenu-item">
+                ${getLink($(".p-up-header-pc__nav-item.user"), `a[href="https://syosetu.com/useredit/input/"]`)}
+            </div>
+            <div class="p-up-header-pc__gmenu-item">
+                ${getLink($(".p-up-header-pc__nav-item.user"), `a[href^="https://mypage.syosetu.com/"], a[href^="https://xmypage.syosetu.com/"]`)}
+            </div>
+            <div class="p-up-header-pc__gmenu-item">
+                ${getLink($(".p-up-header-pc__nav-item.user"), `a[href="https://syosetu.com/login/logout/"]`, (elm)=>{
+                    elm.find("span.p-icon").remove()
+                    elm.text(elm.text().trim())
+                })
+            }
+            </div>
+        </div>
+    `)
+
+    // Message
+    parentHidden.append(`
+        <div class="p-up-header-pc__gmenu-list-items message">
+            <div class="p-up-header-pc__gmenu-headline">
+                <span class="p-icon p-icon--envelope" aria-hidden="true"></span>メッセージ
+            </div>
+            <div class="p-up-header-pc__gmenu-item">
+                ${getLink($(".p-up-header-pc__nav-item.message"), `a`, (elm)=>{
+                    elm.find("span.p-icon").remove()
+                    elm.text(elm.text().trim())
+                })}
+            </div>
+        </div>
+    `)
+    
+    // Home
+    parentHidden.append(`
+        <div class="p-up-header-pc__gmenu-list-items home">
+            <div class="p-up-header-pc__gmenu-headline">
+                <span class="p-icon p-icon--home" aria-hidden="true"></span>${$(".p-up-header-pc__nav-item.home a").text().trim().replace("ユーザホーム", "ユーザページ")}
+            </div>
+            <div class="p-up-header-pc__gmenu-item">
+                ${getLink($(".p-up-header-pc__nav-item.home"), `a`, (elm)=>{
+                    elm.find("span.p-icon").remove()
+                    elm.text(elm.text().trim())
+                })}
+            </div>
+        </div>
+    `)
+
+
+    // Setting Menu
+    function resetMenu(){
+        $(".p-up-header-pc__gmenu .p-up-header-pc__gmenu-column .p-up-header-pc__gmenu-list-items").appendTo(".p-up-header-pc__gmenu .p-up-header-pc__gmenu-column#p-up-header-pc__gmenu-column--hidden")
+        chrome.storage.local.get(null, (data) => {
+            $.each(data.workspaceCustomMenu_Left, function(_, key){
+                var elm = $(".p-up-header-pc__gmenu .p-up-header-pc__gmenu-column .p-up-header-pc__gmenu-list-items."+key)
+                if(elm.length){
+                    $("#p-up-header-pc__gmenu-column--left").append(elm)
+                }
+            })
+            
+            $.each(data.workspaceCustomMenu_Middle, function(_, key){
+                var elm = $(".p-up-header-pc__gmenu .p-up-header-pc__gmenu-column .p-up-header-pc__gmenu-list-items."+key)
+                if(elm.length){
+                    $("#p-up-header-pc__gmenu-column--middle").append(elm)
+                }
+            })
+            
+            $.each(data.workspaceCustomMenu_Right, function(_, key){
+                var elm = $(".p-up-header-pc__gmenu .p-up-header-pc__gmenu-column .p-up-header-pc__gmenu-list-items."+key)
+                if(elm.length){
+                    $("#p-up-header-pc__gmenu-column--right").append(elm)
+                }
+            })
+        })
+    }
+    resetMenu()
+
+    /* Storage Listener */
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.workspaceCustomMenu_Left!=undefined || changes.workspaceCustomMenu_Middle!=undefined || changes.workspaceCustomMenu_Right!=undefined){
+            resetMenu()
         }
     })
 }

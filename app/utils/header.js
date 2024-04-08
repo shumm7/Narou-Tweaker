@@ -203,6 +203,53 @@ export const workspaceIconList = {
     }
 }
 
+export const workspaceMenuIconList = {
+    user: {
+        icon: "fa-solid fa-user",
+        text: "ユーザ"
+    },
+    message: {
+        icon: "fa-regular fa-envelope",
+        text: "メッセージ"
+    },
+    home: {
+        icon: "fa-solid fa-house",
+        text: "ユーザホーム"
+    },
+    favorite: {
+        icon: "fa-regular fa-star",
+        text: "お気に入り"
+    },
+    edit: {
+        icon: "fa-solid fa-pen",
+        text: "投稿"
+    },
+    blog: {
+        icon: "fa-regular fa-newspaper",
+        text: "活動報告"
+    },
+    reaction: {
+        icon: "fa-regular fa-comment-dots",
+        text: "リアクション"
+    },
+    "block-mute": {
+        icon: "fa-solid fa-ban",
+        text: "ブロック・ミュート"
+    },
+    "x-home": {
+        icon: "fa-solid fa-house",
+        text: "ホーム↔Xホーム"
+    },
+    find: {
+        icon: "fa-solid fa-magnifying-glass",
+        text: "作品を探す"
+    },
+    support: {
+        icon: "fa-regular fa-circle-question",
+        text: "お困りの方は"
+    }
+}
+
 export function getExceptedIcon(lists, parent){
     var v = []
     $.each(lists, function(_, list){

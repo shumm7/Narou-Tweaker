@@ -37,3 +37,14 @@ li.p-up-header-pc__nav-item {
 li.p-up-header-pc__nav-item.disabled {
     display: none;
 }
+
+/* Menu */
+.p-up-header-pc__gmenu-list-items:not(:first-child) {
+    margin-top: 15px;
+}
+.p-up-header-pc__gmenu-list-items.disabled{
+    display: none;
+}
+.p-up-header-pc__gmenu-column#p-up-header-pc__gmenu-column--hidden {
+    display: none;
+}
