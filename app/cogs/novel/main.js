@@ -21,8 +21,10 @@ chrome.storage.local.get(null, (data) => {
 
         if(checkNovelPageDetail()=="novel"){
             _novel()
-            _tategaki()
         }
+    }
+    if(checkNovelPageDetail()=="novel"){
+        _tategaki()
     }
     
     /* Author Skin */
