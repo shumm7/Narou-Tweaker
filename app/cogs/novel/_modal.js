@@ -91,7 +91,7 @@ function restoreSkinOptions(skins, selected){
 }
 
 /* フォント設定 */
-function restoreFontOptions(fontFamily, fontSize, lineHeight, width){
+function restoreFontOptions(fontFamily, fontSize, lineHeight, width, novelVertical){
     $(".novel-option--font-button.active").removeClass("active")
     $(".novel-option--font-button#"+defaultValue(fontFamily, defaultOption.fontFontFamily)).addClass("active")
 
@@ -105,6 +105,8 @@ function restoreFontOptions(fontFamily, fontSize, lineHeight, width){
 
     var pWidth = defaultValue(width, defaultOption.fontWidth)
     $("#novel-option--page-width-input").val(Number((pWidth * 100).toFixed(1)))
+
+    check("#novel-option--vertical-toggle", novelVertical, false)
 }
 
 function setOptionContentsDisplay(id){
@@ -149,6 +151,12 @@ function setOptionContentsDisplay(id){
                                 <div class='novel-option--font-button-description'>カスタム</div>
                             </div>
                         </div>
+                    <div class='novel-option-subheader'>縦書き</div>
+                        <p style="color: red; font-weight:bold; text-align: center;">※実験中の機能です</p>
+                        <div id="novel-option--vertical" style="padding: 10px 0;">
+                            <input type="checkbox" id="novel-option--vertical-toggle" class="toggle" name="novelVertical">
+                            <label for="novel-option--vertical-toggle" class="toggle">縦書き表示<span style="font-size: 90%">（再読み込みが必要）</span></label>
+                        </div>
                     <div class='novel-option-subheader'>サイズ</div>
                         <div id="novel-option--font-size">
                             <div style="margin: 0 .5em;">+</div>
@@ -176,7 +184,7 @@ function setOptionContentsDisplay(id){
                 </div>
             </div>
         `)
-        restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
+        restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
 
         /* Font Family */
         $(".novel-option--font-button-box").click(function() {
@@ -334,9 +342,9 @@ function setOptionContentsDisplay(id){
 
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
+        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined || changes.novelVertical!=undefined){
             chrome.storage.local.get(null, (data)=>{
-                restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
+                restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
             })
         }
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){

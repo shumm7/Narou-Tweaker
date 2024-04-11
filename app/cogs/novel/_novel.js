@@ -79,6 +79,7 @@ export function _tategaki(){
             var items = $("#novel_vertical_items")
 
             // Elements (Prepend)
+            $("#novel_p").prependTo(items)
             $(".novel_subtitle").prependTo(items)
             $(".novel-chapter").prependTo(items)
             $("#novel_no").prependTo(items)
@@ -86,6 +87,7 @@ export function _tategaki(){
             $(".contents1").prependTo(items)
 
             // Elements (Append)
+            $("#novel_a").appendTo(items)
             $(".novel_bn:last-child()").appendTo(items)
             
             if($('#novel_vertical_items').length){

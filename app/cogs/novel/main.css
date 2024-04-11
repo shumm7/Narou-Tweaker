@@ -555,7 +555,8 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 }
 #novel-option--font-size,
 #novel-option--line-height,
-#novel-option--page-width {
+#novel-option--page-width,
+#novel-option--vertical {
 	display: flex;
 	flex-flow: row;
 	align-items: center;
@@ -789,21 +790,48 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 	width: unset;
 	max-width: unset;
 }
-
+.narou-tweaker.narou-tweaker-vertical .novel-titles#ep-0,
+.narou-tweaker.narou-tweaker-vertical .novel-titles#ep-1 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.narou-tweaker-vertical #container {
+    margin-top: 0;
+}
 .narou-tweaker-vertical .novel_bn a {
     margin: 10px 0;
+}
+.narou-tweaker-vertical #novel_no {
+	-webkit-text-combine: horizontal;
+  	-ms-text-combine-horizontal: all;
+  	text-combine-upright: all;
+}
+.narou-tweaker-vertical #novel_p {
+    margin: 0px 30px 0px 30px;
+    padding: 20px 20px 20px 30px;
+    width: unset;
+    border-bottom: none;
+	border-left: 3px double #999999;
+}
+.narou-tweaker-vertical #novel_a {
+    margin: 0px 40px 0px 30px;
+    padding: 20px 20px 20px 30px;
+    width: unset;
+    border-top: none;
+	border-right: 3px double #999999;
 }
 
 .narou-tweaker-vertical #novel_honbun::-webkit-scrollbar {
     display: none;
 }
 
-.narou-tweaker-vertical .text-combine {
+
+
+.narou-tweaker-vertical .text-combine{
 	-webkit-text-combine: horizontal;
   	-ms-text-combine-horizontal: all;
   	text-combine-upright: all;
 }
-
 .narou-tweaker-vertical .text-sideways {
 	text-orientation: sideways;
 }
