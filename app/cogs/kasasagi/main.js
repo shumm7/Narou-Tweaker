@@ -2,6 +2,10 @@ import {addExclamationIconBalloon} from "../../utils/ui.js"
 import {getNcode, makeGraph} from "./utils.js"
 import { _general } from "./_general.js"
 import { _chapterUnique } from "./_chapter.js"
+import { _dayPV } from "./_dayPV.js"
+import { _dayUnique } from "./_dayUnique.js"
+import { _monthPV } from "./_monthPV.js"
+import { _monthUnique } from "./_monthUnique.js"
 
 var option
 
@@ -92,92 +96,16 @@ chrome.storage.local.get(null, (data) => {
         _chapterUnique()
 
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
-        if($(".novelview_h3").length){
-            if(option.kasasagiCustomStyle){
-                var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(PV\)/)[2]
+        _dayPV()
 
-                $(".novelview_h3").text("日別（PV）")
-                $(".novelview_h3").addClass("subtitle")
-                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-            }
-            _dayPV()
-        }
     }else if(path.match('/access/monthpv/ncode/.*/')!=null){
-        if($(".novelview_h3").length){
-            if(option.kasasagiCustomStyle){
-                var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(PV\)/)[2]
+        _monthPV()
 
-                $(".novelview_h3").text("月別（PV）")
-                $(".novelview_h3").addClass("subtitle")
-                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-            }
-            _monthPV()
-        }
     }else if(path.match('/access/dayunique/ncode/.*/')!=null){
-        if($(".novelview_h3").length){
-            if(option.kasasagiCustomStyle){
-                var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 日別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
+        _dayUnique()
 
-                $(".novelview_h3").text("日別（ユニーク）")
-                $(".novelview_h3").addClass("subtitle")
-                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-
-                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
-                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-                $(".attention").parent().remove();
-            }
-            _dayUnique()
-        }
     }else if(path.match('/access/monthunique/ncode/.*/')!=null){
-        if($(".novelview_h3").length){
-            if(option.kasasagiCustomStyle){
-                var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
-
-                $(".novelview_h3").text("月別（ユニーク）")
-                $(".novelview_h3").addClass("subtitle")
-                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
-
-                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("ユニークは約2日遅れ"));
-                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-                $(".attention").parent().remove();
-            }
-            _monthUnique()
-        }
+        _monthUnique()
+        
     }
 });
-
-/* Day PV */
-function _dayPV(){
-    if(option.kasasagiShowGraph_DayPV){
-        $("form").after('<canvas class="access-chart" id="day_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("day_pv", option.kasasagiGraphType_DayPV, "日別（PV）")
-    }
-}
-
-/* Day Unique */
-function _dayUnique(){
-    if(option.kasasagiShowGraph_DayUnique){
-        $("form").after('<canvas class="access-chart" id="day_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("day_unique", option.kasasagiGraphType_DayUnique, "日別（ユニーク）")
-    }
-}
-
-/* Month PV */
-function _monthPV(){
-    if(option.kasasagiShowGraph_DayPV){
-        $("#access_all").after('<canvas class="access-chart" id="month_pv" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("month_pv", option.kasasagiGraphType_MonthPV, "月別（PV）")
-    }
-}
-
-/* Month Unique */
-function _monthUnique(){
-    if(option.kasasagiShowGraph_DayUnique){
-        $("#access_all").after('<canvas class="access-chart" id="month_unique" style="width: 100%; margin-bottom:10px;"></canvas>')
-        makeGraph("month_unique", option.kasasagiGraphType_MonthUnique, "月別（ユニーク）")
-    }
-}
