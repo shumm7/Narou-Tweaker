@@ -633,6 +633,7 @@
 								</span>
 							</p>
 						</div>
+
 						<!--文法-->
 						<div class="contents-wide">
 							<div class="contents-option-head">
@@ -659,7 +660,7 @@
 								<div class="contents-item--heading">記号</div>
 							</div>
 							<div class="contents-wide-column">
-								<!--中点の三点リーダー-->
+								<!--三点リーダー-->
 								<div class="contents-option">
 									<div class="contents-option-head">
 										<div class="contents-item--heading">三点リーダー</div>
@@ -673,7 +674,7 @@
 										<label for="correctionNormalizeEllipses" class="toggle"></label>
 									</div>
 								</div>
-								<!--罫線のダッシュ-->
+								<!--ダッシュ-->
 								<div class="contents-option">
 									<div class="contents-option-head">
 										<div class="contents-item--heading">ダッシュ</div>
@@ -684,6 +685,19 @@
 									<div class="contents-option-content">
 										<input type="checkbox" id="correctionNormalizeDash" class="options toggle">
 										<label for="correctionNormalizeDash" class="toggle"></label>
+									</div>
+								</div>
+								<!--感嘆符-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">感嘆符</div>
+										<div class="contents-item--description">感嘆符を個数に応じて適切なものに変換します。
+											<br>「！？」→「⁉️」 「！！！」→「!!!」
+										</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionNormalizeExclamation" class="options toggle">
+										<label for="correctionNormalizeExclamation" class="toggle"></label>
 									</div>
 								</div>
 								<!--句読点の連続-->
@@ -741,6 +755,83 @@
 							</div>
 						</div>
 
+						<!--文字の向き-->
+						<div class="contents-wide option-hide" data-for="novelVertical" data="true">
+							<div class="contents-option-head">
+								<div class="contents-item--heading">文字の向き（縦書きのみ）</div>
+								<div class="contents-item--description">縦書き時に一部の文字列を回転して表示します。</div>
+							</div>
+							<div class="contents-wide-column">
+								
+								<!--半角単語（縦中横）-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">半角単語（縦中横）</div>
+										<div class="contents-item--description">設定した桁数までの半角英数字を横方向に表示します。<br>0で無効化します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input class="options" type="number" id="correctionVerticalLayout_CombineWord" min="0" max="10" style="margin-right:.5em;">文字以下
+									</div>
+								</div>
+
+								<!--半角数字（縦中横）-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">半角数字（縦中横）</div>
+										<div class="contents-item--description">設定した桁数までの半角数字を横方向に表示します。<br>0で無効化します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input class="options" type="number" id="correctionVerticalLayout_CombineNumber" min="0" max="10" style="margin-right:.5em;">文字以下
+									</div>
+								</div>
+
+								<!--半角感嘆符（縦中横）-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">半角感嘆符（縦中横）</div>
+										<div class="contents-item--description">設定した桁数までの半角感嘆符を横方向に表示します。<br>0で無効化します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input class="options" type="number" id="correctionVerticalLayout_CombineExclamation" min="0" max="10" style="margin-right:.5em;">文字以下
+									</div>
+								</div>
+
+								<!--単語中の数字を無視する-->
+								<div class="contents-option option-hide" data-for="correctionVerticalLayout_CombineNumber" data="0" mode="hide">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">単語中の数字を無視する</div>
+										<div class="contents-item--description">前後に半角英字のある数字を、縦中横処理から無視します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input type="checkbox" id="correctionVerticalLayout_IgnoreCombineNumberInWord" class="options toggle">
+										<label for="correctionVerticalLayout_IgnoreCombineNumberInWord" class="toggle"></label>
+									</div>
+								</div>
+
+								<!--全角単語（横向き）-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">全角単語（横向き）</div>
+										<div class="contents-item--description">設定した桁数以上の全角英数字を縦方向に表示します。<br>0で無効化します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input class="options" type="number" id="correctionVerticalLayout_SidewayWord" min="0" max="20" style="margin-right:.5em;">文字以上
+									</div>
+								</div>
+
+								<!--全角感嘆符（横向き）-->
+								<div class="contents-option">
+									<div class="contents-option-head">
+										<div class="contents-item--heading">感嘆符（横向き）</div>
+										<div class="contents-item--description">設定した桁数以上の全角感嘆符を縦方向に表示します。<br>0で無効化します。</div>
+									</div>
+									<div class="contents-option-content">
+										<input class="options" type="number" id="correctionVerticalLayout_SidewayExclamation" min="0" max="20" style="margin-right:.5em;">文字以上
+									</div>
+								</div>
+
+							</div>
+						</div>
 						
 						<!--その他-->
 						<div class="contents-wide">

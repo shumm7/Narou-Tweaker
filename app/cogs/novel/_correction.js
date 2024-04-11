@@ -1,4 +1,4 @@
-import { check } from "../../utils/misc.js"
+import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption } from "../../utils/option.js";
 import { escapeHtml } from "../../utils/text.js";
 import { checkNovelPageDetail } from "./utils.js";
@@ -33,11 +33,16 @@ export function correction(){
     if($("#novel_honbun").length && checkNovelPageDetail()=="novel"){
         chrome.storage.local.get(null, (data) => {
             resetCorrection()
+
+            // 記号
             if(data.correctionNormalizeEllipses){
                 correctionNormalizeEllipses()
             }
             if(data.correctionNormalizeDash){
                 correctionNormalizeDash()
+            }
+            if(data.correctionNormalizeExclamation){
+                correctionNormalizeExclamation()
             }
             if(data.correctionRepeatedSymbols){
                 correctionRepeatedSymbols()
@@ -52,21 +57,41 @@ export function correction(){
                 correctionOddEllipsesAndDash()
             }
 
-            
+            // 構文
             if(data.correctionIndent){
                 correctionIndent()
             }
 
+            // 置換
             if(data.correctionReplacePatterns.length>0){
                 correctionReplaceFromPatterns(data.correctionReplacePatterns)
             }
 
+            // 縦書き設定
+            if(data.novelVertical && data.correctionVerticalLayout_CombineWord){
+                verticalLayout_CombineWord(data.correctionVerticalLayout_CombineWord)
+            }
+            if(data.novelVertical && data.correctionVerticalLayout_CombineNumber){
+                verticalLayout_CombineNumber(data.correctionVerticalLayout_CombineNumber, data.correctionVerticalLayout_IgnoreCombineNumberInWord)
+            }
+            if(data.novelVertical && data.correctionVerticalLayout_CombineExclamation){
+                verticalLayout_CombineExclamation(data.correctionVerticalLayout_CombineExclamation)
+            }
+            if(data.novelVertical && data.correctionVerticalLayout_SidewayWord){
+                verticalLayout_SidewayWord(data.correctionVerticalLayout_SidewayWord)
+            }
+            if(data.novelVertical && data.correctionVerticalLayout_SidewayExclamation){
+                verticalLayout_SidewayExclamation(data.correctionVerticalLayout_SidewayExclamation)
+            }
+
+            // その他
             if(!data.correctionShowIllustration){
                 removeIllustration()
             }
             if(data.correctionRemoveIllustrationLink){
                 removeIllustrationLink()
             }
+
         })
     }
 }
@@ -76,6 +101,7 @@ export function restoreCorrectionMode(){
         check("#novel-option--correction-indent", data.correctionIndent, defaultOption.correctionIndent)
         check("#novel-option--correction-normalize-ellipses", data.correctionNormalizeEllipses, defaultOption.correctionNormalizeEllipses)
         check("#novel-option--correction-normalize-dash", data.correctionNormalizeDash, defaultOption.correctionNormalizeDash)
+        check("#novel-option--correction-normalize-exclamation", data.correctionNormalizeExclamation, defaultOption.correctionNormalizeExclamation)
         check("#novel-option--correction-repeated-symbols", data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)
         check("#novel-option--correction-period-with-brackets", data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)
         check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
@@ -150,7 +176,37 @@ function replaceText(_elem, regexp, replace, isReplaceAll) {
             });
             w.remove();
         }else{
-            replaceText(w);
+            replaceText(w, regexp, replace, isReplaceAll);
+        }
+    });
+}
+
+function wrapTextWithTag(_elem, regexp, tag, callback, insideTag){
+    function wrapHtml(str){
+        var repl = str.replace(regexp, function(rpl){
+            if(callback!=undefined){
+                return callback(rpl, tag)
+            }else{
+                var t = $(tag)
+                t.text(rpl)
+                return t[0].outerHTML
+            }
+        })
+        return repl
+    }
+
+    insideTag = defaultValue(insideTag, true)
+    var nodes = $(_elem)[0].childNodes;
+    $.each(nodes, function(_, w) {
+        if(w.innerHTML==undefined){
+            $.each($.parseHTML(wrapHtml(w.data)), function(_, x) {
+                w.before(x);
+            });
+            w.remove();
+        }else{
+            if(insideTag){
+                wrapTextWithTag(w, regexp, tag, callback, insideTag)
+            }
         }
     });
 }
@@ -200,6 +256,44 @@ function correctionNormalizeDash(){
                 })
             )
         }
+    })
+}
+
+function correctionNormalizeExclamation(){
+    /* 感嘆符 */
+    /*
+    単体の感嘆符：全角
+    2つ連続する感嘆符：‼️、⁉️、⁇、⁈
+    3つ以上連続する感嘆符：半角
+    */
+    $("#novel_honbun > p.replaced").each(function(){
+        function replaceExclamation(s){
+            if(s.length==1){
+                if(s=="！" || s=="？" || s=="‼" || s=="⁇" || s=="⁉" || s=="⁈"){
+                    return s
+                }else if(s=="!"){
+                    return "！"
+                }else if(s=="?"){
+                    return "？"
+                }
+            }else if(s.length==2){
+                if(s=="!!" || s=="!！" || s=="！!" || s=="！！"){
+                    return "‼"
+                }else if(s=="??" || s=="?？" || s=="？?" || s=="？？"){
+                    return "⁇"
+                }else if(s=="!?" || s=="!？" || s=="！?" || s=="！？"){
+                    return "⁉"
+                }else if(s=="?!" || s=="?！" || s=="？!" || s=="？！"){
+                    return "⁈"
+                }
+            }else{
+                return s.replace(/！/g, "!").replace(/？/g, "?").replace(/‼/g, "!!").replace(/⁇/g, "??").replace(/⁉/g, "!?").replace(/⁈/g, "?!")
+            }
+        }
+
+        $("#novel_honbun > p.replaced").each(function(){
+            replaceText(this, new RegExp(`[${exclamation}]+`, "g"), replaceExclamation)
+        })
     })
 }
 
@@ -259,13 +353,71 @@ function correctionOddEllipsesAndDash(){
 }
 
 function removeIllustration(){
+    /* 挿絵の非表示 */
     $("#novel_honbun > p.replaced."+className.img).css("display", "none")
 }
 
 function removeIllustrationLink(){
+    /* 挿絵のリンク無効化 */
     var link = $("#novel_honbun > p.replaced."+className.img + " a")
     link.prop("href", "javascript:void(0)")
     link.prop("target", "")
+}
+
+function verticalLayout_CombineWord(max){
+    /* 縦書き表示時の半角単語の縦中横 */
+    const tag = "<span class='text-combine'>"
+    var callback = (rpl, tag)=>{
+        if(rpl.match(/^\d+$/)){return rpl}
+        var t = $(tag)
+        t.text(rpl)
+        return t[0].outerHTML
+    }
+
+    $("#novel_honbun > p.replaced").each(function(){
+        wrapTextWithTag($(this), new RegExp(`(?<![a-zA-Z\\d\.\,])[a-zA-Z\\d\.\,]{1,${max}}(?![a-zA-Z\\d\.\,])`, "g"), tag, callback)
+    })
+}
+
+function verticalLayout_CombineNumber(max, ignoreCombineInWord){
+    /* 縦書き表示時の数字の縦中横 */
+    const tag = "<span class='text-combine'>"
+
+    $("#novel_honbun > p.replaced").each(function(){
+        if(ignoreCombineInWord){
+            wrapTextWithTag($(this), new RegExp(`(?<![a-zA-Z\\d\\.\\,])\\d{1,${max}}(?![a-zA-Z\\d\\.\\,])`, "g"), tag)
+        }else{
+            wrapTextWithTag($(this), new RegExp(`(?<!\\d)\\d{1,${max}}(?!\\d)`, "g"), tag)
+        }
+    })
+}
+
+function verticalLayout_CombineExclamation(max){
+    /* 縦書き表示時の数字の縦中横 */
+    const tag = "<span class='text-combine'>"
+
+    $("#novel_honbun > p.replaced").each(function(){
+        wrapTextWithTag($(this), new RegExp(`(?<![!?])[!?]{1,${max}}(?![!?])`, "g"), tag)
+    })
+}
+
+function verticalLayout_SidewayWord(min){
+    /* 縦書き表示時の全角英数字の横向き表示 */
+    const tag = "<span class='text-sideways'>"
+
+    $("#novel_honbun > p.replaced").each(function(){
+        wrapTextWithTag($(this), new RegExp(`[ａ-ｚＡ-Ｚ０-９．，\\s]{${min},}`, "g"), tag)
+    })
+}
+
+
+function verticalLayout_SidewayExclamation(min){
+    /* 縦書き表示時の感嘆符の横向き表示 */
+    const tag = "<span class='text-sideways'>"
+
+    $("#novel_honbun > p.replaced").each(function(){
+        wrapTextWithTag($(this), new RegExp(`[！？‼⁇⁉⁈]{${min},}`, "g"), tag)
+    })
 }
 
 

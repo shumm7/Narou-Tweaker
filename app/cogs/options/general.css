@@ -36,7 +36,8 @@ html::-webkit-scrollbar {
 .textfield label {
 	font-size: 90%;
 }
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
 	padding: .3em;
 	padding-left: .5em;
 	font-size: inherit;

@@ -106,7 +106,7 @@ function restoreValues(data, ignore){
         if(tagName == "input" && type=="checkbox"){ // Toggle
           check("#" + elm.prop("id"), value, defaultOption[name])
         }
-        if(tagName == "input" && type=="text"){ // Input Text
+        if(tagName == "input" && (type=="text" || type=="number")){ // Input Text
             elm.val(defaultValue(value, defaultOption[name]))
         }
         else if(tagName=="select" || tagName=="textarea"){ // DropDown / TextArea
@@ -158,6 +158,28 @@ export function restoreOptions(){
             value[name] = $(this).val()
         }else if(tagName=="input" && type=="text"){
             value[name] = $(this).val()
+        }else if(tagName=="input" && type=="number"){
+            var min = parseFloat($(this).prop("min"))
+            var max = parseFloat($(this).prop("max"))
+            var v = parseFloat($(this).val())
+            if(isNaN(v)){
+                v = 0
+                $(this).val(v)
+            }
+            if(!isNaN(min)){
+                if(min>v){
+                    v = min
+                    $(this).val(v)
+                }
+            }
+            if(!isNaN(max)){
+                if(max<v){
+                    v = max
+                    $(this).val(v)
+                }
+            }
+
+            value[name] = v
         }
     
         if(value[name]!=undefined){

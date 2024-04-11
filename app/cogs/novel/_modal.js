@@ -498,6 +498,10 @@ function setOptionContentsCorrection(id){
                     <label for="novel-option--correction-normalize-dash" class="toggle">ダッシュを修正（――）</label>
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
+                    <input type="checkbox" id="novel-option--correction-normalize-exclamation" class="correction_mode toggle" name="correctionNormalizeExclamation">
+                    <label for="novel-option--correction-normalize-exclamation" class="toggle">感嘆符を修正（！？）</label>
+                </div>
+                <div class="novel-option--toggle novel-option--correction-mode">
                     <input type="checkbox" id="novel-option--correction-repeated-symbols" class="correction_mode toggle" name="correctionRepeatedSymbols">
                     <label for="novel-option--correction-repeated-symbols" class="toggle">句読点の連続（、、）</label>
                 </div>
@@ -542,9 +546,7 @@ function setOptionContentsCorrection(id){
         var mode = {}
         mode[$(this).prop("name")] = $(this).prop("checked")
 
-        chrome.storage.local.set(mode, function(){
-            correction()
-        })
+        chrome.storage.local.set(mode, function(){})
     })
 
     /* Replacement */
@@ -560,13 +562,20 @@ function setOptionContentsCorrection(id){
         if(changes.correctionIndent!=undefined ||
             changes.correctionNormalizeEllipses!=undefined ||
             changes.correctionNormalizeDash!=undefined ||
+            changes.correctionNormalizeExclamation!=undefined ||
             changes.correctionRepeatedSymbols!=undefined ||
             changes.correctionPeriodWithBrackets!=undefined ||
             changes.correctionNoSpaceExclamation!=undefined ||
             changes.correctionOddEllipsesAndDash!=undefined ||
             changes.correctionReplacePatterns!=undefined  ||
             changes.correctionShowIllustration!=undefined ||
-            changes.correctionRemoveIllustrationLink!=undefined 
+            changes.correctionRemoveIllustrationLink!=undefined ||
+            changes.correctionVerticalLayout_CombineWord!=undefined ||
+            changes.correctionVerticalLayout_CombineNumber!=undefined ||
+            changes.correctionVerticalLayout_IgnoreCombineNumberInWord!=undefined ||
+            changes.correctionVerticalLayout_CombineExclamation!=undefined ||
+            changes.correctionVerticalLayout_SidewayWord!=undefined ||
+            changes.correctionVerticalLayout_SidewayExclamation!=undefined
         ){
             restoreCorrectionMode()
             restoreReplacePattern()

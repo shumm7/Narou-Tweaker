@@ -1,3 +1,4 @@
+import { correction } from "../cogs/novel/_correction.js"
 import { defaultValue, getExtensionVersion } from "./misc.js"
 
 export const ignoreOptions = [
@@ -98,6 +99,7 @@ export const defaultOption = {
     correctionIndent: false,
     correctionNormalizeEllipses: false,
     correctionNormalizeDash: false,
+    correctionNormalizeExclamation: false,
     correctionRepeatedSymbols: false,
     correctionPeriodWithBrackets: false,
     correctionNoSpaceExclamation: false,
@@ -105,7 +107,12 @@ export const defaultOption = {
     correctionReplacePatterns: [],
     correctionShowIllustration: true,
     correctionRemoveIllustrationLink: false,
+    correctionVerticalLayout_CombineWord: 0,
     correctionVerticalLayout_CombineNumber: 2,
+    correctionVerticalLayout_CombineExclamation: 3,
+    correctionVerticalLayout_IgnoreCombineNumberInWord: true,
+    correctionVerticalLayout_SidewayWord: 0,
+    correctionVerticalLayout_SidewayExclamation: 0,
 }
 
 export const localSkins = [
