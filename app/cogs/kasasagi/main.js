@@ -7,13 +7,10 @@ import { _dayUnique } from "./_dayUnique.js"
 import { _monthPV } from "./_monthPV.js"
 import { _monthUnique } from "./_monthUnique.js"
 
-var option
-
-chrome.storage.local.get(null, (data) => {
+chrome.storage.local.get(null, (option) => {
     var path = location.pathname;
     const ncode = getNcode();
     if(ncode==null){return}
-    option = data
 
     var r18 = false
     var novelLink = $(`.novelview_menu li a[href$='.syosetu.com/${ncode}/']`)
@@ -91,21 +88,15 @@ chrome.storage.local.get(null, (data) => {
     /* Switch */
     if(path.match('/access/top/ncode/.*/')!=null){
         _general(r18)
-
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
         _chapterUnique()
-
     }else if(path.match('/access/daypv/ncode/.*/')!=null){
         _dayPV()
-
     }else if(path.match('/access/monthpv/ncode/.*/')!=null){
         _monthPV()
-
     }else if(path.match('/access/dayunique/ncode/.*/')!=null){
         _dayUnique()
-
     }else if(path.match('/access/monthunique/ncode/.*/')!=null){
         _monthUnique()
-        
     }
 });
