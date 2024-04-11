@@ -266,34 +266,32 @@ function correctionNormalizeExclamation(){
     2つ連続する感嘆符：‼️、⁉️、⁇、⁈
     3つ以上連続する感嘆符：半角
     */
-    $("#novel_honbun > p.replaced").each(function(){
-        function replaceExclamation(s){
-            if(s.length==1){
-                if(s=="！" || s=="？" || s=="‼" || s=="⁇" || s=="⁉" || s=="⁈"){
-                    return s
-                }else if(s=="!"){
-                    return "！"
-                }else if(s=="?"){
-                    return "？"
-                }
-            }else if(s.length==2){
-                if(s=="!!" || s=="!！" || s=="！!" || s=="！！"){
-                    return "‼"
-                }else if(s=="??" || s=="?？" || s=="？?" || s=="？？"){
-                    return "⁇"
-                }else if(s=="!?" || s=="!？" || s=="！?" || s=="！？"){
-                    return "⁉"
-                }else if(s=="?!" || s=="?！" || s=="？!" || s=="？！"){
-                    return "⁈"
-                }
-            }else{
-                return s.replace(/！/g, "!").replace(/？/g, "?").replace(/‼/g, "!!").replace(/⁇/g, "??").replace(/⁉/g, "!?").replace(/⁈/g, "?!")
-            }
-        }
+   function replaceExclamation(s){
+       if(s.length==1){
+           if(s=="！" || s=="？" || s=="‼" || s=="⁇" || s=="⁉" || s=="⁈"){
+               return s
+           }else if(s=="!"){
+               return "！"
+           }else if(s=="?"){
+               return "？"
+           }
+       }else if(s.length==2){
+           if(s=="!!" || s=="!！" || s=="！!" || s=="！！"){
+               return "‼"
+           }else if(s=="??" || s=="?？" || s=="？?" || s=="？？"){
+               return "⁇"
+           }else if(s=="!?" || s=="!？" || s=="！?" || s=="！？"){
+               return "⁉"
+           }else if(s=="?!" || s=="?！" || s=="？!" || s=="？！"){
+               return "⁈"
+           }
+       }else{
+           return s.replace(/！/g, "!").replace(/？/g, "?").replace(/‼/g, "!!").replace(/⁇/g, "??").replace(/⁉/g, "!?").replace(/⁈/g, "?!")
+       }
+   }
 
-        $("#novel_honbun > p.replaced").each(function(){
-            replaceText(this, new RegExp(`[${exclamation}]+`, "g"), replaceExclamation)
-        })
+    $("#novel_honbun > p.replaced").each(function(){
+        replaceText(this, new RegExp(`[${exclamation}]+`, "g"), replaceExclamation, true)
     })
 }
 
