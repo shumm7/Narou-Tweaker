@@ -3,6 +3,7 @@ import { checkNovelPageDetail } from "./utils.js";
 import { _authorSkin } from "./_skin.js";
 import { _novel } from "./_novel.js";
 import { _optionModal } from "./_modal.js";
+import { _tategaki } from "./_vertical.js";
 
 chrome.storage.local.get(null, (data) => {
     /* Header */
@@ -21,6 +22,7 @@ chrome.storage.local.get(null, (data) => {
 
         if(checkNovelPageDetail()=="novel"){
             _novel()
+            _tategaki()
         }
     }
     

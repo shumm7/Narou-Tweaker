@@ -31,8 +31,8 @@
         "libs/qrcodejs/qrcode.min.js",
         "libs/font-awesome/js/brands.min.js",
         "libs/font-awesome/js/fontawesome.min.js",
-        "libs/GSAP/gsap.min.js",
-        "libs/GSAP/ScrollTrigger.min.js",
+        "libs/GSAP/dist/gsap.min.js",
+        "libs/GSAP/dist/ScrollTrigger.min.js",
         "loader/novel.js"
       ],
       "css": [
@@ -119,6 +119,7 @@
         "cogs/novel/main.js",
         "cogs/novel/_header.js",
         "cogs/novel/_novel.js",
+        "cogs/novel/_vertical.js",
         "cogs/novel/_modal.js",
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
