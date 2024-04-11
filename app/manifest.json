@@ -31,7 +31,7 @@
         "libs/qrcodejs/qrcode.min.js",
         "libs/font-awesome/js/brands.min.js",
         "libs/font-awesome/js/fontawesome.min.js",
-        "cogs/novel/loader.js"
+        "loader/novel.js"
       ],
       "css": [
         "libs/font-awesome/css/all.css",
@@ -62,7 +62,7 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
-        "cogs/workspace/loader.js"
+        "loader/workspace.js"
       ],
       "css": [
         "libs/font-awesome/css/all.css",
@@ -78,7 +78,7 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
-        "cogs/mypage/loader.js"
+        "loader/mypage.js"
       ],
       "css": [
         "common.css",
@@ -95,7 +95,7 @@
         "libs/jquery-3.7.1.min.js",
         "libs/chart.min.js",
         "libs/jquery-nstslider/dist/jquery.nstSlider.min.js",
-        "cogs/kasasagi/loader.js"
+        "loader/kasasagi.js"
       ],
       "css": [
         "libs/font-awesome/css/all.css",
