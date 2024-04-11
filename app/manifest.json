@@ -38,7 +38,6 @@
       "css": [
         "libs/font-awesome/css/all.css",
         "common.css",
-        "cogs/novel/vertical.css",
         "cogs/novel/main.css"
       ],
       "matches": [
@@ -119,7 +118,6 @@
         "cogs/novel/main.js",
         "cogs/novel/_header.js",
         "cogs/novel/_novel.js",
-        "cogs/novel/_vertical.js",
         "cogs/novel/_modal.js",
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
