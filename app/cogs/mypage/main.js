@@ -3,7 +3,6 @@ import { _general } from "./_general.js";
 import { _profile } from "./_profile.js";
 
 var path = location.pathname;
-
 if($(".p-userheader__tab").length){
     /* General */
     _general()

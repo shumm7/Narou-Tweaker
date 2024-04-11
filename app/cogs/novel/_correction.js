@@ -1,4 +1,4 @@
-import { check, defaultValue } from "../../utils/misc.js"
+import { check } from "../../utils/misc.js"
 import { defaultOption } from "../../utils/option.js";
 import { escapeHtml } from "../../utils/text.js";
 import { checkNovelPageDetail } from "./utils.js";

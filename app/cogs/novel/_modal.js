@@ -1,11 +1,80 @@
-import { check, defaultValue } from "../../utils/misc.js"
-import { localFont, localSkins, defaultOption, replacePattern } from "../../utils/option.js";
-import { formatSkinData, generateNoDuplicateName } from "../../utils/skin.js";
-import { escapeHtml, getDatetimeString } from "../../utils/text.js";
+import { check, defaultValue } from "/utils/misc.js"
+import { localFont, localSkins, defaultOption, replacePattern } from "/utils/option.js";
+import { formatSkinData, generateNoDuplicateName } from "/utils/skin.js";
+import { escapeHtml, getDatetimeString } from "/utils/text.js";
 import { correction, restoreCorrectionMode } from "./_correction.js";
 import { getNcode } from "./utils.js";
 
-/* Option */
+export function _optionModal(){
+    if(!$("#novel_header").length){return}
+
+    /* Option Modal */
+    $("#novel_header").after("<aside id='novel-option'></aside>")
+    $("#novel-option").before("<div id='novel-option-background'></div>")
+    $("#novel-option").append("<div id='novel-option--header'></div>")
+    $("#novel-option").append("<div id='novel-option--contents'></div>")
+    
+    $("#novel-option-background").on("click", ()=>{
+        if($("#novel-option").hasClass("show")){
+            $("#novel-option").removeClass("show")
+        }else{
+            $("#novel-option").addClass("show")
+        }
+        if($("#novel-option-background").hasClass("show")){
+            $("#novel-option-background").removeClass("show")
+        }else{
+            $("#novel-option-background").addClass("show")
+        }
+    })
+
+    /* Modal Header */
+    $("#novel-option--header").append("<ul></ul>")
+    function addTab(index, title){
+        $("#novel-option--header ul").append("<li class='novel-option--header-tab novel-option-tab-"+index+"'><button type='button'><span class='novel-option--header-tab'>"+title+"</span></button></li>")
+        $("#novel-option--contents").append("<div class='novel-option--content novel-option-tab-"+index+"'></div>")
+        $(".novel-option--header-tab.novel-option-tab-"+index+" button").on("click", ()=>{
+            chrome.storage.local.set({"novelOptionModalSelected": index}, function(){
+                $("#novel-option .novel-option--header-tab").removeClass("active")
+                $("#novel-option .novel-option--content").removeClass("active")
+                $("#novel-option .novel-option-tab-" + index).addClass("active")
+            })
+        })
+    }
+
+    addTab(0, "表示")
+    setOptionContentsDisplay(0)
+
+    addTab(1, "文章校正")
+    setOptionContentsCorrection(1)
+
+    //addTab(2, "統計")
+    
+    if($(".novelrankingtag a:has(img[alt='Narou Tweaker 作者スキン'])").length){
+        addTab(99, "作者スキン")
+        setOptionContentsAuthorSkin(99)
+    }
+    
+    const scrollElement = document.querySelector("#novel-option--contents");
+    if(scrollElement!=null){
+        scrollElement.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            scrollElement.scrollTop += e.deltaY;
+        });
+    }
+
+    chrome.storage.local.get(["novelOptionModalSelected"], function(data){
+        var tab = $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, defaultOption.novelOptionModalSelected))
+        if(tab.length){
+            tab.addClass("active")
+        }else{
+            chrome.storage.local.set({novelOptionModalSelected: 0}, function(){
+                $("#novel-option .novel-option-tab-0").addClass("active")
+            })
+        }
+    })
+
+}
+
 /* スキン設定のドロップダウンを設定 */
 function restoreSkinOptions(skins, selected){
     skins = localSkins.concat(defaultValue(skins, defaultOption.skins))
@@ -21,7 +90,7 @@ function restoreSkinOptions(skins, selected){
     $("#novel-option--skin-description").text(defaultValue(skins[selected], {}).description)
 }
 
-/* フォント設定の値を設定 */
+/* フォント設定 */
 function restoreFontOptions(fontFamily, fontSize, lineHeight, width){
     $(".novel-option--font-button.active").removeClass("active")
     $(".novel-option--font-button#"+defaultValue(fontFamily, defaultOption.fontFontFamily)).addClass("active")
@@ -38,7 +107,7 @@ function restoreFontOptions(fontFamily, fontSize, lineHeight, width){
     $("#novel-option--page-width-input").val(Number((pWidth * 100).toFixed(1)))
 }
 
-export function setOptionContentsDisplay(id){
+function setOptionContentsDisplay(id){
     chrome.storage.local.get(null, (data) => {
         var outer = $(".novel-option--content.novel-option-tab-"+id)
 
@@ -273,6 +342,7 @@ export function setOptionContentsDisplay(id){
     })
 }
 
+/* 文章校正 */
 function restoreReplacePattern(){
     chrome.storage.local.get(["correctionReplacePatterns"], function(data){
         var elementsAmount = $(".novel-option--correction-replace--pattern-box").length
@@ -398,7 +468,7 @@ function restoreReplacePattern(){
     })
 }
 
-export function setOptionContentsCorrection(id){
+function setOptionContentsCorrection(id){
     var outer = $(".novel-option--content.novel-option-tab-"+id)
 
     outer.append(`
@@ -501,7 +571,7 @@ export function setOptionContentsCorrection(id){
     
 }
 
-export function setOptionContentsAuthorSkin(id){
+function setOptionContentsAuthorSkin(id){
     var outer = $(".novel-option--content.novel-option-tab-"+id)
 
     /* Author Skin */
