@@ -126,7 +126,8 @@
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",
         "cogs/kasasagi/main.js",
-        "cogs/kasasagi/utils.js"
+        "cogs/kasasagi/utils.js",
+        "cogs/kasasagi/_chapter.js"
       ],
       "matches": [
         "https://syosetu.com/*",
