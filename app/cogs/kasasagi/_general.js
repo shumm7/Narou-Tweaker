@@ -124,6 +124,58 @@ function total(){
     })
 }
 
+function api(r18){
+    
+    chrome.storage.local.get(null, (option)=>{
+        if (option.kasasagiShowTable_API){
+            const ncode = getNcode()
+            
+            $("#access_all").after("<div id='novel_detail'></div>")
+            $("#novel_detail").append("<p class='novelview_h3'>作品データ</p>")
+            if(option.kasasagiCustomStyle){
+                $("#novel_detail .novelview_h3").addClass("subtitle")
+                $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
+                $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+            }
+            $("#novel_detail").append("<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div>")
+            $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
+            $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
+
+            var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
+            if(r18){
+                url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
+            }
+
+            chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
+            if(response){
+                if(response.success && response.action=="fetch"){
+                    var data = response.result[1]
+                    if(data!=undefined){
+                        $(".loading-api").remove()
+
+                        /* Info */
+                        _tableApi(ncode, data, r18)
+
+                        /* Export Button */
+                        if(option.kasasagiExportButton){
+                            _buttonApi(ncode, data)
+                        }
+
+
+                    }else{
+                        $(".loading-api").text("情報の取得に失敗しました。")
+                    }
+                }else{
+                    $(".loading-api").text("情報の取得に失敗しました。")
+                }
+                return true;
+            }
+            });
+        }
+    })
+}
+
+
 function _buttonToday(today_total, yesterday_total, today_pv, yesterday_pv, today_pv_sum, yesterday_pv_sum){
     $("#today_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
         $("#export-general-day").on("click", function(){
@@ -340,57 +392,6 @@ function _graphTotal(week, week_pv, graphType){
     generateTotalGraph()
 }
 
-
-function api(r18){
-    
-    chrome.storage.local.get(null, (option)=>{
-        if (option.kasasagiShowTable_API){
-            const ncode = getNcode()
-            
-            $("#access_all").after("<div id='novel_detail'></div>")
-            $("#novel_detail").append("<p class='novelview_h3'>作品データ</p>")
-            if(option.kasasagiCustomStyle){
-                $("#novel_detail .novelview_h3").addClass("subtitle")
-                $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
-                $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
-            }
-            $("#novel_detail").append("<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div>")
-            $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
-            $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
-
-            var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
-            if(r18){
-                url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
-            }
-
-            chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
-            if(response){
-                if(response.success && response.action=="fetch"){
-                    var data = response.result[1]
-                    if(data!=undefined){
-                        $(".loading-api").remove()
-
-                        /* Info */
-                        _tableApi(ncode, data, r18)
-
-                        /* Export Button */
-                        if(option.kasasagiExportButton){
-                            _buttonApi(ncode, data)
-                        }
-
-
-                    }else{
-                        $(".loading-api").text("情報の取得に失敗しました。")
-                    }
-                }else{
-                    $(".loading-api").text("情報の取得に失敗しました。")
-                }
-                return true;
-            }
-            });
-        }
-    })
-}
 
 function _tableApi(ncode, d, r18){
     $("#novel_detail .novel_info").append("<table class='access-table'><tbody></tbody></table>")

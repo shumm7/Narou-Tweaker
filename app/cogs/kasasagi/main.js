@@ -86,7 +86,7 @@ chrome.storage.local.get(null, (data) => {
 
     /* Switch */
     if(path.match('/access/top/ncode/.*/')!=null){
-        _general()
+        _general(r18)
 
     }else if(path.match('/access/chapter/ncode/.*/')!=null){
         _chapterUnique()

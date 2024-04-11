@@ -6,10 +6,10 @@ export function messageListener(){
                 fetch(message.data.url, message.data.options)
                 .then(response => response.json())
                 .then(data => {
-                    sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id})
+                    sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id, message: message.data})
                 })
                 .catch((e) => {
-                    sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id})
+                    sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id, message: message.data})
                 })
                 return true
                 
@@ -17,10 +17,10 @@ export function messageListener(){
                 fetch(message.data.url, message.data.options)
                 .then(response => response.text())
                 .then(data => {
-                    sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id})
+                    sendResponse({action: "fetch", result: data, format: message.format, success: true, id: message.id, message: message.data})
                 })
                 .catch((e) => {
-                    sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id})
+                    sendResponse({action: "fetch", result: e, format: message.format, success: false, id: message.id, message: message.data})
                 })
                 return true
             }
@@ -30,7 +30,7 @@ export function messageListener(){
                 url: message.data.url,
                 filename: message.data.filename
             }, function(downloadId){
-                sendResponse({action: "downloads", id: downloadId});
+                sendResponse({action: "downloads", id: downloadId, message: message.data});
                 return true;
             });
         }
