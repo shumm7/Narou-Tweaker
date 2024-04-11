@@ -127,6 +127,7 @@
         "cogs/mypage/utils.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js",
+        "cogs/kasasagi/_general.js",
         "cogs/kasasagi/_chapter.js"
       ],
       "matches": [

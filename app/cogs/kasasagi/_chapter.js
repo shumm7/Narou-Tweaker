@@ -1,43 +1,59 @@
 import { getNcode } from "./utils.js";
 import { getDatetimeString } from "/utils/text.js";
 import { saveJson } from "/utils/misc.js";
+import { addExclamationIconBalloon } from "/utils/ui.js";
 
 /* Chapter Unique */
 export function _chapterUnique(){
-    var chapterpv = [];
-    $('.chapter-graph-list__item').each(function() {
-        var text = $(this).text().trim();
-        var res = text.match(/ep.(\d*): (\d*)人/);
-        if(res!=null){
-            chapterpv[res[1]] = res[2]
-        }
-    });
-
-    var data = []
-    for(let i=1; i<chapterpv.length; i++) {
-        if(chapterpv[i]==null){
-            data[i-1] = null;
-        }else{
-            data[i-1] = chapterpv[i]
-        }
-    }
-
     chrome.storage.local.get(null, function(option){
-        /* Export Button */
-        if(option.kasasagiExportButton){
-            _button(data)
-        }
+        var m = $(".novelview_h3")
+        if(m.length){
+            if(option.kasasagiCustomStyle){
+                var title = m.text().match("『(.*)』 エピソード別 アクセス解析")[1]
 
-        /* Graph */
-        if (option.kasasagiShowGraph_ChapterUnique){
-            _graph(data, option.kasasagiGraphType_ChapterUnique)
-        }
+                $(".novelview_h3").text("エピソード別 ユニークアクセス")
+                $(".novelview_h3").addClass("subtitle")
+                if(title!=undefined){$(".novelview_h3").before("<div class='novelview_h3' id='title' style='margin-bottom: 10px;'>" + title + "</div>")}
+                
+                $("form#datepicker_form").insertAfter(".novelview_h3.subtitle")
+                $(".novelview_h3.subtitle").append(addExclamationIconBalloon("エピソード単位のユニークの合計＝作品全体のユニークではありません"));
+                $(".novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+                $(".attention").parent().remove();
+            }
 
-        /* Table */
-        if(option.kasasagiShowTable_ChapterUnique){
-            _table(data)
+            var chapterpv = [];
+            $('.chapter-graph-list__item').each(function() {
+                var text = $(this).text().trim();
+                var res = text.match(/ep.(\d*): (\d*)人/);
+                if(res!=null){
+                    chapterpv[res[1]] = res[2]
+                }
+            });
+
+            var data = []
+            for(let i=1; i<chapterpv.length; i++) {
+                if(chapterpv[i]==null){
+                    data[i-1] = null;
+                }else{
+                    data[i-1] = chapterpv[i]
+                }
+            }
+
+            /* Export Button */
+            if(option.kasasagiExportButton){
+                _button(data)
+            }
+
+            /* Graph */
+            if (option.kasasagiShowGraph_ChapterUnique){
+                _graph(data, option.kasasagiGraphType_ChapterUnique)
+            }
+
+            /* Table */
+            if(option.kasasagiShowTable_ChapterUnique){
+                _table(data)
+            }
         }
-        
     })
 }
 

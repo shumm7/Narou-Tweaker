@@ -1,7 +1,7 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { localFont, localSkins, defaultOption, replacePattern } from "../../utils/option.js";
 import { formatSkinData, generateNoDuplicateName } from "../../utils/skin.js";
-import { escapeHtml, getDateString, getDateStringJapanese, getDatetimeString } from "../../utils/text.js";
+import { escapeHtml, getDatetimeString } from "../../utils/text.js";
 import { correction, restoreCorrectionMode } from "./_correction.js";
 import { getNcode } from "./utils.js";
 
