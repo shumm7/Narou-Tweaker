@@ -20,6 +20,7 @@ export const defaultOption = {
     novelCustomStyle: true,
     novelCustomHeader: true,
     novelLegacyHeaderIcon: true,
+    novelVertical: false,
     novelCustomHeaderScrollHidden: false,
     novelCustomHeaderMode: "scroll",
     novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "booklist"],

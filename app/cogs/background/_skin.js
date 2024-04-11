@@ -37,6 +37,7 @@ function makeSkin(){
         var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
         var textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
         var width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
+        var widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
 
         if(fontFamily=="custom"){
             fontFamily_Current = fontFamily_Custom
@@ -70,6 +71,12 @@ function makeSkin(){
         .contents1 {
             max-width: 100vw;
             width: calc(max(${width}px, 730px));
+        }
+        .narou-tweaker-vertical #novel_honbun_wrapper {
+            padding-top: calc(5vh * ${widthRatio}) !important;
+        }
+        .narou-tweaker-vertical #novel_honbun {
+            padding-bottom: calc(5vh * ${widthRatio}) !important;
         }
         `
 

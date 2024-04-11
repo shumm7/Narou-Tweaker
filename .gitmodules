@@ -14,3 +14,6 @@
 [submodule "app/libs/qrcodejs"]
 	path = app/libs/qrcodejs
 	url = https://github.com/davidshimjs/qrcodejs.git
+[submodule "app/libs/GSAP"]
+	path = app/libs/GSAP
+	url = https://github.com/greensock/GSAP.git
