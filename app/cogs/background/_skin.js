@@ -72,10 +72,8 @@ function makeSkin(){
             max-width: 100vw;
             width: calc(max(${width}px, 730px));
         }
-        .narou-tweaker-vertical #novel_honbun_wrapper {
+        .narou-tweaker-vertical #novel_vertical_items {
             padding-top: calc(5vh * ${widthRatio}) !important;
-        }
-        .narou-tweaker-vertical #novel_honbun {
             padding-bottom: calc(5vh * ${widthRatio}) !important;
         }
         `

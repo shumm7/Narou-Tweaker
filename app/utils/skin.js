@@ -192,7 +192,8 @@ export function makeSkinCSS(skin, novel_css){
     /* 小説本文ページ */
     if(novel_css) {
         rule += `
-        .narou-tweaker .novel-titles a {
+        .narou-tweaker .novel-titles a,
+        .narou-tweaker #novel_vertical_items .novel-titles a /* 縦書き */ {
             color: inherit;
         }
         .narou-tweaker .novel-titles .novel-title,

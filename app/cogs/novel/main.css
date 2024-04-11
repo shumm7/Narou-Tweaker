@@ -745,7 +745,7 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
 
 
 /* Novel Vertical */
-.narou-tweaker-vertical #novel_honbun_wrapper {
+.narou-tweaker-vertical #novel_vertical_wrapper {
     width: 100vw !important;
     height: 100vh;
     overflow-x: hidden;
@@ -754,21 +754,52 @@ body:not(.narou-tweaker-header) #novel_header ul li.review a:visited /*レビュ
     box-sizing: border-box;
 }
 
-.narou-tweaker-vertical #novel_honbun {
-    width: unset !important;
-    max-width: unset !important;
+.narou-tweaker-vertical #novel_vertical_items {
+	display: flex;
+	flex-direction: column;
     position: absolute;
-    right: calc((100vw - 600px) / 2 + 300px);
+    right: calc((100vw - 600px) / 2);
     margin: 0;
-}
 
-.narou-tweaker-vertical #novel_honbun {
     -ms-writing-mode: tb-rl;
     writing-mode: vertical-rl;
     -webkit-font-feature-settings: 'pkna';
     font-feature-settings: 'pkna';
 }
 
+.narou-tweaker-vertical #novel_vertical_items #novel_honbun {
+    width: unset !important;
+    max-width: unset !important;
+    margin: 0;
+	padding-right: 100px;
+}
+
+.narou-tweaker-vertical .novelview_pager-before,
+.narou-tweaker-vertical .novelview_pager-next {
+    padding-right: 0;
+    padding-left: 0;
+    border-right: none;
+	
+    padding-top: 10px;
+    padding-bottom: 10px;
+	border-bottom: 1px solid rgba(170,170,170,.5);
+}
+
+.narou-tweaker-vertical .contents1{
+	width: unset;
+	max-width: unset;
+}
+
+.narou-tweaker-vertical .novel_bn a {
+    margin: 10px 0;
+}
+
 .narou-tweaker-vertical #novel_honbun::-webkit-scrollbar {
     display: none;
+}
+
+.narou-tweaker-vertical .text-combine {
+	-webkit-text-combine: horizontal;
+  	-ms-text-combine-horizontal: all;
+  	text-combine-upright: all;
 }

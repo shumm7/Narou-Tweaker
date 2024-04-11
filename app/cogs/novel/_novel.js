@@ -74,17 +74,28 @@ export function _novel(){
 export function _tategaki(){
     chrome.storage.local.get(null, (data) => {
         if(data.novelVertical){
-            $("#novel_honbun").wrap(`<section class="novel_honbun_trigger"><div id="novel_honbun_wrapper" style="position: relative;">`)
+            $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
             $("body").addClass("narou-tweaker-vertical")
+            var items = $("#novel_vertical_items")
+
+            // Elements (Prepend)
+            $(".novel_subtitle").prependTo(items)
+            $(".novel-chapter").prependTo(items)
+            $("#novel_no").prependTo(items)
+            $(".novel_bn:first-child()").prependTo(items)
+            $(".contents1").prependTo(items)
+
+            // Elements (Append)
+            $(".novel_bn:last-child()").appendTo(items)
             
-            var width = document.querySelector('#novel_honbun').clientWidth
-            
-            if($('#novel_honbun').length){
-                gsap.to('#novel_honbun', {
+            if($('#novel_vertical_items').length){
+                var width = $("#novel_vertical_items").width() - 300
+
+                gsap.to('#novel_vertical_items', {
                     x: () => (width),
                     ease: 'none',
                     scrollTrigger: {
-                        trigger: '#novel_honbun_wrapper',
+                        trigger: '#novel_vertical_wrapper',
                         start: () => `top top`,
                         end: () => `+=${width}`,
                         scrub: true,

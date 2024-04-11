@@ -105,6 +105,7 @@ export const defaultOption = {
     correctionReplacePatterns: [],
     correctionShowIllustration: true,
     correctionRemoveIllustrationLink: false,
+    correctionVerticalLayout_CombineNumber: 2,
 }
 
 export const localSkins = [
