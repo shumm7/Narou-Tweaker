@@ -178,26 +178,6 @@ function setOptionContentsDisplay(id){
         `)
         restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth)
 
-        /* Header */
-        outer.append(`
-            <div class='novel-option--content-inner' id='option-header'>
-                <div class='novel-option-header'>ヘッダ</div>
-                <div class='novel-option-subheader'>追従モード</div>
-                <div id="novel-option--header-scroll-mode">
-                    <div class="dropdown" style="width: 100%;">
-                        <select id="novelCustomHeaderMode">
-                            <option value="absolute">上部</option>
-                            <option value="fixed">追従</option>
-                            <option value="scroll">スクロール</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        `)
-        chrome.storage.local.get(["novelCustomHeaderMode"], (data)=>{
-            $("#novelCustomHeaderMode").val(data.novelCustomHeaderMode)
-        })
-
         /* Font Family */
         $(".novel-option--font-button-box").click(function() {
             const key = $(this).parent().prop("id")
@@ -325,7 +305,32 @@ function setOptionContentsDisplay(id){
             }
             setWidthValue(value)
         })
+
+
+        /* Header */
+        outer.append(`
+            <div class='novel-option--content-inner' id='option-header'>
+                <div class='novel-option-header'>ヘッダ</div>
+                <div class='novel-option-subheader'>追従モード</div>
+                <div id="novel-option--header-scroll-mode">
+                    <div class="dropdown" style="width: 100%;">
+                        <select id="novelCustomHeaderMode">
+                            <option value="absolute">上部</option>
+                            <option value="fixed">追従</option>
+                            <option value="scroll">スクロール</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        `)
+        chrome.storage.local.get(["novelCustomHeaderMode"], (data)=>{
+            $("#novelCustomHeaderMode").val(data.novelCustomHeaderMode)
+        })
+        $("#novelCustomHeaderMode").change(function(){
+            chrome.storage.local.set({novelCustomHeaderMode: $("#novelCustomHeaderMode").val()}, ()=>{})
+        })
     })
+
 
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
