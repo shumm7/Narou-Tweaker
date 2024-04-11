@@ -2,79 +2,8 @@ import { check, defaultValue } from "../../utils/misc.js"
 import { localFont, localSkins, defaultOption, replacePattern } from "../../utils/option.js";
 import { formatSkinData, generateNoDuplicateName } from "../../utils/skin.js";
 import { escapeHtml, getDateString, getDateStringJapanese, getDatetimeString } from "../../utils/text.js";
-import { correction, restoreCorrectionMode } from "./correction.js";
+import { correction, restoreCorrectionMode } from "./_correction.js";
 import { getNcode } from "./utils.js";
-
-/* Header */
-export function changeHeaderScrollMode(elm){
-        
-    function changeMode(elm){
-        chrome.storage.local.get(null, (data) => {
-            const header_mode = data.novelCustomHeaderMode
-            const hidden_begin = data.novelCustomHeaderScrollHidden
-            if(!$(elm).length){return}
-
-            $(elm).removeClass("header-mode--fixed")
-            $(elm).removeClass("header-mode--absolute")
-            $(elm).removeClass("header-mode--scroll")
-            $(elm).css({"position": ""})
-            $("#novelnavi_right").css({"position": ""})
-            $("#novelnavi_right > *").css({"position": ""})
-
-            if(header_mode=="fixed"){
-                $(elm).addClass("header-mode--fixed")
-            }else if(header_mode=="absolute"){
-                $(elm).addClass("header-mode--absolute")
-            }else if(header_mode=="scroll"){
-                $(elm).addClass("header-mode--scroll")
-                if(hidden_begin){
-                    $(elm + '.header-mode--scroll').addClass('hide');
-                }
-            }
-        })
-    }
-    changeMode(elm)
-
-    var pos = $(window).scrollTop();
-    $(window).on("scroll", function(){
-        if(Math.abs($(this).scrollTop() - pos)>100 ){
-            if($(this).scrollTop() < pos ){
-                $(elm + '.header-mode--scroll').removeClass('hide'); /* Scroll Up */
-                $("#novel_header_search_box.show").removeClass("show")
-            }else{
-                $(elm + '.header-mode--scroll').addClass('hide'); /* Scroll Down */
-                $("#novel_header_search_box.show").removeClass("show")
-            }
-            pos = $(this).scrollTop();
-        }
-    });
-
-    chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.novelCustomHeaderMode!=undefined || changes.novelCustomHeaderScrollHidden!=undefined){
-            changeMode(elm)
-        }
-    })
-}
-
-/* Skin */
-export function removeDefaultSkinClass(){
-    const classList = [
-        "customlayout1",
-        "customlayout2",
-        "customlayout3",
-        "customlayout4",
-        "customlayout5",
-        "customlayout6",
-        "customlayout7",
-    ]
-
-    $.each(classList, function(_, c){
-        $("."+c).each(function(){
-            $(this).removeClass(c);
-        });
-    });
-
-}
 
 /* Option */
 /* スキン設定のドロップダウンを設定 */

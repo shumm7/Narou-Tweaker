@@ -1,8 +1,8 @@
-import { updateOption } from "../../utils/option.js";
-import { actionListener } from "./action.js";
-import { messageListener } from "./process.js";
-import { sidepanelListener } from "./sidepanel.js";
-import { skinListener } from "./skin.js";
+import { updateOption } from "/utils/option.js";
+import { actionListener } from "./_action.js";
+import { messageListener } from "./_process.js";
+import { sidepanelListener } from "./_sidepanel.js";
+import { skinListener } from "./_skin.js";
 
 /* Update Option Data */
 updateOption()

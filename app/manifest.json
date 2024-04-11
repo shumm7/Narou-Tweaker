@@ -115,7 +115,9 @@
       "resources": [
         "cogs/novel/main.js",
         "cogs/novel/cogs.js",
-        "cogs/novel/correction.js",
+        "cogs/novel/_header.js",
+        "cogs/novel/_skin.js",
+        "cogs/novel/_correction.js",
         "cogs/novel/utils.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
