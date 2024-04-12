@@ -30,6 +30,8 @@ export const defaultOption = {
     novelCustomHeaderQRCodeCurrentLocation: true,
     novelCustomHeaderQRCodeShowURL: false,
     novelOptionModalSelected: 0,
+    novelPrefaceAutoURL: true,
+    novelAfterwordAutoURL: true,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],

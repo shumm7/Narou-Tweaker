@@ -1,7 +1,26 @@
-import { getNcode, getEpisode } from "./utils.js"
-
+import { replaceUrl } from "/utils/text.js"
+import { getNcode, getEpisode, checkNovelPageDetail } from "./utils.js"
 
 export function _novel(){
+    chrome.storage.local.get(null, (data) => {
+        const pageDetail = checkNovelPageDetail()
+        if(data.novelCustomStyle){
+            $("body").addClass("narou-tweaker")
+            $("#footer").remove()
+
+            if(pageDetail=="novel"){
+                _novelPage()
+            }
+        }
+        if(pageDetail=="novel" && data.novelVertical){
+            _tategaki()
+        }
+
+        _autoURL()
+    })
+}
+
+function _novelPage(){
     var ncode = getNcode()
     var episode = getEpisode()
     var title
@@ -71,42 +90,55 @@ export function _novel(){
     }
 }
 
-export function _tategaki(){
+function _tategaki(){
+    $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
+    $("body").addClass("narou-tweaker-vertical")
+    var items = $("#novel_vertical_items")
+
+    // Elements (Prepend)
+    $("#novel_p").prependTo(items)
+    $(".novel_subtitle").prependTo(items)
+    $(".novel-chapter").prependTo(items)
+    $("#novel_no").prependTo(items)
+    $(".novel_bn:first-child()").prependTo(items)
+    $(".contents1").prependTo(items)
+
+    // Elements (Append)
+    $("#novel_a").appendTo(items)
+    $(".novel_bn:last-child()").appendTo(items)
+    
+    if($('#novel_vertical_items').length){
+        var width = $("#novel_vertical_items").width() - 300
+
+        gsap.to('#novel_vertical_items', {
+            x: () => (width),
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#novel_vertical_wrapper',
+                start: () => `top top`,
+                end: () => `+=${width}`,
+                scrub: true,
+                pin: true,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+            },
+        });
+    }
+}
+
+function _autoURL(){
+    /* Auto Url */
     chrome.storage.local.get(null, (data) => {
-        if(data.novelVertical){
-            $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
-            $("body").addClass("narou-tweaker-vertical")
-            var items = $("#novel_vertical_items")
-
-            // Elements (Prepend)
-            $("#novel_p").prependTo(items)
-            $(".novel_subtitle").prependTo(items)
-            $(".novel-chapter").prependTo(items)
-            $("#novel_no").prependTo(items)
-            $(".novel_bn:first-child()").prependTo(items)
-            $(".contents1").prependTo(items)
-
-            // Elements (Append)
-            $("#novel_a").appendTo(items)
-            $(".novel_bn:last-child()").appendTo(items)
-            
-            if($('#novel_vertical_items').length){
-                var width = $("#novel_vertical_items").width() - 300
-
-                gsap.to('#novel_vertical_items', {
-                    x: () => (width),
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '#novel_vertical_wrapper',
-                        start: () => `top top`,
-                        end: () => `+=${width}`,
-                        scrub: true,
-                        pin: true,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
-                    },
-                });
-            }
+        if(data.novelPrefaceAutoURL){
+            $('#novel_p p').each(function (idx, elem) {
+                replaceUrl(elem, false)
+            });
+        }
+        
+        if(data.novelAfterwordAutoURL){
+            $('#novel_a p').each(function (idx, elem) {
+                replaceUrl(elem, false)
+            });
         }
     })
 }
