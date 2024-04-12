@@ -12,11 +12,31 @@ export function _novel(){
                 _novelPage()
             }
         }
-        if(pageDetail=="novel" && data.novelVertical){
-            _tategaki()
+        if(pageDetail=="novel"){
+            if(data.novelVertical){
+                _tategaki()
+            }
+            _autoURL()
+        }else if(pageDetail=="top"){
+            _novelTop()
         }
 
-        _autoURL()
+    })
+}
+
+function _novelTop(){
+    chrome.storage.local.get(null, (data) => {
+        if(data.novelShowAllExtext){
+            var Extext = $("#novel_ex")
+            var hiddenText = $("#novel_ex .hidden")
+            if(hiddenText.length && Extext.length){
+                var text = hiddenText[0].innerHTML
+                $("#novel_ex .more").remove()
+                $("#novel_ex .hidden").remove()
+                $("#novel_ex span").remove()
+                Extext[0].innerHTML += text
+            }
+        }
     })
 }
 

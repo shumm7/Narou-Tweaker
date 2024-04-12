@@ -32,6 +32,7 @@ export const defaultOption = {
     novelOptionModalSelected: 0,
     novelPrefaceAutoURL: true,
     novelAfterwordAutoURL: true,
+    novelShowAllExtext: false,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
