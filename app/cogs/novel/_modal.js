@@ -91,22 +91,24 @@ function restoreSkinOptions(skins, selected){
 }
 
 /* フォント設定 */
-function restoreFontOptions(fontFamily, fontSize, lineHeight, width, novelVertical){
-    $(".novel-option--font-button.active").removeClass("active")
-    $(".novel-option--font-button#"+defaultValue(fontFamily, defaultOption.fontFontFamily)).addClass("active")
+function restoreFontOptions(){
+    chrome.storage.local.get(null, (data)=>{
+        $(".novel-option--font-button.active").removeClass("active")
+        $(".novel-option--font-button#"+defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)).addClass("active")
 
-    var fSize = defaultValue(fontSize, defaultOption.fontFontSize)
-    if(fSize>0) {fSize = "+"+fSize}
-    $("#novel-option--font-size-input").val(fSize)
-    
-    var lHeight = defaultValue(lineHeight, defaultOption.fontLineHeight)
-    if(lHeight>0) {lHeight = "+"+lHeight}
-    $("#novel-option--line-height-input").val(lHeight)
+        var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
+        if(fSize>0) {fSize = "+"+fSize}
+        $("#novel-option--font-size-input").val(fSize)
+        
+        var lHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight)
+        if(lHeight>0) {lHeight = "+"+lHeight}
+        $("#novel-option--line-height-input").val(lHeight)
 
-    var pWidth = defaultValue(width, defaultOption.fontWidth)
-    $("#novel-option--page-width-input").val(Number((pWidth * 100).toFixed(1)))
+        var pWidth = defaultValue(data.fontWidth, defaultOption.fontWidth)
+        $("#novel-option--page-width-input").val(Number((pWidth * 100).toFixed(1)))
 
-    check("#novel-option--vertical-toggle", novelVertical, false)
+        check("#novel-option--vertical-toggle", data.novelVertical, defaultOption.novelVertical)
+    })
 }
 
 function setOptionContentsDisplay(id){
@@ -193,6 +195,11 @@ function setOptionContentsDisplay(id){
             $(this).parent().addClass("active")
 
             chrome.storage.local.set({fontFontFamily: key}, () => {})
+        })
+
+        /* Vertical */
+        $("#novel-option--vertical-toggle").on("click", function(){
+            chrome.storage.local.set({novelVertical: $(this).prop("checked")})
         })
 
         /* Font Size */
@@ -343,9 +350,7 @@ function setOptionContentsDisplay(id){
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined || changes.novelVertical!=undefined){
-            chrome.storage.local.get(null, (data)=>{
-                restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
-            })
+            restoreFontOptions()
         }
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){
             chrome.storage.local.get(null, (data)=>{

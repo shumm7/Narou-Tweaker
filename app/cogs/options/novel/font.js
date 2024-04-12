@@ -1,5 +1,5 @@
-import { defaultValue } from "../../../utils/misc.js"
-import { defaultOption, localFont } from "../../../utils/option.js"
+import { check, defaultValue } from "/utils/misc.js"
+import { defaultOption, localFont } from "/utils/option.js"
 
 /* Font Settings */
 /* フォントの表示設定 */
@@ -172,8 +172,17 @@ export function restoreFont(){
   
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-      if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined){
+      if(changes.fontFontFamily!=undefined ||
+        changes.fontFontFamily_Custom!=undefined ||
+        changes.fontFontSize!=undefined ||
+        changes.fontLineHeight!=undefined ||
+        changes.fontTextRendering!=undefined ||
+        changes.fontWidth!=undefined
+      ){
         restoreFont()
+      }
+      if(changes.novelVertical!=undefined){
+        check("#novelVertical", changes.novelVertical.newValue)
       }
     })
   }
