@@ -161,6 +161,8 @@ function checkLineType(string){
 }
 
 function replaceText(_elem, regexp, replace, isReplaceAll) {
+    const exceptTags = ["rp", "rt", "img"]
+
     function replaceHtml(str){
         if(isReplaceAll){
             return str.replaceAll(regexp, replace)
@@ -168,15 +170,26 @@ function replaceText(_elem, regexp, replace, isReplaceAll) {
         return str.replace(regexp, replace)
     }
 
+    function isAllowedTags(tagName){
+        if(tagName){
+            var t = tagName.toLowerCase()
+            return !(exceptTags.includes(t))
+        }else{
+            return true
+        }
+    }
+
     var nodes = $(_elem)[0].childNodes;
     $.each(nodes, function(_, w) {
-        if(w.innerHTML==undefined){
-            $.each($.parseHTML(replaceHtml(w.data)), function(_, x) {
-                w.before(x);
-            });
-            w.remove();
-        }else{
-            replaceText(w, regexp, replace, isReplaceAll);
+        if(isAllowedTags(w.tagName)){
+            if(w.innerHTML==undefined){
+                $.each($.parseHTML(replaceHtml(w.data)), function(_, x) {
+                    w.before(x);
+                });
+                w.remove();
+            }else{
+                replaceText(w, regexp, replace, isReplaceAll);
+            }
         }
     });
 }
