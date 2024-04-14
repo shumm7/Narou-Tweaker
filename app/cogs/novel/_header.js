@@ -10,12 +10,12 @@ export function _header(){
         if(!$("#novel_header").length){return}
         const isCustomHeader = data.novelCustomHeader
 
-        var ncode = getNcode()
-        var index = ncodeToIndex(ncode)
-        var episode = getEpisode()
-        var pageType = checkNovelPageDetail()
-        var atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
-        var r18 = isR18()
+        const ncode = getNcode()
+        const index = ncodeToIndex(ncode)
+        const episode = getEpisode()
+        const pageType = checkNovelPageDetail()
+        const atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
+        const r18 = isR18()
         var userid
         if(location.hostname == "ncode.syosetu.com"){
             userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
@@ -214,6 +214,42 @@ export function _header(){
 
         /* 小説家になろう */
         $("#novel_header ul").append('<li class="narou"><a href="https://syosetu.com/"><i class="fa-solid fa-pen-nib"></i><span class="title">小説家になろう</span></a></li>')
+        
+        if(r18){
+            var url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
+            chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
+                if(response){
+                    if(response.success && response.action=="fetch"){
+                        var data = response.result[1]
+                        if(data!=undefined){
+                            var l = $(".narou")
+                            if(data.nocgenre==1){
+                                l.find("a").prop("href", "https://noc.syosetu.com/")
+                                if(isCustomHeader){
+                                    l.find(".title")[0].innerHTML = "ノクターン<br>ノベルズ"
+                                }else{
+                                    l.find(".title").text("ノクターンノベルズ")
+                                }
+                            }else if(data.nocgenre==2 || data.nocgenre==3){
+                                l.find("a").prop("href", "https://mnlt.syosetu.com/")
+                                if(isCustomHeader){
+                                    l.find(".title")[0].innerHTML = "ムーンライト<br>ノベルズ"
+                                }else{
+                                    l.find(".title").text("ムーンライトノベルズ")
+                                }
+                            }else if(data.nocgenre==4){
+                                l.find("a").prop("href", "https://mid.syosetu.com/")
+                                if(isCustomHeader){
+                                    l.find(".title")[0].innerHTML = "ミッドナイト<br>ノベルズ"
+                                }else{
+                                    l.find(".title").text("ミッドナイトノベルズ")
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        }
 
         /* ログイン/ログアウト */
         if(is_login){
