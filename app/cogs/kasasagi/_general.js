@@ -95,16 +95,33 @@ function today(){
 
 function total(){
     chrome.storage.local.get(null, (option)=>{
-        var total_pv = {
-            total: parseIntWithComma($("#access_all .total_access_table tr:nth-child(2) td:nth-child(2)").text()),
-            pc: parseIntWithComma($("#access_all .total_access_table tr:nth-child(3) td:nth-child(2)").text()),
-            smartphone: parseIntWithComma($("#access_all .total_access_table tr:nth-child(4) td:nth-child(2)").text()),
-        }
-        var total_unique = {
-            total: parseIntWithComma($("#access_all .total_access_table tr:nth-child(2) td:nth-child(3)").text()),
-            pc: parseIntWithComma($("#access_all .total_access_table tr:nth-child(3) td:nth-child(3)").text()),
-            smartphone: parseIntWithComma($("#access_all .total_access_table tr:nth-child(4) td:nth-child(3)").text()),
-        }
+
+        // Total
+        var total_pv = {}
+        var total_unique = {}
+        $(".total_access_table tr:not(.header)").each(function(){
+            var header = $(this).find("td:nth-child(1)").text().trim()
+            var pv = $(this).find("td:nth-child(2)").text()
+            var unique = $(this).find("td:nth-child(3)").text()
+            
+            var key
+            if(header=="累計"){
+                key = "total"
+            }else if(header=="パソコン版"){
+                key = "pc"
+            }else if(header=="フィーチャーフォン版"){
+                key = "phone"
+            }else if(header=="スマートフォン版"){
+                key = "smartphone"
+            }
+            if(key){
+                total_pv[key] = parseIntWithComma(pv)
+                total_unique[key] = parseIntWithComma(unique)
+            }
+        })
+
+
+        // Week
         var week_pv = []
         var week = []
         $("#access_all .total_graph tr:not(.header)").each(function(){
