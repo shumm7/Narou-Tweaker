@@ -92,6 +92,26 @@ export function parseIntWithComma(text){
     return parseInt(text.replace(/,/g, ""))
 }
 
+export function minuteStringJapanese(minute){
+    minute = parseFloat(minute)
+    if(isNaN(minute) || minute<0){
+        return ``
+    }
+
+    var hour = Math.floor(minute / 60)
+    minute -= (hour * 60)
+    var day = Math.floor(hour / 24)
+    hour -= (day * 24)
+
+    if(hour==0){
+        return `${minute}分`
+    }else if(day==0 && hour > 0){
+        return `${hour}時間${minute}分`
+    }else{
+        return `${day.toLocaleString()}日${hour}時間${minute}分`
+    }
+}
+
 
 /* Ncode Parse */
 /* https://zenn.dev/qnighy/articles/5faa90ddfef843 */

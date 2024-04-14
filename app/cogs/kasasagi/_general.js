@@ -3,6 +3,7 @@ import {getBigGenre, getGenre, getNovelType, getNovelEnd, getNocgenre} from "/ut
 import { addQuestionIconBalloon, addExclamationIconBalloon } from "/utils/ui.js";
 import { saveJson } from "/utils/misc.js";
 import { getNcode } from "./utils.js";
+import { minuteStringJapanese } from "../../utils/text.js";
 
 /* General */
 export function _general(r18){
@@ -146,22 +147,26 @@ function api(r18){
     chrome.storage.local.get(null, (option)=>{
         if (option.kasasagiShowTable_API){
             const ncode = getNcode()
+
+            // API URL
+            var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
+            if(r18){
+                url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
+            }
             
             $("#access_all").after("<div id='novel_detail'></div>")
-            $("#novel_detail").append("<p class='novelview_h3'>作品データ</p>")
+            $("#novel_detail").append(`<p class='novelview_h3'>作品データ</p>`)
             if(option.kasasagiCustomStyle){
                 $("#novel_detail .novelview_h3").addClass("subtitle")
                 $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
                 $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
             }
-            $("#novel_detail").append("<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div>")
-            $("#novel_detail #novel_data").append("<div class='novel_info'></div>")
-            $("#novel_detail #novel_data").append("<div class='novel_statics'></div>")
+            $("#novel_detail").append(`<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div><p><a href="${url}">${url}</a></p>`)
+            $("#novel_detail #novel_data").append(`
+                <div class='novel_info'></div>
+                <div class='novel_statics'></div>
+            `)
 
-            var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
-            if(r18){
-                url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
-            }
 
             chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
             if(response){
@@ -447,8 +452,10 @@ function _tableApi(ncode, d, r18){
     }else{
         addValue("作者", d.writer)
     }
-    addValue("大ジャンル", getBigGenre(d.biggenre), d.biggenre)
-    addValue("ジャンル", getGenre(d.genre), d.genre)
+    if(!r18){
+        addValue("大ジャンル", getBigGenre(d.biggenre), d.biggenre)
+        addValue("ジャンル", getGenre(d.genre), d.genre)
+    }
     addValue("種類", getNovelType(d.novel_type), d.novel_type)
     if(r18){
         addValue("掲載サイト", getNocgenre(d.nocgenre), d.nocgenre)
@@ -474,7 +481,7 @@ function _tableApi(ncode, d, r18){
 
     table.append("<tr class='header'><th>作品統計</th><th>項目</th><th>データ</th></tr>")
     addValue("文字数", d.length.toLocaleString(), d.length)
-    addValue("読了時間", d.time.toLocaleString() + "分", d.time)
+    addValue("読了時間", minuteStringJapanese(d.time), d.time)
     addValue("挿絵数", d.sasie_cnt.toLocaleString(), d.sasie_cnt)
     addValue("会話率", d.kaiwaritu + "%", d.kaiwaritu)
     addValue("総合ポイント", d.global_point.toLocaleString() + "pt", d.global_point)
