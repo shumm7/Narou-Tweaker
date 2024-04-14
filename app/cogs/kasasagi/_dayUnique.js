@@ -56,8 +56,8 @@ function _button(datasets, labels){
                 value.label = value.label.trim()
                 if(value.label=="合計"){key = "total"}
                 else if(value.label=="パソコン版"){key = "pc"}
-                else if(value.label=="スマートフォン版"){key = "smartphone"}
-                else if(value.label=="フィーチャーフォン版"){key = "phone"}
+                else if(value.label=="スマートフォン版"){key = "smp"}
+                else if(value.label=="フィーチャーフォン版"){key = "mobile"}
 
                 if(key){
                     data[idx]["unique"][key] = value.data[idx]

@@ -72,10 +72,10 @@ function today(){
 
         today_total.total = parseIntWithComma($("#today_data .oneday_access_table tr.highlight td.right").text())
         today_total.pc = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(3) td.right").text())
-        today_total.smartphone = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(4) td.right").text())
+        today_total.smp = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(4) td.right").text())
         yesterday_total.total = parseIntWithComma($("#yesterday_data .oneday_access_table tr.highlight td.right").text())
         yesterday_total.pc = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(3) td.right").text())
-        yesterday_total.smartphone = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(4) td.right").text())
+        yesterday_total.smp = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(4) td.right").text())
 
         /* Export Button */
         if(option.kasasagiExportButton){
@@ -111,9 +111,9 @@ function total(){
             }else if(header=="パソコン版"){
                 key = "pc"
             }else if(header=="フィーチャーフォン版"){
-                key = "phone"
+                key = "mobile"
             }else if(header=="スマートフォン版"){
-                key = "smartphone"
+                key = "smp"
             }
             if(key){
                 total_pv[key] = parseIntWithComma(pv)
