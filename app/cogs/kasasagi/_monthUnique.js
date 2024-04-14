@@ -7,7 +7,7 @@ export function _monthUnique(){
         if($(".novelview_h3").length){
             if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(ユニーク\)/)[2]
+                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(ユニーク\)/)[1]
 
                 $(".novelview_h3").text("月別（ユニーク）")
                 $(".novelview_h3").addClass("subtitle")

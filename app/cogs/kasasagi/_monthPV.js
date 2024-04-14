@@ -6,7 +6,7 @@ export function _monthPV(){
         if($(".novelview_h3").length){
             if(option.kasasagiCustomStyle){
                 var m = $(".novelview_h3")
-                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(PV\)/)[2]
+                var title = m.text().trim().match(/『(.*)』 月別\[全エピソード\] アクセス解析\(PV\)/)[1]
 
                 $(".novelview_h3").text("月別（PV）")
                 $(".novelview_h3").addClass("subtitle")
