@@ -57,7 +57,7 @@ export function getValueFromTables(){
 
     /* Datasets */
     var labels = []
-    $(".access_per_day").each(function(_){
+    $(".access_per_day:not(.hide)").each(function(_){
         var table = $(this)
         labels.push(table.find("tr td.day").text().trim())
         $.each(legends, function(idx, value){

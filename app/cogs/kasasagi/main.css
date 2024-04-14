@@ -33,6 +33,10 @@ body.narou-tweaker {
 	clear: both;
 	overflow: hidden;
 }
+.access_per_day.hide,
+.access_per_day.hide + br{
+	display: none;
+}
 
 /* モダンレイアウト適用時の総合ページの表示崩れ対策 */
 .narou-tweaker #today_data,
