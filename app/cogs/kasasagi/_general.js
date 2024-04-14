@@ -70,12 +70,51 @@ function today(){
             yesterday_pv_sum[idx] = i
         });
 
-        today_total.total = parseIntWithComma($("#today_data .oneday_access_table tr.highlight td.right").text())
-        today_total.pc = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(3) td.right").text())
-        today_total.smp = parseIntWithComma($("#today_data .oneday_access_table tr:nth-child(4) td.right").text())
-        yesterday_total.total = parseIntWithComma($("#yesterday_data .oneday_access_table tr.highlight td.right").text())
-        yesterday_total.pc = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(3) td.right").text())
-        yesterday_total.smp = parseIntWithComma($("#yesterday_data .oneday_access_table tr:nth-child(4) td.right").text())
+        $("#today_data .oneday_access_table tr:not(.header)").each(function(){
+            var key
+            var l = $(this).find("td:first-child()")
+            var v = $(this).find("td.right")
+
+            if(l.length){
+                var header = l.text().trim()
+                if(header=="小計"){
+                    key = "total"
+                }else if(header=="パソコン版"){
+                    key = "pc"
+                }else if(header=="フィーチャーフォン版"){
+                    key = "mobile"
+                }else if(header=="スマートフォン版"){
+                    key = "smp"
+                }
+            }
+
+            if(key && v.length){
+                today_total[key] = parseIntWithComma(v.text())
+            }
+        })
+
+        $("#yesterday_data .oneday_access_table tr:not(.header)").each(function(){
+            var key
+            var l = $(this).find("td:first-child()")
+            var v = $(this).find("td.right")
+
+            if(l.length){
+                var header = l.text().trim()
+                if(header=="小計"){
+                    key = "total"
+                }else if(header=="パソコン版"){
+                    key = "pc"
+                }else if(header=="フィーチャーフォン版"){
+                    key = "mobile"
+                }else if(header=="スマートフォン版"){
+                    key = "smp"
+                }
+            }
+
+            if(key && v.length){
+                yesterday_total[key] = parseIntWithComma(v.text())
+            }
+        })
 
         /* Export Button */
         if(option.kasasagiExportButton){
