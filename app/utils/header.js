@@ -144,6 +144,10 @@ export const workspaceIconList = {
         icon: "fa-solid fa-book-bookmark",
         text: "ブックマーク"
     },
+    noticelist: {
+        icon: "fa-solid fa-bell",
+        text: "更新通知"
+    },
     edit: {
         icon: "fa-solid fa-pen",
         text: "投稿",

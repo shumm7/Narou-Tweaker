@@ -80,6 +80,19 @@ function headerIcons(){
         return ``
     }
 
+    function isR18(){
+        var g = $(".p-up-header-pc__gmenu-list").find("a[href='https://syosetu.com/xuser/top/'], a[href='https://syosetu.com/user/top/']")
+        if(g.length){
+            var href = g.prop("href").trim()
+            if(href=="https://syosetu.com/xuser/top/"){
+                return false
+            }else if(href=="https://syosetu.com/user/top/"){
+                return true
+            }
+        }
+        
+    }
+
     // ユーザ
     var elm = $(".p-up-header-pc__nav-item:has(.p-up-header-pc__account)")
     if(elm.length){
@@ -129,6 +142,22 @@ function headerIcons(){
         </li>
     `)
     elm.find("a").addClass("p-up-header-pc__nav-label").prepend(`<i class="fa-solid fa-book-bookmark"></i>`)
+    headerParent.append(elm)
+
+    //更新通知
+    if(isR18()){
+        elm = $(`
+            <li class="p-up-header-pc__nav-item noticelist">
+                <a class="p-up-header-pc__nav-label" href="https://syosetu.com/favnovelmain18/isnoticelist/"><span class="p-icon p-icon--bell p-up-header-pc__nav-icon" aria-hidden="true"></span>更新通知</a>
+            </li>
+        `)
+    }else{
+        elm = $(`
+            <li class="p-up-header-pc__nav-item noticelist">
+                <a class="p-up-header-pc__nav-label" href="https://syosetu.com/favnovelmain/isnoticelist/"><span class="p-icon p-icon--bell p-up-header-pc__nav-icon" aria-hidden="true"></span>更新通知</a>
+            </li>
+        `)
+    }
     headerParent.append(elm)
 
     //お気に入りユーザ
