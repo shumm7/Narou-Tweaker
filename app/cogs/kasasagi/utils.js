@@ -33,7 +33,7 @@ export function makeTable(id, label, header, data){
     return outer;
 }
 
-export function makeGraph(_id, _graph_type, _graph_name){
+export function getValueFromTables(){
     /* Value Type */
     var value_type = $(".access_header tr td.item").text().trim()
 
@@ -69,8 +69,14 @@ export function makeGraph(_id, _graph_type, _graph_name){
                 }else{
                     num = parseIntWithComma(m[1])
                 }
+                if(isNaN(num)){
+                    num = 0
+                }
             }else if(value_type=="PV"){
                 num = parseIntWithComma(num)
+                if(isNaN(num)){
+                    num = 0
+                }
             }
             datasets[idx].data.push(num)
         })
@@ -80,16 +86,15 @@ export function makeGraph(_id, _graph_type, _graph_name){
         datasets[idx].data = datasets[idx].data.reverse()
     })
 
-    /* Unit */
-    var unit = ""
-    if(value_type=="ユニーク"){
-        unit = "人"
-    }
+    return [datasets, labels.reverse()]
+}
+
+export function makeGraph(_id, _graph_type, _graph_name, datasets, labels, unit){
 
     return new Chart(document.getElementById(_id), {
         type: _graph_type,
         data: {
-            labels: labels.reverse(),
+            labels: labels,
             datasets: datasets,
         },
         options: {

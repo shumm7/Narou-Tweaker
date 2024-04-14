@@ -200,29 +200,29 @@ function api(r18){
 
 function _buttonToday(today_total, yesterday_total, today_pv, yesterday_pv, today_pv_sum, yesterday_pv_sum){
     $("#today_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
-        $("#export-general-day").on("click", function(){
-            var date = getDateString();
-            var raw = {
-                date: date,
-                generatedTime: getDatetimeString(),
-                ncode: getNcode(),
-                data: {
-                    today: {
-                        date: date,
-                        highlight: today_total,
-                        pv: today_pv,
-                        sum: today_pv_sum
-                    },
-                    yesterday: {
-                        date: getDateString(getYesterday()),
-                        highlight: yesterday_total,
-                        pv: yesterday_pv,
-                        sum: yesterday_pv_sum
-                    }
+    $("#export-general-day").on("click", function(){
+        var date = getDateString();
+        var raw = {
+            date: date,
+            generatedTime: getDatetimeString(),
+            ncode: getNcode(),
+            data: {
+                today: {
+                    date: date,
+                    highlight: today_total,
+                    pv: today_pv,
+                    sum: today_pv_sum
+                },
+                yesterday: {
+                    date: getDateString(getYesterday()),
+                    highlight: yesterday_total,
+                    pv: yesterday_pv,
+                    sum: yesterday_pv_sum
                 }
             }
-            saveJson(raw, "oneday-pv_" + date + ".json");
-        })
+        }
+        saveJson(raw, "oneday-pv_" + date + ".json");
+    })
 }
 
 function _tableToday(today_pv_sum, yesterday_pv_sum){
