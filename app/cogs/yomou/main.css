@@ -11,6 +11,9 @@
 .p-ranktop-item__keyword{
     color: #868e96;
     font-size: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, .1);
 }
 .p-ranktop-item__story{
     margin-bottom: 10px;
@@ -24,5 +27,8 @@
 }
 
 body:not(.narou-tweaker--show-keyword) .p-ranktop-item__keyword{
+    display: none !important;
+}
+body:not(.narou-tweaker--show-length) .p-ranktop-item__length{
     display: none !important;
 }

@@ -17,6 +17,9 @@ export function _rankTop(){
                 if(data.yomouRankTop_ShowTags){
                     $("body").addClass("narou-tweaker--show-keyword")
                 }
+                if(data.yomouRankTop_ShowTags){
+                    $("body").addClass("narou-tweaker--show-length")
+                }
                 showRankTop_NovelDetails()
 
                 chrome.storage.local.onChanged.addListener(function(changes){
@@ -34,6 +37,12 @@ export function _rankTop(){
                                 $("body").addClass("narou-tweaker--show-keyword")
                             }else{
                                 $("body").removeClass("narou-tweaker--show-keyword")
+                            }
+
+                            if(option.yomouRankTop_ShowLength){
+                                $("body").addClass("narou-tweaker--show-length")
+                            }else{
+                                $("body").removeClass("narou-tweaker--show-length")
                             }
                         })
                     }
@@ -64,12 +73,9 @@ function showRankTop_NovelDetails(){
                             // あらすじを表示
                             const j = i
                             var story = n.story
-                            story = story.replace(/\r?\n/g, "")
+                            story = story.replace(/\r?\n/g, " ")
 
                             // Set element
-                            if(elem.find(".p-ranktop-item__story").length){
-                                elem.find(".p-ranktop-item__story").remove()
-                            }
                             var story_box = $(`
                                 <div class="p-ranktop-item__story js-readmore-mypage" data-collapsed-height="${collapsedHeight}">
                                     <div class="c-readmore">
@@ -87,7 +93,6 @@ function showRankTop_NovelDetails(){
                             // Set Event
                             var inner = $(`.js-readmore-mypage__ellipsis#rmjs-${i}`)
                             var height = inner.height()
-                            console.log(height)
                             inner.attr("data-height", Math.ceil(height))
                             inner.css("height", collapsedHeight + "px")
 
@@ -121,13 +126,16 @@ function showRankTop_NovelDetails(){
                             i += 1
 
                             // キーワードを表示
-                            var keyword = n.keyword
-                            if(elem.find(".p-ranktop-item__keyword").length){
-                                elem.find(".p-ranktop-item__keyword").remove()
-                            }
                             elem.find(".p-ranktop-item__infomation").after(`
                                 <div class="p-ranktop-item__keyword">
-                                    ${escapeHtml(keyword)}
+                                    ${escapeHtml(n.keyword)}
+                                </div>
+                            `)
+
+                            // 文字数・長さを表示
+                            elem.find(".p-ranktop-item__keyword").after(`
+                                <div class="p-ranktop-item__length">
+                                    読了時間：約${escapeHtml(n.time)}分（${escapeHtml(n.length.toLocaleString())}文字）
                                 </div>
                             `)
                         }
