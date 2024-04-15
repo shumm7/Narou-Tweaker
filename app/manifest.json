@@ -64,6 +64,21 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "loader/yomou.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
+        "cogs/yomou/main.css"
+      ],
+      "matches": [
+				"https://yomou.syosetu.com/*"
+			],
+      "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
         "loader/workspace.js"
       ],
       "css": [
@@ -122,6 +137,9 @@
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
         "cogs/novel/utils.js",
+        "cogs/yomou/main.js",
+        "cogs/yomou/utils.js",
+        "cogs/yomou/_rankTop.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/_bookmark.js",

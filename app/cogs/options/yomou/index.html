@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>環境設定 - 小説を読もう！ ｜ Narou Tweaker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<base target="_blank">
+		<link rel="stylesheet" type="text/css" href="/common.css">
+		<link rel="stylesheet" type="text/css" href="../general.css">
+		<link rel="stylesheet" type="text/css" href="c_yomou.css">
+		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<script src="/libs/jquery-3.7.1.min.js"></script>
+		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="c_yomou.js" type="module"></script>
+		
+	</head>
+	<body>
+		<div id="container">
+			<div id="sidebar"></div>
+			<div id="contents">
+				<div id="header">
+					<div id="header-title">
+						<div id="header-title--heading">
+							<i class="fa-solid fa-magnifying-glass"></i>
+							<span class="title">小説を読もう！</span>
+						</div>
+						<div id="header-title--description">
+							<p>ユーザホームの表示を設定することが出来ます。
+								<br>
+								<span style="font-size:80%;">対象ページ：yomou.syosetu.com / noc.syosetu.com / mnlt.syosetu.com / mid.syosetu.com
+							</p>
+						</div>
+					</div>
+					<div id="header-menu">
+						<div class="header-menu-left">
+							<ul id="header-menu-left-items">
+								<li class="header-menu-item button-hide selected" name="header" data-for=".yomou-ranktop" data="selected">
+									<span class="header-menu-item--title">ランキング（トップ）</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div id="main">
+					<!-- ランキング（トップ） -->
+					<div class="contents-container yomou-ranktop button-hide-target" name="header">
+						<div class="contents-wide">
+							<p>ランキングのトップページの設定を変更します。 </p>
+						</div>
+
+						<!--あらすじを表示-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">あらすじを表示</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="yomouRankTop_ShowDescription" class="options toggle">
+									<label for="yomouRankTop_ShowDescription" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+						<!--あらすじを表示-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">キーワードを表示</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="yomouRankTop_ShowTags" class="options toggle">
+									<label for="yomouRankTop_ShowTags" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+				<div id="footer">
+                    <div id="js-failed">
+                        JavaScript failed to load. Your development build failed or your browser has some issue.
+                    </div>
+                </div>
+			</div>
+		</div>
+	</body>
+</html>

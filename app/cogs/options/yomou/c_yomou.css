@@ -1,0 +1,53 @@
+/* Draggable (Header) */
+.draggable_area_outer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 5px;
+	padding: 10px;
+	border: 2px solid #aaa4;
+	border-radius: 10px;
+}
+.draggable_area {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	height: 100%;
+	min-height: 110px;
+}
+.draggable_area_header .draggable_area {
+	width: 220px;
+}
+.draggable_area_menu .draggable_area {
+	width: 150px;
+}
+.draggable_area_outer:has(.draggable_area#disabled) {
+    background-color: #fafafa;
+}
+.icon-element {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+	border: 1px solid #aaa;
+	margin: .2em;
+	padding: .4em;
+	cursor: pointer;
+}
+.draggable_area_header .icon-element {
+	width: 200px;
+}
+.draggable_area_menu .icon-element {
+	width: 130px;
+}
+.icon-element i {
+	text-align: center;
+	width: 15px;
+}
+.icon-element .title {
+	margin-left: .5em;
+	font-size: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

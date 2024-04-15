@@ -1,0 +1,28 @@
+
+/* Ranking Top */
+.narou-tweaker--show-story .p-ranktop-item__item {
+    min-height: 150px;
+}
+
+.narou-tweaker--show-story.narou-tweaker--show-keyword .p-ranktop-item__item {
+    min-height: 250px;
+}
+
+.p-ranktop-item__keyword{
+    color: #868e96;
+    font-size: 12px;
+}
+.p-ranktop-item__story{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.js-readmore-mypage__ellipsis[data-readmore] {
+    transition: height 100ms;
+    overflow: hidden;
+}
+
+body:not(.narou-tweaker--show-keyword) .p-ranktop-item__keyword{
+    display: none !important;
+}

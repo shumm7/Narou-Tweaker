@@ -91,6 +91,75 @@ export function getGenre(genre){
     }
 }
 
+export function getGenreNumber(genre){
+    if(genre=="異世界〔恋愛〕"){
+        return 101
+    }
+    else if(genre=="現実世界〔恋愛〕"){
+        return 102
+    }
+    else if(genre=="ハイファンタジー〔ファンタジー〕"){
+        return 201
+    }
+    else if(genre=="ローファンタジー〔ファンタジー〕"){
+        return 202
+    }
+    else if(genre=="純文学〔文芸〕"){
+        return 301
+    }
+    else if(genre=="ヒューマンドラマ〔文芸〕"){
+        return 302
+    }
+    else if(genre=="歴史〔文芸〕"){
+        return 303
+    }
+    else if(genre=="推理〔文芸〕"){
+        return 304
+    }
+    else if(genre=="ホラー〔文芸〕"){
+        return 305
+    }
+    else if(genre=="アクション〔文芸〕"){
+        return 306
+    }
+    else if(genre=="コメディー〔文芸〕"){
+        return 307
+    }
+    else if(genre=="VRゲーム〔SF〕"){
+        return 401
+    }
+    else if(genre=="宇宙〔SF〕"){
+        return 402
+    }
+    else if(genre=="空想科学〔SF〕"){
+        return 403
+    }
+    else if(genre=="パニック〔SF〕"){
+        return 404
+    }
+    else if(genre=="童話〔その他〕"){
+        return 9901
+    }
+    else if(genre=="詩〔その他〕"){
+        return 9902
+    }
+    else if(genre=="エッセイ〔その他〕"){
+        return 9903
+    }
+    else if(genre=="リプレイ〔その他〕"){
+        return 9904
+    }
+    else if(genre=="その他〔その他〕"){
+        return 9999
+    }
+    else if(genre=="ノンジャンル〔ノンジャンル〕"){
+        return 9801
+    }
+    else{
+        return null
+    }
+}
+
 export function getNovelType(tp){
     if(tp==1){
         return "連載"

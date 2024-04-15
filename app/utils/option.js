@@ -45,6 +45,11 @@ export const defaultOption = {
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
     workspaceBookmarkTopPager: true,
+
+    /* Yomou */
+    yomouRankTop_ShowDescription: false,
+    yomouRankTop_ShowTags: false,
+    //yomouRankTop_DailyShowList: ["101", "102", "201", "202", "301", "302", "303", "304", "305", "306", "307", "401", "402", "403", "404", "9901", "9902", "9903", "9999"],
     
     /* Mypage */
     mypageShowUserId: true,
