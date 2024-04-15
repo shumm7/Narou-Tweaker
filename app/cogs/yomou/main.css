@@ -1,13 +1,21 @@
 
 /* Ranking Top */
-.narou-tweaker--show-story .p-ranktop-item__item {
-    min-height: 150px;
+.js-readmore-mypage__ellipsis[data-readmore] {
+    transition: height 100ms;
+    overflow: hidden;
 }
-
-.narou-tweaker--show-story.narou-tweaker--show-keyword .p-ranktop-item__item {
-    min-height: 250px;
+.p-ranktop-item__points{
+    line-height: 1;
+    color: #999;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
 }
-
+.p-ranktop-item__story{
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
 .p-ranktop-item__keyword{
     color: #868e96;
     font-size: 12px;
@@ -15,17 +23,10 @@
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
-.p-ranktop-item__story{
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, .1);
-}
 
-.js-readmore-mypage__ellipsis[data-readmore] {
-    transition: height 100ms;
-    overflow: hidden;
+body:not(.narou-tweaker--show-points) .p-ranktop-item__points{
+    display: none !important;
 }
-
 body:not(.narou-tweaker--show-keyword) .p-ranktop-item__keyword{
     display: none !important;
 }
