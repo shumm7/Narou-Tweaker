@@ -1,6 +1,6 @@
 import { getNcode } from "/cogs/novel/utils.js";
 import { checkRankPageDetail } from "./utils.js";
-import { escapeHtml } from "../../utils/text.js";
+import { escapeHtml, getDatetimeStringWithoutSecond } from "../../utils/text.js";
 import { getGenreNumber } from "../../utils/api.js";
 
 
@@ -24,6 +24,12 @@ export function _rankTop(){
                 if(data.yomouRankTop_ShowPoints){
                     $("body").addClass("narou-tweaker--show-points")
                 }
+                if(data.yomouRankTop_ShowNovelInfoLink){
+                    $("body").addClass("narou-tweaker--show-novel-info")
+                }
+                if(data.yomouRankTop_ShowUpdateDate){
+                    $("body").addClass("narou-tweaker--show-update-date")
+                }
                 
                 showRankTop_NovelDetails()
 
@@ -31,7 +37,9 @@ export function _rankTop(){
                     if(changes.yomouRankTop_ShowDescription!=undefined ||
                         changes.yomouRankTop_ShowTags!=undefined ||
                         changes.yomouRankTop_ShowLength!=undefined ||
-                        changes.yomouRankTop_ShowPoints!=undefined
+                        changes.yomouRankTop_ShowPoints!=undefined ||
+                        changes.yomouRankTop_ShowNovelInfoLink!=undefined ||
+                        changes.yomouRankTop_ShowUpdateDate!=undefined
                     ){
                         chrome.storage.local.get(null, function(option){
                             if(option.yomouRankTop_ShowDescription){
@@ -58,6 +66,18 @@ export function _rankTop(){
                                 $("body").addClass("narou-tweaker--show-points")
                             }else{
                                 $("body").removeClass("narou-tweaker--show-points")
+                            }
+
+                            if(option.yomouRankTop_ShowNovelInfoLink){
+                                $("body").addClass("narou-tweaker--show-novel-info")
+                            }else{
+                                $("body").removeClass("narou-tweaker--show-novel-info")
+                            }
+
+                            if(option.yomouRankTop_ShowUpdateDate){
+                                $("body").addClass("narou-tweaker--show-update-date")
+                            }else{
+                                $("body").removeClass("narou-tweaker--show-update-date")
                             }
                         })
                     }
@@ -198,6 +218,20 @@ function showRankTop_NovelDetails(){
                                         `)
                                     }
                                 }
+
+                                // 作品情報へのリンクを表示
+                                elem.find(".p-ranktop-item__infomation").prepend(`
+                                    <a href="https://ncode.syosetu.com/novelview/infotop/ncode/${ncode}/" class="p-ranktop-item__novel-info">
+                                        作品情報
+                                    </a>
+                                `)
+
+                                // 最終更新日時を表示
+                                elem.find(".p-ranktop-item__infomation").append(`
+                                    <span class="p-ranktop-item__separator p-ranktop-item__update-date">
+                                        最終更新日：${getDatetimeStringWithoutSecond(new Date(n.general_lastup))}
+                                    </span>
+                                `)
                             }
                             return true;
                         }

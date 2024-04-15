@@ -1,3 +1,4 @@
+import { defaultValue } from "./misc.js";
 import { narouNetwrokUrlPattern } from "./option.js";
 
 export function replaceUrl(_elem, isWarning) {
@@ -77,9 +78,18 @@ export function getDateString(date){
     return `${year}-${month}-${day}`;
 }
 
+export function getDatetimeFromString(datetimeString){
+    return new Date(datetimeString)
+}
+
 export function getDatetimeString(date){
     if(date==undefined){date = new Date();}
     return date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' +('0' + date.getDate()).slice(-2) + ' ' +  ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2) + '.' + date.getMilliseconds();
+}
+
+export function getDatetimeStringWithoutSecond(date){
+    if(date==undefined){date = new Date();}
+    return date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' +('0' + date.getDate()).slice(-2) + ' ' +  ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 }
 
 export function getYesterday(){
