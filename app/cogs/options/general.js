@@ -112,7 +112,13 @@ function restoreValues(data, ignore){
         if(tagName == "input" && type=="checkbox"){ // Toggle
           check("#" + elm.prop("id"), value, defaultOption[name])
         }
-        if(tagName == "input" && (type=="text" || type=="number")){ // Input Text
+        else if(tagName == "input" && type=="text" && elm.hasClass("color")){ // Input Text
+            elm.val(defaultValue(value, defaultOption[name]))
+            document.querySelectorAll('.color').forEach(input => {
+                input.dispatchEvent(new Event('input', { bubbles: true }));
+            });
+        }
+        else if(tagName == "input" && (type=="text" || type=="number")){ // Input Text
             elm.val(defaultValue(value, defaultOption[name]))
         }
         else if(tagName=="select" || tagName=="textarea"){ // DropDown / TextArea

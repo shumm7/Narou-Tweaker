@@ -6,6 +6,12 @@ export const ignoreOptions = [
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
     "appliedSkinCSS",
+    "yomouRankTop_UserCSS",
+    "yomouRankTop_AppliedCSS"
+]
+
+export const forceResetOptions = [
+    "extIgnoreOptionIndex"
 ]
 
 export const defaultOption = {
@@ -15,7 +21,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins",
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRankTop_UserCSS yomouRankTop_AppliedCSS",
 
     /* Novel */
     novelCustomStyle: true,
@@ -404,8 +410,8 @@ export function updateOption(force, data){
             var o = defaultOption
             Object.keys(o).forEach(function(key){
                 if(data[key]!=undefined){
-                    if( typeof(o[key]) == typeof(data[key]) ){
-                        if(key in ignoreOptions==false){
+                    if( typeof(o[key]) == typeof(data[key]) || forceResetOptions.includes(key) ){
+                        if(!ignoreOptions.includes(key)){
                             o[key] = data[key]
                         }
                     }
