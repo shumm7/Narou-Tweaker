@@ -34,7 +34,10 @@
 					<div id="header-menu">
 						<div class="header-menu-left">
 							<ul id="header-menu-left-items">
-								<li class="header-menu-item button-hide selected" name="header" data-for=".yomou-ranktop" data="selected">
+								<li class="header-menu-item button-hide selected" name="header" data-for=".yomou-rank" data="selected">
+									<span class="header-menu-item--title">ランキング</span>
+								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".yomou-ranktop" data="selected">
 									<span class="header-menu-item--title">ランキング（トップ）</span>
 								</li>
 							</ul>
@@ -43,8 +46,16 @@
 				</div>
 
 				<div id="main">
+					<!-- ランキング -->
+					<div class="contents-container yomou-rank button-hide-target" name="header">
+						<div class="contents-wide">
+							<p>ランキング全般の設定を変更します。 </p>
+						</div>
+
+					</div>
+
 					<!-- ランキング（トップ） -->
-					<div class="contents-container yomou-ranktop button-hide-target" name="header">
+					<div class="contents-container yomou-ranktop button-hide-target button-hide--hidden" name="header">
 						<div class="contents-wide">
 							<p>ランキングのトップページの設定を変更します。 </p>
 						</div>
@@ -129,6 +140,22 @@
 								<div class="contents-option-content">
 									<input type="checkbox" id="yomouRankTop_ShowUpdateDate" class="options toggle">
 									<label for="yomouRankTop_ShowUpdateDate" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+						<!--追加CSS-->
+						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">追加CSS</div>
+									<div class="contents-item--description">
+										任意のCSSをランキングのトップページに追加することができます。
+									</div>
+								</div>
+
+								<div class="contents-option-content">
+									<textarea class="textarea options" id="yomouRankTop_UserCSS"></textarea>
 								</div>
 							</div>
 						</div>
