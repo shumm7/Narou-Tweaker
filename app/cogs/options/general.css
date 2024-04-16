@@ -44,6 +44,21 @@ input[type="number"] {
 	margin: .1em;
 }
 
+/* Color Field */
+.clr-field {
+	display: block !important;
+}
+.clr-field input {
+	margin: .1em !important;
+	box-sizing: border-box!important;
+}
+.clr-field button {
+    height: 20px!important;
+	width: 40px!important;
+	margin-right: 5px!important;
+    border-radius: 5px!important;
+} 
+
 /* Textarea */
 .textarea {
     padding: 5px;

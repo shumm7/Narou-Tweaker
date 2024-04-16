@@ -1,6 +1,6 @@
 import { restoreOptions, setupDOM } from "../general.js";
 import { addFontAwesomeOriginaIcons, getExceptedIcon, novelIconList } from "../../../utils/header.js"
-import { buttonHide, optionHide } from "../utils.js";
+import { buttonHide, colorPicker, optionHide } from "../utils.js";
 import { addFontEditButtonEvent, restoreFont } from "./font.js";
 import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "./correction.js";
 import { addSkinEditButtonEvent, restoreSkins } from "./skins.js";
@@ -21,18 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
     restoreFont()
     chrome.storage.local.get(null, function(data) {
         restoreSkins(data.skins, data.selectedSkin)
-        
-        Coloris({
-            el: '.option-skin-color',
-            theme: 'polaroid',
-            formatToggle: true,
-            alpha: true,
-            closeButton: true,
-            clearButton: true,
-            clearLabel: 'クリア',
-            closeLabel: '閉じる'
-          
-        });
+        colorPicker()
     })
     restoreReplacePattern()
 });

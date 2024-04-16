@@ -88,3 +88,25 @@ export function optionHide(){
     })
 }
 
+export function colorPicker(){
+    /* Color Picker */
+    Coloris({
+        el: '.color',
+        theme: 'polaroid',
+        formatToggle: true,
+        alpha: true,
+        closeButton: true,
+        clearButton: true,
+        clearLabel: 'クリア',
+        closeLabel: '閉じる'
+    });
+    document.querySelectorAll('.color').forEach(input => {
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+
+    $(".color").on("change", function(){
+        document.querySelectorAll('.color').forEach(input => {
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    })
+}

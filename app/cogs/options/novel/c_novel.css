@@ -70,9 +70,6 @@
 	color: #555;
 	text-overflow: ellipsis;
 }
-.skin-color-field .clr-field {
-	display: block;
-}
 .skin-color-field .clr-field input {
 	margin: .1em;
 	box-sizing: border-box;

@@ -47,6 +47,7 @@ export const defaultOption = {
     workspaceBookmarkTopPager: true,
 
     /* Yomou */
+    yomouRank_PointsColor: "#999",
     yomouRankTop_ShowDescription: false,
     yomouRankTop_ShowPoints: false,
     yomouRankTop_ShowTags: false,

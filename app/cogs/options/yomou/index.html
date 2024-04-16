@@ -9,8 +9,10 @@
 		<link rel="stylesheet" type="text/css" href="../general.css">
 		<link rel="stylesheet" type="text/css" href="c_yomou.css">
 		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<link rel="stylesheet" type="text/css" href="/libs/Coloris/dist/coloris.min.css">
 		<script src="/libs/jquery-3.7.1.min.js"></script>
 		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="/libs/Coloris/dist/coloris.min.js"></script>
 		<script src="c_yomou.js" type="module"></script>
 		
 	</head>
@@ -50,6 +52,20 @@
 					<div class="contents-container yomou-rank button-hide-target" name="header">
 						<div class="contents-wide">
 							<p>ランキング全般の設定を変更します。 </p>
+						</div>
+
+						<!--ポイント表示色-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">ポイント表示色</div>
+									<div class="contents-item--description"></div>
+								</div>
+								<div class="contents-option-content">
+									<input class="options color" type="text" id="yomouRank_PointsColor" data-coloris>
+									</input>
+								</div>
+							</div>
 						</div>
 
 					</div>
