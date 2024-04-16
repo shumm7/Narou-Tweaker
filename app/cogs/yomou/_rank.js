@@ -4,6 +4,20 @@ import { escapeHtml, getDatetimeStringWithoutSecond } from "../../utils/text.js"
 import { getGenreNumber } from "../../utils/api.js";
 
 
+export function _rank(){
+    const pageDetail = checkRankPageDetail()
+
+    chrome.storage.local.get(null, function(data){
+        if(pageDetail.site=="yomou"){
+            if(pageDetail.detail=="rank" && pageDetail.type != "top"){
+
+            }
+        }
+
+    })
+
+}
+
 export function _rankTop(){
     const pageDetail = checkRankPageDetail()
 
@@ -242,3 +256,4 @@ function showRankTop_NovelDetails(){
         })
     })
 }
+

@@ -51,7 +51,7 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
-        "cogs/novel/skin/main.js"
+        "cogs/novel/css/main.js"
       ],
       "matches": [
 				"https://ncode.syosetu.com/*",
@@ -139,7 +139,7 @@
         "cogs/novel/utils.js",
         "cogs/yomou/main.js",
         "cogs/yomou/utils.js",
-        "cogs/yomou/_rankTop.js",
+        "cogs/yomou/_rank.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/_bookmark.js",

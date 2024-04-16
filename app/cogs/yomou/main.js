@@ -1,3 +1,3 @@
-import { _rankTop } from "./_rankTop.js";
+import { _rankTop } from "./_rank.js";
 
 _rankTop()
