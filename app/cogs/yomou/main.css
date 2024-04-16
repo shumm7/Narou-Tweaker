@@ -23,26 +23,8 @@
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
-
 .p-ranktop-item__novel-info::after {
     margin: 0 2.5px;
     content: '●';
     color: rgba(153, 153, 153, .3);
 }
-
-body:not(.narou-tweaker--show-points) .p-ranktop-item__points{
-    display: none !important;
-}
-body:not(.narou-tweaker--show-keyword) .p-ranktop-item__keyword{
-    display: none !important;
-}
-body:not(.narou-tweaker--show-length) .p-ranktop-item__length{
-    display: none !important;
-}
-body:not(.narou-tweaker--show-novel-info) .p-ranktop-item__novel-info{
-    display: none !important;
-}
-body:not(.narou-tweaker--show-update-date) .p-ranktop-item__update-date{
-    display: none !important;
-}
-   

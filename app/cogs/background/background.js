@@ -3,6 +3,7 @@ import { actionListener } from "./_action.js";
 import { messageListener } from "./_process.js";
 import { sidepanelListener } from "./_sidepanel.js";
 import { skinListener } from "./_skin.js";
+import { yomouCssListener } from "./_yomou.js";
 
 /* Update Option Data */
 updateOption()
@@ -23,8 +24,9 @@ chrome.storage.local.onChanged.addListener(function(changes){
 /* Action */
 actionListener()
 
-/* Skin */
+/* CSS */
 skinListener()
+yomouCssListener()
 
 /* Message */
 messageListener()

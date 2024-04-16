@@ -26,72 +26,15 @@ export function _rankTop(){
             if(pageDetail.detail=="rank" && pageDetail.type == "top"){
 
                 // ランキングトップ（要素追加）
-                if(data.yomouRankTop_ShowDescription){
-                    $("body").addClass("narou-tweaker--show-story")
-                }
-                if(data.yomouRankTop_ShowTags){
-                    $("body").addClass("narou-tweaker--show-keyword")
-                }
-                if(data.yomouRankTop_ShowLength){
-                    $("body").addClass("narou-tweaker--show-length")
-                }
-                if(data.yomouRankTop_ShowPoints){
-                    $("body").addClass("narou-tweaker--show-points")
-                }
-                if(data.yomouRankTop_ShowNovelInfoLink){
-                    $("body").addClass("narou-tweaker--show-novel-info")
-                }
-                if(data.yomouRankTop_ShowUpdateDate){
-                    $("body").addClass("narou-tweaker--show-update-date")
-                }
-                
                 showRankTop_NovelDetails()
 
                 chrome.storage.local.onChanged.addListener(function(changes){
-                    if(changes.yomouRankTop_ShowDescription!=undefined ||
-                        changes.yomouRankTop_ShowTags!=undefined ||
-                        changes.yomouRankTop_ShowLength!=undefined ||
-                        changes.yomouRankTop_ShowPoints!=undefined ||
-                        changes.yomouRankTop_ShowNovelInfoLink!=undefined ||
-                        changes.yomouRankTop_ShowUpdateDate!=undefined
-                    ){
+                    if(changes.yomouRankTop_ShowDescription!=undefined){
                         chrome.storage.local.get(null, function(option){
                             if(option.yomouRankTop_ShowDescription){
-                                $("body").addClass("narou-tweaker--show-story")
                                 $(".p-ranktop-item__story").css("display", "")
                             }else{
-                                $("body").removeClass("narou-tweaker--show-story")
                                 $(".p-ranktop-item__story").css("display", "none")
-                            }
-
-                            if(option.yomouRankTop_ShowTags){
-                                $("body").addClass("narou-tweaker--show-keyword")
-                            }else{
-                                $("body").removeClass("narou-tweaker--show-keyword")
-                            }
-
-                            if(option.yomouRankTop_ShowLength){
-                                $("body").addClass("narou-tweaker--show-length")
-                            }else{
-                                $("body").removeClass("narou-tweaker--show-length")
-                            }
-
-                            if(option.yomouRankTop_ShowPoints){
-                                $("body").addClass("narou-tweaker--show-points")
-                            }else{
-                                $("body").removeClass("narou-tweaker--show-points")
-                            }
-
-                            if(option.yomouRankTop_ShowNovelInfoLink){
-                                $("body").addClass("narou-tweaker--show-novel-info")
-                            }else{
-                                $("body").removeClass("narou-tweaker--show-novel-info")
-                            }
-
-                            if(option.yomouRankTop_ShowUpdateDate){
-                                $("body").addClass("narou-tweaker--show-update-date")
-                            }else{
-                                $("body").removeClass("narou-tweaker--show-update-date")
                             }
                         })
                     }

@@ -79,6 +79,16 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "loader/yomouCss.js"
+      ],
+      "matches": [
+				"https://yomou.syosetu.com/*"
+			],
+      "run_at":"document_start"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
         "loader/workspace.js"
       ],
       "css": [
@@ -140,6 +150,7 @@
         "cogs/yomou/main.js",
         "cogs/yomou/utils.js",
         "cogs/yomou/_rank.js",
+        "cogs/yomou/css/main.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/_bookmark.js",
