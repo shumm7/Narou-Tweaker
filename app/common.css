@@ -1,3 +1,11 @@
+/* Font Family */
+@font-face {
+	font-family: 'NTSymbol';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/NTSymbol.ttf") format("truetype");
+    unicode-range: U+2014,U+2015,U+2026;
+}
+
+
 /* Variables */
 :root {
     --background-screen: #f1f3f5;

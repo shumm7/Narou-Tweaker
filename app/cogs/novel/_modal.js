@@ -527,8 +527,12 @@ function setOptionContentsCorrection(id){
                     <label for="novel-option--correction-no-space-exclamation" class="toggle">後ろに空白の無い感嘆符</label>
                 </div>
                 <div class="novel-option--toggle novel-option--correction-mode">
-                    <input type="checkbox" id="novel-option--correction-odd-ellipses-and-dash" class="correction_mode toggle" name="correctionOddEllipsesAndDash">
-                    <label for="novel-option--correction-odd-ellipses-and-dash" class="toggle">奇数の三点リーダー/ダッシュ</label>
+                    <input type="checkbox" id="novel-option--correction-odd-ellipses" class="correction_mode toggle" name="correctionOddEllipses">
+                    <label for="novel-option--correction-odd-ellipses" class="toggle">奇数の三点リーダー</label>
+                </div>
+                <div class="novel-option--toggle novel-option--correction-mode">
+                    <input type="checkbox" id="novel-option--correction-odd-dash" class="correction_mode toggle" name="correctionOddDash">
+                    <label for="novel-option--correction-odd-dash" class="toggle">奇数のダッシュ</label>
                 </div>
             </div>
 
@@ -579,7 +583,8 @@ function setOptionContentsCorrection(id){
             changes.correctionRepeatedSymbols!=undefined ||
             changes.correctionPeriodWithBrackets!=undefined ||
             changes.correctionNoSpaceExclamation!=undefined ||
-            changes.correctionOddEllipsesAndDash!=undefined ||
+            changes.correctionOddEllipses!=undefined ||
+            changes.correctionOddDash!=undefined ||
             changes.correctionReplacePatterns!=undefined  ||
             changes.correctionShowIllustration!=undefined ||
             changes.correctionRemoveIllustrationLink!=undefined ||

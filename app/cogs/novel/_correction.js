@@ -53,8 +53,11 @@ export function correction(){
             if(data.correctionNoSpaceExclamation){
                 correctionNoSpaceExclamation()
             }
-            if(data.correctionOddEllipsesAndDash){
-                correctionOddEllipsesAndDash()
+            if(data.correctionOddEllipses){
+                correctionOddEllipses()
+            }
+            if(data.correctionOddDash){
+                correctionOddDash()
             }
 
             // 構文
@@ -105,7 +108,8 @@ export function restoreCorrectionMode(){
         check("#novel-option--correction-repeated-symbols", data.correctionRepeatedSymbols, defaultOption.correctionRepeatedSymbols)
         check("#novel-option--correction-period-with-brackets", data.correctionPeriodWithBrackets, defaultOption.correctionPeriodWithBrackets)
         check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
-        check("#novel-option--correction-odd-ellipses-and-dash", data.correctionOddEllipsesAndDash, defaultOption.correctionOddEllipsesAndDash)
+        check("#novel-option--correction-odd-ellipses", data.correctionOddEllipses, defaultOption.correctionOddEllipses)
+        check("#novel-option--correction-odd-dash", data.correctionOddDash, defaultOption.correctionOddDash)
         check("#novel-option--correction-show-illustration", data.correctionShowIllustration, defaultOption.correctionShowIllustration)
     });
 }
@@ -253,17 +257,9 @@ function correctionNormalizeEllipses(){
 function correctionNormalizeDash(){
     /* 罫線を用いたダッシュ(─) → 全角ダッシュ（―） */
     $("#novel_honbun > p.replaced").each(function(){
-        if($(this).text().match(/─/)){ //罫線
+        if($(this).text().match(/─|－|—/)){ //罫線
             $(this).after(
-                replaceText(this, /─{2,}/g, function(s){
-                    var l = s.length
-                    return "―".repeat(l)
-                })
-            )
-        }
-        if($(this).text().match(/－{2,}/)){ //全角ハイフン
-            $(this).after(
-                replaceText(this, /－{2,}/g, function(s){
+                replaceText(this, /─{2,}|－{2,}|—{2,}/g, function(s){
                     var l = s.length
                     return "―".repeat(l)
                 })
@@ -338,8 +334,8 @@ function correctionNoSpaceExclamation(){
     })
 }
 
-function correctionOddEllipsesAndDash(){
-    /* 奇数個の三点リーダー・ダッシュ */
+function correctionOddEllipses(){
+    /* 奇数個の三点リーダー */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match( /…+/ )){ //三点リーダー …
             replaceText(this, /…+/g, function(s){
@@ -350,7 +346,12 @@ function correctionOddEllipsesAndDash(){
                 }
             }) 
         }
+    })
+}
 
+function correctionOddDash(){
+    /* 奇数個の三点ダッシュ */
+    $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match( /―+/ )){ //全角ダッシュ ―
             replaceText(this, /―+/g, function(s){
                 if(s.length%2==1){

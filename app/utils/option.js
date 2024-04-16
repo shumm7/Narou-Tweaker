@@ -103,7 +103,7 @@ export const defaultOption = {
     fontFontFamily: "gothic",
     fontFontSize: 0,
     fontLineHeight: 0,
-    fontFontFamily_Custom: `"Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
+    fontFontFamily_Custom: `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
     fontTextRendering: "optimizeLegibility",
     fontWidth: 1,
 
@@ -115,7 +115,8 @@ export const defaultOption = {
     correctionRepeatedSymbols: false,
     correctionPeriodWithBrackets: false,
     correctionNoSpaceExclamation: false,
-    correctionOddEllipsesAndDash: false,
+    correctionOddEllipses: false,
+    correctionOddDash: false,
     correctionReplacePatterns: [],
     correctionShowIllustration: true,
     correctionRemoveIllustrationLink: false,
@@ -372,8 +373,8 @@ export const localSkins = [
 
 export const localFont = {
     "font-family": {
-        "serif": "'游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif",
-        "gothic": `"メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
+        "serif": "NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif",
+        "gothic": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
     },
     "font-size": 100,
     "line-height": 180,

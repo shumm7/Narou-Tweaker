@@ -179,6 +179,9 @@
     },
     {
       "resources": [
+        "/assets/fonts/*.otf",
+        "/assets/fonts/*.woff",
+        "/assets/fonts/*.ttf",
         "/libs/font-awesome/webfonts/*.ttf",
         "/libs/font-awesome/webfonts/*.woff2"
       ],
