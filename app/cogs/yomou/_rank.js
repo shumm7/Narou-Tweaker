@@ -10,7 +10,19 @@ export function _rank(){
     chrome.storage.local.get(null, function(data){
         if(pageDetail.site=="yomou"){
             if(pageDetail.detail=="rank" && pageDetail.type != "top"){
-
+                // ポイントの単位と数値を別々のspanで囲む
+                $(".p-ranklist-item__points").each(function(){
+                    var text = $(this).text()
+                    if(text.match(/.*pt/)){
+                        var m = text.match(/(.*)pt/)
+                        var number = parseInt(m[1].replace(/,/g, ""))
+                        if(isNaN(number)){
+                            number = 0
+                        }
+                        console.log($(this)[0].innerHTML)
+                        $(this)[0].innerHTML = `<span class="p-ranklist-item__points-value">${number.toLocaleString()}</span><span class="p-ranklist-item__points-unit">pt</span>`
+                    }
+                })
             }
         }
 
@@ -170,7 +182,7 @@ function showRankTop_NovelDetails(){
                                     if(!isNaN(point)){
                                         elem.find(".p-ranktop-item__title").after(`
                                             <div class="p-ranktop-item__points">
-                                                ${point.toLocaleString()}pt
+                                                <span class="p-ranktop-item__points-value">${point.toLocaleString()}</span><span class="p-ranktop-item__points-unit">pt</span>
                                             </div>
                                         `)
                                     }

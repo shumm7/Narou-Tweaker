@@ -1,8 +1,19 @@
 export function yomouCssListener(){
+    makeRankCSS()
     makeRankTopCSS()
 
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.yomouRankTop_ShowDescription!=undefined ||
+        if(
+            changes.yomouRank_DevidePointsUnit!=undefined ||
+            changes.yomouRank_PointsColor!=undefined
+        ){
+            makeRankCSS()
+        }
+
+        if(
+            changes.yomouRank_DevidePointsUnit!=undefined ||
+            changes.yomouRank_PointsColor!=undefined ||
+            changes.yomouRankTop_ShowDescription!=undefined ||
             changes.yomouRankTop_ShowTags!=undefined ||
             changes.yomouRankTop_ShowLength!=undefined ||
             changes.yomouRankTop_ShowPoints!=undefined ||
@@ -11,12 +22,68 @@ export function yomouCssListener(){
         ){
             makeRankTopCSS()
         }
+
+    })
+}
+
+
+function makeRankCSS(){
+    chrome.storage.local.get(null, (data) => {
+        var rule = ""
+
+        if(data.yomouRank_DevidePointsUnit){
+            rule += `
+                .p-ranklist-item__points {
+                    color: #999;
+                }
+                .p-ranklist-item__points-value {
+                    color: ${data.yomouRank_PointsColor};
+                }
+                .p-ranklist-item__points-unit {
+                    margin-left: 0.2em;
+                    font-size: 80%;
+                }
+            `
+        }else{
+            rule += `
+                .p-ranklist-item__points {
+                    color: #999;
+                    color: ${data.yomouRank_PointsColor};
+                }
+            `
+
+        }
+
+        chrome.storage.local.set({yomouRank_AppliedCSS: rule})
     })
 }
 
 function makeRankTopCSS(){
     chrome.storage.local.get(null, (data) => {
         var rule = ""
+
+        if(data.yomouRank_DevidePointsUnit){
+            rule += `
+                .p-ranktop-item__points {
+                    color: #999;
+                }
+                .p-ranktop-item__points-value {
+                    color: ${data.yomouRank_PointsColor};
+                }
+                .p-ranktop-item__points-unit {
+                    margin-left: 0.2em;
+                    font-size: 80%;
+                }
+            `
+        }else{
+            rule += `
+                .p-ranktop-item__points {
+                    color: #999;
+                    color: ${data.yomouRank_PointsColor};
+                }
+            `
+
+        }
 
         if(!data.yomouRankTop_ShowTags){
             rule += `

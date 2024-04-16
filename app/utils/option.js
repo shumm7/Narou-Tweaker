@@ -21,7 +21,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRankTop_UserCSS yomouRankTop_AppliedCSS",
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
 
     /* Novel */
     novelCustomStyle: true,
@@ -53,7 +53,10 @@ export const defaultOption = {
     workspaceBookmarkTopPager: true,
 
     /* Yomou */
-    yomouRank_PointsColor: "#999",
+    yomouRank_DevidePointsUnit: true,
+    yomouRank_PointsColor: "#ed1a3d",
+    yomouRank_UserCSS: "",
+
     yomouRankTop_ShowDescription: false,
     yomouRankTop_ShowPoints: false,
     yomouRankTop_ShowTags: false,
