@@ -3,7 +3,6 @@ const path = location.pathname
 export function _bookmark(){
     bookmarkLayout()
     bookmarkCategoryLayout()
-    bookmarkPager()
 }
 
 function bookmarkLayout(){
@@ -172,33 +171,5 @@ function bookmarkCategoryLayout(){
                 resetTags(changes.workspaceBookmarkCategoryLayout.newValue)
             }
         })
-    })
-}
-
-function bookmarkPager(){
-    chrome.storage.local.get(null, function(data){
-        // ブックマークページのページ遷移ボタン
-        if($(".c-pager-box").length){
-            function resetTags(layout){
-                console.log(layout)
-                if(layout){
-                    $(".c-pager-box--top").css("display", "block")
-                }else{
-                    $(".c-pager-box--top").css("display", "none")
-                }
-            }
-
-            var v = $(".c-pager-box").clone()
-            $(".c-pager-box").addClass("c-pager-box--bottom")
-            v.addClass("c-pager-box--top")
-            $(".c-up-list-header--filter").after(v)
-            resetTags(data.workspaceBookmarkTopPager)
-
-            chrome.storage.local.onChanged.addListener(function(changes){
-                if(changes.workspaceBookmarkTopPager!=undefined){
-                    resetTags(changes.workspaceBookmarkTopPager.newValue)
-                }
-            })
-        }
     })
 }
