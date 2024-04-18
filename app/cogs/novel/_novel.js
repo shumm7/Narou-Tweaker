@@ -19,6 +19,8 @@ export function _novel(){
             _autoURL()
         }else if(pageDetail=="top"){
             _novelTop()
+        }else if(pageDetail=="series"){
+            $("body").addClass("narou-tweaker--series")
         }
 
     })

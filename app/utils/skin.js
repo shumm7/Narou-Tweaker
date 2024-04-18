@@ -321,6 +321,31 @@ export function makeSkinCSS(skin, novel_css){
         background: ${s.novel.background_second};
     }
     `
+
+    /* シリーズ */
+    rule += `
+    .narou-tweaker--series #content,
+    .narou-tweaker--series .serieslist .ex,
+    .narou-tweaker--series .serieslist .novel_info {
+        /* 本文文字色*/
+        color: ${s.novel.color};
+    }
+    .narou-tweaker--series .serieslist {
+        border-bottom: 2px dotted ${s.sublist.color};
+    }
+    .narou-tweaker--series a:link {
+        /* リンク色 */
+        color: ${s.link.color_link};
+    }
+    .narou-tweaker--series a:visited {
+        /* リンク色（訪問済み） */
+        color: ${s.link.color_visited};
+    }
+    .narou-tweaker--series a:hover {
+        /* リンク色（ホバー） */
+        color: ${s.link.color_hover};
+    }
+    `
     
     /* Custom CSS */
     rule += `
