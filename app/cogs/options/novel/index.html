@@ -10,11 +10,16 @@
 		<link rel="stylesheet" type="text/css" href="c_novel.css">
 		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
 		<link rel="stylesheet" type="text/css" href="/libs/Coloris/dist/coloris.min.css">
+		<link rel="stylesheet" type="text/css" href="/libs/highlightjs/styles/atom-one-light.min.css">
 		<script src="/libs/jquery-3.7.1.min.js"></script>
 		<script defer src="/libs/font-awesome/js/brands.min.js"></script>
 		<script defer src="/libs/font-awesome/js/fontawesome.min.js"></script>
 		<script src="/libs/SortableJS/Sortable.min.js"></script>
 		<script src="/libs/Coloris/dist/coloris.min.js"></script>
+		<script src="/libs/highlightjs/highlight.min.js"></script>
+		<script src="/libs/highlightjs/languages/css.min.js"></script>
+		<script src="/libs/highlightjs/languages/json.min.js"></script>
+		<script src="/libs/highlightjs/languages/xml.min.js"></script>
 		<script src="c_novel.js" type="module"></script>
 		
 	</head>
@@ -232,7 +237,7 @@
 					</div>
 
 					<!-- 本文 -->
-					<div class="contents-container novel-page button-hide-target" name="header">
+					<div class="contents-container novel-page button-hide-target button-hide--hidden" name="header">
 						<div class="contents-wide">
 							<p>本文ページに影響する設定を変更します。 </p>
 						</div>
@@ -416,7 +421,7 @@
 													<div class="textfield skin-detail">
 														<label for="#skin-additional-style">追加CSS<span style="font-size: 80%">（ここで設定した内容はプレビューには表示されません）</span></label>
 														<div class="skin-color-field">
-															<textarea class="option-skin textarea" id="skin-additional-style"></textarea>
+															<textarea class="option-skin textarea syntax-highlight" id="skin-additional-style" data="css"></textarea>
 														</div>
 													</div>
 												</div>
@@ -442,7 +447,7 @@
 											<button id="skin-export-text" type="button" class="button"><i class="fa-solid fa-align-left"></i> テキスト</button>
 										</div>
 										<div id="skin-export-output" style="display: none;" >
-											<textarea class="textarea" id="skin-export-output--field" readonly></textarea>
+											<textarea class="textarea syntax-highlight autoselect" id="skin-export-output--field" readonly data="json"></textarea>
 										</div>
 									</div>
 								</div>
@@ -466,7 +471,7 @@
 											</label>
 										</div>
 										<div id="skin-import-input">
-											<textarea class="textarea" id="skin-import-input--field" placeholder="ファイルをドロップ"></textarea>
+											<textarea class="textarea syntax-highlight" id="skin-import-input--field" placeholder="ファイルをドロップ" data="json"></textarea>
 											<button id="skin-import-input--submit" type="button" class="button"><i class="fa-solid fa-file-import"></i> 取り込む</button>
 										</div>
 										<div id="skin-import-warnings">
@@ -489,7 +494,7 @@
 
 								<div class="contents-option-content">
 									<div class="export-option-text">
-										<textarea class="textarea options" id="additionalCSS"></textarea>
+										<textarea class="textarea options syntax-highlight" id="additionalCSS" data="css"></textarea>
 									</div>
 								</div>
 							</div>
@@ -556,7 +561,7 @@
 											<button id="skin-author-export--submit" type="button" class="button">バナーを生成</button>
 										</div>
 										<div id="skin-author-export">
-											<textarea class="textarea" id="skin-author-export--field" readonly></textarea>
+											<textarea class="textarea syntax-highlight autoselect" id="skin-author-export--field" readonly data="xml"></textarea>
 											<p>このコードをランキングタグへコピーしてください。</p>
 										</div>
 									</div>

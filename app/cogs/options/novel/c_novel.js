@@ -1,6 +1,6 @@
 import { restoreOptions, setupDOM } from "../general.js";
 import { addFontAwesomeOriginaIcons, getExceptedIcon, novelIconList } from "../../../utils/header.js"
-import { buttonHide, colorPicker, optionHide } from "../utils.js";
+import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "../utils.js";
 import { addFontEditButtonEvent, restoreFont } from "./font.js";
 import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "./correction.js";
 import { addSkinEditButtonEvent, restoreSkins } from "./skins.js";
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
         colorPicker()
     })
     restoreReplacePattern()
+    syntaxHighlight()
 });
 
 function setSortable(){

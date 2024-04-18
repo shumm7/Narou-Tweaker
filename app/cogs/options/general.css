@@ -68,6 +68,59 @@ input[type="number"] {
     resize: vertical;
     font-size: 16px;
     font-family: inherit;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* Syntax Highlight */
+.syntax-highlight-wrap {
+    position: relative;
+    width: 100%;
+}
+.syntax-highlight-wrap textarea.syntax-highlight {
+    -webkit-appearance: none;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+    resize: none;
+    caret-color: #000;
+    color: transparent;
+    font-family: monospace;
+    line-height: 120%;
+}
+.syntax-highlight-wrap textarea.syntax-highlight::selection {
+    background: rgba(77, 144, 254, 0.8);
+    color: transparent;
+}
+.syntax-highlight-wrap pre {
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 10px;
+    padding: 5px !important;
+    border: 1px solid transparent;
+    pointer-events: none;
+    overflow-y: auto;
+    font-family: monospace;
+}
+.syntax-highlight-wrap pre::-webkit-scrollbar {
+    opacity: 0;
+}
+.syntax-highlight-wrap pre code {
+    margin-top: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: transparent;
+    height: 100%;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 120%;
+    user-select: none;
+}
+.syntax-highlight-wrap pre code.resizing {
+    height: unset;
 }
 
 /* Button */

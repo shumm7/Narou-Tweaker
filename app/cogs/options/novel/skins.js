@@ -35,6 +35,7 @@ export function restoreSkins(skins, selected){
   $("#skin-sublist-underline-hover").val(defaultValue(style.sublist.hover, ""))
   $("#skin-sublist-underline-visited").val(defaultValue(style.sublist.visited, ""))
   $("#skin-additional-style").val(defaultValue(skin.css, ""))
+  $("#skin-additional-style").trigger("input")
   document.querySelectorAll('.color').forEach(input => {
       input.dispatchEvent(new Event('input', { bubbles: true }));
   });
@@ -203,7 +204,9 @@ export function addSkinEditButtonEvent(){
     chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
         var skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
         var skin = defaultValue(data.selectedSkin, 0)
-        $("#skin-export-output--field").val(JSON.stringify(skins[skin], null, "\t"))
+        var field = $("#skin-export-output--field")
+        field.val(JSON.stringify(skins[skin], null, "\t"))
+        field.trigger("input")
     });
   })
 
@@ -242,7 +245,9 @@ export function addSkinEditButtonEvent(){
       var reader = new FileReader();
       reader.onload = function(e){
           try{
-            $("#skin-import-input--field").val(e.target.result)
+            var field = $("#skin-import-input--field")
+            field.val(e.target.result)
+            field.trigger("input")
           }catch(e){
             console.warn(e)
           }
@@ -268,7 +273,9 @@ export function addSkinEditButtonEvent(){
       skins.push(raw)
 
       chrome.storage.local.set({skins: skins, selectedSkin: localSkins.length + skins.length - 1}, function(){
-        $("#skin-import-input--field").val("")
+        var field = $("#skin-import-input--field")
+        field.val("")
+        field.trigger("input")
       })
     })
   })
@@ -340,9 +347,11 @@ export function addSkinEditButtonEvent(){
       const image = authorSkinImage[selected]
       const text = JSON.stringify(skin)
       
-      $("#skin-author-export--field").val(
+      var field = $("#skin-author-export--field")
+      field.val(
         `<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp"><img src="${image.src}" width="${image.width}" height="${image.height}" alt="Narou Tweaker 作者スキン"/><span><!--${text}--></span></a>`
       )
+      field.trigger("input")
     });
   })
   $("#skin-author-export--type").on("change", function(e){ 

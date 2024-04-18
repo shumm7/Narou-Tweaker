@@ -9,8 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="../general.css">
 		<link rel="stylesheet" type="text/css" href="c_general.css">
 		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<link rel="stylesheet" type="text/css" href="/libs/highlightjs/styles/atom-one-light.min.css">
 		<script src="/libs/jquery-3.7.1.min.js"></script>
 		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="/libs/highlightjs/highlight.min.js"></script>
+		<script src="/libs/highlightjs/languages/json.min.js"></script>
 		<script src="c_general.js" type="module"></script>
 		
 	</head>
@@ -241,7 +244,7 @@
 								<div class="contents-option-content">
 									<div style="flex-shrink: 0; width: 100%;">
 										<div class="export-option-text">
-											<textarea class="textarea" id="exportOptionText_Output" readonly></textarea>
+											<textarea class="textarea syntax-highlight" id="exportOptionText_Output" readonly data="json"></textarea>
 										</div>
 										<label for="extIgnoreOptionIndex">無視するインデックス</label>
 										<input type="text" class="options" id="extIgnoreOptionIndex" style="width: 100%;" placeholder="スペース区切り">

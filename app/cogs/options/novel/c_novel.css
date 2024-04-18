@@ -98,6 +98,9 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+#skin-additional-style + pre{
+	margin: 0 !important;
+}
 .export-option-text,
 #skin-author {
 	flex-shrink: 0;

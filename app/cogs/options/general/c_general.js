@@ -1,7 +1,7 @@
 import { getExtensionVersion } from "../../../utils/misc.js";
 import { defaultOption } from "../../../utils/option.js";
 import { restoreOptions, setupDOM } from "../general.js";
-import { buttonHide, optionHide } from "../utils.js";
+import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
 
 setupDOM()
 buttonHide()
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     exportOptionText()
     removeOptionData()
+    syntaxHighlight()
 })
 
 
@@ -31,7 +32,9 @@ function exportOptionText() {
                 })
 
                 var text = JSON.stringify(data, null, 4)
-                $("#exportOptionText_Output").text(text)
+                var field = $("#exportOptionText_Output")
+                field.text(text)
+                field.trigger("input")
             }catch(e){
                 
             }

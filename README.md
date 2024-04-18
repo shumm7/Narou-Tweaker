@@ -21,3 +21,4 @@
 * [mdbassit/Coloris](https://github.com/mdbassit/Coloris) Copyright (c) 2021 Mohammed Bassit
 * [davidshimjs/qrcodejs](https://github.com/davidshimjs/qrcodejs) Copyright (c) 2012 davidshimjs
 * [greensock/GSAP](https://github.com/greensock/GSAP) [©2024 GreenSock](https://gsap.com/licensing/)
+* [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js) Copyright (c) 2006, Ivan Sagalaev.

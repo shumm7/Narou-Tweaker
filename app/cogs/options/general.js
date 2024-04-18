@@ -121,8 +121,14 @@ function restoreValues(data, ignore){
         else if(tagName == "input" && (type=="text" || type=="number")){ // Input Text
             elm.val(defaultValue(value, defaultOption[name]))
         }
-        else if(tagName=="select" || tagName=="textarea"){ // DropDown / TextArea
-          elm.val(defaultValue(value, defaultOption[name]))
+        else if(tagName=="select"){ // DropDown
+            elm.val(defaultValue(value, defaultOption[name]))
+        }
+        else if(tagName=="textarea"){ // TextArea
+            elm.val(defaultValue(value, defaultOption[name]))
+            if(elm.hasClass("syntax-highlight")){
+                elm.trigger("input")
+            }
         }
       }
     })
@@ -198,4 +204,11 @@ export function restoreOptions(){
             chrome.storage.local.set(value);
         }
     });
+
+    /* Auto Select */
+    $(".autoselect").each(function(){
+        $(this).on("click", function(){
+            $(this).select()
+        })
+    })
 }

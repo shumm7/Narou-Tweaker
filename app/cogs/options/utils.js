@@ -110,3 +110,32 @@ export function colorPicker(){
         });
     })
 }
+
+export function syntaxHighlight(){
+    var i = 1
+    $(".syntax-highlight").each(function(){
+        var textarea = $(this)
+        var language = textarea.attr("data")
+        textarea.wrap(`<div class="syntax-highlight-wrap" id="highlight-${i}"></div>`)
+        textarea.after(`<pre><code class="${language}"></code></pre>`)
+
+        var wrapper = textarea.parent()
+        var dummyWrapper = wrapper.find("pre")
+        var dummy = dummyWrapper.find("code")
+
+        resizeTextArea()
+        var dataset
+        textarea.on("input", function(){
+            dummy[0].innerHTML = hljs.highlight(textarea.val() + "\u200b", {language: language}).value;
+        })
+        textarea.on("scroll", function(e){
+            dummyWrapper.scrollTop(e.target.scrollTop)
+        })
+
+        function resizeTextArea() {
+            dummy.addClass("resizing");//ありのままの大きさに戻す
+            wrapper.css("height", `${dummy.scrollHeight + 20}px`)
+            dummy.removeClass("resizing");
+        }
+    })
+}
