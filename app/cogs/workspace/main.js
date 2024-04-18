@@ -1,4 +1,4 @@
-import { _bookmark } from "./_bookmark.js"
+import { _bookmark } from "./_favorite.js"
 import { _header } from "./_header.js"
 
 const path = location.pathname

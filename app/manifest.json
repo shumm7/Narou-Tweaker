@@ -95,7 +95,7 @@
         "libs/font-awesome/css/all.css",
         "common.css",
         "cogs/workspace/main.css",
-        "cogs/workspace/_bookmark.css"
+        "cogs/workspace/_favorite.css"
       ],
       "matches": [
 				"https://syosetu.com/*"
@@ -153,7 +153,7 @@
         "cogs/yomou/css/main.js",
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
-        "cogs/workspace/_bookmark.js",
+        "cogs/workspace/_favorite.js",
         "cogs/workspace/_header.js",
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",
