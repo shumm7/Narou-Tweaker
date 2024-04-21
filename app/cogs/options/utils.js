@@ -132,6 +132,19 @@ export function syntaxHighlight(){
             dummyWrapper.scrollTop(e.target.scrollTop)
         })
 
+        var resizeInt = null;
+        var resizeEvent = function() {
+            dummyWrapper.height(textarea.height());
+        };
+        textarea.on("mousedown", function(e) {
+            resizeInt = setInterval(resizeEvent, 1);
+        })
+        $(window).on("mouseup", function(e) {
+            if (resizeInt != null) {
+                clearInterval(resizeInt)
+            }
+        });
+
         function resizeTextArea() {
             dummy.addClass("resizing");//ありのままの大きさに戻す
             wrapper.css("height", `${dummy.scrollHeight + 20}px`)

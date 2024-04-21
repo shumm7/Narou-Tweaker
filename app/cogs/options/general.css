@@ -81,7 +81,6 @@ input[type="number"] {
     -webkit-appearance: none;
     border: 1px solid #aaa;
     box-sizing: border-box;
-    resize: none;
     caret-color: #000;
     color: transparent;
     font-family: monospace;
