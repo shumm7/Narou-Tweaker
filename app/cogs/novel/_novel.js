@@ -1,4 +1,4 @@
-import { replaceUrl } from "/utils/text.js"
+import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
 import { getNcode, getEpisode, checkNovelPageDetail } from "./utils.js"
 
 export function _novel(){
@@ -17,8 +17,11 @@ export function _novel(){
                 _tategaki()
             }
             _autoURL()
+            _saveHistory()
         }else if(pageDetail=="top"){
             _novelTop()
+            _saveHistory()
+            _history()
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
         }
@@ -163,4 +166,66 @@ function _autoURL(){
             });
         }
     })
+}
+
+function _history(){
+    const ncode = getNcode()
+
+    if(ncode){
+        if($(".novelview_pager-box").length){
+            chrome.storage.sync.get(["history_data"], function(data){
+                const history = data.history_data[ncode]
+                if(history){
+                    const episode = history[0]
+                    const date = history[1]
+                    const episode_name = history[2]
+                    if(episode){
+                        $(".novelview_pager-box").after(`
+                            <div id="novel_history">
+                                最後に読んだエピソード：<a href="https://ncode.syosetu.com/${ncode}/${episode}/">${episode_name}（ep.${episode}） ${getDatetimeStringWithoutSecond(new Date(date))}</a>
+                            </div>
+                        `)
+                    }
+                }
+            })
+        }
+    }
+}
+
+function _saveHistory(){
+    const ncode = getNcode()
+    const episode = getEpisode()
+
+    if(ncode){
+        chrome.storage.sync.get(["history", "history_data"], function(data){
+            var history = data.history
+            var history_data = data.history_data
+            if(typeof history != typeof []){
+                history = []
+            }
+            if(typeof history_data != typeof {}){
+                history_data = {}
+            }
+
+
+            var new_history = history.filter(n => n != ncode);
+            new_history.unshift(ncode)
+            if(new_history.length > 300){
+                const key = new_history.pop()
+                delete history_data[key]
+            }
+            if(episode){
+                var episode_name = $(".novel_subtitle").text()
+                if(episode_name.length>20){
+                    episode_name = episode_name.substr(0, 20) + "…"
+                }
+                history_data[ncode] = [episode, Date.now(), episode_name]
+            }
+
+            chrome.storage.sync.set({
+                history: new_history,
+                history_data: history_data
+            })
+        })
+    }
 }
