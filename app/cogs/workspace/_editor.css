@@ -1,0 +1,194 @@
+body.narou-tweaker-custom-editor {
+	background: #ffffff;
+}
+
+.nt-container a {
+	text-decoration: none;
+	color: #0033cc;
+	outline:none;
+}
+
+.nt-container a:visited {
+	color:#885577;
+}
+
+.nt-container a:hover {
+	text-decoration: none;
+	color: #339933;
+}
+
+.nt-container .c-form__input-text {
+    line-height: unset;
+    height: unset;
+    font-size: unset;
+    border: none;
+	border-radius: 0;
+}
+
+.nt-container .c-form__textarea {
+	display: inline-block;
+    font-size: unset;
+	line-height: 180%;
+    min-height: 20px;
+    border: none;
+	border-radius: 0;
+    padding: .25em .5em;
+    resize: none;
+    overflow-y: hidden;
+    box-sizing: border-box;
+	width: 100%;
+	unicode-bidi: normal;
+}
+
+.nt-container .c-form__input-text:focus {
+	-webkit-box-shadow: none;
+    box-shadow: none;
+	border-bottom: 2px solid rgba(133, 213, 225, 1);
+}
+
+.nt-container .c-form__select:focus,
+.nt-container .c-form__textarea:focus {
+	-webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+a:has(.show-button){
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+	margin: 0px auto;
+	cursor: pointer;
+}
+.show-button {
+	margin: 0px auto;
+	width: 600px;
+	height: 10px;
+}
+.show-button--text {
+	display: none;
+}
+
+a:hover .show-button {
+	height: auto;
+	margin: 0px auto;
+	padding: 5px 10px;
+    background: #eeeeee;
+    border: 1px dashed #cccccc;
+    border-radius: 5px;
+    color: #999999;
+}
+a:hover .show-button .show-button--text {
+	display: block;
+}
+a:hover .show-button--novel_p {
+	margin-top: 30px;
+}
+a:hover .show-button--novel_a {
+	margin-bottom: 30px;
+}
+
+.nt-container {
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+	font-size: 14px;
+	color: #444444;
+	-webkit-text-size-adjust: 100%;
+	margin: 55px auto 0;
+
+		margin-top:0px\9; /* IE8 and below */
+		padding-top:55px\9; /* IE8 and below */
+		*margin-top:0px; /* IE7 and below */
+		*padding-top:55px; /* IE7 and below */
+		_margin-top:0px; /* IE6 */
+		_padding-top:55px; /* IE6 */
+	z-index: 2;
+}
+
+.nt-container .contents1 {
+	margin: 0 auto 15px;
+	padding: 8px 20px;
+	background:#ffffff;
+	line-height:180%;
+	width:700px;
+	vertical-align: baseline;
+	text-align: left;
+}
+
+/******** contents ********/
+.nt-container #novel_contents {
+	margin: 0;
+	padding: 0 0 10px 0;
+	text-align:left;
+	line-height: 180%;
+	clear:both;
+
+	position: relative;
+	top:10px;
+	left:0;
+}
+
+.nt-container #novel_color{
+	font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+	font-size: 16px;
+	margin: 0 auto;
+	width: 730px;
+}
+
+
+.nt-container .novel_title,
+.nt-container .novel_subtitle {
+	margin: 0 auto 10px;
+	text-align: center;
+	font-size: 170%;
+	font-weight: bold;
+	line-height: 150%;
+}
+
+.nt-container .novel_view{
+	line-height: 180%;
+	white-space: break-spaces;
+}
+.nt-container #novel_no {
+	margin: 0 10px 10px 0;
+	text-align: right;
+	color:#999999;
+	font-size: 90%;
+}
+
+.nt-container #novel_p {
+	margin: 0px auto 0px;
+	width: 600px;
+	border-bottom: 3px double #999999;
+}
+.nt-container #novel_p textarea {
+	padding: 20px 0 30px 0;
+}
+
+.nt-container #novel_a {
+	margin: 0 auto 30px;
+	width: 600px;
+	border-top: 3px double #999999;
+}
+.nt-container #novel_a textarea {
+	padding: 20px 0 30px 0;
+}
+
+.nt-container #novel_honbun {
+	margin: 0 auto 0;
+	width: 600px;
+}
+.nt-container #novel_honbun textarea {
+	padding: 30px 0 30px 0;
+}
+
+
+.nt-container .novel_view{
+	line-height: 180%;
+}
+
+.nt-container #novel_ex{
+	margin: 20px auto 50px;
+	line-height: 180%;
+	overflow: hidden;
+	text-align: left;
+	font-size:95%;
+}
