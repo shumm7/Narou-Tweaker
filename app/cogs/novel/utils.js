@@ -31,11 +31,14 @@ export function getNcode(url){
         if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
             return indexToNcode(url.pathname.match(/^\/impression\/list\/ncode\/(\d+)\/*.*$/)[1])
         }
+        else if (url.pathname.match(/^\/impressionres\/.*\/ncode\/(\d+)\/*.*$/)){ /* Review */
+            return indexToNcode(url.pathname.match(/^\/impressionres\/.*\/ncode\/(\d+)\/*.*$/)[1])
+        }
         else if (url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)){ /* Review */
             return indexToNcode(url.pathname.match(/^\/novelreview\/list\/ncode\/(\d+)\/*.*$/)[1])
         }
-        else if (url.pathname.match(/^\/novelreport\/input\/ncode\/(\d+)\/*.*$/)){ /* Review */
-            return indexToNcode(url.pathname.match(/^\/novelreport\/input\/ncode\/(\d+)\/*.*$/)[1])
+        else if (url.pathname.match(/^\/novelreport\/.*\/ncode\/(\d+)\/*.*$/)){ /* Review */
+            return indexToNcode(url.pathname.match(/^\/novelreport\/.*\/ncode\/(\d+)\/*.*$/)[1])
         }
     }   
 }
@@ -119,10 +122,13 @@ export function checkNovelPageDetail(url){
         if (url.pathname.match(/^\/impression\/list\/ncode\/\d+\/*.*$/)){ /* Impression */
             return "impression"
         }
+        else if (url.pathname.match(/^\/impressionres\/.*\/ncode\/\d+\/*.*$/)){ /* Impression Reply */
+            return "impressionres"
+        }
         else if (url.pathname.match(/^\/novelreview\/list\/ncode\/\d+\/*.*$/)){ /* Review */
             return "review"
         }
-        else if (url.pathname.match(/^\/novelreport\/input\/ncode\/\d+\/*.*$/)){ /* 誤字報告 */
+        else if (url.pathname.match(/^\/novelreport\/.*\/ncode\/\d+\/*.*$/)){ /* 誤字報告 */
             return "report"
         }
         else if(url.pathname.match(/^\/[s|S]\d{4}[a-zA-Z]{1,}\/*$/)){ /* シリーズ */
