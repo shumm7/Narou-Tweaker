@@ -4,7 +4,7 @@
   "description": "__MSG_extDescription__",
   "author": "__MSG_extAuthor__",
   "default_locale": "ja",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "manifest_version": 3,
   "icons": {
     "16": "assets/icons/icon_16.png",
@@ -95,7 +95,8 @@
         "libs/font-awesome/css/all.css",
         "common.css",
         "cogs/workspace/main.css",
-        "cogs/workspace/_favorite.css"
+        "cogs/workspace/_favorite.css",
+        "cogs/workspace/_reaction.css"
       ],
       "matches": [
 				"https://syosetu.com/*"
@@ -143,6 +144,7 @@
         "cogs/novel/main.js",
         "cogs/novel/_header.js",
         "cogs/novel/_novel.js",
+        "cogs/novel/_novelcom.js",
         "cogs/novel/_modal.js",
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
@@ -154,6 +156,7 @@
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/_favorite.js",
+        "cogs/workspace/_reaction.js",
         "cogs/workspace/_header.js",
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",
