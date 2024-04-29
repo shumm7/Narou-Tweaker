@@ -31,7 +31,7 @@ export function _header(){
 
         /* Right Menu Bar */
         if(isCustomHeader){
-            $("body").addClass("narou-tweaker-header")
+            $("body").addClass("narou-tweaker-header--mode-1")
             $("#novelnavi_right").remove()
 
             $("#novel_header").before(`<div id="novel_header_right">
@@ -40,6 +40,7 @@ export function _header(){
             </div>`)
             $(".wrap_menu_novelview_after").empty()
         }else{
+            $("body").addClass("narou-tweaker-header--mode-0")
             if(!data.novelLegacyHeaderIcon){
                 $("body").addClass("narou-tweaker-header--hide-icon") //アイコンを隠す
             }
