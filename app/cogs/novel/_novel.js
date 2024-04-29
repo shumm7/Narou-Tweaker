@@ -1,4 +1,4 @@
-import { replaceUrl } from "/utils/text.js"
+import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
 import { getNcode, getEpisode, checkNovelPageDetail } from "./utils.js"
 
 export function _novel(){
@@ -17,8 +17,13 @@ export function _novel(){
                 _tategaki()
             }
             _autoURL()
+            _saveHistory()
         }else if(pageDetail=="top"){
             _novelTop()
+            _saveHistory()
+            if(data.novelShowHistoryOnSublist){
+                _history()
+            }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
         }
@@ -163,4 +168,100 @@ function _autoURL(){
             });
         }
     })
+}
+
+function _history(){
+    chrome.storage.local.get(null, function(data){
+        const ncode = getNcode()
+
+        if(ncode){
+            if($(".index_box").length){
+                var outer = $(`<div class="novelview_history-box"></div>`)
+
+                if($(".novellingindex_bookmarker_no").length){
+                    var elm = $(".novellingindex_bookmarker_no")
+                    var link = elm.find("a").prop("href")
+                    var text = elm.find("a").text()
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
+
+                }else if($("meta[name='siori']").length){
+                    var elm = $("meta[name='siori']")
+                    var link = elm.attr("content")
+                    var text = elm.attr("property")
+
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
+                }
+
+                chrome.storage.sync.get(["history_data"], function(h){
+                    const history = h.history_data[ncode]
+                    if(history){
+                        const episode = history[0]
+                        const date = getDatetimeStringWithoutSecond(new Date(history[1]))
+                        if(episode){
+                            outer.append(`
+                                <div class="novelview_history-item" id="novel_history">
+                                    <i class="fa-solid fa-clock-rotate-left"></i><a href="https://ncode.syosetu.com/${ncode}/${episode}/">エピソード${episode}</a><span style="font-size: 90%">（${date}）</span>
+                                </div>
+                            `)
+
+                             /* 目次欄にアンダーラインを追加 */
+                            var sublist = $(`.index_box .novel_sublist2:has(a[href="/${ncode}/${episode}/"])`)
+                            if(sublist.length){
+                                sublist.addClass("underline")
+                                sublist.find(".subtitle").append(`<span class="history_now" title="${date}"><i class="fa-solid fa-clock-rotate-left"></i></span>`)
+                            }
+                        }
+                    }
+
+                    $(".index_box").before(outer)
+                })
+            }
+        }
+    })
+}
+
+function _saveHistory(){
+    const ncode = getNcode()
+    const episode = getEpisode()
+
+    if(ncode){
+        chrome.storage.sync.get(["history", "history_data"], function(data){
+            var history = data.history
+            var history_data = data.history_data
+            if(typeof history != typeof []){
+                history = []
+            }
+            if(typeof history_data != typeof {}){
+                history_data = {}
+            }
+
+
+            var new_history = history.filter(n => n != ncode);
+            new_history.unshift(ncode)
+            if(new_history.length > 300){
+                const key = new_history.pop()
+                delete history_data[key]
+            }
+            if(episode){
+                var episode_name = $(".novel_subtitle").text()
+                if(episode_name.length>20){
+                    episode_name = episode_name.substr(0, 20) + "…"
+                }
+                history_data[ncode] = [episode, Date.now(), episode_name]
+            }
+
+            chrome.storage.sync.set({
+                history: new_history,
+                history_data: history_data
+            })
+        })
+    }
 }
