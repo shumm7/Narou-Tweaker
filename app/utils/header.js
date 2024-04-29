@@ -61,6 +61,10 @@ export const novelIconList = {
         icon: "fa-solid fa-file-lines",
         text: "TXT"
     },
+    history: {
+        icon: "fa-solid fa-clock-rotate-left",
+        text: "直近の閲覧履歴"
+    },
     search: {
         icon: "fa-solid fa-magnifying-glass",
         text: "検索"
