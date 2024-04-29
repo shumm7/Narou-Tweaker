@@ -351,9 +351,9 @@ export function _header(){
                     const episode = history[0]
                     if(episode){
                         if(isCustomHeader){
-                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<br><span style="font-size: 90%;">（EP.${episode}）</span></span></a>`)
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<br><span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
                         }else{
-                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<span style="font-size: 90%;">（EP.${episode}）</span></span></a>`)
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
                         }
                     }else{
                         $("li.history").remove()
