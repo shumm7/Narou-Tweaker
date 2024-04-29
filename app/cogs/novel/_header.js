@@ -189,6 +189,7 @@ export function _header(){
                 }else{
                     $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
                 }
+                $("head").append(`<meta name="siori" content="${link}" property="${text}">`)
             }else{
                 if(isCustomHeader){
                     $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<br><span style="font-size: 90%;">（なし）</span></span></a></li>')
@@ -599,7 +600,6 @@ export function _header(){
         
         /* Set Position */
         function resetHeader(left, right){
-            console.log(right)
             $("#novel_header ul li.disabled").removeClass("disabled")
             $("#novel_header_right ul li.disabled").removeClass("disabled")
             $(".box_menu_novelview_after ul.menu_novelview_after li.disabled").removeClass("disabled")

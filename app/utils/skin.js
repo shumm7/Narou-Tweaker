@@ -153,6 +153,9 @@ export function makeSkinCSS(skin, novel_css){
         background-color: transparent;
         border-color: ${s.novel.background_second};
     }
+    .novelview_history-box {
+        background: ${s.novel.background_second};
+    }
     `
         
     /* 作品情報ページ */

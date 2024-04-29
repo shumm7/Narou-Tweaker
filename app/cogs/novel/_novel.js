@@ -21,7 +21,9 @@ export function _novel(){
         }else if(pageDetail=="top"){
             _novelTop()
             _saveHistory()
-            _history()
+            if(data.novelShowHistoryOnSublist){
+                _history()
+            }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
         }
@@ -169,27 +171,61 @@ function _autoURL(){
 }
 
 function _history(){
-    const ncode = getNcode()
+    chrome.storage.local.get(null, function(data){
+        const ncode = getNcode()
 
-    if(ncode){
-        if($(".novelview_pager-box").length){
-            chrome.storage.sync.get(["history_data"], function(data){
-                const history = data.history_data[ncode]
-                if(history){
-                    const episode = history[0]
-                    const date = history[1]
-                    const episode_name = history[2]
-                    if(episode){
-                        $(".novelview_pager-box").after(`
-                            <div id="novel_history">
-                                最後に読んだエピソード：<a href="https://ncode.syosetu.com/${ncode}/${episode}/">${episode_name}（ep.${episode}） ${getDatetimeStringWithoutSecond(new Date(date))}</a>
-                            </div>
-                        `)
-                    }
+        if(ncode){
+            if($(".index_box").length){
+                var outer = $(`<div class="novelview_history-box"></div>`)
+
+                if($(".novellingindex_bookmarker_no").length){
+                    var elm = $(".novellingindex_bookmarker_no")
+                    var link = elm.find("a").prop("href")
+                    var text = elm.find("a").text()
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
+
+                }else if($("meta[name='siori']").length){
+                    var elm = $("meta[name='siori']")
+                    var link = elm.attr("content")
+                    var text = elm.attr("property")
+
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
                 }
-            })
+
+                chrome.storage.sync.get(["history_data"], function(h){
+                    const history = h.history_data[ncode]
+                    if(history){
+                        const episode = history[0]
+                        const date = getDatetimeStringWithoutSecond(new Date(history[1]))
+                        if(episode){
+                            outer.append(`
+                                <div class="novelview_history-item" id="novel_history">
+                                    <i class="fa-solid fa-clock-rotate-left"></i><a href="https://ncode.syosetu.com/${ncode}/${episode}/">エピソード${episode}</a><span style="font-size: 90%">（${date}）</span>
+                                </div>
+                            `)
+
+                             /* 目次欄にアンダーラインを追加 */
+                            var sublist = $(`.index_box .novel_sublist2:has(a[href="/${ncode}/${episode}/"])`)
+                            if(sublist.length){
+                                sublist.addClass("underline")
+                                sublist.find(".subtitle").append(`<span class="history_now" title="${date}"><i class="fa-solid fa-clock-rotate-left"></i></span>`)
+                            }
+                        }
+                    }
+
+                    $(".index_box").before(outer)
+                })
+            }
         }
-    }
+    })
 }
 
 function _saveHistory(){

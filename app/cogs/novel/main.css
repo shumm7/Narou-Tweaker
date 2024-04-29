@@ -723,6 +723,16 @@ html:has(.narou-tweaker-vertical){
 	margin-right: 5px;
 	text-align: center;
 }
+.history_now {
+    overflow: hidden;
+    width: 20px;
+    height: 15px;
+	font-size: 12px;
+    vertical-align: top;
+	text-align: center;
+    display: inline-block;
+	margin: 5px 0 0 0;
+}
 
 /* Novel Page*/
 .narou-tweaker .novel-titles {
