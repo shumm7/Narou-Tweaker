@@ -1,4 +1,4 @@
-import { indexToNcode } from "../../utils/text.js"
+import { indexToNcode } from "/utils/text.js"
 
 export function getNcode(url){
     if(url==undefined){
