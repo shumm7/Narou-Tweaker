@@ -40,6 +40,7 @@ export const defaultOption = {
     novelAfterwordAutoURL: true,
     novelShowAllExtext: false,
     novelShowHistoryOnSublist: true,
+    novelForceMypageLink: false,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
