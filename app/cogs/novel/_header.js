@@ -342,6 +342,28 @@ export function _header(){
             $(window).scrollTop(0)
         })
 
+        /* 直近の閲覧履歴 */
+        if(pageType!="novel"){
+            $("#novel_header ul").append('<li class="history"></li>')
+            chrome.storage.sync.get(["history_data"], function(data){
+                const history = data.history_data[ncode]
+                if(history){
+                    const episode = history[0]
+                    if(episode){
+                        if(isCustomHeader){
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<br><span style="font-size: 90%;">（EP.${episode}）</span></span></a>`)
+                        }else{
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<span style="font-size: 90%;">（EP.${episode}）</span></span></a>`)
+                        }
+                    }else{
+                        $("li.history").remove()
+                    }
+                }else{
+                    $("li.history").remove()
+                }
+            })
+        }
+
         /* 検索 */
         $("#novel_header ul").append('<li class="search"><a><i class="fa-solid fa-magnifying-glass"></i><span class="title">検索</span></a></li>')
         $("body").prepend(`
@@ -576,6 +598,7 @@ export function _header(){
         
         /* Set Position */
         function resetHeader(left, right){
+            console.log(right)
             $("#novel_header ul li.disabled").removeClass("disabled")
             $("#novel_header_right ul li.disabled").removeClass("disabled")
             $(".box_menu_novelview_after ul.menu_novelview_after li.disabled").removeClass("disabled")
