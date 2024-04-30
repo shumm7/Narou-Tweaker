@@ -187,9 +187,58 @@ function changeEditorPageLikePreview(){
 
     // buttons
     elm.find("#nt-editor--save-button").append(container.find(".c-button-box-center:has(.js-previewButton)"))
+    elm.find(".nt-editor-footer-right").prepend(container.find(".p-up-novel-input__upload").addClass("nt-editor--footer-tab-content").attr("data", 0))
+    elm.find(".p-up-novel-input__upload button").text("ファイルから読込（txt）")
     elm.find(".nt-editor-footer-right").prepend(container.find(".js-read_preface_template").addClass("nt-editor--footer-tab-content").attr("data", 1))
     elm.find(".nt-editor-footer-right").prepend(container.find(".js-read_postscript_template").addClass("nt-editor--footer-tab-content").attr("data", 2))
     elm.find("#nt-editor--panel-close").attr("href", curmbs)
+
+    elm.find(".p-up-novel-input__upload input[name='novel-file']").remove()
+    elm.find(".p-up-novel-input__upload").append($(`<input type="file" name="novel-file" hidden="">`).on("change", function(){
+        const MAX_FILE_SIZE = $(this).parent().find(`input[name="MAX_FILE_SIZE"]`).attr("value")
+        var textfile = $(this).prop('files')[0];
+		if(textfile.size > MAX_FILE_SIZE){
+			alert('ファイルが大きすぎます。1MB以下のファイルを指定してください。');
+			$(this).val('');
+			$('.js-upload_file_name').text('');
+			return;
+		}
+
+		if(textfile.type != 'text/plain'){
+			alert('テキストファイル以外は利用できません。');
+			$(this).val('');
+			$('.js-upload_file_name').text('');
+			return;
+		}
+
+		var reader = new FileReader();
+		reader.addEventListener('loadend', function(){
+			if(reader.error){
+				alert('ファイルの読み込みに失敗しました。');
+				$('input[name="novel-file"]').val('');
+				return;
+			}
+
+			if(!reader.result.byteLength){
+				alert('ファイルの中身が空です。');
+				$('input[name="novel-file"]').val('');
+				return;
+			}
+
+			var codeArray = new Uint8Array(reader.result);
+			var encodingType = Encoding.detect(codeArray);
+
+			var text = Encoding.convert(codeArray,{
+				to: 'UNICODE',
+				from: encodingType,
+				type: 'string',
+			});
+
+			$('textarea[name="novel"]').val(text);
+            $('textarea[name="novel"]').trigger("input")
+		});
+		reader.readAsArrayBuffer(textfile);
+    }))
 
     // inputs
     elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…"))

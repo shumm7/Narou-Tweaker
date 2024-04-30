@@ -89,6 +89,7 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "libs/encoding.js/encoding.min.js",
         "loader/workspace.js"
       ],
       "css": [

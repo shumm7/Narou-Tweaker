@@ -17,3 +17,6 @@
 [submodule "app/libs/GSAP"]
 	path = app/libs/GSAP
 	url = https://github.com/greensock/GSAP.git
+[submodule "app/libs/encoding.js"]
+	path = app/libs/encoding.js
+	url = https://github.com/polygonplanet/encoding.js.git

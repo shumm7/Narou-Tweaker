@@ -421,6 +421,12 @@ body.narou-tweaker-custom-editor {
 	box-sizing: content-box;
 	padding-bottom: 100px;
 }
+.narou-tweaker-custom-editor .p-up-novel-input__upload{
+	margin-top: 0;
+}
+.narou-tweaker-custom-editor .p-up-novel-input__upload .p-up-novel-input__upload-name {
+	display: none;
+}
 
 /*** editor content - preface / postscript ***/
 .narou-tweaker-custom-editor .nt-editor--preface,
