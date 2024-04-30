@@ -5,64 +5,83 @@ export function _editor(){
 }
 
 function changeEditorPageLikePreview(){
-    const title = $(".l-container .c-up-title-area__title").text()
     $("body").addClass("narou-tweaker-custom-editor")
 
-    var form = $(".l-container form").clone(true).empty()
-    form.addClass("nt-container")
+    $(".l-header").remove()
+    $(".l-breadcrumb").remove()
+    $(".l-footer").remove()
+    var container = $(".l-container").clone(true)
+    $(".l-container").remove()
 
+    const title = container.find(".c-up-title-area__title").text()
+    const header = "新規エピソード作成"
+
+    // box
     var elm = $(`
-        <div class="contents1">
-            <div class="novel-titles">
-                <a href="javascript:void(0);">${title}</a>
+        <div class="nt-container nt-panel-show">
+            <div class="nt-editor">
+                
             </div>
-        </div>
-        <div id="novel_contents" class="customlayout1">
-            <div id="novel_color" class="customlayout1">
-                <div id="novel_no">${""}</div>
-                <div class="novel_subtitle"></div>
-                <div id="novel_p" class="novel_view"></div>
-                <div id="novel_honbun" class="novel_view"></div>
-                <div id="novel_a" class="novel_view"></div>
-            </div>
+            <aside class="nt-panel">
+                <div class="nt-panel--header">
+                </div>
+                <div class="nt-panel--content">
+            </aside>
         </div>
     `)
 
-    elm.find(".novel_subtitle").append($(".l-container .c-form__input-text[name='subtitle']").attr("placeholder", "エピソードタイトルを入力…"))
-    elm.find("#novel_honbun").append($(".l-container .c-form__textarea[name='novel']").attr("placeholder", "エピソード本文を入力…"))
-    elm.find("#novel_p").append($(".l-container .c-form__textarea[name='preface']").attr("placeholder", "前書きを入力…")).css("display", "none")
-    elm.find("#novel_a").append($(".l-container .c-form__textarea[name='postscript']").attr("placeholder", "後書きを入力…")).css("display", "none")
-
-    elm.find("textarea").each(function(){
-        var elm = $(this)
-        elm.attr("rows", 1)
-        const ch = elm.height()
-        
-        elm.on(".c-form__textarea", function(){
-            elm.height(ch)
-            const sh = elm.get(0).scrollHeight
-            elm.height(sh)
-        })
+    // form
+    var form = container.find("form.c-form").clone(true).addClass("nt-editor--form").empty()
+    form.append(`
+        <div class="nt-editor--header">
+            <div class="nt-editor--header-items nt-editor-header-left">
+                <button type="button" class="nt-button" id="nt-editor--panel-toggle" title="サイドパネルを閉じる">
+                    <i class="fa-solid fa-table-columns"></i>
+                </button>
+            </div>
+            <div class="nt-editor--header-items nt-editor-header-middle">
+                ${header}
+            </div>
+            <div class="nt-editor--header-items nt-editor-header-right" id="nt-editor--save-button">
+                
+            </div>
+        </div>
+        <div class="nt-editor--body">
+            <div class="nt-editor--body-content" id="nt-editor--main">
+                <div class="nt-editor--main-title">
+                    <span class="nt-editor--main-title-novel">${title}</span>
+                </div>
+                <div class="nt-editor--main-novel"></div>
+            </div>
+            <div class="nt-editor--body-content nt-content-hidden" id="nt-editor--novelex"></div>
+            <div class="nt-editor--body-content nt-content-hidden" id="nt-editor--freememo"></div>
+            <div class="nt-editor--body-content nt-content-hidden" id="nt-editor--preview"></div>
+        </div>
+        <div class="nt-editor--footer">
+        </div>
+    `)
+    form.find("#nt-editor--panel-toggle").on("click", function(){
+        if($(".nt-container").hasClass("nt-panel-show")){
+            $(".nt-container").removeClass("nt-panel-show")
+        }else{
+            $(".nt-container").addClass("nt-panel-show")
+        }
     })
+    // buttons
+    form.find("#nt-editor--save-button").append(container.find(".c-up-panel__button.js-previewButton").clone(true))
+    form.find("#nt-editor--save-button").append(container.find(".p-progress-button__button.c-up-panel__button--primary").clone(true))
 
-    /*
-    elm.find("#novel_p").before($(`<a><div class="show-button show-button--novel_p"><span class="show-button--text">前書きを入力…</span></div></a>`).on("click", function(){
-        $(this).css("display", "none")
-        elm.find("#novel_p").css("display", "block")
-    }))
-    elm.find("#novel_a").before($(`<a><div class="show-button show-button--novel_a"><span class="show-button--text">後書きを入力…</span></div></a>`).on("click", function(){
-        $(this).css("display", "none")
-        elm.find("#novel_a").css("display", "block")
-    }))
-    */
+    // inputs
+    form.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…"))
+    form.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…"))
+    form.find(".nt-editor--main-novel").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…"))
+    form.find(".nt-editor--main-novel").append(container.find("textarea[name='postscript']").clone(true).attr("placeholder", "後書きを入力…"))
 
-    form.append(elm)
-    form.append($(".l-container .c-button-box-center:has(.js-previewButton)"))
+    elm.find(".nt-editor").append(form)
 
-    $(".l-container").after(form)
-    /*
-    form.wrap(`<div class="wrapper js-panel-open" style="display: flex; flex-direction: row;">`)
-    $(".wrapper").append(`<aside class="freememo" style="background: #eee;">test</div>`)
-    */
-    $(".l-container").remove()
+    $("body > div:first-child").after(elm)
+    $("body").on("scroll", function(e){
+        const s = $(this).scrollTop()
+        $(".nt-editor--body-content").scrollTop(s)
+    })
 }
