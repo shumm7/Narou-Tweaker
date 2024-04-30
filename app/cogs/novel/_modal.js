@@ -3,7 +3,7 @@ import { localFont, localSkins, defaultOption, replacePattern } from "/utils/opt
 import { formatSkinData, generateNoDuplicateName } from "/utils/skin.js";
 import { escapeHtml, getDatetimeString } from "/utils/text.js";
 import { correction, restoreCorrectionMode } from "./_correction.js";
-import { getNcode } from "./utils.js";
+import { getNcode } from "/utils/ncode.js";
 
 export function _optionModal(){
     if(!$("#novel_header").length){return}

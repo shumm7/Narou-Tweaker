@@ -7,6 +7,8 @@ body.narou-tweaker-custom-editor {
 	min-height: 100vh;
 	overflow-x: hidden;
 	overflow-y: auto;
+	color: #444;
+	font-size: 14px;
 }
 
 /*** elements ***/
@@ -24,7 +26,7 @@ body.narou-tweaker-custom-editor {
 	text-decoration: none;
 	color: #339933;
 }
-.nt-button {
+.narou-tweaker-custom-editor .nt-button {
 	background: transparent;
 	display: flex;
 	justify-content: center;
@@ -35,12 +37,38 @@ body.narou-tweaker-custom-editor {
 	white-space: nowrap;
 	height: 100%;
 }
-.nt-button:hover {
+.narou-tweaker-custom-editor .nt-button:hover {
 	background-color: #fafafa;
 }
-.c-up-panel__button {
+.narou-tweaker-custom-editor .c-up-panel__button {
 	padding: 5px 10px !important;
 }
+
+.narou-tweaker-custom-editor .c-form__textarea {
+	display: inline-block;
+	resize: none;
+	unicode-bidi: normal;
+	overflow: auto;
+    overflow-y: hidden;
+	padding: 10px;
+	margin: 0;
+}
+.narou-tweaker-custom-editor .c-form__input-text,
+.narou-tweaker-custom-editor .c-form__select,
+.narou-tweaker-custom-editor .c-form__textarea {
+	border-radius: 0;
+	border: none;
+}
+.narou-tweaker-custom-editor .c-form__input-text:focus,
+.narou-tweaker-custom-editor .c-form__select:focus,
+.narou-tweaker-custom-editor .c-form__textarea:focus {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.narou-tweaker-custom-editor .nt-content-hidden {
+	display: none !important;
+}
+
 
 /*** container ***/
 .narou-tweaker-custom-editor .nt-container {
@@ -50,6 +78,8 @@ body.narou-tweaker-custom-editor {
 	top: 0;
 	left: 0;
 }
+
+
 
 /*** sidepanel ***/
 .narou-tweaker-custom-editor .nt-panel {
@@ -67,7 +97,7 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-panel .nt-panel--header {
 	height: 50px;
     box-sizing: border-box;
-	background: #eee;
+	background: rgb(221, 221, 221);
 }
 .narou-tweaker-custom-editor .nt-panel .nt-panel--content {
 	padding: 8px 15px 0;
@@ -76,8 +106,88 @@ body.narou-tweaker-custom-editor {
     width: 100%;
     height: calc(100% - 50px);
 	border-top: 1px solid #ddd;
-	background-color: #fafafa;
+	background-color: rgb(239, 239, 239);
 }
+
+/*** sidepanel header ***/
+.narou-tweaker-custom-editor .nt-panel--tab {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-item {
+	height: 100%;
+	padding: 0 10px;
+	min-width: 75px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-button {
+	height: 100%;
+	vertical-align: middle;
+	border: none;
+	border-top: 4px solid transparent;
+	background: none;
+	text-wrap: nowrap;
+	font-size: 12px;
+	padding-left: 10px; 
+	padding-right: 10px; 
+}
+.narou-tweaker-custom-editor .nt-panel--tab-item:hover .nt-panel--tab-button {
+	border-top-color: var(--kasasagi-blue);
+}
+.narou-tweaker-custom-editor .nt-panel--tab-item.nt-selected .nt-panel--tab-button {
+	border-top-color: rgb(34, 34, 34) !important;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-button > i {
+	margin-right: 3px;
+}
+
+/*** sidepanel content ***/
+.narou-tweaker-custom-editor .nt-panel--tab-content {
+	padding-top: 10px;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content > div {
+	margin-top: 30px;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content > div:first-child {
+	margin-top: 0;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content h4 {
+	padding-bottom: .1em;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content h4:first-child {
+	padding-top: 0;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content h4.underline {
+	padding-bottom: .25em;
+	border-bottom: 1px solid #ddd;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content p {
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 3px;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content > p {
+	margin-bottom: 5px;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content p.content {
+	color:inherit;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content .box {
+	border: 1px solid #ddd;
+	background: #fafafa;
+	padding: 5px 10px;
+	margin: 3px 0;
+}
+.narou-tweaker-custom-editor .nt-panel--tab-content .border {
+	margin: 5px 5px;
+	border-bottom: 1px solid #ddd;
+}
+
+
 
 /*** editor ***/
 .narou-tweaker-custom-editor .nt-editor {
@@ -90,26 +200,18 @@ body.narou-tweaker-custom-editor {
 	width: calc(100% - 250px);
 	margin-left: 250px;
 }
-.narou-tweaker-custom-editor .nt-editor--form {
+.narou-tweaker-custom-editor .nt-editor--outer {
 	height: 100%;
 	width: 100%;
 	position: fixed;
 	top: 0;
 }
-.narou-tweaker-custom-editor .nt-editor .nt-editor--form > * {
+.narou-tweaker-custom-editor .nt-editor .nt-editor--outer > * {
 	transition: all 0.2s;
 	width: 100%;
 }
-.narou-tweaker-custom-editor .nt-panel-show .nt-editor .nt-editor--form > * {
+.narou-tweaker-custom-editor .nt-panel-show .nt-editor .nt-editor--outer > * {
 	width: calc(100% - 250px);
-}
-.narou-tweaker-custom-editor .nt-editor .nt-editor--footer {
-	height: 50px;
-	position: fixed;
-    bottom: 0;
-	border-top: 1px solid #ddd;
-	z-index: 3;
-	background: #fff;
 }
 
 /*** editor header ***/
@@ -143,40 +245,198 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-editor--header-items.nt-editor-header-right {
 	justify-content: flex-end;
 }
+.narou-tweaker-custom-editor #nt-editor--panel-close {
+	margin-left: 10px;
+	padding-left: 20px;
+	color: inherit;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-left: 1px solid #ddd;
+	border-radius: 0;
+	background: none;
+}
+.narou-tweaker-custom-editor #nt-editor--panel-close:hover{
+	color: var(--kasasagi-blue);
+}
+.narou-tweaker-custom-editor .nt-editor--header-items .c-button-combo--lg {
+	width: unset;
+}
+
+/*** editor footer ***/
+.narou-tweaker-custom-editor .nt-editor .nt-editor--footer {
+	height: 50px;
+	position: fixed;
+    bottom: 0;
+	border-top: 1px solid #ddd;
+	z-index: 3;
+	background: #fff;
+	display: flex;
+    justify-content: space-between;
+}
+.narou-tweaker-custom-editor .nt-editor--footer .nt-editor--footer-items {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	max-width: 300px;
+    min-width: 140px;
+	flex-direction: row;
+	align-items: center;
+	text-wrap: nowrap;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-left {
+	justify-content: flex-start;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-middle {
+	justify-content: center;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-right {
+	justify-content: flex-end;
+	padding: 10px;
+}
+
+.narou-tweaker-custom-editor .nt-editor--footer-tab {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-tab-item {
+	height: 100%;
+	padding: 0 10px;
+	min-width: 75px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: 3px solid transparent;
+	cursor: pointer;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-tab-item:hover {
+	background-color: #fafafa;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-tab-item.nt-selected {
+	border-top: 3px solid var(--kasasagi-blue);
+	color: var(--kasasagi-blue);
+	font-weight: bold;
+	background-color: #fafafa;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-tab-button {
+	border: none;
+	background: none;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-tab-button > i {
+	margin-right: 3px;
+}
+
+.narou-tweaker-custom-editor .nt-editor--footer-textcount{
+	display: flex;
+	align-items: baseline;
+	margin-right: 10px;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-textcount .nt-editor--footer-textcount-number{
+	font-size: 16px;
+}
+.narou-tweaker-custom-editor .nt-editor--footer-textcount .nt-editor--footer-textcount-unit{
+	font-size: 12px;
+	color: rgb(153, 153, 153);
+	margin-left: 5px;
+}
+
 
 /*** editor content ***/
 .narou-tweaker-custom-editor .nt-editor .nt-editor--body {
 	display: block;
-	height: auto;
+	height: calc(100vh - 100px);
 	width: 100%;
-	min-height: 100%;
     position: absolute;
-    top: 0;
+    top: 50px;
     overflow-y: scroll;
-}
-.narou-tweaker-custom-editor .nt-editor .nt-editor--body::-webkit-scrollbar {
-	/*display: none;*/
+	font-size: 16px;
+	font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+    text-rendering: optimizeLegibility;
 }
 .narou-tweaker-custom-editor .nt-editor .nt-editor--body-content {
 	width: 100%;
 	min-height: 100%;
 	max-width: 825px;
-	padding: calc(50px + 30px) 30px;
+	padding: 30px 30px;
 	margin: 0 auto;
 	left: 0;
 	right: 0;
+	top: 0;
     display: block;
     position: absolute;
 }
-.narou-tweaker-custom-editor .nt-editor .nt-content-hidden {
-	display: none !important;
+.narou-tweaker-custom-editor .nt-editor--body-content-banner {
+	position: sticky;
+	z-index: 10;
+	top: 0;
+    background: #333;
+	color: #fff;
+	font-size: 12px;
+	height: auto;
+	width: 100%;
+	padding: 2px;
+	text-align: center;
+}
+.narou-tweaker-custom-editor .nt-editor--body-content-banner a {
+	color: inherit;
+	text-decoration: underline;
 }
 
 /*** editor content - novel ***/
+.narou-tweaker-custom-editor .nt-editor--main-items {
+	color: #444;
+	max-width: 600px;
+	margin: 0 auto;
+}
 .narou-tweaker-custom-editor .nt-editor--main-title {
-	font-size: 12px;
     line-height: 1.5;
-    color: #999;
 	margin-top: 30px;
 	padding-left: auto;
+}
+.narou-tweaker-custom-editor .nt-editor--main-title-novel {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 12px;
+    color: #999;
+}
+.narou-tweaker-custom-editor input[name="subtitle"] {
+	font-size: 170%;
+    line-height: 150%;
+	margin: 0 auto 10px;
+	margin-top: 5px;
+    font-weight: bold;
+	border-bottom: 2px solid transparent;
+	transition: all .2s;
+}
+.narou-tweaker-custom-editor input[name="subtitle"]:focus {
+	border-bottom: 2px solid var(--kasasagi-blue)
+}
+.narou-tweaker-custom-editor .nt-editor--main-novel {
+	margin-top: 30px;
+}
+.narou-tweaker-custom-editor textarea[name="novel"] {
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
+}
+
+/*** editor content - preface / postscript ***/
+.narou-tweaker-custom-editor .nt-editor--preface,
+.narou-tweaker-custom-editor .nt-editor--postscript,
+.narou-tweaker-custom-editor .nt-editor--freememo {
+	color: rgb(68, 68, 68);
+    max-width: 600px;
+    margin: 0px auto;
+	margin-top: 50px;
+}
+.narou-tweaker-custom-editor textarea[name="preface"],
+.narou-tweaker-custom-editor textarea[name="postscript"],
+.narou-tweaker-custom-editor textarea[name="freememo"] {
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
 }

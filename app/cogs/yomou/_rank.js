@@ -1,4 +1,4 @@
-import { getNcode } from "/cogs/novel/utils.js";
+import { getNcode } from "/utils/ncode.js";
 import { checkRankPageDetail } from "./utils.js";
 import { escapeHtml, getDatetimeStringWithoutSecond } from "../../utils/text.js";
 import { getGenreNumber } from "../../utils/api.js";

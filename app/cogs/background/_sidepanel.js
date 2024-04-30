@@ -1,4 +1,5 @@
-import { checkNovelPageDetail, getEpisode, getNcode } from "../novel/utils.js";
+import { getNcode } from "/utils/ncode.js";
+import { checkNovelPageDetail, getEpisode } from "../novel/utils.js";
 
 function setupContextMenu() {
     chrome.contextMenus.create({

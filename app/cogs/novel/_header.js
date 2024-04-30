@@ -1,4 +1,5 @@
-import { checkNovelPageDetail, getEpisode, getNcode, isR18 } from "./utils.js"
+import { checkNovelPageDetail, getEpisode, isR18 } from "./utils.js"
+import { getNcode } from "/utils/ncode.js";
 import { ncodeToIndex } from "/utils/text.js"
 import { getExceptedIcon, addFontAwesomeOriginaIcons } from "/utils/header.js"
 

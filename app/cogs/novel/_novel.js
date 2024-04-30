@@ -1,5 +1,6 @@
 import { replaceUrl } from "/utils/text.js"
-import { getNcode, getEpisode, checkNovelPageDetail } from "./utils.js"
+import { getEpisode, checkNovelPageDetail } from "./utils.js"
+import { getNcode } from "/utils/ncode.js";
 
 export function _novel(){
     chrome.storage.local.get(null, (data) => {
