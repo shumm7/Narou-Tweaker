@@ -45,6 +45,7 @@ function changeEditorPageLikePreview(){
         })
     })
 
+    /*
     elm.find("#novel_p").before($(`<a><div class="show-button show-button--novel_p"><span class="show-button--text">前書きを入力…</span></div></a>`).on("click", function(){
         $(this).css("display", "none")
         elm.find("#novel_p").css("display", "block")
@@ -53,10 +54,15 @@ function changeEditorPageLikePreview(){
         $(this).css("display", "none")
         elm.find("#novel_a").css("display", "block")
     }))
+    */
 
     form.append(elm)
     form.append($(".l-container .c-button-box-center:has(.js-previewButton)"))
 
     $(".l-container").after(form)
+    /*
+    form.wrap(`<div class="wrapper js-panel-open" style="display: flex; flex-direction: row;">`)
+    $(".wrapper").append(`<aside class="freememo" style="background: #eee;">test</div>`)
+    */
     $(".l-container").remove()
 }

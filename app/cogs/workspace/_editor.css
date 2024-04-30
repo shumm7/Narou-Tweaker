@@ -93,13 +93,6 @@ a:hover .show-button--novel_a {
 	color: #444444;
 	-webkit-text-size-adjust: 100%;
 	margin: 55px auto 0;
-
-		margin-top:0px\9; /* IE8 and below */
-		padding-top:55px\9; /* IE8 and below */
-		*margin-top:0px; /* IE7 and below */
-		*padding-top:55px; /* IE7 and below */
-		_margin-top:0px; /* IE6 */
-		_padding-top:55px; /* IE6 */
 	z-index: 2;
 }
 
@@ -108,7 +101,8 @@ a:hover .show-button--novel_a {
 	padding: 8px 20px;
 	background:#ffffff;
 	line-height:180%;
-	width:700px;
+	max-width:700px;
+	width: 100%;
 	vertical-align: baseline;
 	text-align: left;
 }
