@@ -2,6 +2,8 @@ import { convertRubyTags, convertSasieTags } from "../../utils/text.js"
 import { _toolCovertKakuyomuRubyDot, _toolRuby, _toolRubyDot, _toolSasie } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
+let isEventLocked = false
+
 export function _editor(){
     changeEditorPageLikePreview()
 }
