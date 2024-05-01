@@ -398,6 +398,7 @@ body.narou-tweaker-custom-editor {
 	z-index: 10;
 	top: 0;
     background: #333;
+	border: none;
 	color: #fff;
 	font-size: 12px;
 	height: auto;
@@ -405,9 +406,25 @@ body.narou-tweaker-custom-editor {
 	padding: 2px;
 	text-align: center;
 }
+.narou-tweaker-custom-editor .nt-editor--body-content-banner.c-alert--warning {
+	color: #b38e00;
+	background-color: #fffae6;
+	font-weight: bold;
+}
+.narou-tweaker-custom-editor .nt-editor--body-content-banner.c-alert--danger {
+	color: #b80000;
+	background-color: #ffebeb;
+	font-weight: bold;
+}
 .narou-tweaker-custom-editor .nt-editor--body-content-banner a {
 	color: inherit;
 	text-decoration: underline;
+}
+.narou-tweaker-custom-editor .nt-editor--body-content-banner--remove-button {
+	float: right;
+	padding: 0 10px;
+	height: 100%;
+	cursor: pointer;
 }
 
 /*** editor content - novel ***/

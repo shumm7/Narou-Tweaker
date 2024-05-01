@@ -309,15 +309,28 @@ function changeEditorPageLikePreview(){
         }
     }
 
+    // Alerts
+    container.find(".c-alert").each(function(){
+        console.log($(this).text())
+        elm.find(".nt-editor--body").prepend(
+            $(this).addClass(["nt-editor--body-content-banner", "nt-editor--body-content-baner-removable", "nt-editor--footer-tab-content"]).attr("data", 0)
+        )
+    })
+
     // Utilities
     /* Unload Warnings */
     let isChanged = false
     elm.find("input,textarea").on("input", function(){
         if(!isChanged){
-            window.addEventListener('beforeunload', function (event) {
+            $(window).on('beforeunload', function (event) {
                 event.preventDefault()
             })
             isChanged = true
+        }
+    })
+    container.find("form.c-form").on("submit", function(e){
+        if(isChanged){
+            $(window).off('beforeunload')
         }
     })
 
@@ -381,6 +394,18 @@ function changeEditorPageLikePreview(){
         })
     }
     elm.find("textarea[name='novel']").on("input", countText)
+
+    /* Banner (Removable) */
+    elm.find(".nt-editor--body-content-banner.nt-editor--body-content-baner-removable").each(function(){
+        $(this).append($(`
+            <div class="nt-editor--body-content-banner--remove-button">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            `).on("click", function(){
+                $(this).parent().remove()
+            })
+        )
+    })
 
     /* API */
     var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
@@ -507,7 +532,6 @@ export function getSelectedContent(){
     elm.find(".nt-editor--freememo").append(container.find("textarea[name='freememo']").clone(true).attr("placeholder", "フリーメモを入力…"))
 */
 function stateCheck(){
-    let isEventLocked = false
     const state = []
     const maxState = 1000
     let currentState = 0
