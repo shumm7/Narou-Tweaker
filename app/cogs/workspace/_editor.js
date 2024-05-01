@@ -31,6 +31,14 @@ function changeEditorPageLikePreview(){
                                 <i class="fa-solid fa-table-columns"></i>
                             </button>
                             <div class="nt-editor--panel-vertical-devide"></div>
+                            <div id="nt-editor--panel-undoredo">
+                                <button type="button" id="nt-editor--panel-undo" class="nt-button nt-editor--panel-undoredo-button" title="戻す">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </button>
+                                <button type="button" id="nt-editor--panel-redo" class="nt-button nt-editor--panel-undoredo-button" title="やり直す">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="nt-editor--header-items nt-editor-header-middle">
                             ${header}
@@ -258,11 +266,11 @@ function changeEditorPageLikePreview(){
     }))
 
     // inputs
-    elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…"))
-    elm.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…"))
-    elm.find(".nt-editor--preface").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…"))
-    elm.find(".nt-editor--postscript").append(container.find("textarea[name='postscript']").clone(true).attr("placeholder", "後書きを入力…"))
-    elm.find(".nt-editor--freememo").append(container.find("textarea[name='freememo']").clone(true).attr("placeholder", "フリーメモを入力…"))
+    elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…").addClass("nt-check-state"))
+    elm.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…").addClass("nt-check-state"))
+    elm.find(".nt-editor--preface").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…").addClass("nt-check-state"))
+    elm.find(".nt-editor--postscript").append(container.find("textarea[name='postscript']").clone(true).attr("placeholder", "後書きを入力…").addClass("nt-check-state"))
+    elm.find(".nt-editor--freememo").append(container.find("textarea[name='freememo']").clone(true).attr("placeholder", "フリーメモを入力…").addClass("nt-check-state"))
     elm.find(".c-form__textarea").each(function(){
         var elm = $(this)
         elm.attr("rows", 1)
@@ -482,34 +490,142 @@ export function getSelectedContent(){
     }
 }
 
+/*
+    elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…"))
+    elm.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…"))
+    elm.find(".nt-editor--preface").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…"))
+    elm.find(".nt-editor--postscript").append(container.find("textarea[name='postscript']").clone(true).attr("placeholder", "後書きを入力…"))
+    elm.find(".nt-editor--freememo").append(container.find("textarea[name='freememo']").clone(true).attr("placeholder", "フリーメモを入力…"))
+*/
 function stateCheck(){
-    let isIMEActive = false
+    let isEventLocked = false
     const state = []
-    const maxState = 100
-    let currentStateIndex = 0
+    const maxState = 1000
+    let currentState = 0
+    const firstState = {}
+    let isTrashedState = false
 
-    function pushState(value){
-        console.log("pushed! -> " + value)
-        if(state.length-1 != currentStateIndex){
-            state.splice(currentStateIndex)
+    function pushState(value, name, caret){
+        if(state.length-1 != currentState){
+            state.splice(0, currentState)
+            currentState = 0
         }
-        state.unshift(value)
+        state.unshift([value, name, caret])
         if(state.length > maxState){
             state.pop()
+            isTrashedState = true
+        }
+        buttonState()
+        
+    }
+
+    function restoreState(isFirst){
+        var value, name, caret
+        if(isFirst){
+            const lastStateName = state[state.length-1][1]
+
+            value = firstState[lastStateName][0]
+            name = firstState[lastStateName][1]
+            caret = firstState[lastStateName][2]
+            $(`.nt-check-state[name='${name}']`).val(value)
+            isEventLocked = true
+            $(`.nt-check-state[name='${name}']`).trigger("input")
+            isEventLocked = false
+            $(`.nt-check-state[name='${name}']`).selection("setPos", caret)
+        }else{
+            if(state.length>0){
+                const appliedState = state[currentState]
+                value = appliedState[0]
+                name = appliedState[1]
+                caret = appliedState[2]
+
+                $(`.nt-check-state[name='${name}']`).val(value)
+                isEventLocked = true
+                $(`.nt-check-state[name='${name}']`).trigger("input")
+                isEventLocked = false
+                $(`.nt-check-state[name='${name}']`).selection("setPos", caret)
+            }
+        }
+        buttonState()
+    }
+
+    function buttonState(){
+        if(state.length>0){
+            if(currentState==0){
+                $("#nt-editor--panel-redo").prop("disabled", true)
+            }else{
+                $("#nt-editor--panel-redo").prop("disabled", false)
+            }
+            if(isTrashedState){
+                if(currentState>=state.length-1){
+                    $("#nt-editor--panel-undo").prop("disabled", true)
+                }else{
+                    $("#nt-editor--panel-undo").prop("disabled", false)
+                }
+            }
+            else{
+                if(currentState>state.length-1){
+                    $("#nt-editor--panel-undo").prop("disabled", true)
+                }else{
+                    $("#nt-editor--panel-undo").prop("disabled", false)
+                }
+            }
+        }else{
+            $("#nt-editor--panel-undo, #nt-editor--panel-redo").prop("disabled", true)
         }
     }
 
-    $("textarea[name='novel']").on("compositionstart", function(){
-        isIMEActive = true
-    })
-    $("textarea[name='novel']").on("compositionend", function(){
-        isIMEActive = false
-        pushState($(this).val())
-    })
-    $("textarea[name='novel']").on("input", function(){
-        if(!isIMEActive){
-            pushState($(this).val())
+    /* buttons */
+    function undoClicked(){
+        if(!isTrashedState && state.length==currentState+1){
+            currentState += 1
+            restoreState(true)
+        }else if(state.length > 0 && currentState+1 <= state.length){
+            currentState += 1
+            restoreState()
         }
+    }
+    function redoClicked(){
+        if(state.length > 0 && currentState-1 >= 0){
+            currentState -= 1
+            restoreState()
+        }
+    }
+    $("#nt-editor--panel-undo").on("click", function(){
+        undoClicked()
+    })
+    $("#nt-editor--panel-redo").on("click", function(){
+        redoClicked()
+    })
+    $("body").keydown(function(e){
+        if ((e.ctrlKey || e.metaKey) && e.key == 'z') {
+            e.preventDefault();
+            undoClicked()
+        }
+        else if((e.ctrlKey || e.metaKey) && e.key == 'y') {
+            e.preventDefault();
+            redoClicked()
+        }
+    });
+    buttonState()
+
+    /* changes */
+    $(".nt-check-state").on("compositionstart", function(){
+        isEventLocked = true
+    })
+    $(".nt-check-state").on("compositionend", function(){
+        isEventLocked = false
+        pushState($(this).val(), $(this).attr("name"), $(this).selection("getPos"))
+    })
+    $(".nt-check-state").on("input", function(){
+        if(!isEventLocked){
+            pushState($(this).val(), $(this).attr("name"), $(this).selection("getPos"))
+        }
+    })
+
+    /* initial state */
+    $(".nt-check-state").each(function(){
+        firstState[$(this).attr("name")] = [$(this).val(), $(this).attr("name"), $(this).selection("getPos")]
     })
 }
 

@@ -40,6 +40,10 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-button:hover {
 	background-color: #fafafa;
 }
+.narou-tweaker-custom-editor .nt-button:disabled {
+	background-color: #eee;
+	color: #aaa;
+}
 .narou-tweaker-custom-editor .c-up-panel__button {
 	padding: 5px 10px !important;
 }
@@ -250,6 +254,24 @@ body.narou-tweaker-custom-editor {
 	padding-left: 10px;
 	margin-right: 10px;
 	height: 100%;
+}
+.narou-tweaker-custom-editor #nt-editor--panel-undoredo{
+	display: flex;
+	height: 100%;
+}
+.narou-tweaker-custom-editor .nt-editor--panel-undoredo-button {
+	padding-top: 0;
+	padding-bottom: 0;
+	height: 100%;
+	display:flex;
+	align-items: center;
+}
+.narou-tweaker-custom-editor #nt-editor--panel-undo {
+	border-radius: 3px 0 0 3px;
+	border-right: 0;
+}
+.narou-tweaker-custom-editor #nt-editor--panel-redo {
+	border-radius: 0 3px 3px 0;
 }
 .narou-tweaker-custom-editor #nt-editor--panel-close {
 	margin-right: 10px;
