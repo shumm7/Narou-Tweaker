@@ -20,3 +20,6 @@
 [submodule "app/libs/encoding.js"]
 	path = app/libs/encoding.js
 	url = https://github.com/polygonplanet/encoding.js.git
+[submodule "app/libs/jquery.selection"]
+	path = app/libs/jquery.selection
+	url = https://github.com/madapaja/jquery.selection.git

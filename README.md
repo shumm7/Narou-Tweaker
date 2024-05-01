@@ -22,3 +22,5 @@
 * [davidshimjs/qrcodejs](https://github.com/davidshimjs/qrcodejs) Copyright (c) 2012 davidshimjs
 * [greensock/GSAP](https://github.com/greensock/GSAP) [©2024 GreenSock](https://gsap.com/licensing/)
 * [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js) Copyright (c) 2006, Ivan Sagalaev.
+* [polygonplanet/encoding.js](https://github.com/polygonplanet/encoding.js) Copyright (c) 2012 polygonplanet
+* [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).

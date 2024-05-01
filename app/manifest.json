@@ -90,6 +90,7 @@
       "js": [
         "libs/jquery-3.7.1.min.js",
         "libs/encoding.js/encoding.min.js",
+        "libs/jquery.selection/src/jquery.selection.js",
         "loader/workspace.js"
       ],
       "css": [
@@ -158,6 +159,7 @@
         "cogs/workspace/_favorite.js",
         "cogs/workspace/_header.js",
         "cogs/workspace/_editor.js",
+        "cogs/workspace/_editorTools.js",
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",
         "cogs/mypage/_general.js",

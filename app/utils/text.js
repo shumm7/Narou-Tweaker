@@ -169,6 +169,24 @@ export function countCharacters(strings, shouldCountSpecialTag, shouldCountBlank
 
 }
 
+/* Convert Sasie Tags */
+export function convertSasieTags(element, isEscaped){
+    var re = /<(i[0-9]+)\|([0-9]+)>/g
+    var to = `<a href="//$2.mitemin.net/$1/" target="_blank"><img src="//$2.mitemin.net/userpageimage/viewimagebig/icode/$1/" alt="挿絵(By みてみん)" border="0"></a>`
+
+    var nodes = $(element)[0].childNodes;
+    $.each(nodes, function(_, w) {
+        if(w.innerHTML==undefined){ // is text
+            if(w.data.match(re)){
+                $.each($.parseHTML(w.data.replace(re, to)), function(_, x) {
+                    w.before(x);
+                });
+                w.remove();
+            }
+        }
+    })
+}
+
 /* Convert Ruby Tags */
 // 文字列中のルビタグを相互変換
 export function convertRubyTags(text, toTags, additionalKanji){

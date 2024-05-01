@@ -1,3 +1,5 @@
+import { convertRubyTags, convertSasieTags } from "../../utils/text.js"
+import { _toolCovertKakuyomuRubyDot, _toolRuby, _toolRubyDot, _toolSasie } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
 export function _editor(){
@@ -14,8 +16,6 @@ function changeEditorPageLikePreview(){
     const ncode = indexToNcode($(".js-novel_backup_info").attr("data-ncode"))
     const userid = $(".js-novel_backup_info").attr("data-userid")
 
-    
-
     $(".l-header").remove()
     $(".l-breadcrumb").remove()
     $(".l-footer").remove()
@@ -30,15 +30,15 @@ function changeEditorPageLikePreview(){
                             <button type="button" class="nt-button" id="nt-editor--panel-toggle" title="サイドパネルを開閉">
                                 <i class="fa-solid fa-table-columns"></i>
                             </button>
-                            <a type="button" class="nt-button" id="nt-editor--panel-close" title="編集画面を閉じる">
-                                <i class="fa-solid fa-xmark"></i>
-                            </a>
+                            <div class="nt-editor--panel-vertical-devide"></div>
                         </div>
                         <div class="nt-editor--header-items nt-editor-header-middle">
                             ${header}
                         </div>
                         <div class="nt-editor--header-items nt-editor-header-right" id="nt-editor--save-button">
-                            
+                            <a type="button" class="nt-button" id="nt-editor--panel-close" title="編集画面を閉じる">
+                                <i class="fa-solid fa-xmark"></i>
+                            </a>
                         </div>
                     </div>
                     <div class="nt-editor--body">
@@ -53,8 +53,13 @@ function changeEditorPageLikePreview(){
                             <span style="text-decoration: underline; font-weight: bold;">フリーメモ</span>&nbsp;を編集しています。<br>
                             エピソードと一緒に保存しておけるメモです。書いたメモは他のユーザには公開されません。詳細は<a href="https://syosetu.com/helpcenter/helppage/helppageid/36/" target="_blank">ヘルプセンター</a>をご確認ください。
                         </div>
+                        <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="4">
+                            <span style="text-decoration: underline; font-weight: bold;">プレビュー</span>&nbsp;を表示中（このエピソードの文字数：<span class="nt-editor--textcount" data="0"></span> 字）<br>
+                            実際の表示と異なる可能性があります。
+                        </div>
 
                         <!-- コンテンツ -->
+                        <input type="hidden" name="nt-editor--selected-content" value="0">
                         <div class="nt-editor--body-content nt-editor--footer-tab-content nt-content-hidden" id="nt-editor--main" data="0">
                             <div class="nt-editor--main-items">
                                 <div class="nt-editor--main-title">
@@ -72,16 +77,25 @@ function changeEditorPageLikePreview(){
                         <div class="nt-editor--body-content nt-editor--footer-tab-content nt-content-hidden" id="nt-editor--freememo" data="3">
                             <div class="nt-editor--freememo"></div>
                         </div>
-                        <div class="nt-editor--body-content nt-editor--footer-tab-content nt-content-hidden" id="nt-editor--preview" data="4"></div>
+                        <div class="nt-editor--body-content nt-editor--footer-tab-content nt-content-hidden" id="nt-editor--preview" data="4">
+                            <div class="nt-editor--preview-items">
+                                <div id="nt-preview--novel_subtitle"></div>
+                                <div class="nt-editor--preview-contents">
+                                    <div id="nt-preview--novel_p" class="novel-view"></div>
+                                    <div id="nt-preview--novel_honbun" class="novel-view"></div>
+                                    <div id="nt-preview--novel_a" class="novel-view"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="nt-editor--footer">
                         <div class="nt-editor--footer-items nt-editor-footer-left">
                             <div class="nt-editor--footer-tab">
                                 <span class="nt-editor--footer-tab-item" data="3">
-                                    <button type="button" class="nt-editor--footer-tab-button">フリーメモ</button>
+                                    <button type="button" class="nt-editor--footer-tab-button"><i class="fa-regular fa-note-sticky"></i>フリーメモ</button>
                                 </span>
                                 <span class="nt-editor--footer-tab-item" data="4">
-                                    <button type="button" class="nt-editor--footer-tab-button">プレビュー</button>
+                                    <button type="button" class="nt-editor--footer-tab-button"><i class="fa-solid fa-align-left"></i>プレビュー</button>
                                 </span>
                             </div>
                         </div>
@@ -167,9 +181,12 @@ function changeEditorPageLikePreview(){
                     <div class="nt-panel--tab-content" id="nt-panel--tab-display" data="1">
                         <h4 class="underline">執筆時の表示設定</h4>
                         <p>閲覧画面には影響しません。</p>
-                    </div>
+                    </div>  
                     <div class="nt-panel--tab-content" id="nt-panel--tab-tools" data="2">
-                    
+                        <button type="button" id="nt-tools--ruby">ルビ</button>
+                        <button type="button" id="nt-tools--rubydot">傍点</button>
+                        <button type="button" id="nt-tools--kakuyomu-rubydot">カクヨムの傍点</button>
+                        <button type="button" id="nt-tools--sasie">挿絵</button>
                     </div>
                 </div>
             </aside>
@@ -277,6 +294,17 @@ function changeEditorPageLikePreview(){
     }
 
     // Utilities
+    /* Unload Warnings */
+    let isChanged = false
+    elm.find("input,textarea").on("input", function(){
+        if(!isChanged){
+            window.addEventListener('beforeunload', function (event) {
+                event.preventDefault()
+            })
+            isChanged = true
+        }
+    })
+
     /* Sidepanel Tabs */
     var selectPanelTab = function(index){
         $(".nt-panel--tab-item").removeClass("nt-selected")
@@ -295,6 +323,7 @@ function changeEditorPageLikePreview(){
         $(".nt-editor--footer-tab-content").addClass("nt-content-hidden")
         $(`.nt-editor--footer-tab-item[data='${index}']`).addClass("nt-selected")
         $(`.nt-editor--footer-tab-content[data='${index}']`).removeClass("nt-content-hidden")
+        $(`input[name="nt-editor--selected-content"]`).val(index)
 
         // Specific Field
         index = `${index}`
@@ -306,6 +335,8 @@ function changeEditorPageLikePreview(){
             novelPadding("textarea[name='postscript']")
         }else if(index=="3"){
             novelPadding("textarea[name='freememo']")
+        }else if(index=="4"){
+            showPreview()
         }
     }
     elm.find(".nt-editor--footer-tab-item").on("click", function(){
@@ -380,4 +411,111 @@ function changeEditorPageLikePreview(){
     selectFooterTab(0)
     selectPanelTab(0)
     countText()
+    insertUtilities()
+    stateCheck()
+}
+
+function showPreview(){
+    function isEmpty(elm){
+        if(elm.get(0).innerHTML.match(/^ *$/)){
+            elm.append("<br/>")
+        }
+    }
+
+    // subtitle
+    $("#nt-preview--novel_subtitle").empty()
+    const subtitle = escapeHtml($(`input[name="subtitle"]`).val())
+    if(subtitle.length>0){
+        $("#nt-preview--novel_subtitle").text(subtitle)
+    }else{
+        $("#nt-preview--novel_subtitle").append(`<span class="empty">エピソードタイトルを入力するとここに表示されます。</span>`)
+    }
+
+    // preface
+    $("#nt-preview--novel_p").empty()
+    const preface = escapeHtml($(`textarea[name="preface"]`).val().replace(/\r\n/g, '\n').replace(/\r/g, '\n'))
+    if(preface.length>0){
+        $.each(preface.split(/\n/), function(i, text){
+            var p = $(`<p id="Lp${i+1}">${convertRubyTags(text, true)}</p>`)
+            isEmpty(p)
+            $("#nt-preview--novel_p").append(p)
+        })
+    }else{
+        $("#nt-preview--novel_p").append(`<span class="empty">前書きを入力するとここに表示されます。</span>`)
+    }
+
+    // honbun
+    $("#nt-preview--novel_honbun").empty()
+    const honbun = escapeHtml($(`textarea[name="novel"]`).val().replace(/\r\n/g, '\n').replace(/\r/g, '\n'))
+    if(honbun.length>0){
+        $.each(honbun.split(/\n/), function(i, text){
+            var p = $(`<p id="L${i+1}">${convertRubyTags(text, true)}</p>`)
+            convertSasieTags(p)
+            isEmpty(p)
+            $("#nt-preview--novel_honbun").append(p)
+        })
+    }else{
+        $("#nt-preview--novel_honbun").append(`<span class="empty">本文を入力するとここに表示されます。</span>`)
+    }
+
+    // postscript
+    $("#nt-preview--novel_a").empty()
+    const postscript = escapeHtml($(`textarea[name="postscript"]`).val().replace(/\r\n/g, '\n').replace(/\r/g, '\n'))
+    if(postscript.length>0){
+        $.each(postscript.split(/\n/), function(i, text){
+            var p = $(`<p id="La${i+1}">${convertRubyTags(text, true)}</p>`)
+            isEmpty(p)
+            $("#nt-preview--novel_a").append(p)
+        })
+    }else{
+        $("#nt-preview--novel_a").append(`<span class="empty">後書きを入力するとここに表示されます。</span>`)
+    }
+
+}
+
+export function getSelectedContent(){
+    const idx = parseInt($(`input[name="nt-editor--selected-content"]`).val())
+    if(isNaN(idx)){
+        return null
+    }else{
+        return idx
+    }
+}
+
+function stateCheck(){
+    let isIMEActive = false
+    const state = []
+    const maxState = 100
+    let currentStateIndex = 0
+
+    function pushState(value){
+        console.log("pushed! -> " + value)
+        if(state.length-1 != currentStateIndex){
+            state.splice(currentStateIndex)
+        }
+        state.unshift(value)
+        if(state.length > maxState){
+            state.pop()
+        }
+    }
+
+    $("textarea[name='novel']").on("compositionstart", function(){
+        isIMEActive = true
+    })
+    $("textarea[name='novel']").on("compositionend", function(){
+        isIMEActive = false
+        pushState($(this).val())
+    })
+    $("textarea[name='novel']").on("input", function(){
+        if(!isIMEActive){
+            pushState($(this).val())
+        }
+    })
+}
+
+function insertUtilities(){
+    _toolRuby()
+    _toolRubyDot()
+    _toolCovertKakuyomuRubyDot()
+    _toolSasie()
 }

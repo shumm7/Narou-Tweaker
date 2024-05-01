@@ -48,7 +48,7 @@ body.narou-tweaker-custom-editor {
 	display: inline-block;
 	resize: none;
 	unicode-bidi: normal;
-	overflow: auto;
+	overflow-x: hidden;
     overflow-y: hidden;
 	padding: 10px;
 	margin: 0;
@@ -245,13 +245,17 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-editor--header-items.nt-editor-header-right {
 	justify-content: flex-end;
 }
+.narou-tweaker-custom-editor .nt-editor--panel-vertical-devide {
+	border-right: 1px solid #ddd;
+	padding-left: 10px;
+	margin-right: 10px;
+	height: 100%;
+}
 .narou-tweaker-custom-editor #nt-editor--panel-close {
-	margin-left: 10px;
-	padding-left: 20px;
+	margin-right: 10px;
 	color: inherit;
 	cursor: pointer;
 	border: 1px solid transparent;
-	border-left: 1px solid #ddd;
 	border-radius: 0;
 	background: none;
 }
@@ -323,7 +327,7 @@ body.narou-tweaker-custom-editor {
 	background: none;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-tab-button > i {
-	margin-right: 3px;
+	margin-right: 5px;
 }
 
 .narou-tweaker-custom-editor .nt-editor--footer-textcount{
@@ -428,7 +432,7 @@ body.narou-tweaker-custom-editor {
 	display: none;
 }
 
-/*** editor content - preface / postscript ***/
+/*** editor content - preface / postscript / freememo ***/
 .narou-tweaker-custom-editor .nt-editor--preface,
 .narou-tweaker-custom-editor .nt-editor--postscript,
 .narou-tweaker-custom-editor .nt-editor--freememo {
@@ -445,4 +449,72 @@ body.narou-tweaker-custom-editor {
     font-size: 100%;
 	box-sizing: content-box;
 	padding-bottom: 100px;
+}
+
+/*** editor content - preview ***/
+.narou-tweaker-custom-editor .nt-editor--preview-items {
+	color: #444;
+	font-size: 16px;
+	font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+	max-width: 730px;
+	margin: 0 auto;
+}
+.narou-tweaker-custom-editor .nt-editor--preview-contents {
+	max-width: 600px;
+	margin: 0 auto;
+}
+.narou-tweaker-custom-editor #nt-preview--novel_subtitle {
+	margin: 0 auto 10px;
+	margin-top: 30px;
+    text-align: center;
+    font-size: 170%;
+    font-weight: bold;
+    line-height: 150%;
+	width: 730px;
+}
+.narou-tweaker-custom-editor .nt-editor--preview-items .novel-view {
+	line-height: 180%;
+}
+.narou-tweaker-custom-editor .nt-editor--preview-items .novel-view p {
+	white-space: break-spaces;
+	line-height: 180%;
+    font-size: 100%;
+	vertical-align: baseline;
+	box-sizing: content-box;
+}
+
+.narou-tweaker-custom-editor .nt-editor--preview-items .novel-view p * {
+	box-sizing: inherit;
+}
+.narou-tweaker-custom-editor .nt-editor--preview-items .novel-view img {
+	border-width: 0 !important;
+	border-style: none !important;
+}
+.narou-tweaker-custom-editor #nt-preview--novel_p {
+	margin: 0px auto 30px;
+    padding: 20px 0 30px 0;
+    max-width: 600px;
+    border-bottom: 3px double #999999;
+}
+.narou-tweaker-custom-editor #nt-preview--novel_honbun {
+	margin: 30px auto 50px;
+    padding: 0;
+    max-width: 600px;
+}
+.narou-tweaker-custom-editor #nt-preview--novel_a {
+	margin: 40px auto 30px;
+    padding: 20px 0 30px 0;
+    max-width: 600px;
+    border-top: 3px double #999999;
+}
+.narou-tweaker-custom-editor #nt-preview--novel_subtitle .empty,
+.narou-tweaker-custom-editor #nt-preview--novel_p .empty,
+.narou-tweaker-custom-editor #nt-preview--novel_honbun .empty,
+.narou-tweaker-custom-editor #nt-preview--novel_a .empty {
+	padding: 5px 10px;
+    background: #eeeeee;
+    border: 1px dashed #cccccc;
+    border-radius: 5px;
+    display: block;
+    color: #999999;
 }
