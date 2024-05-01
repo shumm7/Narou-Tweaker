@@ -1,5 +1,17 @@
 import { getSelectedContent } from "./_editor.js"
 
+function getForms(index){
+    if(index==0){
+        return 'textarea[name="novel"]'
+    }else if(index==1){
+        return 'textarea[name="preface"]'
+    }else if(index==2){
+        return 'textarea[name="postscript"]'
+    }else if(index==3){
+        return 'textarea[name="freememo"]'
+    }
+}
+
 function rubyDot(text){
     var ret = ""
     for(let i = 0; i<text.length; i++){
@@ -11,34 +23,14 @@ function rubyDot(text){
 export function _toolRuby(){
     $("#nt-tools--ruby").click(function(){
         const index = getSelectedContent()
-        if(index==0){
-            var text = $('textarea[name="novel"]').selection()
-            $('textarea[name="novel"]')
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).selection()
+            $(form)
                 .selection('insert', {text: '｜'+text+"《", mode: 'before'})
                 .selection('replace', {text: 'ルビを入力…'})
                 .selection('insert', {text: '》', mode: 'after'})
-            $('textarea[name="novel"]').trigger("input")
-        }else if(index==1){
-            var text = $('textarea[name="preface"]').selection()
-            $('textarea[name="preface"]')
-                .selection('insert', {text: '｜'+text+"《", mode: 'before'})
-                .selection('replace', {text: 'ルビを入力…'})
-                .selection('insert', {text: '》', mode: 'after'})
-            $('textarea[name="preface"]').trigger("input")
-        }else if(index==2){
-            var text = $('textarea[name="postscript"]').selection()
-            $('textarea[name="postscript"]')
-                .selection('insert', {text: '｜'+text+"《", mode: 'before'})
-                .selection('replace', {text: 'ルビを入力…'})
-                .selection('insert', {text: '》', mode: 'after'})
-            $('textarea[name="postscript"]').trigger("input")
-        }else if(index==3){
-            var text = $('textarea[name="freememo"]').selection()
-            $('textarea[name="freememo"]')
-                .selection('insert', {text: '｜'+text+"《", mode: 'before'})
-                .selection('replace', {text: 'ルビを入力…'})
-                .selection('insert', {text: '》', mode: 'after'})
-            $('textarea[name="freememo"]').trigger("input")
+            $(form).trigger("input")
         }
     })
 }
@@ -46,30 +38,13 @@ export function _toolRuby(){
 export function _toolRubyDot(){
     $("#nt-tools--rubydot").click(function(){
         const index = getSelectedContent()
-        if(index==0){
-            var text = $('textarea[name="novel"]').selection()
-            $('textarea[name="novel"]')
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).selection()
+            $(form)
                 .selection('insert', {text: rubyDot(text), mode: 'before'})
                 .selection('replace', {text: ''})
-            $('textarea[name="novel"]').trigger("input")
-        }else if(index==1){
-            var text = $('textarea[name="preface"]').selection()
-            $('textarea[name="preface"]')
-                .selection('insert', {text: rubyDot(text), mode: 'before'})
-                .selection('replace', {text: ''})
-            $('textarea[name="preface"]').trigger("input")
-        }else if(index==2){
-            var text = $('textarea[name="postscript"]').selection()
-            $('textarea[name="postscript"]')
-                .selection('insert', {text: rubyDot(text), mode: 'before'})
-                .selection('replace', {text: ''})
-            $('textarea[name="postscript"]').trigger("input")
-        }else if(index==3){
-            var text = $('textarea[name="freememo"]').selection()
-            $('textarea[name="freememo"]')
-                .selection('insert', {text: rubyDot(text), mode: 'before'})
-                .selection('replace', {text: ''})
-            $('textarea[name="freememo"]').trigger("input")
+            $(form).trigger("input")
         }
     })
 }
@@ -86,22 +61,11 @@ export function _toolCovertKakuyomuRubyDot(){
 
     $("#nt-tools--kakuyomu-rubydot").click(function(){
         const index = getSelectedContent()
-        if(index==0){
-            var text = $('textarea[name="novel"]').val()
-            $('textarea[name="novel"]').val(replaceKakuyomuRubyDot(text))
-            $('textarea[name="novel"]').trigger("input")
-        }else if(index==1){
-            var text = $('textarea[name="preface"]').val()
-            $('textarea[name="preface"]').val(replaceKakuyomuRubyDot(text))
-            $('textarea[name="preface"]').trigger("input")
-        }else if(index==2){
-            var text = $('textarea[name="postscript"]').val()
-            $('textarea[name="postscript"]').val(replaceKakuyomuRubyDot(text))
-            $('textarea[name="postscript"]').trigger("input")
-        }else if(index==3){
-            var text = $('textarea[name="freememo"]').val()
-            $('textarea[name="freememo"]').val(replaceKakuyomuRubyDot(text))
-            $('textarea[name="freememo"]').trigger("input")
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).val()
+            $(form).val(replaceKakuyomuRubyDot(text))
+            $(form).trigger("input")
         }
     })
 }
@@ -109,8 +73,9 @@ export function _toolCovertKakuyomuRubyDot(){
 export function _toolSasie(){
     $("#nt-tools--sasie").click(function(){
         const index = getSelectedContent()
-        if(index==0){
-            var text = $('textarea[name="novel"]').selection()
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).selection()
             var url
             try{
                 url = new URL(text)
@@ -139,28 +104,24 @@ export function _toolSasie(){
             }
 
             if(userid && !icode){
-                console.log($('textarea[name="novel"]').selection())
-                $('textarea[name="novel"]')
-                    .selection('insert', {text: "<", mode: 'before'})
+                console.log($(form).selection())
+                $(form).selection('insert', {text: "<", mode: 'before'})
                     .selection('replace', {text: 'iコード'})
                     .selection('insert', {text: `|${userid}>`, mode: 'after'})
-                $('textarea[name="novel"]').trigger("input")
+                $(form).trigger("input")
             }else if(!userid && icode){
-                $('textarea[name="novel"]')
-                    .selection('insert', {text: `<${icode}|`, mode: 'before'})
+                $(form).selection('insert', {text: `<${icode}|`, mode: 'before'})
                     .selection('replace', {text: 'ユーザID'})
                     .selection('insert', {text: `>`, mode: 'after'})
-                $('textarea[name="novel"]').trigger("input")
+                $(form).trigger("input")
             }else if(userid && icode){
-                $('textarea[name="novel"]')
-                    .selection('replace', {text: `<${icode}|${userid}>`})
-                $('textarea[name="novel"]').trigger("input")
+                $(form).selection('replace', {text: `<${icode}|${userid}>`})
+                $(form).trigger("input")
             }else{
-                $('textarea[name="novel"]')
-                    .selection('insert', {text: text + "<", mode: 'before'})
+                $(form).selection('insert', {text: text + "<", mode: 'before'})
                     .selection('replace', {text: 'iコード'})
                     .selection('insert', {text: '|ユーザID>', mode: 'after'})
-                $('textarea[name="novel"]').trigger("input")
+                $(form).trigger("input")
             }
         }
     })

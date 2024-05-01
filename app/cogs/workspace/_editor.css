@@ -121,8 +121,7 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item {
 	height: 100%;
-	padding: 0 10px;
-	min-width: 75px;
+	padding: 0 5px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -136,8 +135,8 @@ body.narou-tweaker-custom-editor {
 	background: none;
 	text-wrap: nowrap;
 	font-size: 12px;
-	padding-left: 10px; 
-	padding-right: 10px; 
+	padding-left: 5px; 
+	padding-right: 5px; 
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item:hover .nt-panel--tab-button {
 	border-top-color: var(--kasasagi-blue);
@@ -190,7 +189,10 @@ body.narou-tweaker-custom-editor {
 	margin: 5px 5px;
 	border-bottom: 1px solid #ddd;
 }
-
+.narou-tweaker-custom-editor #nt-panel--tab-freememo-box > p {
+	text-indent: .5em;
+	line-height: 1.5;
+}
 
 
 /*** editor ***/

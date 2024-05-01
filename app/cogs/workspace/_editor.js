@@ -142,7 +142,9 @@ function changeEditorPageLikePreview(){
                         <span class="nt-panel--tab-item" data="2">
                             <button type="button" class="nt-panel--tab-button">ツール</button>
                         </span>
-
+                        <span class="nt-panel--tab-item" data="3">
+                            <button type="button" class="nt-panel--tab-button">フリーメモ</button>
+                        </span>
                     </div>
                 </div>
                 <div class="nt-panel--content">
@@ -195,6 +197,12 @@ function changeEditorPageLikePreview(){
                         <button type="button" id="nt-tools--rubydot">傍点</button>
                         <button type="button" id="nt-tools--kakuyomu-rubydot">カクヨムの傍点</button>
                         <button type="button" id="nt-tools--sasie">挿絵</button>
+                    </div>
+                    <div class="nt-panel--tab-content" id="nt-panel--tab-freememo" data="3">
+                        <div id="nt-panel--tab-content--freememo">
+                            <h4 class="underline">フリーメモ</h4>
+                            <div id="nt-panel--tab-freememo-box"></div>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -421,6 +429,7 @@ function changeEditorPageLikePreview(){
     countText()
     insertUtilities()
     stateCheck()
+    freememo()
 }
 
 function showPreview(){
@@ -627,6 +636,26 @@ function stateCheck(){
     $(".nt-check-state").each(function(){
         firstState[$(this).attr("name")] = [$(this).val(), $(this).attr("name"), $(this).selection("getPos")]
     })
+}
+
+function freememo(){
+    function resetFreememo(){
+        var text = $("textarea[name='freememo']").val().replace(/\r\n|\r/g, '\n');
+        $("#nt-panel--tab-freememo-box").empty()
+        $.each(text.split(/\n/), function(_, line){
+            var p = $("<p></p>").addClass("content")
+            p.text(line)
+            if(line.match(/^ *$/)){
+                p.append("<br/>")
+            }
+            $("#nt-panel--tab-freememo-box").append(p)
+        })
+    }
+
+    $("textarea[name='freememo']").on("input", function(){
+        resetFreememo()
+    })
+    //resetFreememo()
 }
 
 function insertUtilities(){

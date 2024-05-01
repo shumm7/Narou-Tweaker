@@ -251,7 +251,7 @@ export function countManuscriptPaper(string){
 
 // 行数を数える
 export function countLines(string){
-	string = string.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+	string = string.replace(/\r\n|\r/g, '\n');
 	var cnt = string.match(/\n/g);
 	if(cnt != null){
 		cnt = cnt.length + 1;
