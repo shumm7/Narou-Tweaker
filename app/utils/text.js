@@ -50,7 +50,7 @@ export function replaceUrl(_elem, isWarning) {
 // 記号をエスケープする（DOMインジェクション対策用）
 export function escapeHtml(string){
     if(typeof string !== 'string') {
-        return string;
+        return string
     }
     return string.replace(/[&'`"<>]/g, function(match) {
         return {

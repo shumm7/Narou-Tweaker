@@ -1,5 +1,5 @@
 import { convertRubyTags, convertSasieTags } from "../../utils/text.js"
-import { _toolCovertKakuyomuRubyDot, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie } from "./_editorTools.js"
+import { _toolCovertKakuyomuRubyDot, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
 let isEventLocked = false
@@ -416,28 +416,6 @@ function changeEditorPageLikePreview(){
         selectFooterTab(idx)
     })
 
-    /* Text count */
-    var countText = function(){
-        var text = $("textarea[name='novel']").val()
-
-        $(".nt-editor--textcount").each(function(){
-            const mode = $(this).attr("data")
-            var number
-            if(mode=="1"){
-                number = countCharacters(text, false, false, false);
-            }else{
-                number = countCharacters(text, true, true, true);
-            }
-            number = parseInt(number)
-            if(isNaN(number)){
-                $(this).text(0)
-            }else{
-                $(this).text(number.toLocaleString())
-            }
-        })
-    }
-    elm.find("textarea[name='novel']").on("input", countText)
-
     /* Banner (Removable) */
     elm.find(".nt-editor--body-content-banner.nt-editor--body-content-baner-removable").each(function(){
         $(this).append($(`
@@ -494,7 +472,7 @@ function changeEditorPageLikePreview(){
     // Initialize
     selectFooterTab(0)
     selectPanelTab(0)
-    countText()
+    textCount()
     insertUtilities()
     stateCheck()
     freememo()
@@ -556,6 +534,30 @@ function showPreview(){
         $("#nt-preview--novel_a").append(`<span class="empty">後書きを入力するとここに表示されます。</span>`)
     }
 
+}
+
+function textCount(){
+    var countText = function(){
+        var text = $("textarea[name='novel']").val()
+
+        $(".nt-editor--textcount").each(function(){
+            const mode = $(this).attr("data")
+            var number
+            if(mode=="1"){
+                number = countCharacters(text, false, false, false);
+            }else{
+                number = countCharacters(text, true, true, true);
+            }
+            number = parseInt(number)
+            if(isNaN(number)){
+                $(this).text(0)
+            }else{
+                $(this).text(number.toLocaleString())
+            }
+        })
+    }
+    $("textarea[name='novel']").on("input", countText)
+    countText()
 }
 
 export function getSelectedContent(){
@@ -730,6 +732,7 @@ function insertUtilities(){
     _toolRubyDot()
     _toolSasie()
 
+    _toolSearch()
     _toolIndent()
     _toolCovertKakuyomuRubyDot()
 }

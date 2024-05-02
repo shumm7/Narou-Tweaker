@@ -1,4 +1,4 @@
-import { autoIndent } from "../../utils/text.js"
+import { autoIndent, escapeHtml } from "../../utils/text.js"
 import { getSelectedContent } from "./_editor.js"
 
 function getForms(index){
@@ -109,7 +109,49 @@ export function _toolSasie(){
 
 
 export function _toolSearch(){
+    function mark(text, pattern, isPlain){
+        var ret = ""
+        var startIndex = 0
+        if(isPlain){
+            if(pattern.length>0){
+                while(text.indexOf(pattern, startIndex)!=-1){
+                    const matchPosStart = text.indexOf(pattern, startIndex)
+                    const matchPosEnd = matchPosStart + pattern.length - 1
+                    ret += escapeHtml(text.substring(startIndex, matchPosStart))
+                    ret += `<mark>${escapeHtml(text.substring(matchPosStart, matchPosEnd+1))}</mark>`
+                    startIndex = matchPosEnd + 1
+                }
+            }
+        }else{
+            var regex = new RegExp(pattern, "g")
+            $.each([...text.matchAll(regex)], function(_, match){
+                if(match[0].length>0){
+                    const matchPosStart = match.index
+                    const matchPosEnd = matchPosStart + match[0].length - 1
+
+                    ret += escapeHtml(text.substring(startIndex, matchPosStart))
+                    ret += `<mark>${escapeHtml(match[0])}</mark>`
+                    startIndex = matchPosEnd + 1
+                }
+            })
+        }
+        return ret
+    }
     
+    $(".c-form__textarea").each(function(){
+        const name = $(this).attr("name")
+        $(this).wrap(`<div class="nt-field--wrapper" name="${name}"></div>`)
+        $(this).before($(`
+            <div class="nt-field--backdrop">
+                <div class="nt-field--highlight"></div>
+            </div>
+        `))
+    })
+
+    $(".c-form__textarea").on("input", function(){
+        var highlight = $(this).parent().find(".nt-field--highlight")
+        highlight.html(mark($(this).val(), "a", true))
+    })
 }
 
 export function _toolIndent(){

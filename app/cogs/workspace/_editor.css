@@ -550,6 +550,47 @@ body.narou-tweaker-custom-editor {
 	padding-bottom: 100px;
 }
 
+/*** editor content - highlighter ***/
+.narou-tweaker-custom-editor .c-form__textarea {
+	position: absolute;
+  	z-index: 2;
+    background: transparent;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop {
+	position: absolute;
+	z-index: 1;
+	unicode-bidi: normal;
+	overflow-x: hidden;
+    overflow-y: hidden;
+	padding: 10px;
+	margin: 0;
+}
+.narou-tweaker-custom-editor .nt-field--wrapper[name="novel"] .nt-field--backdrop{
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
+}
+.narou-tweaker-custom-editor .nt-field--wrapper[name="preface"] .nt-field--backdrop,
+.narou-tweaker-custom-editor .nt-field--wrapper[name="postscript"] .nt-field--backdrop,
+.narou-tweaker-custom-editor .nt-field--wrapper[name="freememo"] .nt-field--backdrop {
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight {
+	color: transparent;
+	white-space: pre-wrap;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark{
+	border-radius: 3px;
+  	color: transparent;
+}
+
+
 /*** editor content - preview ***/
 .narou-tweaker-custom-editor .nt-editor--preview-items {
 	color: #444;
