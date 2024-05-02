@@ -157,6 +157,7 @@
         "cogs/workspace/utils.js",
         "cogs/workspace/_favorite.js",
         "cogs/workspace/_reaction.js",
+        "cogs/workspace/_misc.js",
         "cogs/workspace/_header.js",
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",

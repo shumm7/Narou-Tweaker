@@ -43,6 +43,9 @@
 								<li class="header-menu-item button-hide" name="header" data-for=".workspace-reaction" data="selected">
 									<span class="header-menu-item--title">リアクション</span>
 								</li>
+								<li class="header-menu-item button-hide" name="header" data-for=".workspace-misc" data="selected">
+									<span class="header-menu-item--title">その他</span>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -232,6 +235,28 @@
 								<div class="contents-option-content">
 									<input type="checkbox" id="workspaceImpressionMarkAsReadWhenReply" class="options toggle">
 									<label for="workspaceImpressionMarkAsReadWhenReply" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- その他 -->
+					<div class="contents-container workspace-misc button-hide-target button-hide--hidden" name="header">
+						<div class="contents-wide">
+							<p>ユーザホームのその他の設定を変更します。 </p>
+						</div>
+
+						<!-- 小説削除の誤操作防止機能 -->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">小説削除の誤操作防止機能</div>
+									<div class="contents-item--description">うっかり小説を削除してしまうことを防ぐため、削除操作時の確認画面を変更します。</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="workspaceMiscNovelDeleteConfirm" class="options toggle">
+									<label for="workspaceMiscNovelDeleteConfirm" class="toggle"></label>
 								</div>
 							</div>
 						</div>

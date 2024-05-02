@@ -55,6 +55,7 @@ export const defaultOption = {
     workspaceImpressionRead: [],
     workspaceImpressionReadButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
+    workspaceMiscNovelDeleteConfirm: true,
 
     /* Yomou */
     yomouRank_DevidePointsUnit: true,
