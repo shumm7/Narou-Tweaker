@@ -422,6 +422,9 @@ function changeEditorPageLikePreview(){
         }else if(index=="4"){
             showPreview()
         }
+
+        // Reset Scrolls
+        $(".nt-editor--body").scrollTop($(".nt-editor--body").get(0).scrollHeight)
     }
     elm.find(".nt-editor--footer-tab-item").on("click", function(){
         const idx = $(this).attr("data")
