@@ -194,6 +194,63 @@ body.narou-tweaker-custom-editor {
 	line-height: 1.5;
 }
 
+/*** sidepanel content - tools ***/
+.narou-tweaker-custom-editor .nt-notation-button {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	width: 100%;
+	background-color: #fafafa;
+	border-width: 2px;
+	margin-bottom: 5px;
+	overflow: hidden;
+	padding: .5em .5em .5em .75em;
+}
+.narou-tweaker-custom-editor .nt-notation-button:last-child {
+	margin-bottom: 0;
+}
+.narou-tweaker-custom-editor .nt-notation-button:hover {
+	background-color: #fafafa;
+	border-color: #333;
+}
+.narou-tweaker-custom-editor .nt-notation-button > i {
+	width: 16px;
+	margin-right: 5px;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation-button--label {
+	display: flex;
+	width: 2.75em;
+    font-weight: bold;
+	justify-content: flex-start;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation-button--sample {
+	display: flex;
+	flex-direction: column;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation-button--label + .nt-notation-button--sample {
+	padding-left: .75em;
+	border-left: 1px solid #ddd;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-row {
+	text-align: left;
+    font-family: メイリオ, Meiryo, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", sans-serif;
+	white-space: nowrap;
+	font-size: 14px;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-parsed {
+	font-size: 14px;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-code {
+	font-size: 10px;
+	white-space: nowrap;
+}
+.narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-code .code {
+    font-weight: bold;
+	color: #666;
+    background: #ddd;
+	padding: 0 4px;
+	border-radius: 3px;
+}
 
 /*** editor ***/
 .narou-tweaker-custom-editor .nt-editor {
@@ -431,6 +488,7 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-editor--main-items {
 	color: #444;
 	max-width: 600px;
+	min-width: 300px;
 	margin: 0 auto;
 }
 .narou-tweaker-custom-editor .nt-editor--main-title {

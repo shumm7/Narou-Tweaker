@@ -1,5 +1,5 @@
 import { convertRubyTags, convertSasieTags } from "../../utils/text.js"
-import { _toolCovertKakuyomuRubyDot, _toolRuby, _toolRubyDot, _toolSasie } from "./_editorTools.js"
+import { _toolCovertKakuyomuRubyDot, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
 let isEventLocked = false
@@ -51,6 +51,7 @@ function changeEditorPageLikePreview(){
                             </a>
                         </div>
                     </div>
+                    
                     <div class="nt-editor--body">
                         <!-- バナー -->
                         <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="1">
@@ -98,6 +99,7 @@ function changeEditorPageLikePreview(){
                             </div>
                         </div>
                     </div>
+
                     <div class="nt-editor--footer">
                         <div class="nt-editor--footer-items nt-editor-footer-left">
                             <div class="nt-editor--footer-tab">
@@ -195,11 +197,50 @@ function changeEditorPageLikePreview(){
                         <p>閲覧画面には影響しません。</p>
                     </div>  
                     <div class="nt-panel--tab-content" id="nt-panel--tab-tools" data="2">
-                        <button type="button" id="nt-tools--ruby">ルビ</button>
-                        <button type="button" id="nt-tools--rubydot">傍点</button>
-                        <button type="button" id="nt-tools--kakuyomu-rubydot">カクヨムの傍点</button>
-                        <button type="button" id="nt-tools--sasie">挿絵</button>
+                        <div id="nt-panel--tab-content--tools-format">
+                            <h4 class="underline">記法挿入</h4>
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--ruby">
+                                <span class="nt-notation-button--label">ルビ</span>
+                                <span class="nt-notation-button--sample">
+                                    <span class="nt-notation--sample-row nt-notation--sample-parsed"><ruby>加茂川<rp>(</rp><rt>かもがわ</rt><rp>)</rp></ruby>の水</span>
+                                    <span class="nt-notation--sample-row nt-notation--sample-code"><span class="code">｜加茂川《かもがわ》の水</span></span>
+                                </span>
+                            </button>
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--rubydot">
+                                <span class="nt-notation-button--label">傍点</span>
+                                <span class="nt-notation-button--sample">
+                                    <span class="nt-notation--sample-row nt-notation--sample-parsed"><ruby>絵<rp>(</rp><rt>・</rt><rp>)</rp></ruby><ruby>画<rp>(</rp><rt>・</rt><rp>)</rp></ruby>の鑑賞</span>
+                                    <span class="nt-notation--sample-row nt-notation--sample-code"><span class="code">｜絵《・》｜画《・》の鑑賞</span></span>
+                                </span>
+                            </button>
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--sasie">
+                                <span class="nt-notation-button--label">挿絵</span>
+                                <span class="nt-notation-button--sample">
+                                    <span class="nt-notation--sample-row">みてみんの画像を挿入</span>
+                                    <span class="nt-notation--sample-row nt-notation--sample-code"><span class="code">&lt;iコード|ユーザID&gt;</span></span>
+                                </span>
+                            </button>
+                        </div>
+
+                        <div id="nt-panel--tab-content--tools-replace">
+                            <h4 class="underline">一括変更</h4>
+                            <!--
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--replace">
+                                <i class="fa-solid fa-asterisk"></i>置換
+                            </button>
+                            -->
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--indent">
+                                <i class="fa-solid fa-indent"></i>段落の先頭を字下げ
+                            </button>
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--kakuyomu-rubydot">
+                                <span class="nt-notation-button--sample">
+                                    <span class="nt-notation--sample-row">カクヨム記法の傍点を修正</span>
+                                    <span class="nt-notation--sample-row nt-notation--sample-code"><span class="code">《《絵画》》</span> <i class="fa-solid fa-arrow-right"></i> <span class="code">｜絵《・》｜画《・》</span></span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
+
                     <div class="nt-panel--tab-content" id="nt-panel--tab-freememo" data="3">
                         <div id="nt-panel--tab-content--freememo">
                             <h4 class="underline">フリーメモ</h4>
@@ -687,6 +728,8 @@ function freememo(){
 function insertUtilities(){
     _toolRuby()
     _toolRubyDot()
-    _toolCovertKakuyomuRubyDot()
     _toolSasie()
+
+    _toolIndent()
+    _toolCovertKakuyomuRubyDot()
 }

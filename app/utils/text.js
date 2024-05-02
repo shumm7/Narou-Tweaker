@@ -132,6 +132,25 @@ export function minuteStringJapanese(minute){
     }
 }
 
+/* Convert Sasie Tags */
+export function convertSasieTags(element, isEscaped){
+    var re = /<(i[0-9]+)\|([0-9]+)>/g
+    var to = `<a href="//$2.mitemin.net/$1/" target="_blank"><img src="//$2.mitemin.net/userpageimage/viewimagebig/icode/$1/" alt="挿絵(By みてみん)" border="0"></a>`
+
+    var nodes = $(element)[0].childNodes;
+    $.each(nodes, function(_, w) {
+        if(w.innerHTML==undefined){ // is text
+            if(w.data.match(re)){
+                $.each($.parseHTML(w.data.replace(re, to)), function(_, x) {
+                    w.before(x);
+                });
+                w.remove();
+            }
+        }
+    })
+}
+
+
 /* 小説家になろうの内部関数 */
 /* Count Chars */
 /*
@@ -167,24 +186,6 @@ export function countCharacters(strings, shouldCountSpecialTag, shouldCountBlank
 
 	return strings.length;
 
-}
-
-/* Convert Sasie Tags */
-export function convertSasieTags(element, isEscaped){
-    var re = /<(i[0-9]+)\|([0-9]+)>/g
-    var to = `<a href="//$2.mitemin.net/$1/" target="_blank"><img src="//$2.mitemin.net/userpageimage/viewimagebig/icode/$1/" alt="挿絵(By みてみん)" border="0"></a>`
-
-    var nodes = $(element)[0].childNodes;
-    $.each(nodes, function(_, w) {
-        if(w.innerHTML==undefined){ // is text
-            if(w.data.match(re)){
-                $.each($.parseHTML(w.data.replace(re, to)), function(_, x) {
-                    w.before(x);
-                });
-                w.remove();
-            }
-        }
-    })
 }
 
 /* Convert Ruby Tags */

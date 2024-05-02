@@ -1,3 +1,4 @@
+import { autoIndent } from "../../utils/text.js"
 import { getSelectedContent } from "./_editor.js"
 
 function getForms(index){
@@ -44,27 +45,6 @@ export function _toolRubyDot(){
             $(form)
                 .selection('insert', {text: rubyDot(text), mode: 'before'})
                 .selection('replace', {text: ''})
-            $(form).trigger("input")
-        }
-    })
-}
-
-export function _toolCovertKakuyomuRubyDot(){
-    function replaceKakuyomuRubyDot(text){
-        return text.replace(/《《(.*?)》》/, function(original, p){
-            if(!p.match(/\n/)){
-                return rubyDot(p)
-            }
-            return original
-        })
-    }
-
-    $("#nt-tools--kakuyomu-rubydot").click(function(){
-        const index = getSelectedContent()
-        const form = getForms(index)
-        if($(form).length){
-            var text = $(form).val()
-            $(form).val(replaceKakuyomuRubyDot(text))
             $(form).trigger("input")
         }
     })
@@ -123,6 +103,46 @@ export function _toolSasie(){
                     .selection('insert', {text: '|ユーザID>', mode: 'after'})
                 $(form).trigger("input")
             }
+        }
+    })
+}
+
+
+export function _toolSearch(){
+    
+}
+
+export function _toolIndent(){
+    $("#nt-tools--indent").click(function(){
+        const index = getSelectedContent()
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).val()
+            if(text.length>0){
+                $(form).val(autoIndent(text))
+                $(form).trigger("input")
+            }
+        }
+    })
+}
+
+export function _toolCovertKakuyomuRubyDot(){
+    function replaceKakuyomuRubyDot(text){
+        return text.replace(/《《(.*?)》》/g, function(original, p){
+            if(!p.match(/\n/)){
+                return rubyDot(p)
+            }
+            return original
+        })
+    }
+
+    $("#nt-tools--kakuyomu-rubydot").click(function(){
+        const index = getSelectedContent()
+        const form = getForms(index)
+        if($(form).length){
+            var text = $(form).val()
+            $(form).val(replaceKakuyomuRubyDot(text))
+            $(form).trigger("input")
         }
     })
 }
