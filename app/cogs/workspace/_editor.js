@@ -401,12 +401,24 @@ function changeEditorPageLikePreview(){
         index = `${index}`
         if(index=="0"){
             novelPadding("textarea[name='novel']")
+            isEventLocked = true
+            $("textarea[name='novel']").trigger("input")
+            isEventLocked = false
         }else if(index=="1"){
             novelPadding("textarea[name='preface']")
+            isEventLocked = true
+            $("textarea[name='preface']").trigger("input")
+            isEventLocked = false
         }else if(index=="2"){
             novelPadding("textarea[name='postscript']")
+            isEventLocked = true
+            $("textarea[name='postscript']").trigger("input")
+            isEventLocked = false
         }else if(index=="3"){
             novelPadding("textarea[name='freememo']")
+            isEventLocked = true
+            $("textarea[name='freememo']").trigger("input")
+            isEventLocked = false
         }else if(index=="4"){
             showPreview()
         }
