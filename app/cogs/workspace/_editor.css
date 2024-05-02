@@ -431,8 +431,10 @@ body.narou-tweaker-custom-editor {
 	display: block;
 	height: calc(100vh - 100px);
 	width: 100%;
+	min-width: 360px;
     position: absolute;
     top: 50px;
+	overflow-x: hidden;
     overflow-y: scroll;
 	font-size: 16px;
 	font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
