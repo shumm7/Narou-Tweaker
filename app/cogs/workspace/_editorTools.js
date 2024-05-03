@@ -132,9 +132,7 @@ export function _toolSearch(){
         }
     }
 
-    function searchPattern(text, pattern){
-        var ret = []
-        var startIndex = 0
+    function createPattern(pattern){
         var regexMode = ""
 
         // 大文字・小文字の区別
@@ -147,7 +145,13 @@ export function _toolSearch(){
         // 単語単位での検索
         if(searchMode.word){pattern = `\\b${pattern}\\b`}
 
-        var regex = new RegExp(pattern, regexMode)
+        return new RegExp(pattern, regexMode)
+    }
+
+    function searchPattern(text, pattern){
+        var ret = []
+        var startIndex = 0
+        var regex = createPattern(pattern)
 
         $.each([...text.matchAll(regex)], function(_, match){
             if(match[0].length>0){
@@ -243,8 +247,11 @@ export function _toolSearch(){
                 setCount(searchResult.length)
             }else{
                 const text = $(form).val()
+                const word = text.substring(searchResult[searchFoundIndex].start, searchResult[searchFoundIndex].end + 1)
+                const pattern = createPattern(searchText)
+                
                 const ret = text.substring(0, searchResult[searchFoundIndex].start)
-                    + replaceText
+                    + word.replace(pattern, replaceText)
                     + text.substring(searchResult[searchFoundIndex].end + 1)
                 $(form).val(ret)
 
@@ -286,6 +293,7 @@ export function _toolSearch(){
             var ret = ""
             let i = 0
             const text = $(form).val()
+            const pattern = createPattern(searchText)
 
             $.each(searchResult, function(n, result){
                 var next
@@ -293,8 +301,9 @@ export function _toolSearch(){
                     next = searchResult[n+1].start
                 }
                 
+                const word = text.substring(result.start, result.end + 1)
                 ret += text.substring(i, result.start)
-                    + replaceText
+                    + word.replace(pattern, replaceText)
                     + text.substring(result.end + 1, next)
                 i = next
             })
