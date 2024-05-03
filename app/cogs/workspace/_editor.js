@@ -462,7 +462,8 @@ function changeEditorPageLikePreview(){
         }
 
         // Reset Scrolls
-        $(".nt-editor--body").scrollTop($(".nt-editor--body").get(0).scrollHeight)
+        //$(".nt-editor--body").scrollTop($(".nt-editor--body").get(0).scrollHeight)
+        $(".nt-editor--body").scrollTop(0)
     }
     elm.find(".nt-editor--footer-tab-item").on("click", function(){
         const idx = $(this).attr("data")
