@@ -69,12 +69,24 @@ export function optionHide(){
         var elm = $(this)
 
         function change(value){
+            $(".option--experimental-message").empty()
             if(value){
-                elm.removeClass("option-hide--hidden")
+                elm.removeClass("option-hide--experimental")
+                $(".option--experimental-message").text("【実験的機能】不具合が発生する可能性があります。ご注意ください。")
             }else{
-                elm.addClass("option-hide--hidden")
+                elm.addClass("option-hide--experimental")
+                $(".option--experimental-message").append("実験的機能が無効のため使用できません。<br><span style='font-size: 80%;'>※ [全般] → [環境設定] → [高度な設定]を有効化 → [実験的機能]を有効化</span>")
             }
         }
+
+        // Elements 
+        $(".experimental-hide .contents-item--heading").prepend(
+            `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
+        )
+        $(".experimental-hide .contents-item--description").prepend(
+            `<div class="option--experimental-message"></div>`
+        )
+
             
         chrome.storage.local.get(["extExperimentalFeatures"], function(data){
             change(data.extExperimentalFeatures)

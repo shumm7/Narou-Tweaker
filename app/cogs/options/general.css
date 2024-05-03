@@ -26,6 +26,16 @@ html::-webkit-scrollbar {
 .button-hide--hidden, .option-hide--hidden {
     display: none !important;
 }
+.option-hide--experimental .contents-option-content {
+    pointer-events: none;
+    filter: grayscale(1);
+}
+.option--experimental-message {
+    color: red;
+    font-weight: bold;
+    white-space: break-spaces;
+    clear: both;
+}
 
 /* Text Field */
 .textfield {
