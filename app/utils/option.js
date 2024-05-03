@@ -21,7 +21,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS workspaceImpressionRead",
 
     /* Novel */
     novelCustomStyle: true,
