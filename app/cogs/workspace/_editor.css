@@ -72,6 +72,12 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-content-hidden {
 	display: none !important;
 }
+.narou-tweaker-custom-editor .nt-search-box--right-align {
+	margin-left: auto;
+}
+.narou-tweaker-custom-editor .nt-search-box--left-align {
+	margin-right: auto;
+}
 
 
 /*** container ***/
@@ -117,7 +123,7 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-panel--tab {
 	height: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item {
 	height: 100%;
@@ -552,46 +558,6 @@ body.narou-tweaker-custom-editor {
 	padding-bottom: 100px;
 }
 
-/*** editor content - highlighter ***/
-.narou-tweaker-custom-editor .c-form__textarea {
-	position: absolute;
-  	z-index: 2;
-    background: transparent;
-}
-.narou-tweaker-custom-editor .nt-field--backdrop {
-	position: absolute;
-	z-index: 1;
-	unicode-bidi: normal;
-	overflow-x: hidden;
-    overflow-y: hidden;
-	padding: 10px;
-	margin: 0;
-}
-.narou-tweaker-custom-editor .nt-field--wrapper[name="novel"] .nt-field--backdrop{
-	max-width: 600px;
-	line-height: 180%;
-    font-size: 100%;
-	box-sizing: content-box;
-	padding-bottom: 100px;
-}
-.narou-tweaker-custom-editor .nt-field--wrapper[name="preface"] .nt-field--backdrop,
-.narou-tweaker-custom-editor .nt-field--wrapper[name="postscript"] .nt-field--backdrop,
-.narou-tweaker-custom-editor .nt-field--wrapper[name="freememo"] .nt-field--backdrop {
-	max-width: 600px;
-	line-height: 180%;
-    font-size: 100%;
-	box-sizing: content-box;
-	padding-bottom: 100px;
-}
-.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight {
-	color: transparent;
-	white-space: pre-wrap;
-}
-.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark{
-	border-radius: 3px;
-  	color: transparent;
-}
-
 
 /*** editor content - preview ***/
 .narou-tweaker-custom-editor .nt-editor--preview-items {
@@ -659,4 +625,199 @@ body.narou-tweaker-custom-editor {
     border-radius: 5px;
     display: block;
     color: #999999;
+}
+
+
+/*** editor content - highlighter ***/
+.narou-tweaker-custom-editor .c-form__textarea {
+	position: absolute;
+  	z-index: 2;
+    background: transparent;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop {
+	position: absolute;
+	z-index: 1;
+	unicode-bidi: normal;
+	overflow-x: hidden;
+    overflow-y: hidden;
+	padding: 10px;
+	margin: 0;
+}
+.narou-tweaker-custom-editor .nt-field--wrapper[name="novel"] .nt-field--backdrop{
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
+}
+.narou-tweaker-custom-editor .nt-field--wrapper[name="preface"] .nt-field--backdrop,
+.narou-tweaker-custom-editor .nt-field--wrapper[name="postscript"] .nt-field--backdrop,
+.narou-tweaker-custom-editor .nt-field--wrapper[name="freememo"] .nt-field--backdrop {
+	max-width: 600px;
+	line-height: 180%;
+    font-size: 100%;
+	box-sizing: content-box;
+	padding-bottom: 100px;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight {
+	color: transparent;
+	white-space: pre-wrap;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark{
+	border-radius: 3px;
+  	color: transparent;
+	background-color: yellow;
+}
+.narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark.focused{
+	background-color: orange;
+}
+
+
+/*** editor content - search ***/
+.narou-tweaker-custom-editor .nt-search-box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 5px;
+	position: fixed;
+	bottom: 60px;
+	left: 10px;
+	background: rgb(250, 250, 250);
+	border: 1px solid rgb(221, 221, 221);
+	border-radius: 3px;
+	resize:horizontal;
+	overflow: hidden;
+	width: 50%;
+	padding: 5px 10px 5px 5px;
+	font-size: 12px;
+	min-width: 380px;
+	max-width: calc(100vw - 30px);
+	z-index: 15;
+	transition: left 0.2s ease 0s,
+	max-width 0.2s ease 0s;
+}
+.narou-tweaker-custom-editor .nt-panel-show .nt-search-box {
+	left: 260px;
+	max-width: calc(100vw - 250px - 30px);
+}
+.narou-tweaker-custom-editor .nt-search-box--column {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+.narou-tweaker-custom-editor .nt-search-box--row {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex-direction: row;
+	width: 100%;
+}
+.narou-tweaker-custom-editor .nt-search-box--close .nt-search-box--row.nt-search-box--replace {
+	display: none;
+}
+.narou-tweaker-custom-editor .nt-search-box--open .nt-search-box--row.nt-search-box--search {
+	padding-bottom: 3px;
+}
+
+.narou-tweaker-custom-editor .nt-search-box--fields,
+.narou-tweaker-custom-editor .nt-search-box--buttons {
+	display: flex;
+	flex-direction: row;
+	gap: 3px;
+	flex-shrink: 0;
+}
+.narou-tweaker-custom-editor .nt-search-box--fields {
+	flex: 1;
+	min-width: 50px;
+	position: relative;
+	min-width: 0;
+}
+.narou-tweaker-custom-editor .nt-search-box--buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 3px;
+	width: 100px;
+	flex: 0;
+	flex-shrink: 0;
+	flex-basis: 100px;
+	min-width: 0;
+}
+.narou-tweaker-custom-editor .nt-search-box--button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	border: 1px solid transparent;
+}
+.narou-tweaker-custom-editor .nt-search-box--buttons .nt-search-box--button{
+	padding: 0 3px;
+}
+.narou-tweaker-custom-editor .nt-search-box--buttons .nt-search-box--button:has(.codicon){
+	padding: 0 0;
+}
+.narou-tweaker-custom-editor .nt-search-box--button:hover {
+	color: var(--kasasagi-blue)
+}
+.narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle {
+	padding: 1px;
+	border-radius: 2px;
+}
+.narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle:hover {
+	color: #999;
+}
+.narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle.nt-active {
+	border: 1px solid var(--kasasagi-blue);
+	color: var(--kasasagi-blue)
+}
+
+.narou-tweaker-custom-editor .nt-search-box--field,
+.narou-tweaker-custom-editor .nt-search-box--field-dummy-outer {
+	border: 1px solid #bbb;
+	background: #fff;
+	border-radius: 1px;
+	padding: 2px 5px;
+	width: 100%;
+	margin-right: 5px;
+}
+.narou-tweaker-custom-editor .nt-search-box--field-dummy-outer {
+	display:flex;
+	overflow: hidden;
+}
+.narou-tweaker-custom-editor .nt-search-box--field-dummy{
+	border: none;
+	background: transparent;
+	margin: 0;
+	margin-right: 3px;
+	padding: 0;
+	flex: 1;
+	min-width:0;
+}
+.narou-tweaker-custom-editor .nt-search-box--field-dummy:focus,
+.narou-tweaker-custom-editor .nt-search-box--field-dummy:active {
+	outline: none;
+}
+
+.narou-tweaker-custom-editor .nt-search-box--field-dummy-outer:has(.nt-search-box--field-dummy:focus),
+.narou-tweaker-custom-editor .nt-search-box--field-dummy-outer:has(.nt-search-box--field-dummy:active) {
+	outline: 2px solid black;
+}
+.narou-tweaker-custom-editor .nt-search-box--field-above {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: 100%;
+	gap: 3px;
+}
+
+.narou-tweaker-custom-editor .nt-search-box--open-replace {
+	flex: 1;
+	flex-shrink: 0;
+	flex-basis: 12px;
+	min-width: 0;
+}
+.narou-tweaker-custom-editor .nt-search-box--open .nt-search-box--open-replace i {
+	transform: rotate(90deg);
+}
+.narou-tweaker-custom-editor .nt-search-box--count {
+	white-space: nowrap;
 }

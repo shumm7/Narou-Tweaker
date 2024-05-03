@@ -98,6 +98,42 @@ function changeEditorPageLikePreview(){
                                 </div>
                             </div>
                         </div>
+
+                        <!-- ツール -->
+                        <div class="nt-search-box nt-search-box--close nt-content-hidden"><!--nt-content-hidden-->
+                            <div class="nt-search-box--button nt-search-box--open-replace">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                            <div class="nt-search-box--column">
+                                <div class="nt-search-box--row nt-search-box--search">
+                                    <div class="nt-search-box--fields">
+                                        <div class="nt-search-box--field-dummy-outer">
+                                            <input type="text" class="nt-search-box--field-dummy nt-search-box--field-search" name="nt-search"/>
+                                            <div class="nt-search-box--field-above">
+                                                <div class="nt-search-box--button nt-search-box--mode-case nt-search-box--button-toggle" title="大文字・小文字を区別する"><div class='codicon codicon-case-sensitive'></div></div>
+                                                <div class="nt-search-box--button nt-search-box--mode-word nt-search-box--button-toggle" title="単語単位で検索する"><div class='codicon codicon-whole-word'></div></div>
+                                                <div class="nt-search-box--button nt-search-box--mode-regex nt-search-box--button-toggle" title="正規表現を使用する"><div class='codicon codicon-regex'></div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="nt-search-box--buttons">
+                                        <div class="nt-search-box--count nt-search-box--left-align"></div>
+                                        <div class="nt-search-box--button nt-search-box--prev-index" title="前の一致項目"><i class="fa-solid fa-arrow-up"></i></div>
+                                        <div class="nt-search-box--button nt-search-box--next-index" title="次の一致項目"><i class="fa-solid fa-arrow-down"></i></div>
+                                        <div class="nt-search-box--button nt-search-box--close-self" title="閉じる"><i class="fa-solid fa-xmark"></i></div>
+                                    </div>
+                                </div>
+                                <div class="nt-search-box--row nt-search-box--replace">
+                                    <div class="nt-search-box--fields">
+                                        <input type="text" class="nt-search-box--field nt-search-box--field-replace" name="nt-replace"/>
+                                    </div>
+                                    <div class="nt-search-box--buttons">
+                                        <div class="nt-search-box--button nt-search-box--replace-each" title="置換"><div class='codicon codicon-replace'></div></div>
+                                        <div class="nt-search-box--button nt-search-box--replace-all" title="全て置換"><div class='codicon codicon-replace-all'></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="nt-editor--footer">
@@ -140,9 +176,11 @@ function changeEditorPageLikePreview(){
                         <span class="nt-panel--tab-item" data="0">
                             <button type="button" class="nt-panel--tab-button">統計</button>
                         </span>
+                        <!--
                         <span class="nt-panel--tab-item" data="1">
                             <button type="button" class="nt-panel--tab-button">表示</button>
                         </span>
+                        -->
                         <span class="nt-panel--tab-item" data="2">
                             <button type="button" class="nt-panel--tab-button">ツール</button>
                         </span>
@@ -192,10 +230,12 @@ function changeEditorPageLikePreview(){
                         </div>
                     </div>
 
+                    <!--
                     <div class="nt-panel--tab-content" id="nt-panel--tab-display" data="1">
                         <h4 class="underline">執筆時の表示設定</h4>
                         <p>閲覧画面には影響しません。</p>
                     </div>  
+                    -->
                     <div class="nt-panel--tab-content" id="nt-panel--tab-tools" data="2">
                         <div id="nt-panel--tab-content--tools-format">
                             <h4 class="underline">記法挿入</h4>
@@ -224,11 +264,9 @@ function changeEditorPageLikePreview(){
 
                         <div id="nt-panel--tab-content--tools-replace">
                             <h4 class="underline">一括変更</h4>
-                            <!--
-                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--replace">
-                                <i class="fa-solid fa-asterisk"></i>置換
+                            <button type="button" class="nt-button nt-notation-button" id="nt-tools--search">
+                                <i class="fa-solid fa-magnifying-glass"></i>検索・置換
                             </button>
-                            -->
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--indent">
                                 <i class="fa-solid fa-indent"></i>段落の先頭を字下げ
                             </button>
@@ -486,7 +524,7 @@ function changeEditorPageLikePreview(){
 
     // Initialize
     selectFooterTab(0)
-    selectPanelTab(0)
+    selectPanelTab(2)
     textCount()
     insertUtilities()
     stateCheck()
@@ -584,13 +622,6 @@ export function getSelectedContent(){
     }
 }
 
-/*
-    elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…"))
-    elm.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…"))
-    elm.find(".nt-editor--preface").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…"))
-    elm.find(".nt-editor--postscript").append(container.find("textarea[name='postscript']").clone(true).attr("placeholder", "後書きを入力…"))
-    elm.find(".nt-editor--freememo").append(container.find("textarea[name='freememo']").clone(true).attr("placeholder", "フリーメモを入力…"))
-*/
 function stateCheck(){
     const state = []
     const maxState = 1000

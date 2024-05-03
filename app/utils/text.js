@@ -64,6 +64,15 @@ export function escapeHtml(string){
     });
 }
 
+// 正規表現文字列の記号をエスケープする
+export function escapeRegex(string){
+    var reRegExp = /[\\^$.*+?()[\]{}|]/g
+    var reHasRegExp = new RegExp(reRegExp.source);
+    return (string && reHasRegExp.test(string))
+            ? string.replace(reRegExp, '\\$&')
+            : string;
+}
+
 // 日付を日本語で表示（yyyy年MM月dd日）
 export function getDateStringJapanese(date){
     if(date==undefined){date = new Date();}
