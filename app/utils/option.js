@@ -39,6 +39,8 @@ export const defaultOption = {
     novelPrefaceAutoURL: true,
     novelAfterwordAutoURL: true,
     novelShowAllExtext: false,
+    novelShowHistoryOnSublist: true,
+    novelForceMypageLink: false,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
@@ -50,6 +52,10 @@ export const defaultOption = {
     workspaceHeaderAdditionalMenu: false,
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
+    workspaceImpressionRead: [],
+    workspaceImpressionReadButton: true,
+    workspaceImpressionMarkAsReadWhenReply: true,
+    workspaceMiscNovelDeleteConfirm: true,
     workspaceNewEditor: true,
 
     /* Yomou */

@@ -1,4 +1,4 @@
-import { replaceUrl } from "/utils/text.js"
+import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
 import { getEpisode, checkNovelPageDetail } from "./utils.js"
 import { getNcode } from "/utils/ncode.js";
 
@@ -13,13 +13,21 @@ export function _novel(){
                 _novelPage()
             }
         }
+        if(data.novelForceMypageLink){
+            _authorLink()
+        }
         if(pageDetail=="novel"){
             if(data.novelVertical){
                 _tategaki()
             }
             _autoURL()
+            _saveHistory()
         }else if(pageDetail=="top"){
             _novelTop()
+            _saveHistory()
+            if(data.novelShowHistoryOnSublist){
+                _history()
+            }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
         }
@@ -44,8 +52,8 @@ function _novelTop(){
 }
 
 function _novelPage(){
-    var ncode = getNcode()
-    var episode = getEpisode()
+    const ncode = getNcode()
+    const episode = getEpisode()
     var title
     var chapter = undefined
     
@@ -164,4 +172,179 @@ function _autoURL(){
             });
         }
     })
+}
+
+function _history(){
+    chrome.storage.local.get(null, function(data){
+        const ncode = getNcode()
+
+        if(ncode){
+            if($(".index_box").length){
+                var outer = $(`<div class="novelview_history-box"></div>`)
+                var showHistory = false
+
+                if($(".novellingindex_bookmarker_no").length){
+                    var elm = $(".novellingindex_bookmarker_no")
+                    var link = elm.find("a").prop("href")
+                    var text = elm.find("a").text()
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
+                    showHistory = true
+
+                }else if($("meta[name='siori']").length){
+                    var elm = $("meta[name='siori']")
+                    var link = elm.attr("content")
+                    var text = elm.attr("property")
+
+                    outer.append(`
+                        <div class="novelview_history-item" id="novel_siori">
+                            <i class="fa-solid fa-bookmark"></i><a href="${link}">${text}</a>
+                        </div>
+                    `)
+                    showHistory = true
+                }
+
+                chrome.storage.sync.get(["history_data"], function(h){
+                    const history = h.history_data[ncode]
+                    if(history){
+                        const episode = history[0]
+                        const date = getDatetimeStringWithoutSecond(new Date(history[1]))
+                        if(episode){
+                            outer.append(`
+                                <div class="novelview_history-item" id="novel_history">
+                                    <i class="fa-solid fa-clock-rotate-left"></i><a href="https://ncode.syosetu.com/${ncode}/${episode}/">エピソード${episode}</a><span style="font-size: 90%">（${date}）</span>
+                                </div>
+                            `)
+                            showHistory = true
+
+                             /* 目次欄にアンダーラインを追加 */
+                            var sublist = $(`.index_box .novel_sublist2:has(a[href="/${ncode}/${episode}/"])`)
+                            if(sublist.length){
+                                sublist.addClass("underline")
+                                sublist.find(".subtitle").append(`<span class="history_now" title="${date}"><i class="fa-solid fa-clock-rotate-left"></i></span>`)
+                            }
+                        }
+                    }
+                    if(showHistory){
+                        $(".index_box").before(outer)
+                    }
+                })
+            }
+        }
+    })
+}
+
+function _saveHistory(){
+    const ncode = getNcode()
+    const episode = getEpisode()
+
+    if(ncode){
+        chrome.storage.sync.get(["history", "history_data"], function(data){
+            var history = data.history
+            var history_data = data.history_data
+            if(typeof history != typeof []){
+                history = []
+            }
+            if(typeof history_data != typeof {}){
+                history_data = {}
+            }
+
+
+            var new_history = history.filter(n => n != ncode);
+            new_history.unshift(ncode)
+            if(new_history.length > 300){
+                const key = new_history.pop()
+                delete history_data[key]
+            }
+            if(episode){
+                var episode_name = $(".novel_subtitle").text()
+                if(episode_name.length>20){
+                    episode_name = episode_name.substr(0, 20) + "…"
+                }
+                history_data[ncode] = [episode, Date.now(), episode_name]
+            }
+
+            chrome.storage.sync.set({
+                history: new_history,
+                history_data: history_data
+            })
+        })
+    }
+}
+
+function _authorLink(){
+    const atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']")
+    const r18 = isR18()
+    const ncode = getNcode()
+    const pageDetail = checkNovelPageDetail()
+    let userid
+    if(atom.length){
+        if(location.hostname == "ncode.syosetu.com"){
+            userid = atom.prop("href").match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
+        }else if(location.hostname == "novel18.syosetu.com"){
+            userid = atom.prop("href").match(/https:\/\/api\.syosetu\.com\/writernovel\/(x\d+[a-z]+)\.Atom/)[1]
+        }
+    }
+
+    if(userid){
+        var userid_link
+        if(r18){
+            userid_link =`https://xmypage.syosetu.com/${userid}/`
+        }else{
+            userid_link =`https://mypage.syosetu.com/${userid}/`
+        }
+
+        if(pageDetail=="top"){
+            var author_text = $(".novel_writername")
+            if(!author_text.find("a").length){
+                var author = author_text.text().match(/作者：(.*)/)[1]
+                author_text.get(0).innerHTML = `作者：<a href="${userid_link}">${author}</a>`
+            }
+        }else if(pageDetail=="novel"){
+            if($(".novel-author").length){
+                if(!$(".novel-author a").length){
+                    $(".novel-author").wrapInner(`<a href="${userid_link}">`)
+                }
+            }else{
+                if($(".contents1").length){
+                    var outer = $(".contents1").clone()
+                    var elm_atteintion = outer.find(".attention")
+                    var elm_title = outer.find("a[href='/"+ncode+"/']")
+                    var elm_chapter = outer.find(".chapter_title")
+                    var elm_atteintion_c = elm_atteintion.clone()
+                    var elm_title_c = elm_title.clone()
+                    var elm_chapter_c = elm_chapter.clone()
+
+                    elm_atteintion.remove()
+                    elm_title.remove()
+                    elm_chapter.remove()
+
+                    if(!outer.find("a").length){
+                        var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
+                        var outer = $(".contents1")
+                        outer.empty()
+                        outer.append(elm_atteintion)
+                        outer.append(elm_title_c)
+                        outer.append(` 作者：<a href="${userid_link}">${author}</a> `)
+                        outer.append(elm_chapter_c)
+                    }
+                }
+            }
+        }else if(pageDetail=="info"){
+            $("#noveltable1 tr").each(function(){
+                const header = $(this).find("th").text()
+                if(header == "作者名"){
+                    var elm = $(this).find("td")
+                    if(!elm.find("a").length){
+                        const author = elm.text()
+                        elm.empty()
+                        elm.append(`<a href="${userid_link}">${author}</a>`)
+                    }
+                }
+            })
+        }
+    }
 }

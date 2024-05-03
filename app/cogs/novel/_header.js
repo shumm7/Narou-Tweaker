@@ -32,7 +32,7 @@ export function _header(){
 
         /* Right Menu Bar */
         if(isCustomHeader){
-            $("body").addClass("narou-tweaker-header")
+            $("body").addClass("narou-tweaker-header--mode-1")
             $("#novelnavi_right").remove()
 
             $("#novel_header").before(`<div id="novel_header_right">
@@ -41,6 +41,7 @@ export function _header(){
             </div>`)
             $(".wrap_menu_novelview_after").empty()
         }else{
+            $("body").addClass("narou-tweaker-header--mode-0")
             if(!data.novelLegacyHeaderIcon){
                 $("body").addClass("narou-tweaker-header--hide-icon") //アイコンを隠す
             }
@@ -189,6 +190,7 @@ export function _header(){
                 }else{
                     $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
                 }
+                $("head").append(`<meta name="siori" content="${link}" property="${text}">`)
             }else{
                 if(isCustomHeader){
                     $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<br><span style="font-size: 90%;">（なし）</span></span></a></li>')
@@ -342,6 +344,28 @@ export function _header(){
         $("#scroll-up").on("click", function(){
             $(window).scrollTop(0)
         })
+
+        /* 直近の閲覧履歴 */
+        if(pageType!="novel"){
+            $("#novel_header ul").append('<li class="history"></li>')
+            chrome.storage.sync.get(["history_data"], function(data){
+                const history = data.history_data[ncode]
+                if(history){
+                    const episode = history[0]
+                    if(episode){
+                        if(isCustomHeader){
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<br><span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
+                        }else{
+                            $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
+                        }
+                    }else{
+                        $("li.history").remove()
+                    }
+                }else{
+                    $("li.history").remove()
+                }
+            })
+        }
 
         /* 検索 */
         $("#novel_header ul").append('<li class="search"><a><i class="fa-solid fa-magnifying-glass"></i><span class="title">検索</span></a></li>')

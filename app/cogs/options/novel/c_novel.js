@@ -102,10 +102,15 @@ function storeCustomHeader(){
 function restoreHeaderIconList(){
     function getIconElement(id){
         let icon = novelIconList[id]
+        var text = icon.text
+        if(text.length>8){
+            text = text.substr(0,8) + "…"
+        }
+
         return `
         <div id="`+id+`" class="icon-element" draggable="true">
             <i class="`+icon.icon+`"></i>
-            <span class="title">`+icon.text+`</span>
+            <span class="title">`+text+`</span>
         </div>`
     }
 

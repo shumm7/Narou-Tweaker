@@ -1,0 +1,40 @@
+
+/* 感想 既読機能 */
+.c-up-markread,
+.c-up-unmarkread {
+    margin-left: auto;
+    text-align: right;
+    color: #868e96;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+.c-up-markread {
+    display: block;
+}
+.c-up-unmarkread {
+    display: none;
+}
+.c-up-reaction--read .c-up-markread {
+    display: none;
+}
+.c-up-reaction--read .c-up-unmarkread {
+    display: block;
+}
+
+.c-up-markread + .c-up-dropdown,
+.c-up-unmarkread + .c-up-dropdown {
+    margin-left: 5px;
+}
+
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-postsummary),
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-label),
+.c-up-reaction--read .c-up-reaction-item__footer{
+    display: none !important;
+}
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title),
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title) *{
+    font-size: 90%;
+    color: #999 !important;
+}

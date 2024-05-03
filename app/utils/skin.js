@@ -153,6 +153,9 @@ export function makeSkinCSS(skin, novel_css){
         background-color: transparent;
         border-color: ${s.novel.background_second};
     }
+    .novelview_history-box {
+        background: ${s.novel.background_second};
+    }
     `
         
     /* 作品情報ページ */
@@ -349,69 +352,69 @@ export function makeSkinCSS(skin, novel_css){
     
     /* Custom CSS */
     rule += `
-    body.narou-tweaker-header #novel_header ul li > a,
-    body.narou-tweaker-header #novel_header ul li > a:link,
-    body.narou-tweaker-header #novel_header ul li > a:visited,
-    body.narou-tweaker-header #novel_header ul li > form,
-    body.narou-tweaker-header #novel_header_right ul li > a,
-    body.narou-tweaker-header #novel_header_right ul li > a:link,
-    body.narou-tweaker-header #novel_header_right ul li > a:visited,
-    body.narou-tweaker-header #novel_header_right ul li > form {
+    .narou-tweaker-header--mode-1 #novel_header ul li > a,
+    .narou-tweaker-header--mode-1 #novel_header ul li > a:link,
+    .narou-tweaker-header--mode-1 #novel_header ul li > a:visited,
+    .narou-tweaker-header--mode-1 #novel_header ul li > form,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > a,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > a:link,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > a:visited,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > form {
         color: ${s.sublist.color};
     }
     /* クリック済みのアイコン */
-    body.narou-tweaker-header #novel_header ul li.typo a:visited, /*誤字報告*/
-    body.narou-tweaker-header #novel_header ul li.impression a:visited, /* 感想 */
-    body.narou-tweaker-header #novel_header ul li.review a:visited, /*レビュー */
-    body.narou-tweaker-header #novel_header_right ul li.typo a:visited, /*誤字報告*/
-    body.narou-tweaker-header #novel_header_right ul li.impression a:visited, /* 感想 */
-    body.narou-tweaker-header #novel_header_right ul li.review a:visited /*レビュー */ {
+    .narou-tweaker-header--mode-1 #novel_header ul li.typo a:visited, /*誤字報告*/
+    .narou-tweaker-header--mode-1 #novel_header ul li.impression a:visited, /* 感想 */
+    .narou-tweaker-header--mode-1 #novel_header ul li.review a:visited, /*レビュー */
+    .narou-tweaker-header--mode-1 #novel_header_right ul li.typo a:visited, /*誤字報告*/
+    .narou-tweaker-header--mode-1 #novel_header_right ul li.impression a:visited, /* 感想 */
+    .narou-tweaker-header--mode-1 #novel_header_right ul li.review a:visited /*レビュー */ {
         color: ${s.sublist.visited};
     }
-    body.narou-tweaker-header #novel_header ul li a:hover,
-    body.narou-tweaker-header #novel_header ul li a:active,
-    body.narou-tweaker-header #novel_header ul li > form:hover,
-    body.narou-tweaker-header #novel_header ul li > form:active,
-    body.narou-tweaker-header #novel_header_right ul li > a:hover,
-    body.narou-tweaker-header #novel_header_right ul li > a:active,
-    body.narou-tweaker-header #novel_header_right ul li > form:hover,
-    body.narou-tweaker-header #novel_header_right ul li > form:active {
+    .narou-tweaker-header--mode-1 #novel_header ul li a:hover,
+    .narou-tweaker-header--mode-1 #novel_header ul li a:active,
+    .narou-tweaker-header--mode-1 #novel_header ul li > form:hover,
+    .narou-tweaker-header--mode-1 #novel_header ul li > form:active,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > a:hover,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > a:active,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > form:hover,
+    .narou-tweaker-header--mode-1 #novel_header_right ul li > form:active {
         color: ${s.sublist.hover} !important;
     }
-    body:not(.narou-tweaker-header) .wrap_menu_novelview_after {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after {
         /* 背景色 */
         background-color: transparent;
         background-image: none;
         border-top: 1px solid ${s.sublist.color};
         border-bottom: 1px solid ${s.sublist.color};
     }
-    body:not(.narou-tweaker-header) .wrap_menu_novelview_after ul li:first-child {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li:first-child {
         border-left: 1px solid ${s.sublist.color};
     }
-    body:not(.narou-tweaker-header) .wrap_menu_novelview_after .box_menu_novelview_after ul li {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li {
         border-right: 1px solid ${s.sublist.color};
         color: ${s.sublist.color};
     }
     
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *{
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *{
         color: ${s.sublist.visited};
     }
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
         color: ${s.sublist.color};
     }
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:hover,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:active,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover > *,
-    body:not(.narou-tweaker-header) #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:hover,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:active,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:hover > *,
+    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
         color: ${s.sublist.hover} !important;
         background: transparent;
     }
