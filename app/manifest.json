@@ -98,7 +98,7 @@
         "common.css",
         "cogs/workspace/main.css",
         "cogs/workspace/_favorite.css",
-        "cogs/workspace/_editor.css"
+        "cogs/workspace/_editor.css",
         "cogs/workspace/_reaction.css"
       ],
       "matches": [

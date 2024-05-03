@@ -7,7 +7,7 @@ function deleteConfirm(){
 
     if(location.hostname=="syosetu.com" && location.pathname.match(/^\/usernovel\/deleteconfirm\/ncode\/\d+\/*$/)){
         chrome.storage.local.get(null, function(data){
-            if(data.workspaceMiscNovelDeleteConfirm){
+            if(data.workspaceNovelmanageDeleteConfirm){
                 $("#noveldelete").attr("type", "button")
                 $("#noveldelete").prop("disabled", true)
 

@@ -7,7 +7,7 @@ let isEventLocked = false
 export function _editor(){
     const path = location.pathname
     chrome.storage.local.get(null, function(data){
-        if(data.workspaceNewEditor){
+        if(data.workspaceCustomEditor){
             if(
                 path.match(/^\/usernoveldatamanage\/updateinput\/.*$/) ||
                 path.match(/^\/draftepisode\/updateinput\/.*$/) ||
