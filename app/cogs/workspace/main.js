@@ -15,12 +15,4 @@ if(path.match(/^\/favnovelmain\/.*/) || path.match(/^\/favnovelmain18\/.*/)){
 }
 
 //編集画面
-if(
-    path.match(/^\/usernoveldatamanage\/updateinput\/.*$/) ||
-    path.match(/^\/draftepisode\/updateinput\/.*$/) ||
-    path.match(/^\/draftepisode\/input\/.*$/)
-){
-    if($("textarea[name='novel']").length){
-        _editor()
-    }
-}
+_editor()

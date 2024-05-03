@@ -5,7 +5,20 @@ import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 let isEventLocked = false
 
 export function _editor(){
-    changeEditorPageLikePreview()
+    const path = location.pathname
+    chrome.storage.local.get(null, function(data){
+        if(data.workspaceNewEditor){
+            if(
+                path.match(/^\/usernoveldatamanage\/updateinput\/.*$/) ||
+                path.match(/^\/draftepisode\/updateinput\/.*$/) ||
+                path.match(/^\/draftepisode\/input\/.*$/)
+            ){
+                if($("textarea[name='novel']").length){
+                    changeEditorPageLikePreview()
+                }
+            } 
+        }
+    })
 }
 
 function changeEditorPageLikePreview(){

@@ -50,6 +50,7 @@ export const defaultOption = {
     workspaceHeaderAdditionalMenu: false,
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
+    workspaceNewEditor: true,
 
     /* Yomou */
     yomouRank_DevidePointsUnit: true,
