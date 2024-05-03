@@ -372,21 +372,44 @@ export function _toolSearch(){
 
     // Button Clicked 
     $("#nt-tools--search").click(function(){
-        $(".nt-search-box").removeClass("nt-content-hidden")
-        const initialPos = $(".nt-search-box").offset()
-        const l = $(".nt-search-box--field-search").val().length
-        $(".nt-search-box--field-search").selection("setPos", {start: Math.max(0, l-1), end: Math.max(0, l-1)})
-        doSearchAction()
+        if(getSelectedContent()!=4){
+            $(".nt-search-box").removeClass("nt-content-hidden")
+            const initialPos = $(".nt-search-box").offset()
+            const l = $(".nt-search-box--field-search").val().length
+            $(".nt-search-box--field-search").selection("setPos", {start: Math.max(0, l-1), end: Math.max(0, l-1)})
+            doSearchAction()
+        }
     })
     $("body").keydown(function(e){
         if ((e.ctrlKey || e.metaKey) && e.key == 'f') {
             e.preventDefault();
-            $(".nt-search-box").removeClass("nt-content-hidden")
-            const initialPos = $(".nt-search-box").offset()
-            const l = $(".nt-search-box--field-search").val().length
-            $(".nt-search-box--field-search").selection("setPos", {start: Math.max(0, l), end: Math.max(0, l)})
-            doSearchAction()
+            if(getSelectedContent()!=4){
+                if($(".nt-search-box").hasClass("nt-content-hidden")){
+                    $(".nt-search-box").removeClass("nt-search-box--open")
+                    $(".nt-search-box").addClass("nt-search-box--close")
+                }
+                $(".nt-search-box").removeClass("nt-content-hidden")
+                const initialPos = $(".nt-search-box").offset()
+                const l = $(".nt-search-box--field-search").val().length
+                $(".nt-search-box--field-search").selection("setPos", {start: l, end: l})
+                doSearchAction()
+            }
+        }else if ((e.ctrlKey || e.metaKey) && e.key == 'h') {
+            e.preventDefault();
+            if(getSelectedContent()!=4){
+                $(".nt-search-box").removeClass("nt-search-box--close")
+                $(".nt-search-box").addClass("nt-search-box--open")
+                $(".nt-search-box").removeClass("nt-content-hidden")
+                const initialPos = $(".nt-search-box").offset()
+                const l = $(".nt-search-box--field-replace").val().length
+                $(".nt-search-box--field-replace").selection("setPos", {start: l, end: l})
+                doSearchAction()
+                $("")
+            }
         }
+    })
+    $(".nt-editor--footer-tab-item[data='4']").on("click", function(){
+        $(".nt-search-box--close-self").trigger("click")
     })
 
     
@@ -412,8 +435,8 @@ export function _toolSearch(){
     })
     $(".nt-search-box--close-self").click(function(){ // Close Button
         $(".nt-search-box").addClass("nt-content-hidden")
-        $(".nt-search-box").removeClass("nt-search-box--open")
-        $(".nt-search-box").addClass("nt-search-box--close")
+        //$(".nt-search-box").removeClass("nt-search-box--open")
+        //$(".nt-search-box").addClass("nt-search-box--close")
         $(".nt-search-box--field-search").trigger("input")
         searchFoundIndex = undefined
         $(".nt-field--highlight").empty()
