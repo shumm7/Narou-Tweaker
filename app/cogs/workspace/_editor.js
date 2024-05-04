@@ -291,8 +291,6 @@ function changeEditorPageLikePreview(){
                             </button>
                         </div>
 
-                        
-
                         <div id="nt-panel--tab-content--tools-backup">
                             <h4 class="underline">バックアップ</h4>
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-each">
