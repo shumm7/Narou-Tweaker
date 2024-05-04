@@ -302,8 +302,8 @@ function changeEditorPageLikePreview(){
                                 <i class="fa-solid fa-file-zipper"></i>すべての項目を保存
                             </button>
                             <a href="/userwrittingnovel/backup/" target="blank">
-                                <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-all">
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>執筆バックアップを開く
+                                <button type="button" class="nt-button nt-notation-button" id="nt-tools--backup">
+                                    <i class="fa-solid fa-cloud"></i>執筆バックアップを開く
                                 </button>
                             </a>
                         </div>

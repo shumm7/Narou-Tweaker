@@ -487,10 +487,18 @@ export function _toolSearch(){
         }
     })
     
-    $('.nt-search-box--field-search').keypress(function(e){ // Enter Key (Same as Next Button)
+    $('.nt-search-box--field-search').keypress(function(e){ // Enter Key (Same as Next Button) / Tab Key
         if(e.which == 13) {
             e.preventDefault()
             $(".nt-search-box--next-index").trigger("click")
+            return false;
+        }
+    });
+    $('.nt-search-box--field-search').keydown(function(e){ // Tab Key
+        if(e.which == 9 && $(".nt-search-box").hasClass("nt-search-box--open")) {
+            e.preventDefault()
+            const l = $(".nt-search-box--field-replace").val().length
+            $(".nt-search-box--field-replace").selection("setPos", {start: l, end: l})
             return false;
         }
     });
@@ -528,10 +536,19 @@ export function _toolSearch(){
         replace()
     })
     
-    $('.nt-search-box--field-replace').keypress(function(e){ // Enter Key (Same as Replace Button)
+    $('.nt-search-box--field-replace').keypress(function(e){ // Enter Key (Same as Replace Button) / Tab Key
+        console.log(e.which)
         if(e.which == 13) {
             e.preventDefault()
             $(".nt-search-box--replace-each").trigger("click")
+            return false;
+        }
+    });
+    $('.nt-search-box--field-replace').keydown(function(e){ // Tab Key
+        if(e.which == 9) {
+            e.preventDefault()
+            const l = $(".nt-search-box--field-search").val().length
+            $(".nt-search-box--field-search").selection("setPos", {start: l, end: l})
             return false;
         }
     });
