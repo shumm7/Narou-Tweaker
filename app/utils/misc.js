@@ -7,6 +7,14 @@ export function saveJson(data, filename){
     return true;
 }
 
+export function saveText(data, filename){
+    var url = 'data:text/plain;base64,' + btoa(unescape(encodeURIComponent(data)))
+    chrome.runtime.sendMessage({action: "downloads", data: {url: url, filename, filename}}, function(response){
+        
+    });
+    return true;
+}
+
 export function defaultValue(value, def){
     if(value==undefined){
         return def

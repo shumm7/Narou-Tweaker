@@ -1,5 +1,5 @@
 import { convertRubyTags, convertSasieTags } from "../../utils/text.js"
-import { _toolCovertKakuyomuRubyDot, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
+import { _toolCovertKakuyomuRubyDot, _toolExportAll, _toolExportEach, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
 let isEventLocked = false
@@ -55,9 +55,7 @@ function changeEditorPageLikePreview(){
                                 </button>
                             </div>
                         </div>
-                        <div class="nt-editor--header-items nt-editor-header-middle">
-                            ${header}
-                        </div>
+                        <div class="nt-editor--header-items nt-editor-header-middle">${header}</div>
                         <div class="nt-editor--header-items nt-editor-header-right" id="nt-editor--save-button">
                             <a type="button" class="nt-button" id="nt-editor--panel-close" title="編集画面を閉じる">
                                 <i class="fa-solid fa-xmark"></i>
@@ -114,7 +112,7 @@ function changeEditorPageLikePreview(){
 
                         <!-- ツール -->
                         <!-- 検索・置換 -->
-                        <div class="nt-search-box nt-search-box--close nt-content-hidden"><!--nt-content-hidden-->
+                        <div class="nt-search-box nt-search-box--close nt-content-hidden">
                             <div class="nt-search-box--button nt-search-box--open-replace">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </div>
@@ -297,9 +295,11 @@ function changeEditorPageLikePreview(){
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-each">
                                 <i class="fa-solid fa-file-lines"></i>表示中の項目を保存
                             </button>
+                            <!--
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-all">
                                 <i class="fa-solid fa-file-zipper"></i>すべての項目を保存
                             </button>
+                            -->
                             <a href="/userwrittingnovel/backup/" target="blank">
                                 <button type="button" class="nt-button nt-notation-button" id="nt-tools--backup">
                                     <i class="fa-solid fa-cloud"></i>執筆バックアップを開く
@@ -811,4 +811,7 @@ function insertUtilities(){
     _toolSearch()
     _toolIndent()
     _toolCovertKakuyomuRubyDot()
+
+    _toolExportEach()
+    _toolExportAll()
 }

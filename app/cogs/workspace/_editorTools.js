@@ -1,4 +1,5 @@
-import { autoIndent, escapeHtml, escapeRegex } from "../../utils/text.js"
+import { saveText } from "../../utils/misc.js"
+import { autoIndent, escapeHtml, escapeRegex, getDatetimeStringForFilename } from "../../utils/text.js"
 import { getSelectedContent } from "./_editor.js"
 
 function getForms(index){
@@ -608,5 +609,25 @@ export function _toolCovertKakuyomuRubyDot(){
             $(form).val(replaceKakuyomuRubyDot(text))
             $(form).trigger("input")
         }
+    })
+}
+
+export function _toolExportEach(){
+    $("#nt-tools--export-each").click(function(){
+        const index = getSelectedContent()
+        const form = getForms(index)
+        if($(form).length){
+            var name = $(form).attr("name")
+            var text = $(form).val()
+            console.log("saved")
+            console.log(`${name}-${getDatetimeStringForFilename()}.txt`)
+            saveText(text, `${name}-${getDatetimeStringForFilename()}.txt`)
+        }
+    })
+}
+
+export function _toolExportAll(){
+    $("#nt-tools--export-all").click(function(){
+        
     })
 }
