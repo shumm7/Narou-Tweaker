@@ -322,6 +322,39 @@
 							</div>
 						</div>
 
+						<!--一定時間経過後にマウスカーソルを非表示にする-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">一定時間経過後にマウスカーソルを非表示にする</div>
+									<div class="contents-item--description">
+										マウスを動かさずに一定時間経過すると、マウスカーソルを非表示にします。<br>
+										非表示にするまでの時間は下で設定できます。
+									</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="novelCursorHide" class="options toggle">
+									<label for="novelCursorHide" class="toggle"></label>
+								</div>
+							</div>
+						</div>
+
+						<!--カーソル非表示までの時間-->
+						<div class="contents-wide option-hide" data-for="novelCursorHide" data="true" mode="show">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">カーソル非表示までの時間</div>
+									<div class="contents-item--description">カーソルを非表示にするまでの時間を秒で指定します。</div>
+								</div>
+								<div class="contents-option-content">
+									<div class="textfield">
+										<input class="options" type="text" id="novelCursorHideTimeout">
+										</input>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 					<!-- スキン -->

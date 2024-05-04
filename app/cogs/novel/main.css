@@ -5,7 +5,10 @@ html:has(.narou-tweaker-vertical){
     scroll-behavior: unset !important;
     overflow-x: hidden;
 }
-
+html:has(.narou-tweaker-cursor-hide) {
+    cursor: none !important;
+    pointer-events: none !important;
+}
 
 /* Header */
 #novel_header::-webkit-scrollbar,

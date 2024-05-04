@@ -1,5 +1,5 @@
 import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
-import { getEpisode, checkNovelPageDetail } from "./utils.js"
+import { getEpisode, checkNovelPageDetail, isR18 } from "./utils.js"
 import { getNcode } from "/utils/ncode.js";
 
 export function _novel(){
@@ -31,7 +31,7 @@ export function _novel(){
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
         }
-
+        _cursorHide()
     })
 }
 
@@ -47,6 +47,12 @@ function _novelTop(){
                 $("#novel_ex span").remove()
                 Extext[0].innerHTML += text
             }
+        }
+
+        if(data.novelCustomStyle){
+            $("body").addClass("narou-tweaker")
+
+            $("")
         }
     })
 }
@@ -172,6 +178,26 @@ function _autoURL(){
             });
         }
     })
+}
+
+function _cursorHide(){
+    chrome.storage.local.get(null, (data) => {
+        if(data.novelCursorHide){
+            var resizeTimer = null
+            var timeout = parseFloat(data.novelCursorHideTimeout)
+
+            if(!isNaN(timeout) || timeout>0){
+                $(window).on('load mousemove', function() {
+                    clearTimeout(resizeTimer)
+                    $('body').removeClass('narou-tweaker-cursor-hide')
+                    resizeTimer = setTimeout(function() {
+                        $('body').addClass('narou-tweaker-cursor-hide')
+                    }, timeout * 1000)
+                });
+            }
+        }
+    })
+
 }
 
 function _history(){

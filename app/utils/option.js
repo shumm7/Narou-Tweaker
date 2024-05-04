@@ -41,6 +41,8 @@ export const defaultOption = {
     novelShowAllExtext: false,
     novelShowHistoryOnSublist: true,
     novelForceMypageLink: false,
+    novelCursorHide: false,
+    novelCursorHideTimeout: 5,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
