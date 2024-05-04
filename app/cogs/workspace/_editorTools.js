@@ -145,24 +145,31 @@ export function _toolSearch(){
         // 単語単位での検索
         if(searchMode.word){pattern = `\\b${pattern}\\b`}
 
-        return new RegExp(pattern, regexMode)
+        try{
+            return new RegExp(pattern, regexMode)
+        }catch(e){
+            return 
+        }
     }
 
     function searchPattern(text, pattern){
         var ret = []
         var startIndex = 0
         var regex = createPattern(pattern)
+        if(regex){
+            $.each([...text.matchAll(regex)], function(_, match){
+                if(match[0].length>0){
+                    const matchPosStart = match.index
+                    const matchPosEnd = matchPosStart + match[0].length - 1
 
-        $.each([...text.matchAll(regex)], function(_, match){
-            if(match[0].length>0){
-                const matchPosStart = match.index
-                const matchPosEnd = matchPosStart + match[0].length - 1
-
-                ret.push({start: matchPosStart, end: matchPosEnd})
-                startIndex = matchPosEnd + 1
-            }
-        })
-        return ret
+                    ret.push({start: matchPosStart, end: matchPosEnd})
+                    startIndex = matchPosEnd + 1
+                }
+            })
+            return ret
+        }else{
+            return []
+        }
     }
 
     function nearPattern(caretPos){
@@ -250,26 +257,31 @@ export function _toolSearch(){
                 const word = text.substring(searchResult[searchFoundIndex].start, searchResult[searchFoundIndex].end + 1)
                 const pattern = createPattern(searchText)
                 
-                const ret = text.substring(0, searchResult[searchFoundIndex].start)
-                    + word.replace(pattern, replaceText)
-                    + text.substring(searchResult[searchFoundIndex].end + 1)
-                $(form).val(ret)
+                if(pattern){
+                    const ret = text.substring(0, searchResult[searchFoundIndex].start)
+                        + word.replace(pattern, replaceText)
+                        + text.substring(searchResult[searchFoundIndex].end + 1)
+                    $(form).val(ret)
 
-                const newCaret = searchResult[searchFoundIndex].start + replaceText.length
-                $(form).selection("setPos", {start: newCaret, end: newCaret})
-                $(form).trigger("input")
+                    const newCaret = searchResult[searchFoundIndex].start + replaceText.length
+                    $(form).selection("setPos", {start: newCaret, end: newCaret})
+                    $(form).trigger("input")
 
-                searchResult = searchPattern(ret, searchText)
-                replaceBox.selection("setPos", {start: replaceText.length, end: replaceText.length})
+                    searchResult = searchPattern(ret, searchText)
+                    replaceBox.selection("setPos", {start: replaceText.length, end: replaceText.length})
 
-                if(searchResult.length>0){
-                    if(searchFoundIndex>=searchResult.length){
-                        searchFoundIndex = searchResult.length - 1
+                    if(searchResult.length>0){
+                        if(searchFoundIndex>=searchResult.length){
+                            searchFoundIndex = searchResult.length - 1
+                        }
+                        setCount(searchResult.length)
+                    }else{
+                        elemBackdrop.empty()
+                        searchFoundIndex = 0
+                        setCount(0)
                     }
-                    setCount(searchResult.length)
                 }else{
-                    elemBackdrop.empty()
-                    searchFoundIndex = 0
+                    searchFoundIndex = undefined
                     setCount(0)
                 }
             }
@@ -295,33 +307,38 @@ export function _toolSearch(){
             const text = $(form).val()
             const pattern = createPattern(searchText)
 
-            $.each(searchResult, function(n, result){
-                var next
-                if(n+1<searchResult.length){
-                    next = searchResult[n+1].start
-                }
-                
-                const word = text.substring(result.start, result.end + 1)
-                ret += text.substring(i, result.start)
-                    + word.replace(pattern, replaceText)
-                    + text.substring(result.end + 1, next)
-                i = next
-            })
-            $(form).val(ret)
-            $(form).trigger("input")
+            if(pattern){
+                $.each(searchResult, function(n, result){
+                    var next
+                    if(n+1<searchResult.length){
+                        next = searchResult[n+1].start
+                    }
+                    
+                    const word = text.substring(result.start, result.end + 1)
+                    ret += text.substring(i, result.start)
+                        + word.replace(pattern, replaceText)
+                        + text.substring(result.end + 1, next)
+                    i = next
+                })
+                $(form).val(ret)
+                $(form).trigger("input")
 
-            searchResult = searchPattern(ret, searchText)
-            replaceBox.selection("setPos", {start: replaceText.length, end: replaceText.length})
+                searchResult = searchPattern(ret, searchText)
+                replaceBox.selection("setPos", {start: replaceText.length, end: replaceText.length})
 
-            searchFoundIndex = 0
-            if(searchResult.length>0){
-                if(searchFoundIndex>=searchResult.length){
-                    searchFoundIndex = searchResult.length - 1
-                }
-                setCount(searchResult.length)
-            }else{
-                elemBackdrop.empty()
                 searchFoundIndex = 0
+                if(searchResult.length>0){
+                    if(searchFoundIndex>=searchResult.length){
+                        searchFoundIndex = searchResult.length - 1
+                    }
+                    setCount(searchResult.length)
+                }else{
+                    elemBackdrop.empty()
+                    searchFoundIndex = 0
+                    setCount(0)
+                }
+            }else{
+                searchFoundIndex = undefined
                 setCount(0)
             }
         }else{
