@@ -164,6 +164,9 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-panel--tab-content > div:first-child {
 	margin-top: 0;
 }
+.narou-tweaker-custom-editor .nt-panel--tab-content > div:last-child {
+	margin-bottom: 30px;
+}
 .narou-tweaker-custom-editor .nt-panel--tab-content h4 {
 	padding-bottom: .1em;
 }
@@ -218,6 +221,9 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-notation-button:hover {
 	background-color: #fafafa;
 	border-color: #333;
+}
+.narou-tweaker-custom-editor a:has(.nt-notation-button){
+	color: inherit;
 }
 .narou-tweaker-custom-editor .nt-notation-button > i {
 	width: 16px;
@@ -296,23 +302,34 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-editor--header .nt-editor--header-items {
 	display: flex;
-	width: 100%;
+	width: auto;
 	height: 100%;
 	max-width: 300px;
-    min-width: 140px;
 	flex-direction: row;
 	align-items: center;
-	padding: 10px;
+	padding: 10px 0;
+	margin: 0 5px;
 	text-wrap: nowrap;
 }
 .narou-tweaker-custom-editor .nt-editor--header-items.nt-editor-header-left {
 	justify-content: flex-start;
+	flex: 1;
+	margin-left: 10px;
 }
 .narou-tweaker-custom-editor .nt-editor--header-items.nt-editor-header-middle {
 	justify-content: center;
+	min-width: 0;
+	display: inline-block;
+    height: auto;
+	margin: auto 0;
+    overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0;
 }
 .narou-tweaker-custom-editor .nt-editor--header-items.nt-editor-header-right {
 	justify-content: flex-end;
+	flex: 1;
+	margin-right: 10px;
 }
 .narou-tweaker-custom-editor .nt-editor--panel-vertical-devide {
 	border-right: 1px solid #ddd;
@@ -339,12 +356,13 @@ body.narou-tweaker-custom-editor {
 	border-radius: 0 3px 3px 0;
 }
 .narou-tweaker-custom-editor #nt-editor--panel-close {
-	margin-right: 10px;
+	margin-right: 20px;
 	color: inherit;
 	cursor: pointer;
 	border: 1px solid transparent;
 	border-radius: 0;
 	background: none;
+	padding: 0;
 }
 .narou-tweaker-custom-editor #nt-editor--panel-close:hover{
 	color: var(--kasasagi-blue);
@@ -366,34 +384,42 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-editor--footer .nt-editor--footer-items {
 	display: flex;
-	width: 100%;
+	width: auto;
 	height: 100%;
 	max-width: 300px;
-    min-width: 140px;
 	flex-direction: row;
 	align-items: center;
 	text-wrap: nowrap;
+	background-color: #fff;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-left {
 	justify-content: flex-start;
+	flex-shrink: 1;
+	min-width: 0;
+	min-width: 80px;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-middle {
 	justify-content: center;
+	flex: 1;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-right {
 	justify-content: flex-end;
-	padding: 10px;
+	padding: 10px 0;
+	margin-right: 10px;
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .narou-tweaker-custom-editor .nt-editor--footer-tab {
 	height: 100%;
 	display: flex;
 	justify-content: center;
+	width: 100%;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-tab-item {
 	height: 100%;
 	padding: 0 10px;
-	min-width: 75px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -409,7 +435,14 @@ body.narou-tweaker-custom-editor {
 	font-weight: bold;
 	background-color: #fafafa;
 }
+.narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-left .nt-editor--footer-tab-item {
+	flex-shrink: 1;
+	min-width: 0;
+}
 .narou-tweaker-custom-editor .nt-editor--footer-tab-button {
+	width: 100%;
+	overflow: hidden;
+	text-overflow: clip;
 	border: none;
 	background: none;
 }
@@ -417,6 +450,16 @@ body.narou-tweaker-custom-editor {
 	margin-right: 5px;
 }
 
+.narou-tweaker-custom-editor .p-up-novel-input__upload,
+.narou-tweaker-custom-editor .js-read_postscript_template {
+	min-width: 0;
+    width: auto;
+	overflow: hidden;
+}
+.narou-tweaker-custom-editor .p-up-novel-input__upload button {
+	width: 100%;
+    overflow: hidden;
+}
 .narou-tweaker-custom-editor .nt-editor--footer-textcount{
 	display: flex;
 	align-items: baseline;
