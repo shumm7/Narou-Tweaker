@@ -113,6 +113,7 @@ function changeEditorPageLikePreview(){
                         </div>
 
                         <!-- ツール -->
+                        <!-- 検索・置換 -->
                         <div class="nt-search-box nt-search-box--close nt-content-hidden"><!--nt-content-hidden-->
                             <div class="nt-search-box--button nt-search-box--open-replace">
                                 <i class="fa-solid fa-chevron-right"></i>
