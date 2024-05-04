@@ -120,7 +120,7 @@ function changeEditorPageLikePreview(){
                                 <div class="nt-search-box--row nt-search-box--search">
                                     <div class="nt-search-box--fields">
                                         <div class="nt-search-box--field-dummy-outer">
-                                            <input type="text" class="nt-search-box--field-dummy nt-search-box--field-search" name="nt-search"/>
+                                            <input type="text" class="nt-search-box--field-dummy nt-search-box--field-search" name="nt-search" placeholder="検索"/>
                                             <div class="nt-search-box--field-above">
                                                 <div class="nt-search-box--button nt-search-box--mode-case nt-search-box--button-toggle" title="大文字・小文字を区別する"><div class='codicon codicon-case-sensitive'></div></div>
                                                 <div class="nt-search-box--button nt-search-box--mode-word nt-search-box--button-toggle" title="単語単位で検索する"><div class='codicon codicon-whole-word'></div></div>
@@ -137,7 +137,7 @@ function changeEditorPageLikePreview(){
                                 </div>
                                 <div class="nt-search-box--row nt-search-box--replace">
                                     <div class="nt-search-box--fields">
-                                        <input type="text" class="nt-search-box--field nt-search-box--field-replace" name="nt-replace"/>
+                                        <input type="text" class="nt-search-box--field nt-search-box--field-replace" name="nt-replace" placeholder="置換"/>
                                     </div>
                                     <div class="nt-search-box--buttons">
                                         <div class="nt-search-box--button nt-search-box--replace-each" title="置換"><div class='codicon codicon-replace'></div></div>
