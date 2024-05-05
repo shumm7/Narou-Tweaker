@@ -778,6 +778,8 @@ html:has(.narou-tweaker-cursor-hide) {
 .narou-tweaker .novel-titles .novel-title {
     line-height: normal;
 	font-weight: bold;
+	word-break: break-word;
+	word-break: auto-phrase;
 }
 .narou-tweaker .novel-titles .novel-author {
 	margin-top: .5em;
