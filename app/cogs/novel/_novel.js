@@ -329,10 +329,17 @@ function _authorLink(){
         }
 
         if(pageDetail=="top" || (pageDetail=="novel" && episode==0)){
-            var author_text = $(".novel_writername")
-            if(!author_text.find("a").length){
-                var author = author_text.text().match(/作者：(.*)/)[1]
-                author_text.get(0).innerHTML = `作者：<a href="${userid_link}">${author}</a>`
+            if($(".novel-author").length){
+                if(!$(".novel-author a").length){
+                    $(".novel-author").wrapInner(`<a href="${userid_link}">`)
+                }
+            }
+            else if($(".novel_writername").length){
+                var author_text = $(".novel_writername")
+                if(!author_text.find("a").length){
+                    var author = author_text.text().match(/作者：(.*)/)[1]
+                    author_text.get(0).innerHTML = `作者：<a href="${userid_link}">${author}</a>`
+                }
             }
         }else if(pageDetail=="novel"){
             if($(".novel-author").length){
