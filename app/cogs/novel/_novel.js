@@ -310,6 +310,7 @@ function _authorLink(){
     const r18 = isR18()
     const ncode = getNcode()
     const pageDetail = checkNovelPageDetail()
+    const episode = getEpisode()
     let userid
     if(atom.length){
         if(location.hostname == "ncode.syosetu.com"){
@@ -327,7 +328,7 @@ function _authorLink(){
             userid_link =`https://mypage.syosetu.com/${userid}/`
         }
 
-        if(pageDetail=="top"){
+        if(pageDetail=="top" || (pageDetail=="novel" && episode==0)){
             var author_text = $(".novel_writername")
             if(!author_text.find("a").length){
                 var author = author_text.text().match(/作者：(.*)/)[1]
@@ -338,29 +339,27 @@ function _authorLink(){
                 if(!$(".novel-author a").length){
                     $(".novel-author").wrapInner(`<a href="${userid_link}">`)
                 }
-            }else{
-                if($(".contents1").length){
-                    var outer = $(".contents1").clone()
-                    var elm_atteintion = outer.find(".attention")
-                    var elm_title = outer.find("a[href='/"+ncode+"/']")
-                    var elm_chapter = outer.find(".chapter_title")
-                    var elm_atteintion_c = elm_atteintion.clone()
-                    var elm_title_c = elm_title.clone()
-                    var elm_chapter_c = elm_chapter.clone()
+            }else if($(".contents1").length){
+                var outer = $(".contents1").clone()
+                var elm_atteintion = outer.find(".attention")
+                var elm_title = outer.find("a[href='/"+ncode+"/']")
+                var elm_chapter = outer.find(".chapter_title")
+                var elm_atteintion_c = elm_atteintion.clone()
+                var elm_title_c = elm_title.clone()
+                var elm_chapter_c = elm_chapter.clone()
 
-                    elm_atteintion.remove()
-                    elm_title.remove()
-                    elm_chapter.remove()
+                elm_atteintion.remove()
+                elm_title.remove()
+                elm_chapter.remove()
 
-                    if(!outer.find("a").length){
-                        var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
-                        var outer = $(".contents1")
-                        outer.empty()
-                        outer.append(elm_atteintion)
-                        outer.append(elm_title_c)
-                        outer.append(` 作者：<a href="${userid_link}">${author}</a> `)
-                        outer.append(elm_chapter_c)
-                    }
+                if(!outer.find("a").length){
+                    var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
+                    var outer = $(".contents1")
+                    outer.empty()
+                    outer.append(elm_atteintion)
+                    outer.append(elm_title_c)
+                    outer.append(` 作者：<a href="${userid_link}">${author}</a> `)
+                    outer.append(elm_chapter_c)
                 }
             }
         }else if(pageDetail=="info"){
