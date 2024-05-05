@@ -43,6 +43,7 @@ export const defaultOption = {
     novelForceMypageLink: false,
     novelCursorHide: false,
     novelCursorHideTimeout: 5,
+    novelAttentionBanner: false,
 
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],

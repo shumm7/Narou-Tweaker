@@ -22,11 +22,17 @@ export function _novel(){
             }
             _autoURL()
             _saveHistory()
+            if(data.novelAttentionBanner){
+                novelTopAttention()
+            }
         }else if(pageDetail=="top"){
             _novelTop()
             _saveHistory()
             if(data.novelShowHistoryOnSublist){
                 _history()
+            }
+            if(data.novelAttentionBanner){
+                novelTopAttention()
             }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
@@ -51,8 +57,6 @@ function _novelTop(){
 
         if(data.novelCustomStyle){
             $("body").addClass("narou-tweaker")
-
-            $("")
         }
     })
 }
@@ -138,7 +142,7 @@ function _tategaki(){
     $(".novel-chapter").prependTo(items)
     $("#novel_no").prependTo(items)
     $(".novel_bn:first-child()").prependTo(items)
-    $(".contents1").prependTo(items)
+    $(".contents1:has(.novel-titles)").prependTo(items)
 
     // Elements (Append)
     $("#novel_a").appendTo(items)
@@ -372,5 +376,79 @@ function _authorLink(){
                 }
             })
         }
+    }
+}
+
+function novelTopAttention(){
+    var attention = $(".contents1:not(:has(.novel-titles))")
+    const attentionList = {
+        r15: false,
+        r18: false,
+        zankoku: false,
+        bl: false,
+        gl: false,
+        tensei: false,
+        tenni: false
+    }
+
+    if(attention.length){
+        const text = attention.text()
+
+        if(text.match(/＜R15＞/)){
+            attentionList.r15 = true
+        }
+        if(text.match(/＜R18＞/)){
+            attentionList.r18 = true
+        }
+        if(text.match(/〔残酷描写〕/)){
+            attentionList.zankoku = true
+        }
+        if(text.match(/〔ボーイズラブ要素〕/)){
+            attentionList.bl = true
+        }
+        if(text.match(/〔ガールズラブ要素〕/)){
+            attentionList.gl = true
+        }
+        attention.empty()
+    }else{
+        attention = $(`<div class="contents1"></div>`)
+        if($(".contents1").length){
+            $(".contents1").before(attention)
+        }else{
+            $("#novel_contents").before(attention)
+        }
+    }
+
+    var metaTag = $("head meta[property='og:description']")
+    if(metaTag.length){
+        const content = metaTag.attr("content")
+        if(content.match(/\b異世界転生\b/)){
+            attentionList.tensei = true
+        }
+        if(content.match(/\b異世界転移\b/)){
+            attentionList.tenni = true
+        }
+    }
+
+    if(attentionList.r18){
+        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r18">R18</span>`)
+    }
+    if(attentionList.r15){
+        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r15">R15</span>`)
+    }
+    if(attentionList.zankoku){
+        attention.append(`<span class="nt-novel-attention-label">残酷描写</span>`)
+    }
+    if(attentionList.bl){
+        attention.append(`<span class="nt-novel-attention-label">ボーイズラブ</span>`)
+    }
+    if(attentionList.gl){
+        attention.append(`<span class="nt-novel-attention-label">ガールズラブ</span>`)
+    }
+    if(attentionList.tensei){
+        attention.append(`<span class="nt-novel-attention-label">異世界転生</span>`)
+    }
+    if(attentionList.tenni){
+        attention.append(`<span class="nt-novel-attention-label">異世界転移</span>`)
     }
 }
