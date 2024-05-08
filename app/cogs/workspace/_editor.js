@@ -64,20 +64,39 @@ function changeEditorPageLikePreview(){
                     </div>
                     
                     <div class="nt-editor--body">
-                        <!-- バナー -->
-                        <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="1">
-                            <span style="text-decoration: underline; font-weight: bold;">前書き</span>&nbsp;を編集しています。
-                        </div>
-                        <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="2">
-                            <span style="text-decoration: underline; font-weight: bold;">後書き</span>&nbsp;を編集しています。
-                        </div>
-                        <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="3">
-                            <span style="text-decoration: underline; font-weight: bold;">フリーメモ</span>&nbsp;を編集しています。<br>
-                            エピソードと一緒に保存しておけるメモです。書いたメモは他のユーザには公開されません。詳細は<a href="https://syosetu.com/helpcenter/helppage/helppageid/36/" target="_blank">ヘルプセンター</a>をご確認ください。
-                        </div>
-                        <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="4">
-                            <span style="text-decoration: underline; font-weight: bold;">プレビュー</span>&nbsp;を表示中（このエピソードの文字数：<span class="nt-editor--textcount" data="0"></span> 字）<br>
-                            実際の表示と異なる可能性があります。
+                        <div class="nt-editor--body-content-overlay">
+                            <!-- バナー -->
+                            <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="1">
+                                <span style="text-decoration: underline; font-weight: bold;">前書き</span>&nbsp;を編集しています。
+                            </div>
+                            <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="2">
+                                <span style="text-decoration: underline; font-weight: bold;">後書き</span>&nbsp;を編集しています。
+                            </div>
+                            <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="3">
+                                <span style="text-decoration: underline; font-weight: bold;">フリーメモ</span>&nbsp;を編集しています。<br>
+                                エピソードと一緒に保存しておけるメモです。書いたメモは他のユーザには公開されません。詳細は<a href="https://syosetu.com/helpcenter/helppage/helppageid/36/" target="_blank">ヘルプセンター</a>をご確認ください。
+                            </div>
+                            <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="4">
+                                <span style="text-decoration: underline; font-weight: bold;">プレビュー</span>&nbsp;を表示中（このエピソードの文字数：<span class="nt-editor--textcount" data="0"></span> 字）<br>
+                                実際の表示と異なる可能性があります。
+                            </div>
+
+                            <div class="nt-editor--reserve-date nt-editor--reserve-date--close nt-content-hidden" title="予約掲載設定">
+                                <div class="nt-editor--reserve-date--header"><i class="fa-solid fa-chevron-right"></i><span class="nt-editor--reserve-date--header-title">予約掲載：2024/05/06 23:10</span></div>
+                                <div class="nt-editor--reserve-date--content">
+                                    <div class="nt-editor--reserve-date--item nt-editor--reserve-date--date">
+                                        <div class="nt-editor--reserve-date--item-headding">投稿日</div>
+                                        <div class="nt-editor--reserve-date--item-content"></div>
+                                    </div>
+                                    <div class="nt-editor--reserve-date--item nt-editor--reserve-date--time">
+                                        <div class="nt-editor--reserve-date--item-headding">投稿時間</div>
+                                        <div class="nt-editor--reserve-date--item-content"></div>
+                                    </div>
+                                    <div class="nt-editor--reserve-date--item nt-editor--reserve-date--clear">
+                                        <div class="nt-editor--reserve-date--item-content"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- コンテンツ -->
@@ -384,6 +403,19 @@ function changeEditorPageLikePreview(){
     }))
 
     // inputs
+    if(container.find("input[name='reserve_date']").length){
+        elm.find(".nt-editor--reserve-date").removeClass("nt-content-hidden")
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--date .nt-editor--reserve-date--item-content").append(container.find("input[name='reserve_date']"))
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(container.find("select[name='reserve_hour']"))
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(`<span>時</span>`)
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(container.find("select[name='reserve_minutes']"))
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(`<span>分</span>`)
+        elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--clear .nt-editor--reserve-date--item-content").append(container.find("input.p-up-novel-input__reserve-clear").click(function(){
+            $('input[name="reserve_date"]', "#usernoveldatamangeForm,#wright_form").val('');
+            $('select[name="reserve_hour"]', "#usernoveldatamangeForm,#wright_form").val('');
+            $('select[name="reserve_minutes"]', "#usernoveldatamangeForm,#wright_form").val('');
+        }))
+    }
     elm.find(".nt-editor--main-title").append(container.find("input[name='subtitle']").clone(true).attr("placeholder", "エピソードタイトルを入力…").addClass("nt-check-state"))
     elm.find(".nt-editor--main-novel").append(container.find("textarea[name='novel']").clone(true).attr("placeholder", "本文を入力…").addClass("nt-check-state"))
     elm.find(".nt-editor--preface").append(container.find("textarea[name='preface']").clone(true).attr("placeholder", "前書きを入力…").addClass("nt-check-state"))
@@ -421,7 +453,6 @@ function changeEditorPageLikePreview(){
 
     // Alerts
     container.find(".c-alert").each(function(){
-        console.log($(this).text())
         elm.find(".nt-editor--body").prepend(
             $(this).addClass(["nt-editor--body-content-banner", "nt-editor--body-content-baner-removable", "nt-editor--footer-tab-content"]).attr("data", 0)
         )
@@ -543,7 +574,7 @@ function changeEditorPageLikePreview(){
     });
 
     // DOM
-    var form = container.find("form.c-form").clone(true).empty().append(elm)
+    var form = container.find("#usernoveldatamangeForm,#wright_form").clone(true).empty().append(elm)
 
     $("body > div:first-child").after(form)
     $("body").on("scroll", function(e){
@@ -559,6 +590,9 @@ function changeEditorPageLikePreview(){
     insertUtilities()
     stateCheck()
     freememo()
+    if(!$(".nt-editor--reserve-date").hasClass("nt-content-hidden")){
+        reserveDate()
+    }
 }
 
 function showPreview(){
@@ -801,6 +835,88 @@ function freememo(){
         resetFreememo()
     })
     //resetFreememo()
+}
+
+function reserveDate(){
+    $(".nt-editor--reserve-date--header").on("click", function(){
+        var parent = $(this).parent()
+        if(parent.hasClass("nt-editor--reserve-date--close")){
+            parent.removeClass("nt-editor--reserve-date--close")
+            parent.addClass("nt-editor--reserve-date--open")
+            setDateParam(true)
+        }else{
+            parent.removeClass("nt-editor--reserve-date--open")
+            parent.addClass("nt-editor--reserve-date--close")
+            setDateParam(false)
+        }
+    })
+    
+
+    function emptyToNull(val){
+        if(typeof val === typeof ""){
+            var v = parseInt(val)
+            if(isNaN(v)){
+                return null
+            }else{
+                return v
+            }
+        }
+        return val
+    }
+
+    function setDateParam(isOpen){
+        if(isOpen){
+            $(".nt-editor--reserve-date--header .nt-editor--reserve-date--header-title").text("予約掲載設定")
+        }else{
+            var text = "予約掲載："
+            var submitButton = $("input#novelmanage")
+            submitButton.prop("disabled", false)
+            const date = $("input[name='reserve_date']").val()
+            const hour = emptyToNull($("select[name='reserve_hour']").val())
+            const minutes = emptyToNull($("select[name='reserve_minutes']").val())
+
+            if(date.length==0 && hour===null && minutes===null){
+                text += "今すぐ公開"
+            }else{
+                if(date.length==0){
+                    text += "----/--/-- "
+                }else{
+                    text += date + " "
+                }
+                if(hour===null){
+                    text += "--"
+                }else{
+                    text += ('0' + hour).slice(-2)
+                }
+                if(minutes===null){
+                    text += ":--"
+                }else{
+                    text += ":" + ('0' + minutes).slice(-2)
+                }
+            }
+            $(".nt-editor--reserve-date--header .nt-editor--reserve-date--header-title").text(text)
+        }
+    }
+
+    $("form.c-form").on("submit", function(e){
+        const date = $("input[name='reserve_date']").val()
+        const hour = emptyToNull($("select[name='reserve_hour']").val())
+        const minutes = emptyToNull($("select[name='reserve_minutes']").val())
+        console.log(date)
+        console.log(hour)
+        console.log(minutes)
+
+        if(date.length==0 && hour===null && minutes===null){
+            console.log("not prevented")
+        }else{
+            if(date.length==0 || hour===null || minutes===null){
+                e.preventDefault()
+                alert("不正な日時が設定されました。")
+            }
+        }
+    })
+
+    setDateParam(false)
 }
 
 function insertUtilities(){
