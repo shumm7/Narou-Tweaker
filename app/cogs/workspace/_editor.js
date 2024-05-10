@@ -854,10 +854,9 @@ function reserveDate(){
         format: 'yyyy/mm/dd',
         min: new Date(),
         onSet: (value)=>{
-            var selected = value.select
-            if(selected==undefined){
+            if(value.clear!==undefined){
                 $("input[name='reserve_date']").val("")
-            }else{
+            }else if(value.select!==undefined){
                 $("input[name='reserve_date']").val(getDateString(new Date(value.select), "/"))
             }
             setDateParam()
