@@ -619,8 +619,6 @@ export function _toolExportEach(){
         if($(form).length){
             var name = $(form).attr("name")
             var text = $(form).val()
-            console.log("saved")
-            console.log(`${name}-${getDatetimeStringForFilename()}.txt`)
             saveText(text, `${name}-${getDatetimeStringForFilename()}.txt`)
         }
     })
@@ -628,6 +626,13 @@ export function _toolExportEach(){
 
 export function _toolExportAll(){
     $("#nt-tools--export-all").click(function(){
-        
+        var name = "all"
+        var text = ""
+        text += `【タイトル】\n${$("input[name='subtitle']").val()}\n\n\n\n`
+        text += `【本文】\n${$("textarea[name='novel']").val()}\n\n\n\n`
+        text += `【前書き】\n${$("textarea[name='preface']").val()}\n\n\n\n`
+        text += `【後書き】\n${$("textarea[name='postscript']").val()}\n\n\n\n`
+        text += `【フリーメモ】\n${$("textarea[name='freememo']").val()}`
+        saveText(text, `${name}-${getDatetimeStringForFilename()}.txt`)
     })
 }

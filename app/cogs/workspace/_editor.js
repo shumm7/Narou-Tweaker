@@ -3,6 +3,7 @@ import { _toolCovertKakuyomuRubyDot, _toolExportAll, _toolExportEach, _toolInden
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
 let isEventLocked = false
+const formElement = "#usernoveldatamangeForm,#wright_form,#usernoveldatainputForm"
 
 export function _editor(){
     const path = location.pathname
@@ -25,7 +26,6 @@ function changeEditorPageLikePreview(){
     $("body").addClass("narou-tweaker-custom-editor")
 
     var container = $(".l-container")
-    const title = container.find(".c-up-title-area__title").text()
     const header = "新規エピソード作成"
     const curmbs = $(".l-breadcrumb .c-up-breadcrumb__item:has(a):last a").attr("href")
     const ncode = indexToNcode($(".js-novel_backup_info").attr("data-ncode"))
@@ -105,9 +105,7 @@ function changeEditorPageLikePreview(){
                         <input type="hidden" name="nt-editor--selected-content" value="0">
                         <div class="nt-editor--body-content nt-editor--footer-tab-content nt-content-hidden" id="nt-editor--main" data="0">
                             <div class="nt-editor--main-items">
-                                <div class="nt-editor--main-title">
-                                    <span class="nt-editor--main-title-novel">${title}</span>
-                                </div>
+                                <div class="nt-editor--main-title"></div>
                                 <div class="nt-editor--main-novel"></div>
                             </div>
                         </div>
@@ -316,11 +314,9 @@ function changeEditorPageLikePreview(){
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-each">
                                 <i class="fa-solid fa-file-lines"></i>表示中の項目を保存
                             </button>
-                            <!--
                             <button type="button" class="nt-button nt-notation-button" id="nt-tools--export-all">
                                 <i class="fa-solid fa-file-zipper"></i>すべての項目を保存
                             </button>
-                            -->
                             <a href="/userwrittingnovel/backup/" target="blank">
                                 <button type="button" class="nt-button nt-notation-button" id="nt-tools--backup">
                                     <i class="fa-solid fa-cloud"></i>執筆バックアップを開く
@@ -348,6 +344,9 @@ function changeEditorPageLikePreview(){
             $(".nt-container").addClass("nt-panel-show")
         }
     })
+
+    // displays
+    elm.find(".nt-editor--main-title").prepend(container.find(".c-up-title-area__title").addClass("nt-editor--main-title-novel"))
 
     // buttons
     elm.find("#nt-editor--save-button").append(container.find(".c-button-box-center:has(.js-previewButton)"))
@@ -572,7 +571,7 @@ function changeEditorPageLikePreview(){
     });
 
     // DOM
-    var form = container.find("#usernoveldatamangeForm,#wright_form").clone(true).empty().append(elm)
+    var form = container.find(formElement).clone(true).empty().append(elm)
 
     $("body > div:first-child").after(form)
     $("body").on("scroll", function(e){
@@ -879,11 +878,11 @@ function reserveDate(){
     })
 
     $("input.p-up-novel-input__reserve-clear").click(function(){
-        $('input[name="reserve_date"]', "#usernoveldatamangeForm,#wright_form").val('');
-        $('select[name="reserve_hour"]', "#usernoveldatamangeForm,#wright_form").val('');
-        $('select[name="reserve_minutes"]', "#usernoveldatamangeForm,#wright_form").val('');
+        $('input[name="reserve_date"]', formElement).val('');
+        $('select[name="reserve_hour"]', formElement).val('');
+        $('select[name="reserve_minutes"]', formElement).val('');
 
-        var picker = $('.nt-editor--reverse-date--date-dummy', "#usernoveldatamangeForm,#wright_form").pickadate('picker')
+        var picker = $('.nt-editor--reverse-date--date-dummy', formElement).pickadate('picker')
         picker.clear()
         setDateParam()
     })
