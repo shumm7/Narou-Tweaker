@@ -906,12 +906,15 @@ body.narou-tweaker-custom-editor {
 	justify-content: center;
 	padding-bottom: 5px;
 }
-.narou-tweaker-custom-editor input[name="reserve_date"] {
+/*.narou-tweaker-custom-editor input[name="reserve_date"]*/
+.nt-editor--reverse-date--date-dummy {
 	cursor: pointer;
 	width: 90%;
 	text-align: center;
 	border: 1px solid rgb(221, 221, 221);
 	border-radius: 3px;
+	font-size: 14px;
+	padding: 5px 0;
 }
 .narou-tweaker-custom-editor select[name="reserve_hour"],
 .narou-tweaker-custom-editor select[name="reserve_minutes"] {

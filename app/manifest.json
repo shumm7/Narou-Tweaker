@@ -91,10 +91,15 @@
         "libs/jquery-3.7.1.min.js",
         "libs/encoding.js/encoding.min.js",
         "libs/jquery.selection/src/jquery.selection.js",
+        "libs/pickadate.js/lib/picker.js",
+        "libs/pickadate.js/lib/picker.date.js",
+        "libs/pickadate.js/lib/legacy.js",
         "loader/workspace.js"
       ],
       "css": [
         "libs/font-awesome/css/all.css",
+        "libs/pickadate.js/lib/themes/default.css",
+        "libs/pickadate.js/lib/themes/default.date.css",
         "common.css",
         "cogs/workspace/main.css",
         "cogs/workspace/_favorite.css",

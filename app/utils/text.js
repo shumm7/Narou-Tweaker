@@ -83,12 +83,14 @@ export function getDateStringJapanese(date){
 }
 
 // 日付を表示（yyyy-MM-dd）
-export function getDateString(date){
+export function getDateString(date, divider){
     if(date==undefined){date = new Date();}
+    if(date===null){return ""}
+    if(divider==undefined){divider="-"} 
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    return `${year}${divider}${month}${divider}${day}`;
 }
 
 // 日時を表示
@@ -99,11 +101,13 @@ export function getDatetimeFromString(datetimeString){
 // 日付を表示（yyyy/MM/dd HH:mm:ss.SSS）
 export function getDatetimeString(date){
     if(date==undefined){date = new Date();}
+    if(date===null){return ""}
     return date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' +('0' + date.getDate()).slice(-2) + ' ' +  ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2) + '.' + date.getMilliseconds();
 }
 
 export function getDatetimeStringForFilename(date){
     if(date==undefined){date = new Date();}
+    if(date===null){return ""}
     return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' +('0' + date.getDate()).slice(-2) + ' ' +  ('0' + date.getHours()).slice(-2) + '-' + ('0' + date.getMinutes()).slice(-2) + '-' + ('0' + date.getSeconds()).slice(-2);
 
 }
@@ -111,6 +115,7 @@ export function getDatetimeStringForFilename(date){
 // 日付を表示（yyyy/MM/dd HH:mm）
 export function getDatetimeStringWithoutSecond(date){
     if(date==undefined){date = new Date();}
+    if(date===null){return ""}
     return date.getFullYear() + '/' + ('0' + (date.getMonth() + 1)).slice(-2) + '/' +('0' + date.getDate()).slice(-2) + ' ' +  ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2);
 }
 

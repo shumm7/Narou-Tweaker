@@ -23,3 +23,6 @@
 [submodule "app/libs/jquery.selection"]
 	path = app/libs/jquery.selection
 	url = https://github.com/madapaja/jquery.selection.git
+[submodule "app/libs/pickadate.js"]
+	path = app/libs/pickadate.js
+	url = https://github.com/amsul/pickadate.js.git
