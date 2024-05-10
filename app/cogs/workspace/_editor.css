@@ -879,6 +879,9 @@ body.narou-tweaker-custom-editor {
 	margin: 5px;
 	width: 220px;
 }
+.narou-tweaker-custom-editor .nt-editor--reserve-date--hidden {
+	display: none;
+}
 .narou-tweaker-custom-editor .nt-editor--reserve-date--header {
 	padding: 2px 10px;
 	cursor: pointer;

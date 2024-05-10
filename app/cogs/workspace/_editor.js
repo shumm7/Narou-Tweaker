@@ -81,7 +81,7 @@ function changeEditorPageLikePreview(){
                                 実際の表示と異なる可能性があります。
                             </div>
 
-                            <div class="nt-editor--reserve-date nt-editor--reserve-date--close nt-content-hidden" title="予約掲載設定">
+                            <div class="nt-editor--reserve-date nt-editor--reserve-date--close nt-editor--footer-tab-content nt-editor--reserve-date--hidden" title="予約掲載設定"  data="0">
                                 <div class="nt-editor--reserve-date--header"><i class="fa-solid fa-chevron-right"></i><span class="nt-editor--reserve-date--header-title">予約掲載：2024/05/06 23:10</span></div>
                                 <div class="nt-editor--reserve-date--content">
                                     <div class="nt-editor--reserve-date--item nt-editor--reserve-date--date">
@@ -406,7 +406,7 @@ function changeEditorPageLikePreview(){
 
     // inputs
     if(container.find("input[name='reserve_date']").length){
-        elm.find(".nt-editor--reserve-date").removeClass("nt-content-hidden")
+        elm.find(".nt-editor--reserve-date").removeClass("nt-editor--reserve-date--hidden")
         elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--date .nt-editor--reserve-date--item-content").append(container.find("input[name='reserve_date']").addClass("nt-content-hidden"))
         elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(container.find("select[name='reserve_hour']"))
         elm.find(".nt-editor--reserve-date--content .nt-editor--reserve-date--time .nt-editor--reserve-date--item-content").append(`<span>時</span>`)
@@ -460,7 +460,7 @@ function changeEditorPageLikePreview(){
     /* Unload Warnings */
     let isChanged = false
     elm.find("input,textarea").on("input", function(){
-        if(!isChanged){
+        if(!isChanged && !isEventLocked){
             $(window).on('beforeunload', function (event) {
                 event.preventDefault()
             })
