@@ -421,10 +421,12 @@ export function updateOption(force, data){
         if(currentOptionVersion != data.extOptionsVersion || force){
             var o = defaultOption
             Object.keys(o).forEach(function(key){
-                if(data[key]!=undefined){
-                    if( typeof(o[key]) == typeof(data[key]) || forceResetOptions.includes(key) ){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
+                if(!forceResetOptions.includes(key)){
+                    if(data[key]!=undefined){
+                        if( typeof(o[key]) == typeof(data[key])){
+                            if(!ignoreOptions.includes(key)){
+                                o[key] = data[key]
+                            }
                         }
                     }
                 }
