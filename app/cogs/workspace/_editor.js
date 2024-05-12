@@ -485,7 +485,13 @@ function changeEditorPageLikePreview(){
     })
 
     /* Footer Tabs */
+    var savedScrollHeight = [0,0,0,0,0]
     var selectFooterTab = function(index){
+        const prev = getSelectedContent()
+        const prevScrollHeight = $(".nt-editor--body").scrollTop()
+        savedScrollHeight[prev] = prevScrollHeight
+        const novelTop = $("textarea[name='novel']").position().top
+        const previewTop = $("#nt-preview--novel_honbun").position().top
         $(".nt-editor--footer-tab-item").removeClass("nt-selected")
         $(".nt-editor--footer-tab-content").addClass("nt-content-hidden")
         $(`.nt-editor--footer-tab-item[data='${index}']`).addClass("nt-selected")
@@ -520,7 +526,21 @@ function changeEditorPageLikePreview(){
 
         // Reset Scrolls
         //$(".nt-editor--body").scrollTop($(".nt-editor--body").get(0).scrollHeight)
-        $(".nt-editor--body").scrollTop(0)
+        if(prev==0 && index==4){ // novel to preview
+            const newPreviewTop = $("#nt-preview--novel_honbun").position().top
+            const top = prevScrollHeight - novelTop + newPreviewTop - 20
+            $(".nt-editor--body").scrollTop(top)
+        }else if(prev==4 && index==0){ // preview to novel
+            const newNovelTop = $("textarea[name='novel']").position().top
+            const top = prevScrollHeight - previewTop + newNovelTop + 20
+            $(".nt-editor--body").scrollTop(top)
+        }else if(prev==2 && index==4){ // postscript to preview
+            const newPostscriptTop = $("#nt-preview--novel_a").position().top
+            const top = newPostscriptTop - 20
+            $(".nt-editor--body").scrollTop(top)
+        }else{
+            $(".nt-editor--body").scrollTop(savedScrollHeight[index])
+        }
     }
     elm.find(".nt-editor--footer-tab-item").on("click", function(){
         const idx = $(this).attr("data")
@@ -587,7 +607,7 @@ function changeEditorPageLikePreview(){
     insertUtilities()
     stateCheck()
     freememo()
-    if(!$(".nt-editor--reserve-date").hasClass("nt-content-hidden")){
+    if(!$(".nt-editor--reserve-date").hasClass("nt-editor--reserve-date--hidden")){
         reserveDate()
     }
 }
