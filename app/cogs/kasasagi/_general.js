@@ -48,9 +48,16 @@ function today(){
         var yesterday_pv_sum = [];
         var today_total = {}
         var yesterday_total = {}
+        const hour = new Date().getHours()
 
+        var i = 0
         $("#today_data .oneday_graph tr td.pv").each(function() {
-            today_pv.push(parseIntWithComma($(this).text()))
+            if(i<=hour){
+                today_pv.push(parseIntWithComma($(this).text()))
+            }else{
+                today_pv.push(null)
+            }
+            i++
         });
         $("#yesterday_data .oneday_graph tr td.pv").each(function() {
             yesterday_pv.push(parseIntWithComma($(this).text()))
@@ -59,9 +66,13 @@ function today(){
         // Sum
         var i = 0
         $.each(today_pv, function(idx, val){
-            if(val==NaN || val==undefined){val=0}
-            i += val;
-            today_pv_sum[idx] = i
+            if(idx<=hour){
+                if(val==NaN || val==undefined){val=0}
+                i += val;
+                today_pv_sum[idx] = i
+            }else{
+                today_pv_sum[idx] = null
+            }
         });
         var i = 0
         $.each(yesterday_pv, function(idx, val){
@@ -274,10 +285,16 @@ function _tableToday(today_pv_sum, yesterday_pv_sum){
     $("#today_data .oneday_graph tr td.pv").each(function() {
         var time = parseInt($(this).parent().children(".hour").text().trim());
         var value = today_pv_sum[time]
-        var bar = Math.floor(value / max * 100)
-        if(isNaN(bar) || !isFinite(bar)){bar = 0}
-        $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
-        $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
+        if(value===null){
+            var bar = 0
+            $(this).parent().children(".bar").after('<td class="pv sum"></td>')
+            $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
+        }else{
+            var bar = Math.floor(value / max * 100)
+            if(isNaN(bar) || !isFinite(bar)){bar = 0}
+            $(this).parent().children(".bar").after('<td class="pv sum">'+value.toLocaleString()+'</td>')
+            $(this).parent().children(".sum").after('<td class="bar sum"><p class="graph" style="width:'+bar+'%;"></td>')
+        }
     });
 
     var max = yesterday_pv_sum.reduce(aryMax)
