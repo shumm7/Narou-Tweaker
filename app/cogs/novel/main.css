@@ -758,6 +758,9 @@ html:has(.narou-tweaker-cursor-hide) {
 	margin-right: 5px;
 	text-align: center;
 }
+.subtitle:has(.history_now) a{
+	display: inline-block;
+}
 .history_now {
     overflow: hidden;
     width: 20px;
