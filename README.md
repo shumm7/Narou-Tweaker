@@ -24,3 +24,4 @@
 * [highlightjs/highlight.js](https://github.com/highlightjs/highlight.js) Copyright (c) 2006, Ivan Sagalaev.
 * [polygonplanet/encoding.js](https://github.com/polygonplanet/encoding.js) Copyright (c) 2012 polygonplanet
 * [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).
+* [amsul/pickadate.js](https://github.com/amsul/pickadate.js) Copyright 2014 Amsul, http://amsul.ca
