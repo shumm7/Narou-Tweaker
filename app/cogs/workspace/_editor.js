@@ -77,7 +77,7 @@ function changeEditorPageLikePreview(){
                                 エピソードと一緒に保存しておけるメモです。書いたメモは他のユーザには公開されません。詳細は<a href="https://syosetu.com/helpcenter/helppage/helppageid/36/" target="_blank">ヘルプセンター</a>をご確認ください。
                             </div>
                             <div class="nt-editor--body-content-banner nt-editor--footer-tab-content nt-content-hidden" data="4">
-                                <span style="text-decoration: underline; font-weight: bold;">プレビュー</span>&nbsp;を表示中（このエピソードの文字数：<span class="nt-editor--textcount" data="0"></span> 字）<br>
+                                <span style="text-decoration: underline; font-weight: bold;">プレビュー</span>&nbsp;を表示中（このエピソードの文字数：<span class="nt-editor--textcount" data="1"></span> 字）<br>
                                 実際の表示と異なる可能性があります。
                             </div>
 
