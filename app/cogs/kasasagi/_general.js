@@ -672,20 +672,20 @@ function _tableRank(ncode, d){
             <td class="point">${point}</td>
         </tr>`
 
-        if(type=="d"){tableD.append(text)}
-        else if(type=="w"){tableW.append(text)}
-        else if(type=="m"){tableM.append(text)}
-        else if(type=="q"){tableQ.append(text)}
+        if(type=="d"){tableD.prepend(text)}
+        else if(type=="w"){tableW.prepend(text)}
+        else if(type=="m"){tableM.prepend(text)}
+        else if(type=="q"){tableQ.prepend(text)}
     }
-
-    tableD.append("<tr><th colspan='3'>日間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
-    tableW.append("<tr><th colspan='3'>週間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
-    tableM.append("<tr><th colspan='3'>月間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
-    tableQ.append("<tr><th colspan='3'>四半期</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
 
     $.each(d, function(_, value){
         addValue(value)
     })
+
+    tableD.prepend("<tr><th colspan='3'>日間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableW.prepend("<tr><th colspan='3'>週間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableM.prepend("<tr><th colspan='3'>月間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableQ.prepend("<tr><th colspan='3'>四半期</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
 }
 
 function _buttonRank(ncode, data){
