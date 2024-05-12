@@ -80,7 +80,7 @@ function _button(datasets, labels){
             ncode: getNcode(),
             data: data
         }
-        saveJson(raw, "month-unique_" + date + ".json");
+        saveJson(raw, `month-unique_${ncode}_${date}.json`);
     })
 }
 

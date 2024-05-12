@@ -71,6 +71,6 @@ function _button(datasets, labels){
             ncode: getNcode(),
             data: data
         }
-        saveJson(raw, "day-unique_" + date + ".json");
+        saveJson(raw, `day-unique_${ncode}_${date}.json`);
     })
 }

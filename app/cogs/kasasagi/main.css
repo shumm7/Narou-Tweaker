@@ -416,6 +416,22 @@ table tr td.right {
 	width: 20%;
 	font-weight: bold;
 }
+#novel_rank_data .rank_list {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	margin-bottom: 1em;
+	max-height: 90vh;
+    overflow-y: auto;
+}
+#novel_rank_data .rank_list td.date,
+#novel_rank_data .rank_list td.type {
+	text-align: center;
+}
+#novel_rank_data .rank_list td.rank,
+#novel_rank_data .rank_list td.point {
+	text-align: right;
+}
 
 
 .data-table#chapter-unique {

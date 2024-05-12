@@ -105,6 +105,7 @@ export const defaultOption = {
     kasasagiGraphType_MonthUnique: "bar",
 
     kasasagiShowTable_API: true,
+    kasasagiShowTable_Rank: true,
     kasasagiShowTable_GeneralDay: true,
     kasasagiShowTable_ChapterUnique: true,
     kasasagiShowTable_DayPV: true, //Unused

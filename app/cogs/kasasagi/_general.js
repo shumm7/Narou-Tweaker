@@ -35,6 +35,9 @@ export function _general(r18){
 
             /* 作品データ */
             api(r18)
+
+            /* 殿堂入り */
+            rank(r18)
         }
     })
 }
@@ -195,8 +198,9 @@ function total(){
 function api(r18){
     
     chrome.storage.local.get(null, (option)=>{
+        const ncode = getNcode()
+
         if (option.kasasagiShowTable_API){
-            const ncode = getNcode()
 
             // API URL
             var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
@@ -208,10 +212,10 @@ function api(r18){
             $("#novel_detail").append(`<p class='novelview_h3'>作品データ</p>`)
             if(option.kasasagiCustomStyle){
                 $("#novel_detail .novelview_h3").addClass("subtitle")
-                $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", "https://dev.syosetu.com/man/api/"));
+                $("#novel_detail .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう小説APIから取得した情報です", url));
                 $("#novel_detail .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
             }
-            $("#novel_detail").append(`<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div><p><a href="${url}">${url}</a></p>`)
+            $("#novel_detail").append(`<div id='novel_data'><span class='loading-api'>情報を取得中...</span></div>`)
             $("#novel_detail #novel_data").append(`
                 <div class='novel_info'></div>
                 <div class='novel_statics'></div>
@@ -223,7 +227,7 @@ function api(r18){
                 if(response.success && response.action=="fetch"){
                     var data = response.result[1]
                     if(data!=undefined){
-                        $(".loading-api").remove()
+                        $("#novel_data .loading-api").remove()
 
                         /* Info */
                         _tableApi(ncode, data, r18)
@@ -235,13 +239,61 @@ function api(r18){
 
 
                     }else{
-                        $(".loading-api").text("情報の取得に失敗しました。")
+                        $("#novel_data .loading-api").text("情報の取得に失敗しました。")
                     }
                 }else{
-                    $(".loading-api").text("情報の取得に失敗しました。")
+                    $("#novel_data .loading-api").text("情報の取得に失敗しました。")
                 }
                 return true;
             }
+            });
+        }
+    })
+}
+
+function rank(r18){
+    if(r18){return}
+    chrome.storage.local.get(null, (option)=>{
+        if (option.kasasagiShowTable_Rank){
+            const ncode = getNcode()
+            const url = "https://api.syosetu.com/rank/rankin/?out=json&libtype=2&ncode=" + ncode
+
+            $($(".access_information")[0]).before("<div id='novel_rank'></div>")
+            $("#novel_rank").append(`<p class='novelview_h3'>殿堂入り</p>`)
+            if(option.kasasagiCustomStyle){
+                $("#novel_rank .novelview_h3").addClass("subtitle")
+                $("#novel_rank .novelview_h3.subtitle").append(addQuestionIconBalloon("なろう殿堂入りAPIから取得した情報です", url));
+                $("#novel_rank .novelview_h3.subtitle .ui-balloon").attr("style", "margin-left: .2em;");
+            }
+            $("#novel_rank").append(`<div id='novel_rank_data'><span class='loading-api'>情報を取得中...</span></div>`)
+            $("#novel_rank #novel_rank_data").append(`
+                <div class='rank_list'></div>
+            `)
+
+            chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
+                if(response){
+                    if(response.success && response.action=="fetch"){
+                        var data = response.result
+                        if(data!=undefined){
+                            $("#novel_rank_data .loading-api").remove()
+
+                            /* Info */
+                            _tableRank(ncode, data)
+
+                            /* Export Button */
+                            if(option.kasasagiExportButton){
+                                _buttonRank(ncode, data)
+                            }
+
+
+                        }else{
+                            $("#novel_rank_data .loading-api").text("情報の取得に失敗しました。")
+                        }
+                    }else{
+                        $("#novel_rank_data .loading-api").text("情報の取得に失敗しました。")
+                    }
+                    return true;
+                }
             });
         }
     })
@@ -271,7 +323,7 @@ function _buttonToday(today_total, yesterday_total, today_pv, yesterday_pv, toda
                 }
             }
         }
-        saveJson(raw, "oneday-pv_" + date + ".json");
+        saveJson(raw, `oneday-pv_${ncode}_${date}.json`);
     })
 }
 
@@ -408,7 +460,7 @@ function _buttonTotal(total_pv, total_unique, week, week_pv){
                 }
             }
         }
-        saveJson(raw, "access-all_" + date + ".json");
+        saveJson(raw, `access-all_${ncode}_${date}.json`);
     })
 }
 
@@ -568,6 +620,84 @@ function _buttonApi(ncode, data){
             ncode: ncode,
             data: data
         }
-        saveJson(raw, "api-data_" + date + ".json");
+        saveJson(raw, `api-data_${ncode}_${date}.json`);
+    })
+}
+
+
+function _tableRank(ncode, d){
+    $("#novel_rank .rank_list").append("<table class='data-table' name='d'><tbody></tbody></table>")
+    $("#novel_rank .rank_list").append("<table class='data-table' name='w'><tbody></tbody></table>")
+    $("#novel_rank .rank_list").append("<table class='data-table' name='m'><tbody></tbody></table>")
+    $("#novel_rank .rank_list").append("<table class='data-table' name='q'><tbody></tbody></table>")
+    var tableD = $("#novel_rank_data .rank_list table[name='d'] tbody")
+    var tableW = $("#novel_rank_data .rank_list table[name='w'] tbody")
+    var tableM = $("#novel_rank_data .rank_list table[name='m'] tbody")
+    var tableQ = $("#novel_rank_data .rank_list table[name='q'] tbody")
+    
+    function addValue(data){
+        let rank = data.rank
+        let point = data.pt
+        let rtype = data.rtype.split("-")
+
+        let date = rtype[0]
+        let type = rtype[1]
+        date = new Date(date.substring(0, 4)+ "/" +date.substring(4, 6)+ "/" +date.substring(6))
+
+        /*
+        var type_s
+        if(type=="d"){type_s="日間"}
+        else if(type=="w"){type_s="週間"}
+        else if(type=="m"){type_s="月間"}
+        else if(type=="q"){type_s="四半期"}
+        */
+
+        point = parseInt(point)
+        if(isNaN(point)){
+            point = ""
+        }else{
+            point = point.toLocaleString()
+        }
+
+        rank = parseInt(rank)
+        if(isNaN(rank)){
+            rank = ""
+        }else{
+            rank = rank.toLocaleString()
+        }
+
+        const text = `<tr>
+            <td class="date">${getDateString(date)}</td>
+            <td class="rank">${rank}</td>
+            <td class="point">${point}</td>
+        </tr>`
+
+        if(type=="d"){tableD.append(text)}
+        else if(type=="w"){tableW.append(text)}
+        else if(type=="m"){tableM.append(text)}
+        else if(type=="q"){tableQ.append(text)}
+    }
+
+    tableD.append("<tr><th colspan='3'>日間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableW.append("<tr><th colspan='3'>週間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableM.append("<tr><th colspan='3'>月間</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+    tableQ.append("<tr><th colspan='3'>四半期</th></tr><tr class='header'><th>日付</th><th>順位</th><th>pt.</th></tr>")
+
+    $.each(d, function(_, value){
+        addValue(value)
+    })
+}
+
+function _buttonRank(ncode, data){
+    $("#novel_rank").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-rank-data"></div>')
+    $("#export-rank-data").on("click", function(){
+        var date = getDateString();
+        var raw = {
+            date: date,
+            generatedTime: getDatetimeString(),
+            ncode: ncode,
+            data: data
+        }
+        saveJson(raw, `rank-data_${ncode}_${date}.json`);
     })
 }

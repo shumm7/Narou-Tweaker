@@ -69,7 +69,7 @@ function _button(data){
                 unique: data
             }
         }
-        saveJson(raw, "chapter-unique_" + date + ".json");
+        saveJson(raw, `chapter-unique_${ncode}_${date}.json`);
     })
 }
 

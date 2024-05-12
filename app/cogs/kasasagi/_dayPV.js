@@ -66,6 +66,6 @@ function _button(datasets, labels){
             ncode: getNcode(),
             data: data
         }
-        saveJson(raw, "day-pv_" + date + ".json");
+        saveJson(raw, `day-pv_${ncode}_${date}.json`);
     })
 }
