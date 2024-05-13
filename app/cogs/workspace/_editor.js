@@ -328,7 +328,9 @@ function changeEditorPageLikePreview(){
                     <div class="nt-panel--tab-content" id="nt-panel--tab-freememo" data="3">
                         <div id="nt-panel--tab-content--freememo">
                             <h4 class="underline">フリーメモ</h4>
-                            <div id="nt-panel--tab-freememo-box"></div>
+                            <div id="nt-panel--tab-freememo-box">
+                                <textarea id="nt-panel--tab-freememo-field"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -835,23 +837,14 @@ function stateCheck(){
 }
 
 function freememo(){
-    function resetFreememo(){
-        var text = $("textarea[name='freememo']").val().replace(/\r\n|\r/g, '\n');
-        $("#nt-panel--tab-freememo-box").empty()
-        $.each(text.split(/\n/), function(_, line){
-            var p = $("<p></p>").addClass("content")
-            p.text(line)
-            if(line.match(/^ *$/)){
-                p.append("<br/>")
-            }
-            $("#nt-panel--tab-freememo-box").append(p)
-        })
-    }
+    $("#nt-panel--tab-freememo-field").val($("textarea[name='freememo']").val())
 
     $("textarea[name='freememo']").on("input", function(){
-        resetFreememo()
+        $("#nt-panel--tab-freememo-field").val($(this).val())
     })
-    //resetFreememo()
+    $("#nt-panel--tab-freememo-field").on("input", function(){
+        $("textarea[name='freememo']").val($(this).val())
+    })
 }
 
 function reserveDate(){

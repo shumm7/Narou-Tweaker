@@ -198,9 +198,22 @@ body.narou-tweaker-custom-editor {
 	margin: 5px 5px;
 	border-bottom: 1px solid #ddd;
 }
-.narou-tweaker-custom-editor #nt-panel--tab-freememo-box > p {
-	text-indent: .5em;
+.narou-tweaker-custom-editor #nt-panel--tab-freememo,
+.narou-tweaker-custom-editor #nt-panel--tab-content--freememo,
+.narou-tweaker-custom-editor #nt-panel--tab-freememo-box {
+	height: calc(100% - 16px);
+}
+.narou-tweaker-custom-editor #nt-panel--tab-freememo-box #nt-panel--tab-freememo-field {
 	line-height: 1.5;
+	width: 100%;
+	background: transparent;
+	border: none;
+	min-height: 100%;
+	resize: none;
+	padding: 5px;
+}
+.narou-tweaker-custom-editor #nt-panel--tab-freememo-box #nt-panel--tab-freememo-field:focus-visible {
+	outline: none;
 }
 
 /*** sidepanel content - tools ***/
