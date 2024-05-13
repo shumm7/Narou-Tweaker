@@ -445,8 +445,12 @@ function changeEditorPageLikePreview(){
         const diffs = vh - (top + height) - 60 - 90
         if(diffs>0){
             $(elm).css("padding-bottom", diffs)
+            $(elm).removeClass("nt-active-padding")
+            $(elm).addClass("nt-enactive-padding")
         }else{
-            $(elm).css("padding-bottom", 50)
+            $(elm).css("padding-bottom", 200)
+            $(elm).removeClass("nt-enactive-padding")
+            $(elm).addClass("nt-active-padding")
         }
     }
 
