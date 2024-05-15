@@ -432,9 +432,8 @@ function changeEditorPageLikePreview(){
             elm.height(ch)
             const sh = elm.get(0).scrollHeight
             elm.height(sh)
-            if(sh!=ch){
-                $(".nt-editor--body").scrollTop(scroll + $(".nt-editor--body").get(0).scrollHeight - height)
-            }
+
+            $(".nt-editor--body").scrollTop(scroll + ($(".nt-editor--body").get(0).scrollHeight - height))
             novelPadding(this)
         })
     })
@@ -442,7 +441,8 @@ function changeEditorPageLikePreview(){
         const top = $(elm).position().top
         const vh = $("body").height()
         const height = $(elm).height()
-        const diffs = vh - (top + height) - 60 - 90
+        const diffs = vh - (top + height) - 60 - 110
+        console.log(diffs)
         if(diffs>0){
             $(elm).css("padding-bottom", diffs)
             $(elm).removeClass("nt-active-padding")

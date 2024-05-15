@@ -694,6 +694,7 @@ body.narou-tweaker-custom-editor {
 	position: absolute;
   	z-index: 2;
     background: transparent;
+	overflow-anchor: none;
 }
 .narou-tweaker-custom-editor .nt-field--backdrop {
 	position: absolute;
