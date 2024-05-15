@@ -21,7 +21,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS workspaceImpressionRead",
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
 
     /* Novel */
     novelCustomStyle: true,
@@ -55,7 +55,6 @@ export const defaultOption = {
     workspaceHeaderAdditionalMenu: false,
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
-    workspaceImpressionRead: [],
     workspaceImpressionReadButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
     workspaceNovelmanageDeleteConfirm: true,

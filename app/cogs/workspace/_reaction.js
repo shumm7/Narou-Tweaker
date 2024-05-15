@@ -23,18 +23,20 @@ function _impressionRead(){
                             var unread_button = $(`<div class="c-up-unmarkread"><span class="p-icon p-icon--times" aria-hidden="true"></span>未読にする</div>`)
 
                             read_button.on("click", function(){
-                                chrome.storage.local.get(["workspaceImpressionRead"], function(l){
+                                chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
                                     if(!l.workspaceImpressionRead.includes(url)){
                                         l.workspaceImpressionRead.push(url)
-                                        chrome.storage.local.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                                        chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
                                     }
                                 })
                             })
                             unread_button.on("click", function(){
-                                chrome.storage.local.get(["workspaceImpressionRead"], function(l){
+                                chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
                                     if(l.workspaceImpressionRead.includes(url)){
                                         l.workspaceImpressionRead = l.workspaceImpressionRead.filter(d => d!=url)
-                                        chrome.storage.local.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                                        chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
                                     }
                                 })
                             })
@@ -43,7 +45,7 @@ function _impressionRead(){
                         }
                     })
                     
-                    chrome.storage.local.onChanged.addListener(function(changes){
+                    chrome.storage.sync.onChanged.addListener(function(changes){
                         if(changes.workspaceImpressionRead!=undefined){
                             restoreRead()
                         }
@@ -55,8 +57,9 @@ function _impressionRead(){
     }
 
     function restoreRead(){
-        chrome.storage.local.get(null, function(data){
-            const readList = data.workspaceImpressionRead
+        chrome.storage.sync.get(null, function(data){
+            let readList = data.workspaceImpressionRead
+            if(readList==undefined){readList = []}
             $(".c-up-panel .c-up-panel__list .c-up-panel__list-item").each(function(){
                 $(this).removeClass("c-up-reaction--read")
                 var button = $(this).find(".c-button--primary")

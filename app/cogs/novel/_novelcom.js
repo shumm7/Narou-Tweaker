@@ -10,11 +10,14 @@ if(location.pathname.match(/^\/impressionres\/confirm\/ncode\/\d*\/kanrino\/\d*\
             if($("form #rescomment").length){
                 const url = $("form:has(#rescomment)").prop("action").replace(/\/add\//, "/input/")
 
-                $(document).on('submit','form:has(#rescomment)', function(){
-                    if(!data.workspaceImpressionRead.includes(url)){
-                        data.workspaceImpressionRead.push(url)
-                        chrome.storage.local.set({workspaceImpressionRead: data.workspaceImpressionRead})
-                    }
+                chrome.storage.sync.get(null, function(data_s){
+                    $(document).on('submit','form:has(#rescomment)', function(){
+                        if(data_s.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
+                        if(!data_s.workspaceImpressionRead.includes(url)){
+                            data_s.workspaceImpressionRead.push(url)
+                            chrome.storage.local.set({workspaceImpressionRead: data_s.workspaceImpressionRead})
+                        }
+                    })
                 })
             }
         }
