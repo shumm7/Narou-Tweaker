@@ -329,7 +329,7 @@ function changeEditorPageLikePreview(){
                         <div id="nt-panel--tab-content--freememo">
                             <h4 class="underline">フリーメモ</h4>
                             <div id="nt-panel--tab-freememo-box">
-                                <textarea id="nt-panel--tab-freememo-field" class="nt-check-state" name="freememo-sidebar"></textarea>
+                                <textarea id="nt-panel--tab-freememo-field" class="nt-check-state" name="freememo-panel"></textarea>
                             </div>
                         </div>
                     </div>
