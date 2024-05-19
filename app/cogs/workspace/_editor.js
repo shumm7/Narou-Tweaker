@@ -442,7 +442,6 @@ function changeEditorPageLikePreview(){
         const vh = $("body").height()
         const height = $(elm).height()
         const diffs = vh - (top + height) - 60 - 110
-        console.log(diffs)
         if(diffs>0){
             $(elm).css("padding-bottom", diffs)
             $(elm).removeClass("nt-active-padding")

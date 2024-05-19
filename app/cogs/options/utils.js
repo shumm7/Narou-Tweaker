@@ -158,7 +158,7 @@ export function syntaxHighlight(){
         });
 
         function resizeTextArea() {
-            dummy.addClass("resizing");//ありのままの大きさに戻す
+            dummy.addClass("resizing");
             wrapper.css("height", `${dummy.scrollHeight + 20}px`)
             dummy.removeClass("resizing");
         }

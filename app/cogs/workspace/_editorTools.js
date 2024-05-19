@@ -276,6 +276,7 @@ export function _toolSearch(){
                             searchFoundIndex = searchResult.length - 1
                         }
                         setCount(searchResult.length)
+                        moveToFocusedMark(elemBackdrop)
                     }else{
                         elemBackdrop.empty()
                         searchFoundIndex = 0
@@ -408,7 +409,7 @@ export function _toolSearch(){
         }
     })
     $("body").keydown(function(e){
-        if ((e.ctrlKey || e.metaKey) && e.key == 'f') {
+        if (((e.ctrlKey || e.metaKey) && e.key == 'f') || (e.key == 'F3')) {
             e.preventDefault();
             if(getSelectedContent()!=4){
                 if($(".nt-search-box").hasClass("nt-content-hidden")){
@@ -505,15 +506,13 @@ export function _toolSearch(){
         }
     })
     
-    $('.nt-search-box--field-search').keypress(function(e){ // Enter Key (Same as Next Button) / Tab Key
-        if(e.which == 13) {
+    $('.nt-search-box--field-search').keydown(function(e){ // Enter Key (Same as Next Button) / Tab Key
+        if(e.key == 'Enter') {
             e.preventDefault()
             $(".nt-search-box--next-index").trigger("click")
             return false;
         }
-    });
-    $('.nt-search-box--field-search').keydown(function(e){ // Tab Key
-        if(e.which == 9 && $(".nt-search-box").hasClass("nt-search-box--open")) {
+        else if(e.key == 'Tab' && $(".nt-search-box").hasClass("nt-search-box--open")) {
             e.preventDefault()
             const l = $(".nt-search-box--field-replace").val().length
             $(".nt-search-box--field-replace").selection("setPos", {start: l, end: l})
@@ -554,16 +553,13 @@ export function _toolSearch(){
         replace()
     })
     
-    $('.nt-search-box--field-replace').keypress(function(e){ // Enter Key (Same as Replace Button) / Tab Key
-        console.log(e.which)
-        if(e.which == 13) {
+    $('.nt-search-box--field-replace').keydown(function(e){ // Enter Key (Same as Replace Button) / Tab Key
+        if(e.key == "Enter") {
             e.preventDefault()
             $(".nt-search-box--replace-each").trigger("click")
             return false;
         }
-    });
-    $('.nt-search-box--field-replace').keydown(function(e){ // Tab Key
-        if(e.which == 9) {
+        else if(e.key == "Tab") {
             e.preventDefault()
             const l = $(".nt-search-box--field-search").val().length
             $(".nt-search-box--field-search").selection("setPos", {start: l, end: l})
