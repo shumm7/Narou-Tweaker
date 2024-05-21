@@ -44,6 +44,52 @@ function _impressionRead(){
                             $(this).find(".c-up-reaction-item__menu").before(unread_button)
                         }
                     })
+
+                    $(".c-up-list-tools").append(`
+                        <div class="c-up-markread-button">
+                            <!--
+                            <div class="c-up-unmarkread-all">
+                                <span class="p-icon p-icon--times" aria-hidden="true"></span>すべて未読にする
+                            </div>
+                            -->
+                            <div class="c-up-markread-all">
+                                <span class="p-icon p-icon--check" aria-hidden="true"></span>すべて既読にする
+                            </div>
+                        </div>
+                    `)
+                    $(".c-up-unmarkread-all").click(function(){
+                        chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                            $(".c-up-panel__list-item.c-up-reaction--read").each(function(){
+                                var button = $(this).find(".c-button--primary")
+                                if(button.length){
+                                    const url = button.attr("href")
+                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
+                                    if(l.workspaceImpressionRead.includes(url)){
+                                        l.workspaceImpressionRead = l.workspaceImpressionRead.filter(d => d!=url)
+                                    }
+                                }
+                            })
+
+                            chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                        })
+                    })
+
+                    $(".c-up-markread-all").click(function(){
+                        chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                            $(".c-up-panel__list-item:not(.c-up-reaction--read)").each(function(){
+                                var button = $(this).find(".c-button--primary")
+                                if(button.length){
+                                    const url = button.attr("href")
+                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
+                                    if(!l.workspaceImpressionRead.includes(url)){
+                                        l.workspaceImpressionRead.push(url)
+                                    }
+                                }
+                            })
+
+                            chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                        })
+                    })
                     
                     chrome.storage.sync.onChanged.addListener(function(changes){
                         if(changes.workspaceImpressionRead!=undefined){

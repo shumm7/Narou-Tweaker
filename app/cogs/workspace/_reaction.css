@@ -38,3 +38,12 @@
     font-size: 90%;
     color: #999 !important;
 }
+.c-up-markread-button {
+    color: #868e96;
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
+}
+.c-up-unmarkread-all, .c-up-markread-all {
+    cursor: pointer;
+}
