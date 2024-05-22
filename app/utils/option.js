@@ -58,6 +58,7 @@ export const defaultOption = {
     workspaceImpressionReadButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
     workspaceNovelmanageDeleteConfirm: true,
+    workspaceNovelmanageShowPointAverage: true,
     workspaceCustomEditor: false,
 
     /* Yomou */

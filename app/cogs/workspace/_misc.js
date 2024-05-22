@@ -1,6 +1,7 @@
 
 export function _misc(){
     deleteConfirm()
+    pointAverage()
 }
 
 function deleteConfirm(){
@@ -51,4 +52,18 @@ function deleteConfirm(){
         })
     }
         
+}
+
+function pointAverage(){
+    if(location.hostname=="syosetu.com" && location.pathname.match(/^\/usernovelmanage\/top\/ncode\/\d+\/*$/)){
+        chrome.storage.local.get(null, function(data){
+            if(data.workspaceNovelmanageShowPointAverage){
+                if($(".p-up-novelinfo__reaction").length){
+                    var point = $(".p-up-novelinfo__reaction .js-hyokapointavg")
+                    const pointAvg = point.find("input[name='score']").attr("value")
+                    point.find(".p-up-novelinfo__point-star").before(`<span style="margin-right: 3px;">${pointAvg}</span>`)
+                }
+            }
+        })
+    }
 }
