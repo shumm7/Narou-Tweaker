@@ -302,6 +302,10 @@ export function autoIndent(novel){
 	return novel;
 }
 
+// 読了時間（分）
+export function countTime(string){
+    return Math.ceil(countCharacters(string, false, false, false) / 500)
+}
 
 /* Ncode Parse */
 /* https://zenn.dev/qnighy/articles/5faa90ddfef843 */

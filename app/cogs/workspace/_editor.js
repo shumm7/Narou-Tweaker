@@ -1,4 +1,4 @@
-import { convertRubyTags, convertSasieTags, getDateString } from "../../utils/text.js"
+import { convertRubyTags, convertSasieTags, countLines, countManuscriptPaper, countTime, getDateString, minuteStringJapanese } from "../../utils/text.js"
 import { _toolCovertKakuyomuRubyDot, _toolExportAll, _toolExportEach, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
@@ -228,8 +228,14 @@ function changeEditorPageLikePreview(){
                             <p>エピソード本文の文字数を表示しています。</p>
                             <div class="box">
                                 <p class="content">
+                                    行数：<span class="nt-editor--textcount" data="2"></span> 行<br>
                                     空白・改行含む：<span class="nt-editor--textcount" data="0"></span> 字<br>
                                     空白・改行含まない：<span class="nt-editor--textcount" data="1"></span> 字
+                                </p>
+                                <div class="border"></div>
+                                <p class="content">
+                                    読了時間：<span class="nt-editor--textcount" data="4"></span><br>
+                                    原稿用紙：<span class="nt-editor--textcount" data="5"></span> 枚
                                 </p>
                             </div>
                         </div>
@@ -682,16 +688,30 @@ function textCount(){
         $(".nt-editor--textcount").each(function(){
             const mode = $(this).attr("data")
             var number
-            if(mode=="1"){
+            var isNum = true
+            if(mode=="1"){ //空白・改行含まない
                 number = countCharacters(text, false, false, false);
-            }else{
+            }else if(mode=="2"){ //行数
+                number = countLines(text)
+            }else if(mode=="3"){ //読了時間（分/数値のみ）
+                number = countTime(text)
+            }else if(mode=="4"){ //読了時間（hh時間mm分）
+                number = minuteStringJapanese(countTime(text))
+                isNum = false
+            }else if(mode=="5"){ //原稿用紙換算
+                number = countManuscriptPaper(text)
+            }else{ //空白・改行含む
                 number = countCharacters(text, true, true, true);
             }
-            number = parseInt(number)
-            if(isNaN(number)){
-                $(this).text(0)
+            if(isNum){
+                number = parseInt(number)
+                if(isNaN(number)){
+                    $(this).text(0)
+                }else{
+                    $(this).text(number.toLocaleString())
+                }
             }else{
-                $(this).text(number.toLocaleString())
+                $(this).text(number)
             }
         })
     }
