@@ -26,7 +26,7 @@ function changeEditorPageLikePreview(){
     $("body").addClass("narou-tweaker-custom-editor")
 
     var container = $(".l-container")
-    const header = "新規エピソード作成"
+    const header = $(".l-breadcrumb .c-up-breadcrumb__item:last").text()
     const curmbs = $(".l-breadcrumb .c-up-breadcrumb__item:has(a):last a").attr("href")
     const ncode = indexToNcode($(".js-novel_backup_info").attr("data-ncode"))
     const userid = $(".js-novel_backup_info").attr("data-userid")
