@@ -1,4 +1,4 @@
-import { getExtensionVersion } from "../../../utils/misc.js";
+import { defaultValue, getExtensionVersion } from "../../../utils/misc.js";
 import { defaultOption } from "../../../utils/option.js";
 import { restoreOptions, setupDOM } from "../general.js";
 import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
@@ -9,6 +9,7 @@ optionHide()
 
 document.addEventListener('DOMContentLoaded', function(){
     restoreOptions()
+    showPatchnotes()
 
     const version = getExtensionVersion()
     $(".extension-version").append(`<a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}">${version}</version>`)
@@ -55,4 +56,89 @@ function removeOptionData(){
             })
         }
     })
+}
+
+/* パッチノート */
+function showPatchnotes(){
+
+    fetch('/patchnote.json').then(response => response.json())
+    .then(res => {
+        var outer = $(".general-version")
+        console.log(res)
+
+        $.each(res.data, function(_, data){
+            const lang = "ja"
+
+            var box = $(`
+                <div class="contents-wide">
+                    <div class="contents-option">
+                        <div class="contents-option-head">
+                            <div class="contents-item--heading"></div>
+                            <div class="contents-item--description">
+                                <span class="release-icons"></span>
+                            </div>
+                        </div>
+
+                        <div class="contents-option-content">
+                            <div class="version">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `)
+
+            const version = data.version
+            const date = defaultValue(data.date, "")
+            const url = defaultValue(data.url, `https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}`)
+            const release = data.release
+            const patchnote = data.patchnote[lang]
+            const headerList = {
+                ja: {
+                    novel: "📗 小説ページ",
+                    workspace: "🖊️ ユーザホーム",
+                    mypage: "👤 ユーザページ",
+                    yomou: "🔍️ 小説を読もう！",
+                    kasasagi: "📊 KASASAGI",
+                    general: "⚙ 全般"
+                }
+            }
+
+            box.find(".contents-item--heading").append(`<a href="${url}">${version}</a>`)
+            box.find(".contents-item--description").prepend(`<span class="release-date">${date}</span>`)
+
+            if(release.chrome){
+                box.find(".contents-item--description .release-icons").append(`<i class="fa-brands fa-chrome"></i>`)
+            }
+            if(release.gecko){
+                box.find(".contents-item--description .release-icons").append(`<i class="fa-brands fa-firefox-browser"></i>`)
+            }
+
+            $.each(headerList[lang], function(key, header){
+                if(patchnote[key]!=undefined){
+                    var list = $(`<ul></ul>`)
+                    $.each(patchnote[key], function(_, text){
+                        var item = $(`<li></li>`)
+                        item.text(text)
+                        list.append(item)
+                    })
+
+                    var row = $(`
+                        <p>
+                            <b>${header}</b>
+                        </p>
+                    `)
+                    row.append(list)
+                    box.find(".version").append(row)
+                }
+
+            })
+            outer.append(box)
+        })
+    }).catch(error => {
+        $("#footer").append(`
+            <div id="js-failed">
+                Failed to load patchnote.json: ${error}
+            </div>
+        `)
+    });
 }

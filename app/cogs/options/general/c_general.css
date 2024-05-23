@@ -76,3 +76,7 @@
     font-size: 120%;
     font-weight: bold;
 }
+
+.release-icons i {
+    margin-left: 3px;
+}
