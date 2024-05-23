@@ -58,9 +58,74 @@ def removeDebugMode(codeDir):
     with open(codeDir + "debug_mode.js", 'w', encoding='utf-8') as f:
         f.write("export const debug = false")
 
+def getPatchnote(codeDir):
+    patchnote = JSON.read(codeDir + "patchnote.json")
+    manifest = get_manifest(codeDir)
+
+    # Find Patchnote
+    version = manifest.get("version")
+    db: dict
+    for data in patchnote["data"]:
+        if(data["version"] == version):
+            db = data
+            break
+
+    if(db==None):
+        raise IndexError
+    
+    return db
+
+def makePatchnoteMarkdown(codeDir):
+    headerList = {
+        "novel": "📗 小説ページ",
+        "workspace": "🖊️ ユーザホーム",
+        "mypage": "👤 ユーザページ",
+        "yomou": "🔍️ 小説を読もう！",
+        "kasasagi": "📊 KASASAGI",
+        "general": "⚙ 全般"
+    }
+    lang = "ja"
+
+    text = ""
+    patchnote = getPatchnote(codeDir)["patchnote"]["ja"]
+    for headerKey, header in headerList.items():
+        if(headerKey in patchnote):
+            text += f"**{header}**\n"
+            for line in patchnote[headerKey]:
+                text += f"- {line}\n"
+            text += "\n"
+    
+    return text
+
+def makePatchnoteHTML(codeDir):
+    headerList = {
+        "novel": "📗 小説ページ",
+        "workspace": "🖊️ ユーザホーム",
+        "mypage": "👤 ユーザページ",
+        "yomou": "🔍️ 小説を読もう！",
+        "kasasagi": "📊 KASASAGI",
+        "general": "⚙ 全般"
+    }
+    lang = "ja"
+
+    text = ""
+    patchnote = getPatchnote(codeDir)["patchnote"]["ja"]
+    for headerKey, header in headerList.items():
+        if(headerKey in patchnote):
+            text += f"<b>{header}</b>\n<ul>\n"
+            for line in patchnote[headerKey]:
+                text += f"<li>{line}</li>\n"
+            text += "</ul>\n\n"
+    
+    return text
+
+
 
 def init():
     for p in glob.glob('dist/*.zip', recursive=True):
+        if os.path.isfile(p):
+            os.remove(p)
+    for p in glob.glob('dist/*.txt', recursive=True):
         if os.path.isfile(p):
             os.remove(p)
 
@@ -83,6 +148,17 @@ def build_chrome():
     shutil.make_archive(f'dist/narou-tweaker-{type}-{version}', 'zip', root_dir=codeDir)
 
     notice(type, f"Build finished! => 'dist/narou-tweaker-{type}-{version}.zip'")
+
+    # Generate Patchnote
+    try:
+        patchnoteFilename = "release_markdown.txt"
+        patchnote = makePatchnoteMarkdown(codeDir)
+        with open("dist/" + patchnoteFilename, 'w', encoding='utf-8') as f:
+            f.write(patchnote)
+        notice(type, f"Generated release note (Markdown): dist/{patchnoteFilename}'")
+    except Exception as e:
+        notice(type, f"Failed to generate release note (Markdown). ({e})'")
+        pass
 
 
 def build_gecko():
@@ -126,6 +202,18 @@ def build_gecko():
     shutil.make_archive(f'dist/narou-tweaker-{type}-{version}', 'zip', root_dir=codeDir)
 
     notice(type, f"Build finished! => 'dist/narou-tweaker-{type}-{version}.zip'")
+
+    # Generate Patchnote
+    try:
+        patchnoteFilename = "release_html.txt"
+        patchnote = makePatchnoteHTML(codeDir)
+        with open("dist/" + patchnoteFilename, 'w', encoding='utf-8') as f:
+            f.write(patchnote)
+        notice(type, f"Generated release note (HTML): dist/{patchnoteFilename}'")
+    except Exception as e:
+        notice(type, f"Failed to generate release note (HTML). ({e})'")
+        pass
+
 
 
 init()
