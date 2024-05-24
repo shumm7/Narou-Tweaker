@@ -11,7 +11,8 @@ export const ignoreOptions = [
 ]
 
 export const forceResetOptions = [
-    "extIgnoreOptionIndex"
+    "extIgnoreOptionIndex",
+    "extIgnoreSyncOptionIndex"
 ]
 
 export const defaultOption = {
@@ -22,6 +23,7 @@ export const defaultOption = {
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
     extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
+    extIgnoreSyncOptionIndex: "",
 
     /* Novel */
     novelCustomStyle: true,

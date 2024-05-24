@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function(){
     $(".extension-version").append(`<a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}">${version}</version>`)
 
     exportOptionText()
+    exportSyncOptionText()
     removeOptionData()
     syntaxHighlight()
 })
@@ -43,6 +44,34 @@ function exportOptionText() {
     }
     change()
     chrome.storage.local.onChanged.addListener(function(changes){
+        change()
+    })
+}
+
+function exportSyncOptionText() {
+    function change(){
+        chrome.storage.local.get(null, (local)=>{
+            chrome.storage.sync.get(null, (data)=>{
+                try{
+                    const ignores = local.extIgnoreSyncOptionIndex.split(/\s/)
+                    $.each(ignores, function(_, elm){
+                        if(elm in data){
+                            delete data[elm]
+                        }
+                    })
+
+                    var text = JSON.stringify(data, null, 4)
+                    var field = $("#exportSyncOptionText_Output")
+                    field.text(text)
+                    field.trigger("input")
+                }catch(e){
+                    console.warn(e)
+                }
+            })
+        })
+    }
+    change()
+    chrome.storage.sync.onChanged.addListener(function(changes){
         change()
     })
 }
