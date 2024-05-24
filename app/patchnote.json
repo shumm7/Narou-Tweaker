@@ -2,6 +2,20 @@
     "version": 0,
     "data": [
         {
+            "version": "0.2.5",
+            "date": "2024-05-24",
+            "release": {
+            },
+            "patchnote": {
+                "ja": {
+                    "general": [
+                        "パッチノートの表示・保存方法を変更",
+                        "その他不具合修正"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.2.4",
             "date": "2024-05-22",
             "release": {
