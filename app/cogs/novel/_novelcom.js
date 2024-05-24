@@ -15,7 +15,7 @@ if(location.pathname.match(/^\/impressionres\/confirm\/ncode\/\d*\/kanrino\/\d*\
                         if(data_s.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
                         if(!data_s.workspaceImpressionRead.includes(url)){
                             data_s.workspaceImpressionRead.push(url)
-                            chrome.storage.local.set({workspaceImpressionRead: data_s.workspaceImpressionRead})
+                            chrome.storage.sync.set({workspaceImpressionRead: data_s.workspaceImpressionRead})
                         }
                     })
                 })
