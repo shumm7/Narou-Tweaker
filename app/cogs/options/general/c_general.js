@@ -61,10 +61,9 @@ function removeOptionData(){
 /* パッチノート */
 function showPatchnotes(){
 
-    fetch('/patchnote.json').then(response => response.json())
+    fetch('https://raw.githubusercontent.com/shumm7/Narou-Tweaker/main/app/patchnote.json').then(response => response.json())
     .then(res => {
         var outer = $(".general-version")
-        console.log(res)
 
         $.each(res.data, function(_, data){
             const lang = "ja"
@@ -87,6 +86,7 @@ function showPatchnotes(){
                 </div>
             `)
 
+            const currentVersion = getExtensionVersion()
             const version = data.version
             const date = defaultValue(data.date, "")
             const url = defaultValue(data.url, `https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}`)
@@ -105,6 +105,10 @@ function showPatchnotes(){
 
             box.find(".contents-item--heading").append(`<a href="${url}">${version}</a>`)
             box.find(".contents-item--description").prepend(`<span class="release-date">${date}</span>`)
+
+            if(version == currentVersion){
+                box.find(".contents-item--heading").append(`<span class="current-version">使用中</span>`)
+            }
 
             if(release.chrome){
                 box.find(".contents-item--description .release-icons").append(`<i class="fa-brands fa-chrome"></i>`)

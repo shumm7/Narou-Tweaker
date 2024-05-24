@@ -80,3 +80,11 @@
 .release-icons i {
     margin-left: 3px;
 }
+.current-version {
+    background: orangered;
+    border-radius: 3px;
+    color: white;
+    margin-left: 3px;
+    padding: 1px 3px;
+    font-size: 90%;
+}
