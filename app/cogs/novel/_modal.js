@@ -154,7 +154,6 @@ function setOptionContentsDisplay(id){
                             </div>
                         </div>
                     <div class='novel-option-subheader'>縦書き</div>
-                        <p style="color: red; font-weight:bold; text-align: center;">※実験中の機能です</p>
                         <div id="novel-option--vertical" style="padding: 10px 0;">
                             <input type="checkbox" id="novel-option--vertical-toggle" class="toggle" name="novelVertical">
                             <label for="novel-option--vertical-toggle" class="toggle">縦書き表示<span style="font-size: 90%">（再読み込みが必要）</span></label>
