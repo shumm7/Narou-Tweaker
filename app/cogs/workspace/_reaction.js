@@ -1,3 +1,4 @@
+import { indexToNcode } from "/utils/text.js"
 
 export function _reaction(){
     _impressionRead()
@@ -9,7 +10,7 @@ function _impressionRead(){
 
             var list = $(".c-up-panel .c-up-panel__list")
             if(list.length){
-                if(data.workspaceImpressionReadButton){
+                if(data.workspaceImpressionMarkedButton){
                     restoreRead()
 
                     list.find(".c-up-panel__list-item").each(function(){
@@ -18,25 +19,34 @@ function _impressionRead(){
 
                         var button = $(this).find(".c-button--primary")
                         if(button.length){
-                            const url = button.attr("href")
+                            const url = new URL(button.attr("href"))
+                            console.log(url.pathname)
+                            var m = url.pathname.match(/^\/impressionres\/input\/ncode\/(\d*).*\/kanrino\/(\d*)\/*/)
+                            const ncode = indexToNcode(m[1])
+                            const kanrino = m[2]
+
                             var read_button = $(`<div class="c-up-markread"><span class="p-icon p-icon--check" aria-hidden="true"></span>既読にする</div>`)
                             var unread_button = $(`<div class="c-up-unmarkread"><span class="p-icon p-icon--times" aria-hidden="true"></span>未読にする</div>`)
 
                             read_button.on("click", function(){
-                                chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
-                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
-                                    if(!l.workspaceImpressionRead.includes(url)){
-                                        l.workspaceImpressionRead.push(url)
-                                        chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                                chrome.storage.sync.get(["workspaceImpressionMarked"], function(l){
+                                    if(l.workspaceImpressionMarked==undefined){l.workspaceImpressionMarked = {}}
+                                    if(!(ncode in l.workspaceImpressionMarked)){
+                                        l.workspaceImpressionMarked[ncode] = []
                                     }
+                                    l.workspaceImpressionMarked[ncode].push(kanrino)
+                                    chrome.storage.sync.set({workspaceImpressionMarked: l.workspaceImpressionMarked})
                                 })
                             })
                             unread_button.on("click", function(){
-                                chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
-                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
-                                    if(l.workspaceImpressionRead.includes(url)){
-                                        l.workspaceImpressionRead = l.workspaceImpressionRead.filter(d => d!=url)
-                                        chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                                chrome.storage.sync.get(["workspaceImpressionMarked"], function(l){
+                                    if(l.workspaceImpressionMarked==undefined){l.workspaceImpressionMarked = {}}
+                                    if(ncode in l.workspaceImpressionMarked){
+                                        l.workspaceImpressionMarked[ncode] = l.workspaceImpressionMarked[ncode].filter(d => d!=kanrino)
+                                        if(l.workspaceImpressionMarked[ncode].length === 0)[
+                                            l.workspaceImpressionMarked[ncode] = undefined
+                                        ]
+                                        chrome.storage.sync.set({workspaceImpressionMarked: l.workspaceImpressionMarked})
                                     }
                                 })
                             })
@@ -58,41 +68,54 @@ function _impressionRead(){
                         </div>
                     `)
                     $(".c-up-unmarkread-all").click(function(){
-                        chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                        chrome.storage.sync.get(["workspaceImpressionMarked"], function(l){
                             $(".c-up-panel__list-item.c-up-reaction--read").each(function(){
                                 var button = $(this).find(".c-button--primary")
                                 if(button.length){
-                                    const url = button.attr("href")
-                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
-                                    if(l.workspaceImpressionRead.includes(url)){
-                                        l.workspaceImpressionRead = l.workspaceImpressionRead.filter(d => d!=url)
+                                    const url = new URL(button.attr("href"))
+                                    var m = url.pathname.match(/^\/impressionres\/input\/ncode\/(\d*).*\/kanrino\/(\d*)\/*/)
+                                    const ncode = indexToNcode(m[1])
+                                    const kanrino = m[2]
+
+
+                                    if(l.workspaceImpressionMarked==undefined){l.workspaceImpressionMarked = {}}
+                                    if(ncode in l.workspaceImpressionMarked){
+                                        l.workspaceImpressionMarked[ncode] = l.workspaceImpressionMarked[ncode].filter(d => d!=kanrino)
+                                        if(l.workspaceImpressionMarked[ncode].length === 0)[
+                                            l.workspaceImpressionMarked[ncode] = undefined
+                                        ]
                                     }
                                 }
                             })
 
-                            chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                            chrome.storage.sync.set({workspaceImpressionMarked: l.workspaceImpressionMarked})
                         })
                     })
 
                     $(".c-up-markread-all").click(function(){
-                        chrome.storage.sync.get(["workspaceImpressionRead"], function(l){
+                        chrome.storage.sync.get(["workspaceImpressionMarked"], function(l){
                             $(".c-up-panel__list-item:not(.c-up-reaction--read)").each(function(){
                                 var button = $(this).find(".c-button--primary")
                                 if(button.length){
-                                    const url = button.attr("href")
-                                    if(l.workspaceImpressionRead==undefined){l.workspaceImpressionRead = []}
-                                    if(!l.workspaceImpressionRead.includes(url)){
-                                        l.workspaceImpressionRead.push(url)
+                                    const url = new URL(button.attr("href"))
+                                    var m = url.pathname.match(/^\/impressionres\/input\/ncode\/(\d*).*\/kanrino\/(\d*)\/*/)
+                                    const ncode = indexToNcode(m[1])
+                                    const kanrino = m[2]
+
+                                    if(l.workspaceImpressionMarked==undefined){l.workspaceImpressionMarked = {}}
+                                    if(!(ncode in l.workspaceImpressionMarked)){
+                                        l.workspaceImpressionMarked[ncode] = []
                                     }
+                                    l.workspaceImpressionMarked[ncode].push(kanrino)
                                 }
                             })
 
-                            chrome.storage.sync.set({workspaceImpressionRead: l.workspaceImpressionRead})
+                            chrome.storage.sync.set({workspaceImpressionMarked: l.workspaceImpressionMarked})
                         })
                     })
                     
                     chrome.storage.sync.onChanged.addListener(function(changes){
-                        if(changes.workspaceImpressionRead!=undefined){
+                        if(changes.workspaceImpressionMarked!=undefined){
                             restoreRead()
                         }
                     })
@@ -104,15 +127,21 @@ function _impressionRead(){
 
     function restoreRead(){
         chrome.storage.sync.get(null, function(data){
-            let readList = data.workspaceImpressionRead
+            let readList = data.workspaceImpressionMarked
             if(readList==undefined){readList = []}
             $(".c-up-panel .c-up-panel__list .c-up-panel__list-item").each(function(){
                 $(this).removeClass("c-up-reaction--read")
                 var button = $(this).find(".c-button--primary")
                 if(button.length){
-                    const url = button.attr("href")
-                    if(readList.includes(url)){
-                        $(this).addClass("c-up-reaction--read")
+                    const url = new URL(button.attr("href"))
+                    var m = url.pathname.match(/^\/impressionres\/input\/ncode\/(\d*).*\/kanrino\/(\d*)\/*/)
+                    const ncode = indexToNcode(m[1])
+                    const kanrino = m[2]
+
+                    if(ncode in readList){
+                        if(readList[ncode].includes(kanrino)){
+                            $(this).addClass("c-up-reaction--read")
+                        }
                     }
                 }
             })

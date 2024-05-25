@@ -199,7 +199,7 @@
         "utils/option.js",
         "utils/header.js",
         "utils/skin.js",
-        "utils/data/default_font.js"
+        "utils/char_localize.js"
       ],
       "matches": ["<all_urls>"]
     },

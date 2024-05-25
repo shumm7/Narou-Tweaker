@@ -57,7 +57,7 @@ export const defaultOption = {
     workspaceHeaderAdditionalMenu: false,
     workspaceBookmarkLayout: "0",
     workspaceBookmarkCategoryLayout: "2",
-    workspaceImpressionReadButton: true,
+    workspaceImpressionMarkedButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
     workspaceNovelmanageDeleteConfirm: true,
     workspaceNovelmanageShowPointAverage: true,
