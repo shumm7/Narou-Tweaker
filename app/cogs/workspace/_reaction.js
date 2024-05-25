@@ -20,7 +20,6 @@ function _impressionRead(){
                         var button = $(this).find(".c-button--primary")
                         if(button.length){
                             const url = new URL(button.attr("href"))
-                            console.log(url.pathname)
                             var m = url.pathname.match(/^\/impressionres\/input\/ncode\/(\d*).*\/kanrino\/(\d*)\/*/)
                             const ncode = indexToNcode(m[1])
                             const kanrino = m[2]

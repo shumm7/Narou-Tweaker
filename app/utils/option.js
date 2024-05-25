@@ -151,6 +151,12 @@ export const defaultOption = {
     correctionVerticalLayout_SidewayExclamation: 0,
 }
 
+export const defaultGlobalOption = {
+    history: [],
+    history_data: {},
+    workspaceImpressionMarked: {},
+}
+
 export const localSkins = [
     {
         "name": "ライト〔標準〕",
@@ -447,3 +453,47 @@ export function updateOption(force, data){
         })
     }
 }
+
+export function fixOption(local, sync){
+    if(local){
+        chrome.storage.local.get(null, (data)=>{
+            chrome.storage.local.clear(()=>{
+                var o = defaultOption
+                Object.keys(o).forEach(function(key){
+                    if(data[key]!=undefined){
+                        if( typeof(o[key]) == typeof(data[key])){
+                            if(!ignoreOptions.includes(key)){
+                                o[key] = data[key]
+                            }
+                        }
+                    }
+                })
+
+                chrome.storage.local.set(o, function(){
+                    console.log("Fixed option data (local).")
+                })
+            })
+        })
+    }
+    
+    if(sync){
+        chrome.storage.sync.get(null, (data)=>{
+            chrome.storage.sync.clear(()=>{
+                var o = defaultGlobalOption
+                Object.keys(o).forEach(function(key){
+                    if(data[key]!=undefined){
+                        if( typeof(o[key]) == typeof(data[key])){
+                            if(!ignoreOptions.includes(key)){
+                                o[key] = data[key]
+                            }
+                        }
+                    }
+                })
+
+                chrome.storage.sync.set(o, function(){
+                    console.log("Fixed option data (sync).")
+                })
+            })
+        })
+    }
+}   

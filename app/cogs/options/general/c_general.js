@@ -1,5 +1,5 @@
-import { defaultValue, getExtensionVersion } from "../../../utils/misc.js";
-import { defaultOption } from "../../../utils/option.js";
+import { defaultValue, getExtensionVersion } from "/utils/misc.js";
+import { defaultOption, fixOption } from "/utils/option.js";
 import { restoreOptions, setupDOM } from "../general.js";
 import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
 
@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function(){
     exportOptionText()
     exportSyncOptionText()
     removeOptionData()
+    fixOptionData()
     syntaxHighlight()
 })
 
@@ -83,6 +84,14 @@ function removeOptionData(){
                 chrome.storage.local.set(defaultOption)
                 console.log("Reset all options.")
             })
+        }
+    })
+}
+
+function fixOptionData(){
+    $("#fixOptionData").on("click", function(){
+        if(window.confirm('この操作を行うと、異なるバージョンのNarou Tweakerを利用しているブラウザで不具合が発生する可能性があります。最新版に更新した上で実行してください。')){
+            fixOption(true, true)
         }
     })
 }
