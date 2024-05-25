@@ -5,6 +5,7 @@
             "version": "0.2.5",
             "date": "2024-05-24",
             "release": {
+                "chrome": true,
                 "gecko": true
             },
             "patchnote": {
