@@ -4,3 +4,4 @@ app/temp
 conversion.txt
 /dist
 **/__pycache__/**
+/temp
