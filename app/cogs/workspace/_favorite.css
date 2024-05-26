@@ -101,6 +101,7 @@ body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__show-info-button {
     cursor: pointer;
     margin-left: 5px;
     font-size: 14px;
+    color: #868e96;
 }
 body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__show-info-button {
     transform: rotate(180deg);
