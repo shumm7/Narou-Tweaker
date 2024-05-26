@@ -1,4 +1,4 @@
-import { updateOption } from "/utils/option.js";
+import { updateOption,fixOption } from "/utils/option.js";
 import { actionListener } from "./_action.js";
 import { messageListener } from "./_process.js";
 import { sidepanelListener } from "./_sidepanel.js";
@@ -7,6 +7,13 @@ import { yomouCssListener } from "./_yomou.js";
 
 /* Update Option Data */
 updateOption()
+chrome.runtime.onInstalled.addListener((details) => {
+    if(details.reason === "update"){
+        console.log("Updated: fixing option...")
+        fixOption(true, true)
+    }
+})
+
 chrome.storage.local.onChanged.addListener(function(changes){
     if(changes.extOptionsVersion!=undefined){
         if(typeof changes.extOptionsVersion.newValue != "undefined"){
