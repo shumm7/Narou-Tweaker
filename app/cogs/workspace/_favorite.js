@@ -33,6 +33,7 @@ function bookmarkLayout(){
                 }
                 var c = outer.clone()
 
+                // ラッパー設定
                 outer.empty()
                 outer.append(`
                     <div class="p-up-bookmark-item__header">
@@ -42,6 +43,7 @@ function bookmarkLayout(){
                     <div class="p-up-bookmark-item__option-button"></div>
                 `)
 
+                // 要素の取得
                 var title = c.find(".p-up-bookmark-item__title a").clone().addClass("p-up-bookmark-item__description__title")
                 title.find("span").remove()
                 var label = c.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
@@ -54,6 +56,7 @@ function bookmarkLayout(){
                 var option = c.find(".p-up-bookmark-item__menu").clone(true)
                 var memo = c.find(".c-up-memo").clone()
 
+                // 要素の配置
                 var header = outer.find(".p-up-bookmark-item__header .p-up-bookmark-item__description")
                 header.append(label)
                 header.append(title)
@@ -97,7 +100,70 @@ function bookmarkLayout(){
                     outer.find(".p-up-bookmark-item__status").append(invisible)
                 }
                 footer.append(option)
+            }else if(layout==2){
+                outer.addClass("narou-tweaker-bookmark-layout-2--item")
+                if(insertClass){
+                    outer.addClass(insertClass)
+                }
+                var c = outer.clone()
 
+                outer.empty()
+                outer.append(`
+                    <div class="p-up-bookmark-item__header">
+                        <p class="p-up-bookmark-item__description"></p>
+                    </div>
+                `)
+
+                // 要素の取得
+                var title = c.find(".p-up-bookmark-item__title a").clone().addClass("p-up-bookmark-item__description__title")
+                title.find("span").remove()
+                var label = c.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
+                var complete = c.find(".p-up-bookmark-item__complete").clone()
+                var info = c.find(".p-up-bookmark-item__info").clone()
+                var option = c.find(".p-up-bookmark-item__menu").clone(true)
+                var memo = c.find(".c-up-memo").clone()
+
+                // 要素の配置
+                var header = outer.find(".p-up-bookmark-item__header")
+                var list_elm = header.find(".p-up-bookmark-item__description")
+                list_elm.append(label)
+                list_elm.append(title)
+
+                var current_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)").clone()
+                var latest_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)").clone()
+                var episode = $(`<span class="p-up-bookmark-item__episode">`)
+                if(current_ep.hasClass("c-button--primary")){
+                    current_ep.removeClass(["c-button c-button--primary c-button--sm"])
+                    current_ep.find(".p-up-bookmark-item__unread").remove()
+                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
+                    var icon = current_ep.find(".p-icon--siori").clone()
+                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    current_ep.find(".p-icon--siori").remove()
+                    current_ep.prepend(icon)
+                    $(this).addClass("p-up-bookmark-item--siori")
+                }
+                latest_ep.removeClass("c-button c-button--outline c-button--sm")
+                if(complete.length){
+                    latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
+                }else{
+                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                }
+                episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+                list_elm.after(episode)
+
+                header.append($(`<span class="p-up-bookmark-item__show-info-button"><span class="p-icon p-icon--caret-down" aria-hidden="true"></span></span>`).click(function(){
+                    if(outer.hasClass("p-up-bookmark-item--hidden")){
+                        outer.removeClass("p-up-bookmark-item--hidden")
+                    }else{
+                        outer.addClass("p-up-bookmark-item--hidden")
+                    }
+                }))
+                outer.addClass("p-up-bookmark-item--hidden")
+
+                header.after(info)
+                info.find(".p-up-bookmark-item__status").append(option)
+                info.prepend(memo)
+                
             }else{
                 outer.addClass("narou-tweaker-bookmark-layout-0--item")
             }
