@@ -74,7 +74,13 @@ function exportSyncOptionText() {
     }
     change()
     chrome.storage.sync.onChanged.addListener(function(changes){
+        console.log(changes)
         change()
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extIgnoreSyncOptionIndex!=undefined){
+            change()
+        }
     })
 }
 
