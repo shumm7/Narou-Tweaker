@@ -186,6 +186,9 @@ input[type=file] {
     width: 100%;
     contain: paint;
 }
+.brand-icon {
+    margin: 16px 0 20px 26px;
+}
 #sidebar-items {
     position: fixed;
     top: 70px;

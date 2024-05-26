@@ -7,6 +7,7 @@ export function setupDOM(){
     var sidebar = $(`
         <div id="sidebar-inner">
             <div id="sidebar-header">
+                <img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/>
                 <div class="sidebar-icon" id="sidebar-icon--help">
                     <!--<a href="/cogs/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>
