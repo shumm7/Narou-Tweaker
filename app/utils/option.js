@@ -56,6 +56,7 @@ export const defaultOption = {
     workspaceCustomMenu_Right: ["find", "support"],
     workspaceHeaderAdditionalMenu: false,
     workspaceBookmarkLayout: "0",
+    workspaceBookmarkReplaceEpisode: false,
     workspaceBookmarkCategoryLayout: "2",
     workspaceImpressionMarkedButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,

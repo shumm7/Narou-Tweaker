@@ -75,15 +75,19 @@ function bookmarkLayout(){
                     current_ep.find(".p-up-bookmark-item__unread").remove()
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                     current_ep.find(".p-icon--siori").insertBefore(current_ep)
-                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    if(data.workspaceBookmarkReplaceEpisode){
+                        current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
                     $(this).addClass("p-up-bookmark-item--siori")
                 }
 
                 latest_ep.removeClass("c-button c-button--outline c-button--sm")
-                if(complete.length){
-                    latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
-                }else{
-                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                if(data.workspaceBookmarkReplaceEpisode){
+                    if(complete.length){
+                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
+                    }else{
+                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
                 }
                 episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
                 middle.append(episode)
@@ -137,16 +141,20 @@ function bookmarkLayout(){
                     current_ep.find(".p-up-bookmark-item__unread").remove()
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                     var icon = current_ep.find(".p-icon--siori").clone()
-                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    if(data.workspaceBookmarkReplaceEpisode){
+                        current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
                     current_ep.find(".p-icon--siori").remove()
                     current_ep.prepend(icon)
                     $(this).addClass("p-up-bookmark-item--siori")
                 }
                 latest_ep.removeClass("c-button c-button--outline c-button--sm")
-                if(complete.length){
-                    latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
-                }else{
-                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                if(data.workspaceBookmarkReplaceEpisode){
+                    if(complete.length){
+                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
+                    }else{
+                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
                 }
                 episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
                 list_elm.after(episode)
@@ -166,6 +174,25 @@ function bookmarkLayout(){
                 
             }else{
                 outer.addClass("narou-tweaker-bookmark-layout-0--item")
+                if(data.workspaceBookmarkReplaceEpisode){
+                    var complete = outer.find(".p-up-bookmark-item__complete").clone()
+                    var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
+                    var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
+
+                    var icon = current_ep.find(".p-icon--siori").clone()
+                    var unread_mark = current_ep.find(".p-up-bookmark-item__unread").clone()
+                    current_ep.find(".p-up-bookmark-item__unread").remove()
+                    current_ep.find(".p-icon--siori").remove()
+                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    current_ep.prepend(icon)
+                    current_ep.append(unread_mark)
+
+                    if(complete.length){
+                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
+                    }else{
+                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
+                }
             }
             
 
