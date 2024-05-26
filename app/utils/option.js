@@ -232,6 +232,30 @@ export const localSkins = [
         "css": ""
     },
     {
+        "name": "水色〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "style": {
+            "link": {
+                "color_hover": "rgb(98, 84, 255)",
+                "color_link": "rgb(26, 13, 171)",
+                "color_visited": "#681da8"
+            },
+            "novel": {
+                "background": "#dfecf4",
+                "background_second": "#b7d2e4",
+                "color": "rgba(0, 0, 0, 0.87)"
+            },
+            "sublist": {
+                "color": "rgba(0, 0, 0, 0.5)",
+                "hover": "rgba(67, 51, 242, 0.7)",
+                "visited": "rgba(50, 38, 181, 0.7)"
+            }
+        },
+        "css": ""
+    },
+    {
         "name": "標準設定〔小説家になろう〕",
         "description": "サイトのデフォルト",
         "customizable": false,
