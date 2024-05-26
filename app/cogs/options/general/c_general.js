@@ -2,6 +2,7 @@ import { defaultValue, getExtensionVersion } from "/utils/misc.js";
 import { defaultOption, fixOption } from "/utils/option.js";
 import { restoreOptions, setupDOM } from "../general.js";
 import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
+import { escapeHtml } from "../../../utils/text.js";
 
 setupDOM()
 buttonHide()
@@ -125,10 +126,10 @@ function showPatchnotes(){
             `)
 
             const currentVersion = getExtensionVersion()
-            const version = data.version
-            const date = defaultValue(data.date, "")
-            const url = defaultValue(data.url, `https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}`)
-            const release = data.release
+            const version = escapeHtml(data.version)
+            const date = escapeHtml(defaultValue(data.date, ""))
+            const url = escapeHtml(defaultValue(data.url, `https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}`))
+            const release = escapeHtml(data.release)
             const patchnote = data.patchnote[lang]
             const headerList = {
                 ja: {
