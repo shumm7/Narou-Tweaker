@@ -1,5 +1,5 @@
 import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
-import { localSkins, defaultOption } from "../../../utils/option.js";
+import { localSkins, defaultOption, localFont } from "../../../utils/option.js";
 import { generateNoDuplicateName, formatSkinData } from "../../../utils/skin.js";
 
 /* 指定したスキンを表示 */
@@ -95,7 +95,6 @@ function showSkinPreview() {
     s += getCSSRule("#skin-preview #link:hover, #skin-preview #link-visited:hover", [{"color": style.link.color_hover}])
     s += getCSSRule("#skin-preview #link-visited", [{"border-bottom": "1px solid " + style.sublist.color}])
     s += getCSSRule("#skin-preview #link-visited:hover", [{"border-bottom": "1px solid " + style.sublist.hover}])
-    $("#skin-preview-style").text(s)
 
     $(".skin-color-field div[name='skin-novel-color']").css("background", style.novel.color)
     $(".skin-color-field div[name='skin-novel-background']").css("background", style.novel.background)
@@ -106,6 +105,28 @@ function showSkinPreview() {
     $(".skin-color-field div[name='skin-sublist-underline']").css("background", style.sublist.color)
     $(".skin-color-field div[name='skin-sublist-underline-hover']").css("background", style.sublist.hover)
     $(".skin-color-field div[name='skin-sublist-underline-visited']").css("background", style.sublist.visited)
+
+    chrome.storage.local.get(null, function(data){
+      var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
+      var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
+      var fontFamily_Current 
+      var fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
+      var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
+      var textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
+      var width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
+      var widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
+
+      if(fontFamily=="custom"){
+          fontFamily_Current = fontFamily_Custom
+      }else{
+          fontFamily_Current = localFont["font-family"][fontFamily]
+      }
+
+      s += getCSSRule("#skin-preview", [{"font-family": fontFamily_Current, "text-rendering": textRendering}])
+      s += getCSSRule("#skin-preview p", [{"line-height": lineHeight + "%", "font-size": fontSize + "%"}])
+
+      $("#skin-preview-style").text(s)
+    })
 }
 
 /* 選択中のスキンを保存 */
@@ -386,6 +407,17 @@ export function addSkinEditButtonEvent(){
       chrome.storage.local.get(["skins", "selectedSkin"], function(data) {
         restoreSkins(defaultValue(data.skins, defaultOption.skins), defaultValue(data.selectedSkin, defaultOption.selectedSkin));
       })
+    }
+    if(changes.skins!=undefined ||
+      changes.selectedSkin!=undefined ||
+      changes.fontFontFamily!=undefined ||
+      changes.fontFontFamily_Custom!=undefined ||
+      changes.fontFontSize!=undefined ||
+      changes.fontLineHeight!=undefined ||
+      changes.fontTextRendering!=undefined ||
+      changes.fontWidth!=undefined
+    ){
+        showSkinPreview()
     }
   })
 }
