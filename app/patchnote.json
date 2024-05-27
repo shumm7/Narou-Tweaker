@@ -2,6 +2,41 @@
     "version": 0,
     "data": [
         {
+            "version": "0.2.7",
+            "date": "2024-05-27",
+            "release": {
+                "chrome": null,
+                "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "novel": [
+                        "スキン「水色」を追加"
+                    ],
+                    "general": [
+                        "ブランドロゴを変更",
+                        "オプションページの機能・レイアウトを調整",
+                        "その他不具合修正"
+                    ]
+                }
+            }
+        },
+        {
+            "version": "0.2.6.1",
+            "date": "2024-05-27",
+            "release": {
+                "chrome": true,
+                "gecko": false
+            },
+            "patchnote": {
+                "ja": {
+                    "general": [
+                        "このバージョンは0.2.5のロールバックです。0.2.6に致命的な不具合が発見されたため、リリースされました。"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.2.6",
             "date": "2024-05-26",
             "release": {
