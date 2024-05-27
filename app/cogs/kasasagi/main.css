@@ -437,4 +437,20 @@ table tr td.right {
 .data-table#chapter-unique {
 	margin: auto;
 	width: 460px;
-  }
+}
+
+/* リンク集 */
+#external_urls {
+	background-color: rgb(238, 238, 238);
+	display: flex;
+    align-items: center;
+	flex-direction: column;
+	font-size: 110%;
+}
+.external_urls-column {
+	display: flex;
+	gap: 15px;
+}
+.external_urls-item i {
+	margin-right: 3px;
+}

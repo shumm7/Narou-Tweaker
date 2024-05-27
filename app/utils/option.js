@@ -109,6 +109,7 @@ export const defaultOption = {
 
     kasasagiShowTable_API: true,
     kasasagiShowTable_Rank: true,
+    kasasagiShowTable_ExternalLink: true,
     kasasagiShowTable_GeneralDay: true,
     kasasagiShowTable_ChapterUnique: true,
     kasasagiShowTable_DayPV: true, //Unused

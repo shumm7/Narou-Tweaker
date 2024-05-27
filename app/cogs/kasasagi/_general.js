@@ -38,6 +38,9 @@ export function _general(r18){
 
             /* 殿堂入り */
             rank(r18)
+
+            /* リンク集 */
+            link(r18)
         }
     })
 }
@@ -299,6 +302,50 @@ function rank(r18){
     })
 }
 
+function link(r18){
+    chrome.storage.local.get(null, (option)=>{
+        if (option.kasasagiShowTable_ExternalLink){
+            const ncode = getNcode()
+            const title = $("#title").text()
+
+            var box = $(`<div class="access_information" id="external_urls"></div>`)
+
+            if(!r18){
+                const url = `https://ncode.syosetu.com/${ncode}/`
+                box.append(`
+                    <div class="external_urls-column">
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=${title}" target="_blank"><i class="fa-solid fa-magnifying-glass"></i>作品タイトルを検索</a></span>
+                        <span class="external_urls-item"><a href="https://x.com/search?q=${url}" target="_blank"><i class="fa-brands fa-square-x-twitter"></i>Xで検索</a></span>
+                        <span class="external_urls-item"><a href="https://x.com/hashtag/narou${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-hashtag"></i>Xでハッシュタグ検索</a></span>
+                    </div>
+                    <div class="external_urls-column">
+                        <span class="external_urls-item"><a href="https://rawi-novel.work/writer/ai?ncode=${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-robot"></i>RaWiで分析</a></span>
+                        <span class="external_urls-item"><a href="https://db.narou.fun/works/${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-database"></i>なろうファンDB</a></span>
+                    </div>
+                    <div class="external_urls-column">
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=site:mypage.syosetu.com/mypagenovelhyoka/list%20%22${title}%22" target="_blank"><i class="fa-regular fa-star"></i>評価したユーザを検索</a></span>
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=site:mypage.syosetu.com/mypagefavnovelmain/list%20%22${title}%22" target="_blank"><i class="fa-solid fa-book-bookmark"></i>ブクマしたユーザを検索</a></span>
+                    </div>
+                `)
+            }else{
+                const url = `https://novel18.syosetu.com/${ncode}/`
+                box.append(`
+                    <div class="external_urls-column">
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=${title}" target="_blank"><i class="fa-solid fa-magnifying-glass"></i>作品タイトルを検索</a></span>
+                        <span class="external_urls-item"><a href="https://x.com/search?q=${url}" target="_blank"><i class="fa-brands fa-square-x-twitter"></i>Xで検索</a></span>
+                        <span class="external_urls-item"><a href="https://x.com/hashtag/narou${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-hashtag"></i>Xでハッシュタグ検索</a></span>
+                    </div>
+                    <div class="external_urls-column">
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=site:xmypage.syosetu.com/mypagenovelhyoka/list%20%22${title}%22" target="_blank"><i class="fa-regular fa-star"></i>評価したユーザを検索</a></span>
+                        <span class="external_urls-item"><a href="https://www.google.com/search?q=site:xmypage.syosetu.com/mypagefavnovelmain18/list%20%22${title}%22" target="_blank"><i class="fa-solid fa-book-bookmark"></i>ブクマしたユーザを検索</a></span>
+                    </div>
+                `)
+            }
+
+            $($(".access_information")[0]).before(box)
+        }
+    })
+}
 
 function _buttonToday(today_total, yesterday_total, today_pv, yesterday_pv, today_pv_sum, yesterday_pv_sum){
     $("#today_all").append('<div class="ui-button--center"><input class="ui-button" type="submit" value="エクスポート" id="export-general-day"></div>')
