@@ -2,8 +2,8 @@ import { _header, changeHeaderScrollMode } from "./_header.js";
 import { _authorSkin } from "./_skin.js";
 import { _novel } from "./_novel.js";
 import { _optionModal } from "./_modal.js";
-import { checkNovelPageDetail } from "./utils.js";
 import { _novelcom } from "./_novelcom.js";
+import { checkNovelPageDetail } from "./utils.js";
 
 /* Header */
 if(checkNovelPageDetail()!="series"){
