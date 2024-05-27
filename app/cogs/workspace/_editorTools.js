@@ -27,11 +27,13 @@ export function _toolRuby(){
         const index = getSelectedContent()
         const form = getForms(index)
         if($(form).length){
+            const scroll = $(".nt-editor--body").scrollTop()
             var text = $(form).selection()
             $(form)
                 .selection('insert', {text: '｜'+text+"《", mode: 'before'})
                 .selection('replace', {text: 'ルビを入力…'})
                 .selection('insert', {text: '》', mode: 'after'})
+            $(".nt-editor--body").scrollTop(scroll)
             $(form).trigger("input")
         }
     })
@@ -42,10 +44,12 @@ export function _toolRubyDot(){
         const index = getSelectedContent()
         const form = getForms(index)
         if($(form).length){
+            const scroll = $(".nt-editor--body").scrollTop()
             var text = $(form).selection()
             $(form)
                 .selection('insert', {text: rubyDot(text), mode: 'before'})
                 .selection('replace', {text: ''})
+            $(".nt-editor--body").scrollTop(scroll)
             $(form).trigger("input")
         }
     })
@@ -84,24 +88,28 @@ export function _toolSasie(){
                 
             }
 
+            const scroll = $(".nt-editor--body").scrollTop()
             if(userid && !icode){
-                console.log($(form).selection())
                 $(form).selection('insert', {text: "<", mode: 'before'})
                     .selection('replace', {text: 'iコード'})
                     .selection('insert', {text: `|${userid}>`, mode: 'after'})
+                $(".nt-editor--body").scrollTop(scroll)
                 $(form).trigger("input")
             }else if(!userid && icode){
                 $(form).selection('insert', {text: `<${icode}|`, mode: 'before'})
                     .selection('replace', {text: 'ユーザID'})
                     .selection('insert', {text: `>`, mode: 'after'})
+                $(".nt-editor--body").scrollTop(scroll)
                 $(form).trigger("input")
             }else if(userid && icode){
                 $(form).selection('replace', {text: `<${icode}|${userid}>`})
+                $(".nt-editor--body").scrollTop(scroll)
                 $(form).trigger("input")
             }else{
                 $(form).selection('insert', {text: text + "<", mode: 'before'})
                     .selection('replace', {text: 'iコード'})
                     .selection('insert', {text: '|ユーザID>', mode: 'after'})
+                $(".nt-editor--body").scrollTop(scroll)
                 $(form).trigger("input")
             }
         }
