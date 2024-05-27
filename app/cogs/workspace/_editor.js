@@ -235,7 +235,7 @@ function changeEditorPageLikePreview(){
                                 <div class="border"></div>
                                 <p class="content">
                                     読了時間：<span class="nt-editor--textcount" data="4"></span><br>
-                                    原稿用紙：<span class="nt-editor--textcount" data="5"></span> 枚
+                                    原稿用紙：<span class="nt-editor--textcount" data="5"></span>枚分
                                 </p>
                             </div>
                         </div>
