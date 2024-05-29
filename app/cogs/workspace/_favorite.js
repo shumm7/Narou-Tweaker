@@ -31,44 +31,37 @@ function bookmarkLayout(){
                 if(insertClass){
                     outer.addClass(insertClass)
                 }
-                var c = outer.clone()
-
-                // ラッパー設定
-                outer.empty()
-                outer.append(`
-                    <div class="p-up-bookmark-item__header">
-                        <p class="p-up-bookmark-item__description"></p>
-                    </div>
-                    <div class="p-up-bookmark-item__info-button"></div>
-                    <div class="p-up-bookmark-item__option-button"></div>
-                `)
-
-                // 要素の取得
-                var title = c.find(".p-up-bookmark-item__title a").clone().addClass("p-up-bookmark-item__description__title")
-                title.find("span").remove()
-                var label = c.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
-                var author_link = c.find(".p-up-bookmark-item__author a").clone()
-                var author = $(`<span class="p-up-bookmark-item__description__author">`).append(author_link)
-                var date = c.find(".p-up-bookmark-item__date").clone()
-                var notice = c.find(".p-up-bookmark-item__notice").clone()
-                var complete = c.find(".p-up-bookmark-item__complete").clone()
-                var invisible = c.find(".p-up-bookmark-item__private").clone()
-                var option = c.find(".p-up-bookmark-item__menu").clone(true)
-                var memo = c.find(".c-up-memo").clone()
 
                 // 要素の配置
+                var notice = outer.find(".p-up-bookmark-item__notice")
+                var invisible = outer.find(".p-up-bookmark-item__private")
+
+                // Header
+                var title = outer.find(".p-up-bookmark-item__title a").addClass("p-up-bookmark-item__description__title")
+                var label = outer.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
+                title.find("span").remove()
+                var author_link = outer.find(".p-up-bookmark-item__author a")
+                var author = $(`<span class="p-up-bookmark-item__description__author">`).append(author_link)
+
+                outer.find(".p-up-bookmark-item__header").append(`<p class="p-up-bookmark-item__description"></p>`)
                 var header = outer.find(".p-up-bookmark-item__header .p-up-bookmark-item__description")
                 header.append(label)
                 header.append(title)
                 header.append(author)
+                outer.find(".p-up-bookmark-item__header > .p-up-bookmark-item__title").remove()
+
+                // Middle
+                var date = outer.find(".p-up-bookmark-item__date")
+                var complete = outer.find(".p-up-bookmark-item__complete")
+                var memo = outer.find(".c-up-memo")
 
                 var middle = outer.find(".p-up-bookmark-item__info-button")
+                middle.before(memo)
                 middle.append(date)
                 middle.append(complete)
-                middle.before(memo)
 
-                var current_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)").clone()
-                var latest_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)").clone()
+                var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
                 if(current_ep.hasClass("c-button--primary")){
                     current_ep.removeClass(["c-button c-button--primary c-button--sm"])
@@ -90,8 +83,14 @@ function bookmarkLayout(){
                     }
                 }
                 episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+                outer.find(".p-up-bookmark-item__button").remove()
+                outer.find(".p-up-bookmark-item__info").remove()
                 middle.append(episode)
                 
+                // footer
+                var option = outer.find(".p-up-bookmark-item__menu")
+
+                outer.append(`<div class="p-up-bookmark-item__option-button"></div>`)
                 var footer = outer.find(".p-up-bookmark-item__option-button")
                 footer.append(`<span class="p-up-bookmark-item__status">`)
                 if(notice.length){
@@ -104,6 +103,7 @@ function bookmarkLayout(){
                     outer.find(".p-up-bookmark-item__status").append(invisible)
                 }
                 footer.append(option)
+
             }else if(layout==2){
                 outer.addClass("narou-tweaker-bookmark-layout-2--item")
                 if(insertClass){
@@ -111,30 +111,26 @@ function bookmarkLayout(){
                 }
                 var c = outer.clone()
 
-                outer.empty()
-                outer.append(`
-                    <div class="p-up-bookmark-item__header">
-                        <p class="p-up-bookmark-item__description"></p>
-                    </div>
-                `)
-
                 // 要素の取得
-                var title = c.find(".p-up-bookmark-item__title a").clone().addClass("p-up-bookmark-item__description__title")
-                title.find("span").remove()
-                var label = c.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
-                var complete = c.find(".p-up-bookmark-item__complete").clone()
-                var info = c.find(".p-up-bookmark-item__info").clone()
-                var option = c.find(".p-up-bookmark-item__menu").clone(true)
-                var memo = c.find(".c-up-memo").clone()
+                var complete = outer.find(".p-up-bookmark-item__complete")
+                var info = outer.find(".p-up-bookmark-item__info")
+                var option = outer.find(".p-up-bookmark-item__menu")
+                var memo = outer.find(".c-up-memo")
 
                 // 要素の配置
+                // header
+                var title = outer.find(".p-up-bookmark-item__title a").addClass("p-up-bookmark-item__description__title")
+                var label = outer.find(".p-up-bookmark-item__title span").addClass("p-up-bookmark-item__description__label")
+                title.find("span").remove()
+
+                outer.find(".p-up-bookmark-item__header").append(`<p class="p-up-bookmark-item__description"></p>`)
                 var header = outer.find(".p-up-bookmark-item__header")
                 var list_elm = header.find(".p-up-bookmark-item__description")
                 list_elm.append(label)
                 list_elm.append(title)
 
-                var current_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)").clone()
-                var latest_ep = c.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)").clone()
+                var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
                 if(current_ep.hasClass("c-button--primary")){
                     current_ep.removeClass(["c-button c-button--primary c-button--sm"])
@@ -169,9 +165,10 @@ function bookmarkLayout(){
                 outer.addClass("p-up-bookmark-item--hidden")
 
                 header.after(info)
-                info.find(".p-up-bookmark-item__status").append(option)
                 info.prepend(memo)
-                
+                info.find(".p-up-bookmark-item__status").append(option)
+                outer.find(".p-up-bookmark-item__info-button").remove()
+
             }else{
                 outer.addClass("narou-tweaker-bookmark-layout-0--item")
                 if(data.workspaceBookmarkReplaceEpisode){
