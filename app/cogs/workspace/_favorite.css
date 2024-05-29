@@ -83,7 +83,7 @@ body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__author {
     margin-top: 5px;
 }
 body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__description {
-    width: 75%;
+    width: 70%;
     text-overflow: ellipsis;
     overflow-x: hidden;
     white-space: nowrap;
