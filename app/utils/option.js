@@ -34,6 +34,7 @@ export const defaultOption = {
     novelCustomHeaderMode: "scroll",
     novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "booklist"],
     novelCustomHeaderRight: ["siori", "option"],
+    novelCustomHeaderShowEnactiveItems: false,
     novelCustomHeaderSocialShowsBrandName: false,
     novelCustomHeaderQRCodeCurrentLocation: true,
     novelCustomHeaderQRCodeShowURL: false,

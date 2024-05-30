@@ -57,6 +57,27 @@ html:has(.narou-tweaker-cursor-hide) {
 	/* テキストの自動折り返しを無効化 */
 	text-wrap: nowrap;
 }
+#novel_header ul li.enactive,
+#novel_header_right ul li.enactive,
+#novel_footer ul li.enactive,
+.wrap_menu_novelview_after ul li.enactive {
+	/* enactiveタグの付いたliを非表示 */
+	display:none;
+}
+#novel_header ul li.enactive a,
+#novel_header_right ul li.enactive a,
+#novel_footer ul li.enactive a,
+.wrap_menu_novelview_after ul li.enactive a {
+	/* enactiveタグの付いたliのカーソル設定 */
+	cursor: default !important;
+}
+.narou-tweaker-header--show-enactive-icon #novel_header ul li.enactive,
+.narou-tweaker-header--show-enactive-icon #novel_header_right ul li.enactive,
+.narou-tweaker-header--show-enactive-icon #novel_footer ul li.enactive,
+.narou-tweaker-header--show-enactive-icon .wrap_menu_novelview_after ul li.enactive {
+	/* enactiveタグの付いたliを非表示 */
+	display:block;
+}
 #novel_header ul li.disabled,
 #novel_header_right ul li.disabled,
 #novel_footer ul li.disabled,
@@ -278,7 +299,6 @@ html:has(.narou-tweaker-cursor-hide) {
 	font-size: 13px !important;
 	font-weight: bold !important;
 	padding: 5px 10px !important;
-	color: #666666 !important;
 }
 .narou-tweaker-header--mode-0 ul li.bookmark > a,
 .narou-tweaker-header--mode-0 ul li.siori > a {

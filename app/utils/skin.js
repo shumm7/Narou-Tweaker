@@ -381,6 +381,7 @@ export function makeSkinCSS(skin, novel_css){
     .narou-tweaker-header--mode-1 #novel_header_right ul li > form:active {
         color: ${s.sublist.hover} !important;
     }
+
     .narou-tweaker-header--mode-0 .wrap_menu_novelview_after {
         /* 背景色 */
         background-color: transparent;
@@ -417,6 +418,31 @@ export function makeSkinCSS(skin, novel_css){
     .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:active > * {
         color: ${s.sublist.hover} !important;
         background: transparent;
+    }
+    .narou-tweaker-header--mode-0 #novel_header ul li.siori:not(.enactive) > * {
+        color: #666666 !important;
+    }
+    
+    #novel_header ul li.enactive > a,
+    #novel_header ul li.enactive > form,
+    #novel_header_right ul li.enactive > a,
+    #novel_header_right ul li.enactive > form,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > a,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > form,
+    #novel_header ul li.enactive > a:hover,
+    #novel_header ul li.enactive > form:hover,
+    #novel_header_right ul li.enactive > a:hover,
+    #novel_header_right ul li.enactive > form:hover,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > a:hover,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > form:hover,
+    #novel_header ul li.enactive > a:active,
+    #novel_header ul li.enactive > form:active,
+    #novel_header_right ul li.enactive > a:active,
+    #novel_header_right ul li.enactive > form:active,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > a:active,
+    .wrap_menu_novelview_after .box_menu_novelview_after ul li.enactive > form:active {
+        /* Enactive アイコン */
+        color: ${s.novel.background_second} !important;
     }
     `
 

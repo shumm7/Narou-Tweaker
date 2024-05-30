@@ -30,6 +30,14 @@ export function _header(){
         $("#pageBottom").remove()
         $("#pageTop").remove()
 
+        /* Wrapper Tags */
+        
+        if(isCustomHeader){
+            $("#novel_header, #novel_header_right").addClass("novel-header-wrapper")
+        }else{
+            $("#novel_header, .box_menu_novelview_after").addClass("novel-header-wrapper")
+        }
+
         /* Right Menu Bar */
         if(isCustomHeader){
             $("body").addClass("narou-tweaker-header--mode-1")
@@ -65,6 +73,11 @@ export function _header(){
         }
         $("#novel_footer").remove()
 
+        // Enactiveなアイコンを表示する
+        if(data.novelCustomHeaderShowEnactiveItems){
+            $("body").addClass("narou-tweaker-header--show-enactive-icon")
+        }
+
         
         /* Twitter シェアボタンを削除 */
         $("#novel_header li:nth-last-child(1)").remove()
@@ -76,6 +89,9 @@ export function _header(){
             elm.text("")
             elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
             elm.parent().addClass("home")
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i><span class="title">ホーム</span></a></li>')
         }
 
         /* 作品情報 */
@@ -84,6 +100,9 @@ export function _header(){
             elm.text("")
             elm.append('<i class="fa-solid fa-circle-info"></i><span class="title">作品情報</span>')
             elm.parent().addClass("info")
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="info enactive"><a><i class="fa-solid fa-circle-info"></i><span class="title">作品情報</span></a></li>')
         }
 
         /* 感想 */
@@ -92,6 +111,9 @@ export function _header(){
             elm.text("")
             elm.append('<i class="fa-solid fa-comments"></i><span class="title">感想</span>')
             elm.parent().addClass("impression")
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="impression enactive"><a><i class="fa-solid fa-comments"></i><span class="title">感想</span></a></li>')
         }
 
         /* レビュー */
@@ -100,6 +122,9 @@ export function _header(){
             elm.text("")
             elm.append('<i class="fa-solid fa-flag"></i><span class="title">レビュー</span>')
             elm.parent().addClass("review")
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="review enactive"><a><i class="fa-solid fa-flag"></i><span class="title">レビュー</span></a></li>')
         }
 
         /* PDF */
@@ -110,6 +135,9 @@ export function _header(){
             $("#novel_header li.pdf form i").on("click", function(){
                 $(this).parent().find("input[type='submit']").trigger("click")
             })
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="pdf enactive"><a><i class="fa-solid fa-file-pdf"></i><span class="title">縦書きPDF</span></a></li>')
         }
 
         /* ブックマーク */
@@ -157,6 +185,12 @@ export function _header(){
             is_logined_and_self = true
         }
 
+        elm = $("#novel_header li.booklist")
+        if(!elm.length){
+            // enactive
+            $("#novel_header ul").append('<li class="booklist enactive"><a><i class="fa-solid fa-book"></i><span class="title">ブックマーク</span></a></li>')
+        }
+
         /* しおり */
         elm = $("#novel_header li.bookmark_now a")
         if(elm.length){
@@ -200,9 +234,15 @@ export function _header(){
             }
         }
 
+        elm = $("#novel_header li.siori")
+        if(!elm.length){
+            // enactive
+            $("#novel_header ul").append('<li class="siori enactive"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり</span></a></li>')
+        }
+
         /* 設定 */
-        $("#novel_header ul").append('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
-        $("#novel_header li.option").on("click", function(){
+        elm = $('<li class="option"><a><i class="fa-solid fa-gear"></i><span>設定</span></a></li>')
+        elm.on("click", function(){
             if($("#novel-option").hasClass("show")){
                 $("#novel-option").removeClass("show")
             }else{
@@ -214,6 +254,8 @@ export function _header(){
                 $("#novel-option-background").addClass("show")
             }
         })
+        $("#novel_header ul").append(elm)
+
 
         /* 小説家になろう */
         $("#novel_header ul").append('<li class="narou"><a href="https://syosetu.com/"><i class="fa-solid fa-pen-nib"></i><span class="title">小説家になろう</span></a></li>')
@@ -293,12 +335,18 @@ export function _header(){
                 $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
             }else if(pageType=="novel"){
                 $("#novel_header ul").append('<li class="typo"><a href="https://novelcom.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }else{
+                // enactive
+                $("#novel_header ul").append('<li class="typo enactive"><a><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
             }
         }else{
             if(episode==0 && pageType=="novel"){
                 $("#novel_header ul").append('<li class="typo"><a href="https://novelcom18.syosetu.com/novelreport/input/ncode/'+index+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
             }else if(pageType=="novel"){
                 $("#novel_header ul").append('<li class="typo"><a href="https://novelcom18.syosetu.com/novelreport/input/ncode/'+index+'/no/'+episode+'/"><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
+            }else{
+                // enactive
+                $("#novel_header ul").append('<li class="typo enactive"><a><i class="fa-solid fa-keyboard"></i><span class="title">誤字報告</span></a></li>')
             }
         }
 
@@ -308,6 +356,9 @@ export function _header(){
         /* 編集 */
         if(is_logined_and_self){
             $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="edit enactive"><a><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')
         }
 
         /* スクロール */
@@ -365,6 +416,9 @@ export function _header(){
                     $("li.history").remove()
                 }
             })
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="history enactive"><a><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴</span></a></li>')
         }
 
         /* 検索 */
@@ -429,6 +483,13 @@ export function _header(){
         }
 
         /* Twitter */
+        var txt
+        if(data.novelCustomHeaderSocialShowsBrandName){
+            txt = "X"
+        }else{
+            txt = "ポスト"
+        }
+
         if(meta_title!=undefined && meta_url!=undefined){
             var prefix = ""
             var host = "ncode"
@@ -456,16 +517,14 @@ export function _header(){
                 }
             }
 
-            var txt
-            if(data.novelCustomHeaderSocialShowsBrandName){
-                txt = "X"
-            }else{
-                txt = "ポスト"
-            }
             if(uri!=undefined){
                 $("#novel_header ul").append('<li class="twitter"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-x-twitter"></i><span class="title">'+txt+'</span></a></li>')
             }
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="twitter enactive"><a><i class="fa-brands fa-x-twitter"></i><span class="title">'+txt+'</span></a></li>')
         }
+        
 
         /* Facebook */
         var txt
@@ -477,6 +536,9 @@ export function _header(){
         if(meta_url!=undefined){
             var uri = "https://www.facebook.com/share.php?u=" + meta_url
             $("#novel_header ul").append('<li class="facebook"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-facebook"></i><span class="title">'+txt+'</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="facebook enactive"><a><i class="fa-brands fa-facebook"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         /* LINE */
@@ -489,6 +551,9 @@ export function _header(){
         if(meta_url!=undefined){
             var uri = "https://social-plugins.line.me/lineit/share?url=" + meta_url
             $("#novel_header ul").append('<li class="line"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-line"></i><span class="title">'+txt+'</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="line enactive"><a><i class="fa-brands fa-line"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         /* はてなブックマーク */
@@ -506,6 +571,9 @@ export function _header(){
                 uri = `https://b.hatena.ne.jp/entry/panel/?url=${meta_url}&btitle=【R18】${meta_title}`
             }
             $("#novel_header ul").append('<li class="hatena-bookmark"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-hatena-bookmark"></i><span class="title">'+txt+'</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="hatena-bookmark enactive"><a><i class="fa-brands fa-hatena-bookmark"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         /* Feedly */
@@ -518,6 +586,9 @@ export function _header(){
         if(atom!=undefined){
             var uri = `https://feedly.com/i/subscription/feed/${atom}`
             $("#novel_header ul").append('<li class="feedly"><a href="'+encodeURI(uri)+'"><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="feedly enactive"><a><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
         }
 
         /* コピー */
@@ -683,6 +754,14 @@ export function _header(){
                         $("body").addClass("narou-tweaker-header--hide-icon")
                     }else{
                         $("body").removeClass("narou-tweaker-header--hide-icon")
+                    }
+                })
+            }else if(changes.novelCustomHeaderShowEnactiveItems){
+                chrome.storage.local.get(["novelCustomHeaderShowEnactiveItems"], (data) => {
+                    if(data.novelCustomHeaderShowEnactiveItems){
+                        $("body").addClass("narou-tweaker-header--show-enactive-icon")
+                    }else{
+                        $("body").removeClass("narou-tweaker-header--show-enactive-icon")
                     }
                 })
             }
