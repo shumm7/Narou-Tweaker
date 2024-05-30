@@ -653,6 +653,14 @@ export function _header(){
             $("#novel_header ul").append('<li class="feedly enactive"><a><i class="fa-brands fa-feedly"></i><span class="title">'+txt+'</span></a></li>')
         }
 
+        if(ncode){
+            var uri = "https://www.facebook.com/share.php?u=" + meta_url
+            $("#novel_header ul").append('<li class="rawi"><a href="https://rawi-novel.work/writer/ai?ncode='+ncode+'"><i class="fa-solid fa-robot"></i><span class="title">RaWi</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="rawi enactive"><a><i class="fa-solid fa-robot"></i><span class="title">RaWi</span></a></li>')
+        }
+
         /* コピー */
         let copy_animation_timer = null;
         $("#novel_header ul").append('<li class="copy-url"><a><i class="fa-solid fa-link"></i><span class="title">URLをコピー</span></a></li>')

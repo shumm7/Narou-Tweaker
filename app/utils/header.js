@@ -105,6 +105,10 @@ export const novelIconList = {
         icon: "fa-brands fa-feedly",
         text: "Feedly"
     },
+    rawi: {
+        icon: "fa-solid fa-robot",
+        text: "RaWi"
+    },
     qrcode: {
         icon: "fa-solid fa-qrcode",
         text: "QRコード"
