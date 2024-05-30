@@ -30,14 +30,6 @@ export function _header(){
         $("#pageBottom").remove()
         $("#pageTop").remove()
 
-        /* Wrapper Tags */
-        
-        if(isCustomHeader){
-            $("#novel_header, #novel_header_right").addClass("novel-header-wrapper")
-        }else{
-            $("#novel_header, .box_menu_novelview_after").addClass("novel-header-wrapper")
-        }
-
         /* Right Menu Bar */
         if(isCustomHeader){
             $("body").addClass("narou-tweaker-header--mode-1")
@@ -70,6 +62,16 @@ export function _header(){
             })
 
             $(".wrap_menu_novelview_after ul").empty()
+        }
+
+        
+        /* Wrapper Tags */
+        if(isCustomHeader){
+            $("#novel_header").addClass("novel-icon-wrapper")
+            $("#novel_header_right").addClass("novel-icon-wrapper")
+        }else{
+            $("#novel_header").addClass("novel-icon-wrapper")
+            $(".box_menu_novelview_after").addClass("novel-icon-wrapper")
         }
         $("#novel_footer").remove()
 
