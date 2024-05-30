@@ -12,16 +12,21 @@ export function _header(){
         const isCustomHeader = data.novelCustomHeader
 
         const ncode = getNcode()
-        const index = ncodeToIndex(ncode)
+        let index
+        if(ncode){
+            index = ncodeToIndex(ncode)
+        }
         const episode = getEpisode()
         const pageType = checkNovelPageDetail()
         const atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
         const r18 = isR18()
         var userid
-        if(location.hostname == "ncode.syosetu.com" || location.hostname == "novelcom.syosetu.com"){
-            userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
-        }else if(location.hostname == "novel18.syosetu.com" || location.hostname == "novelcom18.syosetu.com"){
-            userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(x\d+[a-z]+)\.Atom/)[1]
+        if(pageType!="series"){
+            if(location.hostname == "ncode.syosetu.com" || location.hostname == "novelcom.syosetu.com"){
+                userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
+            }else if(location.hostname == "novel18.syosetu.com" || location.hostname == "novelcom18.syosetu.com"){
+                userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(x\d+[a-z]+)\.Atom/)[1]
+            }
         }
 
         var text
@@ -61,7 +66,15 @@ export function _header(){
                 }
             })
 
-            $(".wrap_menu_novelview_after ul").empty()
+            if(pageType=="series"){
+                $(".novel_sublist").after(`<div class="wrap_menu_novelview_after">
+                    <div class="box_menu_novelview_after clearfix novel-icon-wrapper">
+                        <ul class="menu_novelview_after"></ul>
+                    </div>
+                </div>`)
+            }else{
+                $(".wrap_menu_novelview_after ul").empty()
+            }
         }
 
         
@@ -85,15 +98,29 @@ export function _header(){
         $("#novel_header li:nth-last-child(1)").remove()
 
         /* ホーム / ログイン */
-        elm = $("#novel_header li#login a")
-        if(elm.length){
-            text = elm.text()
-            elm.text("")
-            elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
-            elm.parent().addClass("home")
+        if(pageType!="series"){
+            elm = $("#novel_header li#login a")
+            if(elm.length){
+                text = elm.text()
+                elm.text("")
+                elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
+                elm.parent().addClass("home")
+            }else{
+                // enactive
+                $("#novel_header ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i><span class="title">ホーム</span></a></li>')
+            }
         }else{
-            // enactive
-            $("#novel_header ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i><span class="title">ホーム</span></a></li>')
+            elm = $("#novel_header li a")
+            if(elm.length){
+                text = elm.text()
+                elm.text("")
+                elm.append('<i class="fa-solid fa-house"></i><span class="title">'+text+'</span>')
+                elm.parent().addClass("home")
+            }else{
+                // enactive
+                $("#novel_header ul").append('<li class="home"><a href="https://syosetu.com/user/top/"><i class="fa-solid fa-house"></i><span class="title">ホーム</span></a></li>')
+            }
+
         }
 
         /* 作品情報 */
@@ -306,30 +333,57 @@ export function _header(){
         }
 
         /* 作者マイページ */
-        if(!r18){
-            $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+        if(userid){
+            if(!r18){
+                $("#novel_header ul").append('<li class="author"><a href="https://mypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+            }else{
+                $("#novel_header ul").append('<li class="author"><a href="https://xmypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+            }
         }else{
-            $("#novel_header ul").append('<li class="author"><a href="https://xmypage.syosetu.com/'+userid+'/"><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
+            // enactive
+            $("#novel_header ul").append('<li class="author enactive"><a><i class="fa-solid fa-user"></i><span class="title">作者</span></a></li>')
         }
 
         /* KASASAGI */
-        $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+        if(ncode){
+            $("#novel_header ul").append('<li class="kasasagi"><a href="https://kasasagi.hinaproject.com/access/top/ncode/'+ncode+'/"><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="kasasagi enactive"><a><i class="fa-solid fa-chart-line"></i><span class="title">アクセス解析</span></a></li>')
+        }
 
         /* API */
-        if(!r18){
-            $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+        if(ncode){
+            if(!r18){
+                $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novelapi/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+            }else{
+                $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novel18api/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+            }
         }else{
-            $("#novel_header ul").append('<li class="narou-api"><a href="https://api.syosetu.com/novel18api/api/?libtype=2&out=json&ncode='+ncode+'"><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
+            // enactive
+            $("#novel_header ul").append('<li class="narou-api enactive"><a><i class="fa-solid fa-file-code"></i><span class="title">なろうAPI</span></a></li>')
         }
+
         /* RSS */
-        $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
+        if(atom){
+            $("#novel_header ul").append('<li class="rss"><a href="'+atom+'"><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="rss enactive"><a><i class="fa-solid fa-rss"></i><span class="title">RSS</span></a></li>')
+        }
 
         /* TXT */
-        if(!r18){
-            $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+        if(index){
+            if(!r18){
+                $("#novel_header ul").append('<li class="text"><a href="https://ncode.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+            }else{
+                $("#novel_header ul").append('<li class="text"><a href="https://novel18.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+            }
         }else{
-            $("#novel_header ul").append('<li class="text"><a href="https://novel18.syosetu.com/txtdownload/top/ncode/'+index+'/"><i class="fa-solid fa-file-lines"></i><span class="title">TXT</span></a></li>')
+            // enactive
+            $("#novel_header ul").append('<li class="text enactive"><a><i class="fa-solid fa-file-lines"></i>TXT</span></a></li>')
         }
+
 
         /* 誤字報告 */
         if(!r18){
@@ -353,8 +407,13 @@ export function _header(){
         }
 
         /* 情報提供 */
-        $("#novel_header ul").append('<li class="report"><a href="https://syosetu.com/ihantsuhou/input/ncode/'+index+'/"><i class="fa-solid fa-bullhorn"></i><span class="title">情報提供</span></a></li>')
-
+        if(index){
+            $("#novel_header ul").append('<li class="report"><a href="https://syosetu.com/ihantsuhou/input/ncode/'+index+'/"><i class="fa-solid fa-bullhorn"></i><span class="title">情報提供</span></a></li>')
+        }else{
+            // enactive
+            $("#novel_header ul").append('<li class="report enactive"><a><i class="fa-solid fa-bullhorn"></i>情報提供</span></a></li>')
+        }
+        
         /* 編集 */
         if(is_logined_and_self){
             $("#novel_header ul").append('<li class="edit"><a href="https://syosetu.com/usernovelmanage/top/ncode/'+index+'/"><i class="fa-solid fa-pen-to-square"></i><span class="title">編集</span></a></li>')

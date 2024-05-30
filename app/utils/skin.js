@@ -82,30 +82,30 @@ export function makeSkinCSS(skin, novel_css){
     }
     #novel_contents div.novelrankingtag,
     #novel_contents .customlayout-color,
-    #novel_contents[class^="customlayout"] div.novelrankingtag,
-    #novel_contents[class^="customlayout"] .customlayout-color {
+    div.novelrankingtag,
+    .customlayout-color {
         /* ランキングタグ / 評価欄 文字色*/
         color: ${s.novel.color};
     }
 
     #novel_contents a:link,
     #novel_contents .customlayout-color a:link,
-    #novel_contents[class^="customlayout"] a:link,
-    #novel_contents[class^="customlayout"] .customlayout-color a:link  {
+    a:link,
+    .customlayout-color a:link  {
         /* リンク色 */
         color: ${s.link.color_link};
     }
     #novel_contents a:visited,
     #novel_contents .customlayout-color a:visited,
-    #novel_contents[class^="customlayout"] a:visited,
-    #novel_contents[class^="customlayout"] .customlayout-color a:visited {
+    a:visited,
+    .customlayout-color a:visited {
         /* リンク色（訪問済み） */
         color: ${s.link.color_visited};
     }
     #novel_contents a:hover,
     #novel_contents .customlayout-color a:hover,
-    #novel_contents[class^="customlayout"] a:hover,
-    #novel_contents[class^="customlayout"] .customlayout-color a:hover {
+    a:hover,
+    .customlayout-color a:hover {
         /* リンク色（ホバー） */
         color: ${s.link.color_hover};
     }
@@ -386,25 +386,25 @@ export function makeSkinCSS(skin, novel_css){
         color: ${s.sublist.color};
     }
     
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:visited,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:visited > *{
-        color: ${s.sublist.visited};
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:visited,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:visited,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:visited > *{
+        color: ${s.sublist.visited} !important;
     }
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form > *,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > a:link,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li > form:link > * {
-        color: ${s.sublist.color};
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form > *,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:link,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:link,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:link > * {
+        color: ${s.sublist.color} !important;
     }
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:hover,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:active,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover > *,
-    .narou-tweaker-header--mode-0 #novel_contents[class^="customlayout"] .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active > * {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:hover,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:active,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover > *,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active > * {
         color: ${s.sublist.hover} !important;
         background: transparent;
     }

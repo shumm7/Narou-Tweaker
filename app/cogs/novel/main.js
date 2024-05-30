@@ -6,9 +6,7 @@ import { _novelcom } from "./_novelcom.js";
 import { checkNovelPageDetail } from "./utils.js";
 
 /* Header */
-if(checkNovelPageDetail()!="series"){
-    _header()
-}
+_header()
 changeHeaderScrollMode("#novel_header_right");
 changeHeaderScrollMode("#novel_header");
 
