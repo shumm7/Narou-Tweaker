@@ -1,5 +1,5 @@
-import { check, defaultValue, getExtensionVersion } from "../../utils/misc.js"
-import { defaultOption, updateOption } from "../../utils/option.js"
+import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
+import { defaultOption, updateOption } from "/utils/option.js"
 
 export function setupDOM(){
     $('#js-failed').remove();
@@ -98,6 +98,31 @@ export function setupDOM(){
             $("#sidebar").removeClass("hide")
         }else{
             $("#sidebar").addClass("hide")
+        }
+    }
+
+    /* Header Tabs */
+    $(".header-menu-item").each(function(){
+        var name = $(this).attr("name")
+
+        $(this).on("click", function(e){
+            $(`.header-menu-item.selected`).removeClass("selected")
+            $(this).addClass("selected")
+
+            $(`.header-menu-target.selected`).removeClass("selected")
+            $(`.header-menu-target[name="${name}"]`).addClass("selected")
+            location.replace(`#${name}`)
+        })
+    })
+
+    const hash = location.hash
+    if(hash.length){
+        var tag = hash.match(/#(.*)/)[1]
+        if(tag){
+            var tab = $(`.header-menu-item[name="${tag}"]`)
+            if(tab.length){
+                tab.trigger("click")
+            }
         }
     }
 }

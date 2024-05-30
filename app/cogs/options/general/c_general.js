@@ -107,7 +107,7 @@ function showPatchnotes(){
 
     fetch('https://raw.githubusercontent.com/shumm7/Narou-Tweaker/main/app/patchnote.json').then(response => response.json())
     .then(res => {
-        var outer = $(".general-version")
+        var outer = $(".contents-container[name='version']")
 
         $.each(res.data, function(_, data){
             const lang = "ja"

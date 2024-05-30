@@ -305,6 +305,12 @@ input[type=file] {
     padding-left: 30px;
     color: #fff;
 }
+.header-menu-target {
+    display: none;
+}
+.header-menu-target.selected {
+    display: block;
+}
 #header-title--heading{
     font-weight: bold;
     font-size: 150%;

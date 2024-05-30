@@ -14,19 +14,6 @@ export function buttonHide(){
             }
         })
     })
-
-    const hash = location.hash
-    const path = location.pathname
-    if(hash.length){
-        var index = path.match(/cogs\/options\/(.*)\/.*\.html/)[1]
-        var tag = hash.match(/#(.*)/)[1]
-        if(index && tag){
-            var tab = $(`.header-menu-item[data-for=".${index}-${tag}"]`)
-            if(tab.length){
-                tab.trigger("click")
-            }
-        }
-    }
 }
 
 export function optionHide(){
