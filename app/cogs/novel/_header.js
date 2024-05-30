@@ -197,6 +197,7 @@ export function _header(){
             is_login = false
             if(isCustomHeader){
                 elm = $("#novel_header li.booklist")
+                elm.addClass("enactive")
                 elm.find(".button_bookmark.logout").remove()
                 elm.prepend(`<a><i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（要ログイン）</span></span></a>`)
             }else{
@@ -206,7 +207,7 @@ export function _header(){
                 $("#novel_header li.booklist").remove()
             }else{
                 $("#novel_header ul").append(`
-                    <li class="booklist">
+                    <li class="booklist enactive">
                         <span class="button_bookmark logout">${text}に追加</span>
                     </li>
                 `)

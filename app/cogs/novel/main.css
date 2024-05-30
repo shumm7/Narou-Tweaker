@@ -54,21 +54,18 @@ html:has(.narou-tweaker-cursor-hide) {
 	/* テキストの自動折り返しを無効化 */
 	text-wrap: nowrap;
 }
-.novel-icon-wrapper ul li.enactive {
-	/* enactiveタグの付いたliを非表示 */
-	display:none;
-}
-.novel-icon-wrapper ul li.enactive a {
+.novel-icon-wrapper ul li.enactive a,
+.novel-icon-wrapper ul li.booklist .button_bookmark.logout {
 	/* enactiveタグの付いたliのカーソル設定 */
 	cursor: default !important;
-}
-.narou-tweaker-header--show-enactive-icon .novel-icon-wrapper ul li.enactive {
-	/* enactiveタグの付いたliを非表示 */
-	display:block;
 }
 .novel-icon-wrapper ul li.disabled {
 	/* disabledタグの付いたliを非表示 */
 	display:none !important;
+}
+body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.enactive {
+	/* enactiveタグの付いたliを非表示 */
+	display: none !important;
 }
 .narou-tweaker-header--mode-1--hide-icon .novel-icon-wrapper ul li i {
 	/* アイコンの非表示設定 */
