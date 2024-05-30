@@ -66,6 +66,11 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
+        .narou-tweaker--series #container {
+            font-family: ${fontFamily_Current};
+            text-rendering: ${textRendering};
+        }
+
         
         #novel_color,
         .contents1 {
