@@ -356,6 +356,8 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	margin-top: .5em;
 	padding: .3em 1em;
 	border-radius: .5em;
+	width: 250px;
+	text-align: center;
 }
 
 

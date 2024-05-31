@@ -692,7 +692,10 @@ export function _header(){
 
         /* QRコード */
         if(data.novelCustomHeaderQRCodeShowURL){
-            $("#novel_header").before(`<div id='qrcode-outer'><div id="qrcode-background"></div><div id="qrcode-display"><div id="qrcode-text"></div></div></div>`)
+            $("#novel_header").before(`<div id='qrcode-outer'><div id="qrcode-background"></div><div id="qrcode-display"><input type="text" id="qrcode-text" readonly></div></div></div>`)
+            $("#qrcode-text").on("click", function(){
+                $(this).select()
+            })
         }else{
             $("#novel_header").before(`<div id='qrcode-outer'><div id="qrcode-background"></div><div id="qrcode-display"></div></div>`)
         }
@@ -704,12 +707,12 @@ export function _header(){
         if(data.novelCustomHeaderQRCodeCurrentLocation){
             $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
             qrcode = new QRCode(document.getElementById("qrcode-display"), {text: location.href});
-            $("#qrcode-text").text(location.href)
+            $("#qrcode-text").val(location.href)
         }else{
             if(meta_url!=undefined){
                 $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
                 qrcode = new QRCode(document.getElementById("qrcode-display"), {text: meta_url});
-                $("#qrcode-text").text(meta_url)
+                $("#qrcode-text").val(meta_url)
             }else if(ncode!=undefined){
                 $("#novel_header ul").append('<li class="qrcode"><a><i class="fa-solid fa-qrcode"></i><span class="title">QRコード</span></a></li>')
                 var url
@@ -727,7 +730,7 @@ export function _header(){
                     }
                 }
                 qrcode = new QRCode(document.getElementById("qrcode-display"), {text: url});
-                $("#qrcode-text").text(url)
+                $("#qrcode-text").val(url)
             }
         }
 
