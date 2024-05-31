@@ -62,6 +62,7 @@ export const defaultOption = {
     workspaceImpressionMarkedButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
     workspaceNovelmanageDeleteConfirm: true,
+    workspaceUserblogmanageDeleteConfirm: true,
     workspaceNovelmanageShowPointAverage: true,
     workspaceCustomEditor: false,
 
