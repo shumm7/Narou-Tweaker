@@ -319,7 +319,7 @@ function link(r18){
                         <span class="external_urls-item"><a href="https://x.com/hashtag/narou${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-hashtag"></i>Xでハッシュタグ検索</a></span>
                     </div>
                     <div class="external_urls-column">
-                        <span class="external_urls-item"><a href="https://rawi-novel.work/writer/ai?ncode=${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-robot"></i>RaWiで分析</a></span>
+                        <span class="external_urls-item"><a href="https://rawi-novel.work/writer/ai?ncode=${ncode}" target="_blank"><i class="fa-solid fa-robot"></i>RaWiで分析</a></span>
                         <span class="external_urls-item"><a href="https://db.narou.fun/works/${ncode.toUpperCase()}" target="_blank"><i class="fa-solid fa-database"></i>なろうファンDB</a></span>
                     </div>
                     <div class="external_urls-column">
