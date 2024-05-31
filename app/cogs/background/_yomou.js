@@ -18,7 +18,8 @@ export function yomouCssListener(){
             changes.yomouRankTop_ShowLength!=undefined ||
             changes.yomouRankTop_ShowPoints!=undefined ||
             changes.yomouRankTop_ShowNovelInfoLink!=undefined ||
-            changes.yomouRankTop_ShowUpdateDate!=undefined
+            changes.yomouRankTop_ShowUpdateDate!=undefined ||
+            changes.yomouRankTop_ShowRaWi!=undefined
         ){
             makeRankTopCSS()
         }
@@ -116,6 +117,14 @@ function makeRankTopCSS(){
         if(!data.yomouRankTop_ShowUpdateDate){
             rule += `
             .p-ranktop-item__update-date{
+                display: none !important;
+            }
+            `
+        }
+
+        if(!data.yomouRankTop_ShowRaWi){
+            rule += `
+            .p-ranktop-item__novel-rawi{
                 display: none !important;
             }
             `

@@ -22,7 +22,7 @@
     padding-top: 10px;
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
-.p-ranktop-item__novel-info::after {
+.p-ranktop-item__list_item::after {
     margin: 0 2.5px;
     content: '●';
     color: rgba(153, 153, 153, .3);

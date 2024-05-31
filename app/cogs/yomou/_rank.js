@@ -188,9 +188,16 @@ function showRankTop_NovelDetails(){
                                     }
                                 }
 
+                                // RaWiへのリンクを表示
+                                elem.find(".p-ranktop-item__infomation").prepend(`
+                                    <a href="https://rawi-novel.work/writer/ai?ncode=${ncode}" class="p-ranktop-item__novel-rawi p-ranktop-item__list_item">
+                                        RaWi
+                                    </a>
+                                `)
+
                                 // 作品情報へのリンクを表示
                                 elem.find(".p-ranktop-item__infomation").prepend(`
-                                    <a href="https://ncode.syosetu.com/novelview/infotop/ncode/${ncode}/" class="p-ranktop-item__novel-info">
+                                    <a href="https://ncode.syosetu.com/novelview/infotop/ncode/${ncode}/" class="p-ranktop-item__novel-info p-ranktop-item__list_item">
                                         作品情報
                                     </a>
                                 `)

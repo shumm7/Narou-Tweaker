@@ -76,6 +76,7 @@ export const defaultOption = {
     yomouRankTop_ShowLength: false,
     yomouRankTop_ShowNovelInfoLink: false,
     yomouRankTop_ShowUpdateDate: false,
+    yomouRankTop_ShowRaWi: false,
     yomouRankTop_UserCSS: "",
     //yomouRankTop_DailyShowList: ["101", "102", "201", "202", "301", "302", "303", "304", "305", "306", "307", "401", "402", "403", "404", "9901", "9902", "9903", "9999"],
     
