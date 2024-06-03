@@ -93,7 +93,7 @@ input[type="number"] {
     box-sizing: border-box;
     caret-color: #000;
     color: transparent;
-    font-family: monospace;
+    font-family: "BizinGothicDiscord", monospace;
     line-height: 120%;
 }
 .syntax-highlight-wrap textarea.syntax-highlight::selection {
@@ -127,6 +127,7 @@ input[type="number"] {
     word-break: break-all;
     line-height: 120%;
     user-select: none;
+    font-family: "BizinGothicDiscord", monospace;
 }
 .syntax-highlight-wrap pre code.resizing {
     height: unset;

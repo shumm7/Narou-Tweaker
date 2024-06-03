@@ -5,6 +5,11 @@
     unicode-range: U+2014,U+2015,U+2026;
 }
 
+@font-face {
+	font-family: 'BizinGothicDiscord';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BizinGothicDiscord.ttf") format("truetype");
+}
+
 
 /* Variables */
 :root {
