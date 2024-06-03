@@ -59,7 +59,7 @@ def removeDebugMode(codeDir):
         f.write("export const debug = false")
 
 def getPatchnote(codeDir):
-    patchnote = JSON.read(codeDir + "patchnote.json")
+    patchnote = JSON.read("patchnote.json")
     manifest = get_manifest(codeDir)
 
     # Find Patchnote

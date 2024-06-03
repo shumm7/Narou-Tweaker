@@ -105,7 +105,7 @@ function fixOptionData(){
 /* パッチノート */
 function showPatchnotes(){
 
-    fetch('https://raw.githubusercontent.com/shumm7/Narou-Tweaker/main/app/patchnote.json').then(response => response.json())
+    fetch('https://raw.githubusercontent.com/shumm7/Narou-Tweaker/main/patchnote.json').then(response => response.json())
     .then(res => {
         var outer = $(".contents-container[name='version']")
 
