@@ -51,8 +51,15 @@
 }
 #skin-selection {
 	display: flex;
+	align-items: center;
 	flex-flow: row;
 	margin-bottom: 10px;
+}
+#skin-option--buttons {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1em;
+	gap: 5px;
 }
 #skin-option--options {
 	display: flex;
@@ -67,7 +74,7 @@
 #skin-option--editting {
 	font-size: 120%;
 	font-weight: bold;
-	margin-left: 1em;
+	margin-left: 0.8em;
 	color: #555;
 	text-overflow: ellipsis;
 }
