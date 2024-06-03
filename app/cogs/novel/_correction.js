@@ -239,13 +239,23 @@ function correctionIndent(){
 }
 
 function correctionNormalizeEllipses(){
-    /* 中点を用いた三点リーダー(・・・) → 三点リーダー（……） */
+    /* 三点リーダー(・・・) → 三点リーダー（……） */
     $("#novel_honbun > p.replaced").each(function(){
         if($(this).text().match(/・{2,}/)){
             $(this).after(replaceText(this, /・{2,}/g, function(s){
                 var l = s.length
                 var p = 1
                 if(l>=2){
+                    p = Math.round(l/3)
+                }
+                return "……".repeat(p)
+            }))
+        }
+        if($(this).text().match(/\.{3,}/)){
+            $(this).after(replaceText(this, /\.{3,}/g, function(s){
+                var l = s.length
+                var p = 1
+                if(l>=3){
                     p = Math.round(l/3)
                 }
                 return "……".repeat(p)
