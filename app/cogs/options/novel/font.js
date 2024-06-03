@@ -127,7 +127,7 @@ export function restoreFont(){
         if(isNaN(value)){
             value = 0
         }else{
-          value = Math.floor(value) - (10 - Math.abs(Math.floor(value) % 10))
+          value = Math.floor(value) + (10 - Math.abs(Math.floor(value) % 10))
         }
         setLineHeightValue(value)
     })

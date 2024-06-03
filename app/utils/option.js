@@ -454,7 +454,7 @@ export const localFontFamily = [
         "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`
     },
     {
-        "name": "BIZ UD明朝",
+        "name": "BIZ UDP明朝",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,

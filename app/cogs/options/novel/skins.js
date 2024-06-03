@@ -122,7 +122,8 @@ function showSkinPreview() {
           fontFamily_Current = fontFamilyList[selectedFontFamily].font
       }
       s += getCSSRule(".skin-preview", [{"font-family": fontFamily_Current, "text-rendering": textRendering}])
-      s += getCSSRule(".skin-preview p", [{"line-height": lineHeight + "%", "font-size": fontSize + "%"}])
+      //s += getCSSRule(".skin-preview p", [{"line-height": lineHeight + "%", "font-size": fontSize + "%"}])
+      s += getCSSRule(".skin-preview p", [{"line-height": localFont["line-height"] + "%", "font-size": localFont["font-size"] + "%"}])
 
       $("#skin-preview-style").text(s)
     })
