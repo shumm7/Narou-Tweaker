@@ -26,3 +26,4 @@
 * [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).
 * [amsul/pickadate.js](https://github.com/amsul/pickadate.js) Copyright 2014 Amsul, http://amsul.ca
 * [yuru7/bizin-gothic](https://github.com/yuru7/bizin-gothic) Copyright (c) 2022 Yuko Otawara, with Reserved Font Name "Bizin Gothic"
+* [googlefonts/morisawa-biz-ud-mincho](https://github.com/googlefonts/morisawa-biz-ud-mincho) Copyright 2022 The BIZ UDMincho Project Authors (https://github.com/googlefonts/morisawa-biz-ud-mincho)

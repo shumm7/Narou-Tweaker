@@ -578,11 +578,13 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 }
 
 /* Skin */
-#novel-option--skin-description {
+#novel-option--skin-description,
+#novel-option--font-family-description {
 	margin-top: .5em;
 	margin-left: .3em;
 }
-#novel-option--skin-description:before {
+#novel-option--skin-description:before,
+#novel-option--font-family-description:before {
 	content: "選択中";
 	font-weight: bold;
 	margin-right: .5em;
@@ -594,6 +596,14 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	flex-flow: row;
 	justify-content: center;
 	margin-bottom: 1em;
+}
+#novel-option--font-family-sample {
+	padding: 5px 10px;
+	border: 1px solid rgb(221, 221, 221);
+	margin: 5px 0;
+	margin-bottom: 10px;
+	line-height: 180%;
+    font-size: 100%;
 }
 .novel-option--font-button {
 	display: flex;

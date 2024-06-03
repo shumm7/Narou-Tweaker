@@ -1,5 +1,5 @@
 import { check, defaultValue } from "/utils/misc.js"
-import { localFont, localSkins, defaultOption, replacePattern } from "/utils/option.js";
+import { localFont, localSkins, defaultOption, replacePattern, localFontFamily } from "/utils/option.js";
 import { formatSkinData, generateNoDuplicateName } from "/utils/skin.js";
 import { escapeHtml, getDatetimeString } from "/utils/text.js";
 import { correction, restoreCorrectionMode } from "./_correction.js";
@@ -93,8 +93,18 @@ function restoreSkinOptions(skins, selected){
 /* フォント設定 */
 function restoreFontOptions(){
     chrome.storage.local.get(null, (data)=>{
-        $(".novel-option--font-button.active").removeClass("active")
-        $(".novel-option--font-button#"+defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)).addClass("active")
+        var fontlist = localFontFamily.concat(defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily))
+
+        $("#novel-option--font-family #font-family").empty()
+        $.each(fontlist, function(i, font){
+            if(font.show==true){
+                $("#novel-option--font-family #font-family").append("<option value='"+i+"'>"+font.name+"</option>")
+            }
+        })
+        const selected = data.fontSelectedFontFamily
+        $("#novel-option--font-family #font-family").val(String(selected))
+        $("#novel-option--font-family-description").text(defaultValue(fontlist[selected], {}).description)
+        $("#novel-option--font-family-sample").css("font-family", defaultValue(fontlist[selected], {}).font)
 
         var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
         if(fSize>0) {fSize = "+"+fSize}
@@ -140,18 +150,13 @@ function setOptionContentsDisplay(id){
                 <div id="novel-option--text">
                     <div class='novel-option-subheader'>フォント</div>
                         <div id="novel-option--font-family">
-                            <div class='novel-option--font-button' id='gothic'>
-                                <div class='novel-option--font-button-box'>あ亜A</div>
-                                <div class='novel-option--font-button-description'>ゴシック</div>
+                            <div class="dropdown" style="width: 100%;">
+                                <select id="font-family" name="font-family"></select>
                             </div>
-                            <div class='novel-option--font-button' id='serif'>
-                                <div class='novel-option--font-button-box'>あ亜A</div>
-                                <div class='novel-option--font-button-description'>明朝体</div>
-                            </div>
-                            <div class='novel-option--font-button' id='custom'>
-                                <div class='novel-option--font-button-box'>あ亜A</div>
-                                <div class='novel-option--font-button-description'>カスタム</div>
-                            </div>
+                        </div>
+                        <div id="novel-option--font-family-description"></div>
+                        <div id="novel-option--font-family-sample">
+                            あのイーハトーヴォのすきとおった風、夏でも底に冷たさをもつ青いそら、うつくしい森で飾られたモリーオ市、郊外のぎらぎらひかる草の波。
                         </div>
                     <div class='novel-option-subheader'>縦書き</div>
                         <div id="novel-option--vertical" style="padding: 10px 0;">
@@ -185,15 +190,20 @@ function setOptionContentsDisplay(id){
                 </div>
             </div>
         `)
-        restoreFontOptions(data.fontFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
+        restoreFontOptions(data.fontSelectedFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
 
         /* Font Family */
+        /*
         $(".novel-option--font-button-box").click(function() {
             const key = $(this).parent().prop("id")
             $(".novel-option--font-button.active").removeClass("active")
             $(this).parent().addClass("active")
 
             chrome.storage.local.set({fontFontFamily: key}, () => {})
+        })
+        */
+        $("#novel-option--font-family #font-family").on("change",() => {
+            chrome.storage.local.set({fontSelectedFontFamily: parseInt($("#novel-option--font-family #font-family").val())}, function() {})
         })
 
         /* Vertical */
@@ -348,7 +358,7 @@ function setOptionContentsDisplay(id){
 
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.fontFontFamily!=undefined || changes.fontFontFamily_Custom!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined || changes.novelVertical!=undefined){
+        if(changes.fontSelectedFontFamily!=undefined || changes.fontFontFamilyList!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined || changes.novelVertical!=undefined){
             restoreFontOptions()
         }
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){

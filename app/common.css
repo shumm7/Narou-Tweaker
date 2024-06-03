@@ -10,6 +10,16 @@
 	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BizinGothicDiscord.ttf") format("truetype");
 }
 
+@font-face {
+	font-family: 'BIZ UDPMincho';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BIZUDPMincho-Regular.ttf") format("truetype");
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'BIZ UDPMincho';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BIZUDPMincho-Bold.ttf") format("truetype");
+	font-weight: bold;
+}
 
 /* Variables */
 :root {

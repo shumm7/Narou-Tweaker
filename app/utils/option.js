@@ -130,10 +130,10 @@ export const defaultOption = {
     novelAuthorCustomSkinWarning: true,
 
     /* Font */
-    fontFontFamily: "gothic",
+    fontSelectedFontFamily: 0,
+    fontFontFamilyList: [],
     fontFontSize: 0,
     fontLineHeight: 0,
-    fontFontFamily_Custom: `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
     fontTextRendering: "optimizeLegibility",
     fontWidth: 1,
 
@@ -431,11 +431,38 @@ export const localSkins = [
     }
 ]
 
-export const localFont = {
-    "font-family": {
-        "serif": "NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif",
-        "gothic": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
+export const localFontFamily = [
+    {
+        "name": "ゴシック〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
     },
+    {
+        "name": "明朝体〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": "NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif"
+    },
+    {
+        "name": "游ゴシック",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`
+    },
+    {
+        "name": "BIZ UD明朝",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "BIZ UDPMincho", "游明朝", YuMincho, sans-serif`
+    }
+]
+
+export const localFont = {
     "font-size": 100,
     "line-height": 180,
     "text-rendering": "optimizeLegibility",

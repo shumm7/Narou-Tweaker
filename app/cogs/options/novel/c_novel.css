@@ -68,7 +68,7 @@
 #skin-option--field {
 	width: 100%;
 }
-#skin-option--preview {
+.skin-option--preview {
 	margin-top: 20px;
 }
 #skin-option--editting {
@@ -89,15 +89,15 @@
 	margin-right: 5px;
     border-radius: 5px;
 }
-#skin-preview {
+.skin-preview {
 	padding: 1em;
 }
-#skin-preview #subtitle-dummy div {
+.skin-preview #subtitle-dummy div {
 	padding: 10px 10px 2px 5px;
 	font-size: 95%;
 }
-#skin-preview #subtitle-dummy #link,
-#skin-preview #subtitle-dummy #link-visited  {
+.skin-preview #subtitle-dummy #link,
+.skin-preview #subtitle-dummy #link-visited  {
 	cursor: pointer;
 }
 #skin-additional-style {
@@ -149,6 +149,8 @@
 	display: flex;
 	flex-flow: row;
 	justify-content: center;
+	align-items: center;
+	margin-bottom: 10px;
 }
 .font-button {
 	display: flex;

@@ -1,14 +1,20 @@
 import { check, defaultValue } from "/utils/misc.js"
-import { defaultOption, localFont } from "/utils/option.js"
+import { defaultOption, localFont, localFontFamily } from "/utils/option.js"
 
 /* Font Settings */
 /* フォントの表示設定 */
 export function restoreFont(){
     chrome.storage.local.get(null, (data)=>{
-      $(".font-button.active").removeClass("active")
-      $(".font-button#"+defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)).addClass("active")
-  
-      $("#custom-font-family").val(defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom))
+      const fontList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
+
+      $("#font-family-dropdown").empty()
+      $.each(fontList, function(i, font){
+        if(font.show==true){
+          $("#font-family-dropdown").append("<option value='"+i+"'>"+font.name+"</option>")
+        }
+      })
+      $("#font-family-dropdown").val(String(defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)))
+      //$("#skin-option--editting").text((selected+1)+": " + skins[selected].name)
       
       var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
       if(fSize>0) {fSize = "+"+fSize}
@@ -21,23 +27,14 @@ export function restoreFont(){
       var pWidth = defaultValue(data.fontWidth, defaultOption.fontWidth)
       $("#page-width-input").val(Number((pWidth * 100).toFixed(1)))
     })
-  
-    showFontPreview()
   }
   
-  /* フォント設定のプレビューを表示 */
-  function showFontPreview(){
-    chrome.storage.local.get(null, (data)=>{
-      $(".font-button#custom").css("font-family", defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom))
-    })
-  }
-  
+
   /* イベントを設定 */
   export function addFontEditButtonEvent(){
-    $(".font-button#gothic").css("font-family", localFont["font-family"].gothic)
-    $(".font-button#serif").css("font-family", localFont["font-family"].serif)
-  
+
     /* Font Family */
+    /*
     $(".font-button-box").click(function(){
       const key = $(this).parent().prop("id")
       $(".font-button.active").removeClass("active")
@@ -45,6 +42,17 @@ export function restoreFont(){
   
       chrome.storage.local.set({fontFontFamily: key}, function(){})
     })
+    */
+    $("#font-family-dropdown").change(function(){
+      const key = $(this).parent().prop("id")
+      $(".font-button.active").removeClass("active")
+      $(this).parent().addClass("active")
+  
+      chrome.storage.local.set({fontFontFamily: key}, function(){})
+    })
+    $("#font-family-dropdown").on("change",() => {
+      chrome.storage.local.set({fontSelectedFontFamily: parseInt($("#font-family-dropdown").val())}, function() {})
+  })
   
     /* Font Family - Custom */
     $("#custom-font-family").change(function(){
@@ -172,8 +180,8 @@ export function restoreFont(){
   
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-      if(changes.fontFontFamily!=undefined ||
-        changes.fontFontFamily_Custom!=undefined ||
+      if(changes.fontSelectedFontFamily!=undefined ||
+        changes.fontFontFamilyList!=undefined ||
         changes.fontFontSize!=undefined ||
         changes.fontLineHeight!=undefined ||
         changes.fontTextRendering!=undefined ||
