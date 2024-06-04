@@ -26,7 +26,7 @@
 * [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).
 * [amsul/pickadate.js](https://github.com/amsul/pickadate.js) Copyright 2014 Amsul, http://amsul.ca
 
-## Fonts
+### Fonts
 * Bizin Gothic ([yuru7/bizin-gothic](https://github.com/yuru7/bizin-gothic))<br>Copyright (c) 2022 Yuko Otawara, with Reserved Font Name "Bizin Gothic"<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
 * [源暎こぶり明朝](https://okoneya.jp/font/genei-koburimin.html)/[源暎ちくご明朝](https://okoneya.jp/font/genei-chikumin.html)<br>Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
 * [源暎エムゴ](https://okoneya.jp/font/genei-m-gothic.html)<br>Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
