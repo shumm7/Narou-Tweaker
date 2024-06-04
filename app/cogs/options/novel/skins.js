@@ -166,7 +166,7 @@ export function addSkinEditButtonEvent(){
     chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultOption.skins)
         
-      var defaultSkin = Object.assign(localSkins[0])
+      var defaultSkin = Object.assign({}, localSkins[0])
       defaultSkin.customizable = true
       defaultSkin.name = generateNoDuplicateName(localSkins.concat(skins), "新規スキン", -1)
       defaultSkin.description = ""
@@ -212,6 +212,7 @@ export function addSkinEditButtonEvent(){
       }
     });
   })
+  
   /* Export Button */
   $("#skin-export-json").on("click", (e)=>{
     chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {

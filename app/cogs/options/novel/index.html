@@ -414,7 +414,7 @@
 								</div>
 
 								<div class="contents-option-content">
-									<div id="skin-option" class="section" style="padding: 1em;">
+									<div id="skin-option" class="section" style="padding: 1em; width: 100%;">
 										<div id="skin-selection">
 											<div id="skin-selection--dropdown">
 												<div class="dropdown">
@@ -690,19 +690,47 @@
 									</div>
 								</div>
 								<div class="contents-option-content" style="align-items: flex-start;">
-									<div id="font-family" class="section" style="padding: 1em;">
-										<div id="font-family-select" style="margin-bottom: 1em;">
+									<div id="font-family" class="section" style="padding: 1em; width: 100%;">
+										<div id="font-family-selection">
 											<div id="font-family-selection--dropdown">
 												<div class="dropdown">
 													<select id="font-family-dropdown" name="font-family"></select>
 												</div>
 											</div>
-											<!--
 											<div id="font-family-selection--buttons" style="margin-left: 2em;">
 												<button name="new" type="button" class="button">＋</button>
 											</div>
-											-->
 										</div>
+										<div id="font-family-option--buttons">
+											<!--<button name="save" type="button" class="button">保存</button>-->
+											<button name="copy" type="button" class="button">複製</button>
+											<button name="delete" type="button" class="button">削除</button>
+											<span id="font-family-option--editting"></span>
+										</div>
+
+										<div id="font-family-option--options">
+											<div id="font-family-option--field">
+												<div style="margin-bottom: 1em;">
+													<div class="textfield">
+														<label for="#font-name">名前</label>
+														<input name="font-name" class="option-font" type="text" id="font-name"></input>
+													</div>
+													<div class="textfield">
+														<label for="#font-description">概要</label>
+														<input name="font-description" class="option-font" type="text" id="font-description"></input>
+													</div>
+													<div class="font-detail">
+														<label for="#font-data">フォント設定</label>
+														<textarea class="option-font textarea font-option-field" id="font-data" name="font-data"></textarea>
+													</div>
+													<div class="textfield">
+														<label for="#font-license">ライセンス表示</label>
+														<textarea class="option-font textarea font-option-field" id="font-license" name="font-license" style="height: 80px;" disabled></textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+
 									</div>
 								</div>
 							</div>
