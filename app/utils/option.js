@@ -130,10 +130,10 @@ export const defaultOption = {
     novelAuthorCustomSkinWarning: true,
 
     /* Font */
-    fontFontFamily: "gothic",
+    fontSelectedFontFamily: 0,
+    fontFontFamilyList: [],
     fontFontSize: 0,
     fontLineHeight: 0,
-    fontFontFamily_Custom: `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
     fontTextRendering: "optimizeLegibility",
     fontWidth: 1,
 
@@ -431,11 +431,105 @@ export const localSkins = [
     }
 ]
 
-export const localFont = {
-    "font-family": {
-        "serif": "NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif",
-        "gothic": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
+export const localFontFamily = [
+    {
+        "name": "ゴシック体〔デフォルト〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
     },
+    {
+        "name": "明朝体〔デフォルト〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',serif`
+    },
+    {
+        "name": "Noto Sans〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "Noto Sans JP", sans-serif`
+    },
+    {
+        "name": "游ゴシック〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`
+    },
+    {
+        "name": "源暎エムゴ〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "源暎エムゴ", sans-serif`,
+        "license": `Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+    {
+        "name": "BIZ UDPゴシック〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "BIZ UDPGothic", sans-serif`
+    },
+    {
+        "name": "DotGothic16〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "DotGothic16", sans-serif`,
+        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
+    },
+    {
+        "name": "M PLUS Rounded〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "M PLUS Rounded 1c", sans-serif`,
+    },
+    {
+        "name": "Noto Serif〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "Noto Serif JP", serif`
+    },
+    {
+        "name": "BIZ UDP明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "BIZ UDPMincho", serif`
+    },
+    {
+        "name": "さわらび明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "Sawarabi Mincho", serif`
+    },
+    {
+        "name": "源暎こぶり明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "源暎こぶり明朝", serif`,
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+    {
+        "name": "源暎ちくご明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "源暎ちくご明朝", serif`,
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+]
+
+export const localFont = {
     "font-size": 100,
     "line-height": 180,
     "text-rendering": "optimizeLegibility",

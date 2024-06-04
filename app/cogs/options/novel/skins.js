@@ -1,6 +1,6 @@
-import { defaultValue, getCSSRule, saveJson } from "../../../utils/misc.js";
-import { localSkins, defaultOption, localFont } from "../../../utils/option.js";
-import { generateNoDuplicateName, formatSkinData } from "../../../utils/skin.js";
+import { defaultValue, getCSSRule, saveJson } from "/utils/misc.js";
+import { localSkins, defaultOption, localFont, localFontFamily } from "/utils/option.js";
+import { generateNoDuplicateName, formatSkinData } from "/utils/skin.js";
 
 /* 指定したスキンを表示 */
 export function restoreSkins(skins, selected){
@@ -89,12 +89,12 @@ function showSkinPreview() {
     var s = ""
     const style = getSkinData().style
 
-    s += getCSSRule("#skin-preview", [{"background": style.novel.background}, {"color": style.novel.color}, {"border": "3px solid" + style.novel.background_second}])
-    s += getCSSRule("#skin-preview #link", [{"color": style.link.color_link}])
-    s += getCSSRule("#skin-preview #link-visited", [{"color": style.link.color_visited}])
-    s += getCSSRule("#skin-preview #link:hover, #skin-preview #link-visited:hover", [{"color": style.link.color_hover}])
-    s += getCSSRule("#skin-preview #link-visited", [{"border-bottom": "1px solid " + style.sublist.color}])
-    s += getCSSRule("#skin-preview #link-visited:hover", [{"border-bottom": "1px solid " + style.sublist.hover}])
+    s += getCSSRule(".skin-preview", [{"background": style.novel.background}, {"color": style.novel.color}, {"border": "3px solid" + style.novel.background_second}])
+    s += getCSSRule(".skin-preview #link", [{"color": style.link.color_link}])
+    s += getCSSRule(".skin-preview #link-visited", [{"color": style.link.color_visited}])
+    s += getCSSRule(".skin-preview #link:hover, .skin-preview #link-visited:hover", [{"color": style.link.color_hover}])
+    s += getCSSRule(".skin-preview #link-visited", [{"border-bottom": "1px solid " + style.sublist.color}])
+    s += getCSSRule(".skin-preview #link-visited:hover", [{"border-bottom": "1px solid " + style.sublist.hover}])
 
     $(".skin-color-field div[name='skin-novel-color']").css("background", style.novel.color)
     $(".skin-color-field div[name='skin-novel-background']").css("background", style.novel.background)
@@ -107,8 +107,8 @@ function showSkinPreview() {
     $(".skin-color-field div[name='skin-sublist-underline-visited']").css("background", style.sublist.visited)
 
     chrome.storage.local.get(null, function(data){
-      var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
-      var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
+      const selectedFontFamily = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
+      var fontFamilyList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
       var fontFamily_Current 
       var fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
       var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
@@ -116,14 +116,14 @@ function showSkinPreview() {
       var width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
       var widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
 
-      if(fontFamily=="custom"){
-          fontFamily_Current = fontFamily_Custom
+      if(fontFamilyList.length<=selectedFontFamily || selectedFontFamily<0){
+        fontFamily_Current = localFontFamily[0].font
       }else{
-          fontFamily_Current = localFont["font-family"][fontFamily]
+          fontFamily_Current = fontFamilyList[selectedFontFamily].font
       }
-
-      s += getCSSRule("#skin-preview", [{"font-family": fontFamily_Current, "text-rendering": textRendering}])
-      s += getCSSRule("#skin-preview p", [{"line-height": lineHeight + "%", "font-size": fontSize + "%"}])
+      s += getCSSRule(".skin-preview", [{"font-family": fontFamily_Current, "text-rendering": textRendering}])
+      //s += getCSSRule(".skin-preview p", [{"line-height": lineHeight + "%", "font-size": fontSize + "%"}])
+      s += getCSSRule(".skin-preview p", [{"line-height": localFont["line-height"] + "%", "font-size": localFont["font-size"] + "%"}])
 
       $("#skin-preview-style").text(s)
     })
@@ -166,7 +166,7 @@ export function addSkinEditButtonEvent(){
     chrome.storage.local.get(["skins"], function(data) {
       var skins = defaultValue(data.skins, defaultOption.skins)
         
-      var defaultSkin = Object.assign(localSkins[0])
+      var defaultSkin = Object.assign({}, localSkins[0])
       defaultSkin.customizable = true
       defaultSkin.name = generateNoDuplicateName(localSkins.concat(skins), "新規スキン", -1)
       defaultSkin.description = ""
@@ -212,6 +212,7 @@ export function addSkinEditButtonEvent(){
       }
     });
   })
+  
   /* Export Button */
   $("#skin-export-json").on("click", (e)=>{
     chrome.storage.local.get(["skins", "selectedSkin" ], function(data) {
@@ -410,8 +411,8 @@ export function addSkinEditButtonEvent(){
     }
     if(changes.skins!=undefined ||
       changes.selectedSkin!=undefined ||
-      changes.fontFontFamily!=undefined ||
-      changes.fontFontFamily_Custom!=undefined ||
+      changes.fontSelectedFontFamily!=undefined ||
+      changes.fontFontFamilyList!=undefined ||
       changes.fontFontSize!=undefined ||
       changes.fontLineHeight!=undefined ||
       changes.fontTextRendering!=undefined ||

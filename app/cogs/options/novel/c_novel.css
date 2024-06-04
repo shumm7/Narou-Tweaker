@@ -49,29 +49,34 @@
 	display: flex;
 	flex-flow: column;
 }
-#skin-selection {
+#skin-selection,
+#font-family-selection {
 	display: flex;
 	align-items: center;
 	flex-flow: row;
 	margin-bottom: 10px;
 }
-#skin-option--buttons {
+#skin-option--buttons,
+#font-family-option--buttons {
 	display: flex;
 	align-items: center;
 	margin-bottom: 1em;
 	gap: 5px;
 }
-#skin-option--options {
+#skin-option--options,
+#font-family-option--options {
 	display: flex;
 	flex-flow: row;
 }
-#skin-option--field {
+#skin-option--field,
+#font-family-option--field {
 	width: 100%;
 }
-#skin-option--preview {
+.skin-option--preview {
 	margin-top: 20px;
 }
-#skin-option--editting {
+#skin-option--editting,
+#font-family-option--editting {
 	font-size: 120%;
 	font-weight: bold;
 	margin-left: 0.8em;
@@ -89,15 +94,15 @@
 	margin-right: 5px;
     border-radius: 5px;
 }
-#skin-preview {
+.skin-preview {
 	padding: 1em;
 }
-#skin-preview #subtitle-dummy div {
+.skin-preview #subtitle-dummy div {
 	padding: 10px 10px 2px 5px;
 	font-size: 95%;
 }
-#skin-preview #subtitle-dummy #link,
-#skin-preview #subtitle-dummy #link-visited  {
+.skin-preview #subtitle-dummy #link,
+.skin-preview #subtitle-dummy #link-visited  {
 	cursor: pointer;
 }
 #skin-additional-style {
@@ -145,11 +150,6 @@
 }
 
 /* Font Button */
-#font-family-select {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-}
 .font-button {
 	display: flex;
 	flex-flow: column;
@@ -175,6 +175,12 @@
 }
 .font-button.active .font-button-box{
 	border: 1px solid var(--kasasagi-blue);
+}
+.font-option-field {
+	width: 100%;
+    height: 200px;
+	margin: 0;
+	box-sizing: border-box;
 }
 .font-number-change-button {
 	display: flex;

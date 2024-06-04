@@ -1,5 +1,5 @@
 import { defaultValue } from "/utils/misc.js"
-import { defaultOption, localFont, localSkins } from "/utils/option.js"
+import { defaultOption, localFont, localSkins, localFontFamily } from "/utils/option.js"
 import { makeSkinCSS } from "/utils/skin.js"
 
 export function skinListener(){
@@ -8,8 +8,8 @@ export function skinListener(){
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.skins!=undefined ||
             changes.selectedSkin!=undefined ||
-            changes.fontFontFamily!=undefined ||
-            changes.fontFontFamily_Custom!=undefined ||
+            changes.fontSelectedFontFamily!=undefined ||
+            changes.fontFontFamilyList!=undefined ||
             changes.fontFontSize!=undefined ||
             changes.fontLineHeight!=undefined ||
             changes.fontTextRendering!=undefined ||
@@ -30,20 +30,21 @@ function makeSkin(){
         var rule = makeSkinCSS(skin, data.novelCustomStyle)
 
         /* Font */
-        var fontFamily = defaultValue(data.fontFontFamily, defaultOption.fontFontFamily)
-        var fontFamily_Custom = defaultValue(data.fontFontFamily_Custom, defaultOption.fontFontFamily_Custom)
+        const selectedFontFamily = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
+        var fontFamilyList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
         var fontFamily_Current 
-        var fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
-        var lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
-        var textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
-        var width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
-        var widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
 
-        if(fontFamily=="custom"){
-            fontFamily_Current = fontFamily_Custom
+        if(fontFamilyList.length<=selectedFontFamily || selectedFontFamily<0){
+            fontFamily_Current = localFontFamily[0].font
         }else{
-            fontFamily_Current = localFont["font-family"][fontFamily]
+            fontFamily_Current = fontFamilyList[selectedFontFamily].font
         }
+
+        const fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
+        const lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
+        const textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
+        const width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
+        const widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
 
         rule += `
         #novel_honbun:not(.novelreport_novelview) {
@@ -85,14 +86,8 @@ function makeSkin(){
 
         /* Option Modal */
         rule += `
-        .novel-option--font-button#gothic {
-            font-family: ${localFont["font-family"].gothic};
-        }
-        .novel-option--font-button#serif {
-            font-family: ${localFont["font-family"].serif};
-        }
-        .novel-option--font-button#custom {
-            font-family: ${fontFamily_Custom};
+        .novel-option--font-button#current {
+            font-family: ${fontFamily_Current};
         }
         `
 
