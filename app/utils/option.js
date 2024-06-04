@@ -433,33 +433,66 @@ export const localSkins = [
 
 export const localFontFamily = [
     {
-        "name": "ゴシック〔標準〕",
+        "name": "ゴシック体〔デフォルト〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
     },
     {
-        "name": "明朝体〔標準〕",
+        "name": "明朝体〔デフォルト〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
         "font": "NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif"
     },
     {
-        "name": "游ゴシック",
+        "name": "游ゴシック〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`
     },
     {
-        "name": "BIZ UDP明朝",
+        "name": "源暎エムゴ〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "BIZ UDPMincho", "游明朝", YuMincho, sans-serif`
-    }
+        "font": `NTSymbol, "源暎エムゴ", "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
+        "license": `Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+    {
+        "name": "新コミック体〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "新コミック体", "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
+        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
+    },
+    {
+        "name": "BIZ UDP明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "BIZ UDPMincho", '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif`,
+        "license": `Copyright 2022 The BIZ UDMincho Project Authors (https://github.com/googlefonts/morisawa-biz-ud-mincho)\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+    {
+        "name": "源暎こぶり明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "源暎こぶり明朝", '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif`,
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
+    {
+        "name": "源暎ちくご明朝〔標準〕",
+        "description": "Narou Tweaker オリジナル",
+        "customizable": false,
+        "show": true,
+        "font": `NTSymbol, "源暎ちくご明朝", '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',sans-serif`,
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+    },
 ]
 
 export const localFont = {

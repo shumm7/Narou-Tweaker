@@ -25,5 +25,10 @@
 * [polygonplanet/encoding.js](https://github.com/polygonplanet/encoding.js) Copyright (c) 2012 polygonplanet
 * [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).
 * [amsul/pickadate.js](https://github.com/amsul/pickadate.js) Copyright 2014 Amsul, http://amsul.ca
-* [yuru7/bizin-gothic](https://github.com/yuru7/bizin-gothic) Copyright (c) 2022 Yuko Otawara, with Reserved Font Name "Bizin Gothic"
-* [googlefonts/morisawa-biz-ud-mincho](https://github.com/googlefonts/morisawa-biz-ud-mincho) Copyright 2022 The BIZ UDMincho Project Authors (https://github.com/googlefonts/morisawa-biz-ud-mincho)
+
+## Fonts
+* Bizin Gothic ([yuru7/bizin-gothic](https://github.com/yuru7/bizin-gothic))<br>Copyright (c) 2022 Yuko Otawara, with Reserved Font Name "Bizin Gothic"<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
+* Morisawa BIZ UDMincho ([googlefonts/morisawa-biz-ud-mincho](https://github.com/googlefonts/morisawa-biz-ud-mincho))<br>Copyright 2022 The BIZ UDMincho Project Authors (https://github.com/googlefonts/morisawa-biz-ud-mincho)<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
+* [源暎こぶり明朝](https://okoneya.jp/font/genei-koburimin.html)/[源暎ちくご明朝](https://okoneya.jp/font/genei-chikumin.html)<br>Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
+* [源暎エムゴ](https://okoneya.jp/font/genei-m-gothic.html)<br>Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
+* [新コミック体](https://www.font910.jp/font-list/conposite-comic.html)<br>Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.<br>Copyright (C) 2014 FONT910. All Rights Reserved.<br>Licensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)

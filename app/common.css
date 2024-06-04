@@ -5,11 +5,13 @@
     unicode-range: U+2014,U+2015,U+2026;
 }
 
+/* Bizin Gothic */
 @font-face {
 	font-family: 'BizinGothicDiscord';
 	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BizinGothicDiscord.ttf") format("truetype");
 }
 
+/* BIZ UDP明朝 */
 @font-face {
 	font-family: 'BIZ UDPMincho';
 	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BIZUDPMincho-Regular.ttf") format("truetype");
@@ -20,6 +22,50 @@
 	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/BIZUDPMincho-Bold.ttf") format("truetype");
 	font-weight: bold;
 }
+
+/* 源暎（明朝） */
+@font-face {
+	font-family: '源暎こぶり明朝';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiKoburiMin6-R.ttf") format("truetype");
+}
+@font-face {
+	font-family: '源暎ちくご明朝';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiChikugoMin3-R.ttf") format("truetype");
+}
+
+/* 源暎（ゴシック） */
+@font-face {
+	font-family: '源暎エムゴ';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiMGothic2-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+	font-family: '源暎エムゴ';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiMGothic2-Medium.ttf") format("truetype");
+    font-weight: 500; /* medium */
+}
+@font-face {
+	font-family: '源暎エムゴ';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiMGothic2-Bold.ttf") format("truetype");
+    font-weight: bold;
+}
+@font-face {
+	font-family: '源暎エムゴ';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiMGothic2-Heavy.ttf") format("truetype");
+    font-weight: 900; /* heavy */
+}
+@font-face {
+	font-family: '源暎エムゴ';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/GenEiMGothic2-Black.ttf") format("truetype");
+    font-weight: 950; /* extra black */
+}
+
+/* 新コミック体 */
+@font-face {
+	font-family: '新コミック体';
+	src: url("chrome-extension://__MSG_@@extension_id__/assets/fonts/f910-shin-comic-2.04.otf") format("opentype");
+}
+
 
 /* Variables */
 :root {
