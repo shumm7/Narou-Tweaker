@@ -492,13 +492,6 @@ export const localFontFamily = [
         "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
     },
     {
-        "name": "M PLUS Rounded〔標準〕",
-        "description": "Narou Tweaker オリジナル",
-        "customizable": false,
-        "show": true,
-        "font": `NTSymbol, "M PLUS Rounded 1c", sans-serif`,
-    },
-    {
         "name": "Noto Serif〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
