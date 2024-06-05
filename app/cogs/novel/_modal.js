@@ -545,6 +545,14 @@ function setOptionContentsCorrection(id){
                 </div>
             </div>
 
+            <div class='novel-option-header'>ローカライズ</div>
+            <div id="novel-option--correction-numbers">
+                <div class="novel-option--toggle novel-option--correction-mode">
+                    <input type="checkbox" id="novel-option--correction-number" class="correction_mode toggle" name="correctionNumber">
+                    <label for="novel-option--correction-number" class="toggle">数値</label>
+                </div>
+            </div>
+
             <div class='novel-option-header'>その他</div>
             <div id="novel-option--correction-others">
                 <div class="novel-option--toggle novel-option--correction-mode">
@@ -571,6 +579,7 @@ function setOptionContentsCorrection(id){
     $(".correction_mode.toggle").on("click", function(e){
         var mode = {}
         mode[$(this).prop("name")] = $(this).prop("checked")
+        console.log(mode)
 
         chrome.storage.local.set(mode, function(){})
     })
@@ -594,6 +603,10 @@ function setOptionContentsCorrection(id){
             changes.correctionNoSpaceExclamation!=undefined ||
             changes.correctionOddEllipses!=undefined ||
             changes.correctionOddDash!=undefined ||
+            changes.correctionNumber!=undefined ||
+            changes.correctionNumberShort!=undefined ||
+            changes.correctionNumberLong!=undefined ||
+            changes.correctionNumberSymbol!=undefined ||
             changes.correctionReplacePatterns!=undefined  ||
             changes.correctionShowIllustration!=undefined ||
             changes.correctionRemoveIllustrationLink!=undefined ||

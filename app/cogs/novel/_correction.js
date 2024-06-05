@@ -1,6 +1,6 @@
-import { check, defaultValue } from "../../utils/misc.js"
-import { defaultOption } from "../../utils/option.js";
-import { escapeHtml } from "../../utils/text.js";
+import { check, defaultValue } from "/utils/misc.js"
+import { defaultOption } from "/utils/option.js";
+import { escapeHtml } from "/utils/text.js";
 import { checkNovelPageDetail } from "./utils.js";
 
 const bracket_begin = `「『＜《〈≪【（”“’‘\\\(\\\'`
@@ -65,6 +65,11 @@ export function correction(){
                 correctionIndent()
             }
 
+            // 数値
+            if(data.correctionNumber){
+                correctionNumber({short: data.correctionNumberShort, long:data.correctionNumberLong, symbol:data.correctionNumberSymbol})
+            }
+
             // 置換
             if(data.correctionReplacePatterns.length>0){
                 correctionReplaceFromPatterns(data.correctionReplacePatterns)
@@ -110,6 +115,7 @@ export function restoreCorrectionMode(){
         check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
         check("#novel-option--correction-odd-ellipses", data.correctionOddEllipses, defaultOption.correctionOddEllipses)
         check("#novel-option--correction-odd-dash", data.correctionOddDash, defaultOption.correctionOddDash)
+        check("#novel-option--correction-number", data.correctionNumber, defaultOption.correctionNumber)
         check("#novel-option--correction-show-illustration", data.correctionShowIllustration, defaultOption.correctionShowIllustration)
     });
 }
@@ -229,6 +235,7 @@ function wrapTextWithTag(_elem, regexp, tag, callback, insideTag){
 }
 
 
+// 校正
 function correctionIndent(){
     /* 行頭の段落下げ */
     $("#novel_honbun > p.replaced").each(function(){
@@ -374,6 +381,56 @@ function correctionOddDash(){
     })
 }
 
+
+// 数字表記
+function correctionNumber(option){
+    function convertNumber(s, numConvMode, symbolConvMode){
+        const kanjiNum = "〇一二三四五六七八九"
+        const fullNum = "０１２３４５６７８９"
+        const halfNum = "0123456789"
+
+        if(numConvMode=="half"){
+            s = s.replace(/[０-９]/g, function(char){
+                return fullNum.indexOf(char)
+            })
+        }else if(numConvMode=="full"){
+            s = s.replace(/\d/g, function(char){
+                return `${fullNum[parseInt(char)]}`
+            })
+        }else if(numConvMode=="kanji"){
+            s = s.replace(/[０-９]/g, function(char){
+                return kanjiNum[fullNum.indexOf(char)]
+            }).replace(/\d/g, function(char){
+                return `${kanjiNum[parseInt(char)]}`
+            })
+        }
+
+        if(symbolConvMode=="half"){
+            s = s.replace(/＋/g, "+").replace(/[－‐]/g, "-").replace(/．/g, ".")
+        }else if(symbolConvMode=="full"){
+            s = s.replace(/\+/g, "＋").replace(/\-/g, "－").replace(/\./g, "．")
+        }else if(symbolConvMode=="kanji"){
+            s = s.replace(/[＋+]/g, "プラス").replace(/[－‐-]/g, "マイナス").replace(/\./g, "．")
+        }
+        
+        return s
+    }
+
+    $("#novel_honbun > p.replaced").each(function(){
+        if($(this).text().match(/([+-]?(?:\d+\.?\d+|\.\d+|\d+)|[＋－‐+-]?(?:[０-９]+[.．]?[０-９]+|[.．][０-９]+|[０-９]+))/)){
+            replaceText(this, /([+-]?(?:\d+\.?\d+|\.\d+|\d+)|[＋－‐+-]?(?:[０-９]+[.．]?[０-９]+|[.．][０-９]+|[０-９]+))/g, function(s){
+                if(s.length==1 || s.match(/^[＋－‐+-.．](\d|[０-９])$/)){
+                    return convertNumber(s, option.short, option.symbol)
+                }else{
+                    return convertNumber(s, option.long, option.symbol)
+                }
+            })
+        }
+    })
+}
+
+
+// 挿絵
 function removeIllustration(){
     /* 挿絵の非表示 */
     $("#novel_honbun > p.replaced."+className.img).css("display", "none")
@@ -386,6 +443,8 @@ function removeIllustrationLink(){
     link.prop("target", "")
 }
 
+
+// 縦中横設定
 function verticalLayout_CombineWord(max){
     /* 縦書き表示時の半角単語の縦中横 */
     const tag = "<span class='text-combine'>"
