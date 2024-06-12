@@ -12,14 +12,12 @@ if($(".p-userheader__tab").length){
     if(path.match(/\/mypageblog\/view\/userid\/.*\/blogkey\/.*\/*/)!=null){
         _blog()
     }
-
-    /* User Novel List */
-    else if(path.match(/\/mypage\/novellist\/userid\/.*\/*/)!=null || path.match(/\/.*\/*/)!=null){
-        _novel()
-    }
-
+    
     /* User Profile */
     else if(path.match(/\/mypage\/profile\/userid\/.*\/*/)!=null){
         _profile()
     }
+
+    /* User Novel List */
+    _novel()
 }
