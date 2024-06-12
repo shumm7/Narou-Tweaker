@@ -4,6 +4,12 @@ export function yomouCssListener(){
 
     chrome.storage.local.onChanged.addListener(function(changes){
         if(
+            changes.yomouRank_ShowNovelInfoLink!=undefined ||
+            changes.yomouRank_ShowKasasagi!=undefined ||
+            changes.yomouRank_ShowRaWi!=undefined ||
+            changes.yomouRank_ShowDescription!=undefined ||
+            changes.yomouRank_ShowTags!=undefined ||
+            changes.yomouRank_ShowNovelInfoLink!=undefined ||
             changes.yomouRank_DevidePointsUnit!=undefined ||
             changes.yomouRank_PointsColor!=undefined
         ){
@@ -19,6 +25,7 @@ export function yomouCssListener(){
             changes.yomouRankTop_ShowPoints!=undefined ||
             changes.yomouRankTop_ShowNovelInfoLink!=undefined ||
             changes.yomouRankTop_ShowUpdateDate!=undefined ||
+            changes.yomouRankTop_ShowKasasagi!=undefined ||
             changes.yomouRankTop_ShowRaWi!=undefined
         ){
             makeRankTopCSS()
@@ -52,7 +59,42 @@ function makeRankCSS(){
                     color: ${data.yomouRank_PointsColor};
                 }
             `
+        }
 
+        if(!data.yomouRank_ShowNovelInfoLink){
+            rule += `
+                .p-ranklist-item__novel-info {
+                    display: none !important;
+                }
+            `
+        }
+        if(!data.yomouRank_ShowKasasagi){
+            rule += `
+                .p-ranklist-item__kasasagi {
+                    display: none !important;
+                }
+            `
+        }
+        if(!data.yomouRank_ShowRaWi){
+            rule += `
+                .p-ranklist-item__novel-rawi {
+                    display: none !important;
+                }
+            `
+        }
+        if(!data.yomouRank_ShowDescription){
+            rule += `
+                .p-ranklist-item__synopsis {
+                    display: none !important;
+                }
+            `
+        }
+        if(!data.yomouRank_ShowTags){
+            rule += `
+                .p-ranklist-item__keyword {
+                    display: none !important;
+                }
+            `
         }
 
         chrome.storage.local.set({yomouRank_AppliedCSS: rule})
@@ -121,6 +163,15 @@ function makeRankTopCSS(){
             }
             `
         }
+
+        if(!data.yomouRankTop_ShowKasasagi){
+            rule += `
+            .p-ranktop-item__kasasagi{
+                display: none !important;
+            }
+            `
+        }
+
 
         if(!data.yomouRankTop_ShowRaWi){
             rule += `

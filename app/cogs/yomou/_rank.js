@@ -1,7 +1,7 @@
 import { getNcode } from "/utils/ncode.js";
 import { checkRankPageDetail } from "./utils.js";
-import { escapeHtml, getDatetimeStringWithoutSecond } from "../../utils/text.js";
-import { getGenreNumber } from "../../utils/api.js";
+import { escapeHtml, getDatetimeStringWithoutSecond } from "/utils/text.js";
+import { getGenreNumber } from "/utils/api.js";
 
 
 export function _rank(){
@@ -10,19 +10,31 @@ export function _rank(){
     chrome.storage.local.get(null, function(data){
         if(pageDetail.site=="yomou"){
             if(pageDetail.detail=="rank" && pageDetail.type != "top"){
-                // ポイントの単位と数値を別々のspanで囲む
-                $(".p-ranklist-item__points").each(function(){
-                    var text = $(this).text()
+                $(".p-ranklist-item").each(function(){
+                    var url = $(this).find(".p-ranklist-item__title a").prop("href")
+                    const ncode = getNcode(url)
+                    
+                    // ポイントの単位と数値を別々のspanで囲む
+                    var text = $(this).find(".p-ranklist-item__points").text()
                     if(text.match(/.*pt/)){
                         var m = text.match(/(.*)pt/)
                         var number = parseInt(m[1].replace(/,/g, ""))
                         if(isNaN(number)){
                             number = 0
                         }
-                        console.log($(this)[0].innerHTML)
-                        $(this)[0].innerHTML = `<span class="p-ranklist-item__points-value">${number.toLocaleString()}</span><span class="p-ranklist-item__points-unit">pt</span>`
+                        $(this).find(".p-ranklist-item__points").get(0).innerHTML = `<span class="p-ranklist-item__points-value">${number.toLocaleString()}</span><span class="p-ranklist-item__points-unit">pt</span>`
                     }
+
+                    // 要素追加・削除
+                    var info = $(this).find(".p-ranklist-item__infomation")
+                    info.find("a").addClass("p-ranklist-item__novel-info")
+
+                    info.find(".p-ranklist-item__novel-info").after(`
+                        <a target="_blank" href="https://kasasagi.hinaproject.com/access/top/ncode/${ncode}/" class="p-ranklist-item__kasasagi p-ranklist-item__separator">アクセス解析</a>
+                        <a target="_blank" href="https://rawi-novel.work/writer/ai?ncode=${ncode}" class="p-ranklist-item__novel-rawi p-ranklist-item__separator">RaWi</a>
+                    `)
                 })
+
             }
         }
 
@@ -192,6 +204,13 @@ function showRankTop_NovelDetails(){
                                 elem.find(".p-ranktop-item__infomation").prepend(`
                                     <a href="https://rawi-novel.work/writer/ai?ncode=${ncode}" class="p-ranktop-item__novel-rawi p-ranktop-item__list_item">
                                         RaWi
+                                    </a>
+                                `)
+
+                                // アクセス解析へのリンクを表示
+                                elem.find(".p-ranktop-item__infomation").prepend(`
+                                    <a href="https://kasasagi.hinaproject.com/access/top/ncode/${ncode}/" class="p-ranktop-item__kasasagi p-ranktop-item__list_item">
+                                        アクセス解析
                                     </a>
                                 `)
 
