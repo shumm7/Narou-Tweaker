@@ -176,7 +176,7 @@
         "cogs/mypage/_general.js",
         "cogs/mypage/_blog.js",
         "cogs/mypage/_profile.js",
-        "cogs/mypage/_novellist.js",
+        "cogs/mypage/_misc.js",
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js",
         "cogs/kasasagi/_general.js",

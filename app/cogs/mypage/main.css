@@ -211,3 +211,16 @@
     background-color: #e9ecef;
 }
 
+/* Favuser */
+.p-favuser-list__header:has(.p-favuser-list__userid) {
+    display: flex;
+    flex-direction: column;
+}
+.p-favuser-list__userid {
+    font-size: 90%;
+    color: #999999;
+}
+.p-favuser-list__userid::before {
+    content: "#";
+    padding-right: .2em;
+}
