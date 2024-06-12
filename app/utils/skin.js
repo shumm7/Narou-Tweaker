@@ -89,6 +89,7 @@ export function makeSkinCSS(skin, novel_css){
     }
 
     #novel_contents a:link,
+    #novel_contents.customlayout1 a:link,
     #novel_contents .customlayout-color a:link,
     a:link,
     .customlayout-color a:link  {
@@ -96,6 +97,7 @@ export function makeSkinCSS(skin, novel_css){
         color: ${s.link.color_link};
     }
     #novel_contents a:visited,
+    #novel_contents.customlayout1 a:visited,
     #novel_contents .customlayout-color a:visited,
     a:visited,
     .customlayout-color a:visited {
@@ -103,6 +105,7 @@ export function makeSkinCSS(skin, novel_css){
         color: ${s.link.color_visited};
     }
     #novel_contents a:hover,
+    #novel_contents.customlayout1 a:hover,
     #novel_contents .customlayout-color a:hover,
     a:hover,
     .customlayout-color a:hover {
