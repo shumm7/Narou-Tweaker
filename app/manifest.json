@@ -208,7 +208,6 @@
     },
     {
       "resources": [
-        "patchnote.json",
         "/assets/fonts/*.otf",
         "/assets/fonts/*.woff",
         "/assets/fonts/*.ttf",
