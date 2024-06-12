@@ -20,7 +20,9 @@
 		"page": "cogs/options/general/index.html",
     "open_in_tab": true
 	},
-  "action": {},
+  "action": {
+    "default_popup": "cogs/options/popup/index.html"
+  },
   "side_panel": {
     "default_path": "cogs/sidepanel/index/index.html"
   },
