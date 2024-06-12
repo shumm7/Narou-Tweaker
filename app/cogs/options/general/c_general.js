@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', function(){
     restoreOptions()
     showPatchnotes()
 
-    const version = getExtensionVersion()
-    $(".extension-version").append(`<a href="https://github.com/shumm7/Narou-Tweaker/releases/tag/${version}">${version}</version>`)
-
     exportOptionText()
     exportSyncOptionText()
     removeOptionData()
@@ -181,6 +178,10 @@ function showPatchnotes(){
 
             })
             outer.append(box)
+
+            if(getExtensionVersion() == version){
+                $(".extension-version").append(`<a href="${url}">${version}</version>`)
+            }
         })
     }).catch(error => {
         $("#footer").append(`
