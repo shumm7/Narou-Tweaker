@@ -85,7 +85,6 @@ export function _toolSasie(){
                         icode = "i" + url.pathname.match(/^\/send\/image\/icode\/([0-9]+)\/*$/)[1]
                     }
                 }
-                
             }
 
             const scroll = $(".nt-editor--body").scrollTop()

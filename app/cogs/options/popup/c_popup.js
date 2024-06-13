@@ -67,6 +67,9 @@ function openDropdown(){
             else if(url.hostname == "yomou.syosetu.com" || url.hostname=="noc.syosetu.com" || url.hostname == "mnlt.syosetu.com" || url.hostname=="mid.syosetu.com" ){
                 $("#yomou").prop("open", true)
                 //location.hash = "#yomou"
+            }else if(url.hostname == "mitemin.net" || url.hostname.match(/^\d+\.mitemin\.net$/) || url.hostname == "eparet.net" ){
+                $("#mitemin").prop("open", true)
+                //location.hash = "#mitemin"
             }
         }catch(e){
 

@@ -146,6 +146,23 @@
 				"https://kasasagi.hinaproject.com/*"
 			],
       "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
+        "loader/mitemin.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
+        "cogs/mitemin/main.css"
+      ],
+      "matches": [
+				"https://mitemin.net/*",
+				"https://*.mitemin.net/*",
+				"https://eparet.net/*"
+			],
+      "run_at":"document_end"
     }
   ],
   "web_accessible_resources": [
@@ -159,10 +176,12 @@
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
         "cogs/novel/utils.js",
+
         "cogs/yomou/main.js",
         "cogs/yomou/utils.js",
         "cogs/yomou/_rank.js",
         "cogs/yomou/css/main.js",
+
         "cogs/workspace/main.js",
         "cogs/workspace/utils.js",
         "cogs/workspace/_favorite.js",
@@ -171,12 +190,14 @@
         "cogs/workspace/_header.js",
         "cogs/workspace/_editor.js",
         "cogs/workspace/_editorTools.js",
+
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",
         "cogs/mypage/_general.js",
         "cogs/mypage/_blog.js",
         "cogs/mypage/_profile.js",
         "cogs/mypage/_misc.js",
+
         "cogs/kasasagi/main.js",
         "cogs/kasasagi/utils.js",
         "cogs/kasasagi/_general.js",
@@ -184,11 +205,18 @@
         "cogs/kasasagi/_dayPV.js",
         "cogs/kasasagi/_dayUnique.js",
         "cogs/kasasagi/_monthPV.js",
-        "cogs/kasasagi/_monthUnique.js"
+        "cogs/kasasagi/_monthUnique.js",
+
+        "cogs/mitemin/main.js",
+        "cogs/mitemin/utils.js",
+        "cogs/mitemin/_general.js"
       ],
       "matches": [
         "https://syosetu.com/*",
         "https://*.syosetu.com/*",
+        "https://mitemin.net/*",
+        "https://*.mitemin.net/*",
+        "https://eparet.net/*",
         "https://kasasagi.hinaproject.com/*"
       ]
     },

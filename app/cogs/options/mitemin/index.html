@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>環境設定 - みてみん ｜ Narou Tweaker</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<base target="_blank">
+		<link rel="stylesheet" type="text/css" href="/common.css">
+		<link rel="stylesheet" type="text/css" href="../general.css">
+		<link rel="stylesheet" type="text/css" href="c_mitemin.css">
+		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<script src="/libs/jquery-3.7.1.min.js"></script>
+		<script src="c_mitemin.js" type="module"></script>
+		
+	</head>
+	<body>
+		<div id="container">
+			<div id="sidebar"></div>
+			<div id="contents">
+				<div id="header">
+					<div id="header-title">
+						<div id="header-title--heading">
+							<i class="fa-solid fa-palette"></i>
+							<span class="title">みてみん</span>
+						</div>
+						<div id="header-title--description">
+							<p>みてみん・えぱれっとの表示を設定することが出来ます。
+								<br>
+								<span style="font-size:80%;">対象ページ：mitemin.net / eparet.net
+							</p>
+						</div>
+					</div>
+					<div id="header-menu">
+						<div class="header-menu-left">
+							<ul id="header-menu-left-items">
+								<li class="header-menu-item selected" name="general">
+									<span class="header-menu-item--title">全般
+									</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="main">
+					<!-- 全般 -->
+					<div class="contents-container header-menu-target selected" name="top">
+						<div class="contents-wide">
+							<p>みてみん全体に影響する設定を変更します。 </p>
+						</div>
+
+						<!--iコードを表示-->
+						<div class="contents-wide">
+							<div class="contents-option">
+								<div class="contents-option-head">
+									<div class="contents-item--heading">iコードを表示</div>
+									<div class="contents-item--description">iコードのコピー用フィールドを表示します。</div>
+								</div>
+								<div class="contents-option-content">
+									<input type="checkbox" id="miteminShowIcodeField" class="options toggle">
+                                    <label for="miteminShowIcodeField" class="toggle"></label>
+                                </div>
+							</div>
+						</div>
+						
+					</div>
+
+				</div>
+				<div id="footer">
+                    <div id="js-failed">
+                        JavaScript failed to load. Your development build failed or your browser has some issue.
+                    </div>
+                </div>
+			</div>
+		</div>
+	</body>
+</html>

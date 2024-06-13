@@ -43,6 +43,12 @@ export function setupDOM(){
                         <span class="sidebar-item--title">マイページ</span>
                     </a>
                 </div>
+                <div class="sidebar-item" name="mitemin">
+                    <a href="/cogs/options/mitemin/index.html" target="_self">
+                        <i class="fa-solid fa-palette"></i>
+                        <span class="sidebar-item--title">みてみん</span>
+                    </a>
+                </div>
                 <div class="sidebar-item" name="kasasagi">
                     <a href="/cogs/options/kasasagi/index.html" target="_self">
                         <i class="fa-solid fa-chart-line"></i>

@@ -129,6 +129,9 @@ export const defaultOption = {
     kasasagiShowTable_MonthPV: true, //Unused
     kasasagiShowTable_MonthUnique: true, //Unused
 
+    /* Mitemin */
+    miteminShowIcodeField: true,
+
     /* Skin */
     skins: [],
     selectedSkin: 0,
