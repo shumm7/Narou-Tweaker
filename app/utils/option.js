@@ -91,6 +91,8 @@ export const defaultOption = {
     mypageShowUserId: true,
     mypageNovellistShowReaction: false,
     mypageNovellistShowKasasagi: false,
+    mypageNovellistShowRaWi: false,
+    mypageNovellistShowLength: false,
     mypageShowFavUserId: true,
     mypageProfileStatics: true,
     mypageProfileBooklist: true,

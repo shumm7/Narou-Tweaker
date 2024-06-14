@@ -1,5 +1,6 @@
 import { getNcode } from "../novel/utils.js"
 import { checkXmypage } from "./utils.js"
+import { escapeHtml } from "/utils/text.js"
 
 export function _general(){
     /* Show User ID */
@@ -53,28 +54,38 @@ function novellist(){
                     `)
                 }
 
+                // RaWi
+                if(data.mypageNovellistShowRaWi){
+                    outer.find(".c-novel-list__novel-info-button").after(`
+                        <a href="https://rawi-novel.work/writer/ai?ncode=${ncode}" class="c-novel-list__novel-rawi-button c-button c-button--outline c-button--sm">RaWi</a>
+                    `)
+                }
+
                 // API
-                if(data.mypageNovellistShowReaction){
-                    let url
-                    if(isR18){
-                        url = `https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=${ncode}`
-                    }else{
-                        url = `https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=${ncode}`
-                    }
+                let url
+                if(isR18){
+                    url = `https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=${ncode}`
+                }else{
+                    url = `https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=${ncode}`
+                }
 
-                    chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
-                        if(response){
-                            if(response.success && response.action=="fetch"){
-                                var n = response.result[1]
+                chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
+                    if(response){
+                        if(response.success && response.action=="fetch"){
+                            var n = response.result[1]
 
-                                const global_point = toInteger(n.global_point)
-                                const daily_point = toInteger(n.daily_point)
-                                const fav_novel_cnt = toInteger(n.fav_novel_cnt)
-                                const impression_cnt = toInteger(n.impression_cnt)
-                                const review_cnt = toInteger(n.review_cnt)
-                                const all_hyoka_cnt = toInteger(n.all_hyoka_cnt)
-                                const all_point = toInteger(n.all_point)
-
+                            const global_point = toInteger(n.global_point)
+                            const daily_point = toInteger(n.daily_point)
+                            const fav_novel_cnt = toInteger(n.fav_novel_cnt)
+                            const impression_cnt = toInteger(n.impression_cnt)
+                            const review_cnt = toInteger(n.review_cnt)
+                            const all_hyoka_cnt = toInteger(n.all_hyoka_cnt)
+                            const all_point = toInteger(n.all_point)
+                            const length = toInteger(n.length)
+                            const time = toInteger(n.time)
+                            const keyword = escapeHtml(n.keyword)
+                            
+                            if(data.mypageNovellistShowReaction){
                                 var point_average = Math.round((all_point / 2) / all_hyoka_cnt * 10) / 10
                                 if(isNaN(point_average)){
                                     point_average = 0
@@ -120,9 +131,18 @@ function novellist(){
                                     </span>
                                 `)
                             }
+
+                            if(!outer.find(".c-novel-list__additional").length && data.mypageNovellistShowLength){
+                                outer.find(".c-novel-list__content").append(`
+                                    <div class="c-novel-list__additional">
+                                        <span class="c-novel-list__keyword">${keyword}</span>
+                                        <span class="c-novel-list__length">読了時間：約${time.toLocaleString()}分（${length.toLocaleString()}文字）</span>
+                                    </div>
+                                `)
+                            }
                         }
-                    })
-                }
+                    }
+                })
             }
         })
     })

@@ -29,13 +29,19 @@
 }
 
 /* Novel List */
-.c-novel-list__novel-kasasagi-button {
+.c-novel-list__novel-kasasagi-button,
+.c-novel-list__novel-rawi-button {
     margin-right: 5px;
 }
 .c-novel-list__reaction:not(:last-child) {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.c-novel-list__lastup.c-novel-list__lastup--top + .c-novel-list__additional {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, .1);
 }
 .c-novel-list__novel-info__points > *:not(:last-child) {
     margin-right: 15px;
@@ -51,7 +57,6 @@
     margin-right: 3px;
     margin-left: 3px;
 }
-.,
 .c-novel-list__global-point {
     margin-top: 5px;
     font-size: 16px;
