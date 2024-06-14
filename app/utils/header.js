@@ -282,6 +282,8 @@ export function getExceptedIcon(lists, parent){
 }
 
 export function addFontAwesomeOriginaIcons(){
+    window.requestAnimationFrame = window.requestAnimationFrame.bind(window)
+
     /* はてなブックマーク */
     FontAwesome.library.add({
         prefix: 'fab',

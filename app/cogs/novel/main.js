@@ -3,7 +3,6 @@ import { _authorSkin } from "./_skin.js";
 import { _novel } from "./_novel.js";
 import { _optionModal } from "./_modal.js";
 import { _novelcom } from "./_novelcom.js";
-import { checkNovelPageDetail } from "./utils.js";
 
 /* Header */
 _header()
