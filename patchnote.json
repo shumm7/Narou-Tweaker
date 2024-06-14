@@ -5,8 +5,8 @@
             "version": "0.3.0",
             "date": "2024-06-13",
             "release": {
-                "chrome": null,
-                "gecko": null
+                "chrome": true,
+                "gecko": true
             },
             "patchnote": {
                 "ja": {
