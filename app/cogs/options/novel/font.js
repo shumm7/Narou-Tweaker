@@ -290,7 +290,8 @@ export function addFontEditButtonEvent(){
 
   /* Storage Listener */
   chrome.storage.local.onChanged.addListener(function(changes){
-    if(changes.fontSelectedFontFamily!=undefined ||
+    if(
+      changes.fontSelectedFontFamily!=undefined ||
       changes.fontFontFamilyList!=undefined ||
       changes.fontFontSize!=undefined ||
       changes.fontLineHeight!=undefined ||

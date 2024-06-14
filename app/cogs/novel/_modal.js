@@ -93,17 +93,20 @@ function restoreSkinOptions(skins, selected){
 /* フォント設定 */
 function restoreFontOptions(){
     chrome.storage.local.get(null, (data)=>{
-        var fontlist = localFontFamily.concat(defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily))
+        var fontlist = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
 
         $("#novel-option--font-family #font-family").empty()
         $.each(fontlist, function(i, font){
             if(font.show==true){
-                $("#novel-option--font-family #font-family").append("<option value='"+i+"'>"+font.name+"</option>")
+                var opt = $(`<option value="${i}">${font.name}</option>`)
+                opt.css("font-family", font.font)
+                $("#novel-option--font-family #font-family").append(opt)
             }
         })
         const selected = data.fontSelectedFontFamily
         $("#novel-option--font-family #font-family").val(String(selected))
         $("#novel-option--font-family-description").text(defaultValue(fontlist[selected], {}).description)
+        $("#novel-option--font-family #font-family").css("font-family", defaultValue(fontlist[selected], {}).font)
         $("#novel-option--font-family-sample").css("font-family", defaultValue(fontlist[selected], {}).font)
 
         var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
@@ -190,7 +193,7 @@ function setOptionContentsDisplay(id){
                 </div>
             </div>
         `)
-        restoreFontOptions(data.fontSelectedFontFamily, data.fontFontSize, data.fontLineHeight, data.fontWidth, data.novelVertical)
+        restoreFontOptions()
 
         /* Font Family */
         /*
@@ -358,7 +361,15 @@ function setOptionContentsDisplay(id){
 
     /* Storage Listener */
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.fontSelectedFontFamily!=undefined || changes.fontFontFamilyList!=undefined || changes.fontFontSize!=undefined || changes.fontLineHeight!=undefined || changes.fontTextRendering!=undefined || changes.fontWidth!=undefined || changes.novelVertical!=undefined){
+        if(
+            changes.fontSelectedFontFamily!=undefined ||
+            changes.fontFontFamilyList!=undefined ||
+            changes.fontFontSize!=undefined ||
+            changes.fontLineHeight!=undefined ||
+            changes.fontTextRendering!=undefined ||
+            changes.fontWidth!=undefined ||
+            changes.novelVertical!=undefined
+        ){
             restoreFontOptions()
         }
         if(changes.skins!=undefined || changes.selectedSkin!=undefined){
