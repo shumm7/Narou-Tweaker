@@ -81,6 +81,7 @@ def makePatchnoteMarkdown(codeDir):
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
         "yomou": "🔍️ 小説を読もう！",
+        "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
         "general": "⚙ 全般"
     }
@@ -103,6 +104,7 @@ def makePatchnoteHTML(codeDir):
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
         "yomou": "🔍️ 小説を読もう！",
+        "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
         "general": "⚙ 全般"
     }

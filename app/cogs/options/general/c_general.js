@@ -139,6 +139,7 @@ function showPatchnotes(){
                     workspace: "🖊️ ユーザホーム",
                     mypage: "👤 ユーザページ",
                     yomou: "🔍️ 小説を読もう！",
+                    mitemin: "🎨 みてみん",
                     kasasagi: "📊 KASASAGI",
                     general: "⚙ 全般"
                 }
