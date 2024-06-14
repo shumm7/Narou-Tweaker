@@ -175,6 +175,8 @@ export const defaultOption = {
 }
 
 export const defaultGlobalOption = {
+    extLaunchCount: 0,
+    extLastLaunchTime: "",
     history: [],
     history_data: {},
     workspaceImpressionMarked: {},

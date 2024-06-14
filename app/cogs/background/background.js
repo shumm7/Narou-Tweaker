@@ -28,6 +28,21 @@ chrome.storage.local.onChanged.addListener(function(changes){
     }
 })
 
+/* Count */
+chrome.storage.sync.get(null, function(data){
+    var count = data.extLaunchCount
+    if(typeof count === "number"){
+        count += 1
+    }else{
+        count = 1
+    }
+
+    chrome.storage.sync.set({
+        extLaunchCount: count,
+        extLastLaunchTime: new Date().toUTCString()
+    })
+})
+
 /* Action */
 actionListener()
 
