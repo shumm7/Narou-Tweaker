@@ -49,6 +49,11 @@ export function replaceUrl(_elem, isWarning) {
 
 // 記号をエスケープする（DOMインジェクション対策用）
 export function escapeHtml(string){
+    var p = $("<p>")
+    p.text(string)
+    return p.text()
+
+    /*
     if(typeof string !== 'string') {
         return string
     }
@@ -62,6 +67,7 @@ export function escapeHtml(string){
         '>': '&gt;',
         }[match]
     });
+    */
 }
 
 // 正規表現文字列の記号をエスケープする
