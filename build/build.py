@@ -83,7 +83,7 @@ def makePatchnoteMarkdown(codeDir):
         "yomou": "🔍️ 小説を読もう！",
         "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
-        "general": "⚙ 全般"
+        "general": "⚒️ 全般"
     }
     lang = "ja"
 
@@ -106,7 +106,7 @@ def makePatchnoteHTML(codeDir):
         "yomou": "🔍️ 小説を読もう！",
         "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
-        "general": "⚙ 全般"
+        "general": "⚒️ 全般"
     }
     lang = "ja"
 

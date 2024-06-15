@@ -141,7 +141,7 @@ function showPatchnotes(){
                     yomou: "🔍️ 小説を読もう！",
                     mitemin: "🎨 みてみん",
                     kasasagi: "📊 KASASAGI",
-                    general: "⚙ 全般"
+                    general: "⚒️ 全般"
                 }
             }
 
