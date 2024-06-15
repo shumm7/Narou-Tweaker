@@ -254,7 +254,7 @@
 							<div class="contents-option">
 								<div class="contents-option-head">
 									<div class="contents-item--heading">設定データを閲覧</div>
-									<div class="contents-item--description">現在保存されている設定データを文字列で表示します。<br>（storage.local/storage.syncのデータを表示しています）</div>
+									<div class="contents-item--description">現在保存されている設定データを文字列で表示します。<br>（local/sync/sessionのデータを表示しています）</div>
 								</div>
 
 								<div class="contents-option-content" style="flex-direction: column;">
@@ -271,6 +271,13 @@
 										</div>
 										<label for="extIgnoreSyncOptionIndex">無視するインデックス</label>
 										<input type="text" class="options" id="extIgnoreSyncOptionIndex" style="width: 100%;" placeholder="スペース区切り">
+									</div>
+									<div style="flex-shrink: 0; width: 100%; margin-top: 10px;">
+										<div class="export-option-text">
+											<textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
+										</div>
+										<label for="extIgnoreSessionOptionIndex">無視するインデックス</label>
+										<input type="text" class="options" id="extIgnoreSessionOptionIndex" style="width: 100%;" placeholder="スペース区切り">
 									</div>
                                 </div>
 							</div>

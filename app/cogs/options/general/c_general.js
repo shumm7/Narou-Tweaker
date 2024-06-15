@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     exportOptionText()
     exportSyncOptionText()
+    exportSessionOptionText()
     removeOptionData()
     fixOptionData()
     syntaxHighlight()
@@ -75,6 +76,39 @@ function exportSyncOptionText() {
     })
     chrome.storage.local.onChanged.addListener(function(changes){
         if(changes.extIgnoreSyncOptionIndex!=undefined){
+            change()
+        }
+    })
+}
+
+function exportSessionOptionText() {
+    function change(){
+        chrome.storage.local.get(null, (local)=>{
+            chrome.storage.session.get(null, (data)=>{
+                try{
+                    const ignores = local.extIgnoreSessionOptionIndex.split(/\s/)
+                    $.each(ignores, function(_, elm){
+                        if(elm in data){
+                            delete data[elm]
+                        }
+                    })
+
+                    var text = JSON.stringify(data, null, 4)
+                    var field = $("#exportSessionOptionText_Output")
+                    field.text(text)
+                    field.trigger("input")
+                }catch(e){
+                    console.warn(e)
+                }
+            })
+        })
+    }
+    change()
+    chrome.storage.session.onChanged.addListener(function(changes){
+        change()
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extIgnoreSessionOptionIndex!=undefined){
             change()
         }
     })
