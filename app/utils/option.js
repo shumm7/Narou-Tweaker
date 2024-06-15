@@ -24,6 +24,7 @@ export const defaultOption = {
     extOptionSidePanelShow: true,
     extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
     extIgnoreSyncOptionIndex: "",
+    extIgnoreSessionOptionIndex: "",
 
     /* Novel */
     novelCustomStyle: true,
