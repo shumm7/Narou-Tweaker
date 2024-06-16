@@ -401,7 +401,6 @@ function novelTopAttention(){
 
     const ncode = getNcode()
     const r18 = isR18()
-    
 
     var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
     if(r18){
@@ -445,34 +444,39 @@ function novelTopAttention(){
                         attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r18"><a href="${getNovelSearchURL(site)}">R18</a></span>`)
                     }
                     if(tags.includes("R15")){
-                        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r15"><a href="${getNovelSearchURL(site)}?isr15=1">R15</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r15"><a href="${getNovelSearchURL(site, {isr15: 1})}">R15</a></span>`)
                         removeItem("R15")
                     }
+                    
+                    if(tags.includes("二次創作")){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelTagURL("二次創作", site)}"><i class="fa-solid fa-code-merge"></i>二次創作</a></span>`)
+                        removeItem("二次創作")
+                    }
                     if(data.iszankoku){
-                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?iszankoku=1"><i class="fa-solid fa-gun"></i>残酷な描写あり</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site, {iszankoku: 1})}"><i class="fa-solid fa-gun"></i>残酷な描写あり</a></span>`)
                         removeItem("残酷な描写あり")
                     }
                     if(data.isbl){
-                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?iszankoku=1"><i class="fa-solid fa-mars-double"></i>ボーイズラブ</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site, {isbl: 1})}"><i class="fa-solid fa-mars-double"></i>ボーイズラブ</a></span>`)
                         removeItem("ボーイズラブ")
                     }
                     if(data.isgl){
-                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?isgl=1"><i class="fa-solid fa-venus-double"></i>ガールズラブ</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site, {isgl: 1})}?isgl=1"><i class="fa-solid fa-venus-double"></i>ガールズラブ</a></span>`)
                         removeItem("ガールズラブ")
                     }
                     if(data.istensei){
-                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?istensei=1"><i class="fa-solid fa-earth-americas"></i>異世界転生</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site, {istensei: 1})}"><i class="fa-solid fa-earth-americas"></i>異世界転生</a></span>`)
                         removeItem("異世界転生")
                     }
                     if(data.istenni){
-                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?istenni=1"><i class="fa-solid fa-earth-americas"></i>異世界転移</a></span>`)
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site, {istenni: 1})}"><i class="fa-solid fa-earth-americas"></i>異世界転移</a></span>`)
                         removeItem("異世界転移")
                     }
 
                     if(!r18){
                         $.each(officialTagList, function(_, tag){
                             if(tags.includes(tag)){
-                                attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--official"><a href="${getNovelTagURL(tag)}"><i class="fa-solid fa-flag"></i>${tag}</a></span>`)
+                                attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--official"><a href="${getNovelTagURL(tag, site)}"><i class="fa-solid fa-flag"></i>${tag}</a></span>`)
                                 removeItem("tag")
                             }
                         })

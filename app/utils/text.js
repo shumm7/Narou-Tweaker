@@ -359,18 +359,46 @@ export function normalizeNcode(ncode) {
     return indexToNcode(ncodeToIndex(ncode));
 }
 
-export function getNovelTagURL(tag, site){
-    return `${site}?word=${tag}&keyword=1`
+export function getNovelTagURL(tag, site, param){
+    if(!param){
+        param = {}
+    }
+    param.word = tag
+    param.keyword = 1
+
+    return getNovelSearchURL(site, param)
 }
 
-export function getNovelSearchURL(site){
-    if(site=="noc" || parseInt(site)==1){
-        return `https://noc.syosetu.com/search/search/search.php`
-    }else if(site=="mnlt" || parseInt(site)==2 || parseInt(site)==3){
-        return `https://mnlt.syosetu.com/search/search/`
-    }else if(site=="mid" || parseInt(site)==4){
-        return `https://mid.syosetu.com/search/search/`
-    }else{
-        return `https://yomou.syosetu.com/search.php`
+export function getNovelSearchURL(site, param){
+    if(!param){
+        param = {}
     }
+
+    var url = `https://yomou.syosetu.com/search.php`
+    if(site=="noc" || parseInt(site)==1){
+        url = `https://noc.syosetu.com/search/search/search.php`
+    }else if(site=="mnlt"){
+        return `https://mnlt.syosetu.com/search/search/`
+    }else if(parseInt(site)==2){
+        param.nocgenre = 2
+        url = `https://mnlt.syosetu.com/search/search/`
+    }else if(parseInt(site)==3){
+        param.nocgenre = 3
+        url = `https://mnlt.syosetu.com/search/search/`
+    }else if(site=="mid" || parseInt(site)==4){
+        url = `https://mid.syosetu.com/search/search/`
+    }
+
+    let i = 0
+    Object.keys(param).forEach(function(key){
+        if(i==0){
+            url += "?"
+        }else{
+            url += "&"
+        }
+        url += `${key}=${param[key]}`
+        i += 1
+    })
+
+    return url
 }
