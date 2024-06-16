@@ -1,6 +1,7 @@
 import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
 import { getEpisode, checkNovelPageDetail, isR18 } from "./utils.js"
 import { getNcode } from "/utils/ncode.js";
+import { escapeRegex, getNovelSearchURL, getNovelTagURL } from "../../utils/text.js";
 
 export function _novel(){
     chrome.storage.local.get(null, (data) => {
@@ -387,34 +388,7 @@ function _authorLink(){
 
 function novelTopAttention(){
     var attention = $(".contents1:not(:has(.novel-titles))")
-    const attentionList = {
-        r15: false,
-        r18: false,
-        zankoku: false,
-        bl: false,
-        gl: false,
-        tensei: false,
-        tenni: false
-    }
-
     if(attention.length){
-        const text = attention.text()
-
-        if(text.match(/＜R15＞/)){
-            attentionList.r15 = true
-        }
-        if(text.match(/＜R18＞/)){
-            attentionList.r18 = true
-        }
-        if(text.match(/〔残酷描写〕/)){
-            attentionList.zankoku = true
-        }
-        if(text.match(/〔ボーイズラブ要素〕/)){
-            attentionList.bl = true
-        }
-        if(text.match(/〔ガールズラブ要素〕/)){
-            attentionList.gl = true
-        }
         attention.empty()
     }else{
         attention = $(`<div class="contents1"></div>`)
@@ -425,36 +399,87 @@ function novelTopAttention(){
         }
     }
 
-    var metaTag = $("head meta[property='og:description']")
-    if(metaTag.length){
-        const content = metaTag.attr("content")
-        if(content.match(/\b異世界転生\b/)){
-            attentionList.tensei = true
-        }
-        if(content.match(/\b異世界転移\b/)){
-            attentionList.tenni = true
-        }
+    const ncode = getNcode()
+    const r18 = isR18()
+    
+
+    var url = "https://api.syosetu.com/novelapi/api/?out=json&libtype=2&ncode=" + ncode
+    if(r18){
+        var url = "https://api.syosetu.com/novel18api/api/?out=json&libtype=2&ncode=" + ncode
     }
 
-    if(attentionList.r18){
-        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r18">R18</span>`)
-    }
-    if(attentionList.r15){
-        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r15">R15</span>`)
-    }
-    if(attentionList.zankoku){
-        attention.append(`<span class="nt-novel-attention-label">残酷描写</span>`)
-    }
-    if(attentionList.bl){
-        attention.append(`<span class="nt-novel-attention-label">ボーイズラブ</span>`)
-    }
-    if(attentionList.gl){
-        attention.append(`<span class="nt-novel-attention-label">ガールズラブ</span>`)
-    }
-    if(attentionList.tensei){
-        attention.append(`<span class="nt-novel-attention-label">異世界転生</span>`)
-    }
-    if(attentionList.tenni){
-        attention.append(`<span class="nt-novel-attention-label">異世界転移</span>`)
-    }
+    chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: url, options: {'method': 'GET'}}}, function(response){
+        if(response){
+            if(response.success && response.action=="fetch"){
+                const data = response.result[1]
+                let tags = data.keyword.split(/\s/)
+                var site = data.nocgenre
+
+                function removeItem(item){
+                    tags = tags.filter(n => n != item)
+                }
+
+                chrome.storage.local.get(["novelOfficialTags"], (data) => {
+                    if(data.novelOfficialTags){
+                        setTags(data.novelOfficialTags)
+                    }else{
+                        chrome.runtime.sendMessage({action: "fetch", format: "text", data: {url: "https://yomou.syosetu.com/", options: {'method': 'GET'}}}, function(response){
+                            if(response){
+                            if(response.success && response.action=="fetch"){
+                                var html = $($.parseHTML(response.result))
+                                var t = []
+                                html.find(".p-search-novel .p-search-novel__keyword .p-search-novel__keyword-item").each(function(){
+                                    var tag = $(this).text()
+                                    t.push(tag)
+                                })
+                                chrome.storage.local.set({novelOfficialTags: t})
+                                setTags(t)
+                            }
+                            }
+                        })
+                    }
+                })
+
+                function setTags(officialTagList){
+                    if(r18){
+                        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r18"><a href="${getNovelSearchURL(site)}">R18</a></span>`)
+                    }
+                    if(tags.includes("R15")){
+                        attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--rating-r15"><a href="${getNovelSearchURL(site)}?isr15=1">R15</a></span>`)
+                        removeItem("R15")
+                    }
+                    if(data.iszankoku){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?iszankoku=1"><i class="fa-solid fa-gun"></i>残酷な描写あり</a></span>`)
+                        removeItem("残酷な描写あり")
+                    }
+                    if(data.isbl){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?iszankoku=1"><i class="fa-solid fa-mars-double"></i>ボーイズラブ</a></span>`)
+                        removeItem("ボーイズラブ")
+                    }
+                    if(data.isgl){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?isgl=1"><i class="fa-solid fa-venus-double"></i>ガールズラブ</a></span>`)
+                        removeItem("ガールズラブ")
+                    }
+                    if(data.istensei){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?istensei=1"><i class="fa-solid fa-earth-americas"></i>異世界転生</a></span>`)
+                        removeItem("異世界転生")
+                    }
+                    if(data.istenni){
+                        attention.append(`<span class="nt-novel-attention-label"><a href="${getNovelSearchURL(site)}?istenni=1"><i class="fa-solid fa-earth-americas"></i>異世界転移</a></span>`)
+                        removeItem("異世界転移")
+                    }
+
+                    if(!r18){
+                        $.each(officialTagList, function(_, tag){
+                            if(tags.includes(tag)){
+                                attention.append(`<span class="nt-novel-attention-label nt-novel-attention-label--official"><a href="${getNovelTagURL(tag)}"><i class="fa-solid fa-flag"></i>${tag}</a></span>`)
+                                removeItem("tag")
+                            }
+                        })
+                    }
+                }
+
+            }
+        }
+    })
 }

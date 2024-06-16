@@ -1,5 +1,5 @@
-import { saveText } from "../../utils/misc.js"
-import { autoIndent, escapeHtml, escapeRegex, getDatetimeStringForFilename } from "../../utils/text.js"
+import { saveText } from "/utils/misc.js"
+import { autoIndent, escapeHtml, escapeRegex, getDatetimeStringForFilename } from "/utils/text.js"
 import { getSelectedContent } from "./_editor.js"
 
 function getForms(index){

@@ -358,3 +358,19 @@ export function indexToNcode(index) {
 export function normalizeNcode(ncode) {
     return indexToNcode(ncodeToIndex(ncode));
 }
+
+export function getNovelTagURL(tag, site){
+    return `${site}?word=${tag}&keyword=1`
+}
+
+export function getNovelSearchURL(site){
+    if(site=="noc" || parseInt(site)==1){
+        return `https://noc.syosetu.com/search/search/search.php`
+    }else if(site=="mnlt" || parseInt(site)==2 || parseInt(site)==3){
+        return `https://mnlt.syosetu.com/search/search/`
+    }else if(site=="mid" || parseInt(site)==4){
+        return `https://mid.syosetu.com/search/search/`
+    }else{
+        return `https://yomou.syosetu.com/search.php`
+    }
+}

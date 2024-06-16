@@ -28,6 +28,9 @@ chrome.storage.local.onChanged.addListener(function(changes){
     }
 })
 
+/* Reset Options */
+chrome.storage.local.set({novelOfficialTags: undefined})
+
 /* Count */
 chrome.storage.sync.get(null, function(data){
     var count = data.extLaunchCount
