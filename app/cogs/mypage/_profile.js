@@ -1,11 +1,13 @@
 import { escapeHtml, replaceUrl } from "/utils/text.js"
-import { checkXmypage } from "./utils.js"
+import { checkXmypage, getUserId } from "./utils.js"
 
 export function _profile(){
     $(".l-main .c-panel").attr("id", "introduction")
+    const userid = getUserId()
+    const r18 = checkXmypage()
 
-    /* Disable External Link Warning */
     chrome.storage.local.get(null, (data) => {
+        /* Disable External Link Warning */
         if (data.mypageDisableExternalURLWarning){
             var elm = $(".c-side-list .c-side-list__item dl dd a")
             if(elm.length){
@@ -14,12 +16,9 @@ export function _profile(){
                 elm.prop("href", url)
             }
         }
-    })
 
-    /* User Detail */
-    chrome.storage.local.get(null, (data) => {
-        if(data.mypageProfileStatics && !checkXmypage()){
-            var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
+        /* User Detail */
+        if(data.mypageProfileStatics && !r18){
             chrome.runtime.sendMessage({action: "fetch", format: "json", data: {url: "https://api.syosetu.com/userapi/api/?out=json&libtype=2&userid=" + userid, options: {'method': 'GET'}}}, function(response) {
             if(response){
                 if(response.success && response.action=="fetch"){
@@ -74,10 +73,8 @@ export function _profile(){
             }
             });
         }
-    })
 
-    /* Auto Url */
-    chrome.storage.local.get(null, (data) => {
+        /* Auto Url */
         if(data.mypageProfileAutoURL){
             $('.c-panel__item').each(function(_) {
                 var comment = $(this)
@@ -94,15 +91,17 @@ export function _profile(){
                 });
             });
         }
-    })
 
-    /* Book List */
-    chrome.storage.local.get(null, (data) => {
-        if(data.mypageProfileBooklist && !checkXmypage()){
+        /* Book List */
+        if(data.mypageProfileBooklist){
             const max_amount = 5
-            var userid = location.pathname.match('/mypage/profile/userid/(.*)/')[1]
+
+            var url = `https://syosetu.com/syuppan/list/?word=${userid}`
+            if(r18){
+                url = `https://nl.syosetu.com/syuppan/list/?noc=on&mnlt=on&mid=on&word=${userid}`
+            }
             
-            chrome.runtime.sendMessage ({action: "fetch", format: "text", data: {url: "https://syosetu.com/syuppan/list/?word=" + userid, options: {'method': 'GET'}}}, function(response) {
+            chrome.runtime.sendMessage ({action: "fetch", format: "text", data: {url: url, options: {'method': 'GET'}}}, function(response) {
             if(response){   
                 if(response.success && response.action=="fetch"){
                     var list = []
@@ -112,7 +111,8 @@ export function _profile(){
                             return false;
                         }
 
-                        if($(value).find(".p-syuppan-list__spec-item:nth-child(1) a").prop("href")=="https://mypage.syosetu.com/"+userid+"/"){
+                        var atag = $(value).find(`.p-syuppan-list__spec-item:nth-child(1) a[href="https://mypage.syosetu.com/${userid}/"], .p-syuppan-list__spec-item:nth-child(1) a[href="https://xmypage.syosetu.com/${userid.toUpperCase()}/"]`)
+                        if(atag.length){
                             var title = $(value).find("a.p-syuppan-list__title").text()
                             var link = $(value).find("a.p-syuppan-list__title").prop("href")
                             var author = $(value).find(".p-syuppan-list__writer").text()
@@ -135,25 +135,34 @@ export function _profile(){
                                     date = $(l).text().trim()
                                 }
                             })
+                            if(r18){
+                                link = link.replace("https://xmypage.syosetu.com/", "https://nl.syosetu.com/")
+                            }else{
+                                link = link.replace("https://mypage.syosetu.com/", "https://syosetu.com/")
+                            }
                             list.push({
                                 userid: userid,
-                                author: author,
-                                title: title,
-                                link: link.replace("https://mypage.syosetu.com/", "https://syosetu.com/"),
-                                publisher: publisher,
-                                label: label,
-                                date: date
+                                author: escapeHtml(author),
+                                title: escapeHtml(title),
+                                link: escapeHtml(link),
+                                publisher: escapeHtml(publisher),
+                                label: escapeHtml(label),
+                                date: escapeHtml(date)
                             })
                         }
                     })
 
                     if(list.length>0){
+                        var shoho_url = "https://syosetu.com/syuppan/list/"
+                        if(r18){
+                            shoho_url = "https://nl.syosetu.com/syuppan/list/"
+                        }
                         $(".c-panel#introduction").after(`
                             <div class="c-panel" id="books">
                                 <div class="c-panel__headline" id="book-list">書籍リスト</div>
                                 <div class="c-panel__body">
                                     <div class="c-panel__item">
-                                        <p><a href="https://syosetu.com/syuppan/list/">書報</a>に掲載された作品を最大`+max_amount+`件まで自動的に取得しています。</p>
+                                        <p><a href="${shoho_url}">書報</a>に掲載された作品を最大${max_amount}件まで自動的に取得しています。</p>
                                         <div class='p-syuppan-lists'></div>
                                     </div>
                                 </div>
@@ -163,31 +172,35 @@ export function _profile(){
                             var ls = ""
                             if(book.publisher){
                                 ls += `<div class="p-syuppan-list__spec-item">
-                                    <span class="c-label">出版社</span>`+book.publisher+`
+                                    <span class="c-label">出版社</span>
+                                    ${book.publisher}
                                 </div>`
                             }
                             if(book.label){
                                 ls += `<div class="p-syuppan-list__spec-item">
-                                    <span class="c-label">レーベル</span>`+book.label+`
+                                    <span class="c-label">レーベル</span>
+                                    ${book.label}
                                 </div>`
                             }
                             if(book.date){
                                 ls += `<div class="p-syuppan-list__spec-item">
-                                    <span class="c-label">発売日</span>`+book.date+`
+                                    <span class="c-label">発売日</span>
+                                    ${book.date}
                                 </div>`
                             }
                             $(".p-syuppan-lists").append(`
                             <div class='c-card p-syuppan-list'>
                                 <div class="p-syuppan-list__head">
-                                    <a class="p-syuppan-list__title" href="`+book.link+`">`+book.title+`</a>
-                                    <div class="p-syuppan-list__writer">`+book.author+`</div>
+                                    <a class="p-syuppan-list__title" href="${book.link}">${book.title}</a>
+                                    <div class="p-syuppan-list__writer">${book.author}</div>
                                 </div>
                                 <div class="p-syuppan-list__spec">
                                 `+ls+`
                                 </div>
                             </div>`)
                         })
-                        $(".c-panel#books .c-panel__item .p-syuppan-lists").after('<div class="p-syuppan-list__more"><a href="https://syosetu.com/syuppan/list/?word='+userid+'">もっと見る</a></div>')
+                        $(".c-panel#books .c-panel__item .p-syuppan-lists").after(`<div class="p-syuppan-list__more"><a href="${url}">もっと見る</a></div>`)
+                        
                     }
                 }
                 return true;
