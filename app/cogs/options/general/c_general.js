@@ -169,6 +169,7 @@ function showPatchnotes(){
             const patchnote = data.patchnote[lang]
             const headerList = {
                 ja: {
+                    narou: "🏡 小説家になろう",
                     novel: "📗 小説ページ",
                     workspace: "🖊️ ユーザホーム",
                     mypage: "👤 ユーザページ",

@@ -19,6 +19,13 @@ export function setupDOM(){
                         <span class="sidebar-item--title">全般</span>
                     </a>
                 </div>
+                
+                <div class="sidebar-item" name="narou">
+                    <a href="/cogs/options/narou/index.html" target="_self">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="sidebar-item--title">小説家になろう</span>
+                    </a>
+                </div>
                 <div class="sidebar-item" name="novel">
                     <a href="/cogs/options/novel/index.html" target="_self">
                         <i class="fa-solid fa-book"></i>

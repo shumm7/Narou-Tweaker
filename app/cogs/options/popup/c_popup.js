@@ -61,6 +61,7 @@ function openDropdown(){
                 //location.hash = "#kasasagi"
             }
             else if(url.hostname == "syosetu.com" ){
+                $("#narou").prop("open", true)
                 $("#workspace").prop("open", true)
                 //location.hash = "#workspace"
             }

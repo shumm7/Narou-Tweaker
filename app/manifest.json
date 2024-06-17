@@ -81,6 +81,22 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "loader/narou.js"
+      ],
+      "css": [
+        "libs/font-awesome/css/all.css",
+        "common.css",
+        "cogs/narou/main.css"
+      ],
+      "matches": [
+				"https://syosetu.com/*",
+				"https://nl.syosetu.com/*"
+			],
+      "run_at":"document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
         "loader/yomouCss.js"
       ],
       "matches": [
@@ -176,6 +192,9 @@
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
         "cogs/novel/utils.js",
+
+        "cogs/narou/main.js",
+        "cogs/narou/_syuppan.js",
 
         "cogs/yomou/main.js",
         "cogs/yomou/utils.js",

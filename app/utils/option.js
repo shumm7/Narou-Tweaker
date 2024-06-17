@@ -26,6 +26,10 @@ export const defaultOption = {
     extIgnoreSyncOptionIndex: "",
     extIgnoreSessionOptionIndex: "",
 
+    /* Narou */
+    narouSyuppanShowBookImage: true,
+    narouSyuppanShowBookViewImage: true,
+
     /* Novel */
     novelCustomStyle: true,
     novelCustomHeader: true,

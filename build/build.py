@@ -77,6 +77,7 @@ def getPatchnote(codeDir):
 
 def makePatchnoteMarkdown(codeDir):
     headerList = {
+        "narou": "🏡 小説家になろう",
         "novel": "📗 小説ページ",
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
@@ -100,6 +101,7 @@ def makePatchnoteMarkdown(codeDir):
 
 def makePatchnoteHTML(codeDir):
     headerList = {
+        "narou": "🏡 小説家になろう",
         "novel": "📗 小説ページ",
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
