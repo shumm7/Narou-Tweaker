@@ -50,7 +50,7 @@ function novellist(){
                 // KASASAGI
                 if(data.mypageNovellistShowKasasagi){
                     outer.find(".c-novel-list__novel-info-button").after(`
-                        <a href="https://ncode.syosetu.com/novelview/infotop/ncode/${ncode}/" class="c-novel-list__novel-kasasagi-button c-button c-button--outline c-button--sm">アクセス解析</a>
+                        <a href=https://kasasagi.hinaproject.com/access/top/ncode/${ncode}/" class="c-novel-list__novel-kasasagi-button c-button c-button--outline c-button--sm">アクセス解析</a>
                     `)
                 }
 
