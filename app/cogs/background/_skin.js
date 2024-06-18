@@ -99,7 +99,7 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
         }
         `
-        
-        chrome.storage.local.set({appliedSkinCSS: rule, appliedUserSkinCSS: skin.css, appliedUserFontCSS: fontCss})
+
+        chrome.storage.local.set({novelAppliedCSS: rule, novelSkinCustomCSS: skin.css, novelFontCustomCSS: fontCss})
     })
 }

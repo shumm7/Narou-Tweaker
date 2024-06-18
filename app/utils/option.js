@@ -5,10 +5,13 @@ export const ignoreOptions = [
     "extOptionsVersion",
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
-    "appliedSkinCSS",
-    "appliedUserSkinCSS",
-    "appliedUserFontCSS",
-    "yomouRankTop_UserCSS",
+    "novelCustomCSS",
+    "novelAppliedCSS",
+    "novelSkinCustomCSS",
+    "novelFontCustomCSS",
+    "yomouRank_CustomCSS",
+    "yomouRank_AppliedCSS",
+    "yomouRankTop_CustomCSS",
     "yomouRankTop_AppliedCSS"
 ]
 
@@ -24,7 +27,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedUserSkinCSS appliedUserFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
+    extIgnoreOptionIndex: "novelCustomCSS novelAppliedCSS novelSkinCustomCSS novelFontCustomCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_CustomCSS yomouRankTop_AppliedCSS yomouRankTop_CustomCSS",
     extIgnoreSyncOptionIndex: "",
     extIgnoreSessionOptionIndex: "",
 
@@ -81,7 +84,7 @@ export const defaultOption = {
     yomouRank_ShowTags: true,
     yomouRank_DevidePointsUnit: true,
     yomouRank_PointsColor: "#ed1a3d",
-    yomouRank_UserCSS: "",
+    yomouRank_CustomCSS: "",
 
     yomouRankTop_ShowDescription: false,
     yomouRankTop_ShowPoints: false,
@@ -91,7 +94,7 @@ export const defaultOption = {
     yomouRankTop_ShowUpdateDate: false,
     yomouRankTop_ShowKasasagi: false,
     yomouRankTop_ShowRaWi: false,
-    yomouRankTop_UserCSS: "",
+    yomouRankTop_CustomCSS: "",
     //yomouRankTop_DailyShowList: ["101", "102", "201", "202", "301", "302", "303", "304", "305", "306", "307", "401", "402", "403", "404", "9901", "9902", "9903", "9999"],
     
     /* Mypage */
@@ -144,7 +147,6 @@ export const defaultOption = {
     /* Skin */
     skins: [],
     selectedSkin: 0,
-    additionalCSS: "",
     novelAuthorCustomSkin: true,
     novelAuthorCustomSkinWarning: true,
 

@@ -4,7 +4,7 @@ const pageDetail = checkRankPageDetail()
 
 if(pageDetail.site=="yomou"){
     if(pageDetail.detail=="rank" && pageDetail.type == "top"){
-        chrome.storage.local.get(["yomouRankTop_UserCSS", "yomouRankTop_AppliedCSS"], (data)=>{
+        chrome.storage.local.get(["yomouRankTop_CustomCSS", "yomouRankTop_AppliedCSS"], (data)=>{
             /* Styles */
             if("yomouRankTop_AppliedCSS" in data){
                 var l = $(`<style type="text/css" id="narou-tweaker-style--rank-css" class="narou-tweaker-style"></style>`)
@@ -15,9 +15,9 @@ if(pageDetail.site=="yomou"){
             }
 
             /* User CSS */
-            if("yomouRankTop_UserCSS" in data){
+            if("yomouRankTop_CustomCSS" in data){
                 var l = $(`<style type="text/css" id="narou-tweaker-style--rank-user-css" class="narou-tweaker-style"></style>`)
-                l.text(data.yomouRankTop_UserCSS)
+                l.text(data.yomouRankTop_CustomCSS)
                 $("html").append(l)
             }else{
                 $("html").append(`<style type="text/css" id="narou-tweaker-style--rank-user-css" class="narou-tweaker-style"></style>`)
@@ -31,16 +31,16 @@ if(pageDetail.site=="yomou"){
                 }
             }
         
-            if(changes.yomouRankTop_UserCSS!=undefined){
+            if(changes.yomouRankTop_CustomCSS!=undefined){
                 if($("#narou-tweaker-style--rank-user-css").length){
-                    $("#narou-tweaker-style--rank-user-css").text(changes.yomouRankTop_UserCSS.newValue)
+                    $("#narou-tweaker-style--rank-user-css").text(changes.yomouRankTop_CustomCSS.newValue)
                 }
             }
         })
     }
     
     else if(pageDetail.detail=="rank" && pageDetail.type != "top"){
-        chrome.storage.local.get(["yomouRank_UserCSS", "yomouRank_AppliedCSS"], (data)=>{
+        chrome.storage.local.get(["yomouRank_CustomCSS", "yomouRank_AppliedCSS"], (data)=>{
             /* Styles */
             if("yomouRank_AppliedCSS" in data){
                 var l = $(`<style type="text/css" id="narou-tweaker-style--rank-css" class="narou-tweaker-style"></style>`)
@@ -51,9 +51,9 @@ if(pageDetail.site=="yomou"){
             }
 
             /* User CSS */
-            if("yomouRank_UserCSS" in data){
+            if("yomouRank_CustomCSS" in data){
                 var l = $(`<style type="text/css" id="narou-tweaker-style--rank-user-css" class="narou-tweaker-style"></style>`)
-                l.text(data.yomouRank_UserCSS)
+                l.text(data.yomouRank_CustomCSS)
                 $("html").append(l)
             }else{
                 $("html").append(`<style type="text/css" id="narou-tweaker-style--rank-user-css" class="narou-tweaker-style"></style>`)
@@ -67,9 +67,9 @@ if(pageDetail.site=="yomou"){
                 }
             }
         
-            if(changes.yomouRank_UserCSS!=undefined){
+            if(changes.yomouRank_CustomCSS!=undefined){
                 if($("#narou-tweaker-style--rank-user-css").length){
-                    $("#narou-tweaker-style--rank-user-css").text(changes.yomouRank_UserCSS.newValue)
+                    $("#narou-tweaker-style--rank-user-css").text(changes.yomouRank_CustomCSS.newValue)
                 }
             }
         })
