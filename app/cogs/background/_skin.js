@@ -71,6 +71,12 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
+        .narou-tweaker .novel-titles#ep-0,
+        .narou-tweaker .novel-titles#ep-1 {
+            font-family: ${fontFamily_Current};
+            text-rendering: ${textRendering};
+        
+        }
 
         
         #novel_color,
