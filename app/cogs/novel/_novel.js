@@ -418,6 +418,7 @@ function novelTopAttention(){
                     tags = tags.filter(n => n != item)
                 }
 
+                /*
                 chrome.storage.local.get(["novelOfficialTags"], (data) => {
                     if(data.novelOfficialTags){
                         setTags(data.novelOfficialTags)
@@ -438,6 +439,8 @@ function novelTopAttention(){
                         })
                     }
                 })
+                */
+                setTags()
 
                 function setTags(officialTagList){
                     if(r18){
@@ -473,6 +476,7 @@ function novelTopAttention(){
                         removeItem("異世界転移")
                     }
 
+                    /*
                     if(!r18){
                         $.each(officialTagList, function(_, tag){
                             if(tags.includes(tag)){
@@ -481,6 +485,7 @@ function novelTopAttention(){
                             }
                         })
                     }
+                    */
                 }
 
             }
