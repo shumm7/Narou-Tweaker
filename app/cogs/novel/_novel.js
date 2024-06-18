@@ -23,7 +23,7 @@ export function _novel(){
             }
             _autoURL()
             _saveHistory()
-            if(data.novelAttentionBanner){
+            if(data.novelAttentionBanner && getEpisode==0){
                 novelTopAttention()
             }
         }else if(pageDetail=="top"){
