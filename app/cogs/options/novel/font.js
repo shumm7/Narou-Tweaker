@@ -25,6 +25,8 @@ export function restoreFont(){
       $(".option-font[name='font-name']").val(selectedFont.name)
       $(".option-font[name='font-description']").val(selectedFont.description)
       $(".option-font[name='font-data']").val(selectedFont.font)
+      $(".option-font[name='font-css']").val(selectedFont.css)
+      $(".option-font[name='font-css']").trigger("input")
       $(".option-font[name='font-license']").val(selectedFont.license)
 
       if(selectedFont.customizable){
@@ -58,6 +60,7 @@ function getFontData(){
     show: true,
     customizable: !$(".option-font").prop("disabled"),
     font: $("#font-data").val(),
+    css: $("#font-css").val(),
     license: $("#font-license").val()
   }
 }
@@ -121,6 +124,7 @@ export function addFontEditButtonEvent(){
       defaultFont.name = generateNoDuplicateName(localFontFamily.concat(fontList), "新規フォント", -1)
       defaultFont.description = ""
       defaultFont.license = ""
+      defaultFont.css = ""
 
       fontList.push(defaultFont)
       chrome.storage.local.set({fontFontFamilyList: fontList, fontSelectedFontFamily: localFontFamily.length + fontList.length - 1}, function(){})

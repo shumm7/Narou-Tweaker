@@ -149,7 +149,7 @@
 	color: red;
 }
 
-/* Font Button */
+/* Font */
 .font-button {
 	display: flex;
 	flex-flow: column;
@@ -212,6 +212,9 @@
 	text-align: center;
 	height: 30px;
 	padding: 0;
+}
+#font-css + pre {
+	margin: 0;
 }
 
 

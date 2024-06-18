@@ -6,6 +6,8 @@ export const ignoreOptions = [
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
     "appliedSkinCSS",
+    "appliedUserSkinCSS",
+    "appliedUserFontCSS",
     "yomouRankTop_UserCSS",
     "yomouRankTop_AppliedCSS"
 ]
@@ -22,7 +24,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
+    extIgnoreOptionIndex: "additionalCSS appliedSkinCSS appliedUserSkinCSS appliedUserFontCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_UserCSS yomouRankTop_AppliedCSS yomouRankTop_UserCSS",
     extIgnoreSyncOptionIndex: "",
     extIgnoreSessionOptionIndex: "",
 
@@ -460,28 +462,32 @@ export const localFontFamily = [
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`
+        "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`,
+        "css": ""
     },
     {
         "name": "明朝体〔デフォルト〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',serif`
+        "font": `NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',serif`,
+        "css": ""
     },
     {
         "name": "Noto Sans〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "Noto Sans JP", sans-serif`
+        "font": `NTSymbol, "Noto Sans JP", sans-serif`,
+        "css": ""
     },
     {
         "name": "游ゴシック〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`
+        "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
+        "css": ""
     },
     {
         "name": "源暎エムゴ〔標準〕",
@@ -489,6 +495,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "源暎エムゴ", sans-serif`,
+        "css": "",
         "license": `Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
     },
     {
@@ -496,7 +503,8 @@ export const localFontFamily = [
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "BIZ UDPGothic", sans-serif`
+        "font": `NTSymbol, "BIZ UDPGothic", sans-serif`,
+        "css": ""
     },
     {
         "name": "新コミック体〔標準〕",
@@ -504,6 +512,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "新コミック体", sans-serif`,
+        "css": "",
         "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
     },
     {
@@ -512,6 +521,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "DotGothic16", sans-serif`,
+        "css": "",
         "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
     },
     {
@@ -519,21 +529,24 @@ export const localFontFamily = [
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "Noto Serif JP", serif`
+        "font": `NTSymbol, "Noto Serif JP", serif`,
+        "css": ""
     },
     {
         "name": "BIZ UDP明朝〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "BIZ UDPMincho", serif`
+        "font": `NTSymbol, "BIZ UDPMincho", serif`,
+        "css": ""
     },
     {
         "name": "さわらび明朝〔標準〕",
         "description": "Narou Tweaker オリジナル",
         "customizable": false,
         "show": true,
-        "font": `NTSymbol, "Sawarabi Mincho", serif`
+        "font": `NTSymbol, "Sawarabi Mincho", serif`,
+        "css": ""
     },
     {
         "name": "源暎こぶり明朝〔標準〕",
@@ -541,6 +554,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "源暎こぶり明朝", serif`,
+        "css": "",
         "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
     },
     {
@@ -549,6 +563,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "源暎ちくご明朝", serif`,
+        "css": "",
         "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
     },
 ]

@@ -426,8 +426,5 @@ export function makeSkinCSS(skin, novel_css){
     }
     `
 
-    /* Skin CSS */
-    rule += defaultValue(skin.css, "")
-
     return rule
 }

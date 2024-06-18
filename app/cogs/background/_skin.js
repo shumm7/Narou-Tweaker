@@ -33,11 +33,14 @@ function makeSkin(){
         const selectedFontFamily = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
         var fontFamilyList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
         var fontFamily_Current 
+        var fontCss
 
         if(fontFamilyList.length<=selectedFontFamily || selectedFontFamily<0){
             fontFamily_Current = localFontFamily[0].font
+            fontCss = ""
         }else{
             fontFamily_Current = fontFamilyList[selectedFontFamily].font
+            fontCss = fontFamilyList[selectedFontFamily].css
         }
 
         const fontSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize) + localFont["font-size"]
@@ -96,7 +99,7 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
         }
         `
-
-        chrome.storage.local.set({appliedSkinCSS: rule})
+        
+        chrome.storage.local.set({appliedSkinCSS: rule, appliedUserSkinCSS: skin.css, appliedUserFontCSS: fontCss})
     })
 }
