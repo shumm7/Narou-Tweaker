@@ -2,6 +2,7 @@ import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
 import { getEpisode, checkNovelPageDetail, isR18 } from "./utils.js"
 import { getNcode } from "/utils/ncode.js";
 import { escapeRegex, getNovelSearchURL, getNovelTagURL } from "../../utils/text.js";
+import { novelTop } from "./_novelTop.js";
 
 export function _novel(){
     chrome.storage.local.get(null, (data) => {
@@ -27,7 +28,7 @@ export function _novel(){
                 novelTopAttention()
             }
         }else if(pageDetail=="top"){
-            _novelTop()
+            novelTop()
             _saveHistory()
             if(data.novelShowHistoryOnSublist){
                 _history()
@@ -42,25 +43,6 @@ export function _novel(){
     })
 }
 
-function _novelTop(){
-    chrome.storage.local.get(null, (data) => {
-        if(data.novelShowAllExtext){
-            var Extext = $("#novel_ex")
-            var hiddenText = $("#novel_ex .hidden")
-            if(hiddenText.length && Extext.length){
-                var text = hiddenText[0].innerHTML
-                $("#novel_ex .more").remove()
-                $("#novel_ex .hidden").remove()
-                $("#novel_ex span").remove()
-                Extext[0].innerHTML += text
-            }
-        }
-
-        if(data.novelCustomStyle){
-            $("body").addClass("narou-tweaker")
-        }
-    })
-}
 
 function _novelPage(){
     const ncode = getNcode()

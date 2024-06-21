@@ -1,0 +1,30 @@
+/* novelview */
+.novelview_history-box {
+	margin-bottom: 20px;
+	background: #eeeeee;
+	padding: 10px;
+}
+.novelview_history-item {
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+	justify-content: flex-start;
+}
+.novelview_history-item > i {
+	width: 16px;
+	margin-right: 5px;
+	text-align: center;
+}
+.subtitle:has(.history_now) a{
+	display: inline-block;
+}
+.history_now {
+    overflow: hidden;
+    width: 20px;
+    height: 15px;
+	font-size: 12px;
+    vertical-align: top;
+	text-align: center;
+    display: inline-block;
+	margin: 5px 0 0 0;
+}

@@ -40,7 +40,9 @@
       "css": [
         "libs/font-awesome/css/all.css",
         "common.css",
-        "cogs/novel/main.css"
+        "cogs/novel/main.css",
+        "cogs/novel/novelVertical.css",
+        "cogs/novel/novelTop.css"
       ],
       "matches": [
 				"https://ncode.syosetu.com/*",
