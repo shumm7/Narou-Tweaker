@@ -6,7 +6,7 @@
             "date": "2024-06-21",
             "release": {
                 "chrome": null,
-                "gecko": null
+                "gecko": true
             },
             "patchnote": {
                 "ja": {
