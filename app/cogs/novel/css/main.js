@@ -19,12 +19,21 @@ chrome.storage.local.get(null, (data)=>{
     }
 
     /* Skin */
-    if("novelAppliedCSS" in data){
+    if("novelAppliedSkinCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style"></style>`)
-        l.text(data.novelAppliedCSS)
+        l.text(data.novelAppliedSkinCSS)
         $("html").append(l)
     }else{
         $("html").append(`<style type="text/css" id="narou-tweaker-style--skin" class="narou-tweaker-style"></style>`)
+    }
+
+    /* Font */
+    if("novelAppliedFontCSS" in data){
+        var l = $(`<style type="text/css" id="narou-tweaker-style--font" class="narou-tweaker-style"></style>`)
+        l.text(data.novelAppliedFontCSS)
+        $("html").append(l)
+    }else{
+        $("html").append(`<style type="text/css" id="narou-tweaker-style--font" class="narou-tweaker-style"></style>`)
     }
 
     /* Author CSS */
@@ -52,9 +61,14 @@ chrome.storage.local.onChanged.addListener(function(changes){
         }
     }
 
-    if(changes.novelAppliedCSS!=undefined){
+    if(changes.novelAppliedSkinCSS!=undefined){
         if($("#narou-tweaker-style--skin").length){
-            $("#narou-tweaker-style--skin").text(changes.novelAppliedCSS.newValue)
+            $("#narou-tweaker-style--skin").text(changes.novelAppliedSkinCSS.newValue)
+        }
+    }
+    if(changes.novelAppliedFontCSS!=undefined){
+        if($("#narou-tweaker-style--font").length){
+            $("#narou-tweaker-style--font").text(changes.novelAppliedFontCSS.newValue)
         }
     }
 

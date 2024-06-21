@@ -26,8 +26,7 @@ function makeSkin(){
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
         const skin = skins[skin_idx]
 
-        /* Skin */
-        var rule = makeSkinCSS(skin, data.novelCustomStyle)
+        var rule = ""
 
         /* Font */
         const selectedFontFamily = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
@@ -100,6 +99,10 @@ function makeSkin(){
         }
         `
 
-        chrome.storage.local.set({novelAppliedCSS: rule, novelSkinCustomCSS: skin.css, novelFontCustomCSS: fontCss})
+        chrome.storage.local.set({
+            novelAppliedSkinCSS: makeSkinCSS(skin, data.novelCustomStyle),
+            novelAppliedFontCSS: rule,
+            novelSkinCustomCSS: skin.css,
+            novelFontCustomCSS: fontCss})
     })
 }
