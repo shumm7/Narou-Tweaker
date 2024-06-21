@@ -190,6 +190,7 @@
         "cogs/novel/_header.js",
         "cogs/novel/_novel.js",
         "cogs/novel/_novelcom.js",
+        "cogs/novel/_novelTop.js",
         "cogs/novel/_modal.js",
         "cogs/novel/_skin.js",
         "cogs/novel/_correction.js",
