@@ -9,55 +9,55 @@ export function setupDOM(){
             <div id="sidebar-header">
                 <img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/>
                 <div class="sidebar-icon" id="sidebar-icon--help">
-                    <!--<a href="/cogs/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
+                    <!--<a href="/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>
             </div>
             <div id="sidebar-items">
                 <div class="sidebar-item" name="general">
-                    <a href="/cogs/options/general/index.html" target="_self">
+                    <a href="/options/general/index.html" target="_self">
                         <i class="fa-solid fa-gear"></i>
                         <span class="sidebar-item--title">全般</span>
                     </a>
                 </div>
                 
                 <div class="sidebar-item" name="narou">
-                    <a href="/cogs/options/narou/index.html" target="_self">
+                    <a href="/options/narou/index.html" target="_self">
                         <i class="fa-solid fa-house"></i>
                         <span class="sidebar-item--title">小説家になろう</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="novel">
-                    <a href="/cogs/options/novel/index.html" target="_self">
+                    <a href="/options/novel/index.html" target="_self">
                         <i class="fa-solid fa-book"></i>
                         <span class="sidebar-item--title">小説ページ</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="novel">
-                    <a href="/cogs/options/yomou/index.html" target="_self">
+                    <a href="/options/yomou/index.html" target="_self">
                     <i class="fa-solid fa-magnifying-glass"></i>
                         <span class="sidebar-item--title">小説を読もう！</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="workspace">
-                    <a href="/cogs/options/workspace/index.html" target="_self">
+                    <a href="/options/workspace/index.html" target="_self">
                         <i class="fa-solid fa-pen-nib"></i>
                         <span class="sidebar-item--title">ユーザホーム</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="mypage">
-                    <a href="/cogs/options/mypage/index.html" target="_self">
+                    <a href="/options/mypage/index.html" target="_self">
                         <i class="fa-solid fa-user"></i>
                         <span class="sidebar-item--title">マイページ</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="mitemin">
-                    <a href="/cogs/options/mitemin/index.html" target="_self">
+                    <a href="/options/mitemin/index.html" target="_self">
                         <i class="fa-solid fa-palette"></i>
                         <span class="sidebar-item--title">みてみん</span>
                     </a>
                 </div>
                 <div class="sidebar-item" name="kasasagi">
-                    <a href="/cogs/options/kasasagi/index.html" target="_self">
+                    <a href="/options/kasasagi/index.html" target="_self">
                         <i class="fa-solid fa-chart-line"></i>
                         <span class="sidebar-item--title">KASASAGI</span>
                     </a>

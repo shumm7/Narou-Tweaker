@@ -17,11 +17,11 @@
     "type": "module"
   },
   "options_ui": {
-		"page": "cogs/options/general/index.html",
+		"page": "options/general/index.html",
     "open_in_tab": true
 	},
   "action": {
-    "default_popup": "cogs/options/popup/index.html"
+    "default_popup": "options/popup/index.html"
   },
   "side_panel": {
     "default_path": "cogs/sidepanel/index/index.html"

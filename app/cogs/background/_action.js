@@ -2,7 +2,7 @@
 export function actionListener(){
     /*
     chrome.action.onClicked.addListener((tab) => {
-        chrome.tabs.create({"url": "/cogs/options/general/index.html" });
+        chrome.tabs.create({"url": "/options/general/index.html" });
     });
     */
 }
