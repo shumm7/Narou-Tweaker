@@ -23,13 +23,6 @@
 	margin-right: auto;
 }
 
-html::after {
-	/* Add some extra scroll to the page to reduce section toggle jumps/scroll */
-	content: '';
-	display: block;
-	height: 50vh;
-}
-
 p {
 	margin-top: 0;
 }
