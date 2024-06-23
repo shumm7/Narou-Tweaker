@@ -4,7 +4,7 @@
   "description": "__MSG_extDescription__",
   "author": "__MSG_extAuthor__",
   "default_locale": "ja",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "manifest_version": 3,
   "icons": {
     "16": "assets/icons/icon_16.png",
@@ -234,11 +234,9 @@
         "cogs/mitemin/_general.js"
       ],
       "matches": [
-        "*://syosetu.com/*",
         "*://*.syosetu.com/*",
-        "*://mitemin.net/*",
         "*://*.mitemin.net/*",
-        "*://eparet.net/*",
+        "*://*.eparet.net/*",
         "*://kasasagi.hinaproject.com/*"
       ]
     },

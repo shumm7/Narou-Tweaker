@@ -28,7 +28,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "novelCustomCSS novelAppliedSkinCSS novelAppliedFontCSS novelSkinCustomCSS novelFontCustomCSS correctionReplacePatterns skins yomouRank_AppliedCSS yomouRank_CustomCSS yomouRankTop_AppliedCSS yomouRankTop_CustomCSS",
+    extIgnoreOptionIndex: "novelCustomCSS novelAppliedSkinCSS novelAppliedFontCSS novelSkinCustomCSS novelFontCustomCSS correctionReplacePatterns skins fontFontFamilyList yomouRank_AppliedCSS yomouRank_CustomCSS yomouRankTop_AppliedCSS yomouRankTop_CustomCSS",
     extIgnoreSyncOptionIndex: "",
     extIgnoreSessionOptionIndex: "",
 
