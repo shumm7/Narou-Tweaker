@@ -65,7 +65,7 @@ function exportSyncOptionText() {
                     field.text(text)
                     field.trigger("input")
                 }catch(e){
-                    console.warn(e)
+
                 }
             })
         })
@@ -98,7 +98,7 @@ function exportSessionOptionText() {
                     field.text(text)
                     field.trigger("input")
                 }catch(e){
-                    console.warn(e)
+                    
                 }
             })
         })
