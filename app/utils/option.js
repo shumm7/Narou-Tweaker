@@ -628,13 +628,15 @@ export function fixOption(local, sync){
             chrome.storage.local.clear(()=>{
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
-                    if(data[key]!=undefined){
-                        if( typeof(o[key]) == typeof(data[key])){
-                            if(!ignoreOptions.includes(key)){
-                                o[key] = data[key]
+                    //if(!forceResetOptions.includes(key)){
+                        if(data[key]!=undefined){
+                            if( typeof(o[key]) == typeof(data[key])){
+                                if(!ignoreOptions.includes(key)){
+                                    o[key] = data[key]
+                                }
                             }
                         }
-                    }
+                    //}
                 })
 
                 chrome.storage.local.set(o, function(){
