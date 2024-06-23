@@ -35,6 +35,7 @@ export const defaultOption = {
     /* Narou */
     narouSyuppanShowBookImage: true,
     narouSyuppanShowBookViewImage: true,
+    narouSkipAgeauth: false,
 
     /* Novel */
     novelCustomStyle: true,

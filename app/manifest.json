@@ -45,10 +45,10 @@
         "cogs/novel/novelTop.css"
       ],
       "matches": [
-				"https://ncode.syosetu.com/*",
-        "https://novel18.syosetu.com/*",
-        "https://novelcom.syosetu.com/*",
-        "https://novelcom18.syosetu.com/*"
+				"*://ncode.syosetu.com/*",
+        "*://novel18.syosetu.com/*",
+        "*://novelcom.syosetu.com/*",
+        "*://novelcom18.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -58,10 +58,10 @@
         "cogs/novel/css/main.js"
       ],
       "matches": [
-				"https://ncode.syosetu.com/*",
-        "https://novel18.syosetu.com/*",
-        "https://novelcom.syosetu.com/*",
-        "https://novelcom18.syosetu.com/*"
+				"*://ncode.syosetu.com/*",
+        "*://novel18.syosetu.com/*",
+        "*://novelcom.syosetu.com/*",
+        "*://novelcom18.syosetu.com/*"
 			],
       "run_at":"document_start"
     },
@@ -76,7 +76,7 @@
         "cogs/yomou/main.css"
       ],
       "matches": [
-				"https://yomou.syosetu.com/*"
+				"*://yomou.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -91,8 +91,8 @@
         "cogs/narou/main.css"
       ],
       "matches": [
-				"https://syosetu.com/*",
-				"https://nl.syosetu.com/*"
+				"*://*.syosetu.com/*",
+        "*://*.eparet.net/*"
 			],
       "run_at":"document_end"
     },
@@ -102,7 +102,7 @@
         "loader/yomouCss.js"
       ],
       "matches": [
-				"https://yomou.syosetu.com/*"
+				"*://yomou.syosetu.com/*"
 			],
       "run_at":"document_start"
     },
@@ -127,7 +127,7 @@
         "cogs/workspace/_reaction.css"
       ],
       "matches": [
-				"https://syosetu.com/*"
+				"*://syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -141,8 +141,8 @@
         "cogs/mypage/main.css"
       ],
       "matches": [
-				"https://mypage.syosetu.com/*",
-				"https://xmypage.syosetu.com/*"
+				"*://mypage.syosetu.com/*",
+				"*://xmypage.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -161,7 +161,7 @@
         "cogs/kasasagi/main.css"
       ],
       "matches": [
-				"https://kasasagi.hinaproject.com/*"
+				"*://kasasagi.hinaproject.com/*"
 			],
       "run_at":"document_end"
     },
@@ -176,9 +176,8 @@
         "cogs/mitemin/main.css"
       ],
       "matches": [
-				"https://mitemin.net/*",
-				"https://*.mitemin.net/*",
-				"https://eparet.net/*"
+				"*://*.mitemin.net/*",
+				"*://eparet.net/*"
 			],
       "run_at":"document_end"
     }
@@ -198,6 +197,7 @@
 
         "cogs/narou/main.js",
         "cogs/narou/_syuppan.js",
+        "cogs/narou/_ageauth.js",
 
         "cogs/yomou/main.js",
         "cogs/yomou/utils.js",
@@ -234,12 +234,12 @@
         "cogs/mitemin/_general.js"
       ],
       "matches": [
-        "https://syosetu.com/*",
-        "https://*.syosetu.com/*",
-        "https://mitemin.net/*",
-        "https://*.mitemin.net/*",
-        "https://eparet.net/*",
-        "https://kasasagi.hinaproject.com/*"
+        "*://syosetu.com/*",
+        "*://*.syosetu.com/*",
+        "*://mitemin.net/*",
+        "*://*.mitemin.net/*",
+        "*://eparet.net/*",
+        "*://kasasagi.hinaproject.com/*"
       ]
     },
     {
@@ -274,7 +274,8 @@
     "cookies"
   ],
   "host_permissions": [
-    "https://syosetu.com/*",
-    "https://*.syosetu.com/*"
+    "*://*.syosetu.com/*",
+    "*://*.eparet.net/*",
+    "*://*.mitemin.net/*"
   ]
 }

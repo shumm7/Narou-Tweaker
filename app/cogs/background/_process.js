@@ -28,9 +28,9 @@ export function messageListener(){
         }else if (message.action == "fetchWrap"){
             try{
                 fetchWrap(message.data.url, message.data.post, message.data.header, message.data.callback, message.data.charset)
-                sendResponse({action: "fetch", result: {}, success: true, id: message.id, message: message.data})
+                sendResponse({action: "fetchWrap", result: {}, success: true, id: message.id, message: message.data})
             }catch(e){
-                sendResponse({action: "fetch", result: e, success: false, id: message.id, message: message.data})
+                sendResponse({action: "fetchWrap", result: e, success: false, id: message.id, message: message.data})
             }
             return true
         }else if(message.action == "downloads"){
@@ -39,9 +39,23 @@ export function messageListener(){
                 filename: message.data.filename
             }, function(downloadId){
                 sendResponse({action: "downloads", id: downloadId, message: message.data});
-                return true;
             });
+            return true;
+        }else if(message.action == "cookies"){
+            if(message.function == "set"){
+                chrome.cookies.set(message.data, function(cookie){
+                    console.log(cookie)
+                    sendResponse({action: "cookies", function: message.function, result: cookie, message: message.data});
+                });
+                return true;
+            }else if(message.function == "get"){
+                chrome.cookies.get(message.data, function(cookie){
+                    sendResponse({action: "cookies", function: message.function, result: cookie, message: message.data});
+                });
+                return true;
+            }
         }
+        
         sendResponse()
         return
     })
