@@ -271,8 +271,7 @@
     "storage",
     "downloads",
     "tabs",
-    "contextMenus",
-    "sidePanel"
+    "cookies"
   ],
   "host_permissions": [
     "https://syosetu.com/*",

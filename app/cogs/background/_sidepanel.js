@@ -1,6 +1,11 @@
 import { getNcode } from "/utils/ncode.js";
 import { checkNovelPageDetail, getEpisode } from "../novel/utils.js";
 
+/* Require permissions: 
+    "contextMenus",
+    "sidePanel"
+*/
+
 function setupContextMenu() {
     chrome.contextMenus.create({
         id: 'narou-tweaker-show-index',
