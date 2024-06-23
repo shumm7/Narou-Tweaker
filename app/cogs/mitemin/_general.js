@@ -4,7 +4,7 @@ export function _image(){
     chrome.storage.local.get(null, function(data){
         // iコードを取得
         if(data.miteminShowIcodeField){
-            var info = $(".image_infomation")
+            var info = $(".image_infomation, .ximage_infomation")
             if(info.length){
                 var img = getIcode()
                 if(img.icode && img.userid)

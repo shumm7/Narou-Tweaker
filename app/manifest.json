@@ -177,7 +177,7 @@
       ],
       "matches": [
 				"*://*.mitemin.net/*",
-				"*://eparet.net/*"
+				"*://*.eparet.net/*"
 			],
       "run_at":"document_end"
     }
