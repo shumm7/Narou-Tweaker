@@ -188,8 +188,10 @@ def build_gecko():
         "gecko": { "id": "{29c0c2f1-2092-4808-9709-6aa5fb8562d7}" }
     }
     manifest.pop("side_panel")
-    manifest["permissions"].remove("contextMenus")
-    manifest["permissions"].remove("sidePanel")
+    if("contextMenus" in manifest["permissions"]):
+        manifest["permissions"].remove("contextMenus")
+    if("sidePanel" in manifest["permissions"]):
+        manifest["permissions"].remove("sidePanel")
     set_manifest(codeDir, manifest)
 
     # Remove Debug
