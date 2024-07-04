@@ -160,6 +160,7 @@ function makeEditorSkin(){
         }
         .narou-tweaker-custom-editor .nt-editor .nt-button:disabled {
             background-color: ${s.novel.background_second};
+            color: ${s.sublist.color};
         }
         `
 
