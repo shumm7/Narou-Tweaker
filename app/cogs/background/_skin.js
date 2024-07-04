@@ -17,6 +17,17 @@ export function skinListener(){
         ){
             makeSkin()
         }
+        if(changes.skins!=undefined ||
+            changes.workspaceEditorSelectedSkin!=undefined ||
+            changes.workspaceEditorSelectedFontFamily!=undefined ||
+            changes.workspaceEditorFontFamilyList!=undefined ||
+            changes.workspaceEditorFontSize!=undefined ||
+            changes.workspaceEditorLineHeight!=undefined ||
+            changes.workspaceEditorTextRendering!=undefined ||
+            changes.workspaceEditorWidth!=undefined
+        ){
+            makeEditorSkin()
+        }
     })
 }
 
@@ -103,6 +114,108 @@ function makeSkin(){
             novelAppliedSkinCSS: makeSkinCSS(skin, data.novelCustomStyle),
             novelAppliedFontCSS: rule,
             novelSkinCustomCSS: skin.css,
-            novelFontCustomCSS: fontCss})
+            novelFontCustomCSS: fontCss
+        })
+    })
+}
+
+function makeEditorSkin(){
+    chrome.storage.local.get(null, (data) => {
+        const skin_idx = defaultValue(data.workspaceEditorSelectedSkin, defaultOption.workspaceEditorSelectedSkin)
+        const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
+        if(skins.length<skin_idx || skin_idx<0){
+            skin_idx = 0
+            chrome.storage.local.set({workspaceEditorSelectedSkin: skin_idx})
+        }
+        const skin = skins[skin_idx]
+        const s = skin.style
+        let skin_rule = ""
+
+        skin_rule += `
+        body.narou-tweaker-custom-editor,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--header,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer,
+        .narou-tweaker-custom-editor .nt-editor--footer .nt-editor--footer-items {
+            background-color: ${s.novel.background};
+        }
+        .narou-tweaker-custom-editor .nt-editor--body,
+        .narou-tweaker-custom-editor .nt-editor--main-items,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--header,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer {
+            color: ${s.novel.color};
+        }
+        .narou-tweaker-custom-editor .nt-editor--footer-textcount .nt-editor--footer-textcount-unit {
+            color: ${s.sublist.color};
+        }
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--header,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer {
+            border-color: ${s.novel.background_second};
+        }
+        .narou-tweaker-custom-editor .nt-editor .nt-button {
+            border-color: ${s.novel.background_second};
+        }
+        .narou-tweaker-custom-editor .nt-editor .nt-button:hover,
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer-tab-item:hover {
+            background-color: ${s.novel.background_second};
+        }
+        .narou-tweaker-custom-editor .nt-editor .nt-button:disabled {
+            background-color: ${s.novel.background_second};
+        }
+        `
+
+        const selectedFontFamily = defaultValue(data.workspaceEditorSelectedFontFamily, defaultOption.workspaceEditorSelectedFontFamily)
+        const fontFamilyList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
+        var fontFamily_Current 
+        var fontCss
+
+        if(fontFamilyList.length<=selectedFontFamily || selectedFontFamily<0){
+            fontFamily_Current = localFontFamily[0].font
+            fontCss = ""
+        }else{
+            fontFamily_Current = fontFamilyList[selectedFontFamily].font
+            fontCss = fontFamilyList[selectedFontFamily].css
+        }
+
+        const fontSize = defaultValue(data.workspaceEditorFontSize, defaultOption.workspaceEditorFontSize) + localFont["font-size"]
+        const lineHeight = defaultValue(data.workspaceEditorLineHeight, defaultOption.workspaceEditorLineHeight) + localFont["line-height"]
+        const textRendering = defaultValue(data.workspaceEditorTextRendering, defaultOption.workspaceEditorTextRendering)
+        const width = localFont["width"] * defaultValue(data.workspaceEditorWidth, defaultOption.workspaceEditorWidth)
+        const widthRatio = defaultValue(data.workspaceEditorWidth, defaultOption.workspaceEditorWidth)
+        let font_rule = ""
+
+        font_rule += `
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--body {
+            text-rendering: ${textRendering};
+            font-family: ${fontFamily_Current};
+        }
+        .narou-tweaker-custom-editor textarea[name="novel"],
+        .narou-tweaker-custom-editor textarea[name="preface"],
+        .narou-tweaker-custom-editor textarea[name="postscript"],
+        .narou-tweaker-custom-editor textarea[name="freememo"] {
+            line-height: ${lineHeight}% !important;
+            width: ${width}px;
+            max-width: 100%;
+        }
+        .narou-tweaker-custom-editor .nt-field--wrapper,
+        .narou-tweaker-custom-editor .nt-editor--freememo,
+        .narou-tweaker-custom-editor .nt-editor--preface,
+        .narou-tweaker-custom-editor .nt-editor--main-novel,
+        .narou-tweaker-custom-editor .nt-editor--main-title,
+        .narou-tweaker-custom-editor .nt-editor--main-items,
+        .narou-tweaker-custom-editor .nt-editor--postscript {
+            max-width: 100% !important;
+            width: ${width}px;
+            line-height: ${lineHeight}% !important;
+            font-size: ${fontSize}% !important;
+        }
+        
+        `
+
+        chrome.storage.local.set({
+            workspaceEditorAppliedSkinCSS: skin_rule,
+            workspaceEditorAppliedFontCSS: font_rule,
+            workspaceEditorSkinCustomCSS: skin.css,
+            workspaceEditorFontCustomCSS: fontCss
+        })
     })
 }

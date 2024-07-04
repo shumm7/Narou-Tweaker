@@ -10,6 +10,10 @@ export const ignoreOptions = [
     "novelAppliedFontCSS",
     "novelSkinCustomCSS",
     "novelFontCustomCSS",
+    "workspaceEditorAppliedSkinCSS",
+    "workspaceEditorAppliedFontCSS",
+    "workspaceEditorSkinCustomCSS",
+    "workspaceEditorFontCustomCSS",
     "yomouRank_CustomCSS",
     "yomouRank_AppliedCSS",
     "yomouRankTop_CustomCSS",
@@ -77,6 +81,12 @@ export const defaultOption = {
     workspaceUserblogmanageDeleteConfirm: true,
     workspaceNovelmanageShowPointAverage: true,
     workspaceCustomEditor: false,
+    workspaceEditorSelectedSkin: 0,
+    workspaceEditorSelectedFontFamily: 0,
+    workspaceEditorFontSize: 0,
+    workspaceEditorLineHeight: 0,
+    workspaceEditorTextRendering: "optimizeLegibility",
+    workspaceEditorWidth: 1,
 
     /* Yomou */
     yomouRank_ShowNovelInfoLink: true,

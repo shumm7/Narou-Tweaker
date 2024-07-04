@@ -134,6 +134,16 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
+        "cogs/workspace/css/main.js"
+      ],
+      "matches": [
+				"*://syosetu.com/*"
+			],
+      "run_at":"document_start"
+    },
+    {
+      "js": [
+        "libs/jquery-3.7.1.min.js",
         "loader/mypage.js"
       ],
       "css": [
@@ -212,6 +222,7 @@
         "cogs/workspace/_header.js",
         "cogs/workspace/_editor.js",
         "cogs/workspace/_editorTools.js",
+        "cogs/workspace/_editorCss.js",
 
         "cogs/mypage/main.js",
         "cogs/mypage/utils.js",

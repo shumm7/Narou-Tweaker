@@ -1,4 +1,5 @@
 import { convertRubyTags, convertSasieTags, countLines, countManuscriptPaper, countTime, getDateString, minuteStringJapanese } from "../../utils/text.js"
+import { setDisplayEvent } from "./_editorCss.js"
 import { _toolCovertKakuyomuRubyDot, _toolExportAll, _toolExportEach, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
 import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
 
@@ -207,11 +208,9 @@ function changeEditorPageLikePreview(){
                         <span class="nt-panel--tab-item" data="0">
                             <button type="button" class="nt-panel--tab-button">統計</button>
                         </span>
-                        <!--
                         <span class="nt-panel--tab-item" data="1">
                             <button type="button" class="nt-panel--tab-button">表示</button>
                         </span>
-                        -->
                         <span class="nt-panel--tab-item" data="2">
                             <button type="button" class="nt-panel--tab-button">ツール</button>
                         </span>
@@ -267,12 +266,55 @@ function changeEditorPageLikePreview(){
                         </div>
                     </div>
 
-                    <!--
                     <div class="nt-panel--tab-content" id="nt-panel--tab-display" data="1">
-                        <h4 class="underline">執筆時の表示設定</h4>
-                        <p>閲覧画面には影響しません。</p>
-                    </div>  
-                    -->
+                        <div id="nt-panel--tab-content--display-font">
+                            <h4 class="underline">執筆時のスキン設定</h4>
+                            <p>小説の閲覧画面には影響しません。</p>
+                            <div class='box'>
+                                <div id="nt-display-option--skin">
+                                    <div class="dropdown" style="width: 100%;">
+                                        <select id="nt-display-option--skin-dropdown" name="nt-display-option--skin-dropdown"></select>
+                                    </div>
+                                </div>
+                                <div id="nt-display-option--skin-description"></div>
+                            </div>
+                        </div
+                        >
+                        <div id="nt-panel--tab-content--display-font">
+                            <h4 class="underline">執筆時のフォント設定</h4>
+
+                            <div class='box'>
+                                <div id="nt-display-option--font-family">
+                                    <div class="dropdown" style="width: 100%;">
+                                        <select id="font-family" name="font-family"></select>
+                                    </div>
+                                </div>
+                                <div id="nt-display-option--font-family-description"></div>
+                                <div id="nt-display-option--font-size">
+                                    <div style="margin: 0 .5em;">+</div>
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--font-size-minus">-</div>
+                                    <input name="fontFontSize" class="nt-display-option--textfield" type="text" id="nt-display-option--font-size-input">
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--font-size-plus">+</div>
+                                    <div style="margin: 0 .5em;">%</div>
+                                </div>
+                                <div id="nt-display-option--line-height">
+                                    <div style="margin: 0 .5em;">+</div>
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--line-height-minus">-</div>
+                                    <input name="fontLineHeight" class="nt-display-option--textfield" type="text" id="nt-display-option--line-height-input">
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--line-height-plus">+</div>
+                                    <div style="margin: 0 .5em;">%</div>
+                                </div>
+                                <div id="nt-display-option--page-width">
+                                    <div style="margin: 0 .5em;">×</div>
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--page-width-minus">-</div>
+                                    <input name="fontWidth" class="nt-display-option--textfield" type="text" id="nt-display-option--page-width-input">
+                                    <div class="nt-display-option--font-number-change-button" id="nt-display-option--page-width-plus">+</div>
+                                    <div style="margin: 0 .5em;">%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="nt-panel--tab-content" id="nt-panel--tab-tools" data="2">
                         <div id="nt-panel--tab-content--tools-format">
                             <h4 class="underline">記法挿入</h4>
@@ -447,21 +489,6 @@ function changeEditorPageLikePreview(){
             novelPadding(this)
         })
     })
-    var novelPadding = function(elm){
-        const top = $(elm).position().top
-        const vh = $("body").height()
-        const height = $(elm).height()
-        const diffs = vh - (top + height) - 60 - 110
-        if(diffs>0){
-            $(elm).css("padding-bottom", diffs)
-            $(elm).removeClass("nt-active-padding")
-            $(elm).addClass("nt-enactive-padding")
-        }else{
-            $(elm).css("padding-bottom", 200)
-            $(elm).removeClass("nt-enactive-padding")
-            $(elm).addClass("nt-active-padding")
-        }
-    }
 
     // Alerts
     container.find(".c-alert").each(function(){
@@ -617,7 +644,9 @@ function changeEditorPageLikePreview(){
 
     // Initialize
     selectFooterTab(0)
-    selectPanelTab(2)
+    selectPanelTab(1)
+    setDisplayEvent()
+    editorSkinChangeEvent()
     textCount()
     insertUtilities()
     stateCheck()
@@ -1001,4 +1030,79 @@ function insertUtilities(){
 
     _toolExportEach()
     _toolExportAll()
+}
+
+function editorSkinChangeEvent(){
+    function _triggerInput(){
+        var index = getSelectedContent()
+        index = `${index}`
+        if(index=="0"){
+            novelPadding("textarea[name='novel']")
+            isEventLocked = true
+            $("textarea[name='novel']").trigger("input")
+            isEventLocked = false
+        }else if(index=="1"){
+            novelPadding("textarea[name='preface']")
+            isEventLocked = true
+            $("textarea[name='preface']").trigger("input")
+            isEventLocked = false
+        }else if(index=="2"){
+            novelPadding("textarea[name='postscript']")
+            isEventLocked = true
+            $("textarea[name='postscript']").trigger("input")
+            isEventLocked = false
+        }else if(index=="3"){
+            novelPadding("textarea[name='freememo']")
+            isEventLocked = true
+            $("textarea[name='freememo']").trigger("input")
+            isEventLocked = false
+        }else if(index=="4"){
+
+        }
+    }
+
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.workspaceEditorSkinCustomCSS!=undefined){
+            if($("#narou-tweaker-style--editor-skin-user").length){
+                $("#narou-tweaker-style--editor-skin-user").text(changes.workspaceEditorSkinCustomCSS.newValue)
+                _triggerInput()
+            }
+        }
+        if(changes.workspaceEditorFontCustomCSS!=undefined){
+            if($("#narou-tweaker-style--font-user").length){
+                $("#narou-tweaker-style--editor-font-user").text(changes.workspaceEditorFontCustomCSS.newValue)
+                _triggerInput()
+            }
+        }
+
+        if(changes.workspaceEditorAppliedSkinCSS!=undefined){
+            if($("#narou-tweaker-style--editor-skin").length){
+                $("#narou-tweaker-style--editor-skin").text(changes.workspaceEditorAppliedSkinCSS.newValue)
+                _triggerInput()
+            }
+        }
+        if(changes.workspaceEditorAppliedFontCSS!=undefined){
+            console.log($("#narou-tweaker-style--editor-font").length)
+            if($("#narou-tweaker-style--editor-font").length){
+                $("#narou-tweaker-style--editor-font").text(changes.workspaceEditorAppliedFontCSS.newValue)
+                _triggerInput()
+            }
+        }
+    })
+}
+
+function novelPadding(elm){
+    const top = $(elm).position().top
+    const vh = $("body").height()
+    const height = $(elm).height()
+    const diffs = vh - (top + height) - 60 - 110
+    if(diffs>0){
+        $(elm).css("padding-bottom", diffs)
+        $(elm).removeClass("nt-active-padding")
+        $(elm).addClass("nt-enactive-padding")
+    }else{
+        $(elm).css("padding-bottom", 200)
+        $(elm).removeClass("nt-enactive-padding")
+        $(elm).addClass("nt-active-padding")
+    }
 }

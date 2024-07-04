@@ -190,7 +190,7 @@ function setOptionContentsDisplay(id){
                             <div class="novel-option--font-number-change-button" id="novel-option--page-width-plus">+</div>
                             <div style="margin: 0 .5em;">%</div>
                         </div>
-                </div>
+                    </div>
             </div>
         `)
         restoreFontOptions()
