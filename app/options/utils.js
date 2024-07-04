@@ -18,10 +18,11 @@ export function buttonHide(){
 
 export function optionHide(){
     $(".option-hide").each(function(){
-        var elm = $(this)
-        var data_for = $(this).attr("data-for")
-        var action_value = $(this).attr("data")
-        var mode = $(this).attr("mode")
+        let elm = $(this)
+        const data_for_raw = $(this).attr("data-for")
+        const data_for = data_for_raw.split(/ +/)
+        const action_value = $(this).attr("data")
+        const mode = $(this).attr("mode")
 
         function change(value){
             if(String(value)==String(action_value)){
@@ -53,14 +54,21 @@ export function optionHide(){
             }
         }
 
-        chrome.storage.local.get([data_for], function(data){
-            change(data[data_for])
+        chrome.storage.local.get(data_for, function(data){
+            $.each(data_for, function(_, key){
+                if(data.includes(key)){
+                    change(data[key])
+                }
+            })
         })
 
         chrome.storage.local.onChanged.addListener(function(changes){
-            if(changes[data_for]!=undefined){
-                change(changes[data_for].newValue)
-            }
+            $.each(data_for, function(_, key){
+                if(changes[key]){
+                    change(changes[key].newValue)
+                }
+            })
+            
         })
     })
 
