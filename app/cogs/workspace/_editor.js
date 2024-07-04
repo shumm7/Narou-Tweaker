@@ -356,6 +356,10 @@ function changeEditorPageLikePreview(){
     // displays
     elm.find(".nt-editor--main-title").prepend(container.find(".c-up-title-area__title").addClass("nt-editor--main-title-novel"))
 
+    // token
+    elm.prepend(container.find("input[name='token']"))
+    elm.prepend(container.find("input[name='draftepisodeid']"))
+
     // buttons
     elm.find("#nt-editor--save-button").append(container.find(".c-button-box-center:has(.js-previewButton)"))
     elm.find(".nt-editor-footer-right").prepend(container.find(".p-up-novel-input__upload").addClass("nt-editor--footer-tab-content").attr("data", 0))
