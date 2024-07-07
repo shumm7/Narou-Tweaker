@@ -141,7 +141,11 @@ function makeEditorSkin(){
         .narou-tweaker-custom-editor .nt-editor--body,
         .narou-tweaker-custom-editor .nt-editor--main-items,
         .narou-tweaker-custom-editor .nt-editor .nt-editor--header,
-        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer {
+        .narou-tweaker-custom-editor .nt-editor .nt-editor--footer,
+        .narou-tweaker-custom-editor textarea[name="novel"],
+        .narou-tweaker-custom-editor textarea[name="preface"],
+        .narou-tweaker-custom-editor textarea[name="postscript"],
+        .narou-tweaker-custom-editor textarea[name="freememo"] {
             color: ${s.novel.color};
         }
         .narou-tweaker-custom-editor .nt-editor--footer-textcount .nt-editor--footer-textcount-unit {
@@ -160,7 +164,17 @@ function makeEditorSkin(){
         }
         .narou-tweaker-custom-editor .nt-editor .nt-button:disabled {
             background-color: ${s.novel.background_second};
-            color: ${s.sublist.color};
+            color: ${s.novel.color};
+        }
+        .narou-tweaker-custom-editor .nt-search-box {
+            color: ${s.novel.color};
+            background-color: ${s.novel.background_second};
+            border-color: ${s.sublist.color};
+        }
+        .narou-tweaker-custom-editor .nt-search-box--field-dummy-outer,
+        .narou-tweaker-custom-editor .nt-search-box--field {
+            background-color: ${s.novel.background};
+            border-color: ${s.sublist.color};
         }
         `
 
@@ -197,19 +211,15 @@ function makeEditorSkin(){
             width: ${width}px;
             max-width: 100%;
         }
-        .narou-tweaker-custom-editor .nt-field--wrapper,
-        .narou-tweaker-custom-editor .nt-editor--freememo,
-        .narou-tweaker-custom-editor .nt-editor--preface,
         .narou-tweaker-custom-editor .nt-editor--main-novel,
-        .narou-tweaker-custom-editor .nt-editor--main-title,
-        .narou-tweaker-custom-editor .nt-editor--main-items,
-        .narou-tweaker-custom-editor .nt-editor--postscript {
+        .narou-tweaker-custom-editor .nt-editor--preface,
+        .narou-tweaker-custom-editor .nt-editor--postscript,
+        .narou-tweaker-custom-editor .nt-editor--freememo {
             max-width: 100% !important;
             width: ${width}px;
             line-height: ${lineHeight}% !important;
             font-size: ${fontSize}% !important;
         }
-        
         `
 
         chrome.storage.local.set({

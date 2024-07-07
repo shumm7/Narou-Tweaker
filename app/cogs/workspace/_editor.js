@@ -290,6 +290,7 @@ function changeEditorPageLikePreview(){
                                     </div>
                                 </div>
                                 <div id="nt-display-option--font-family-description"></div>
+                                <div class="nt-display-option--description">サイズ</div>
                                 <div id="nt-display-option--font-size">
                                     <div style="margin: 0 .5em;">+</div>
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--font-size-minus">-</div>
@@ -297,6 +298,7 @@ function changeEditorPageLikePreview(){
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--font-size-plus">+</div>
                                     <div style="margin: 0 .5em;">%</div>
                                 </div>
+                                <div class="nt-display-option--description">行間</div>
                                 <div id="nt-display-option--line-height">
                                     <div style="margin: 0 .5em;">+</div>
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--line-height-minus">-</div>
@@ -304,6 +306,8 @@ function changeEditorPageLikePreview(){
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--line-height-plus">+</div>
                                     <div style="margin: 0 .5em;">%</div>
                                 </div>
+                                <!--
+                                <div class="nt-display-option--description">横幅</div>
                                 <div id="nt-display-option--page-width">
                                     <div style="margin: 0 .5em;">×</div>
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--page-width-minus">-</div>
@@ -311,6 +315,7 @@ function changeEditorPageLikePreview(){
                                     <div class="nt-display-option--font-number-change-button" id="nt-display-option--page-width-plus">+</div>
                                     <div style="margin: 0 .5em;">%</div>
                                 </div>
+                                -->
                             </div>
                         </div>
                     </div>
