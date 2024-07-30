@@ -358,7 +358,8 @@ export function makeSkinCSS(skin, novel_css){
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a,
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a:link,
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a:visited,
-    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form {
+    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form,
+    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button {
         color: ${s.sublist.color} !important;
     }
     /* クリック済みのアイコン */
@@ -370,7 +371,9 @@ export function makeSkinCSS(skin, novel_css){
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li a:hover,
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li a:active,
     .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:hover,
-    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:active {
+    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:active,
+    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button:hover,
+    .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button:active {
         color: ${s.sublist.hover} !important;
     }
 

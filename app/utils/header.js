@@ -49,14 +49,24 @@ export const novelIconList = {
         icon: "fa-solid fa-book-bookmark",
         text: "ブックマーク"
     },
+    favlist_add: {
+        icon: "fa-regular fa-star",
+        text: "お気に入りep"
+    },
+    favepisode: {
+        icon: "fa-solid fa-table-list",
+        text: "お気に入りep一覧"
+    },
     edit: {
         icon: "fa-solid fa-pen-to-square",
         text: "編集"
     },
+    /*
     siori: {
         icon: "fa-solid fa-bookmark",
         text: "しおり"
     },
+    */
     text: {
         icon: "fa-solid fa-file-lines",
         text: "TXT"

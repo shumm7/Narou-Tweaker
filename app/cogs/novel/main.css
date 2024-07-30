@@ -123,8 +123,9 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	margin-bottom: 3em;
 }
 .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form {
-	/* アイコンのa,formタグ用 */
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form,
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button {
+	/* アイコンのa,form,buttonタグ用 */
 	display: flex !important;
 	flex-flow: column;
 	justify-content: center;
@@ -141,7 +142,8 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	background: none !important;
 }
 .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li a > span,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form > input {
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form > input,
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button > span {
 	/* アイコンの題名 */
 	margin-top: .5em;
 	text-align: center;
@@ -152,7 +154,8 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	color: transparent;
 }
 .narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a:hover > span,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:hover > input {
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:hover > input,
+.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button:hover > span {
 	/* アイコンの題名（ホバー時） */
 	color: inherit;
 	transition: color .2s;
@@ -173,6 +176,11 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	/* シリーズページのul設定 */
 	border-left: none;
 }
+.narou-tweaker-header--mode-1 .novel-icon-wrapper .p-favepisode-form__button {
+	/* お気に入りep */
+    border: none !important;
+}
+
 
 /* モダンなヘッダ OFF */
 .narou-tweaker-header--mode-0 .novel-icon-wrapper ul {
@@ -212,7 +220,8 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	margin-right: .3em;
 }
 .narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > a:hover,
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > form:hover > input {
+.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > form:hover > input,
+.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > div > button:hover > span {
 	/* 背景色を無効化 */
 	background: none;
 }
@@ -242,6 +251,39 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 /* ブックマークアイコン */
 .narou-tweaker-header--mode-0 #novel_header ul li.booklist {
 	margin: 0 5px !important;
+}
+
+/* お気に入りep */
+.narou-tweaker-header--mode-0 .novel-icon-wrapper  .favlist_add {
+    margin: 0 !important;
+    padding: 11px 0 0 0 !important;
+}
+.narou-tweaker-header--mode-0 .novel-icon-wrapper .p-favepisode-form {
+    padding: 5px 10px;
+    border-left: 1px solid #cccccc;
+    height: 100%;
+}
+.narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add button {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    color: #666666;
+    font-weight: bold;
+    font-size: inherit !important;
+    font-family: inherit;
+    width: unset;
+    height: unset;
+    display: flex;
+    align-items: center;
+	margin-top: 2px;
+}
+
+ul#head_nav li a, .pdflilnk {
+    padding: 5px 10px;
+    color: #666666;
+    font-weight: bold;
+    display: block;
+    border-left: 1px solid #cccccc;
 }
 
 /* しおり */
@@ -285,6 +327,22 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 .narou-tweaker-header--mode-0 #novel_header ul li.review a:visited /*レビュー */ {
 	color: #999;
 }
+
+/* お気に入りep */
+.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button::before {
+    content: none !important;
+}
+.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button .active-icon{
+	display: none;
+}
+.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .active-icon {
+	display: block;
+}
+.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .enactive-icon {
+	display: none;
+}
+
+
 
 /* 検索ボックス */
 #novel_header_search_box.show {

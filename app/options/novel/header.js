@@ -186,6 +186,7 @@ export function restoreHeaderIconList(){
         function restore(data, position){
             $(".draggable_area[name='novel-header']#"+position).empty()
             $.each(data, (_, icon)=>{
+                if(icon in novelIconList)
                 $(".draggable_area[name='novel-header']#"+position).append(getNovelHeaderIconElement(icon))
             })
         }

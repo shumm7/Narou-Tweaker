@@ -222,6 +222,7 @@ export function _header(){
         }
 
         /* しおり */
+        /*
         elm = $("#novel_header li.bookmark_now a")
         if(elm.length){
             elm.text("")
@@ -268,6 +269,33 @@ export function _header(){
         if(!elm.length){
             // enactive
             $("#novel_header ul").append('<li class="siori enactive"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり</span></a></li>')
+        }
+        */
+
+        /* お気に入りep追加 */
+        elm = $("#novel_header li.favlist_add")
+        if(elm.length){
+            var button = elm.find(".p-favepisode-form__button")
+            elm.find(".p-favepisode-form__button").append(`<i class="fa-regular fa-star enactive-icon"></i><i class="fa-solid fa-star active-icon"></i><span class="title">お気に入りep</span>`)
+        }else{
+            //enactive
+            $("#novel_header ul").append('<li class="favlist_add enactive"><a><i class="fa-regular fa-star"></i><span class="title">お気に入りep</span></a></li>')
+        }
+
+        /* お気に入りep */
+        elm = $("#novel_header li a.js-favepisode_list_open_button")
+        if(elm.length){
+            elm.find("span.p-icon").remove()
+            elm.parent().addClass("favepisode")
+            elm.text("")
+            if(isCustomHeader){
+                elm.append('<i class="fa-solid fa-table-list"></i><span class="title">お気に入りep<br>一覧</span>')
+            }else{
+                elm.append('<i class="fa-solid fa-table-list"></i><span class="title">お気に入りep一覧</span>')
+            }
+        }else{
+            //enactive
+            $("#novel_header ul").append('<li class="favepisode enactive"><a><i class="fa-solid fa-table-list"></i><span class="title">お気に入りep一覧</span></a></li>')
         }
 
         /* 設定 */
