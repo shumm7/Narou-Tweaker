@@ -56,7 +56,7 @@ export function optionHide(){
 
         chrome.storage.local.get(data_for, function(data){
             $.each(data_for, function(_, key){
-                if(data.includes(key)){
+                if(key in data){
                     change(data[key])
                 }
             })
