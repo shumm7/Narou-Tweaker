@@ -2,11 +2,33 @@
     "version": 0,
     "data": [
         {
-            "version": "0.3.3",
-            "date": "2024-06-23",
+            "version": "0.3.4",
+            "date": "2024-07-30",
             "release": {
                 "chrome": null,
                 "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "novel": [
+                        "ヘッダ：ブックマーク関連の更新に関連して、「しおり」を削除し、「お気に入りep」「お気に入りep一覧」等のアイコンを追加"
+                    ],
+                    "workspace": [
+                        "エディタ：編集内容が正常に保存できないことがある不具合を修正",
+                        "エディタ：スキンの変更機能を追加"
+                    ],
+                    "general": [
+                        "その他不具合修正"
+                    ]
+                }
+            }
+        },
+        {
+            "version": "0.3.3",
+            "date": "2024-06-23",
+            "release": {
+                "chrome": true,
+                "gecko": true
             },
             "patchnote": {
                 "ja": {
