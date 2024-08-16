@@ -23,6 +23,9 @@ body.narou-tweaker-bookmark-layout-1 .c-up-panel__list-item {
 body.narou-tweaker-bookmark-layout-1 .c-up-chk-item__content.c-up-chk-item__content--nochk {
     padding-left: 10px;
 }
+body.narou-tweaker-bookmark-layout-1 :not(.js-item_check[style="display: block;"]) + .c-up-chk-item__content {
+    padding-left: 10px;
+}
 body.narou-tweaker-bookmark-layout-1 .c-up-panel__list-item.p-up-bookmark-item--siori:not(.p-up-bookmark-item--notice) {
     background: -webkit-linear-gradient(90deg, #D1E8FC .7em, transparent .7em);
     background: -moz-linear-gradient(90deg, #D1E8FC .7em, transparent .7em);
@@ -137,6 +140,11 @@ body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__latest {
 }
 body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__complete {
     font-weight: 600;
+    color: var(--color-text);
+    font-size: 12px;
+}
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__complete:after{
+    display: none;
 }
 body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__complete.p-up-bookmark-item__complete-hidden {
     opacity: 0;

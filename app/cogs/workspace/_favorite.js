@@ -40,7 +40,7 @@ function bookmarkLayout(){
                 var title = outer.find(".p-up-bookmark-item__title a").addClass("p-up-bookmark-item__description__title")
                 var label = outer.find(".p-up-bookmark-item__title span").clone().addClass("p-up-bookmark-item__description__label")
                 title.find("span").remove()
-                var author_link = outer.find(".p-up-bookmark-item__author a")
+                var author_link = outer.find(".p-up-bookmark-item__data a[href^='https://mypage.syosetu.com/'], .p-up-bookmark-item__data a[href^='https://xmypage.syosetu.com/']")
                 var author = $(`<span class="p-up-bookmark-item__description__author">`).append(author_link)
 
                 outer.find(".p-up-bookmark-item__header").append(`<p class="p-up-bookmark-item__description"></p>`)
@@ -55,24 +55,42 @@ function bookmarkLayout(){
                 var complete = outer.find(".p-up-bookmark-item__complete")
                 var memo = outer.find(".c-up-memo")
 
+                if(complete.length){
+                    complete.text(`＜ ${complete.text()} ＞`)
+                }
+
                 var middle = outer.find(".p-up-bookmark-item__info-button")
                 middle.before(memo)
                 middle.append(date)
                 middle.append(complete)
 
-                var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
-                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
+                var current_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
-                if(current_ep.hasClass("c-button--primary")){
-                    current_ep.removeClass(["c-button c-button--primary c-button--sm"])
-                    current_ep.find(".p-up-bookmark-item__unread").remove()
+
+                if(latest_ep.find(".p-up-bookmark-item__unread").length){
+                    latest_ep.find(".p-up-bookmark-item__unread").remove()
+                    latest_ep.text("最新 " + latest_ep.text())
+                }
+                if(latest_ep.attr("disabled")!==undefined){
+                    latest_ep.remove()
+                    latest_ep = current_ep.clone()
+                    episode.append(latest_ep)
+                    latest_ep.text("最新 " + current_ep.text())
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                     current_ep.find(".p-icon--siori").insertBefore(current_ep)
-                    if(data.workspaceBookmarkReplaceEpisode){
-                        current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
-                    }
-                    $(this).addClass("p-up-bookmark-item--siori")
+                }else{
+                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
+                    current_ep.find(".p-icon--siori").insertBefore(current_ep)
                 }
+
+                current_ep.removeClass(["c-button", "c-button--primary","c-button__text-sm", "c-button--outline", "c-button--sm"])
+                latest_ep.removeClass(["c-button--primary","c-button__text-sm"])
+
+                if(data.workspaceBookmarkReplaceEpisode){
+                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                }
+                $(this).addClass("p-up-bookmark-item--siori")
 
                 latest_ep.removeClass("c-button c-button--outline c-button--sm")
                 if(data.workspaceBookmarkReplaceEpisode){
@@ -80,6 +98,10 @@ function bookmarkLayout(){
                         latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
                     }else{
                         latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    }
+                }else{
+                    if(complete.length){
+                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 ep.$1"))
                     }
                 }
                 episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
