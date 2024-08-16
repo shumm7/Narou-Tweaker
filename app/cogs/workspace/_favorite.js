@@ -26,7 +26,7 @@ function bookmarkLayout(){
 
             var outer = $(this).find(".c-up-chk-item__content")
             
-            if(layout==1){
+            if(layout==1){ //mode = 1
                 outer.addClass("narou-tweaker-bookmark-layout-1--item")
                 if(insertClass){
                     outer.addClass(insertClass)
@@ -70,13 +70,10 @@ function bookmarkLayout(){
 
                 if(latest_ep.find(".p-up-bookmark-item__unread").length){
                     latest_ep.find(".p-up-bookmark-item__unread").remove()
-                    latest_ep.text("最新 " + latest_ep.text())
                 }
+                let is_latest = true
                 if(latest_ep.attr("disabled")!==undefined){
-                    latest_ep.remove()
-                    latest_ep = current_ep.clone()
-                    episode.append(latest_ep)
-                    latest_ep.text("最新 " + current_ep.text())
+                    is_latest = false
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                     current_ep.find(".p-icon--siori").insertBefore(current_ep)
                 }else{
@@ -85,7 +82,7 @@ function bookmarkLayout(){
                 }
 
                 current_ep.removeClass(["c-button", "c-button--primary","c-button__text-sm", "c-button--outline", "c-button--sm"])
-                latest_ep.removeClass(["c-button--primary","c-button__text-sm"])
+                latest_ep.removeClass(["c-button--primary","c-button__text-sm", "c-button c-button--outline", "c-button--sm"])
 
                 if(data.workspaceBookmarkReplaceEpisode){
                     current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
@@ -94,17 +91,12 @@ function bookmarkLayout(){
 
                 latest_ep.removeClass("c-button c-button--outline c-button--sm")
                 if(data.workspaceBookmarkReplaceEpisode){
-                    if(complete.length){
-                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
-                    }else{
-                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
-                    }
-                }else{
-                    if(complete.length){
-                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 ep.$1"))
-                    }
+                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
                 }
-                episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+
+                if(is_latest){
+                    episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+                }
                 outer.find(".p-up-bookmark-item__button").remove()
                 outer.find(".p-up-bookmark-item__info").remove()
                 middle.append(episode)
@@ -126,7 +118,7 @@ function bookmarkLayout(){
                 }
                 footer.append(option)
 
-            }else if(layout==2){
+            }else if(layout==2){ //mode = 2
                 outer.addClass("narou-tweaker-bookmark-layout-2--item")
                 if(insertClass){
                     outer.addClass(insertClass)
@@ -151,30 +143,44 @@ function bookmarkLayout(){
                 list_elm.append(label)
                 list_elm.append(title)
 
-                var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
-                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
+                var current_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
-                if(current_ep.hasClass("c-button--primary")){
-                    current_ep.removeClass(["c-button c-button--primary c-button--sm"])
-                    current_ep.find(".p-up-bookmark-item__unread").remove()
+                var unread = outer.find(".p-up-bookmark-item__unread-num")
+                
+                if(latest_ep.find(".p-up-bookmark-item__unread").length){
+                    latest_ep.find(".p-up-bookmark-item__unread").remove()
+                }
+
+                var is_latest = true
+                var is_siori = false
+                if(latest_ep.attr("disabled")!==undefined){
+                    is_latest = false
+                    latest_ep.remove()
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
-                    var icon = current_ep.find(".p-icon--siori").clone()
-                    if(data.workspaceBookmarkReplaceEpisode){
-                        current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
-                    }
-                    current_ep.find(".p-icon--siori").remove()
-                    current_ep.prepend(icon)
-                    $(this).addClass("p-up-bookmark-item--siori")
+                }else{
+                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                 }
-                latest_ep.removeClass("c-button c-button--outline c-button--sm")
+                if(current_ep.find(".p-icon--siori").length){
+                    is_siori = true
+                }
+
+                current_ep.removeClass(["c-button", "c-button--primary","c-button__text-sm", "c-button--outline", "c-button--sm"])
+                latest_ep.removeClass(["c-button--primary","c-button__text-sm", "c-button", "c-button--outline", "c-button--sm"])
+
                 if(data.workspaceBookmarkReplaceEpisode){
-                    if(complete.length){
-                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
-                    }else{
-                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    if(is_siori){
+                        current_ep.prepend(`<span class="p-icon p-icon--siori" aria-hidden="true"></span>`)
                     }
                 }
-                episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+                if(is_latest){
+                    episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
+                    if(unread.length){
+                        latest_ep.append(`<span class="p-up-bookmark-item__unread"><span class="p-up-bookmark-item__unread-num">${unread.text()}</span></span>`)
+                    }
+                }
                 list_elm.after(episode)
 
                 header.append($(`<span class="p-up-bookmark-item__show-info-button"><span class="p-icon p-icon--caret-down" aria-hidden="true"></span></span>`).click(function(){
@@ -191,7 +197,7 @@ function bookmarkLayout(){
                 info.find(".p-up-bookmark-item__status").append(option)
                 outer.find(".p-up-bookmark-item__info-button").remove()
 
-            }else{
+            }else{ //mode = 0
                 outer.addClass("narou-tweaker-bookmark-layout-0--item")
                 if(data.workspaceBookmarkReplaceEpisode){
                     var complete = outer.find(".p-up-bookmark-item__complete").clone()

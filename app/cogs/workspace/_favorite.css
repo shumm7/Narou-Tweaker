@@ -130,8 +130,8 @@ body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode a {
     font-weight: bold;
     font-family: "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 }
-body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__siori:after,
-body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__episode__siori:after {
+body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__latest:before,
+body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__episode__latest:before {
     margin: 0 .5em;
     content: "‐";
 }
@@ -160,6 +160,18 @@ body.narou-tweaker-bookmark-layout-1 .p-up-bookmark-item__episode__siori .p-icon
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__unread {
+    margin: 0;
+    padding: 0;
+    margin-left: 3px;
+    padding: 0 5px;
+    background-color: var(--color-ui-button-bg--primary-lighten);
+    color: var(--color-text--light);
+}
+body.narou-tweaker-bookmark-layout-2 .p-up-bookmark-item__unread-num {
+    margin: 0;
+    font-weight: 100;
 }
 
 /* 小説ステータス / 設定*/
