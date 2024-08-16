@@ -95,27 +95,27 @@
     speak: none
 }
 .c-up-point-star>.is-full::after {
-    content: ""
-}
-.c-up-point-star>.is-half::after {
-    font-family: hinaicon;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    position: relative;
-    top: -.1em;
-    display: inline-block;
-    vertical-align: middle;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 400;
-    line-height: 1;
-    text-decoration: none;
-    text-transform: none;
-    speak: none
-}
-.c-up-point-star>.is-half::after {
     content: ""
 }
+.c-up-point-star>.is-half::after {
+    font-family: hinaicon;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    top: -.1em;
+    display: inline-block;
+    vertical-align: middle;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: none;
+    speak: none
+}
+.c-up-point-star>.is-half::after {
+    content: ""
+}
 .c-up-point-star>.is-empty::after {
     font-family: hinaicon;
     -webkit-font-smoothing: antialiased;
@@ -133,7 +133,7 @@
     speak: none
 }
 .c-up-point-star>.is-empty::after {
-    content: ""
+    content: ""
 }
 
 /* For Auto URLs */
