@@ -207,20 +207,19 @@ function bookmarkLayout(){
                     var complete = outer.find(".p-up-bookmark-item__complete").clone()
                     var current_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(1)")
                     var latest_ep = outer.find(".p-up-bookmark-item__button .c-button-combo a:nth-child(2)")
+                    var unread_mark = latest_ep.find(".p-up-bookmark-item__unread").clone()
+                
+                    if(unread_mark.length){
+                        latest_ep.find(".p-up-bookmark-item__unread").remove()
+                    }
 
                     var icon = current_ep.find(".p-icon--siori").clone()
-                    var unread_mark = current_ep.find(".p-up-bookmark-item__unread").clone()
-                    current_ep.find(".p-up-bookmark-item__unread").remove()
                     current_ep.find(".p-icon--siori").remove()
                     current_ep.text(current_ep.text().replace(/ep\.(\d+)/, "$1部分"))
                     current_ep.prepend(icon)
-                    current_ep.append(unread_mark)
 
-                    if(complete.length){
-                        latest_ep.text(latest_ep.text().replace(/最新 ep\.(\d+)/, "最終 $1部分"))
-                    }else{
-                        latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
-                    }
+                    latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
+                    latest_ep.append(unread_mark)
                 }
             }
             
