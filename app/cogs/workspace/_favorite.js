@@ -67,6 +67,7 @@ function bookmarkLayout(){
                 var current_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(1)")
                 var latest_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
+                var unread = outer.find(".p-up-bookmark-item__unread-num")
 
                 if(latest_ep.find(".p-up-bookmark-item__unread").length){
                     latest_ep.find(".p-up-bookmark-item__unread").remove()
@@ -107,6 +108,9 @@ function bookmarkLayout(){
                 outer.append(`<div class="p-up-bookmark-item__option-button"></div>`)
                 var footer = outer.find(".p-up-bookmark-item__option-button")
                 footer.append(`<span class="p-up-bookmark-item__status">`)
+                if(unread.length){
+                    outer.find(".p-up-bookmark-item__status").append(`<span class="p-up-bookmark-item__unread">未読 <span class="p-up-bookmark-item__unread-num">${unread.text()}</span></span>`)
+                }
                 if(notice.length){
                     $(this).addClass("p-up-bookmark-item--notice")
                     notice.text("チェック中")
