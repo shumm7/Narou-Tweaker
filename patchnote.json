@@ -2,6 +2,24 @@
     "version": 0,
     "data": [
         {
+            "version": "0.3.5",
+            "date": "2024-08-20",
+            "release": {
+                "chrome": null,
+                "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "workspace": [
+                        "ブックマークページの表示不具合を修正"
+                    ],
+                    "mypage": [
+                        "一部、星のアイコンが正常に表示されない問題を修正"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.3.4",
             "date": "2024-07-30",
             "release": {
