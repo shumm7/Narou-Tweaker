@@ -75,9 +75,9 @@ function bookmarkLayout(){
                 let is_latest = true
                 if(latest_ep.attr("disabled")!==undefined){
                     is_latest = false
-                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
-                    current_ep.find(".p-icon--siori").insertBefore(current_ep)
-                }else{
+                }
+
+                if(current_ep.length){
                     episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                     current_ep.find(".p-icon--siori").insertBefore(current_ep)
                 }
@@ -95,7 +95,7 @@ function bookmarkLayout(){
                     latest_ep.text(latest_ep.text().replace(/ep\.(\d+)/, "$1部分"))
                 }
 
-                if(is_latest){
+                if(is_latest && latest_ep.length){
                     episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
                 }
                 outer.find(".p-up-bookmark-item__button").remove()
@@ -161,12 +161,12 @@ function bookmarkLayout(){
                 if(latest_ep.attr("disabled")!==undefined){
                     is_latest = false
                     latest_ep.remove()
-                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
-                }else{
-                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
                 }
-                if(current_ep.find(".p-icon--siori").length){
-                    is_siori = true
+                if(current_ep.length){
+                    episode.prepend($(`<span class="p-up-bookmark-item__episode__siori">`).append(current_ep))
+                    if(current_ep.find(".p-icon--siori").length){
+                        is_siori = true
+                    }
                 }
 
                 current_ep.removeClass(["c-button", "c-button--primary","c-button__text-sm", "c-button--outline", "c-button--sm"])
@@ -179,7 +179,7 @@ function bookmarkLayout(){
                         current_ep.prepend(`<span class="p-icon p-icon--siori" aria-hidden="true"></span>`)
                     }
                 }
-                if(is_latest){
+                if(is_latest && latest_ep.length){
                     episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
                     if(unread.length){
                         latest_ep.append(`<span class="p-up-bookmark-item__unread"><span class="p-up-bookmark-item__unread-num">${unread.text()}</span></span>`)
