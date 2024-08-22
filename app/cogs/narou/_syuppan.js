@@ -17,8 +17,8 @@ export function syuppan(){
 }
 
 function _viewBookImage(){
-    if($(".p-syuppan-detail__image[href^='https://www.amazon.co.jp/dp/'] .c-syuppan-noimage").length){
-        var image = $(".p-syuppan-detail__image[href^='https://www.amazon.co.jp/dp/']")
+    if($(".p-syuppan-detail__image-link[href^='https://www.amazon.co.jp/dp/'] .c-syuppan-noimage").length){
+        var image = $(".p-syuppan-detail__image-link[href^='https://www.amazon.co.jp/dp/']")
         var amazonLink = image.prop("href")
 
         var amazonId = escapeHtml(amazonLink.match(/^https\:\/\/www\.amazon\.co\.jp\/dp\/(.*)\/$/)[1])
@@ -30,7 +30,7 @@ function _viewBookImage(){
 }
 
 function _listBookImage(){
-    $(".p-syuppan-list .p-syuppan-list__image.p-syuppan-list__image--noimage").each(function(){
+    $(".p-syuppan-list .p-syuppan-list__image-link.p-syuppan-list__image-link--noimage").each(function(){
         var listImage = $(this)
         const url = listImage.prop("href")
         listImage.prop("href", "javascript:void(0)")
@@ -44,8 +44,8 @@ function _listBookImage(){
                         var body = $($.parseHTML(response.result))
 
                         listImage.removeClass("p-syuppan-list__image--nosearch")
-                        if(body.find(".p-syuppan-detail__image[href^='https://www.amazon.co.jp/dp/'] .c-syuppan-noimage").length){
-                            var image = body.find(".p-syuppan-detail__image[href^='https://www.amazon.co.jp/dp/']")
+                        if(body.find(".p-syuppan-detail__image-link[href^='https://www.amazon.co.jp/dp/'] .c-syuppan-noimage").length){
+                            var image = body.find(".p-syuppan-detail__image-link[href^='https://www.amazon.co.jp/dp/']")
                             var amazonLink = image.prop("href")
                     
                             var amazonId = escapeHtml(amazonLink.match(/^https\:\/\/www\.amazon\.co\.jp\/dp\/(.*)\/$/)[1])
