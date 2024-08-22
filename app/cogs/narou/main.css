@@ -1,4 +1,5 @@
 .p-syuppan-list__image--searchimage {
     margin-top: 10px;
-    font-size: 90%;
+    font-size: 80%;
+    text-wrap: nowrap;
 }

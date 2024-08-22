@@ -35,7 +35,7 @@ function _listBookImage(){
         const url = listImage.prop("href")
         listImage.prop("href", "javascript:void(0)")
         listImage.addClass("p-syuppan-list__image--nosearch")
-        listImage.find(".c-syuppan-noimage__title").append(`<div class="p-syuppan-list__image--searchimage">クリックで書影を取得</div>`)
+        listImage.find(".c-syuppan-noimage__title").append(`<div class="p-syuppan-list__image--searchimage">（クリックで書影を取得）</div>`)
         
         listImage.on("click", function(){
             chrome.runtime.sendMessage({action: "fetch", format: "text", data: {url: url, options: {'method': 'GET'}}}, function(response){
