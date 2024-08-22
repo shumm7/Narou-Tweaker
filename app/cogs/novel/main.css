@@ -539,6 +539,7 @@ ul#head_nav li a, .pdflilnk {
 	width: 100vw;
 	height: 100vh;
     z-index: 49;
+	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 }
 #novel-option-background.show {
 	display: block;
