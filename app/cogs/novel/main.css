@@ -52,7 +52,7 @@ html:has(.narou-tweaker-cursor-hide) {
 #novel_header::-webkit-scrollbar,
 #novel_header ul::-webkit-scrollbar,
 #novel_header_right::-webkit-scrollbar,
-.wrap_menu_novelview_after *::-webkit-scrollbar {
+#novel_header_right *::-webkit-scrollbar {
 	/* スクロールバー無効化 */
 	display: none;
 }
@@ -191,18 +191,57 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	overflow-x: scroll;
 	overflow-y: hidden;
 }
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul {
+.narou-tweaker-header--mode-0 #novel_header_right ul {
 	/* ul 基本設定 */
 	align-items: center;
 }
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li {
+.narou-tweaker-header--mode-0 #novel_header {
+	/* header 基本設定 */
+	z-index: 3;
+	top: 0;
+    height: 48px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+	border-bottom: 1px solid var(--color-ui-border);
+	background-color: var(--color-bg-neverchange);
+	box-sizing: border-box;
+    width: 100%;
+}
+.narou-tweaker-header--mode-0 #novel_header ul {
+	/* header nav 基本設定 */
+	width: 730px;
+    height: 32px;
+    margin-right: auto;
+    margin-left: auto;
+	justify-content: start;
+}
+.narou-tweaker-header--mode-0 #novel_header_right {
+	/* フッタ用 header 基本設定 */
+	box-sizing: border-box;
+    width: 100%;
+    border-bottom: 1px solid var(--color-ui-border);
+	border-top: 1px solid var(--color-ui-border);
+    background-color: var(--color-bg-neverchange);
+    height: 48px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.narou-tweaker-header--mode-0 #novel_header_right ul {
+	/* フッタ用 ul 基本設定 */
+	display: flex;
+    width: 730px;
+    height: 32px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.narou-tweaker-header--mode-0 #novel_header_right ul li {
 	/* フッタ用 li 基本設定 */
     text-align: center;
     display: inline-block;
     font-weight: bold;
     font-size: 13px;
 }
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > *{
+.narou-tweaker-header--mode-0 #novel_header_right ul li > *{
 	/* フッタ用 aタグ基本設定 */
 	display: inline-block;
     padding: 3px 10px;
@@ -219,32 +258,31 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	/* アイコンの横にマージンを設定 */
 	margin-right: .3em;
 }
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > a:hover,
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > form:hover > input,
-.narou-tweaker-header--mode-0 .wrap_menu_novelview_after ul li > div > button:hover > span {
-	/* 背景色を無効化 */
-	background: none;
+.narou-tweaker-header--mode-0 #novel_header_right ul li > a:hover,
+.narou-tweaker-header--mode-0 #novel_header_right ul li > form:hover > input,
+.narou-tweaker-header--mode-0 #novel_header_right ul li > div > button:hover > span {
+	/* ホバー時の背景色 */
+	background-color: var(--color-link-globalnav-bg--hover);
 }
 
 
 /* 縦書きPDFアイコン */
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf .pdflilnk {
-    padding: 0;
-    border-left: none;
-}
 .narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf form {
 	display: flex;
 	align-items: center;
 }
 .narou-tweaker-header--mode-0 #novel_header ul li.pdf form {
     padding: 5px 10px;
-	border-left: 1px solid #eeeeee;
 	color: #666666;
 }
-.wrap_menu_novelview_after ul li.pdf form > *:hover {
+.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf .c-menu__item--pdflink {
+    padding: 0;
+    border-left: none !important;
+}
+#novel_header_right ul li.pdf form > *:hover {
 	background: transparent;
 }
-.wrap_menu_novelview_after ul li.pdf form > * {
+#novel_header_right ul li.pdf form > * {
 	font-size: inherit !important;
 }
 
@@ -254,9 +292,8 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 }
 
 /* お気に入りep */
-.narou-tweaker-header--mode-0 .novel-icon-wrapper  .favlist_add {
+.narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add {
     margin: 0 !important;
-    padding: 11px 0 0 0 !important;
 }
 .narou-tweaker-header--mode-0 .novel-icon-wrapper .p-favepisode-form {
     padding: 5px 10px;
@@ -278,11 +315,13 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	margin-top: 2px;
 }
 
-ul#head_nav li a, .pdflilnk {
+ul#head_nav li a, .c-menu__item--pdflink {
     padding: 5px 10px;
-    color: #666666;
     font-weight: bold;
     display: block;
+}
+ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
+    color: #666666;
     border-left: 1px solid #cccccc;
 }
 
@@ -427,21 +466,15 @@ ul#head_nav li a, .pdflilnk {
 
 /* Header */
 #novel_header.header-mode--absolute,
-#novel_header_right.header-mode--absolute,
-.header-mode--absolute #novelnavi_right,
-.header-mode--absolute #novelnavi_right > * {
+.narou-tweaker-header--mode-1 #novel_header_right.header-mode--absolute {
     position: absolute !important;
 }
 #novel_header.header-mode--scroll,
-#novel_header_right.header-mode--scroll,
-.header-mode--scroll #novelnavi_right, 
-.header-mode--scroll #novelnavi_right > * {
+.narou-tweaker-header--mode-1 #novel_header_right.header-mode--scroll {
     position: fixed !important;
 }
 #novel_header.header-mode--fixed,
-#novel_header_right.header-mode--fixed,
-.header-mode--fixed #novelnavi_right,
-.header-mode--fixed #novelnavi_right > *{
+.narou-tweaker-header--mode-1 #novel_header_right.header-mode--fixed{
     position: fixed !important;
 }
 .narou-tweaker-header--mode-1 #novel_header.header-mode--scroll,
@@ -469,26 +502,20 @@ ul#head_nav li a, .pdflilnk {
 /* Series Page - Header */
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header {
 	width: 100%;
-	text-align: left;
-	height: 48px;
-	background: url(/novelview/img/novelheader_bg.png) repeat-x top left #ffffff;
-	position: fixed;
-	top: 0;
-	left: 0;
+	border-bottom: 1px solid #ccc;
 	z-index: 3;
 }
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul {
 	margin: 0 auto;
-    width: 740px;
 	padding: 0;
 }
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li {
 	margin: 0;
-    padding: 11px 0 0 0;
     float: left;
     display: block;
     font-size: 13px;
 	border-left: none;
+	padding: 0;
 }
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li a {
     padding: 5px 10px;
@@ -502,23 +529,22 @@ ul#head_nav li a, .pdflilnk {
 }
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist {
 	margin: 0 0 0 10px;
-	padding: 9px 0 0 0;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .button_bookmark {
+.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .c-bookmark-button {
 	font-size:12px;
-	padding: 5px 10px;
+	padding: 5px;
 	border-style:solid;
 	border-width:2px;
 	text-align:center;
 	font-weight:bold;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .logout {
+.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .c-bookmark-button--disabled {
 	background:#fafafa;
 	border-color:#cccccc;
 	color:#aaaaaa;
 	display:block;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series .wrap_menu_novelview_after {
+.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header_right {
     box-sizing: border-box;
     margin-top: 10px;
 }

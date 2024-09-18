@@ -54,10 +54,10 @@ function _novelPage(){
     if(episode==0){
         title = $(".p-novel__title")
     }else{
-        title = $(".l-container .c-announce a[href='/"+ncode+"/']")
-        if($(".l-container .c-announce span").length){
-            $(".l-container .c-announce span").addClass("chapter_title")
-            var chapter_elm = $(".l-container .c-announce span")
+        title = $(".l-container .c-announce:last-child a[href='/"+ncode+"/']")
+        if($(".l-container .c-announce:last-child span").length){
+            $(".l-container .c-announce:last-child span").addClass("chapter_title")
+            var chapter_elm = $(".l-container .c-announce:last-child span")
             chapter = chapter_elm.text()
             chapter_elm.remove()
         }
@@ -92,22 +92,23 @@ function _novelPage(){
         var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
         var d_2
 
-        if($(".c-announce a").length){
-            var author = $(".c-announce a")
+        if($(".c-announce-box .c-announce:not(.c-announce--note) a").length){
+            var author = $(".c-announce-box .c-announce:not(.c-announce--note) a")
+            console.log(author)
             d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
         }else{
-            var author = $(".c-announce").text().trim().match(/作者：\s(.*)/)[1]
+            var author = $(".c-announce-box .c-announce:last-child").text().trim().match(/作者：\s(.*)/)[1]
             d_2 = `<div class="novel-author">`+author+`</div>`
         }
         if(chapter){
             $(".p-novel__number").after("<div class='novel-chapter'>"+chapter+"</div>")
         }
         
-        $(".c-announce").empty()
-        $(".c-announce").append(d)
-        $(".c-announce .novel-titles").append(d_1 + d_2)
+        $(".c-announce:last-child").empty()
+        $(".c-announce:last-child").append(d)
+        $(".c-announce:last-child .novel-titles").append(d_1 + d_2)
     }
-    
+}
 
 function _tategaki(){
     $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)

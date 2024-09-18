@@ -6,10 +6,8 @@ import { correction, restoreCorrectionMode } from "./_correction.js";
 import { getNcode } from "/utils/ncode.js";
 
 export function _optionModal(){
-    if(!$("#novel_header").length){return}
-
     /* Option Modal */
-    $("#novel_header").after("<aside id='novel-option'></aside>")
+    $("body").prepend("<aside id='novel-option'></aside>")
     $("#novel-option").before("<div id='novel-option-background'></div>")
     $("#novel-option").append("<div id='novel-option--header'></div>")
     $("#novel-option").append("<div id='novel-option--contents'></div>")

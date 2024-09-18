@@ -8,7 +8,8 @@ export function _header(){
     addFontAwesomeOriginaIcons()
 
     chrome.storage.local.get(null, (data) => {
-        if(!$("#novel_header").length){return}
+        $(".l-scrollheader").after("<div id='novel_header'><ul id='head_nav'></ul></div>")
+
         const isCustomHeader = data.novelCustomHeader
 
         const ncode = getNcode()
@@ -32,8 +33,8 @@ export function _header(){
         var text
         var elm
 
-        $("#pageBottom").remove()
-        $("#pageTop").remove()
+        $(".c-navigater--tobottom").remove()
+        $(".c-navigater--totop-up").remove()
 
         /* Right Menu Bar */
         if(isCustomHeader){
@@ -51,7 +52,11 @@ export function _header(){
                 $("body").addClass("narou-tweaker-header--hide-icon") //アイコンを隠す
             }
 
-            $("#novelnavi_right").empty()
+            $(".l-foot-contents").prepend(`<div id="novel_header_right">
+                <ul id="head_nav">
+                </ul>
+            </div>`)
+            /*
             $("#novelnavi_right").append(`<div class="option" id="menu_on" style="position: fixed;">設定</div>`)
             $("#novelnavi_right .option").on("click", function(){
                 if($("#novel-option").hasClass("show")){
@@ -65,6 +70,7 @@ export function _header(){
                     $("#novel-option-background").addClass("show")
                 }
             })
+        */
 
             if(pageType=="series"){
                 $(".novel_sublist").after(`<div class="wrap_menu_novelview_after">
@@ -79,14 +85,9 @@ export function _header(){
 
         
         /* Wrapper Tags */
-        if(isCustomHeader){
-            $("#novel_header").addClass("novel-icon-wrapper")
-            $("#novel_header_right").addClass("novel-icon-wrapper")
-        }else{
-            $("#novel_header").addClass("novel-icon-wrapper")
-            $(".box_menu_novelview_after").addClass("novel-icon-wrapper")
-        }
-        $("#novel_footer").remove()
+        $("#novel_header").addClass("novel-icon-wrapper")
+        $("#novel_header_right").addClass("novel-icon-wrapper")
+        $(".c-menu--foot").remove()
 
         // Enactiveなアイコンを表示する
         if(data.novelCustomHeaderShowEnactiveItems){
@@ -94,12 +95,49 @@ export function _header(){
         }
 
         
-        /* Twitter シェアボタンを削除 */
-        $("#novel_header li:nth-last-child(1)").remove()
+        /* 初期アイコン */
+        
+        if(pageType=="series"){
+            $("#novel_header ul").empty()
+        }else{
+            $(".l-scrollheader .c-menu__body a, .l-scrollheader .c-menu__body form, .l-scrollheader .c-menu__body div").each(function(){
+                if($(this).hasClass("c-menu__item-pdf")){
+                    var pdf = $(`<li>`)
+                    pdf.append($(this))
+                    $("#novel_header #head_nav").append(pdf)
+                }
+                else if($(this).hasClass("c-menu__item") && $(this).hasClass("js-favepisode_list_open_button")){
+                    var elm = $(`<li class="favepisode">`)
+                    elm.append($(this))
+                    $("#novel_header #head_nav").append(elm)
+                }
+                else if($(this).hasClass("c-menu__item--bookmark")){
+                    var elm = $("<li class='booklist'>")
+                    elm.append($(this).children())
+                    $("#novel_header #head_nav").append(elm)
+                }
+                else if($(this).hasClass("c-menu__item--favep")){
+                    var elm = $("<li class='favlist_add'>")
+                    elm.append($(this).children())
+                    $("#novel_header #head_nav").append(elm)
+                }
+                else if($(this).hasClass("c-menu__item--xpost")){
+                    //None
+                }
+                else if($(this).hasClass("c-menu__item")){
+                    $("#novel_header #head_nav").append(`<li><a href="${$(this).prop("href")}">${$(this).text()}</a></li>`)
+                }
+            })
+        }
+        $(".l-scrollheader").remove()
 
         /* ホーム / ログイン */
         if(pageType!="series"){
-            elm = $("#novel_header li#login a")
+            elm = $(`
+                #novel_header li a[href='https://syosetu.com/user/top/'],
+                #novel_header li a[href='https://syosetu.com/login/input/'],
+                #novel_header li a[href='https://syosetu.com/xuser/top/']`
+            )
             if(elm.length){
                 text = elm.text()
                 elm.text("")
@@ -193,7 +231,7 @@ export function _header(){
             }
             elm.parent().addClass("booklist")
         }
-        else if($("#novel_header li.booklist .button_bookmark.logout").length){ //非ログイン状態
+        else if($("#novel_header li.booklist .c-bookmark-button--disabled").length){ //非ログイン状態
             is_login = false
             if(isCustomHeader){
                 elm = $("#novel_header li.booklist")
@@ -208,7 +246,7 @@ export function _header(){
             }else{
                 $("#novel_header ul").append(`
                     <li class="booklist enactive">
-                        <span class="button_bookmark logout">${text}に追加</span>
+                        <span class="c-bookmark-button c-bookmark-button--disabled">${text}に追加</span>
                     </li>
                 `)
             }
@@ -218,59 +256,12 @@ export function _header(){
         elm = $("#novel_header li.booklist")
         if(!elm.length){
             // enactive
-            $("#novel_header ul").append('<li class="booklist enactive"><a><i class="fa-solid fa-book"></i><span class="title">ブックマーク</span></a></li>')
-        }
-
-        /* しおり */
-        /*
-        elm = $("#novel_header li.bookmark_now a")
-        if(elm.length){
-            elm.text("")
-            elm.append('<i class="fa-regular fa-bookmark"></i><span class="title">しおり</span>')
-            elm.addClass("siori")
-            $("#novel_header li.set_siori").on("click", function(){
-                $(this).find("a.siori i.fa-bookmark").removeClass("fa-regular")
-                $(this).find("a.siori i.fa-bookmark").addClass("fa-solid")
-                $(this).find("a.siori .title").text("しおり中")
-            })
-            elm.parent().addClass("siori")
-        }
-
-        elm = $("#novel_header li.bookmark")
-        if(elm.length){
-            elm.text("")
-            elm.append('<a><i class="fa-solid fa-bookmark"></i><span class="title">しおり中</span></a>')
-            elm.addClass("siori")
-        }
-
-        elm = $("#novel_header li.bookmark")
-        if(pageType=="top" && !elm.length){
-            elm = $(".novellingindex_bookmarker_no")
-            if(elm.length){
-                var link = elm.find("a").prop("href")
-                var text = elm.find("a").text()
-                elm.remove()
-                if(isCustomHeader){
-                    $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<br><span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
-                }else{
-                    $("#novel_header ul").prepend('<li class="siori"><a href="'+link+'"><i class="fa-solid fa-bookmark"></i><span class="title">しおり中<span style="font-size: 90%;">（'+text+'）</span></span></a></li>')
-                }
-                $("head").append(`<meta name="siori" content="${link}" property="${text}">`)
+            if(isCustomHeader){
+                $("#novel_header ul").append('<li class="booklist enactive"><a><i class="fa-solid fa-book"></i><span class="title">ブックマーク</span></a></li>')
             }else{
-                if(isCustomHeader){
-                    $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<br><span style="font-size: 90%;">（なし）</span></span></a></li>')
-                }else{
-                    $("#novel_header ul").prepend('<li class="siori"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり<span style="font-size: 90%;">（なし）</span></span></a></li>')
-                }
+                $("#novel_header ul").append('<li class="booklist enactive"><span class="c-bookmark-button c-bookmark-button--disabled">ブックマークに追加</span></li>')
             }
         }
-
-        elm = $("#novel_header li.siori")
-        if(!elm.length){
-            // enactive
-            $("#novel_header ul").append('<li class="siori enactive"><a><i class="fa-regular fa-bookmark"></i><span class="title">しおり</span></a></li>')
-        }
-        */
 
         /* お気に入りep追加 */
         elm = $("#novel_header li.favlist_add")
@@ -283,10 +274,9 @@ export function _header(){
         }
 
         /* お気に入りep */
-        elm = $("#novel_header li a.js-favepisode_list_open_button")
+        elm = $("#novel_header li.favepisode a")
         if(elm.length){
             elm.find("span.p-icon").remove()
-            elm.parent().addClass("favepisode")
             elm.text("")
             if(isCustomHeader){
                 elm.append('<i class="fa-solid fa-table-list"></i><span class="title">お気に入りep<br>一覧</span>')
@@ -785,12 +775,7 @@ export function _header(){
             $.each(right, (_, cls)=>{
                 var elm = $(`#novel_header ul li.${cls}, #novel_header_right ul li.${cls}, .box_menu_novelview_after ul.menu_novelview_after li.${cls}`)
                 if(elm.length){
-                    var ext
-                    if(isCustomHeader){
-                        ext = "#novel_header_right ul"
-                    }else{
-                        ext = ".box_menu_novelview_after .menu_novelview_after"
-                    }
+                    var ext = "#novel_header_right ul"
                     if($(ext).length){
                         elm.appendTo(ext)
                     }else{
