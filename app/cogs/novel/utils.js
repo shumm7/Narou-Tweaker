@@ -97,7 +97,7 @@ export function checkNovelPageDetail(url){
         }
         else if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
             if((typeof $)!=="undefined"){
-                if($("#novel_honbun").length){
+                if($(".p-novel").length){
                     return "novel"
                 }else{
                     return "top"

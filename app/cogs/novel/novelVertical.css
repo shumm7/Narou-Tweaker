@@ -60,7 +60,7 @@
 .narou-tweaker-vertical .novel_bn a {
     margin: 10px 0;
 }
-.narou-tweaker-vertical #novel_no {
+.narou-tweaker-vertical .p-novel__number {
 	-webkit-text-combine: horizontal;
   	-ms-text-combine-horizontal: all;
   	text-combine-upright: all;

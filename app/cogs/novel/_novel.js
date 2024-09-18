@@ -12,6 +12,7 @@ export function _novel(){
             $("#footer").remove()
 
             if(pageDetail=="novel"){
+
                 _novelPage()
             }
         }
@@ -51,37 +52,39 @@ function _novelPage(){
     var chapter = undefined
     
     if(episode==0){
-        title = $(".novel_title")
+        title = $(".p-novel__title")
     }else{
-        title = $("#container .contents1 a[href='/"+ncode+"/']")
-        if($("#container .contents1 .chapter_title").length){
-            chapter = $("#container .contents1 .chapter_title").text()
+        title = $(".l-container .c-announce a[href='/"+ncode+"/']")
+        if($(".l-container .c-announce span").length){
+            $(".l-container .c-announce span").addClass("chapter_title")
+            var chapter_elm = $(".l-container .c-announce span")
+            chapter = chapter_elm.text()
+            chapter_elm.remove()
         }
-
     }
 
     if(episode==0){
         var d_1 = `<div class="novel-title">`+title.text()+`</div>`
         var d_2
 
-        if($("#novel_contents .novel_writername a").length){
-            var author = $("#novel_contents .novel_writername a")
+        if($(".p-novel__author a").length){
+            var author = $(".p-novel__author a")
             d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
         }else{
-            var author = $("#novel_contents .novel_writername").text().trim().match(/作者：(.*)/)[1]
+            var author = $(".p-novel__author").text().trim().match(/作者：(.*)/)[1]
             d_2 = `<div class="novel-author">`+author+`</div>`
         }
 
-        $("#novel_contents").before(`
-        <div class="contents1">
+        $(".c-announce-box").append(`
+        <div class="c-announce">
             <div class="novel-titles" id="ep-`+episode+`">
                 `+d_1+`
                 `+d_2+`
             </div>
         </div>
         `)
-        $(".novel_title").remove()
-        $(".novel_writername").remove()
+        $(".p-novel__title").remove()
+        $(".p-novel__author").remove()
 
     }else{
         title.remove()
@@ -89,30 +92,22 @@ function _novelPage(){
         var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
         var d_2
 
-        if($("#container .contents1 a").length){
-            var author = $("#container .contents1 a")
+        if($(".c-announce a").length){
+            var author = $(".c-announce a")
             d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
         }else{
-            var author = $("#container .contents1").text().trim().match(/作者：(.*)/)[1]
+            var author = $(".c-announce").text().trim().match(/作者：\s(.*)/)[1]
             d_2 = `<div class="novel-author">`+author+`</div>`
         }
         if(chapter){
-            $("#novel_no").after("<div class='novel-chapter'>"+chapter+"</div>")
+            $(".p-novel__number").after("<div class='novel-chapter'>"+chapter+"</div>")
         }
         
-        $("#container .contents1").empty()
-        $("#container .contents1").append(d)
-        $("#container .contents1 .novel-titles").append(d_1 + d_2)
+        $(".c-announce").empty()
+        $(".c-announce").append(d)
+        $(".c-announce .novel-titles").append(d_1 + d_2)
     }
     
-
-
-    if(episode==1){
-        
-    }else if(episode>1){
-
-    }
-}
 
 function _tategaki(){
     $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
