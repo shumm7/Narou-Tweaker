@@ -99,7 +99,7 @@ export function _header(){
         
         if(pageType=="series"){
             $("#novel_header ul").empty()
-        }else{
+        }else if(pageType=="top" && pageType=="novel"){
             $(".l-scrollheader .c-menu__body a, .l-scrollheader .c-menu__body form, .l-scrollheader .c-menu__body div").each(function(){
                 if($(this).hasClass("c-menu__item-pdf")){
                     var pdf = $(`<li>`)
@@ -128,8 +128,10 @@ export function _header(){
                     $("#novel_header #head_nav").append(`<li><a href="${$(this).prop("href")}">${$(this).text()}</a></li>`)
                 }
             })
+            $(".l-scrollheader").remove()
+        }else{
+            $("#novel_header li:nth-last-child(1)").remove()
         }
-        $(".l-scrollheader").remove()
 
         /* ホーム / ログイン */
         if(pageType!="series"){
