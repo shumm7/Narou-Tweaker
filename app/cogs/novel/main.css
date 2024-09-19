@@ -241,6 +241,9 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
     font-weight: bold;
     font-size: 13px;
 }
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li {
+    padding: 0;
+}
 .narou-tweaker-header--mode-0 #novel_header_right ul li > *{
 	/* フッタ用 aタグ基本設定 */
 	display: inline-block;
@@ -271,11 +274,18 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	display: flex;
 	align-items: center;
 }
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page .novel-icon-wrapper ul li.pdf form {
+    border-left: 1px solid #cccccc;
+}
 .narou-tweaker-header--mode-0 #novel_header ul li.pdf form {
     padding: 5px 10px;
 	color: #666666;
 }
 .narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf .c-menu__item--pdflink {
+    padding: 0;
+    border-left: none !important;
+}
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page .novel-icon-wrapper ul li.pdf .pdflilnk {
     padding: 0;
     border-left: none !important;
 }
@@ -293,12 +303,11 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 
 /* お気に入りep */
 .narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add {
-    margin: 0 !important;
+	font-size: 13px;
 }
 .narou-tweaker-header--mode-0 .novel-icon-wrapper .p-favepisode-form {
-    padding: 5px 10px;
+    padding: 8.1px 10px;
     border-left: 1px solid #cccccc;
-    height: 100%;
 }
 .narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add button {
     padding: 0;
@@ -312,7 +321,9 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
     height: unset;
     display: flex;
     align-items: center;
-	margin-top: 2px;
+	margin-top: 0;
+    display: flex;
+    align-items: center;
 }
 
 ul#head_nav li a, .c-menu__item--pdflink {
@@ -530,7 +541,11 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 .narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist {
 	margin: 0 0 0 10px;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .c-bookmark-button {
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist {
+    padding: 0;
+}
+.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .c-bookmark-button,
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul .c-bookmark-button {
 	font-size:12px;
 	padding: 5px;
 	border-style:solid;
@@ -538,7 +553,8 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	text-align:center;
 	font-weight:bold;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .c-bookmark-button--disabled {
+.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .c-bookmark-button--disabled,
+.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist .c-bookmark-button--disabled {
 	background:#fafafa;
 	border-color:#cccccc;
 	color:#aaaaaa;

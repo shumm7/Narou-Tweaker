@@ -20,15 +20,17 @@ export function _novel(){
             _authorLink()
         }
         if(pageDetail=="novel"){
+            $("body").addClass("narou-tweaker--novel-page")
             if(data.novelVertical){
                 _tategaki()
             }
             _autoURL()
             _saveHistory()
-            if(data.novelAttentionBanner && getEpisode==0){
+            if(data.novelAttentionBanner && getEpisode()==0){
                 novelTopAttention()
             }
         }else if(pageDetail=="top"){
+            $("body").addClass("narou-tweaker--novel-page")
             novelTop()
             _saveHistory()
             if(data.novelShowHistoryOnSublist){
@@ -39,6 +41,8 @@ export function _novel(){
             }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
+        }else{
+            $("body").addClass("narou-tweaker--novelcom-page")
         }
         _cursorHide()
     })
@@ -94,7 +98,6 @@ function _novelPage(){
 
         if($(".c-announce-box .c-announce:not(.c-announce--note) a").length){
             var author = $(".c-announce-box .c-announce:not(.c-announce--note) a")
-            console.log(author)
             d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
         }else{
             var author = $(".c-announce-box .c-announce:last-child").text().trim().match(/作者：\s(.*)/)[1]
@@ -308,9 +311,11 @@ function _authorLink(){
         }
 
         if(pageDetail=="top" || (pageDetail=="novel" && episode==0)){
-            if($(".novel-author").length){
-                if(!$(".novel-author a").length){
-                    $(".novel-author").wrapInner(`<a href="${userid_link}">`)
+            if($(".p-novel__author").length){
+                if(!$(".p-novel__author a").length){
+                    var author_text = $(".p-novel__author")
+                    var author = author_text.text().match(/作者：(.*)/)[1]
+                    author_text.get(0).innerHTML = `作者：<a href="${userid_link}">${author}</a>`
                 }
             }
             else if($(".novel_writername").length){
@@ -365,16 +370,13 @@ function _authorLink(){
 }
 
 function novelTopAttention(){
-    var attention = $(".contents1:not(:has(.novel-titles))")
+    var attention = $(".c-announce-box .c-announce:not(.c-announce--note):has(.c-announce__emphasis)")
+    console.log("attention")
     if(attention.length){
         attention.empty()
     }else{
-        attention = $(`<div class="contents1"></div>`)
-        if($(".contents1").length){
-            $(".contents1").before(attention)
-        }else{
-            $("#novel_contents").before(attention)
-        }
+        $(".c-announce-box").append(`<div class="c-announce c-announce__attention"></div>`)
+        attention = $(".c-announce.c-announce__attention")
     }
 
     const ncode = getNcode()

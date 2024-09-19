@@ -97,7 +97,7 @@ export function checkNovelPageDetail(url){
         }
         else if (url.pathname.match(/^\/[n|N]\d{4}[a-zA-Z]{2}\/*$/)){ /* Top */
             if((typeof $)!=="undefined"){
-                if($(".p-novel").length){
+                if($(".p-novel__body").length){
                     return "novel"
                 }else{
                     return "top"

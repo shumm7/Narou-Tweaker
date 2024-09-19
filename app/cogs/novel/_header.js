@@ -99,7 +99,7 @@ export function _header(){
         
         if(pageType=="series"){
             $("#novel_header ul").empty()
-        }else if(pageType=="top" && pageType=="novel"){
+        }else if(pageType=="top" || pageType=="novel"){
             $(".l-scrollheader .c-menu__body a, .l-scrollheader .c-menu__body form, .l-scrollheader .c-menu__body div").each(function(){
                 if($(this).hasClass("c-menu__item-pdf")){
                     var pdf = $(`<li>`)
