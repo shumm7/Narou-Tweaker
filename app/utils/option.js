@@ -77,6 +77,8 @@ export const defaultOption = {
     workspaceBookmarkCategoryLayout: "2",
     workspaceImpressionMarkedButton: true,
     workspaceImpressionMarkAsReadWhenReply: true,
+    workspaceImpressionHideButton: true,
+    workspaceImpressionHideWhenMarked: true,
     workspaceNovelmanageDeleteConfirm: true,
     workspaceUserblogmanageDeleteConfirm: true,
     workspaceNovelmanageShowPointAverage: true,

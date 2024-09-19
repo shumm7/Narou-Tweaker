@@ -1,8 +1,11 @@
 
 /* 感想 既読機能 */
-.c-up-markread,
-.c-up-unmarkread {
-    margin-left: auto;
+.c-up-reaction-item__head-info {
+    margin-right: auto;
+}
+.c-up-markread, .c-up-unmarkread,
+.c-up-markhide, .c-up-markshow {
+    margin-left: 15px;
     text-align: right;
     color: #868e96;
     -webkit-flex-shrink: 0;
@@ -10,11 +13,18 @@
     flex-shrink: 0;
     cursor: pointer;
 }
-.c-up-markread {
+
+.c-up-markread, .c-up-markhide {
     display: block;
 }
-.c-up-unmarkread {
+.c-up-unmarkread, .c-up-markshow {
     display: none;
+}
+.c-up-reaction--hidden .c-up-markhide {
+    display: none;
+}
+.c-up-reaction--hidden .c-up-markshow {
+    display: block;
 }
 .c-up-reaction--read .c-up-markread {
     display: none;
@@ -28,16 +38,6 @@
     margin-left: 5px;
 }
 
-.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-postsummary),
-.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-label),
-.c-up-reaction--read .c-up-reaction-item__footer{
-    display: none !important;
-}
-.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title),
-.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title) *{
-    font-size: 90%;
-    color: #999 !important;
-}
 .c-up-markread-button {
     color: #868e96;
     display: flex;
@@ -46,4 +46,33 @@
 }
 .c-up-unmarkread-all, .c-up-markread-all {
     cursor: pointer;
+}
+
+/* 既読時の処理 */
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-postsummary),
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-label) {
+    font-size: 90%;
+    color: #999 !important;
+}
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-postsummary) *,
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-label) * {
+    color: #999 !important;
+}
+.c-up-reaction--read .c-up-reaction-item__group .c-up-postsummary {
+    filter:grayscale(1);
+}
+.c-up-reaction--read .c-up-reaction-item__footer{
+    display: none !important;
+}
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title),
+.c-up-reaction--read .c-up-reaction-item__group:has(.c-up-reaction-item__title) *{
+    font-size: 90%;
+    color: #999 !important;
+}
+
+/* 開く・隠す時の処理 */
+.c-up-reaction--hidden .c-up-reaction-item__group:has(.c-up-postsummary),
+.c-up-reaction--hidden .c-up-reaction-item__group:has(.c-up-label),
+.c-up-reaction--hidden .c-up-reaction-item__footer {
+    display: none;
 }
