@@ -65,8 +65,8 @@ function makeSkin(){
             font-size: ${fontSize}% !important;
         }
         #novel_honbun:not(.novelreport_novelview),
-        #novel_a,
-        #novel_p {
+        .p-novel__text--preface,
+        .p-novel__text--afterword {
             /* 本文 あとがき まえがき*/
             max-width: 100vw;
             width: ${width}px;

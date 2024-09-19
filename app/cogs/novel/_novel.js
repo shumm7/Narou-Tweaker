@@ -58,10 +58,11 @@ function _novelPage(){
     if(episode==0){
         title = $(".p-novel__title")
     }else{
-        title = $(".l-container .c-announce:last-child a[href='/"+ncode+"/']")
-        if($(".l-container .c-announce:last-child span").length){
-            $(".l-container .c-announce:last-child span").addClass("chapter_title")
-            var chapter_elm = $(".l-container .c-announce:last-child span")
+        $(".l-container .l-main .c-announce:has(a[href='/"+ncode+"/'])").addClass("c-announce--novel-detail")
+        title = $(".c-announce--novel-detail a[href='/"+ncode+"/']")
+        if($(".c-announce--novel-detail span").length){
+            $(".c-announce--novel-detail span").addClass("chapter_title")
+            var chapter_elm = $(".c-announce--novel-detail span")
             chapter = chapter_elm.text()
             chapter_elm.remove()
         }
@@ -79,8 +80,8 @@ function _novelPage(){
             d_2 = `<div class="novel-author">`+author+`</div>`
         }
 
-        $(".c-announce-box").append(`
-        <div class="c-announce">
+        $(".l-main > .c-announce-box").append(`
+        <div class="c-announce c-announce--novel-detail">
             <div class="novel-titles" id="ep-`+episode+`">
                 `+d_1+`
                 `+d_2+`
@@ -96,20 +97,20 @@ function _novelPage(){
         var d_1 = `<div class="novel-title"><a href="`+title.prop("href")+`">`+title.text()+`</a></div>`
         var d_2
 
-        if($(".c-announce-box .c-announce:not(.c-announce--note) a").length){
-            var author = $(".c-announce-box .c-announce:not(.c-announce--note) a")
+        if($(".c-announce--novel-detail a").length){
+            var author = $(".c-announce--novel-detail a")
             d_2 = `<div class="novel-author"><a href="`+author.prop("href")+`">`+author.text()+`</a></div>`
         }else{
-            var author = $(".c-announce-box .c-announce:last-child").text().trim().match(/作者：\s(.*)/)[1]
+            var author = $(".c-announce--novel-detail").text().trim().match(/作者：\s(.*)/)[1]
             d_2 = `<div class="novel-author">`+author+`</div>`
         }
         if(chapter){
             $(".p-novel__number").after("<div class='novel-chapter'>"+chapter+"</div>")
         }
         
-        $(".c-announce:last-child").empty()
-        $(".c-announce:last-child").append(d)
-        $(".c-announce:last-child .novel-titles").append(d_1 + d_2)
+        $(".c-announce--novel-detail").empty()
+        $(".c-announce--novel-detail").append(d)
+        $(".c-announce--novel-detail .novel-titles").append(d_1 + d_2)
     }
 }
 
@@ -119,16 +120,17 @@ function _tategaki(){
     var items = $("#novel_vertical_items")
 
     // Elements (Prepend)
-    $("#novel_p").prependTo(items)
-    $(".novel_subtitle").prependTo(items)
+    $(".p-novel__text--preface").prependTo(items)
+    $(".p-novel__title").prependTo(items)
     $(".novel-chapter").prependTo(items)
-    $("#novel_no").prependTo(items)
-    $(".novel_bn:first-child()").prependTo(items)
-    $(".contents1:has(.novel-titles)").prependTo(items)
+    $(".p-novel__number").prependTo(items)
+    $(".c-pager:first-child()").prependTo(items)
+    $(".c-announce--novel-detail").prependTo(items)
+    $(".p-novel__series").prependTo(items)
 
     // Elements (Append)
-    $("#novel_a").appendTo(items)
-    $(".novel_bn:last-child()").appendTo(items)
+    $(".p-novel__text--afterword").appendTo(items)
+    $(".c-pager:last-child()").appendTo(items)
     
     if($('#novel_vertical_items').length){
         var width = $("#novel_vertical_items").width() - 300
@@ -153,13 +155,13 @@ function _autoURL(){
     /* Auto Url */
     chrome.storage.local.get(null, (data) => {
         if(data.novelPrefaceAutoURL){
-            $('#novel_p p').each(function (idx, elem) {
+            $('.p-novel__text--preface p').each(function (idx, elem) {
                 replaceUrl(elem, false)
             });
         }
         
         if(data.novelAfterwordAutoURL){
-            $('#novel_a p').each(function (idx, elem) {
+            $('.p-novel__text--afterword p').each(function (idx, elem) {
                 replaceUrl(elem, false)
             });
         }
@@ -371,7 +373,6 @@ function _authorLink(){
 
 function novelTopAttention(){
     var attention = $(".c-announce-box .c-announce:not(.c-announce--note):has(.c-announce__emphasis)")
-    console.log("attention")
     if(attention.length){
         attention.empty()
     }else{

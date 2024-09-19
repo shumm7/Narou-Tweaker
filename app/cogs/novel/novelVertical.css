@@ -34,15 +34,16 @@
 	padding-right: 100px;
 }
 
-.narou-tweaker-vertical .novelview_pager-before,
-.narou-tweaker-vertical .novelview_pager-next {
-    padding-right: 0;
-    padding-left: 0;
-    border-right: none;
-	
-    padding-top: 10px;
+.narou-tweaker-vertical .c-pager .c-pager__item{
+    padding: 0;
+    border: none;
+}
+.narou-tweaker-vertical .c-pager .c-pager__item:not(:last-child){
     padding-bottom: 10px;
-	border-bottom: 1px solid rgba(170,170,170,.5);
+    border-bottom: 1px solid var(--color-custom-pager-border-disabled);
+}
+.narou-tweaker-vertical .c-pager .c-pager__item:not(:first-child){
+    padding-top: 10px;
 }
 
 .narou-tweaker-vertical .contents1{
@@ -54,18 +55,12 @@
 	margin-top: 0;
 	margin-bottom: 0;
 }
-.narou-tweaker-vertical #container {
-    margin-top: 0;
-}
-.narou-tweaker-vertical .novel_bn a {
-    margin: 10px 0;
-}
 .narou-tweaker-vertical .p-novel__number {
 	-webkit-text-combine: horizontal;
   	-ms-text-combine-horizontal: all;
   	text-combine-upright: all;
 }
-.narou-tweaker-vertical #novel_p {
+.narou-tweaker-vertical .p-novel__text--preface {
     margin: 0px 30px 0px 30px;
     padding: 20px 20px 20px 30px;
     width: unset;
@@ -73,7 +68,7 @@
     border-bottom: none;
 	border-left: 3px double #999999;
 }
-.narou-tweaker-vertical #novel_a {
+.narou-tweaker-vertical .p-novel__text--afterword {
     margin: 0px 40px 0px 30px;
     padding: 20px 20px 20px 30px;
     width: unset;
