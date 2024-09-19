@@ -317,13 +317,13 @@ export function makeSkinCSS(skin, novel_css){
     table.table_novelreport th {
         background: ${s.novel.background_second};
     }
-    #novel_honbun.novelreport_novelview {
+    .p-novel__body.novelreport_novelview {
         border: 1px solid ${s.sublist.color};
     }
-    #novel_honbun.novelreport_novelview {
+    .p-novel__body.novelreport_novelview {
         border: 1px solid ${s.sublist.color};
     }
-    #novel_honbun.novelreport_novelview p[data-original] span:hover {
+    .p-novel__body.novelreport_novelview p[data-original] span:hover {
         background: ${s.novel.background_second};
     }
     `

@@ -942,6 +942,6 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	text-align: center;
 	font-size: 90%;
 }
-#novel_honbun > p.original{
+.p-novel__body > p.original{
 	display: none;
 }

@@ -115,7 +115,7 @@ function _novelPage(){
 }
 
 function _tategaki(){
-    $("#novel_honbun").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
+    $(".p-novel__body").wrap(`<div id="novel_vertical_wrapper" style="position: relative;"><div id="novel_vertical_items">`)
     $("body").addClass("narou-tweaker-vertical")
     var items = $("#novel_vertical_items")
 

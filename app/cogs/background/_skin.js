@@ -57,26 +57,28 @@ function makeSkin(){
         const lineHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight) + localFont["line-height"]
         const textRendering = defaultValue(data.fontTextRendering, defaultOption.fontTextRendering)
         const width = localFont["width"] * defaultValue(data.fontWidth, defaultOption.fontWidth)
+        const outerWidth = width + 130
         const widthRatio = defaultValue(data.fontWidth, defaultOption.fontWidth)
+        const verticalVh = 20 * (1 - widthRatio) + 5
 
         rule += `
-        #novel_honbun:not(.novelreport_novelview) {
+        .p-novel__text {
             line-height: ${lineHeight}% !important;
             font-size: ${fontSize}% !important;
         }
-        #novel_honbun:not(.novelreport_novelview),
-        .p-novel__text--preface,
-        .p-novel__text--afterword {
-            /* 本文 あとがき まえがき*/
+        body:not(.narou-tweaker-vertical) .p-novel__text {
             max-width: 100vw;
             width: ${width}px;
+            margin-right: auto;
+            margin-left: auto;
         }
-        `
-        
-        rule += `
+        body:not(.narou-tweaker-vertical) .l-main {
+            max-width: 100vw;
+            width: ${outerWidth}px;
+        }
+
         html body#container,
-        #novel_color,
-        #contents_main {
+        .p-novel {
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
@@ -90,7 +92,6 @@ function makeSkin(){
             text-rendering: ${textRendering};
         
         }
-
         
         #novel_color,
         .contents1 {
@@ -98,8 +99,8 @@ function makeSkin(){
             width: calc(max(${width}px, 730px));
         }
         .narou-tweaker-vertical #novel_vertical_items {
-            padding-top: calc(5vh * ${widthRatio}) !important;
-            padding-bottom: calc(5vh * ${widthRatio}) !important;
+            padding-top: ${verticalVh}vh !important;
+            padding-bottom: ${verticalVh}vh !important;
         }
         `
 
