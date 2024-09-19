@@ -238,7 +238,7 @@ export function _header(){
             if(isCustomHeader){
                 elm = $("#novel_header li.booklist")
                 elm.addClass("enactive")
-                elm.find(".button_bookmark.logout").remove()
+                elm.find(".c-bookmark-button--disabled").remove()
                 elm.prepend(`<a><i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（要ログイン）</span></span></a>`)
             }else{
             }

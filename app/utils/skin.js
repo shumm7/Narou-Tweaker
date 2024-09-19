@@ -68,96 +68,19 @@ export function makeSkinCSS(skin, novel_css){
 
     /* Skin */
     rule += `
-    body,
-    body[class^="customlayout"] {
-        /* ボディー背景色*/
-        background-color: ${s.novel.background};
-        background-image: none;
-        font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
-    }
-    #novel_color,
-    #novel_color[class^="customlayout"] {
-        /* 本文文字色*/
-        color: ${s.novel.color};
-    }
-    #novel_contents div.novelrankingtag,
-    #novel_contents .customlayout-color,
-    div.novelrankingtag,
-    .customlayout-color {
-        /* ランキングタグ / 評価欄 文字色*/
-        color: ${s.novel.color};
-    }
-
-    #novel_contents a:link,
-    #novel_contents.customlayout1 a:link,
-    #novel_contents .customlayout-color a:link,
-    a:link,
-    .customlayout-color a:link  {
-        /* リンク色 */
-        color: ${s.link.color_link};
-    }
-    #novel_contents a:visited,
-    #novel_contents.customlayout1 a:visited,
-    #novel_contents .customlayout-color a:visited,
-    a:visited,
-    .customlayout-color a:visited {
-        /* リンク色（訪問済み） */
-        color: ${s.link.color_visited};
-    }
-    #novel_contents a:hover,
-    #novel_contents.customlayout1 a:hover,
-    #novel_contents .customlayout-color a:hover,
-    a:hover,
-    .customlayout-color a:hover {
-        /* リンク色（ホバー） */
-        color: ${s.link.color_hover};
-    }
-    .index_box dl.novel_sublist2.underline,
-    .index_box dl.novel_sublist2.underline[class^="customlayout"] {
-        /* 目次の下線（しおりあり） */
-        border-bottom: 1px solid ${s.sublist.color};
-    }
-    .index_box dl.novel_sublist2,
-    .index_box dl.novel_sublist2[class^="customlayout"] {
-        /* 目次の下線（デフォルトは非表示） */
-        border-color: transparent;
-    }
-    .index_box dl.novel_sublist2:hover,
-    .index_box dl.novel_sublist2:hover[class^="customlayout"] {
-        /* 目次の下線（ホバー） */
-        border-color: ${s.sublist.hover};
-    }
-    `
-
-    /* 作品トップページ */
-    rule += `
-    .contents1 {
-        /* 文字色 / 背景色 */
-        color: ${s.novel.color};
-        background-color: ${s.novel.background};
-        background-image: none;
-    }
-    .contents1 a:link {
-        /* リンク色 */
-        color: ${s.link.color_link};
-    }
-    .contents1 a:visited {
-        /* リンク色（訪問済み） */
-        color: ${s.link.color_visited};
-    }
-    .contents1 a:hover {
-        /* リンク色（ホバー） */
-        color: ${s.link.color_hover};
-    }
-    #novel_attention,
-    .box_announce_bookmark {
-        /* Attention */
-        color: ${s.novel.color};
-        background-color: transparent;
-        border-color: ${s.novel.background_second};
-    }
-    .novelview_history-box {
-        background: ${s.novel.background_second};
+    .js-customlayout1 {
+        --00-text: ${s.novel.color};
+        --01-link: ${s.link.color_link};
+        --02-link-visited: ${s.link.color_visited};
+        --03-link-hover: ${s.link.color_hover};
+        --04-bg: ${s.novel.background};
+        --color-custom-epilist-underline: transparent;
+        --color-custom-epilist-underline-hover: #9df;
+        --color-custom-pager-border-disabled: #44444433;
+        --color-custom-pager-text-disabled: #44444480;
+        --color-custom-bkmfix-box: #e7f5ff;
+        --color-custom-bkmfix-text: #1971c2;
+        --color-custom-favep-empty: #ced4da;
     }
     `
         
@@ -196,6 +119,12 @@ export function makeSkinCSS(skin, novel_css){
     `
 
     /* 小説本文ページ */
+    rule += `
+        .c-announce-box {
+            background-color: var(--04-bg);
+            color: var(--00-text);
+        }
+    `
     if(novel_css) {
         rule += `
         .narou-tweaker .novel-titles a,
@@ -209,7 +138,7 @@ export function makeSkinCSS(skin, novel_css){
         }
         .narou-tweaker .novel-titles#ep-0 .novel-title,
         .narou-tweaker .novel-titles#ep-1 .novel-title {
-            color: inherit;
+            color: var(--color-custom-text);
         }
         `
     }
