@@ -68,42 +68,47 @@ export function makeSkinCSS(skin, novel_css){
 
     /* Skin */
     rule += `
-    .js-customlayout1 {
+    :root {
         --00-text: ${s.novel.color};
         --01-link: ${s.link.color_link};
         --02-link-visited: ${s.link.color_visited};
         --03-link-hover: ${s.link.color_hover};
         --04-bg: ${s.novel.background};
-        --color-custom-epilist-underline: transparent;
-        --color-custom-epilist-underline-hover: #9df;
-        --color-custom-pager-border-disabled: #44444433;
-        --color-custom-pager-text-disabled: #44444480;
-        --color-custom-bkmfix-box: #e7f5ff;
-        --color-custom-bkmfix-text: #1971c2;
-        --color-custom-favep-empty: #ced4da;
     }
     `
-        
+    /* 本文ページ以外 */
+    rule += `
+    body.narou-tweaker--novelcom-page {
+        background: var(--04-bg);
+    }
+    .narou-tweaker--novelcom-page {
+        --color-text: var(--00-text);
+    }
+    `
+
     /* 作品情報ページ */
     rule += `
     #contents_main {
-        color: ${s.novel.color};
-        background-color: ${s.novel.background};
+        color: var(--00-text);
+        background-color: var(--04-bg);
         background-image: none;
     }
+    #contents_main #novel_attention {
+        color: #333;
+    }
     #contents_main a:link {
-        color: ${s.link.color_link};
+        color: var(--01-link);
     }
     #contents_main a:visited {
-        color: ${s.link.color_visited};
+        color: var(--02-link-visited);
     }
     #contents_main a:hover {
-        color: ${s.link.color_hover};
+        color: var(--03-link-hover);
     }
 
     #noveltable1 th,
     #noveltable2 th, #onazi .th {
-        color: ${s.novel.color};
+        color: var(--00-text);
         background: ${s.novel.background_second};
     }
     #noveltable1 th, #noveltable2 th,
@@ -120,10 +125,10 @@ export function makeSkinCSS(skin, novel_css){
 
     /* 小説本文ページ */
     rule += `
-        .c-announce-box {
-            background-color: var(--04-bg);
-            color: var(--00-text);
-        }
+    .c-announce-box {
+        background-color: var(--04-bg);
+        color: var(--00-text);
+    }
     `
     if(novel_css) {
         rule += `
@@ -221,7 +226,7 @@ export function makeSkinCSS(skin, novel_css){
     rule += `
     article.verticalpdf,
     main.verticalpdf-main {
-        color: ${s.novel.color};
+        color: var(--00-text);
     }
     .verticalpdf-main .verticalpdf-info{
         border-bottom: 1px solid ${s.sublist.color};
@@ -263,22 +268,22 @@ export function makeSkinCSS(skin, novel_css){
     .narou-tweaker--series .serieslist .ex,
     .narou-tweaker--series .serieslist .novel_info {
         /* 本文文字色*/
-        color: ${s.novel.color};
+        color: var(--00-text);
     }
     .narou-tweaker--series .serieslist {
         border-bottom: 2px dotted ${s.sublist.color};
     }
     .narou-tweaker--series a:link {
         /* リンク色 */
-        color: ${s.link.color_link};
+        color: var(--01-link);
     }
     .narou-tweaker--series a:visited {
         /* リンク色（訪問済み） */
-        color: ${s.link.color_visited};
+        color: var(--02-link-visited);
     }
     .narou-tweaker--series a:hover {
         /* リンク色（ホバー） */
-        color: ${s.link.color_hover};
+        color: var(--03-link-hover);
     }
     `
     
