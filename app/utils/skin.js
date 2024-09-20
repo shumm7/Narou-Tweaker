@@ -75,6 +75,17 @@ export function makeSkinCSS(skin, novel_css){
         --03-link-hover: ${s.link.color_hover};
         --04-bg: ${s.novel.background};
     }
+    .js-customlayout1 {
+        --00-text: ${s.novel.color};
+        --01-link: ${s.link.color_link};
+        --02-link-visited: ${s.link.color_visited};
+        --03-link-hover: ${s.link.color_hover};
+        --04-bg: ${s.novel.background};
+        --color-custom-epilist-underline: transparent;
+        --color-custom-epilist-underline-favorited: ${s.sublist.visited};
+        --color-custom-epilist-underline-hover: ${s.sublist.hover};
+        --color-custom-pager-text-disabled: ${s.sublist.color};
+    }
     `
     /* 本文ページ以外 */
     rule += `
