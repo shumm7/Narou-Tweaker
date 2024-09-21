@@ -2,6 +2,24 @@
     "version": 0,
     "data": [
         {
+            "version": "0.4.2",
+            "date": "2024-09-21",
+            "release": {
+                "chrome": null,
+                "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "novel": [
+                        "文章構成機能が使用できなかった不具合を修正"
+                    ],
+                    "general": [
+                        "拡張機能のアップデート時に通知を表示するように"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.4.1",
             "date": "2024-09-20",
             "release": {
