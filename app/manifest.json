@@ -281,7 +281,8 @@
     "storage",
     "downloads",
     "tabs",
-    "cookies"
+    "cookies",
+    "notifications"
   ],
   "host_permissions": [
     "*://*.syosetu.com/*",
