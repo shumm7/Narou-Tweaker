@@ -121,14 +121,19 @@ export function restoreCorrectionMode(){
 }
 
 export function resetCorrection(){
-    $(".p-novel__body > p.replaced").remove()
-    $(".p-novel__body > p").addClass("original")
-    $(".p-novel__body > p.original").each(function(){
+    $(".p-novel__body p.correction-replaced").remove()
+    $(".p-novel__body .p-novel__text").each(function(){
+        if(!$(this).hasClass("p-novel__text--preface") && !$(this).hasClass("p-novel__text--afterword")){
+            $(this).find("p").addClass("correction-original")
+            console.log("added")
+        }
+    })
+    $(".p-novel__body p.correction-original").each(function(){
         const id = $(this).prop("id")
         const text = $(this).text()
         const lineType = checkLineType(text)
 
-        var p = $(`<p id='${id}' class='replaced'>${$(this)[0].innerHTML}</p>`)
+        var p = $(`<p id='${id}' class='correction-replaced'>${$(this)[0].innerHTML}</p>`)
         p.addClass(lineType)
 
         if($(this).find("img").length){
@@ -238,7 +243,7 @@ function wrapTextWithTag(_elem, regexp, tag, callback, insideTag){
 // 校正
 function correctionIndent(){
     /* 行頭の段落下げ */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if(!$(this).hasClass("jinobun")){return}
         var text = $(this)[0].innerHTML
         $(this)[0].innerHTML = "　" + text.match(new RegExp(`^(\\s*)(.*)`))[2]
@@ -247,7 +252,7 @@ function correctionIndent(){
 
 function correctionNormalizeEllipses(){
     /* 三点リーダー(・・・) → 三点リーダー（……） */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(/・{2,}/)){
             $(this).after(replaceText(this, /・{2,}/g, function(s){
                 var l = s.length
@@ -273,7 +278,7 @@ function correctionNormalizeEllipses(){
 
 function correctionNormalizeDash(){
     /* 罫線を用いたダッシュ(─) → 全角ダッシュ（―） */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(/─|－|—/)){ //罫線
             $(this).after(
                 replaceText(this, /─{2,}|－{2,}|—{2,}/g, function(s){
@@ -316,14 +321,14 @@ function correctionNormalizeExclamation(){
        }
    }
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         replaceText(this, new RegExp(`[${exclamation}]+`, "g"), replaceExclamation, true)
     })
 }
 
 function correctionRepeatedSymbols(){
     /* 句読点の繰り返し（。。/、、） */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(/、{2,}/)){
             replaceText(this, /[、]{2,}/g, function(s){
                 return s.substr(0,1)
@@ -334,7 +339,7 @@ function correctionRepeatedSymbols(){
 
 function correctionPeriodWithBrackets(){
     /* 句点と括弧（。」） */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(new RegExp(`[。]([`+bracket_end+`])`))){
             replaceText(this, new RegExp(`[。]([`+bracket_end+`])`, "g"), "$1")
         }
@@ -343,7 +348,7 @@ function correctionPeriodWithBrackets(){
 
 function correctionNoSpaceExclamation(){
     /* 空白を開けない感嘆符（！） */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         const id = $(this).prop("id")
         if($(this).text().match( new RegExp(`([`+exclamation+`])([^　`+exclamation+bracket_end+`])`) )){
             replaceText(this, new RegExp(`([`+exclamation+`])([^　`+exclamation+bracket_end+`])`, "g"), "$1　$2")
@@ -353,7 +358,7 @@ function correctionNoSpaceExclamation(){
 
 function correctionOddEllipses(){
     /* 奇数個の三点リーダー */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match( /…+/ )){ //三点リーダー …
             replaceText(this, /…+/g, function(s){
                 if(s.length%2==1){
@@ -368,7 +373,7 @@ function correctionOddEllipses(){
 
 function correctionOddDash(){
     /* 奇数個の三点ダッシュ */
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match( /―+/ )){ //全角ダッシュ ―
             replaceText(this, /―+/g, function(s){
                 if(s.length%2==1){
@@ -416,7 +421,7 @@ function correctionNumber(option){
         return s
     }
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(/([+-]?(?:\d+\.?\d+|\.\d+|\d+)|[＋－‐+-]?(?:[０-９]+[.．]?[０-９]+|[.．][０-９]+|[０-９]+))/)){
             replaceText(this, /([+-]?(?:\d+\.?\d+|\.\d+|\d+)|[＋－‐+-]?(?:[０-９]+[.．]?[０-９]+|[.．][０-９]+|[０-９]+))/g, function(s){
                 if(s.length==1 || s.match(/^[＋－‐+-.．](\d|[０-９])$/)){
@@ -433,12 +438,12 @@ function correctionNumber(option){
 // 挿絵
 function removeIllustration(){
     /* 挿絵の非表示 */
-    $(".p-novel__body > p.replaced."+className.img).css("display", "none")
+    $(".p-novel__body p.correction-replaced."+className.img).css("display", "none")
 }
 
 function removeIllustrationLink(){
     /* 挿絵のリンク無効化 */
-    var link = $(".p-novel__body > p.replaced."+className.img + " a")
+    var link = $(".p-novel__body p.correction-replaced."+className.img + " a")
     link.prop("href", "javascript:void(0)")
     link.prop("target", "")
 }
@@ -455,7 +460,7 @@ function verticalLayout_CombineWord(max){
         return t[0].outerHTML
     }
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         wrapTextWithTag($(this), new RegExp(`(?<![a-zA-Z\\d\.\,])[a-zA-Z\\d\.\,]{1,${max}}(?![a-zA-Z\\d\.\,])`, "g"), tag, callback)
     })
 }
@@ -464,7 +469,7 @@ function verticalLayout_CombineNumber(max, ignoreCombineInWord){
     /* 縦書き表示時の数字の縦中横 */
     const tag = "<span class='text-combine'>"
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         if(ignoreCombineInWord){
             wrapTextWithTag($(this), new RegExp(`(?<![a-zA-Z\\d\\.\\,])\\d{1,${max}}(?![a-zA-Z\\d\\.\\,])`, "g"), tag)
         }else{
@@ -477,7 +482,7 @@ function verticalLayout_CombineExclamation(max){
     /* 縦書き表示時の数字の縦中横 */
     const tag = "<span class='text-combine'>"
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         wrapTextWithTag($(this), new RegExp(`(?<![!?])[!?]{1,${max}}(?![!?])`, "g"), tag)
     })
 }
@@ -486,7 +491,7 @@ function verticalLayout_SidewayWord(min){
     /* 縦書き表示時の全角英数字の横向き表示 */
     const tag = "<span class='text-sideways'>"
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         wrapTextWithTag($(this), new RegExp(`[ａ-ｚＡ-Ｚ０-９．，\\s]{${min},}`, "g"), tag)
     })
 }
@@ -496,7 +501,7 @@ function verticalLayout_SidewayExclamation(min){
     /* 縦書き表示時の感嘆符の横向き表示 */
     const tag = "<span class='text-sideways'>"
 
-    $(".p-novel__body > p.replaced").each(function(){
+    $(".p-novel__body p.correction-replaced").each(function(){
         wrapTextWithTag($(this), new RegExp(`[！？‼⁇⁉⁈]{${min},}`, "g"), tag)
     })
 }
@@ -505,7 +510,7 @@ function verticalLayout_SidewayExclamation(min){
 /* Replace Text from Patterns */
 function correctionReplaceFromPatterns(patterns){
     $.each(patterns, function(_, pattern){
-        $(".p-novel__body > p.replaced").each(function(){
+        $(".p-novel__body p.correction-replaced").each(function(){
             if(pattern.active){
                 if(pattern.pattern.trim().length>0){
                     if(pattern.regex){

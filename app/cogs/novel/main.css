@@ -942,6 +942,6 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	text-align: center;
 	font-size: 90%;
 }
-.p-novel__body > p.original{
+.p-novel__body p.correction-original{
 	display: none;
 }

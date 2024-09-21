@@ -588,7 +588,6 @@ function setOptionContentsCorrection(id){
     $(".correction_mode.toggle").on("click", function(e){
         var mode = {}
         mode[$(this).prop("name")] = $(this).prop("checked")
-        console.log(mode)
 
         chrome.storage.local.set(mode, function(){})
     })

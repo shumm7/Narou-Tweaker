@@ -86,6 +86,12 @@ export function makeSkinCSS(skin, novel_css){
         --color-custom-epilist-underline-hover: ${s.sublist.hover};
         --color-custom-pager-text-disabled: ${s.sublist.color};
     }
+    .narou-tweaker-header--mode-0 .l-scrollheader,
+    .narou-tweaker-header--mode-1 .l-scrollheader {
+        /* ヘッダの残像を非表示 */
+        display: none !important;
+    }
+
     `
     /* 本文ページ以外 */
     rule += `
