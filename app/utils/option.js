@@ -187,7 +187,6 @@ export const defaultOption = {
     correctionNumberShort: "full",
     correctionNumberLong: "half",
     correctionNumberSymbol: "default",
-    correctionReplacePatterns: [],
     correctionShowIllustration: true,
     correctionRemoveIllustrationLink: false,
     correctionVerticalLayout_CombineWord: 0,
@@ -196,6 +195,99 @@ export const defaultOption = {
     correctionVerticalLayout_IgnoreCombineNumberInWord: true,
     correctionVerticalLayout_SidewayWord: 0,
     correctionVerticalLayout_SidewayExclamation: 0,
+
+    correctionReplacePatterns: [
+        {
+            "active": false,
+            "pattern": "兎に角",
+            "regex": false,
+            "replacement": "とにかく"
+        },
+        {
+            "active": false,
+            "pattern": "兎も角",
+            "regex": false,
+            "replacement": "ともかく"
+        },
+        {
+            "active": false,
+            "pattern": "態々",
+            "regex": false,
+            "replacement": "わざわざ"
+        },
+        {
+            "active": false,
+            "pattern": "殆ど",
+            "regex": false,
+            "replacement": "ほとんど"
+        },
+        {
+            "active": false,
+            "pattern": "偶々",
+            "regex": false,
+            "replacement": "たまたま"
+        },
+        {
+            "active": false,
+            "pattern": "勿論",
+            "regex": false,
+            "replacement": "もちろん"
+        },
+        {
+            "active": false,
+            "pattern": "一際",
+            "regex": false,
+            "replacement": "ひときわ"
+        },
+        {
+            "active": false,
+            "pattern": "流石",
+            "regex": false,
+            "replacement": "さすが"
+        },
+        {
+            "active": false,
+            "pattern": "其れ",
+            "regex": false,
+            "replacement": "それ"
+        },
+        {
+            "active": false,
+            "pattern": "其の",
+            "regex": false,
+            "replacement": "その"
+        },
+        {
+            "active": false,
+            "pattern": "而も",
+            "regex": false,
+            "replacement": "しかも"
+        },
+        {
+            "active": false,
+            "pattern": "而る",
+            "regex": false,
+            "replacement": "しかる"
+        },
+        {
+            "active": false,
+            "pattern": "而れ",
+            "regex": false,
+            "replacement": "しかれ"
+        },
+        {
+            "active": false,
+            "pattern": "凄く",
+            "regex": false,
+            "replacement": "すごく"
+        },
+        {
+            "active": false,
+            "pattern": "凄い",
+            "regex": false,
+            "replacement": "すごい"
+        }
+    ],
 }
 
 export const defaultGlobalOption = {
