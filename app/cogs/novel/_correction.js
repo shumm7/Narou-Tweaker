@@ -59,6 +59,9 @@ export function correction(){
             if(data.correctionOddDash){
                 correctionOddDash()
             }
+            if(data.correctionWaveDash){
+                correctionWaveDash()
+            }
 
             // 構文
             if(data.correctionIndent){
@@ -115,6 +118,7 @@ export function restoreCorrectionMode(){
         check("#novel-option--correction-no-space-exclamation", data.correctionNoSpaceExclamation, defaultOption.correctionNoSpaceExclamation)
         check("#novel-option--correction-odd-ellipses", data.correctionOddEllipses, defaultOption.correctionOddEllipses)
         check("#novel-option--correction-odd-dash", data.correctionOddDash, defaultOption.correctionOddDash)
+        check("#novel-option--correction-wave-dash", data.correctionWaveDash, defaultOption.correctionWaveDash)
         check("#novel-option--correction-number", data.correctionNumber, defaultOption.correctionNumber)
         check("#novel-option--correction-show-illustration", data.correctionShowIllustration, defaultOption.correctionShowIllustration)
     });
@@ -125,7 +129,6 @@ export function resetCorrection(){
     $(".p-novel__body .p-novel__text").each(function(){
         if(!$(this).hasClass("p-novel__text--preface") && !$(this).hasClass("p-novel__text--afterword")){
             $(this).find("p").addClass("correction-original")
-            console.log("added")
         }
     })
     $(".p-novel__body p.correction-original").each(function(){
@@ -383,6 +386,19 @@ function correctionOddDash(){
                 }
             })
         }
+    })
+}
+
+function correctionWaveDash(){
+    /* 波ダッシュを繋げる */
+    const tag = "<span class='text-sideways'>"
+
+    $(".p-novel__body p.correction-replaced").each(function(){
+        wrapTextWithTag($(this), /～{2,}/g, tag, function(s, t){
+            var t = $(tag)
+            t.text("〰".repeat(s.length))
+            return t[0].outerHTML
+        })
     })
 }
 

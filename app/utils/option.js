@@ -182,6 +182,7 @@ export const defaultOption = {
     correctionNoSpaceExclamation: false,
     correctionOddEllipses: false,
     correctionOddDash: false,
+    correctionWaveDash: false,
     correctionNumber: false,
     correctionNumberShort: "full",
     correctionNumberLong: "half",

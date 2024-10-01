@@ -552,6 +552,10 @@ function setOptionContentsCorrection(id){
                     <input type="checkbox" id="novel-option--correction-odd-dash" class="correction_mode toggle" name="correctionOddDash">
                     <label for="novel-option--correction-odd-dash" class="toggle">奇数のダッシュ</label>
                 </div>
+                <div class="novel-option--toggle novel-option--correction-mode">
+                    <input type="checkbox" id="novel-option--correction-wave-dash" class="correction_mode toggle" name="correctionWaveDash">
+                    <label for="novel-option--correction-wave-dash" class="toggle">波ダッシュを繋げる</label>
+                </div>
             </div>
 
             <div class='novel-option-header'>ローカライズ</div>
@@ -611,6 +615,7 @@ function setOptionContentsCorrection(id){
             changes.correctionNoSpaceExclamation!=undefined ||
             changes.correctionOddEllipses!=undefined ||
             changes.correctionOddDash!=undefined ||
+            changes.correctionWaveDash!=undefined ||
             changes.correctionNumber!=undefined ||
             changes.correctionNumberShort!=undefined ||
             changes.correctionNumberLong!=undefined ||
