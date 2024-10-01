@@ -790,12 +790,15 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 }
 
 /* Replace Patterns (Correction) */
-#novel-option--correction-replace--patterns {
-	height: 10em;
-	overflow-y: scroll;
+#novel-option--correction-replace--patterns-outer {
 	background: #f8f8f8;
-    border-radius: .5em;
     padding: .3em .3em;
+	overflow-y: scroll;
+	height: 10em;
+    border-radius: .5em;
+	border: 1px solid #ddd;
+}
+#novel-option--correction-replace--patterns {
 }
 #novel-option--correction-replace--patterns::-webkit-scrollbar{
 	display: none;

@@ -508,7 +508,7 @@ function setOptionContentsCorrection(id){
     var outer = $(".novel-option--content.novel-option-tab-"+id)
 
     outer.append(`
-        <div class='novel-option--content-inner' id='option-correction'>
+        <div class='novel-option--content-inner' id='option-correction' style='margin-bottom: 100px;'>
         
             <div class='novel-option-header'>文法</div>
             <div id="novel-option--correction-syntax">
@@ -575,7 +575,9 @@ function setOptionContentsCorrection(id){
             </div>
 
             <div class='novel-option-header'>置換</div>
-			<div id="novel-option--correction-replace--patterns"></div>
+			<div id="novel-option--correction-replace--patterns-outer">
+			    <div id="novel-option--correction-replace--patterns"></div>
+            </div>
             <div id="novel-option--correction-replace--patterns-addition">
                 <div id="novel-option--correction-replace--pattern-box-addition">
                     <i class="fa-solid fa-plus"></i>
@@ -595,6 +597,17 @@ function setOptionContentsCorrection(id){
 
         chrome.storage.local.set(mode, function(){})
     })
+
+    /* Scroll Replacement Pattern List */
+    /*
+    const scrollElement = document.querySelector("#novel-option--correction-replace--patterns-outer");
+    if(scrollElement!=null){
+        scrollElement.addEventListener("wheel", (e) => {
+            e.preventDefault();
+            scrollElement.scrollTop += e.deltaY;
+        });
+    }
+    */
 
     /* Replacement */
     $("#novel-option--correction-replace--pattern-box-addition").on("click", function(){
