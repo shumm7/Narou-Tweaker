@@ -73,6 +73,11 @@ input[type="number"] {
 } 
 
 /* Textarea */
+.textarea-outer {
+	flex-shrink: 0;
+	width: 100%;
+}
+
 .textarea {
     padding: 5px;
     margin-top: 10px;
