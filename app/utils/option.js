@@ -37,9 +37,9 @@ export const defaultOption = {
     extIgnoreSessionOptionIndex: "",
 
     /* Narou */
+    narouSkipAgeauth: false,
     narouSyuppanShowBookImage: true,
     narouSyuppanShowBookViewImage: true,
-    narouSkipAgeauth: false,
 
     /* Novel */
     novelCustomStyle: true,
