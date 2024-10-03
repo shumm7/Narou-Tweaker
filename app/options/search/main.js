@@ -16,8 +16,53 @@ $("#search-box").on("input", function(e){
     search(searchWords)
 })
 
+function splitWords(splitWords){
+    var list = []
+    var word = ""
+    var startBracket = false
+    var startBracketPos = -1
+
+    var chars = [...splitWords.trim()]
+    $.each(chars, function(idx, c){
+        if(c.match(/\"/)){
+            if(!startBracket && word.length==0){
+                startBracket = true //ブラケット開始
+                startBracketPos = idx
+                word += c
+            }else{
+                if(idx < chars.length-1){
+                    if(chars[idx+1].match(/\s/) && idx - startBracketPos>1){
+                        list.push(word + c)
+                        word = ""
+                        startBracket = false
+                        startBracketPos = -1
+                    }else{
+                        word += c
+                    }
+                }
+                else{
+                    list.push(word + c)
+                    word = ""
+                } 
+            }
+        }else if(c.match(/\s/) && !startBracket){
+            if(word.length>0){
+                list.push(word)
+                word = ""
+            }
+        }else{
+            word += c
+        }
+    })
+    if(word.length>0){
+        list.push(word)
+    }
+    return list
+}
+
 function search(searchWords){
-    const words = searchWords.split(/\s/).filter(w => w.trim().length > 0)
+    const words = splitWords(searchWords)
+    console.log(words)
     
     const params = new URLSearchParams(location.search)
     params.set("s", words.join(" "))
