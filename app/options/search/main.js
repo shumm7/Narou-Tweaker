@@ -62,7 +62,6 @@ function splitWords(splitWords){
 
 function search(searchWords){
     const words = splitWords(searchWords)
-    console.log(words)
     
     const params = new URLSearchParams(location.search)
     params.set("s", words.join(" "))
