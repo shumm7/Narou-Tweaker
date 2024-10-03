@@ -1,8 +1,45 @@
+import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/utils.js";
+import { customUIList } from "./_lib/customUI.js";
+import { optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
 import { defaultOption, updateOption } from "/utils/option.js"
 
-export function setupDOM(){
+const manifest = chrome.runtime.getManifest()
+var currentPage
+
+export function setup(){
+    currentPage = $("#option-page-id").val()
+
+    setupDOM()
+    setupContents()
+    buttonHide()
+    optionHide()
+    syntaxHighlight()
+    restoreOptions()
+}
+
+function setupDOM(){
+    var currentCategory 
+
+    /* Remove JS error message */
     $('#js-failed').remove();
+
+    /* Sidebars */
+    var sidebarDOMItems = ""
+    $.each(optionCategoryList, function(idx, category){
+        sidebarDOMItems += `
+        <div class="sidebar-item" name="${category.id}">
+            <a href="/options/${category.id}/index.html" target="_self">
+                <i class="${category.icon}"></i>
+                <span class="sidebar-item--title">${category.title}</span>
+            </a>
+        </div>
+        `
+
+        if(category.id===currentPage){
+            currentCategory = category
+        }
+    })
 
     var sidebar = $(`
         <div id="sidebar-inner">
@@ -13,58 +50,10 @@ export function setupDOM(){
                 </div>
             </div>
             <div id="sidebar-items">
-                <div class="sidebar-item" name="general">
-                    <a href="/options/general/index.html" target="_self">
-                        <i class="fa-solid fa-gear"></i>
-                        <span class="sidebar-item--title">全般</span>
-                    </a>
-                </div>
-                
-                <div class="sidebar-item" name="narou">
-                    <a href="/options/narou/index.html" target="_self">
-                        <i class="fa-solid fa-house"></i>
-                        <span class="sidebar-item--title">小説家になろう</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="novel">
-                    <a href="/options/novel/index.html" target="_self">
-                        <i class="fa-solid fa-book"></i>
-                        <span class="sidebar-item--title">小説ページ</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="novel">
-                    <a href="/options/yomou/index.html" target="_self">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                        <span class="sidebar-item--title">小説を読もう！</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="workspace">
-                    <a href="/options/workspace/index.html" target="_self">
-                        <i class="fa-solid fa-pen-nib"></i>
-                        <span class="sidebar-item--title">ユーザホーム</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="mypage">
-                    <a href="/options/mypage/index.html" target="_self">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="sidebar-item--title">マイページ</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="mitemin">
-                    <a href="/options/mitemin/index.html" target="_self">
-                        <i class="fa-solid fa-palette"></i>
-                        <span class="sidebar-item--title">みてみん</span>
-                    </a>
-                </div>
-                <div class="sidebar-item" name="kasasagi">
-                    <a href="/options/kasasagi/index.html" target="_self">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span class="sidebar-item--title">KASASAGI</span>
-                    </a>
-                </div>
+                ${sidebarDOMItems}
             </div>
             <div id="sidebar-bottom">
-                <div id="sidebar-version">build. ${getExtensionVersion()}</div>
+                <div id="sidebar-version">build. ${manifest.version}</div>
                 <div class="sidebar-icon" id="sidebar-icon--hide">
                     <i class="fa-solid fa-angles-left"></i>
                 </div>
@@ -75,23 +64,12 @@ export function setupDOM(){
                 <i class="fa-solid fa-angles-right"></i>
             </div>
         </div>
-    `)
+        `)
+
     sidebar.find(`.sidebar-item:has(a[href="${location.pathname}"])`).addClass("selected")
     $("#sidebar").append(sidebar)
 
-    const manifest = chrome.runtime.getManifest()
-    $("#footer").append(`
-    <div id="footer-contents">
-        <div class="footer-contents--image">
-            <a href="https://github.com/shumm7/Narou-Tweaker">
-                <img src="/assets/icons/icon.png" width="30" height="30">
-            </a>
-        </div>
-        <div class="footer-contents--text">Narou Tweaker v${manifest.version}</div>
-    </div>
-    `)
-
-    /* Events */
+    /* Sidepanel Events */
     chrome.storage.local.get("extOptionSidePanelShow", function(data){
         _sidepanelHide(data.extOptionSidePanelShow)
     })
@@ -114,18 +92,94 @@ export function setupDOM(){
         }
     }
 
+    /* Set Title */
+    $("head title").text(`環境設定 > ${currentCategory.title} ｜ Narou Tweaker`)
+    
+    /* Footer */
+    $("#footer").append(`
+    <div id="footer-contents">
+        <div class="footer-contents--image">
+            <a href="https://github.com/shumm7/Narou-Tweaker">
+                <img src="/assets/icons/icon.png" width="30" height="30">
+            </a>
+        </div>
+        <div class="footer-contents--text">Narou Tweaker v${manifest.version}</div>
+    </div>
+    `)
+
+    /* Header Info */
+    $("#header-title--heading").append(`
+        <i class="${currentCategory.icon}"></i>
+		<span class="title">${currentCategory.title}</span>
+    `)
+
+    if(currentCategory.targetUrl !== undefined){
+        $("#header-title--description").append(`
+            <p>
+                ${currentCategory.description}<br>
+                <span style="font-size:80%;">対象ページ：${currentCategory.targetUrl.join(" / ")}
+            </p>
+        `)
+    }else{
+        $("#header-title--description").append(`
+            <p>${currentCategory.description}</p>
+        `)
+    }
+
     /* Header Tabs */
-    $(".header-menu-item").each(function(){
+    const defaultCategory = currentCategory.defaultCategory
+    $.each(currentCategory.categories, function(_, tab){
+        $("#main").append(`<div class="contents-container header-menu-target" name="${tab.id}"></div>`)
+
+        if(tab.description){
+            var categoryDescription = []
+            if(tab.description.text){
+                categoryDescription.push(tab.description.text)
+            }
+            if(tab.description.small){
+                categoryDescription.push(`<span style="color: #999; font-size: 80%;">${tab.description.small}</span>`)
+            }
+            if(tab.description.attention){
+                categoryDescription.push(`<span style="color: red; font-weight: bold; font-size: 90%;">${tab.description.attention}</span>`)
+            }
+
+            if(categoryDescription.length > 0) {
+                $(`.header-menu-target[name="${tab.id}"]`).append(`
+                    <div class="contents-wide">
+						<p>${categoryDescription.join("<br>")}</p>
+					</div>
+                `)
+            }
+        }
+
+        if(defaultCategory===tab.id){
+            $("#header-menu-left-items").append(`
+                <li class="header-menu-item selected" name="${tab.id}">
+                    <span class="header-menu-item--title">${tab.title}
+                    </span>
+                </li>
+            `)
+
+            $(`.header-menu-target[name="${tab.id}"]`).addClass("selected")
+        }else{
+            $("#header-menu-left-items").append(`
+                <li class="header-menu-item" name="${tab.id}">
+                    <span class="header-menu-item--title">${tab.title}
+                    </span>
+                </li>
+            `)
+        }
+        
+    })
+        
+    $(".header-menu-item").on("click", function(e){
         var name = $(this).attr("name")
+        $(`.header-menu-item.selected`).removeClass("selected")
+        $(this).addClass("selected")
 
-        $(this).on("click", function(e){
-            $(`.header-menu-item.selected`).removeClass("selected")
-            $(this).addClass("selected")
-
-            $(`.header-menu-target.selected`).removeClass("selected")
-            $(`.header-menu-target[name="${name}"]`).addClass("selected")
-            location.replace(`#${name}`)
-        })
+        $(`.header-menu-target.selected`).removeClass("selected")
+        $(`.header-menu-target[name="${name}"]`).addClass("selected")
+        location.replace(`#${name}`)
     })
 
     const hash = location.hash
@@ -139,6 +193,346 @@ export function setupDOM(){
         }
     }
 }
+
+function setupContents(){
+    $.each(optionList, function(idx, option){
+        if(option.location.page === currentPage){
+            const category = option.location.category
+            const id = option.id
+            const title = option.title
+            const style = option.style
+            const elmClass = option.class
+            const description = option.description
+            const uiType = option.ui.type
+            const uiName = option.ui.name
+            const uiData = option.ui.data
+            const uiStyle = option.ui.style
+            const uiClass = option.ui.class
+            var uiPrefix = option.ui.prefix
+            var uiSuffix = option.ui.suffix
+            const hasValue = option.value.hasValue
+            const isExperimental = option.value.isExperimental
+            const isAdvanced = option.value.isAdvanced
+            const hasParent = option.location.hasParent
+            const parent = option.location.parent
+            const hideSettings = option.hideSettings
+
+            var elm
+            
+            if(hasParent){
+                elm = $(`<div class="contents-option" name="${id}"></div>`)
+            }else{
+                elm = $(`<div class="contents-wide" name="${id}"><div class="contents-option"></div></div>`)
+            }
+            
+            if(uiType == "parent"){
+                elm.append(`
+                    <div class="contents-option-head"></div>
+                    <div class="contents-wide-column"></div>
+                `)
+                
+            }else{
+                if(elm.hasClass("contents-option")){
+                    elm.append(`<div class="contents-option-head"></div>`)
+                }else{
+                    elm.find(".contents-option").append(`<div class="contents-option-head"></div>`)
+                }
+
+                if(!uiPrefix){
+                    uiPrefix = ""
+                }
+                if(!uiSuffix){
+                    uiSuffix = ""
+                }
+
+                /* Contents */
+                if(uiType === "toggle"){
+                    if(elm.hasClass("contents-option")){
+                        elm.append(`<div class="contents-option-content"></div>`)
+                    }else{
+                        elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+                    }
+
+                    if(uiName==="default" || uiName===undefined){
+                        var item = $(`<input type="checkbox" id="${id}" class="options toggle">`)
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        var toggleElm = $(`
+                            ${uiPrefix}
+                            ${item[0].outerHTML}
+                            <label for="${id}" class="toggle"></label>
+                            ${uiSuffix}
+                        `)
+
+                        elm.find(".contents-option-content").append(toggleElm)
+                    }
+                }
+                else if(uiType === "dropdown"){
+                    if(elm.hasClass("contents-option")){
+                        elm.append(`<div class="contents-option-content"></div>`)
+                    }else{
+                        elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+                    }
+
+                    if(uiName==="default" || uiName===undefined){
+                        var dropdownElm = $(`
+                            <div class="dropdown">
+                                ${uiPrefix}
+                                <select id="${id}" class="options">
+                                </select>
+                                ${uiSuffix}
+                            </div>
+                        `)
+
+                        if(uiStyle){
+                            dropdownElm.css(uiStyle)
+                        }
+                        if(uiClass){
+                            dropdownElm.addClass(uiClass)
+                        }
+
+                        $.each(uiData, function(_, val){
+                            var value = ""
+                            var title = ""
+                            if(val.value){
+                                value = val.value
+                            }else{
+                                return true
+                            }
+                            if(val.title){
+                                title = val.title
+                            }else{
+                                if(value){
+                                    title = value
+                                }else{
+                                    return true
+                                }
+                            }
+
+                            dropdownElm.find("select").append(`
+                                <option value="${value}">${title}</option>
+                            `)
+                        })
+
+                        elm.find(".contents-option-content").append(dropdownElm)
+                    }
+                }
+                else if(uiType === "input"){
+                    if(elm.hasClass("contents-option")){
+                        elm.append(`<div class="contents-option-content"></div>`)
+                    }else{
+                        elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+                    }
+
+                    if(uiName==="default" || uiName===undefined || uiName==="text" || uiName==="number"){
+                        var item = $(`
+                            <div class="textfield">
+                                ${uiPrefix}<input class="options" type="text" id="${id}">${uiSuffix}
+                            </div>
+                        `)
+
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        elm.find(".contents-option-content").append(item)
+                    }
+                    else if(uiName==="integer"){
+                        var item = $(`
+                            <div class="textfield">
+                                <label>${uiPrefix}</label>
+                                <input class="options" type="number" id="${id}">
+                                <label>${uiSuffix}</label>
+                            </div>
+                        `)
+                        
+                        if(uiData){
+                            if(uiData.min){
+                                item.find("input").attr("min", uiData.min)
+                            }
+                            if(uiData.max){
+                                item.find("input").attr("max", uiData.max)
+                            }
+                        }
+
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        elm.find(".contents-option-content").append(item)
+                    }
+                    else if(uiName==="color"){
+                        var item = $(`
+                            <div class="textfield">
+                                <label>${uiPrefix}</label>
+                                <input class="options color" type="text" id="${id}" data-coloris>
+                                <label>${uiSuffix}</label>
+                            </div>
+                        `)
+
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        elm.find(".contents-option-content").append(item)
+                    }
+                }
+                else if(uiType === "textarea"){
+                    if(elm.hasClass("contents-option")){
+                        elm.append(`<div class="contents-option-content"></div>`)
+                    }else{
+                        elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+                    }
+
+                    if(uiName==="default" || uiName===undefined){
+                        var item = $(`
+                            <div class="textarea-outer">
+                                <label>${uiPrefix}</label>
+								<textarea class="textarea options" id="${id}"></textarea>
+                                <label>${uiSuffix}</label>
+							</div>
+                        `)
+
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        elm.find(".contents-option-content").append(item)
+                    }else if(uiName === "syntax-highlight"){
+                        var item = $(`
+                            <div class="textarea-outer">
+                                <label>${uiPrefix}</label>
+								<textarea class="textarea options syntax-highlight" id="${id}" data="${uiData}"></textarea>
+                                <label>${uiSuffix}</label>
+							</div>
+                        `)
+
+                        if(uiStyle){
+                            item.css(uiStyle)
+                        }
+                        if(uiClass){
+                            item.addClass(uiClass)
+                        }
+
+                        elm.find(".contents-option-content").append(item)
+                    }
+                }
+                else if(uiType === "custom"){
+                    if(elm.hasClass("contents-option")){
+                        elm.append(`<div class="contents-option-content"></div>`)
+                    }else{
+                        elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+                    }
+                    
+                    if(uiName==="default" || uiName===undefined){
+                        if(customUIList[uiData]){
+                            elm.find(".contents-option-content").append(customUIList[uiData])
+                        }
+                    }else if(uiName==="wide"){
+                        if(customUIList[uiData]){
+                            elm.empty()
+                            elm.append(customUIList[uiData])
+                        }
+                    }
+                }
+            }
+
+            /* Title / Description */
+            if(title || description){
+                if(title){
+                    if(!elm.find(".contents-item--heading").length){
+                        elm.find(".contents-option-head").append(`<div class="contents-item--heading">${title}</div>`)
+                    }else{
+                        elm.find(".contents-item--heading").empty()
+                        elm.find(".contents-item--heading").append(title)
+                    }
+                }
+                if(description){
+                    var descriptionText = []
+                    if(description.text){
+                        descriptionText.push(description.text)
+                    }
+                    if(description.small){
+                        descriptionText.push(`<span style="font-size: 80%;">${description.small}</span>`)
+                    }
+                    if(description.attention){
+                        descriptionText.push(`<span style="color: red; font-weight: bold; font-size: 90%;">${description.attention}</span>`)
+                    }
+
+                    if(descriptionText.length > 0){
+                        if(!elm.find(".contents-item--description").length){
+                            elm.find(".contents-option-head").append(`<div class="contents-item--description">${descriptionText.join("<br>")}</div>`)
+                        }else{
+                            elm.find(".contents-item--description").empty()
+                            elm.find(".contents-item--description").append(descriptionText.join("<br>"))
+                        }
+                    }
+                }
+            }
+
+            /* Hide Settings */
+            if(hideSettings){
+                var hsDataFor = hideSettings.dataFor
+                const hsData = hideSettings.data
+                const hsMode = hideSettings.mode
+
+                if(typeof hsDataFor === "string"){
+                    hsDataFor = [hsDataFor]
+                }
+                elm.addClass("option-hide")
+                elm.attr("data-for", hsDataFor.join(" "))
+                if(hsData){
+                    elm.attr("data", hsData)
+                }
+                if(hsMode){
+                    elm.attr("mode", hsMode)
+                }
+            }
+
+            /* Advanced / Experimental settings */
+            if(isAdvanced){
+                elm.addClass("advanced-hide")
+            }
+            if(isExperimental){
+                elm.addClass("experimental-hide")
+            }
+
+            /* Style */
+            if(style){
+                elm.css(style)
+            }
+
+            if(elmClass){
+                elm.addClass(elmClass)
+            }
+
+            /* Placement */
+            if(hasParent){
+                $(`.contents-container[name="${category}"] .contents-wide[name="${parent}"] .contents-wide-column`).append(elm)
+            }else{
+                $(`.contents-container[name="${category}"]`).append(elm)
+            }
+        }   
+    })
+}
+
 
 /* Restore Options */
 function restoreValues(data, ignore){
@@ -183,7 +577,8 @@ export function restoreOptions(){
     })
   
     chrome.storage.local.get(null, function(data) {
-      restoreValues(data)
+       restoreValues(data)
+       colorPicker()
     });
 
     /* On Click Elements */

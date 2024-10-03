@@ -272,6 +272,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "introduction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -289,6 +290,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "introduction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -306,6 +308,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "introduction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -323,6 +326,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "introduction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -335,7 +339,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_extIntroduction_License"
+            data: "ui_extIntroduction_License",
+            noindex: true,
         },
         location: {
             page: "general",
@@ -363,7 +368,7 @@ export const optionList = [
             category: "config"
         },
         value: {
-            hasValue: true
+            hasValue: true,
         }
     },
 
@@ -404,11 +409,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
-        },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: true,
-            mode: "show"
+            isAdvanced: true
         },
     },
 
@@ -429,11 +430,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
-        },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: true,
-            mode: "show"
+            isAdvanced: true,
         },
     },
 
@@ -448,19 +445,14 @@ export const optionList = [
             type: "custom",
             name: "default",
             data: "ui_extOptionList",
-            style: {"flex-direction": "column"}
         },
         location: {
             page: "general",
             category: "config",
         },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: true,
-            mode: "show"
-        },
         value: {
             hasValue: false,
+            isAdvanced: true,
         }
     },
 
@@ -476,6 +468,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "version",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -484,27 +477,6 @@ export const optionList = [
 
     /* 小説家になろう */
     /* 全般 (general) */
-    {
-        id: "narouSkipAgeauth",
-        title: "アダルトコンテンツの年齢認証をスキップ",
-        description: {
-            text: "各種R18小説サイト、および、えぱれっとの年齢認証画面をスキップします。",
-            attention: "18歳未満の方は有効にしないでください。"
-        },
-        ui: {
-            type: "toggle",
-            name: "default",
-        },
-        location: {
-            page: "narou",
-            category: "general",
-        },
-        value: {
-            default: defaultOption.narouSkipAgeauth,
-            hasValue: true,
-        }
-    },
-
     {
         id: "narouSyuppanShowBookImage",
         title: "書報（作品一覧）ページの書影を取得",
@@ -546,6 +518,27 @@ export const optionList = [
         }
     },
 
+    {
+        id: "narouSkipAgeauth",
+        title: "アダルトコンテンツの年齢認証をスキップ",
+        description: {
+            text: "各種R18小説サイト、および、えぱれっとの年齢認証画面をスキップします。",
+            attention: "18歳未満の方は有効にしないでください。"
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        location: {
+            page: "narou",
+            category: "general",
+        },
+        value: {
+            default: defaultOption.narouSkipAgeauth,
+            hasValue: true,
+            isExperimental: true,
+        }
+    },
 
     /* 小説ページ */
     /* 全般 (general) */
@@ -672,6 +665,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "general",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -886,6 +880,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCursorHide,
             hasValue: true,
+            isExperimental: true,
         }
     },
 
@@ -906,6 +901,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCursorHideTimeout,
             hasValue: true,
+            isExperimental: true,
         },
         hideSettings: {
             dataFor: ["novelCursorHide"],
@@ -931,6 +927,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelAttentionBanner,
             hasValue: true,
+            isExperimental: true,
         },
     },
 
@@ -1010,11 +1007,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomCSS,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: true,
-            mode: "show"
+            isAdvanced: true,
         },
     },
 
@@ -1190,6 +1183,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "correction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1206,6 +1200,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "correction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1222,6 +1217,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "correction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1241,6 +1237,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "correction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1262,6 +1259,7 @@ export const optionList = [
         location: {
             page: "novel",
             category: "correction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1532,7 +1530,7 @@ export const optionList = [
             data: [
                 {value: "default", title: "そのまま"},
                 {value: "half", title: "半角へ置換"},
-                {value: "wide", title: "全角へ置換"},
+                {value: "full", title: "全角へ置換"},
                 {value: "kanji", title: "漢数字へ置換"},
             ]
         },
@@ -1565,7 +1563,7 @@ export const optionList = [
             data: [
                 {value: "default", title: "そのまま"},
                 {value: "half", title: "半角へ置換"},
-                {value: "wide", title: "全角へ置換"},
+                {value: "full", title: "全角へ置換"},
                 {value: "kanji", title: "漢数字へ置換"},
             ]
         },
@@ -1598,7 +1596,7 @@ export const optionList = [
             data: [
                 {value: "default", title: "そのまま"},
                 {value: "half", title: "半角へ置換"},
-                {value: "wide", title: "全角へ置換"},
+                {value: "full", title: "全角へ置換"},
                 {value: "kanji", title: "カタカナへ置換"},
             ]
         },
@@ -1632,9 +1630,8 @@ export const optionList = [
             data: {
                 min: "0",
                 max: "10",
-                style: "margin-right:.5em;"
             },
-            suffix: "文字以下"
+            suffix: "文字以下",
         },
         location: {
             page: "novel",
@@ -1660,8 +1657,7 @@ export const optionList = [
             name: "integer",
             data: {
                 min: "0",
-                max: "10",
-                style: "margin-right:.5em;"
+                max: "10"
             },
             suffix: "文字以下"
         },
@@ -1690,7 +1686,6 @@ export const optionList = [
             data: {
                 min: "0",
                 max: "10",
-                style: "margin-right:.5em;"
             },
             suffix: "文字以下"
         },
@@ -1747,7 +1742,6 @@ export const optionList = [
             data: {
                 min: "0",
                 max: "20",
-                style: "margin-right:.5em;"
             },
             suffix: "文字以上"
         },
@@ -1776,7 +1770,6 @@ export const optionList = [
             data: {
                 min: "0",
                 max: "20",
-                style: "margin-right:.5em;"
             },
             suffix: "文字以上"
         },
@@ -1878,6 +1871,7 @@ export const optionList = [
         location: {
             page: "yomou",
             category: "rank",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -1894,6 +1888,7 @@ export const optionList = [
         location: {
             page: "yomou",
             category: "rank",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -2021,8 +2016,8 @@ export const optionList = [
         id: "yomouRank_PointsColor",
         title: "ポイント表示色",
         ui: {
-            type: "color",
-            name: "default",
+            type: "input",
+            name: "color",
         },
         location: {
             page: "yomou",
@@ -2045,7 +2040,7 @@ export const optionList = [
         ui: {
             type: "textarea",
             name: "syntax-highlight",
-            data: "css"
+            data: "css",
         },
         location: {
             page: "yomou",
@@ -2054,11 +2049,7 @@ export const optionList = [
         value: {
             default: defaultOption.yomouRank_CustomCSS,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: "true",
-            mode: "show"
+            isAdvanced: true,
         },
     },
 
@@ -2076,6 +2067,7 @@ export const optionList = [
         location: {
             page: "yomou",
             category: "ranktop",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -2252,68 +2244,12 @@ export const optionList = [
         value: {
             default: defaultOption.yomouRankTop_CustomCSS,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["extAdvancedSettings"],
-            data: "true",
-            mode: "show"
+            isAdvanced: true,
         },
     },
 
     /* ユーザページ */
     /* 全般 (general) */
-    {
-        id: "workspaceCustomHeaderMode",
-        title: "ヘッダの追従モード",
-        description: {
-            text: "ヘッダの配置場所を設定します。",
-            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示"
-        },
-        ui: {
-            type: "dropdown",
-            name: "default",
-            data: [
-                {value: "absolute", title: "上部"},
-                {value: "fixed", title: "追従"},
-                {value: "scroll", title: "スクロール"},
-            ]
-        },
-        location: {
-            page: "workspace",
-            category: "general",
-        },
-        value: {
-            default: defaultOption.workspaceCustomHeaderMode,
-            hasValue: true,
-        },
-    },
-
-    {
-        id: "workspaceCustomHeaderScrollHidden",
-        title: "ページ読み込み時にヘッダを隠す",
-        description: {
-            text: "オンの場合、ページ読み込み時にヘッダを隠します。",
-            small: "（ヘッダの追従モードが「スクロール」でのみ有効）"
-        },
-        ui: {
-            type: "toggle",
-            name: "default"
-        },
-        location: {
-            page: "workspace",
-            category: "general",
-        },
-        value: {
-            default: defaultOption.workspaceCustomHeaderScrollHidden,
-            hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["workspaceCustomHeaderMode"],
-            data: "scroll",
-            mode: "show"
-        },
-    },
-
     {
         id: "workspaceCustomHeaderData",
         title: "ヘッダのアイテム配置",
@@ -2354,6 +2290,60 @@ export const optionList = [
             hasValue: false,
         },
     },
+    
+    {
+        id: "workspaceCustomHeaderMode",
+        title: "ヘッダの追従モード",
+        description: {
+            text: "ヘッダの配置場所を設定します。",
+            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示"
+        },
+        ui: {
+            type: "dropdown",
+            name: "default",
+            data: [
+                {value: "absolute", title: "上部"},
+                {value: "fixed", title: "追従"},
+                {value: "scroll", title: "スクロール"},
+            ]
+        },
+        location: {
+            page: "workspace",
+            category: "general",
+        },
+        value: {
+            default: defaultOption.workspaceCustomHeaderMode,
+            hasValue: true,
+            isExperimental: true,
+        },
+    },
+
+    {
+        id: "workspaceCustomHeaderScrollHidden",
+        title: "ページ読み込み時にヘッダを隠す",
+        description: {
+            text: "オンの場合、ページ読み込み時にヘッダを隠します。",
+            small: "（ヘッダの追従モードが「スクロール」でのみ有効）"
+        },
+        ui: {
+            type: "toggle",
+            name: "default"
+        },
+        location: {
+            page: "workspace",
+            category: "general",
+        },
+        value: {
+            default: defaultOption.workspaceCustomHeaderScrollHidden,
+            hasValue: true,
+        },
+        hideSettings: {
+            dataFor: ["workspaceCustomHeaderMode"],
+            data: "scroll",
+            mode: "show"
+        },
+    },
+
 
     /* 小説管理 (manage) */
     {
@@ -2448,6 +2438,7 @@ export const optionList = [
         location: {
             page: "workspace",
             category: "favorite",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -2535,6 +2526,7 @@ export const optionList = [
         location: {
             page: "workspace",
             category: "reaction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -2958,6 +2950,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "pageview",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -3024,6 +3017,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "pageview",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -3218,6 +3212,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "day",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -3284,6 +3279,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "day",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -3351,6 +3347,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "month",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -3417,6 +3414,7 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "month",
+            noindex: true,
         },
         value: {
             hasValue: false,

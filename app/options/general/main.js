@@ -1,23 +1,17 @@
 import { defaultValue, getExtensionVersion } from "/utils/misc.js";
 import { defaultOption, fixOption } from "/utils/option.js";
-import { restoreOptions, setupDOM } from "../general.js";
-import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
+import { setup } from "../general.js";
 import { escapeHtml } from "../../../utils/text.js";
 
-setupDOM()
-buttonHide()
-optionHide()
+setup()
 
 document.addEventListener('DOMContentLoaded', function(){
-    restoreOptions()
     showPatchnotes()
-
     exportOptionText()
     exportSyncOptionText()
     exportSessionOptionText()
     removeOptionData()
     fixOptionData()
-    syntaxHighlight()
 })
 
 

@@ -93,26 +93,28 @@ export const customUIList = {
     `,
 
     ui_extOptionList: `
-        <div style="flex-shrink: 0; width: 100%;">
-            <div class="export-option-text">
-                <textarea class="textarea syntax-highlight" id="exportOptionText_Output" readonly data="json"></textarea>
+        <div style="display: flex; flex-direction: column; width: 100%;" class="option-list">
+            <div class="option-list--item">
+                <div class="export-option-text">
+                    <textarea class="textarea syntax-highlight" id="exportOptionText_Output" readonly data="json"></textarea>
+                </div>
+                <label for="extIgnoreOptionIndex">無視するインデックス</label>
+                <input type="text" class="options" id="extIgnoreOptionIndex" style="width: 100%;" placeholder="スペース区切り">
             </div>
-            <label for="extIgnoreOptionIndex">無視するインデックス</label>
-            <input type="text" class="options" id="extIgnoreOptionIndex" style="width: 100%;" placeholder="スペース区切り">
-        </div>
-        <div style="flex-shrink: 0; width: 100%; margin-top: 10px;">
-            <div class="export-option-text">
-                <textarea class="textarea syntax-highlight" id="exportSyncOptionText_Output" readonly data="json"></textarea>
+            <div style="margin-top: 10px;" class="option-list--item">
+                <div class="export-option-text">
+                    <textarea class="textarea syntax-highlight" id="exportSyncOptionText_Output" readonly data="json"></textarea>
+                </div>
+                <label for="extIgnoreSyncOptionIndex">無視するインデックス</label>
+                <input type="text" class="options" id="extIgnoreSyncOptionIndex" style="width: 100%;" placeholder="スペース区切り">
             </div>
-            <label for="extIgnoreSyncOptionIndex">無視するインデックス</label>
-            <input type="text" class="options" id="extIgnoreSyncOptionIndex" style="width: 100%;" placeholder="スペース区切り">
-        </div>
-        <div style="flex-shrink: 0; width: 100%; margin-top: 10px;">
-            <div class="export-option-text">
-                <textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
+            <div style="margin-top: 10px;" class="option-list--item">
+                <div class="export-option-text">
+                    <textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
+                </div>
+                <label for="extIgnoreSessionOptionIndex">無視するインデックス</label>
+                <input type="text" class="options" id="extIgnoreSessionOptionIndex" style="width: 100%;" placeholder="スペース区切り">
             </div>
-            <label for="extIgnoreSessionOptionIndex">無視するインデックス</label>
-            <input type="text" class="options" id="extIgnoreSessionOptionIndex" style="width: 100%;" placeholder="スペース区切り">
         </div>
     `,
 

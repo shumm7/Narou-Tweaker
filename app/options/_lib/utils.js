@@ -88,10 +88,10 @@ export function optionHide(){
         }
 
         // Elements 
-        $(".experimental-hide .contents-item--heading").prepend(
+        elm.find(".contents-item--heading").prepend(
             `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
         )
-        $(".experimental-hide .contents-item--description").prepend(
+        elm.find(".contents-item--description").prepend(
             `<div class="option--experimental-message"></div>`
         )
 
@@ -103,6 +103,35 @@ export function optionHide(){
         chrome.storage.local.onChanged.addListener(function(changes){
             if(changes.extExperimentalFeatures!=undefined){
                 change(changes.extExperimentalFeatures.newValue)
+            }
+        })
+    })
+
+    $(".advanced-hide").each(function(){
+        var elm = $(this)
+
+        function change(value){
+            $(".option--advanced-message").empty()
+            if(value){
+                elm.removeClass("option-hide--advanced")
+            }else{
+                elm.addClass("option-hide--advanced")
+            }
+        }
+
+        // Elements 
+        elm.find(".contents-item--heading").prepend(
+            `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
+        )
+
+            
+        chrome.storage.local.get(["extAdvancedSettings"], function(data){
+            change(data.extAdvancedSettings)
+        })
+
+        chrome.storage.local.onChanged.addListener(function(changes){
+            if(changes.extAdvancedSettings!=undefined){
+                change(changes.extAdvancedSettings.newValue)
             }
         })
     })
@@ -129,6 +158,7 @@ export function colorPicker(){
             input.dispatchEvent(new Event('input', { bubbles: true }));
         });
     })
+    
 }
 
 export function syntaxHighlight(){

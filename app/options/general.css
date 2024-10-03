@@ -29,6 +29,9 @@ html::-webkit-scrollbar {
 .button-hide--hidden, .option-hide--hidden {
     display: none !important;
 }
+.option-hide--advanced {
+    display: none !important;
+}
 .option-hide--experimental .contents-option-content {
     pointer-events: none;
     filter: grayscale(1);
@@ -38,6 +41,12 @@ html::-webkit-scrollbar {
     font-weight: bold;
     white-space: break-spaces;
     clear: both;
+    border: 1px solid #999;
+    background-color: #fafafa;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 3px;
+    margin-bottom: 10px;
 }
 
 /* Text Field */
