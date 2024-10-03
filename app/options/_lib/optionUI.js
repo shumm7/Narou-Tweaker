@@ -2,6 +2,21 @@ import { defaultOption } from "/utils/option.js";
 
 export const optionCategoryList = [
     {
+        title: "検索",
+        description: "設定項目を絞り込み検索することができます。",
+        id: "search",
+        defaultCategory: "general",
+        categories: [
+            {
+                title: "検索",
+                id: "general",
+            },
+        ],
+        tabs: false,
+        sidebar: false,
+        noindex: true,
+    },
+    {
         title: "全般",
         description: "Narou Tweaker全体の設定を変更することが出来ます。",
         id: "general",
@@ -256,6 +271,28 @@ export const optionCategoryList = [
 ]
 
 export const optionList = [
+    /* 検索 */
+    {
+        id: "extSearch",
+        title: "検索",
+        description: {
+            text: "キーワードを入力してください"
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extSearchBox"
+        },
+        location: {
+            page: "search",
+            category: "general",
+            noindex: true,
+        },
+        value: {
+            hasValue: false,
+        },
+    },
+
     /* 全般 */
     /* Narou Tweaker (introduction) */
     {
@@ -935,6 +972,9 @@ export const optionList = [
     {
         id: "novelSkin",
         title: "スキン",
+        description: {
+            text: "小説ページの外観を変更します。"
+        },
         ui: {
             type: "custom",
             name: "wide",

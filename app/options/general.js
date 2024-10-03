@@ -47,7 +47,7 @@ function setupDOM(){
         if(category.id===currentPage){
             currentCategory = category
         }
-    })
+    }),
 
     var sidebar = $(`
         <div id="sidebar-inner">
@@ -61,9 +61,14 @@ function setupDOM(){
                 ${sidebarDOMItems}
             </div>
             <div id="sidebar-bottom">
-                <div id="sidebar-version">build. ${manifest.version}</div>
-                <div class="sidebar-icon" id="sidebar-icon--hide">
-                    <i class="fa-solid fa-angles-left"></i>
+                <div id="sidebar-search">
+                    <input type="text" id="sidebar-search-box" placeholder="検索">
+                </div>
+                <div id="sidebar-toolbox">
+                    <div id="sidebar-version">build. ${manifest.version}</div>
+                    <div class="sidebar-icon" id="sidebar-icon--hide">
+                        <i class="fa-solid fa-angles-left"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,6 +105,35 @@ function setupDOM(){
             $("#sidebar").addClass("hide")
         }
     }
+
+    /* search event */
+    $("#sidebar-search-box").on("input", function(){
+        var searchWords = $(this).val()
+        if(currentPage!=="search"){
+            const words = searchWords.split(/\s/).filter(w => w.trim().length > 0)
+        
+            const params = new URLSearchParams(location.search)
+            params.set("s", words.join(" "))
+            window.history.replaceState(null, "", `${location.pathname}?${params.toString()}`)
+        }else{
+            $("#search-box").val(searchWords)
+            $("#search-box").trigger("input")
+        }
+    })
+    $("#sidebar-search-box").on("keydown", function(e){
+        if(e.key === "Enter"){
+            if(currentPage!=="search"){
+                var searchWords = $(this).val()
+                const words = searchWords.split(/\s/).filter(w => w.trim().length > 0)
+            
+                const params = new URLSearchParams(location.search)
+                params.set("s", words.join(" "))
+                location.replace(`/options/search/index.html?${params.toString()}`)
+            }else{
+                $("#search-box").focus()
+            }
+        }
+    })
 
 
     /* Set Title */
@@ -663,12 +697,13 @@ function urlScheme(){
     const p_category = params.get("category")
     const p_force = params.get("force")
     const p_panel = params.get("panel")
+    const p_focus = params.get("focus")
 
     if(p_id){
         const p_dataOption = getOptionFromId(p_id)
         if(p_dataOption){
             if(p_dataOption.location){
-                if(p_dataOption.location.page!==currentPage && p_force){
+                if(p_dataOption.location.page!==currentPage && p_force==="1"){
                     params.set("category", p_dataOption.location.category)
                     location.replace(`/options/${p_dataOption.location.page}/index.html?${params.toString()}`)
                 }else if(p_dataOption.location.page===currentPage){
@@ -677,9 +712,16 @@ function urlScheme(){
                         var tab = $(`.header-menu-item[name="${p_dataOption.location.category}"]`)
                         if(tab.length){
                             tab.trigger("click")
-                            elm.find(".options").eq(0).focus()
                             $(window).scrollTop(elm.offset().top)
                         }
+                    }
+                }
+
+                if(p_focus==="1"){
+                    var elm = $(`*[name="${p_id}"]`)
+                    if(elm.length){
+                        elm.addClass("search-focused")
+                        elm.find(".options").eq(0).focus()
                     }
                 }
             }
@@ -705,5 +747,17 @@ function urlScheme(){
             }
 
         })
+    }
+
+    /* search */
+    const p_search = params.get("s")
+    if(currentPage=="search"){
+        if(p_search){
+            $("#search-box").val(p_search)
+            $("#search-box").trigger("input")
+        }
+    }
+    if(p_search){
+        $("#sidebar-search-box").val(p_search)
     }
 }

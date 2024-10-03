@@ -49,6 +49,11 @@ html::-webkit-scrollbar {
     margin-bottom: 10px;
 }
 
+.search-focused .contents-item--heading {
+    text-decoration: underline wavy;
+    color: rgb(27, 77, 243);
+}
+
 /* Text Field */
 .textfield {
 	display: flex;
@@ -242,11 +247,10 @@ input[type=file] {
 }
 #sidebar-bottom {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    flex-direction: column;
+    width: 100%;
     position: fixed;
     bottom: 10px;
-    width: inherit;
 }
 .sidebar-icon {
     cursor: pointer;
@@ -265,6 +269,35 @@ input[type=file] {
 #sidebar-icon--help a {
     color: inherit;
 }
+
+#sidebar-toolbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: inherit;
+}
+#sidebar-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin: 0 10px;
+    margin-bottom: 30px;
+}
+#sidebar-search-box {
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-right: 8px;
+    border: none;
+    border-radius: 0;
+    background-color: #e6e6e6;
+    border-bottom: 3px solid #ccc;
+}
+#sidebar-search-box:focus-visible {
+    outline: none;
+    background: #e0e0e0;
+}
+
 #sidebar-version {
     color: #666;
     margin-left: 15px;

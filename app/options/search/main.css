@@ -1,0 +1,51 @@
+*[name="extSearch"] .contents-option{
+    min-height: 80px;
+}
+
+/* 検索ボックス */
+#search-box-outer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: flex-start;
+}
+
+#search-box--text {
+    width: 100%;
+}
+
+#search-box {
+    width: 100%;
+    min-width: 50px;
+    max-width: 300px;
+}
+
+#search-box--suggestion {
+    font-size: 12px;
+    color: #666;
+    margin: 5px;
+}
+
+.search-result--items-locate {
+    font-weight: bold;
+}
+.search-result--items-id {
+    margin-top: 5px;
+    font-size: 12px;
+}
+.search-result--items-id-tag {
+    border-radius: 10px;
+    background: #eee;
+    padding: 3px 7px;
+}
+.search-result--items-id a::before {
+    content: "#";
+}
+.search-result--items-id a {
+    color: inherit;
+}
+#search-result--notfound {
+    display: flex;
+    width: 100%;
+}
