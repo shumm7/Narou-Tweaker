@@ -3,6 +3,7 @@ import { customUIList } from "./_lib/customUI.js";
 import { optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
 import { defaultOption, updateOption } from "/utils/option.js"
+import { getOptionFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
 var currentPage
@@ -16,6 +17,7 @@ export function setup(){
     optionHide()
     syntaxHighlight()
     restoreOptions()
+    urlScheme()
 }
 
 function setupDOM(){
@@ -27,14 +29,20 @@ function setupDOM(){
     /* Sidebars */
     var sidebarDOMItems = ""
     $.each(optionCategoryList, function(idx, category){
-        sidebarDOMItems += `
-        <div class="sidebar-item" name="${category.id}">
-            <a href="/options/${category.id}/index.html" target="_self">
-                <i class="${category.icon}"></i>
-                <span class="sidebar-item--title">${category.title}</span>
-            </a>
-        </div>
-        `
+        if(category.sidebar || category.sidebar===undefined){
+            var elm = $(`
+                <div class="sidebar-item" name="${category.id}">
+                    <a href="/options/${category.id}/index.html" target="_self">
+                        <span class="sidebar-item--title">${category.title}</span>
+                    </a>
+                </div>
+            `)
+
+            if(category.icon){
+                elm.find("a").prepend(`<i class="${category.icon}"></i>`)
+            }
+            sidebarDOMItems += elm[0].outerHTML
+        }
 
         if(category.id===currentPage){
             currentCategory = category
@@ -69,6 +77,7 @@ function setupDOM(){
     sidebar.find(`.sidebar-item:has(a[href="${location.pathname}"])`).addClass("selected")
     $("#sidebar").append(sidebar)
 
+
     /* Sidepanel Events */
     chrome.storage.local.get("extOptionSidePanelShow", function(data){
         _sidepanelHide(data.extOptionSidePanelShow)
@@ -92,8 +101,10 @@ function setupDOM(){
         }
     }
 
+
     /* Set Title */
     $("head title").text(`環境設定 > ${currentCategory.title} ｜ Narou Tweaker`)
+    
     
     /* Footer */
     $("#footer").append(`
@@ -108,10 +119,10 @@ function setupDOM(){
     `)
 
     /* Header Info */
-    $("#header-title--heading").append(`
-        <i class="${currentCategory.icon}"></i>
-		<span class="title">${currentCategory.title}</span>
-    `)
+    if(currentCategory.icon){
+        $("#header-title--heading").append(`<i class="${currentCategory.icon}"></i>`)
+    }
+    $("#header-title--heading").append(`<span class="title">${currentCategory.title}</span>`)
 
     if(currentCategory.targetUrl !== undefined){
         $("#header-title--description").append(`
@@ -151,7 +162,7 @@ function setupDOM(){
                 `)
             }
         }
-
+        
         if(defaultCategory===tab.id){
             $("#header-menu-left-items").append(`
                 <li class="header-menu-item selected" name="${tab.id}">
@@ -169,6 +180,10 @@ function setupDOM(){
                 </li>
             `)
         }
+
+        if(!currentCategory.tabs && currentCategory.tabs!==undefined){
+            $("#header-menu").css("display", "none")
+        }
         
     })
         
@@ -179,19 +194,12 @@ function setupDOM(){
 
         $(`.header-menu-target.selected`).removeClass("selected")
         $(`.header-menu-target[name="${name}"]`).addClass("selected")
-        location.replace(`#${name}`)
-    })
 
-    const hash = location.hash
-    if(hash.length){
-        var tag = hash.match(/#(.*)/)[1]
-        if(tag){
-            var tab = $(`.header-menu-item[name="${tag}"]`)
-            if(tab.length){
-                tab.trigger("click")
-            }
-        }
-    }
+        const params = new URLSearchParams(location.search)
+        params.set("category", name)
+
+        window.history.replaceState(null, "", `/options/${currentPage}/index.html?${params.toString()}`)
+    })
 }
 
 function setupContents(){
@@ -645,4 +653,57 @@ export function restoreOptions(){
             $(this).select()
         })
     })
+}
+
+
+/* URL Scheme */
+function urlScheme(){
+    var params = new URLSearchParams(location.search)
+    const p_id = params.get("id")
+    const p_category = params.get("category")
+    const p_force = params.get("force")
+    const p_panel = params.get("panel")
+
+    if(p_id){
+        const p_dataOption = getOptionFromId(p_id)
+        if(p_dataOption){
+            if(p_dataOption.location){
+                if(p_dataOption.location.page!==currentPage && p_force){
+                    params.set("category", p_dataOption.location.category)
+                    location.replace(`/options/${p_dataOption.location.page}/index.html?${params.toString()}`)
+                }else if(p_dataOption.location.page===currentPage){
+                    var elm = $(`*[name="${p_id}"]`)
+                    if(elm.length){
+                        var tab = $(`.header-menu-item[name="${p_dataOption.location.category}"]`)
+                        if(tab.length){
+                            tab.trigger("click")
+                            elm.find(".options").eq(0).focus()
+                            $(window).scrollTop(elm.offset().top)
+                        }
+                    }
+                }
+            }
+        }
+    }else{
+        if(p_category){
+            var tab = $(`.header-menu-item[name="${p_category}"]`)
+            if(tab.length){
+                tab.trigger("click")
+            }
+        }
+    }
+    if(p_panel!==null){
+        chrome.storage.local.get(["extOptionSidePanelShow"], d =>{
+            if(p_panel==="1"){
+                if(!d.extOptionSidePanelShow){
+                    chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})
+                }
+            }else if(p_panel==="0"){
+                if(d.extOptionSidePanelShow){
+                    chrome.storage.local.set({extOptionSidePanelShow: false}, function(){})
+                }
+            }
+
+        })
+    }
 }
