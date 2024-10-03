@@ -1,23 +1,22 @@
 import { defaultValue, getExtensionVersion } from "/utils/misc.js";
 import { defaultOption, fixOption } from "/utils/option.js";
-import { restoreOptions, setupDOM } from "../general.js";
-import { buttonHide, optionHide, syntaxHighlight } from "../utils.js";
-import { escapeHtml } from "../../../utils/text.js";
+import { setup } from "../general.js";
+import { escapeHtml, getDatetimeStringForFilename } from "/utils/text.js";
+import { getUpdatedOption } from "/utils/option.js";
+import { saveJson } from "../../utils/misc.js";
+import { updateOption } from "../../utils/option.js";
 
-setupDOM()
-buttonHide()
-optionHide()
+setup()
 
 document.addEventListener('DOMContentLoaded', function(){
-    restoreOptions()
     showPatchnotes()
-
     exportOptionText()
     exportSyncOptionText()
     exportSessionOptionText()
     removeOptionData()
     fixOptionData()
-    syntaxHighlight()
+    exportOptionData()
+    importOptionData()
 })
 
 
@@ -114,12 +113,21 @@ function exportSessionOptionText() {
     })
 }
 
+/* 設定データをリセット/修復 */
 function removeOptionData(){
     $("#removeOptionData").on("click", function(){
-        if(window.confirm('スキンを含む、保存されているデータが全てリセットされます。')){
+        if(window.confirm('スキンを含む、保存されているデータが全てリセットされます。\nこの操作は元に戻せません。')){
             chrome.storage.local.clear(()=>{
                 chrome.storage.local.set(defaultOption)
                 console.log("Reset all options.")
+
+                /* notify */
+                chrome.notifications.create(null, {
+                    iconUrl: "/assets/icons/icon_48.png",
+                    type: "basic",
+                    title: "Narou Tweakerがリセットされました",
+                    message: ``
+                })
             })
         }
     })
@@ -127,8 +135,123 @@ function removeOptionData(){
 
 function fixOptionData(){
     $("#fixOptionData").on("click", function(){
-        if(window.confirm('この操作を行うと、異なるバージョンのNarou Tweakerを利用しているブラウザで不具合が発生する可能性があります。最新版に更新した上で実行してください。')){
+        if(window.confirm('この操作を行うと、異なるバージョンのNarou Tweakerを利用している他のブラウザで不具合が発生する可能性があります。\n最新版に更新した上で実行してください。')){
             fixOption(true, true)
+
+            chrome.notifications.create(null, {
+                iconUrl: "/assets/icons/icon_48.png",
+                type: "basic",
+                title: "Narou Tweakerが修復されました",
+                message: `保存されたデータはそのままです。`
+            })
+        }
+    })
+}
+
+/* 設定データのエクスポート/インポート */
+function exportOptionData(){
+    /* Export Button */
+    $("#option-export-json").on("click", (e)=>{
+        chrome.storage.local.get(null, function(data) {
+            var date = getDatetimeStringForFilename()
+            console.log(date)
+            var d = getUpdatedOption(data)
+            console.log(d)
+            if(d){
+                saveJson(getUpdatedOption(data), `nt-option-${date}.json`)
+            }
+        });
+    })
+    $("#option-export-text").on("click", (e)=>{
+        $("#option-export-output").css("display", "block")
+        chrome.storage.local.get(null, function(data) {
+            var field = $("#option-export-output--field")
+            var d = getUpdatedOption(data)
+            if(d){
+                field.val(JSON.stringify(d, null, "\t"))
+                field.trigger("input")
+            }
+        });
+    })
+}
+
+function importOptionData(){
+    $("#option-import-json").on("change", (evt)=>{
+        $("#option-import-warnings").empty()
+
+        try{
+            var f = evt.target.files[0]
+            var reader = new FileReader();
+            reader.onload = function(e){
+                try{
+                    var field = $("#option-import-input--field")
+                    field.val(e.target.result)
+                    field.trigger("input")
+                }catch(e){
+                    console.warn(e)
+                }
+            }
+            reader.readAsText(f);
+        }catch(e){}
+    })
+    $('#option-import').on('dragenter', function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+    });
+    $('#option-import').on('dragover', function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+    });
+    $("#option-import").on("drop", (evt)=>{
+        evt.stopPropagation();
+        evt.preventDefault();
+        $("#option-import-warnings").empty()
+
+        try{
+            var f = evt.originalEvent.dataTransfer.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e){
+                try{
+                    var field = $("#option-import-input--field")
+                    field.val(e.target.result)
+                    field.trigger("input")
+                }catch(e){
+                    console.warn(e)
+                }
+            }
+            reader.readAsText(f);
+        }catch(e){}
+    })
+
+    $("#option-import-input--submit").on("click", (e)=>{
+        if(window.confirm('スキンを含む、既存のデータが全て上書きされます。\nこの操作は元に戻せません。')){
+            $("#option-import-warnings").empty()
+            var raw
+            try{
+                raw = JSON.parse($("#option-import-input--field").val())
+                var option = getUpdatedOption(raw)
+                if(option){
+                    chrome.storage.local.set(option, function(){
+                        var field = $("#option-import-input--field")
+                        field.val("")
+                        field.trigger("input")
+
+                        /* notify */
+                        chrome.notifications.create(null, {
+                            iconUrl: "/assets/icons/icon_48.png",
+                            type: "basic",
+                            title: "Narou Tweakerがアップデートされました",
+                            message: `ユーザによるデータインポート`
+                        })
+                    })
+                }
+
+            }catch(e){
+                $("#option-import-warnings").append(`<div class="option-import-warning">データの読み取りに失敗しました。</div>`)
+                console.warn(e)
+                return
+            }
+
         }
     })
 }

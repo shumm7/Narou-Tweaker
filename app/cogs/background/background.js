@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener((details) => {
             chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex){
                 console.log(details)
                 if(notificationId === id && buttonIndex===0){
-                    chrome.tabs.create({url: "/options/general/index.html#version"});
+                    chrome.tabs.create({url: "/options/general/index.html?category=version"});
                 }
             })
         }

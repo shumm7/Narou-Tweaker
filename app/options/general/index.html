@@ -2,308 +2,51 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>環境設定 - 全般 ｜ Narou Tweaker</title>
+		<title>環境設定 ｜ Narou Tweaker</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<base target="_blank">
 		<link rel="stylesheet" type="text/css" href="/common.css">
 		<link rel="stylesheet" type="text/css" href="../general.css">
-		<link rel="stylesheet" type="text/css" href="c_general.css">
+		<link rel="stylesheet" type="text/css" href="main.css">
 		<link rel="stylesheet" type="text/css" href="/libs/font-awesome/css/all.css">
+		<link rel="stylesheet" type="text/css" href="/libs/Coloris/dist/coloris.min.css">
 		<link rel="stylesheet" type="text/css" href="/libs/highlightjs/styles/atom-one-light.min.css">
 		<script src="/libs/jquery-3.7.1.min.js"></script>
+		<script defer src="/libs/font-awesome/js/brands.min.js"></script>
+		<script defer src="/libs/font-awesome/js/fontawesome.min.js"></script>
 		<script src="/libs/SortableJS/Sortable.min.js"></script>
+		<script src="/libs/Coloris/dist/coloris.min.js"></script>
 		<script src="/libs/highlightjs/highlight.min.js"></script>
+		<script src="/libs/highlightjs/languages/css.min.js"></script>
 		<script src="/libs/highlightjs/languages/json.min.js"></script>
-		<script src="c_general.js" type="module"></script>
-		
-	</head>
-	<body>
-		<div id="container">
+		<script src="/libs/highlightjs/languages/xml.min.js"></script>
+		<script src="main.js" type="module"></script>
+        <input id="option-page-id" type="hidden" value="general">
+    </head>
+    <body>
+        <div id="container">
 			<div id="sidebar"></div>
 			<div id="contents">
 				<div id="header">
 					<div id="header-title">
-						<div id="header-title--heading">
-							<i class="fa-solid fa-gear"></i>
-							<span class="title">全般</span>
-						</div>
-						<div id="header-title--description">
-							<p>Narou Tweaker全体の設定を変更することが出来ます。
-							</p>
-						</div>
+						<div id="header-title--heading"></div>
+						<div id="header-title--description"></div>
 					</div>
 					<div id="header-menu">
 						<div class="header-menu-left">
-							<ul id="header-menu-left-items">
-								<li class="header-menu-item selected" name="introduction">
-									<span class="header-menu-item--title">Narou Tweaker</span>
-								</li>
-								<li class="header-menu-item" name="config">
-									<span class="header-menu-item--title">環境設定</span>
-								</li>
-								<li class="header-menu-item" name="version">
-									<span class="header-menu-item--title">パッチノート</span>
-								</li>
-								<!--
-								<li class="header-menu-item button-hide" name="header" data-for=".general-help" data="selected">
-									<span class="header-menu-item--title">ヘルプ</span>
-								</li>
-								-->
-							</ul>
+							<ul id="header-menu-left-items"></ul>
 						</div>
 					</div>
 				</div>
 
-				<div id="main">
-					<!-- 全般 -->
-					<div class="contents-container header-menu-target selected" name="introduction">
-						<!--ヘッダ-->
-						<div class="contents-wide">
-							<div id="intro">
-								<img src="/assets/image/wide.png">
-								<span class="title">Narou Tweaker</span>
-								<div class="subtitle">
-									<span class="version extension-version"></span>
-								</div>
-							</div>
-						</div>
+                <div id="main"></div>
 
-						<!--Narou Tweakerとは-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">Narou Tweakerとは</div>
-									<div class="contents-item--description"></div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="description">
-										<p>
-											Narou Tweakerは「小説家になろう」のユーザー体験を向上させることを目的に開発された、ブラウザ拡張機能です。
-										</p>
-										<p>
-											幅広い拡張性と高いユーザビリティで、より快適に小説を楽しむことが出来ます。
-										</p>
-										<div id="downloads">
-											<div class="download-item">
-												<a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
-													<span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
-													<span class="download-item--title">Chrome</span>
-												</a>
-											</div>
-											<div class="download-item">
-												<a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
-													<span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
-													<span class="download-item--title">FireFox</span>
-												</a>
-											</div>
-										</div>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-						<!--プライバシーポリシー-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">プライバシーポリシー</div>
-									<div class="contents-item--description"></div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="description">
-										<p>
-											Narou Tweakerを利用される際には、<a href="https://github.com/shumm7/Narou-Tweaker/blob/main/TERMS.md">利用規約・プライバシーポリシー</a>をご確認ください。
-										</p>
-										<p>
-											ご同意いただけない場合は、本アプリケーションにアクセスしないでください。
-										</p>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-						<!--サポート-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">サポート</div>
-									<div class="contents-item--description"></div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="description">
-										<p>
-											<span style="color: red; font-weight: bold"><i class="fa-solid fa-triangle-exclamation"></i> これは開発中のバージョンです！ 不具合が発生したり、破壊的な変更が行われる場合があります。</span>
-										</p>
-										<p>
-											不具合が発生した、こんな機能が欲しい、使い方が分からない。<br>
-										</p>
-										<p>
-											このような時は、<a style="font-weight: bold;" href="https://github.com/shumm7/Narou-Tweaker/issues">GitHub</a>もしくは<a style="font-weight: bold;" href="https://novelcom.syosetu.com/impression/list/ncode/2265900/">小説家になろう</a>などからお問い合わせください。
-										</p>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-						<!--ライセンス-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">ライセンス</div>
-									<div class="contents-item--description"></div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="description">
-										<p>
-											Narou Tweakerのソースコードは、<a href="https://github.com/shumm7/Narou-Tweaker/blob/main/LICENSE">MIT License</a>で提供されています。
-										</p>
-										<p>
-											詳しくは<a href="https://github.com/shumm7/Narou-Tweaker"><i class="fa-brands fa-github"></i> GitHubリポジトリ</a>をご確認ください。
-										</p>
-										<p style="margin-top: 10px; font-weight: bold;">
-											作者：しゅう<i class="fa-brands fa-square-x-twitter"></i> <a href="https://twitter.com/shulmj_">@shulmj_</a>
-										</p>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-					</div>
-
-					<!-- 環境設定 -->
-					<div class="contents-container header-menu-target" name="config">
-						<!--環境設定について-->
-						<div class="contents-wide">
-							<p>
-								Narou Tweaker全体に影響する設定を変更します。<br>
-								<span style="color: red; font-weight: bold;">すべての設定がリセットされる場合があります。操作にはご注意ください。</span>
-							</p>
-						</div>
-
-						<!--高度な設定-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">高度な設定</div>
-									<div class="contents-item--description">上級者向けの設定項目を表示します。通常では不要です。</div>
-								</div>
-
-								<div class="contents-option-content">
-									<input type="checkbox" id="extAdvancedSettings" class="options toggle">
-                                    <label for="extAdvancedSettings" class="toggle"></label>
-                                </div>
-							</div>
-						</div>
-
-						<!--実験的機能-->
-						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">実験的機能</div>
-									<div class="contents-item--description">
-										テスト中の機能を有効化します。<br>
-										<span style="color: red; font-weight: bold;">不具合が発生する可能性があります。ご注意ください。</span>
-									</div>
-								</div>
-
-								<div class="contents-option-content">
-									<input type="checkbox" id="extExperimentalFeatures" class="options toggle">
-                                    <label for="extExperimentalFeatures" class="toggle"></label>
-                                </div>
-							</div>
-						</div>
-
-						<!--設定をリセット-->
-						<div class="contents-wide">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">設定をリセット</div>
-									<div class="contents-item--description">保存されている設定データをすべて初期値に戻します。</div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="export-option-text">
-										<button class="button" id="removeOptionData" type="button">リセット</button>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-						<!--設定を修復-->
-						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">設定を修復</div>
-									<div class="contents-item--description">バージョンアップなどにより残された不要な設定データを削除し、修復します。通常、データは削除されません。</div>
-								</div>
-
-								<div class="contents-option-content">
-									<div class="export-option-text">
-										<button class="button" id="fixOptionData" type="button">修復</button>
-									</div>
-                                </div>
-							</div>
-						</div>
-
-						<!--設定データを閲覧-->
-						<div class="contents-wide option-hide" data-for="extAdvancedSettings" data="true" mode="show">
-							<div class="contents-option">
-								<div class="contents-option-head">
-									<div class="contents-item--heading">設定データを閲覧</div>
-									<div class="contents-item--description">現在保存されている設定データを文字列で表示します。<br>（local/sync/sessionのデータを表示しています）</div>
-								</div>
-
-								<div class="contents-option-content" style="flex-direction: column;">
-									<div style="flex-shrink: 0; width: 100%;">
-										<div class="export-option-text">
-											<textarea class="textarea syntax-highlight" id="exportOptionText_Output" readonly data="json"></textarea>
-										</div>
-										<label for="extIgnoreOptionIndex">無視するインデックス</label>
-										<input type="text" class="options" id="extIgnoreOptionIndex" style="width: 100%;" placeholder="スペース区切り">
-									</div>
-									<div style="flex-shrink: 0; width: 100%; margin-top: 10px;">
-										<div class="export-option-text">
-											<textarea class="textarea syntax-highlight" id="exportSyncOptionText_Output" readonly data="json"></textarea>
-										</div>
-										<label for="extIgnoreSyncOptionIndex">無視するインデックス</label>
-										<input type="text" class="options" id="extIgnoreSyncOptionIndex" style="width: 100%;" placeholder="スペース区切り">
-									</div>
-									<div style="flex-shrink: 0; width: 100%; margin-top: 10px;">
-										<div class="export-option-text">
-											<textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
-										</div>
-										<label for="extIgnoreSessionOptionIndex">無視するインデックス</label>
-										<input type="text" class="options" id="extIgnoreSessionOptionIndex" style="width: 100%;" placeholder="スペース区切り">
-									</div>
-                                </div>
-							</div>
-						</div>
-
-					</div>
-
-					<!-- パッチノート -->
-					<div class="contents-container header-menu-target" name="version">
-						<!--パッチノートについて-->
-						<div class="contents-wide">
-							<p>
-								Narou Tweakerの更新履歴を表示します。<br>
-								現在のバージョンは、<span class="extension-version"></span>です。
-							</p>
-						</div>
-
-					</div>
-
-				</div>
-				<div id="footer">
+                <div id="footer">
                     <div id="js-failed">
                         JavaScript failed to load. Your development build failed or your browser has some issue.
                     </div>
                 </div>
-			</div>
-		</div>
-	</body>
+            </div>
+        </div>
+    </body>
 </html>

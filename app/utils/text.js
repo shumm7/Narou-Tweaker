@@ -402,3 +402,53 @@ export function getNovelSearchURL(site, param){
 
     return url
 }
+
+/* 文字列の出現回数を検索 */
+export function searchCount(str, pattern){
+    return str.split(pattern).length - 1
+}
+
+/* 文字列の類似度を計算 */
+/* https://qiita.com/gomaoaji/items/603904e31f965d759293 */
+export function stringSimilarity(strA, strB){
+    function getToNgram(text, n){
+        if(n===undefined){
+            n = 3
+        }
+
+        let ret = {}
+        for (var m = 0; m < n; m++) {
+            for (var i = 0; i < text.length - m; i++) {
+                const c = text.substring(i, i + m + 1)
+                ret[c] = ret[c] ? ret[c] + 1 : 1
+            }
+        }
+        return ret
+    }
+
+    function getValuesSum(object){
+        return Object.values(object).reduce((prev, current) => prev + current, 0)
+    }
+      
+    function calculate(a, b){
+        const aGram = getToNgram(a)
+        const bGram = getToNgram(b)
+        const keyOfAGram = Object.keys(aGram)
+        const keyOfBGram = Object.keys(bGram)
+
+        // aGramとbGramに共通するN-gramのkeyの配列
+        const abKey = keyOfAGram.filter((n) => keyOfBGram.includes(n))
+      
+        // aGramとbGramの内積(0と1の掛け算のため、小さいほうの値を足し算すれば終わる。)
+        let dot = abKey.reduce(
+          (prev, key) => prev + Math.min(aGram[key], bGram[key]),
+          0
+        )
+      
+        // 長さの積(平方根の積は積の平方根)
+        const abLengthMul = Math.sqrt(getValuesSum(aGram) * getValuesSum(bGram));
+        return dot / abLengthMul;
+    }
+
+    return calculate(strA, strB)
+}

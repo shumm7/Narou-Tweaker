@@ -1087,7 +1087,6 @@ function editorSkinChangeEvent(){
             }
         }
         if(changes.workspaceEditorAppliedFontCSS!=undefined){
-            console.log($("#narou-tweaker-style--editor-font").length)
             if($("#narou-tweaker-style--editor-font").length){
                 $("#narou-tweaker-style--editor-font").text(changes.workspaceEditorAppliedFontCSS.newValue)
                 _triggerInput()
