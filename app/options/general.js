@@ -47,7 +47,7 @@ function setupDOM(){
         if(category.id===currentPage){
             currentCategory = category
         }
-    }),
+    })
 
     var sidebar = $(`
         <div id="sidebar-inner">

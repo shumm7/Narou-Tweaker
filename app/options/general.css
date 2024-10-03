@@ -25,7 +25,15 @@ html::-webkit-scrollbar {
     font-weight: bold;
     margin: .3em;
     text-align: center;
+    opacity: 0;
+    animation: late-open 0s ease-in 1s forwards;
 }
+@keyframes late-open {
+    to {
+      opacity: 1;
+    }
+  }
+
 .button-hide--hidden, .option-hide--hidden {
     display: none !important;
 }
