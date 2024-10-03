@@ -22,7 +22,8 @@ export const ignoreOptions = [
 
 export const forceResetOptions = [
     "extIgnoreOptionIndex",
-    "extIgnoreSyncOptionIndex"
+    "extIgnoreSyncOptionIndex",
+    "extIgnoreSessionOptionIndex"
 ]
 
 export const defaultOption = {
@@ -695,6 +696,26 @@ export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/(.*)\.syosetu\.com)/,
     /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
 ]
+
+export function getUpdatedOption(data){
+    function update(data){
+        var o = defaultOption
+        Object.keys(o).forEach(function(key){
+            if(data[key]!=undefined){
+                if( typeof(o[key]) == typeof(data[key])){
+                    if(!ignoreOptions.includes(key)){
+                        o[key] = data[key]
+                    }
+                }
+            }
+        })
+        return o
+    }
+
+    if(data){
+        return update(data)
+    }
+}
 
 export function updateOption(force, data){
 

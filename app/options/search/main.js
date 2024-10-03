@@ -24,7 +24,6 @@ function search(searchWords){
     window.history.replaceState(null, "", `${location.pathname}?${params.toString()}`)
 
     var result = searchOption(words).slice(0, 10)
-    console.log(result)
     var c_result = searchCategory(words)
 
     $(".search-result-box").remove()

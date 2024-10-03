@@ -31,7 +31,14 @@ export const optionCategoryList = [
                 title: "環境設定",
                 id: "config",
                 description: {
-                    text: "Narou Tweaker全体に影響する設定を変更します。",
+                    text: "Narou Tweaker全体に影響する設定を変更します。"
+                }
+            },
+            {
+                title: "データ",
+                id: "data",
+                description: {
+                    text: "Narou Tweakerの設定データを変更します。",
                     attention: "すべての設定がリセットされる場合があります。操作にはご注意ください。"
                 }
             },
@@ -276,7 +283,8 @@ export const optionList = [
         id: "extSearch",
         title: "検索",
         description: {
-            text: "キーワードを入力してください"
+            text: "キーワードを入力してください",
+            small: "・スペース区切りでAND検索ができます。<br>・「\"」で括ると完全一致する語句を検索します。<br>・「-」で特定の語句を除外します。"
         },
         ui: {
             type: "custom",
@@ -429,6 +437,47 @@ export const optionList = [
         }
     },
 
+    /* データ (data) */
+    {
+        id: "extExportOption",
+        title: "設定をエクスポート",
+        description: {
+            text: "保存されている設定データをJSON形式で出力します。"
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extExportButton"
+        },
+        location: {
+            page: "general",
+            category: "data",
+        },
+        value: {
+            hasValue: false,
+        },
+    },
+
+    {
+        id: "extImportOption",
+        title: "設定をインポート",
+        description: {
+            text: "外部からJSON形式の設定データを読み込みます。"
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extImportButton"
+        },
+        location: {
+            page: "general",
+            category: "data",
+        },
+        value: {
+            hasValue: false,
+        },
+    },
+
     {
         id: "extResetOption",
         title: "設定をリセット",
@@ -442,11 +491,10 @@ export const optionList = [
         },
         location: {
             page: "general",
-            category: "config",
+            category: "data",
         },
         value: {
             hasValue: false,
-            isAdvanced: true
         },
     },
 
@@ -463,7 +511,7 @@ export const optionList = [
         },
         location: {
             page: "general",
-            category: "config",
+            category: "data",
         },
         value: {
             hasValue: false,
@@ -485,7 +533,7 @@ export const optionList = [
         },
         location: {
             page: "general",
-            category: "config",
+            category: "data",
         },
         value: {
             hasValue: false,

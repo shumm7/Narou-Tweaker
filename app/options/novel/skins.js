@@ -241,7 +241,9 @@ export function addSkinEditButtonEvent(){
       var reader = new FileReader();
       reader.onload = function(e){
           try{
-            $("#skin-import-input--field").val(e.target.result)
+            var field = $("#skin-import-input--field")
+            field.val(e.target.result)
+            field.trigger("input")
           }catch(e){
             console.warn(e)
           }

@@ -107,6 +107,38 @@ export const customUIList = {
         </p>
     `,
 
+    ui_extExportButton: `
+        <div id="option-export">
+            <div id="option-export-buttons">
+                <button id="option-export-json" type="button" class="button"><i class="fa-solid fa-download"></i> JSONファイル</button>
+                <button id="option-export-text" type="button" class="button"><i class="fa-solid fa-align-left"></i> テキスト</button>
+            </div>
+            <div id="option-export-output" style="display: none;">
+                <div class="syntax-highlight-wrap" id="highlight-1"><textarea class="textarea syntax-highlight autoselect" id="option-export-output--field" readonly="" data="json"></textarea><pre><code class="json"></code></pre></div>
+            </div>
+        </div>
+    `,
+
+    ui_extImportButton: `
+        <div id="option-import">
+            <div id="option-import-buttons">
+                <label id="import-options-label">
+                    <i class="fa-solid fa-upload"></i> ファイルから読み込む
+                    <input id="option-import-json" type="file" accept="application/json">
+                </label>
+            </div>
+            <div id="option-import-input">
+                <div class="syntax-highlight-wrap" id="highlight-1">
+                    <textarea class="textarea syntax-highlight" id="option-import-input--field" placeholder="ファイルをドロップ" data="json"></textarea>
+                    <pre><code class="json"></code></pre>
+                </div>
+                <button id="option-import-input--submit" type="button" class="button"><i class="fa-solid fa-file-import"></i> 取り込む</button>
+            </div>
+            <div id="option-import-warnings">
+            </div>
+        </div>
+    `,
+
     ui_extResetButton: `
         <div class="export-option-text">
 			<button class="button" id="removeOptionData" type="button">リセット</button>
