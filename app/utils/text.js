@@ -49,11 +49,12 @@ export function replaceUrl(_elem, isWarning) {
 
 // 記号をエスケープする（DOMインジェクション対策用）
 export function escapeHtml(string){
+    /*
     var p = $("<p>")
     p.text(string)
     return p.text()
+    */
 
-    /*
     if(typeof string !== 'string') {
         return string
     }
@@ -67,7 +68,6 @@ export function escapeHtml(string){
         '>': '&gt;',
         }[match]
     });
-    */
 }
 
 // 正規表現文字列の記号をエスケープする
@@ -162,9 +162,9 @@ export function minuteStringJapanese(minute){
 export function convertSasieTags(element, isEscaped){
     var re = /<(i[0-9]+)\|([0-9]+)>/g
     var to = `<a href="//$2.mitemin.net/$1/" target="_blank"><img src="//$2.mitemin.net/userpageimage/viewimagebig/icode/$1/" alt="挿絵(By みてみん)" border="0"></a>`
-
     var nodes = $(element)[0].childNodes;
     $.each(nodes, function(_, w) {
+        console.log(w)
         if(w.innerHTML==undefined){ // is text
             if(w.data.match(re)){
                 $.each($.parseHTML(w.data.replace(re, to)), function(_, x) {
