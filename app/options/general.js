@@ -239,20 +239,24 @@ function setupDOM(){
 
 function setupContents(){
     $.each(optionList, function(_, option){
-        if(option.location.page === currentPage){
+        if(option.location){
+            if(option.location.page === currentPage){
+                if(!option.location.hide){
+                    const category = option.location.category
+                    const hasParent = option.location.hasParent
+                    const parent = option.location.parent
 
-            const category = option.location.category
-            const hasParent = option.location.hasParent
-            const parent = option.location.parent
-            var elm = getOptionElement(option)
+                    var elm = getOptionElement(option)
 
-            /* Placement */
-            if(hasParent){
-                $(`.contents-container[name="${category}"] .contents-wide[name="${parent}"] .contents-wide-column`).append(elm)
-            }else{
-                $(`.contents-container[name="${category}"]`).append(elm)
+                    /* Placement */
+                    if(hasParent){
+                        $(`.contents-container[name="${category}"] .contents-wide[name="${parent}"] .contents-wide-column`).append(elm)
+                    }else{
+                        $(`.contents-container[name="${category}"]`).append(elm)
+                    }
+                }
             }
-        }   
+        }
     })
 }
 

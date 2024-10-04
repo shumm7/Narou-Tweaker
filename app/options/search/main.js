@@ -1,5 +1,6 @@
 import { searchCount, stringSimilarity } from "../../utils/text.js";
 import { getOptionElement, optionCategoryList, optionList } from "../_lib/optionUI.js";
+import { optionHide } from "../_lib/utils.js";
 import { restoreOptions, setup } from "../general.js";
 
 setup()
@@ -91,51 +92,9 @@ function search(searchWords){
         $.each(result.slice(0, 10), function(_, r){
             var elm = getOptionElement(r, true)
 
+            optionHide()
             restoreOptions()
             
-            /*
-            var elm = $(`
-                <div class="contents-wide search-result-box search-result--option">
-                    <div class="contents-option">
-                        <div class="contents-option-head">
-                            <div class="contents-item--heading"><a href="/options/${r.page}/index.html?id=${r.id}&focus=1" target="_self">${r.title}</a></div>
-                        </div>
-
-                        <div class="contents-option-content">
-                            <div class="search-result--items">
-                                <div class="search-result--items-locate"></div>
-                                <div class="search-result--items-id"><span class="search-result--items-id-tag"><a href="/options/${r.page}/index.html?id=${r.id}&focus=1" target="_self">${r.id}</a></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `)
-            
-            const page = getOptionPageFromId(r.page)
-            const category = getOptionCategory(page, r.category)
-
-            if(r.description){
-                elm.find(".contents-option-head").append(`<div class="contents-item--description">${r.description}</div>`)
-            }
-
-            if(r.parent){
-                const parent = getOptionFromId(r.parent)
-                if(parent){
-                    elm.find(".search-result--items-locate").append(`
-                        <a href="/options/${page.id}/index.html" target="_self">${page.title}</a> > <a href="/options/${page.id}/index.html?category=${category.id}" target="_self">${category.title}</a> > <a href="/options/${page.id}/index.html?id=${parent.id}" target="_self">${parent.title}</a>
-                    `)
-                }else{
-                    elm.find(".search-result--items-locate").append(`
-                        <a href="/options/${page.id}/index.html" target="_self">${page.title}</a> > <a href="/options/${page.id}/index.html?category=${category.id}" target="_self">${category.title}</a>
-                    `)
-                }
-            }else{
-                elm.find(".search-result--items-locate").append(`
-                    <a href="/options/${page.id}/index.html" target="_self">${page.title}</a> > <a href="/options/${page.id}/index.html?category=${category.id}" target="_self">${category.title}</a>
-                `)
-            }
-            */
-
             $(`.contents-container[name="general"]`).append(elm)
         })
 

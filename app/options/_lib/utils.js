@@ -19,14 +19,87 @@ export function buttonHide(){
 export function optionHide(){
     $(".option-hide").each(function(){
         let elm = $(this)
-        const data_for_raw = $(this).attr("data-for")
-        const data_for = data_for_raw.split(/ +/)
-        const action_value = $(this).attr("data")
-        const mode = $(this).attr("mode")
+        var data_for
+        var action_value
+        var action_mode
+        var data_type
 
-        function change(value){
-            console.log(mode)
-            if(String(value)==String(action_value)){
+        /* data_for (前提となる設定項目のID) */
+        if(elm.is("[data-for]")){
+            data_for = $(this).attr("data-for").trim().split(/ +/)
+        }else{
+            return true
+        }
+
+        /* data (前提となる設定項目のトリガー値) */
+        if(elm.is("[data]")){
+            action_value = $(this).attr("data").trim().split(/ +/)
+        }else{
+            return true
+        }
+
+        if(data_for.length > action_value.length){
+            var k = action_value.length
+            for(var i=0; i < data_for.length-action_value.length; i++){
+                action_value.push(action_value[k-1])
+            }
+        }else if(data_for.length < action_value.length){
+            action_value = action_value.slice(0, data_for.length)
+        }
+
+        /* mode */
+        if(elm.is("[mode]")){
+            action_mode = $(this).attr("mode").trim().split(/ +/)
+        }else{
+            action_mode = new Array(data_for.length).fill("show")
+        }
+
+        if(data_for.length > action_mode.length){
+            var k = action_mode.length
+            for(var i=0; i < data_for.length-action_mode.length; i++){
+                action_mode.push(action_mode[k-1])
+            }
+        }else if(data_for.length < action_value.length){
+            action_mode = action_mode.slice(0, data_for.length)
+        }
+
+        /* data_type (トリガー値の型) */
+        if(elm.is("[data-type]")){
+            data_type = $(this).attr("data-type").trim().split(/ +/)
+        }else{
+            data_type = new Array(data_for.length).fill(undefined)
+        }
+
+        if(data_for.length > data_type.length){
+            var k = data_type.length
+            for(var i=0; i < data_for.length-data_type.length; i++){
+                data_type.push(undefined)
+            }
+        }else if(data_for.length < data_type.length){
+            data_type = data_type.slice(0, data_for.length)
+        }
+
+        function change(value, action_value, mode, type){
+
+            function compare(source, value, type){
+                if(type){
+                    if(type==="null"){
+                        return source === null
+                    }
+                    else if(type==="boolean"){
+                        return source === (value.toLowerCase() === "true")
+                    }
+                    else if(type==="string"){
+                        return source===value
+                    }
+                    else if(type==="number"){
+                        return source===Number(value)
+                    }
+                }
+                return String(source)===String(value)
+            }
+
+            if(compare(value, action_value, type)){
                 if(mode==="hide"){
                     elm.addClass("option-hide--hidden")
                 }
@@ -56,17 +129,17 @@ export function optionHide(){
         }
 
         chrome.storage.local.get(data_for, function(data){
-            $.each(data_for, function(_, key){
+            $.each(data_for, function(i, key){
                 if(key in data){
-                    change(data[key])
+                    change(data[key], action_value[i], action_mode[i], data_type[i])
                 }
             })
         })
 
         chrome.storage.local.onChanged.addListener(function(changes){
-            $.each(data_for, function(_, key){
+            $.each(data_for, function(i, key){
                 if(changes[key]){
-                    change(changes[key].newValue)
+                    change(changes[key].newValue, action_value[i], action_mode[i], data_type[i])
                 }
             })
             
@@ -88,13 +161,22 @@ export function optionHide(){
             }
         }
 
-        // Elements 
-        elm.find(".contents-item--heading").prepend(
-            `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
-        )
-        elm.find(".contents-item--description").prepend(
-            `<div class="option--experimental-message"></div>`
-        )
+        // Elements
+        if(!elm.hasClass("option-hide--experimental-processed")){
+            if(elm.find(".search-result--items-title").length){
+                elm.find(".search-result--items-title").prepend(
+                    `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
+                )
+            }else{
+                elm.find(".contents-item--heading").prepend(
+                    `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
+                )
+            }
+            elm.find(".contents-item--description").prepend(
+                `<div class="option--experimental-message"></div>`
+            )
+            elm.addClass("option-hide--experimental-processed")
+        }
 
             
         chrome.storage.local.get(["extExperimentalFeatures"], function(data){
@@ -121,9 +203,18 @@ export function optionHide(){
         }
 
         // Elements 
-        elm.find(".contents-item--heading").prepend(
-            `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
-        )
+        if(!elm.hasClass("option-hide--advanced-processed")){
+            if(elm.find(".search-result--items-title").length){
+                elm.find(".search-result--items-title").prepend(
+                    `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
+                )
+            }else{
+                elm.find(".contents-item--heading").prepend(
+                    `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
+                )
+            }
+            elm.addClass("option-hide--advanced-processed")
+        }
 
             
         chrome.storage.local.get(["extAdvancedSettings"], function(data){

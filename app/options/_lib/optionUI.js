@@ -392,6 +392,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "introduction",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -417,6 +418,7 @@ export const optionList = [
         },
         value: {
             hasValue: true,
+            default: defaultOption.extAdvancedSettings,
         }
     },
 
@@ -437,7 +439,8 @@ export const optionList = [
             name: "default",
         },
         value: {
-            hasValue: true
+            hasValue: true,
+            default: defaultOption.extExperimentalFeatures,
         }
     },
 
@@ -729,11 +732,11 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomHeaderScrollHidden,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["novelCustomHeaderMode"],
-            data: "scroll",
-            mode: "show"
+            requirement: {
+                dataFor: ["novelCustomHeaderMode"],
+                data: "scroll",
+                mode: "show"
+            }
         },
     },
 
@@ -756,6 +759,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["novelCustomHeaderLeft", "novelCustomHeaderRight"],
         }
     },
 
@@ -1017,11 +1021,11 @@ export const optionList = [
             default: defaultOption.novelCursorHideTimeout,
             hasValue: true,
             isExperimental: true,
-        },
-        hideSettings: {
-            dataFor: ["novelCursorHide"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["novelCursorHide"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1066,6 +1070,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["skins", "selectedSkin"],
         },
     },
 
@@ -1173,11 +1178,11 @@ export const optionList = [
         value: {
             default: defaultOption.novelAuthorCustomSkinWarning,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["novelAuthorCustomSkin"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["novelAuthorCustomSkin"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1199,11 +1204,11 @@ export const optionList = [
         },
         value: {
             hasValue: false,
-        },
-        hideSettings: {
-            dataFor: ["novelAuthorCustomSkin"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["novelAuthorCustomSkin"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1227,6 +1232,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["fontFontFamilyList", "fontSelectedFontFamily"],
         },
     },
 
@@ -1270,6 +1276,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["fontFontSize"],
         },
     },
 
@@ -1291,6 +1298,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["fontLineHeight"],
         },
     },
 
@@ -1312,6 +1320,28 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["fontWidth"],
+        },
+    },
+
+    {
+        id: "fontTextRendering",
+        title: "fontTextRendering",
+        description: {
+            keywords: [],
+        },
+        ui: {
+            type: "input",
+            name: "text",
+        },
+        location: {
+            page: "novel",
+            category: "font",
+            noindex: true,
+            hide: true,
+        },
+        value: {
+            hasValue: true,
         },
     },
 
@@ -1384,11 +1414,11 @@ export const optionList = [
         },
         value: {
             hasValue: false,
-        },
-        hideSettings: {
-            dataFor: ["novelVertical"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1698,11 +1728,11 @@ export const optionList = [
         value: {
             default: defaultOption.correctionNumberShort,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["correctionNumber"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["correctionNumber"],
+                data: true,
+                mode: "show"
+            },
         },
     },
     
@@ -1732,11 +1762,11 @@ export const optionList = [
         value: {
             default: defaultOption.correctionNumberLong,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["correctionNumber"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["correctionNumber"],
+                data: true,
+                mode: "show"
+            },
         },
     },
     
@@ -1766,11 +1796,11 @@ export const optionList = [
         value: {
             default: defaultOption.correctionNumberSymbol,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["correctionNumber"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["correctionNumber"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1882,11 +1912,11 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["correctionVerticalLayout_CombineNumber"],
-            data: "0",
-            mode: "hide"
+            requirement: {
+                dataFor: ["correctionVerticalLayout_CombineNumber"],
+                data: 0,
+                mode: "hide"
+            },
         },
     },
 
@@ -1991,11 +2021,11 @@ export const optionList = [
         value: {
             default: defaultOption.correctionRemoveIllustrationLink,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["correctionShowIllustration"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["correctionShowIllustration"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -2490,6 +2520,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["workspaceCustomHeader"],
         },
     },
 
@@ -2511,6 +2542,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            related: ["workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right"],
         },
     },
     
@@ -2561,11 +2593,11 @@ export const optionList = [
         value: {
             default: defaultOption.workspaceCustomHeaderScrollHidden,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["workspaceCustomHeaderMode"],
-            data: "scroll",
-            mode: "show"
+            requirement: {
+                dataFor: ["workspaceCustomHeaderMode"],
+                data: "scroll",
+                mode: "show"
+            },
         },
     },
 
@@ -2837,11 +2869,11 @@ export const optionList = [
         value: {
             default: defaultOption.workspaceImpressionMarkAsReadWhenReply,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["workspaceImpressionMarkedButton"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["workspaceImpressionMarkedButton"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -2865,11 +2897,11 @@ export const optionList = [
         value: {
             default: defaultOption.workspaceImpressionHideWhenMarked,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["workspaceImpressionMarkedButton", "workspaceImpressionHideButton"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["workspaceImpressionMarkedButton", "workspaceImpressionHideButton"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3261,11 +3293,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_GeneralDay,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_GeneralDay"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_GeneralDay"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3333,11 +3365,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_GeneralTotal,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_GeneralTotal"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_GeneralTotal"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3471,11 +3503,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_ChapterUnique,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_ChapterUnique"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_ChapterUnique"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3565,11 +3597,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_DayPV,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_DayPV"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_DayPV"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3637,11 +3669,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_DayUnique,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_DayUnique"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_DayUnique"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3710,11 +3742,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_MonthPV,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_MonthPV"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_MonthPV"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3782,11 +3814,11 @@ export const optionList = [
         value: {
             default: defaultOption.kasasagiGraphType_MonthUnique,
             hasValue: true,
-        },
-        hideSettings: {
-            dataFor: ["kasasagiShowGraph_MonthUnique"],
-            data: true,
-            mode: "show"
+            requirement: {
+                dataFor: ["kasasagiShowGraph_MonthUnique"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3808,11 +3840,11 @@ export function getOptionElement(option, forSearch){
     var uiPrefix = option.ui.prefix
     var uiSuffix = option.ui.suffix
     const hasValue = option.value.hasValue
+    const requirement = option.value.requirement
     const isExperimental = option.value.isExperimental
     const isAdvanced = option.value.isAdvanced
     const hasParent = option.location.hasParent
     const parent = option.location.parent
-    const hideSettings = option.hideSettings
 
     var elm
     
@@ -4065,7 +4097,7 @@ export function getOptionElement(option, forSearch){
             var item = $(`
                 <div class="search-result--items">
                     <div class="search-result--items-disabled">
-                        このオプションはここでは設定できません。
+                        <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">このオプションはここでは設定できません。</a>
                     </div>
                 </div>
             `)
@@ -4175,33 +4207,56 @@ export function getOptionElement(option, forSearch){
         }
     }
 
-    if(!forSearch){
-        /* Hide Settings */
-        if(hideSettings){
-            var hsDataFor = hideSettings.dataFor
-            const hsData = hideSettings.data
-            const hsMode = hideSettings.mode
+    /* Hide Settings */
+    if(requirement){
+        var hsDataFor = requirement.dataFor
+        var hsData = requirement.data
+        var hsMode = requirement.mode
 
-            if(typeof hsDataFor === "string"){
-                hsDataFor = [hsDataFor]
-            }
-            elm.addClass("option-hide")
-            elm.attr("data-for", hsDataFor.join(" "))
-            if(hsData){
-                elm.attr("data", hsData)
-            }
-            if(hsMode){
-                elm.attr("mode", hsMode)
-            }
+        if(!Array.isArray(hsDataFor)){
+            hsDataFor = [hsDataFor]
         }
 
-        /* Advanced / Experimental settings */
-        if(isAdvanced){
-            elm.addClass("advanced-hide")
+        const len = hsDataFor.length
+        if(!Array.isArray(hsData)){
+            hsData = new Array(len).fill(hsData)
         }
-        if(isExperimental){
-            elm.addClass("experimental-hide")
+        if(!Array.isArray(hsMode)){
+            hsMode = new Array(len).fill(hsMode)
         }
+
+        var hsDataType = new Array(len)
+            .fill(undefined)
+            .map((v, k) => {
+                var t = typeof hsData[k]
+                if(t==="boolean" || t==="number" || t==="string"){
+                    return t
+                }else if(hsData[k]===null){
+                    return "null"
+                }else{
+                    return "undefined"
+                }
+            })
+        
+        elm.addClass("option-hide")
+        elm.attr("data-for", hsDataFor.join(" "))
+        if(hsData){
+            elm.attr("data", hsData.join(" "))
+        }
+        if(hsMode){
+            elm.attr("mode", hsMode.join(" "))
+        }
+        if(hsDataType){
+            elm.attr("data-type", hsDataType.join(" "))
+        }
+    }
+
+    /* Advanced / Experimental settings */
+    if(isAdvanced){
+        elm.addClass("advanced-hide")
+    }
+    if(isExperimental){
+        elm.addClass("experimental-hide")
     }
 
     /* Style */

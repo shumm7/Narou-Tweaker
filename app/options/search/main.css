@@ -26,6 +26,7 @@
     margin: 5px;
 }
 
+/* 検索結果 */
 .search-result--items-title a {
     color: inherit;
 }
@@ -87,4 +88,52 @@
 #search-result--information {
     display: flex;
     width: 100%;
+}
+
+/* 検索アイテム */
+.search-result--items-disabled {
+    font-weight: bold;
+    height: 100%;
+
+}
+.search-result--items-disabled a {
+    color: inherit;
+    border:1px solid #e0e0e0;
+    background: #f7f7f7;
+    padding: 30px 30px;
+}
+.search-result--items-disabled a:hover,
+.search-result--items-disabled a:focus {
+    color: #555;
+}
+
+/* 非表示イベント */
+.search-result--option.option-hide--advanced,
+.search-result--option.option-hide--hidden {
+    display: block !important;
+}
+.search-result--option.option-hide--advanced .contents-option-content,
+.search-result--option.option-hide--hidden .contents-option-content {
+    pointer-events: none;
+    filter: grayscale(1);
+}
+/* toggle */
+.option-hide--advanced .contents-option-content label.toggle::before,
+.option-hide--hidden .contents-option-content label.toggle::before{
+    background-color: #666;
+}
+.option-hide--advanced .contents-option-content label.toggle::after,
+.option-hide--hidden .contents-option-content label.toggle::after{
+    background-color: #999;
+}
+/* field / dropdown */
+.option-hide--advanced .contents-option-content input[type="text"],
+.option-hide--advanced .contents-option-content input[type="number"],
+.option-hide--advanced .contents-option-content textarea,
+.option-hide--advanced .contents-option-content select,
+.option-hide--hidden .contents-option-content input[type="text"],
+.option-hide--hidden .contents-option-content input[type="number"],
+.option-hide--hidden .contents-option-content textarea,
+.option-hide--hidden .contents-option-content select {
+    background-color: #ddd;
 }
