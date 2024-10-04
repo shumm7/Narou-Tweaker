@@ -147,7 +147,7 @@ function searchOption(searchWords){
     const modeId = true
     const modeTitle = true
     const modeDescription = true
-    const modeKeywords = false
+    const modeKeywords = true
 
     var searchResult = []
     if(modeTitle || modeDescription || modeKeywords){
@@ -175,8 +175,11 @@ function searchOption(searchWords){
                             fullWords += v.description.attention
                         }
                     }
-                    if(modeKeywords && v.keyword){
-                        fullWords += v.keyword.join("")
+                    var p_fullWords = fullWords
+                    if(modeKeywords && v.description){
+                        if(v.description.keywords){
+                            fullWords += v.description.keywords.join("")
+                        }
                     }
 
                     /* NOT検索 / 完全一致 */
@@ -185,13 +188,13 @@ function searchOption(searchWords){
                         var score = 0
                         if(w.match(/\-.+/s)){
                             w = w.match(/\-(.+)/s)[1]
-                            if(fullWords.includes(w)){
+                            if(p_fullWords.includes(w)){
                                 exception = true
                                 return true
                             }
                         }else if(w.match(/\".+\"/s)){
                             w = w.match(/\"(.+)\"/s)[1]
-                            if(!fullWords.includes(w)){
+                            if(!p_fullWords.includes(w)){
                                 exception = true
                                 return true
                             }else{
@@ -205,9 +208,14 @@ function searchOption(searchWords){
                                     score += getSearchScore(v.description.text, w, 10) * countMult_include(v.description.text, w, 0.1)
                                     score += getSearchScore(v.description.small, w, 8) * countMult_include(v.description.small, w, 0.08)
                                     score += getSearchScore(v.description.attention, w, 8) * countMult_include(v.description.attention, w, 0.08)
+                                    score += getSearchScore(v.description.hidden, w, 10) * countMult_include(v.description.hidden, w, 0.1)
                                 }
-                                if(modeKeywords){
-                                    score += getSearchScore(v.keyword, w, 10) * countMult_include(v.keyword, w, 0.1)
+                                if(modeKeywords && v.description){
+                                    if(Array.isArray(v.description.keywords)){
+                                        $.each(v.description.keywords, function(_, k){
+                                            score += getSearchScore(k, w, 10) * countMult_include(k, w, 0)
+                                        })
+                                    }
                                 }
                                 score *= 1.5
                             }
@@ -222,9 +230,14 @@ function searchOption(searchWords){
                                 score += getSearchScore(v.description.text, w, 10) * countMult(v.description.text, w, 0.1)
                                 score += getSearchScore(v.description.small, w, 8) * countMult(v.description.small, w, 0.08)
                                 score += getSearchScore(v.description.attention, w, 8) * countMult(v.description.attention, w, 0.08)
+                                score += getSearchScore(v.description.hidden, w, 10) * countMult(v.description.hidden, w, 0.1)
                             }
-                            if(modeKeywords){
-                                score += getSearchScore(v.keyword, w, 10) * countMult(v.keyword, w, 0.1)
+                            if(modeKeywords && v.description){
+                                if(Array.isArray(v.description.keywords)){
+                                    $.each(v.description.keywords, function(_, k){
+                                        score += getSearchScore(k, w, 10) * countMult_include(k, w, 0)
+                                    })
+                                }
                             }
                         }
                         scoreSum += score

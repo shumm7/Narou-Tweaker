@@ -402,7 +402,8 @@ export const optionList = [
         id: "extAdvancedSettings",
         title: "高度な設定",
         description: {
-            text: "上級者向けの設定項目を表示します。通常では不要です。"
+            text: "上級者向けの設定項目を表示します。通常では不要です。",
+            keywords: ["高度", "こうどなせってい", "環境設定", "上級者"],
         },
         ui: {
             type: "toggle",
@@ -422,7 +423,8 @@ export const optionList = [
         title: "実験的機能",
         description: {
             text: "テスト中の機能を有効化します。",
-            attention: "不具合が発生する可能性があります。ご注意ください。"
+            attention: "不具合が発生する可能性があります。ご注意ください。",
+            keywords: ["高度", "じっけんてききのう", "環境設定", "上級者", "実験", "テスト"],
         },
         location: {
             page: "general",
@@ -442,7 +444,8 @@ export const optionList = [
         id: "extExportOption",
         title: "設定をエクスポート",
         description: {
-            text: "保存されている設定データをJSON形式で出力します。"
+            text: "保存されている設定データをJSON形式で出力します。",
+            keywords: ["エクスポート", "せっていをえくすぽーと", "設定データ", "JSON"],
         },
         ui: {
             type: "custom",
@@ -462,7 +465,8 @@ export const optionList = [
         id: "extImportOption",
         title: "設定をインポート",
         description: {
-            text: "外部からJSON形式の設定データを読み込みます。"
+            text: "外部からJSON形式の設定データを読み込みます。",
+            keywords: ["インポート", "せっていをいんぽーと", "設定データ", "JSON"],
         },
         ui: {
             type: "custom",
@@ -482,7 +486,8 @@ export const optionList = [
         id: "extResetOption",
         title: "設定をリセット",
         description: {
-            text: "保存されている設定データをすべて初期値に戻します。"
+            text: "保存されている設定データをすべて初期値に戻します。",
+            keywords: ["リセット", "せっていをりせっと", "設定データ"],
         },
         ui: {
             type: "custom",
@@ -502,7 +507,8 @@ export const optionList = [
         id: "extFixOption",
         title: "設定を修復",
         description: {
-            text: "バージョンアップなどにより残された不要な設定データを削除し、修復します。通常、データは削除されません。"
+            text: "バージョンアップなどにより残された不要な設定データを削除し、修復します。通常、データは削除されません。",
+            keywords: ["せっていをしゅうふく", "設定データ", "リセット"],
         },
         ui: {
             type: "custom",
@@ -524,7 +530,8 @@ export const optionList = [
         title: "設定データを閲覧",
         description: {
             text: "保存されている設定データを文字列で表示します。",
-            small: "（local/sync/sessionのデータを表示しています）"
+            small: "（local/sync/sessionのデータを表示しています）",
+            keywords: ["せっていでーたをえつらん", "設定データ", "local", "sync", "session", "JSON"],
         },
         ui: {
             type: "custom",
@@ -567,7 +574,8 @@ export const optionList = [
         title: "書報（作品一覧）ページの書影を取得",
         description: {
             text: "書報（作品一覧）ページ上にある作品の書影をAmazonから取得します。",
-            small: "（負荷軽減のため、アイコンをクリックした時に書影を取得します）"
+            small: "（負荷軽減のため、アイコンをクリックした時に書影を取得します）",
+            keywords: ["しょほう（さくひんいちらん）ぺーじのしょえいをしゅとく", "書報", "書影"],
         },
         ui: {
             type: "toggle",
@@ -587,7 +595,8 @@ export const optionList = [
         id: "narouSyuppanShowBookViewImage",
         title: "書報（作品詳細）ページの書影を取得",
         description: {
-            text: "書報（作品詳細）ページ上にある作品の書影をAmazonから取得します。"
+            text: "書報（作品詳細）ページ上にある作品の書影をAmazonから取得します。",
+            keywords: ["しょほう（さくひんしょうさい）ぺーじのしょえいをしゅとく", "書報", "書影"],
         },
         ui: {
             type: "toggle",
@@ -608,7 +617,8 @@ export const optionList = [
         title: "アダルトコンテンツの年齢認証をスキップ",
         description: {
             text: "各種R18小説サイト、および、えぱれっとの年齢認証画面をスキップします。",
-            attention: "18歳未満の方は有効にしないでください。"
+            attention: "18歳未満の方は有効にしないでください。",
+            keywords: ["あだるとこんてんつのねんれいにんしょうをすきっぷ", "R18", "アダルト", "ノクターンノベルズ", "ミッドナイトノベルズ", "ムーンライトノベルズ", "えぱれっと"],
         },
         ui: {
             type: "toggle",
@@ -631,7 +641,8 @@ export const optionList = [
         id: "novelCustomStyle",
         title: "デザインを調整（推奨）",
         description: {
-            text: "全体的なページのデザインを調整します。"
+            text: "全体的なページのデザインを調整します。",
+            keywords: ["でざいんをちょうせい", "レイアウト", "デザイン", "外観"],
         },
         ui: {
             type: "toggle",
@@ -651,7 +662,8 @@ export const optionList = [
         id: "novelCustomHeader",
         title: "シンプルなヘッダ",
         description: {
-            text: "ページに表示されるヘッダを、シンプルなデザインに変更します。"
+            text: "ページに表示されるヘッダを、シンプルなデザインに変更します。",
+            keywords: ["しんぷるなへっだ", "レイアウト", "デザイン", "外観", "ヘッダ", "シンプルなヘッダ"],
         },
         ui: {
             type: "toggle",
@@ -672,7 +684,8 @@ export const optionList = [
         title: "ヘッダの追従モード",
         description: {
             text: "ヘッダの配置場所を設定します。",
-            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示"
+            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示",
+            keywords: ["へっだのついじゅうもーど", "ヘッダ", "追従モード"],
         },
         ui: {
             type: "dropdown",
@@ -698,7 +711,8 @@ export const optionList = [
         title: "ページ読み込み時にヘッダを隠す",
         description: {
             text: "オンの場合、ページ読み込み時にヘッダを隠します。",
-            small: "（ヘッダの追従モードが「スクロール」でのみ有効）"
+            small: "（ヘッダの追従モードが「スクロール」でのみ有効）",
+            keywords: ["ぺーじよみこみじにへっだをかくす", "追従モード"],
         },
         ui: {
             type: "toggle",
@@ -724,7 +738,8 @@ export const optionList = [
         title: "ヘッダのアイテム配置",
         description: {
             text: "ヘッダに表示するアイテムを指定します。",
-            small: "（ドラッグ＆ドロップで入れ替え）"
+            small: "（ドラッグ＆ドロップで入れ替え）",
+            keywords: ["へっだのあいてむはいち", "ヘッダ", "レイアウト", "外観"],
         },
         ui: {
             type: "custom",
@@ -761,7 +776,8 @@ export const optionList = [
         id: "novelCustomHeaderShowEnactiveItems",
         title: "使用できないアイコンを表示",
         description: {
-            text: "オンの場合、使用できないアイコンを暗転して表示します。"
+            text: "オンの場合、使用できないアイコンを暗転して表示します。",
+            keywords: ["しようできないあいこんをひょうじ", "ヘッダの詳細設定"],
         },
         ui: {
             type: "toggle",
@@ -784,7 +800,8 @@ export const optionList = [
         title: "SNSアイコンをブランド名で表記する",
         description: {
             text: "SNSアイコンの表示テキストの設定を変更します。",
-            small: "オン：「Facebook」などのブランド名を表示します。<br>オフ：「シェア」などのアクション名を表示します。"
+            small: "オン：「Facebook」などのブランド名を表示します。<br>オフ：「シェア」などのアクション名を表示します。",
+            keywords: ["SNSあいこんをぶらんどめいでひょうきする", "ヘッダの詳細設定"],
         },
         ui: {
             type: "toggle",
@@ -807,7 +824,8 @@ export const optionList = [
         title: "QRコードのURLを現在のページに設定",
         description: {
             text: "QRコードアイコンのURL設定を変更します。",
-            small: "オン：現在表示しているページのURL<br>オフ：作品の目次/本文のURL"
+            small: "オン：現在表示しているページのURL<br>オフ：作品の目次/本文のURL",
+            keywords: ["QRこーどのURLをげんざいのぺーじにせってい", "ヘッダの詳細設定", "QRコード"],
         },
         ui: {
             type: "toggle",
@@ -830,6 +848,7 @@ export const optionList = [
         title: "QRコードのリンクをテキストで表示",
         description: {
             text: "QRコードアイコンでURLを別途テキストで表示します。",
+            keywords: ["QRこーどのりんくをてきすとでひょうじ", "ヘッダの詳細設定", "QRコード"],
         },
         ui: {
             type: "toggle",
@@ -852,7 +871,8 @@ export const optionList = [
         id: "novelShowAllExtext",
         title: "あらすじを全て表示",
         description: {
-            text: "作品のあらすじの隠れている部分を自動的に表示する。"
+            text: "作品のあらすじの隠れている部分を自動的に表示する。",
+            keywords: ["あらすじをすべてひょうじ", "あらすじ"],
         },
         ui: {
             type: "toggle",
@@ -872,7 +892,8 @@ export const optionList = [
         id: "novelPrefaceAutoURL",
         title: "自動URL化（前書き）",
         description: {
-            text: "前書きに含まれるURL文字列を、自動的にリンクに変換します。"
+            text: "前書きに含まれるURL文字列を、自動的にリンクに変換します。",
+            keywords: ["じどうURLか", "前書き", "まえがき", "自動URL化"],
         },
         ui: {
             type: "toggle",
@@ -892,7 +913,8 @@ export const optionList = [
         id: "novelAfterwordAutoURL",
         title: "自動URL化（後書き）",
         description: {
-            text: "後書きに含まれるURL文字列を、自動的にリンクに変換します。"
+            text: "後書きに含まれるURL文字列を、自動的にリンクに変換します。",
+            keywords: ["じどうURLか", "後書き", "あとがき", "自動URL化"],
         },
         ui: {
             type: "toggle",
@@ -912,7 +934,8 @@ export const optionList = [
         id: "novelForceMypageLink",
         title: "作者のマイページへのリンクを強制",
         description: {
-            text: "作者が別で作者名を設定していた場合でも、常にマイページへのリンクを表示します。"
+            text: "作者が別で作者名を設定していた場合でも、常にマイページへのリンクを表示します。",
+            keywords: ["さくしゃのまいぺーじへのりんくをきょうせい", "マイページ", "作者名"],
         },
         ui: {
             type: "toggle",
@@ -932,7 +955,8 @@ export const optionList = [
         id: "novelShowHistoryOnSublist",
         title: "目次ページに直近の閲覧履歴を表示",
         description: {
-            text: "目次ページ上に、直近の閲覧したエピソードを表示します。"
+            text: "目次ページ上に、直近の閲覧したエピソードを表示します。",
+            keywords: ["もくじぺーじにちょっきんのえつらんりれきをひょうじ", "履歴", "目次"],
         },
         ui: {
             type: "toggle",
@@ -952,7 +976,8 @@ export const optionList = [
         id: "novelCursorHide",
         title: "一定時間経過後にマウスカーソルを非表示にする",
         description: {
-            text: "マウスを動かさずに一定時間経過すると、マウスカーソルを非表示にします。"
+            text: "マウスを動かさずに一定時間経過すると、マウスカーソルを非表示にします。",
+            keywords: ["いっていじかんけいかごにまうすかーそるをひひょうじにする", "マウスカーソル"],
         },
         ui: {
             type: "toggle",
@@ -973,7 +998,8 @@ export const optionList = [
         id: "novelCursorHideTimeout",
         title: "カーソル非表示までの時間",
         description: {
-            text: "カーソルを非表示にするまでの時間を秒で指定します。"
+            text: "マウスカーソルを非表示にするまでの時間を秒で指定します。",
+            keywords: ["かーそるひひょうじまでのじかん", "マウスカーソル"],
         },
         ui: {
             type: "input",
@@ -999,7 +1025,8 @@ export const optionList = [
         id: "novelAttentionBanner",
         title: "「作品に含まれる要素」をバナーで表示する",
         description: {
-            text: "「作品に含まれる要素」をバナーで表示します。"
+            text: "「作品に含まれる要素」をバナーで表示します。",
+            keywords: ["「さくひんにふくまれるようそ」をばなーでひょうじする"],
         },
         ui: {
             type: "toggle",
@@ -1021,7 +1048,8 @@ export const optionList = [
         id: "novelSkin",
         title: "スキン",
         description: {
-            text: "小説ページの外観を変更します。"
+            text: "小説ページの外観を変更します。",
+            keywords: ["すきん", "レイアウト", "デザイン", "外観", "スキン", "スキン設定", "CSS"],
         },
         ui: {
             type: "custom",
@@ -1041,7 +1069,8 @@ export const optionList = [
         id: "novelSkinExport",
         title: "スキンのエクスポート",
         description: {
-            text: "現在、選択中のスキンをデータとして出力します。"
+            text: "現在、選択中のスキンをデータとして出力します。",
+            keywords: ["すきんのえくすぽーと", "エクスポート", "スキン"],
         },
         ui: {
             type: "custom",
@@ -1061,7 +1090,8 @@ export const optionList = [
         id: "novelSkinImport",
         title: "スキンのインポート",
         description: {
-            text: "外部からスキンを取り込むことができます。"
+            text: "外部からスキンを取り込むことができます。",
+            keywords: ["すきんのいんぽーと", "インポート", "スキン"],
         },
         ui: {
             type: "custom",
@@ -1081,7 +1111,8 @@ export const optionList = [
         id: "novelCustomCSS",
         title: "追加CSS",
         description: {
-            text: "任意のCSSをページに追加することができます。<br>このスタイルは、スキンよりも後に読み込まれます。"
+            text: "任意のCSSをページに追加することができます。<br>このスタイルは、スキンよりも後に読み込まれます。",
+            keywords: ["ついかCSS", "追加CSS", "スキン"],
         },
         ui: {
             type: "textarea",
@@ -1103,7 +1134,8 @@ export const optionList = [
         id: "novelAuthorCustomSkin",
         title: "作者スキン",
         description: {
-            text: "専用バナーが小説の「ランキングタグ」に配置されている場合、作者が設定したスキンが反映されます。"
+            text: "専用バナーが小説の「ランキングタグ」に配置されている場合、作者が設定したスキンが反映されます。",
+            keywords: ["さくしゃすきん", "作者スキン", "作者", "CSS"],
         },
         ui: {
             type: "toggle",
@@ -1123,7 +1155,8 @@ export const optionList = [
         id: "novelAuthorCustomSkinWarning",
         title: "作者スキンの警告文を表示",
         description: {
-            text: "作者スキンが適用されていることを示す警告文を、ページ上部に表示します。"
+            text: "作者スキンが適用されていることを示す警告文を、ページ上部に表示します。",
+            keywords: ["さくしゃすきんのけいこくぶんをひょうじ", "作者スキン", "作者"],
         },
         ui: {
             type: "toggle",
@@ -1148,7 +1181,8 @@ export const optionList = [
         id: "novelGenerateAuthorCustomSkin",
         title: "作者スキンバナーを作成",
         description: {
-            text: "現在選択中のスキンから、作者設定スキンバナーを生成します。"
+            text: "現在選択中のスキンから、作者設定スキンバナーを生成します。",
+            keywords: ["さくしゃすきんばなーをさくせい", "作者スキン", "作者"],
         },
         ui: {
             type: "custom",
@@ -1174,6 +1208,10 @@ export const optionList = [
     {
         id: "novelFont",
         title: "フォント",
+        description: {
+            text: "小説ページの書体やレイアウトを変更します。",
+            keywords: ["ふぉんと", "レイアウト", "デザイン", "外観", "フォント", "フォント設定", "CSS", "書体"],
+        },
         ui: {
             type: "custom",
             name: "wide",
@@ -1193,7 +1231,8 @@ export const optionList = [
         title: "縦書き",
         description: {
             text: "本文を縦書きで表示します。",
-            attention: "設定の反映には、ページの再読み込みが必要です。"
+            attention: "設定の反映には、ページの再読み込みが必要です。",
+            keywords: ["たてがき", "レイアウト", "外観", "フォント", "縦書き", "書体"],
         },
         ui: {
             type: "toggle",
@@ -1212,6 +1251,10 @@ export const optionList = [
     {
         id: "novelFontSize",
         title: "文字サイズ",
+        description: {
+            hidden: "小説ページの文字サイズを変更します。",
+            keywords: ["もじさいず", "レイアウト", "外観", "フォント", "大きさ"],
+        },
         ui: {
             type: "custom",
             name: "default",
@@ -1229,6 +1272,10 @@ export const optionList = [
     {
         id: "novelFontLineHeight",
         title: "行間",
+        description: {
+            hidden: "小説ページの行間幅を変更します。",
+            keywords: ["ぎょうかん", "レイアウト", "外観", "フォント", "行間", "幅"],
+        },
         ui: {
             type: "custom",
             name: "default",
@@ -1246,6 +1293,10 @@ export const optionList = [
     {
         id: "novelFontWidth",
         title: "横幅",
+        description: {
+            hidden: "小説ページの横幅を変更します。",
+            keywords: ["よこはば", "レイアウト", "外観", "フォント", "横幅", "幅"],
+        },
         ui: {
             type: "custom",
             name: "default",
@@ -1359,6 +1410,7 @@ export const optionList = [
         title: "段落下げ",
         description: {
             text: "地の文の行頭に全角スペースを1つ追加します。",
+            keywords: ["だんらくさげ", "文法", "文章校正", "段落"],
         },
         ui: {
             type: "toggle",
@@ -1382,6 +1434,7 @@ export const optionList = [
         description: {
             text: "中点やピリオドなどでできた三点リーダーを修正します。",
             small: "「・・・」「...」→「…………」",
+            keywords: ["さんてんりーだー", "記号", "文章校正", "三点リーダー"],
         },
         ui: {
             type: "toggle",
@@ -1405,6 +1458,7 @@ export const optionList = [
         description: {
             text: "罫線・ハイフンなどでできたダッシュを全角ダッシュへ変換します。",
             small: "「──」→「――」",
+            keywords: ["だっしゅ", "記号", "文章校正", "ダッシュ"],
         },
         ui: {
             type: "toggle",
@@ -1428,6 +1482,7 @@ export const optionList = [
         description: {
             text: "感嘆符を個数に応じて適切なものに変換します。",
             small: "「！？」→「⁉️」 「！！！」→「!!!」",
+            keywords: ["かんたんふ", "記号", "文章校正", "感嘆符", "クエスチョン", "エクスクラメーション"],
         },
         ui: {
             type: "toggle",
@@ -1451,6 +1506,7 @@ export const optionList = [
         description: {
             text: "連続で現れる句読点を1つに修正します。",
             small: "「、、、」→「、」",
+            keywords: ["れんぞくするくとうてん", "記号", "文章校正", "句読点"],
         },
         ui: {
             type: "toggle",
@@ -1474,6 +1530,7 @@ export const optionList = [
         description: {
             text: "括弧の後に現れる句点を削除します。",
             small: "「。』」→「』」",
+            keywords: ["かっこのあとのくてん", "記号", "文章校正", "句読点", "カッコ", "括弧"],
         },
         ui: {
             type: "toggle",
@@ -1497,6 +1554,7 @@ export const optionList = [
         description: {
             text: "感嘆符の後ろに全角スペースを追加します。",
             small: "「！あ」→「！　あ」",
+            keywords: ["うしろにくうはくのないかんたんふ", "記号", "文章校正", "感嘆符"],
         },
         ui: {
             type: "toggle",
@@ -1520,6 +1578,7 @@ export const optionList = [
         description: {
             text: "奇数個連続する三点リーダーを偶数個に修正します。",
             small: "「…」→「……」",
+            keywords: ["きすうのさんてんりーだー", "記号", "文章校正", "三点リーダー"],
         },
         ui: {
             type: "toggle",
@@ -1543,6 +1602,7 @@ export const optionList = [
         description: {
             text: "奇数個連続するダッシュを偶数個に修正します。",
             small: "「―」→「――」",
+            keywords: ["きすうのだっしゅ", "記号", "文章校正", "ダッシュ"],
         },
         ui: {
             type: "toggle",
@@ -1566,6 +1626,7 @@ export const optionList = [
         description: {
             text: "連続する波ダッシュを繋げます。",
             small: "「～～」→「〰〰」",
+            keywords: ["なみだっしゅをつなげる", "記号", "文章校正", "波ダッシュ"],
         },
         ui: {
             type: "toggle",
@@ -1589,6 +1650,7 @@ export const optionList = [
         description: {
             text: "数値の表記方法を変更します。",
             small: "※数値とは、「+-」の記号を含む半角/全角数字で構成された実数のことです。",
+            keywords: ["すうち", "ローカライズ", "文章校正", "数値"],
         },
         ui: {
             type: "toggle",
@@ -1611,6 +1673,7 @@ export const optionList = [
         title: "1文字の数値",
         description: {
             text: "1文字の数値の表示方法を設定します。",
+            keywords: ["1もじのすうち", "ローカライズ", "文章校正", "数値"],
         },
         ui: {
             type: "dropdown",
@@ -1644,6 +1707,7 @@ export const optionList = [
         title: "2文字以上の数値",
         description: {
             text: "2文字以上の数値の表示方法を設定します。",
+            keywords: ["2もじのすうち", "ローカライズ", "文章校正", "数値"],
         },
         ui: {
             type: "dropdown",
@@ -1677,6 +1741,7 @@ export const optionList = [
         title: "数値内の記号",
         description: {
             text: "数値内の記号の表示方法を設定します。",
+            keywords: ["すうちないのきごう", "ローカライズ", "文章校正", "数値"],
         },
         ui: {
             type: "dropdown",
@@ -1710,7 +1775,8 @@ export const optionList = [
         title: "半角単語（縦中横）",
         description: {
             text: "設定した桁数までの半角英数字を横方向に表示します。",
-            small: "（0で無効）"
+            small: "（0で無効）",
+            keywords: ["はんかくたんご", "縦中横", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "input",
@@ -1738,7 +1804,8 @@ export const optionList = [
         title: "半角数字（縦中横）",
         description: {
             text: "設定した桁数までの半角数字を横方向に表示します。",
-            small: "（0で無効）"
+            small: "（0で無効）",
+            keywords: ["はんかくすうじ", "縦中横", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "input",
@@ -1766,7 +1833,8 @@ export const optionList = [
         title: "半角感嘆符（縦中横）",
         description: {
             text: "設定した桁数までの半角感嘆符を横方向に表示します。",
-            small: "（0で無効）"
+            small: "（0で無効）",
+            keywords: ["はんかくかんたんふ", "縦中横", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "input",
@@ -1795,6 +1863,7 @@ export const optionList = [
         description: {
             text: "数値の表記方法を変更します。",
             small: "前後に半角英字のある数字を、縦中横処理から無視します。",
+            keywords: ["たんごちゅうのすうじをむしする", "縦中横", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "toggle",
@@ -1822,7 +1891,8 @@ export const optionList = [
         title: "全角単語（横向き）",
         description: {
             text: "設定した桁数以上の全角英数字を縦方向に表示します。",
-            small: "（0で無効）"
+            small: "（0で無効）",
+            keywords: ["ぜんかくたんご", "横向き", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "input",
@@ -1850,7 +1920,8 @@ export const optionList = [
         title: "感嘆符（横向き）",
         description: {
             text: "設定した桁数以上の全角感嘆符を縦方向に表示します。",
-            small: "（0で無効）"
+            small: "（0で無効）",
+            keywords: ["ぜんかくたんご", "横向き", "文字の向き", "文章校正", "縦書き"],
         },
         ui: {
             type: "input",
@@ -1878,6 +1949,7 @@ export const optionList = [
         title: "挿絵を表示",
         description: {
             text: "挿絵を表示するかどうか選択します。",
+            keywords: ["さしえをひょうじ", "挿絵", "文章校正"],
         },
         ui: {
             type: "toggle",
@@ -1900,6 +1972,7 @@ export const optionList = [
         title: "挿絵のリンクを無効化",
         description: {
             text: "挿絵に設定される「みてみん」へのリンクを無効化します。",
+            keywords: ["さしえのりんくをむこうか", "挿絵", "文章校正"],
         },
         ui: {
             type: "toggle",
@@ -1927,7 +2000,8 @@ export const optionList = [
         title: "置換",
         description: {
             text: "任意の文字列を置換します。 ",
-            small: "・「＋」ボタンをクリックすると、置換パターンを追加します。追加されたパターンは上から順番に適用されます。<br>・「＊」アイコンをオンにすると正規表現が利用できます。<br>・「●」アイコンで置換の有効/無効を切り替えることができます。"
+            small: "・「＋」ボタンをクリックすると、置換パターンを追加します。追加されたパターンは上から順番に適用されます。<br>・「＊」アイコンをオンにすると正規表現が利用できます。<br>・「●」アイコンで置換の有効/無効を切り替えることができます。",
+            keywords: ["ちかん", "置換", "置き換え", "文章校正", "正規表現"],
         },
         ui: {
             type: "custom",
@@ -1986,6 +2060,10 @@ export const optionList = [
     {
         id: "yomouRank_ShowDescription",
         title: "あらすじ",
+        description: {
+            hidden: "ランキング上の作品にあらすじを表示します。",
+            keywords: ["あらすじ", "ランキング"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2005,6 +2083,10 @@ export const optionList = [
     {
         id: "yomouRank_ShowTags",
         title: "キーワード",
+        description: {
+            hidden: "ランキング上の作品にキーワードを表示します。",
+            keywords: ["きーわーど", "ランキング", "キーワード", "タグ"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2024,6 +2106,10 @@ export const optionList = [
     {
         id: "yomouRank_ShowNovelInfoLink",
         title: "作品情報へのリンク",
+        description: {
+            hidden: "ランキング上の作品に作品情報ページへのリンクを表示します。",
+            keywords: ["さくひんじょうほうへのりんく", "ランキング", "作品情報"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2043,6 +2129,10 @@ export const optionList = [
     {
         id: "yomouRank_ShowKasasagi",
         title: "アクセス解析へのリンク",
+        description: {
+            hidden: "ランキング上の作品にアクセス解析ページへのリンクを表示します。",
+            keywords: ["あくせすかいせきへのりんく", "ランキング", "アクセス解析", "KASASAGI"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2062,6 +2152,10 @@ export const optionList = [
     {
         id: "yomouRank_ShowRaWi",
         title: "RaWiへのリンク",
+        description: {
+            hidden: "ランキング上の作品にRaWiへのリンクを表示します。",
+            keywords: ["RaWiへのりんく", "ランキング", "RaWi"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2082,7 +2176,8 @@ export const optionList = [
         id: "yomouRank_DevidePointsUnit",
         title: "ポイント表示の数値と単位の色を分ける",
         description: {
-            text: "評価ポイントの数値と単位の文字色を分けます。"
+            text: "評価ポイントの数値と単位の文字色を分けます。",
+            keywords: ["ぽいんとひょうじのすうちとたんいのいろをわける", "ランキング", "評価ポイント", "CSS"],
         },
         ui: {
             type: "toggle",
@@ -2103,6 +2198,10 @@ export const optionList = [
     {
         id: "yomouRank_PointsColor",
         title: "ポイント表示色",
+        description: {
+            hidden: "評価ポイントの文字色を指定します。",
+            keywords: ["ぽいんとひょうじしょく", "ランキング", "評価ポイント", "CSS"],
+        },
         ui: {
             type: "input",
             name: "color",
@@ -2123,7 +2222,8 @@ export const optionList = [
         id: "yomouRank_CustomCSS",
         title: "追加CSS",
         description: {
-            text: "任意のCSSをランキングページに追加することができます。"
+            text: "任意のCSSをランキングページに追加することができます。",
+            keywords: ["ついかCSS", "追加CSS"],
         },
         ui: {
             type: "textarea",
@@ -2146,7 +2246,7 @@ export const optionList = [
         id: "parent_yomouRankTop_data",
         title: "表示内容",
         description: {
-            text: "各作品に表示する情報を設定します。"
+            text: "各作品に表示する情報を設定します。",
         },
         ui: {
             type: "parent",
@@ -2184,6 +2284,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowDescription",
         title: "あらすじ",
+        description: {
+            hidden: "ランキングのトップページ上の作品にあらすじを表示します。",
+            keywords: ["あらすじ", "ランキング（トップ）"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2203,6 +2307,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowTags",
         title: "キーワード",
+        description: {
+            hidden: "ランキングのトップページ上の作品にキーワードを表示します。",
+            keywords: ["きーわーど", "ランキング（トップ）", "キーワード", "タグ"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2222,6 +2330,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowLength",
         title: "読了時間・文字数",
+        description: {
+            hidden: "ランキングのトップページ上の作品に読了時間・文字数を表示します。",
+            keywords: ["どくりょうじかん・もじすう", "ランキング（トップ）"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2241,6 +2353,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowNovelInfoLink",
         title: "作品情報へのリンク",
+        description: {
+            hidden: "ランキングのトップページ上の作品に作品情報ページへのリンクを表示します。",
+            keywords: ["さくひんじょうほうへのりんく", "ランキング（トップ）", "作品情報"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2260,6 +2376,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowUpdateDate",
         title: "最終更新日時",
+        description: {
+            hidden: "ランキングのトップページ上の作品に最終更新日時を表示します。",
+            keywords: ["さいしゅうこうしんにちじ", "ランキング（トップ）"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2279,6 +2399,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowKasasagi",
         title: "アクセス解析へのリンク",
+        description: {
+            hidden: "ランキングのトップページ上の作品にアクセス解析ページへのリンクを表示します。",
+            keywords: ["あくせすかいせきへのりんく", "ランキング（トップ）", "アクセス解析", "KASASAGI"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2298,6 +2422,10 @@ export const optionList = [
     {
         id: "yomouRankTop_ShowRaWi",
         title: "RaWiへのリンク",
+        description: {
+            hidden: "ランキングのトップページ上の作品にRaWiへのリンクを表示します。",
+            keywords: ["RaWiへのりんく", "ランキング（トップ）", "RaWi"],
+        },
         ui: {
             type: "toggle",
             name: "default",
@@ -2318,7 +2446,8 @@ export const optionList = [
         id: "yomouRankTop_CustomCSS",
         title: "追加CSS",
         description: {
-            text: "任意のCSSをランキングのトップページに追加することができます。"
+            text: "任意のCSSをランキングのトップページに追加することができます。",
+            keywords: ["ついかCSS", "追加CSS"],
         },
         ui: {
             type: "textarea",
@@ -2343,7 +2472,8 @@ export const optionList = [
         title: "ヘッダのアイテム配置",
         description: {
             text: "ヘッダに表示するアイテムを指定します。",
-            small: "（最大6つまで）"
+            small: "（最大6つまで）",
+            keywords: ["へっだのあいてむはいち", "ヘッダ", "レイアウト", "外観"],
         },
         ui: {
             type: "custom",
@@ -2364,6 +2494,7 @@ export const optionList = [
         title: "メニューのアイテム配置",
         description: {
             text: "ヘッダのメニューに表示するアイテムを指定します。",
+            keywords: ["めにゅーのあいてむはいち", "ヘッダ", "レイアウト", "外観"],
         },
         ui: {
             type: "custom",
@@ -2384,7 +2515,8 @@ export const optionList = [
         title: "ヘッダの追従モード",
         description: {
             text: "ヘッダの配置場所を設定します。",
-            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示"
+            small: "・上部：ページ上部に固定<br>・追従：スクロールしても常に表示<br>・スクロール：基本は非表示、上にスクロールした時だけ表示",
+            keywords: ["へっだのついじゅうもーど", "ヘッダ", "追従モード"],
         },
         ui: {
             type: "dropdown",
@@ -2411,7 +2543,8 @@ export const optionList = [
         title: "ページ読み込み時にヘッダを隠す",
         description: {
             text: "オンの場合、ページ読み込み時にヘッダを隠します。",
-            small: "（ヘッダの追従モードが「スクロール」でのみ有効）"
+            small: "（ヘッダの追従モードが「スクロール」でのみ有効）",
+            keywords: ["ぺーじよみこみじにへっだをかくす", "ヘッダ", "追従モード"],
         },
         ui: {
             type: "toggle",
@@ -2439,6 +2572,7 @@ export const optionList = [
         title: "作品詳細ページで評価ポイント平均を表示",
         description: {
             text: "作品詳細ページ上で、評価ポイント平均の星マークの横に数値を表示します。",
+            keywords: ["さくひんしょうさいぺーじでひょうかぽいんとへいきんをひょうじ", "評価ポイント"],
         },
         ui: {
             type: "toggle",
@@ -2459,6 +2593,7 @@ export const optionList = [
         title: "小説削除の誤操作防止機能",
         description: {
             text: "うっかり小説を削除してしまうことを防ぐため、削除操作時の確認画面を変更します。",
+            keywords: ["しょうせつさくじょのごそうさぼうしきのう", "削除", "安全"],
         },
         ui: {
             type: "toggle",
@@ -2479,6 +2614,7 @@ export const optionList = [
         title: "活動報告削除の誤操作防止機能",
         description: {
             text: "うっかり活動報告を削除してしまうことを防ぐため、削除操作時の確認画面を変更します。",
+            keywords: ["かつどうほうこくさくじょのごそうさぼうしきのう", "削除", "安全"],
         },
         ui: {
             type: "toggle",
@@ -2499,7 +2635,8 @@ export const optionList = [
         id: "workspaceCustomEditor",
         title: "エディタ",
         description: {
-            text: "小説の編集画面をカクヨム風のエディタに変更します。",
+            text: "小説の編集画面をオリジナルのエディタに変更します。",
+            keywords: ["えでぃた", "エディタ", "編集", "レイアウト", "外観", "デザイン"],
         },
         ui: {
             type: "toggle",
@@ -2536,6 +2673,10 @@ export const optionList = [
     {
         id: "workspaceBookmarkLayout",
         title: "ブックマークのレイアウト",
+        description: {
+            text: "ブックマーク画面のレイアウトを変更します。",
+            keywords: ["ぶっくまーくのれいあうと", "レイアウト", "外観", "デザイン", "ブックマーク", "お気に入り"],
+        },
         ui: {
             type: "dropdown",
             name: "default",
@@ -2560,6 +2701,10 @@ export const optionList = [
     {
         id: "workspaceBookmarkCategoryLayout",
         title: "カテゴリ表示",
+        description: {
+            text: "ブックマークカテゴリのレイアウトを変更します。",
+            keywords: ["ぶっくまーくかてごりひょうじ", "レイアウト", "外観", "デザイン", "ブックマーク", "お気に入り"],
+        },
         ui: {
             type: "dropdown",
             name: "default",
@@ -2586,6 +2731,7 @@ export const optionList = [
         title: "「エピソード」→「部分」表記",
         description: {
             text: "「エピソード(ep.)」の表記を「部分」に変更します。",
+            keywords: ["「えぴそーど」 → 「ぶぶん」ひょうき", "ブックマーク", "お気に入り"],
         },
         ui: {
             type: "toggle",
@@ -2626,6 +2772,7 @@ export const optionList = [
         title: "既読/未読ボタンを表示",
         description: {
             text: "書かれた感想を既読/未読にするボタンを追加します。",
+            keywords: ["きどく/みどくぼたんをひょうじ", "感想", "リアクション"],
         },
         ui: {
             type: "toggle",
@@ -2648,6 +2795,7 @@ export const optionList = [
         title: "表示/非表示ボタンを表示",
         description: {
             text: "書かれた感想を表示/非表示にするボタンを追加します。",
+            keywords: ["ひょうじ/ひひょうじぼたんをひょうじ", "感想", "リアクション"],
         },
         ui: {
             type: "toggle",
@@ -2670,6 +2818,7 @@ export const optionList = [
         title: "返信時に既読にする",
         description: {
             text: "感想に返信したとき、自動的にその感想を既読にします。",
+            keywords: ["へんしんじにきどくにする", "感想", "リアクション"],
         },
         ui: {
             type: "toggle",
@@ -2697,6 +2846,7 @@ export const optionList = [
         title: "既読にしたとき非表示にする",
         description: {
             text: "感想を既読にしたとき、自動的にその感想を非表示にします。",
+            keywords: ["きどくにしたときひひょうじにする", "感想", "リアクション"],
         },
         ui: {
             type: "toggle",
@@ -2726,6 +2876,7 @@ export const optionList = [
         title: "ユーザIDを表示",
         description: {
             text: "ユーザ名の横にIDを表示します。",
+            keywords: ["ゆーざIDをひょうじ", "ユーザID", "マイページ"],
         },
         ui: {
             type: "toggle",
@@ -2746,6 +2897,7 @@ export const optionList = [
         title: "お気に入りユーザのIDを表示",
         description: {
             text: "お気に入りユーザ名の下にIDを表示します。",
+            keywords: ["おきにいりゆーざのIDをひょうじ", "お気に入りユーザ", "ユーザID", "マイページ"],
         },
         ui: {
             type: "toggle",
@@ -2766,6 +2918,7 @@ export const optionList = [
         title: "小説の評価情報を表示",
         description: {
             text: "作品のポイントやブックマーク数などを表示します。",
+            keywords: ["しょうせつのひょうかじょうほうをひょうじ", "評価ポイント", "評価", "マイページ"],
         },
         ui: {
             type: "toggle",
@@ -2786,6 +2939,7 @@ export const optionList = [
         title: "小説の読了時間を表示",
         description: {
             text: "作品の読了時間や文字数を表示します。",
+            keywords: ["しょうせつのどくりょうじかんをひょうじ", "マイページ"],
         },
         ui: {
             type: "toggle",
@@ -2805,7 +2959,8 @@ export const optionList = [
         id: "mypageNovellistShowKasasagi",
         title: "小説のアクセス解析へのリンクを表示",
         description: {
-            text: "作品のアクセス解析ページ（KASASAGI）へのリンクを表示します。",
+            text: "作品のアクセス解析ページへのリンクを表示します。",
+            keywords: ["しょうせつのあくせすかいせきへのりんくをひょうじ", "マイページ", "アクセス解析", "KASASAGI"],
         },
         ui: {
             type: "toggle",
@@ -2826,6 +2981,7 @@ export const optionList = [
         title: "RaWiへのリンクを表示",
         description: {
             text: "作品のRaWiへのリンクを表示します。",
+            keywords: ["RaWiへのりんくをひょうじ", "マイページ", "RaWi"],
         },
         ui: {
             type: "toggle",
@@ -2846,6 +3002,7 @@ export const optionList = [
         title: "外部リンク警告を非表示",
         description: {
             text: "外部リンクのクリック時に表示される警告画面を無効化します。",
+            keywords: ["がいぶりんくけいこくをひひょうじ", "マイページ"],
         },
         ui: {
             type: "toggle",
@@ -2867,6 +3024,7 @@ export const optionList = [
         title: "自動URL化（活動報告の本文）",
         description: {
             text: "活動報告の本文に含まれるURL文字列を、自動的にリンクに変換します。",
+            keywords: ["じどうURLか（かつどうほうこくのほんぶん）", "活動報告", "自動URL化"],
         },
         ui: {
             type: "toggle",
@@ -2887,6 +3045,7 @@ export const optionList = [
         title: "自動URL化（活動報告のコメント）",
         description: {
             text: "活動報告のコメントに含まれるURL文字列を、自動的にリンクに変換します。",
+            keywords: ["じどうURLか（かつどうほうこくのこめんと）", "活動報告", "自動URL化"],
         },
         ui: {
             type: "toggle",
@@ -2905,9 +3064,10 @@ export const optionList = [
     /* プロフィール (profile) */
     {
         id: "mypageProfileStatics",
-        title: "ユーザ統計を表示",
+        title: "統計を表示",
         description: {
-            text: "なろうAPIから取得したユーザの統計情報を表示します。",
+            text: "ユーザの統計情報を表示します。",
+            keywords: ["ゆーざとうけいをひょうじ", "マイページ", "プロフィール", "なろうAPI"],
         },
         ui: {
             type: "toggle",
@@ -2928,6 +3088,7 @@ export const optionList = [
         title: "書報を表示",
         description: {
             text: "ユーザが刊行した書籍情報を書報から取得します。",
+            keywords: ["しょほうをひょうじ", "マイページ", "プロフィール", "書報"],
         },
         ui: {
             type: "toggle",
@@ -2948,6 +3109,7 @@ export const optionList = [
         title: "自動URL化（プロフィール）",
         description: {
             text: "プロフィールに含まれるURL文字列を、自動的にリンクに変換します。",
+            keywords: ["じどうURLか（ぷろふぃーる）", "マイページ", "プロフィール", "自動URL化"],
         },
         ui: {
             type: "toggle",
@@ -2970,6 +3132,7 @@ export const optionList = [
         title: "iコードを表示",
         description: {
             text: "iコードのコピー用フィールドを表示します。",
+            keywords: ["iこーどをひょうじ", "iコード", "みてみん", "挿絵"],
         },
         ui: {
             type: "toggle",
@@ -2992,6 +3155,7 @@ export const optionList = [
         title: "デザインを調整（推奨）",
         description: {
             text: "全体的なページのデザインを調整します。",
+            keywords: ["でざいんをちょうせい", "KASASAGI", "アクセス解析", "レイアウト", "デザイン", "外観"],
         },
         ui: {
             type: "toggle",
@@ -3012,6 +3176,7 @@ export const optionList = [
         title: "エクスポートボタン",
         description: {
             text: "表示されているデータをファイルで出力できるボタンを追加します。",
+            keywords: ["えくすぽーとぼたん", "KASASAGI", "アクセス解析", "エクスポート", "JSON"],
         },
         ui: {
             type: "toggle",
@@ -3048,6 +3213,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_GeneralDay",
         title: "グラフ表示",
+        description: {
+            hidden: "当日・前日PVのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（とうじつ・ぜんじつPV）", "KASASAGI", "アクセス解析", "グラフ", "当日・前日PV"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3068,7 +3237,8 @@ export const optionList = [
         id: "kasasagiGraphType_GeneralDay",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（とうじつ・ぜんじつPV）", "KASASAGI", "アクセス解析", "グラフ", "当日・前日PV"],
         },
         ui: {
             type: "dropdown",
@@ -3115,6 +3285,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_GeneralTotal",
         title: "グラフ表示",
+        description: {
+            hidden: "累計PVのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（るいけいPV）", "KASASAGI", "アクセス解析", "グラフ", "累計PV"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3135,7 +3309,8 @@ export const optionList = [
         id: "kasasagiGraphType_GeneralTotal",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（るいけいPV）", "KASASAGI", "アクセス解析", "グラフ", "累計PV"],
         },
         ui: {
             type: "dropdown",
@@ -3163,10 +3338,28 @@ export const optionList = [
     },
 
     {
+        id: "parent_kasasagiGeneralAPI",
+        title: "情報表示",
+        ui: {
+            type: "parent",
+            name: "column",
+        },
+        location: {
+            page: "kasasagi",
+            category: "pageview",
+            noindex: true,
+        },
+        value: {
+            hasValue: false,
+        }
+    },
+
+    {
         id: "kasasagiShowTable_API",
-        title: "作品データ表示",
+        title: "作品データ",
         description: {
-            text: "なろうAPIを利用して、詳細な作品の統計情報を表示します。"
+            text: "詳細な作品の統計情報を表示します。",
+            keywords: ["さくひんでーたひょうじ", "KASASAGI", "アクセス解析", "テーブル（表）", "なろうAPI"],
         },
         ui: {
             type: "toggle",
@@ -3175,6 +3368,8 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "pageview",
+            hasParent: true,
+            parent: "parent_kasasagiGeneralAPI",
         },
         value: {
             default: defaultOption.kasasagiShowTable_API,
@@ -3184,17 +3379,20 @@ export const optionList = [
 
     {
         id: "kasasagiShowTable_Rank",
-        title: "殿堂入り表示",
+        title: "殿堂入り",
         description: {
-            text: "なろうAPIを利用して、作品の殿堂入り情報を表示します。"
+            text: "作品の殿堂入り情報を表示します。",
+            keywords: ["さくひんでーたひょうじ", "KASASAGI", "アクセス解析", "テーブル（表）", "なろうAPI", "殿堂入り", "ランキング"],
         },
         ui: {
             type: "toggle",
-            name: "default"
+            name: "default",
         },
         location: {
             page: "kasasagi",
             category: "pageview",
+            hasParent: true,
+            parent: "parent_kasasagiGeneralAPI",
         },
         value: {
             default: defaultOption.kasasagiShowTable_Rank,
@@ -3204,9 +3402,10 @@ export const optionList = [
 
     {
         id: "kasasagiShowTable_ExternalLink",
-        title: "リンク集表示",
+        title: "リンク集",
         description: {
-            text: "作品に関連する外部サイトのリンクを表示します。"
+            text: "作品に関連する外部サイトのリンクを表示します。",
+            keywords: ["りんくしゅうひょうじ", "KASASAGI", "アクセス解析"],
         },
         ui: {
             type: "toggle",
@@ -3215,6 +3414,8 @@ export const optionList = [
         location: {
             page: "kasasagi",
             category: "pageview",
+            hasParent: true,
+            parent: "parent_kasasagiGeneralAPI",
         },
         value: {
             default: defaultOption.kasasagiShowTable_ExternalLink,
@@ -3226,6 +3427,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_ChapterUnique",
         title: "グラフ表示",
+        description: {
+            hidden: "エピソード別ユニークのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（えぴそーどべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "エピソード別ユニーク"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3244,7 +3449,8 @@ export const optionList = [
         id: "kasasagiGraphType_ChapterUnique",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（えぴそーどべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "エピソード別ユニーク"],
         },
         ui: {
             type: "dropdown",
@@ -3270,10 +3476,11 @@ export const optionList = [
     },
 
     {
-        id: "kasasagiShowTable_GeneralDay",
+        id: "kasasagiShowTable_ChapterUnique",
         title: "テーブル表示",
         description: {
-            text: "既存のテーブル（表）のレイアウトを変更します。"
+            text: "既存のテーブル（表）のレイアウトを変更します。",
+            keywords: ["てーぶるひょうじ（えぴそーどべつゆにーく）", "KASASAGI", "アクセス解析", "テーブル（表）", "エピソード別ユニーク"],
         },
         ui: {
             type: "toggle",
@@ -3310,6 +3517,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_DayPV",
         title: "グラフ表示",
+        description: {
+            hidden: "日別PVのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（ひべつPV）", "KASASAGI", "アクセス解析", "グラフ", "日別PV"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3330,7 +3541,8 @@ export const optionList = [
         id: "kasasagiGraphType_DayPV",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（ひべつPV）", "KASASAGI", "アクセス解析", "グラフ", "日別PV"],
         },
         ui: {
             type: "dropdown",
@@ -3377,6 +3589,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_DayUnique",
         title: "グラフ表示",
+        description: {
+            hidden: "日別ユニークのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（ひべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "日別ユニーク"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3397,7 +3613,8 @@ export const optionList = [
         id: "kasasagiGraphType_DayUnique",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（ひべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "日別ユニーク"],
         },
         ui: {
             type: "dropdown",
@@ -3445,6 +3662,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_MonthPV",
         title: "グラフ表示",
+        description: {
+            hidden: "月別PVのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（つきべつPV）", "KASASAGI", "アクセス解析", "グラフ", "月別PV"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3465,7 +3686,8 @@ export const optionList = [
         id: "kasasagiGraphType_MonthPV",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（つきべつPV）", "KASASAGI", "アクセス解析", "グラフ", "月別PV"],
         },
         ui: {
             type: "dropdown",
@@ -3512,6 +3734,10 @@ export const optionList = [
     {
         id: "kasasagiShowGraph_MonthUnique",
         title: "グラフ表示",
+        description: {
+            hidden: "月別ユニークのグラフを表示します。",
+            keywords: ["ぐらふひょうじ（つきべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "月別ユニーク"],
+        },
         ui: {
             type: "toggle",
             name: "default"
@@ -3532,7 +3758,8 @@ export const optionList = [
         id: "kasasagiGraphType_MonthUnique",
         title: "グラフ種類",
         description: {
-            text: "グラフの外観を設定します。"
+            text: "グラフの外観を設定します。",
+            keywords: ["ぐらふしゅるい（つきべつゆにーく）", "KASASAGI", "アクセス解析", "グラフ", "月別ユニーク"],
         },
         ui: {
             type: "dropdown",

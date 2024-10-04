@@ -151,10 +151,10 @@ export const defaultOption = {
     kasasagiShowTable_ExternalLink: true,
     kasasagiShowTable_GeneralDay: true,
     kasasagiShowTable_ChapterUnique: true,
-    kasasagiShowTable_DayPV: true, //Unused
-    kasasagiShowTable_DayUnique: true, //Unused
-    kasasagiShowTable_MonthPV: true, //Unused
-    kasasagiShowTable_MonthUnique: true, //Unused
+    //kasasagiShowTable_DayPV: true, //Unused
+    //kasasagiShowTable_DayUnique: true, //Unused
+    //kasasagiShowTable_MonthPV: true, //Unused
+    //kasasagiShowTable_MonthUnique: true, //Unused
 
     /* Mitemin */
     miteminShowIcodeField: true,

@@ -25,27 +25,28 @@ export function optionHide(){
         const mode = $(this).attr("mode")
 
         function change(value){
+            console.log(mode)
             if(String(value)==String(action_value)){
-                if(mode=="hide"){
+                if(mode==="hide"){
                     elm.addClass("option-hide--hidden")
                 }
-                else if(mode=="inactive"){
+                else if(mode==="inactive"){
                     elm.addClass("option-hide--inactive")
                 }
-                else if(mode=="active"){
+                else if(mode==="active"){
                     elm.removeClass("option-hide--inactive")
                 }
                 else{ //show
                     elm.removeClass("option-hide--hidden")
                 }
             }else{
-                if(mode=="hide"){
+                if(mode==="hide"){
                     elm.removeClass("option-hide--hidden")
                 }
-                else if(mode=="inactive"){
+                else if(mode==="inactive"){
                     elm.removeClass("option-hide--inactive")
                 }
-                else if(mode=="active"){
+                else if(mode==="active"){
                     elm.addClass("option-hide--inactive")
                 }
                 else{ //show
