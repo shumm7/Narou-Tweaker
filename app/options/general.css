@@ -148,6 +148,7 @@ input[type="number"] {
     color: transparent;
     font-family: "BizinGothicDiscord", monospace;
     line-height: 120%;
+    font-size: 100%;
 }
 .syntax-highlight-wrap textarea.syntax-highlight::selection {
     background: rgba(77, 144, 254, 0.8);
@@ -165,7 +166,7 @@ input[type="number"] {
     border: 1px solid transparent;
     pointer-events: none;
     overflow-y: auto;
-    font-family: monospace;
+    font-family: "BizinGothicDiscord", monospace;
 }
 .syntax-highlight-wrap pre::-webkit-scrollbar {
     opacity: 0;
