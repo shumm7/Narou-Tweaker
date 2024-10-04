@@ -57,13 +57,15 @@ function setupDOM(){
                     <!--<a href="/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>
             </div>
-            <div id="sidebar-items">
-                ${sidebarDOMItems}
-            </div>
-            <div id="sidebar-bottom">
+            <div id="sidebar-middle">
                 <div id="sidebar-search">
                     <input type="text" id="sidebar-search-box" placeholder="検索">
                 </div>
+                <div id="sidebar-items">
+                    ${sidebarDOMItems}
+                </div>
+            </div>
+            <div id="sidebar-bottom">
                 <div id="sidebar-toolbox">
                     <div id="sidebar-version">build. ${manifest.version}</div>
                     <div class="sidebar-icon" id="sidebar-icon--hide">

@@ -220,9 +220,15 @@ input[type=file] {
 .brand-icon {
     margin: 16px 0 20px 26px;
 }
-#sidebar-items {
+#sidebar-middle {
     position: fixed;
     top: 70px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+#sidebar-items {
+
 }
 .sidebar-item {
     margin: 15px 0 15px 0;
@@ -289,13 +295,11 @@ input[type=file] {
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    margin: 0 10px;
-    margin-bottom: 30px;
+    margin: 0 15px 15px 10px;
 }
 #sidebar-search-box {
     max-width: 100%;
     box-sizing: border-box;
-    margin-right: 8px;
     border: none;
     border-radius: 0;
     background-color: #e6e6e6;
