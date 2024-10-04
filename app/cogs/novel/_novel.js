@@ -193,7 +193,7 @@ function _history(){
         const ncode = getNcode()
 
         if(ncode){
-            if($(".index_box").length){
+            if($(".p-eplist").length){
                 var outer = $(`<div class="novelview_history-box"></div>`)
                 var showHistory = false
 
@@ -243,7 +243,7 @@ function _history(){
                         }
                     }
                     if(showHistory){
-                        $(".index_box").before(outer)
+                        $(".p-eplist").before(outer)
                     }
                 })
             }
