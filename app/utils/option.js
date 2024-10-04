@@ -791,7 +791,7 @@ export function checkOptionValue(key, value){
         if(key==="novelCustomHeaderLeft" || key==="novelCustomHeaderRight"){
             if(!Array.isArray(value)){return false}
             var res = true
-            $.each(value, function(v){
+            Object.keys(value).forEach(function(v){
                 if(!(v in novelIconList)){
                     res = false
                     return false
@@ -802,7 +802,7 @@ export function checkOptionValue(key, value){
         else if(key==="workspaceCustomHeader"){
             if(!Array.isArray(value)){return false}
             var res = true
-            $.each(value, function(v){
+            Object.keys(value).forEach(function(v){
                 if(!(v in workspaceIconList)){
                     res = false
                     return false
@@ -813,7 +813,7 @@ export function checkOptionValue(key, value){
         else if(key==="workspaceCustomMenu_Left" || key==="workspaceCustomMenu_Middle" || key==="workspaceCustomMenu_Right"){
             if(!Array.isArray(value)){return false}
             var res = true
-            $.each(value, function(v){
+            Object.keys(value).forEach(function(v){
                 if(!(v in workspaceMenuIconList)){
                     res = false
                     return false

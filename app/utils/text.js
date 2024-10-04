@@ -164,7 +164,6 @@ export function convertSasieTags(element, isEscaped){
     var to = `<a href="//$2.mitemin.net/$1/" target="_blank"><img src="//$2.mitemin.net/userpageimage/viewimagebig/icode/$1/" alt="挿絵(By みてみん)" border="0"></a>`
     var nodes = $(element)[0].childNodes;
     $.each(nodes, function(_, w) {
-        console.log(w)
         if(w.innerHTML==undefined){ // is text
             if(w.data.match(re)){
                 $.each($.parseHTML(w.data.replace(re, to)), function(_, x) {
