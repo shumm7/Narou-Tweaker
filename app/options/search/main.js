@@ -1,6 +1,6 @@
 import { searchCount, stringSimilarity } from "../../utils/text.js";
 import { getOptionElement, optionCategoryList, optionList } from "../_lib/optionUI.js";
-import { optionHide } from "../_lib/utils.js";
+import { optionHide, syntaxHighlight } from "../_lib/utils.js";
 import { restoreOptions, setup } from "../general.js";
 
 setup()
@@ -130,6 +130,118 @@ function searchOption(searchWords){
     const modeDescription = true
     const modeKeywords = true
 
+    /* 特殊キーワード（検索フィルター） */
+    var isWhitelistActive = false
+    var magic_word = false
+    var pageFilter = {
+        blacklist: [],
+        whitelist: []
+    }
+
+    var modeFilter = {
+        whitelist: {
+            experimental: false,
+            advanced: false
+        },
+        blacklist: {
+            experimental: false,
+            advanced: false
+        }
+    }
+
+    function getPageFromKeyword(w){
+        var ret = []
+        
+        if(w.match(/^\".+\"$/s)){
+            w = w.match(/^\"(.+)\"$/s)[1]
+            $.each(optionCategoryList, function(_, c){
+                if(!c.noindex){
+                    if(c.title === w || c.id === w){
+                        ret.push(c.id)
+                    }
+                }
+            })
+            
+        }
+        else{
+            w = w.toLowerCase()
+            $.each(optionCategoryList, function(_, c){
+                if(!c.noindex){
+                    if(c.title.toLowerCase().includes(w) || c.id.toLowerCase().includes(w)){
+                        ret.push(c.id)
+                    }
+                }
+            })
+            
+        }
+        return ret
+    }
+
+    $.each(searchWords, function(k, w){
+        if(w.match(w.match(/^\-+page\:.+$/s))){ /* 特定のページを除外 */
+            w = w.match(/^\-+page\:(.+)$/s)[1]
+            $.each(w.split("&"), function(_, v){
+                v = getPageFromKeyword(v)
+                $.each(v, function(_, u){
+                    if(!pageFilter.blacklist.includes(u)){
+                        pageFilter.blacklist.push(u)
+                    }
+                })
+            })
+            searchWords[k] = ""
+        }
+        else if(w.match(w.match(/^page\:.+$/s))){ /* 特定のページのみで検索 */
+            isWhitelistActive = true
+            w = w.match(/^page\:(.+)$/s)[1]
+            $.each(w.split("&"), function(_, v){
+                v = getPageFromKeyword(v)
+                $.each(v, function(_, u){
+                    if(!pageFilter.whitelist.includes(u)){
+                        pageFilter.whitelist.push(u)
+                    }
+                })
+            })
+            searchWords[k] = ""
+        }
+        else if(w.match(w.match(/^\-+filter\:.+$/s))){
+            w = w.match(/^\-+filter\:(.+)$/s)[1]
+            $.each(w.split("&"), function(_, v){
+                v = v.toLowerCase()
+                if(v==="experiment" || v==="experimental" || v==="e"){
+                    modeFilter.blacklist.experimental = true
+                }else if(v==="advance" || v==="advanced" || v==="a"){
+                    modeFilter.blacklist.advanced = true
+                }
+            })
+            searchWords[k] = ""
+        }
+        else if(w.match(w.match(/^filter\:.+$/s))){
+            w = w.match(/^filter\:(.+)$/s)[1]
+            $.each(w.split("&"), function(_, v){
+                v = v.toLowerCase()
+                if(v==="experiment" || v==="experimental" || v==="e"){
+                    modeFilter.whitelist.experimental = true
+                }else if(v==="advance" || v==="advanced" || v==="a"){
+                    modeFilter.whitelist.advanced = true
+                }
+            })
+            searchWords[k] = ""
+        }else if(w.match(/^\*$/s)){
+            magic_word = true
+            searchWords[k] = ""
+        }
+    })
+
+    if(!isWhitelistActive){
+        $.each(optionCategoryList, function(_,c){
+            if(!c.noindex){
+                pageFilter.whitelist.push(c.id)
+            }
+        })
+    }
+    
+
+    /* 検索実行 */
     var searchResult = []
     if(modeTitle || modeDescription || modeKeywords){
         $.each(optionList, function(_, v){
@@ -163,18 +275,22 @@ function searchOption(searchWords){
                         }
                     }
 
-                    /* NOT検索 / 完全一致 */
+                    /* キーワード検索 */
                     var scoreSum = 0
                     $.each(searchWords, function(_, w){
+                        if(!w){
+                            return true
+                        }
+
                         var score = 0
-                        if(w.match(/\-.+/s)){
-                            w = w.match(/\-(.+)/s)[1]
+                        if(w.match(/^\-+.+$/s)){
+                            w = w.match(/^\-+(.+)$/s)[1]
                             if(p_fullWords.includes(w)){
                                 exception = true
                                 return true
                             }
-                        }else if(w.match(/\".+\"/s)){
-                            w = w.match(/\"(.+)\"/s)[1]
+                        }else if(w.match(/^\".+\"$/s)){
+                            w = w.match(/^\"(.+)\"$/s)[1]
                             if(!p_fullWords.includes(w)){
                                 exception = true
                                 return true
@@ -225,8 +341,40 @@ function searchOption(searchWords){
                     })
 
                     const score = scoreSum / searchWords.length
-                    if(score>=20 && !exception){
+
+                    
+                    /* 検索フィルター */
+                    if(modeFilter.blacklist.experimental){
+                        if(v.value.isExperimental){
+                            exception = true
+                        }
+                    }
+                    if(modeFilter.blacklist.advanced){
+                        if(v.value.isAdvanced){
+                            exception = true
+                        }
+                    }
+                    if(modeFilter.whitelist.experimental){
+                        if(!v.value.isExperimental){
+                            exception = true
+                        }
+                    }
+                    if(modeFilter.whitelist.advanced){
+                        if(!v.value.isAdvanced){
+                            exception = true
+                        }
+                    }
+
+                    if(pageFilter.blacklist.includes(v.location.page)){
+                        exception = true
+                    }
+                    if(!pageFilter.whitelist.includes(v.location.page)){
+                        exception = true
+                    }
+
+                    if((score>=20 && !exception && !magic_word) || (magic_word && !exception)){
                         v.score = score
+                        
                         searchResult.push(v)
                     }
                 }
@@ -257,14 +405,14 @@ function searchCategory(searchWords){
             var scoreSum = 0
             $.each(searchWords.filter(w => w.trim().length > 0), function(_, w){
                 var score = 0
-                if(w.match(/\-.+/s)){
-                    w = w.match(/\-(.+)/s)[1]
+                if(w.match(/^\-+.+$/s)){
+                    w = w.match(/^\-+(.+)$/s)[1]
                     if(fullWords.includes(w)){
                         exception = true
                         return true
                     }
-                }else if(w.match(/\".+\"/s)){
-                    w = w.match(/\"(.+)\"/s)[1]
+                }else if(w.match(/^\".+\"$/s)){
+                    w = w.match(/^\"(.+)\"$/s)[1]
                     if(!fullWords.includes(w)){
                         exception = true
                         return true

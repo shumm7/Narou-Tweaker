@@ -30,14 +30,14 @@ export const optionCategoryList = [
                 id: "introduction",
             },
             {
-                title: "環境設定",
+                title: "基本設定",
                 id: "config",
                 description: {
                     text: "Narou Tweaker全体に影響する設定を変更します。"
                 }
             },
             {
-                title: "データ",
+                title: "設定データ",
                 id: "data",
                 description: {
                     text: "Narou Tweakerの設定データを変更します。",
@@ -400,13 +400,13 @@ export const optionList = [
     },
 
 
-    /* 環境設定 (config) */
+    /* 基本設定 (config) */
     {
         id: "extAdvancedSettings",
         title: "高度な設定",
         description: {
             text: "上級者向けの設定項目を表示します。通常では不要です。",
-            keywords: ["高度", "こうどなせってい", "環境設定", "上級者"],
+            keywords: ["高度", "こうどなせってい", "環境設定", "上級者", "基本設定"],
         },
         ui: {
             type: "toggle",
@@ -424,11 +424,11 @@ export const optionList = [
 
     {
         id: "extExperimentalFeatures",
-        title: "実験的機能",
+        title: "実験中の機能",
         description: {
             text: "テスト中の機能を有効化します。",
             attention: "不具合が発生する可能性があります。ご注意ください。",
-            keywords: ["高度", "じっけんてききのう", "環境設定", "上級者", "実験", "テスト"],
+            keywords: ["高度", "じっけんちゅうのきのう", "環境設定", "上級者", "実験", "テスト", "基本設定"],
         },
         location: {
             page: "general",
@@ -736,7 +736,8 @@ export const optionList = [
                 dataFor: ["novelCustomHeaderMode"],
                 data: "scroll",
                 mode: "show"
-            }
+            },
+            isAdvanced: true,
         },
     },
 
@@ -777,6 +778,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            isAdvanced: true,
         }
     },
 
@@ -800,6 +802,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomHeaderShowEnactiveItems,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -824,6 +827,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomHeaderSocialShowsBrandName,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -848,6 +852,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomHeaderQRCodeCurrentLocation,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -871,6 +876,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelCustomHeaderQRCodeShowURL,
             hasValue: true,
+            isAdvanced: true,
         },
     },
     
@@ -893,6 +899,7 @@ export const optionList = [
         value: {
             default: defaultOption.novelShowAllExtext,
             hasValue: true,
+            isAdvanced: true,
         }
     },
 
@@ -1092,6 +1099,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            isAdvanced: true,
         },
     },
 
@@ -1113,6 +1121,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            isAdvanced: true,
         },
     },
 
@@ -1183,6 +1192,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -1209,6 +1219,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -1394,6 +1405,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            isAdvanced: true,
         }
     },
 
@@ -1419,6 +1431,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -1699,6 +1712,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionNumber,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -1733,6 +1747,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
     
@@ -1767,6 +1782,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
     
@@ -1801,6 +1817,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -1830,6 +1847,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_CombineWord,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -1859,6 +1877,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_CombineNumber,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -1888,6 +1907,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_CombineExclamation,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -1917,6 +1937,7 @@ export const optionList = [
                 data: 0,
                 mode: "hide"
             },
+            isAdvanced: true,
         },
     },
 
@@ -1946,6 +1967,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayWord,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -1975,6 +1997,7 @@ export const optionList = [
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayExclamation,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -2016,7 +2039,7 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionMisc"
         },
         value: {
             default: defaultOption.correctionRemoveIllustrationLink,
@@ -2026,6 +2049,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -2088,6 +2112,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
+            isAdvanced: true,
         }
     },
 
@@ -2226,6 +2251,7 @@ export const optionList = [
         value: {
             default: defaultOption.yomouRank_DevidePointsUnit,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -2249,6 +2275,7 @@ export const optionList = [
         value: {
             default: defaultOption.yomouRank_PointsColor,
             hasValue: true,
+            isAdvanced: true,
         },
     },
 
@@ -2598,32 +2625,12 @@ export const optionList = [
                 data: "scroll",
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
 
     /* 小説管理 (manage) */
-    {
-        id: "workspaceNovelmanageShowPointAverage",
-        title: "作品詳細ページで評価ポイント平均を表示",
-        description: {
-            text: "作品詳細ページ上で、評価ポイント平均の星マークの横に数値を表示します。",
-            keywords: ["さくひんしょうさいぺーじでひょうかぽいんとへいきんをひょうじ", "評価ポイント"],
-        },
-        ui: {
-            type: "toggle",
-            name: "default"
-        },
-        location: {
-            page: "workspace",
-            category: "manage",
-        },
-        value: {
-            default: defaultOption.workspaceNovelmanageShowPointAverage,
-            hasValue: true,
-        },
-    },
-
     {
         id: "workspaceNovelmanageDeleteConfirm",
         title: "小説削除の誤操作防止機能",
@@ -2663,6 +2670,28 @@ export const optionList = [
         value: {
             default: defaultOption.workspaceUserblogmanageDeleteConfirm,
             hasValue: true,
+        },
+    },
+
+    {
+        id: "workspaceNovelmanageShowPointAverage",
+        title: "作品詳細ページで評価ポイント平均を表示",
+        description: {
+            text: "作品詳細ページ上で、評価ポイント平均の星マークの横に数値を表示します。",
+            keywords: ["さくひんしょうさいぺーじでひょうかぽいんとへいきんをひょうじ", "評価ポイント"],
+        },
+        ui: {
+            type: "toggle",
+            name: "default"
+        },
+        location: {
+            page: "workspace",
+            category: "manage",
+        },
+        value: {
+            default: defaultOption.workspaceNovelmanageShowPointAverage,
+            hasValue: true,
+            isAdvanced: true
         },
     },
     
@@ -2764,7 +2793,7 @@ export const optionList = [
 
     {
         id: "workspaceBookmarkReplaceEpisode",
-        title: "「エピソード」→「部分」表記",
+        title: "「部分」表記へ変更",
         description: {
             text: "「エピソード(ep.)」の表記を「部分」に変更します。",
             keywords: ["「えぴそーど」 → 「ぶぶん」ひょうき", "ブックマーク", "お気に入り"],
@@ -2782,6 +2811,7 @@ export const optionList = [
         value: {
             default: defaultOption.workspaceBookmarkReplaceEpisode,
             hasValue: true,
+            isExperimental: true,
         },
     },
 
@@ -2874,6 +2904,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -2902,6 +2933,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -2950,8 +2982,25 @@ export const optionList = [
     },
 
     {
+        id: "mypageNovellistData",
+        title: "作品の情報表示",
+        noindex: true,
+        ui: {
+            type: "parent",
+            name: "default"
+        },
+        location: {
+            page: "mypage",
+            category: "general",
+        },
+        value: {
+            hasValue: false,
+        },
+    },
+
+    {
         id: "mypageNovellistShowReaction",
-        title: "小説の評価情報を表示",
+        title: "評価情報",
         description: {
             text: "作品のポイントやブックマーク数などを表示します。",
             keywords: ["しょうせつのひょうかじょうほうをひょうじ", "評価ポイント", "評価", "マイページ"],
@@ -2963,6 +3012,8 @@ export const optionList = [
         location: {
             page: "mypage",
             category: "general",
+            hasParent: true,
+            parent: "mypageNovellistData"
         },
         value: {
             default: defaultOption.mypageNovellistShowReaction,
@@ -2972,7 +3023,7 @@ export const optionList = [
 
     {
         id: "mypageNovellistShowLength",
-        title: "小説の読了時間を表示",
+        title: "読了時間",
         description: {
             text: "作品の読了時間や文字数を表示します。",
             keywords: ["しょうせつのどくりょうじかんをひょうじ", "マイページ"],
@@ -2984,6 +3035,8 @@ export const optionList = [
         location: {
             page: "mypage",
             category: "general",
+            hasParent: true,
+            parent: "mypageNovellistData"
         },
         value: {
             default: defaultOption.mypageNovellistShowLength,
@@ -2993,18 +3046,20 @@ export const optionList = [
 
     {
         id: "mypageNovellistShowKasasagi",
-        title: "小説のアクセス解析へのリンクを表示",
+        title: "アクセス解析",
         description: {
             text: "作品のアクセス解析ページへのリンクを表示します。",
             keywords: ["しょうせつのあくせすかいせきへのりんくをひょうじ", "マイページ", "アクセス解析", "KASASAGI"],
         },
         ui: {
             type: "toggle",
-            name: "default"
+            name: "default",
         },
         location: {
             page: "mypage",
             category: "general",
+            hasParent: true,
+            parent: "mypageNovellistData"
         },
         value: {
             default: defaultOption.mypageNovellistShowKasasagi,
@@ -3014,18 +3069,20 @@ export const optionList = [
 
     {
         id: "mypageNovellistShowRaWi",
-        title: "RaWiへのリンクを表示",
+        title: "RaWi",
         description: {
             text: "作品のRaWiへのリンクを表示します。",
             keywords: ["RaWiへのりんくをひょうじ", "マイページ", "RaWi"],
         },
         ui: {
             type: "toggle",
-            name: "default"
+            name: "default",
         },
         location: {
             page: "mypage",
             category: "general",
+            hasParent: true,
+            parent: "mypageNovellistData"
         },
         value: {
             default: defaultOption.mypageNovellistShowRaWi,
@@ -3051,6 +3108,7 @@ export const optionList = [
         value: {
             default: defaultOption.mypageDisableExternalURLWarning,
             hasValue: true,
+            isAdvanced: true
         },
     },
 
@@ -3168,7 +3226,7 @@ export const optionList = [
         title: "iコードを表示",
         description: {
             text: "iコードのコピー用フィールドを表示します。",
-            keywords: ["iこーどをひょうじ", "iコード", "みてみん", "挿絵"],
+            keywords: ["iこーどをひょうじ", "iコード", "みてみん", "挿絵", "えぱれっと"],
         },
         ui: {
             type: "toggle",
@@ -3298,6 +3356,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3370,6 +3429,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3508,6 +3568,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3602,6 +3663,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3674,6 +3736,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3747,6 +3810,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 
@@ -3819,6 +3883,7 @@ export const optionList = [
                 data: true,
                 mode: "show"
             },
+            isAdvanced: true,
         },
     },
 

@@ -154,10 +154,10 @@ export function optionHide(){
             $(".option--experimental-message").empty()
             if(value){
                 elm.removeClass("option-hide--experimental")
-                $(".option--experimental-message").text("【実験的機能】不具合が発生する可能性があります。ご注意ください。")
+                $(".option--experimental-message").append("<a href='/options/general/index.html?id=extExperimentalFeatures&focus=1&category=config' target='_self'>【実験中の機能】不具合が発生する可能性があります。ご注意ください。</a>")
             }else{
                 elm.addClass("option-hide--experimental")
-                $(".option--experimental-message").append("実験的機能が無効のため使用できません。<br><span style='font-size: 80%;'>※ [全般] → [環境設定] → [高度な設定]を有効化 → [実験的機能]を有効化</span>")
+                $(".option--experimental-message").append("<a href='/options/general/index.html?id=extExperimentalFeatures&focus=1&category=config' target='_self'>「実験中の機能」が無効のため使用できません。<br><span style='font-size: 80%;'>※ [全般] → [環境設定] → [実験中の機能]を有効化</span></a>")
             }
         }
 
@@ -168,11 +168,11 @@ export function optionHide(){
                     `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
                 )
             }else{
-                elm.find(".contents-item--heading").prepend(
+                elm.find(".contents-item--heading:first").prepend(
                     `<i class="fa-solid fa-flask" style="margin-right: 5px;"></i>`
                 )
             }
-            elm.find(".contents-item--description").prepend(
+            elm.find(".contents-item--description:first").prepend(
                 `<div class="option--experimental-message"></div>`
             )
             elm.addClass("option-hide--experimental-processed")
@@ -209,7 +209,7 @@ export function optionHide(){
                     `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
                 )
             }else{
-                elm.find(".contents-item--heading").prepend(
+                elm.find(".contents-item--heading:first").prepend(
                     `<i class="fa-solid fa-feather" style="margin-right: 5px;"></i>`
                 )
             }

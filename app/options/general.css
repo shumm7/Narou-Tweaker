@@ -73,6 +73,12 @@ html::-webkit-scrollbar {
     margin: 3px;
     margin-bottom: 10px;
 }
+.option--experimental-message a {
+    color: inherit;
+}
+.option--experimental-message a:hover {
+    text-decoration: underline;
+}
 
 /* query events */
 .search-focused .contents-item--heading {
