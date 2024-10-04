@@ -1,7 +1,6 @@
 import { searchCount, stringSimilarity } from "../../utils/text.js";
-import { getOptionCategory, getOptionFromId, getOptionPageFromId } from "../_lib/optionLib.js";
-import { optionCategoryList, optionList } from "../_lib/optionUI.js";
-import { setup } from "../general.js";
+import { getOptionElement, optionCategoryList, optionList } from "../_lib/optionUI.js";
+import { restoreOptions, setup } from "../general.js";
 
 setup()
 $("#search-box").focus()
@@ -67,7 +66,7 @@ function search(searchWords){
     params.set("s", words.join(" "))
     window.history.replaceState(null, "", `${location.pathname}?${params.toString()}`)
 
-    var result = searchOption(words).slice(0, 10)
+    var result = searchOption(words)
     var c_result = searchCategory(words)
 
     $(".search-result-box").remove()
@@ -81,7 +80,20 @@ function search(searchWords){
 
     /* オプション */
     if(result.length>0){
-        $.each(result, function(_, r){
+        var elm = $(`
+            <div class="contents-wide search-result-box search-result--option">
+                <div id="search-result--information">${result.length}件の項目が見つかりました。</div>
+            </div>
+        `)
+
+        $(`.contents-container[name="general"]`).append(elm)
+
+        $.each(result.slice(0, 10), function(_, r){
+            var elm = getOptionElement(r, true)
+
+            restoreOptions()
+            
+            /*
             var elm = $(`
                 <div class="contents-wide search-result-box search-result--option">
                     <div class="contents-option">
@@ -122,14 +134,24 @@ function search(searchWords){
                     <a href="/options/${page.id}/index.html" target="_self">${page.title}</a> > <a href="/options/${page.id}/index.html?category=${category.id}" target="_self">${category.title}</a>
                 `)
             }
+            */
 
             $(`.contents-container[name="general"]`).append(elm)
         })
+
+        if(result.length>10){
+            elm = $(`
+                <div class="contents-wide search-result-box search-result--option">
+                    <div id="search-result--information">このページには関連性の高い10件のみが表示されています。</div>
+                </div>
+            `)
+            $(`.contents-container[name="general"]`).append(elm)
+        }
     }else{
         if(words.length>0){
             var elm = $(`
                 <div class="contents-wide search-result-box search-result--option">
-                    <div id="search-result--notfound">一致する項目が見つかりませんでした。</div>
+                    <div id="search-result--information search-result--notfound">一致する項目が見つかりませんでした。</div>
                 </div>
             `)
 
@@ -245,20 +267,8 @@ function searchOption(searchWords){
 
                     const score = scoreSum / searchWords.length
                     if(score>=20 && !exception){
-                        var data = {id: v.id, title: v.title, score: score}
-                        if(v.location){
-                            data.page = v.location.page
-                            data.category = v.location.category
-                            if(v.location.hasParent){
-                                data.parent = v.location.parent
-                            }
-                        }
-                        if(v.description){
-                            if(v.description.text){
-                                data.description = v.description.text
-                            }
-                        }
-                        searchResult.push(data)
+                        v.score = score
+                        searchResult.push(v)
                     }
                 }
             }

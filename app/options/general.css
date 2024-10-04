@@ -17,7 +17,7 @@ html::-webkit-scrollbar {
     flex-direction: row;
     min-height: 100vh;
     height: 100%;
-    font-size: 14px;
+    font-size: 16px;
     box-sizing: border-box;
 }
 #js-failed {
@@ -106,7 +106,6 @@ input[type="number"] {
     width: 100%;
     height: 200px;
     resize: vertical;
-    font-size: 16px;
     font-family: inherit;
     white-space: pre-wrap;
     word-break: break-all;
@@ -149,7 +148,6 @@ input[type="number"] {
 }
 .syntax-highlight-wrap pre code {
     margin-top: 10px;
-    font-size: 16px;
     box-sizing: border-box;
     background: transparent;
     height: 100%;
@@ -166,7 +164,6 @@ input[type="number"] {
 /* Button */
 .button, #import-options-label {
     color: rgb(255, 255, 255);
-    font-size: 14px;
     line-height: 1.7;
     display: inline-block;
     width: auto;
@@ -325,7 +322,7 @@ input[type=file] {
     height: 40px;
     background: #eee;
     border: 1px solid #fafafa;
-    font-size: 20px;
+    font-size: 130%;
     border-radius: .5em;
     opacity: 0;
     transition: all .2s ease-in;
@@ -384,7 +381,7 @@ input[type=file] {
 }
 #header-title--description {
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 90%;
     text-align: right;
     opacity: 0.8;
 }
@@ -471,11 +468,25 @@ input[type=file] {
 }
 .contents-item--heading {
     font-weight: bold;
+    font-size: 100%;
     margin-bottom: 5px;
 }
 .contents-item--description{
-    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    font-size: 90%;
+    gap: .5em;
+}
+.contents-item--description-item {
     color: #666;
+}
+.contents-item--description-item.description-small {
+    font-size: 80%;
+}
+.contents-item--description-item.description-attention {
+    color: red;
+    font-weight: bold;
+    font-size: 80%;
 }
 
 

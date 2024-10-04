@@ -1,4 +1,6 @@
 import { defaultOption } from "/utils/option.js";
+import { customUIList } from "./customUI.js";
+import { getOptionCategory, getOptionFromId, getOptionPageFromId } from "./optionLib.js";
 
 export const optionCategoryList = [
     {
@@ -466,6 +468,7 @@ export const optionList = [
         title: "設定をインポート",
         description: {
             text: "外部からJSON形式の設定データを読み込みます。",
+            attention: "スキンを含む、既存のデータが全て上書きされます。この操作は元に戻せません。",
             keywords: ["インポート", "せっていをいんぽーと", "設定データ", "JSON"],
         },
         ui: {
@@ -487,6 +490,7 @@ export const optionList = [
         title: "設定をリセット",
         description: {
             text: "保存されている設定データをすべて初期値に戻します。",
+            attention: "スキンを含む、保存されているデータが全てリセットされます。この操作は元に戻せません。",
             keywords: ["リセット", "せっていをりせっと", "設定データ"],
         },
         ui: {
@@ -3787,3 +3791,428 @@ export const optionList = [
     },
 
 ]
+
+export function getOptionElement(option, forSearch){
+    const page = option.location.page
+    const category = option.location.category
+    const id = option.id
+    const title = option.title
+    const style = option.style
+    const elmClass = option.class
+    const description = option.description
+    const uiType = option.ui.type
+    const uiName = option.ui.name
+    const uiData = option.ui.data
+    const uiStyle = option.ui.style
+    const uiClass = option.ui.class
+    var uiPrefix = option.ui.prefix
+    var uiSuffix = option.ui.suffix
+    const hasValue = option.value.hasValue
+    const isExperimental = option.value.isExperimental
+    const isAdvanced = option.value.isAdvanced
+    const hasParent = option.location.hasParent
+    const parent = option.location.parent
+    const hideSettings = option.hideSettings
+
+    var elm
+    
+    /* Outer */
+    if(hasParent && !forSearch){
+        elm = $(`<div class="contents-option" name="${id}"></div>`)
+    }else{
+        elm = $(`<div class="contents-wide" name="${id}"><div class="contents-option"></div></div>`)
+    }
+    if(forSearch){
+        elm.addClass(["search-result-box", "search-result--option"])
+    }
+    
+    /* Option Items */
+    if(uiType == "parent"){
+        elm.append(`
+            <div class="contents-option-head"></div>
+            <div class="contents-wide-column"></div>
+        `)
+        
+    }else{
+        if(elm.hasClass("contents-option")){
+            elm.append(`<div class="contents-option-head"></div>`)
+        }else{
+            elm.find(".contents-option").append(`<div class="contents-option-head"></div>`)
+        }
+
+        if(!uiPrefix){
+            uiPrefix = ""
+        }
+        if(!uiSuffix){
+            uiSuffix = ""
+        }
+
+        /* Contents */
+        if(uiType === "toggle"){
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+
+            if(uiName==="default" || uiName===undefined){
+                var item = $(`<input type="checkbox" id="${id}" class="options toggle">`)
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                var toggleElm = $(`
+                    ${uiPrefix}
+                    ${item[0].outerHTML}
+                    <label for="${id}" class="toggle"></label>
+                    ${uiSuffix}
+                `)
+
+                elm.find(".contents-option-content").append(toggleElm)
+            }
+        }
+        else if(uiType === "dropdown"){
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+
+            if(uiName==="default" || uiName===undefined){
+                var dropdownElm = $(`
+                    <div class="dropdown">
+                        ${uiPrefix}
+                        <select id="${id}" class="options">
+                        </select>
+                        ${uiSuffix}
+                    </div>
+                `)
+
+                if(uiStyle){
+                    dropdownElm.css(uiStyle)
+                }
+                if(uiClass){
+                    dropdownElm.addClass(uiClass)
+                }
+
+                $.each(uiData, function(_, val){
+                    var value = ""
+                    var title = ""
+                    if(val.value){
+                        value = val.value
+                    }else{
+                        return true
+                    }
+                    if(val.title){
+                        title = val.title
+                    }else{
+                        if(value){
+                            title = value
+                        }else{
+                            return true
+                        }
+                    }
+
+                    dropdownElm.find("select").append(`
+                        <option value="${value}">${title}</option>
+                    `)
+                })
+
+                elm.find(".contents-option-content").append(dropdownElm)
+            }
+        }
+        else if(uiType === "input"){
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+
+            if(uiName==="default" || uiName===undefined || uiName==="text" || uiName==="number"){
+                var item = $(`
+                    <div class="textfield">
+                        ${uiPrefix}<input class="options" type="text" id="${id}">${uiSuffix}
+                    </div>
+                `)
+
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                elm.find(".contents-option-content").append(item)
+            }
+            else if(uiName==="integer"){
+                var item = $(`
+                    <div class="textfield">
+                        <label>${uiPrefix}</label>
+                        <input class="options" type="number" id="${id}">
+                        <label>${uiSuffix}</label>
+                    </div>
+                `)
+                
+                if(uiData){
+                    if(uiData.min){
+                        item.find("input").attr("min", uiData.min)
+                    }
+                    if(uiData.max){
+                        item.find("input").attr("max", uiData.max)
+                    }
+                }
+
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                elm.find(".contents-option-content").append(item)
+            }
+            else if(uiName==="color"){
+                var item = $(`
+                    <div class="textfield">
+                        <label>${uiPrefix}</label>
+                        <input class="options color" type="text" id="${id}" data-coloris>
+                        <label>${uiSuffix}</label>
+                    </div>
+                `)
+
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                elm.find(".contents-option-content").append(item)
+            }
+        }
+        else if(uiType === "textarea"){
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+
+            if(uiName==="default" || uiName===undefined){
+                var item = $(`
+                    <div class="textarea-outer">
+                        <label>${uiPrefix}</label>
+                        <textarea class="textarea options" id="${id}"></textarea>
+                        <label>${uiSuffix}</label>
+                    </div>
+                `)
+
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                elm.find(".contents-option-content").append(item)
+            }else if(uiName === "syntax-highlight"){
+                var item = $(`
+                    <div class="textarea-outer">
+                        <label>${uiPrefix}</label>
+                        <textarea class="textarea options syntax-highlight" id="${id}" data="${uiData}"></textarea>
+                        <label>${uiSuffix}</label>
+                    </div>
+                `)
+
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                elm.find(".contents-option-content").append(item)
+            }
+        }
+        else if(uiType === "custom" && !forSearch){
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+            
+            if(uiName==="default" || uiName===undefined){
+                if(customUIList[uiData]){
+                    elm.find(".contents-option-content").append(customUIList[uiData])
+                }
+            }else if(uiName==="wide"){
+                if(customUIList[uiData]){
+                    elm.empty()
+                    elm.append(customUIList[uiData])
+                }
+            }
+        }
+        else if(forSearch){ //検索用例外設定
+            if(elm.hasClass("contents-option")){
+                elm.append(`<div class="contents-option-content"></div>`)
+            }else{
+                elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
+            }
+
+            elm.addClass("search-result--option-disabled")
+            var item = $(`
+                <div class="search-result--items">
+                    <div class="search-result--items-disabled">
+                        このオプションはここでは設定できません。
+                    </div>
+                </div>
+            `)
+
+            elm.find(".contents-option-content").append(item)
+        }
+    }
+
+    /* Title / Description */
+    if(title || description){
+        const pageData = getOptionPageFromId(page)
+        const categoryData = getOptionCategory(pageData, category)
+
+        //title
+        if(title){
+            if(!forSearch){
+                if(!elm.find(".contents-item--heading").length){
+                    elm.find(".contents-option-head").append(`<div class="contents-item--heading">${title}</div>`)
+                }else{
+                    elm.find(".contents-item--heading").empty()
+                    elm.find(".contents-item--heading").append(title)
+                }
+            }else{
+                var crumbs = ""
+                var optionTag = ""
+                /*
+                optionTag = `
+                    <span class="search-result--items-crumbs-item search-result--items-id">
+                        <a class="search-result--items-id-tag" href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${id}</a>
+                    </span>
+                `
+                */
+
+                if(hasParent){
+                    const parentData = getOptionFromId(parent)
+                    if(parentData){
+                        crumbs = `
+                            <div class="search-result--items-crumbs">
+                                <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html" target="_self">${pageData.title}</a></span>
+                                <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html?category=${categoryData.id}" target="_self">${categoryData.title}</a></span>
+                                <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html?id=${parentData.id}" target="_self">${parentData.title}</a></span>
+                                ${optionTag}
+                            </div>
+                        `
+                    }else{
+                        crumbs = `
+                            <div class="search-result--items-crumbs">
+                                <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html" target="_self">${pageData.title}</a></span>
+                                <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html?category=${categoryData.id}" target="_self">${categoryData.title}</a></span>
+                                ${optionTag}
+                            </div>
+                        `
+                    }
+                }else{
+                    crumbs = `
+                        <div class="search-result--items-crumbs">
+                            <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html" target="_self">${pageData.title}</a></span>
+                            <span class="search-result--items-crumbs-item"><a href="/options/${pageData.id}/index.html?category=${categoryData.id}" target="_self">${categoryData.title}</a></span>
+                            ${optionTag}
+                        </div>
+                    `
+                }
+
+                if(!elm.find(".contents-item--heading").length){
+                    elm.find(".contents-option-head").append(`
+                        <div class="contents-item--heading">
+                            ${crumbs}
+                            <div class="search-result--items-title">
+                                <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${title}</a>
+                            </div>
+                        </div>
+                    `)
+                }else{
+                    elm.find(".contents-item--heading").empty()
+                    elm.find(".contents-item--heading").append(`
+                        ${crumbs}
+                        <div class="search-result--items-title">
+                            <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${title}</a>
+                        </div>
+                    `)
+                }
+            }
+        }
+        
+        // description
+        var descriptionText = []
+
+        if(description){
+            if(description.text){
+                descriptionText.push(`<div class="contents-item--description-item">${description.text}</div>`)
+            }
+            if(description.small){
+                descriptionText.push(`<div class="contents-item--description-item description-small">${description.small}</div>`)
+            }
+            if(description.attention){
+                descriptionText.push(`<div class="contents-item--description-item description-attention">${description.attention}</div>`)
+            }
+        }
+
+        if(descriptionText.length > 0){
+            if(!elm.find(".contents-item--description").length){
+                elm.find(".contents-option-head").append(`<div class="contents-item--description">${descriptionText.join("")}</div>`)
+            }else{
+                elm.find(".contents-item--description").empty()
+                elm.find(".contents-item--description").append(descriptionText.join(""))
+            }
+        }
+    }
+
+    if(!forSearch){
+        /* Hide Settings */
+        if(hideSettings){
+            var hsDataFor = hideSettings.dataFor
+            const hsData = hideSettings.data
+            const hsMode = hideSettings.mode
+
+            if(typeof hsDataFor === "string"){
+                hsDataFor = [hsDataFor]
+            }
+            elm.addClass("option-hide")
+            elm.attr("data-for", hsDataFor.join(" "))
+            if(hsData){
+                elm.attr("data", hsData)
+            }
+            if(hsMode){
+                elm.attr("mode", hsMode)
+            }
+        }
+
+        /* Advanced / Experimental settings */
+        if(isAdvanced){
+            elm.addClass("advanced-hide")
+        }
+        if(isExperimental){
+            elm.addClass("experimental-hide")
+        }
+    }
+
+    /* Style */
+    if(style){
+        elm.css(style)
+    }
+
+    /* Class */
+    if(elmClass){
+        elm.addClass(elmClass)
+    }
+
+    return elm
+}
