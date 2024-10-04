@@ -1,5 +1,5 @@
-import { correction } from "../cogs/novel/_correction.js"
-import { defaultValue, getExtensionVersion } from "./misc.js"
+import { novelIconList, workspaceIconList, workspaceMenuIconList } from "./header.js"
+import { getExtensionVersion } from "./misc.js"
 
 export const ignoreOptions = [
     "extOptionsVersion",
@@ -701,11 +701,9 @@ export function getUpdatedOption(data){
     function update(data){
         var o = defaultOption
         Object.keys(o).forEach(function(key){
-            if(data[key]!=undefined){
-                if( typeof(o[key]) == typeof(data[key])){
-                    if(!ignoreOptions.includes(key)){
-                        o[key] = data[key]
-                    }
+            if(checkOptionValue(key, data[key])){
+                if(!ignoreOptions.includes(key)){
+                    o[key] = data[key]
                 }
             }
         })
@@ -725,11 +723,9 @@ export function updateOption(force, data){
             var o = defaultOption
             Object.keys(o).forEach(function(key){
                 if(!forceResetOptions.includes(key)){
-                    if(data[key]!=undefined){
-                        if( typeof(o[key]) == typeof(data[key])){
-                            if(!ignoreOptions.includes(key)){
-                                o[key] = data[key]
-                            }
+                    if(checkOptionValue(key, data[key])){
+                        if(!ignoreOptions.includes(key)){
+                            o[key] = data[key]
                         }
                     }
                 }
@@ -754,15 +750,11 @@ export function fixOption(local, sync){
             chrome.storage.local.clear(()=>{
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
-                    //if(!forceResetOptions.includes(key)){
-                        if(data[key]!=undefined){
-                            if( typeof(o[key]) == typeof(data[key])){
-                                if(!ignoreOptions.includes(key)){
-                                    o[key] = data[key]
-                                }
-                            }
+                    if(checkOptionValue(key, data[key])){
+                        if(!ignoreOptions.includes(key)){
+                            o[key] = data[key]
                         }
-                    //}
+                    }
                 })
 
                 chrome.storage.local.set(o, function(){
@@ -779,9 +771,9 @@ export function fixOption(local, sync){
                 Object.keys(o).forEach(function(key){
                     if(data[key]!=undefined){
                         if( typeof(o[key]) == typeof(data[key])){
-                            if(!ignoreOptions.includes(key)){
+                            //if(!ignoreOptions.includes(key)){
                                 o[key] = data[key]
-                            }
+                            //}
                         }
                     }
                 })
@@ -793,3 +785,76 @@ export function fixOption(local, sync){
         })
     }
 }   
+
+export function checkOptionValue(key, value){
+    if(typeof(defaultOption[key]) === typeof(value) && value!==undefined){
+        if(key==="novelCustomHeaderLeft" || key==="novelCustomHeaderRight"){
+            if(!Array.isArray(value)){return false}
+            var res = true
+            $.each(value, function(v){
+                if(!(v in novelIconList)){
+                    res = false
+                    return false
+                }
+            })
+            return res
+        }
+        else if(key==="workspaceCustomHeader"){
+            if(!Array.isArray(value)){return false}
+            var res = true
+            $.each(value, function(v){
+                if(!(v in workspaceIconList)){
+                    res = false
+                    return false
+                }
+            })
+            return res
+        }
+        else if(key==="workspaceCustomMenu_Left" || key==="workspaceCustomMenu_Middle" || key==="workspaceCustomMenu_Right"){
+            if(!Array.isArray(value)){return false}
+            var res = true
+            $.each(value, function(v){
+                if(!(v in workspaceMenuIconList)){
+                    res = false
+                    return false
+                }
+            })
+            return res
+        }
+        else if(key==="kasasagiGraphType_GeneralDay"
+            || key==="kasasagiGraphType_GeneralTotal"
+            || key==="kasasagiGraphType_ChapterUnique"
+            || key==="kasasagiGraphType_DayPV"
+            || key==="kasasagiGraphType_DayUnique"
+            || key==="kasasagiGraphType_MonthPV"
+            || key==="kasasagiGraphType_MonthUnique"
+        ){
+            if(value!=="bar" && value!=="line"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else if(key==="novelCustomHeaderMode" || key==="workspaceCustomHeaderMode"){
+            if(value!=="absolute" || value!=="fixed" || value!=="scroll"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else if(key==="correctionNumberShort" || key==="correctionNumberLong" || key==="correctionNumberSymbol"){
+            if(value!=="default" || value!=="half" || value!=="full" || value!=="kanji"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+
+    }else{
+        return false
+    }
+
+}
