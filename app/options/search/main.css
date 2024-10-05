@@ -112,8 +112,8 @@
 .search-result--option.option-hide--hidden {
     display: block !important;
 }
-.search-result--option.option-hide--advanced .contents-option-content,
-.search-result--option.option-hide--hidden .contents-option-content {
+.search-result--option.option-hide--advanced .contents-option-content:not(:has(.search-result--items-disabled)),
+.search-result--option.option-hide--hidden .contents-option-content:not(:has(.search-result--items-disabled)) {
     pointer-events: none;
     filter: grayscale(1);
 }
