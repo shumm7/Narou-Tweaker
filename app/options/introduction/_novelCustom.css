@@ -1,0 +1,39 @@
+/* novelCustomStyle */
+.nt-introduction__item-new__1 {
+    display: none !important;
+}
+#novel-sample.narou-tweaker--custom-css {
+    .nt-introduction__item-new__1 {
+        display: block !important;
+    }
+    .nt-introduction__item-old__1 {
+        display: none !important;
+    }
+
+    .novel-titles {
+        font-family: NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+        text-rendering: optimizeLegibility;
+        line-height: normal;
+        word-break: break-word;
+        text-align: center;
+        margin-top: 4em;
+        margin-bottom: 4em;
+    }
+    .novel-titles .dummy-link {
+        color: inherit;
+    }
+    .novel-titles .novel-title {
+        color: var(--color-custom-text);
+        font-size: 3em;
+        line-height: normal;
+        font-weight: bold;
+        word-break: auto-phrase;
+    }
+
+    .novel-titles .novel-author {
+        text-align: center;
+        font-size: 2em;
+        margin-top: 0.5em;
+        color: rgba(0, 0, 0, 0.5);
+    }
+}

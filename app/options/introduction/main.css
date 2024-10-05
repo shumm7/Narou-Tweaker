@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+#novel-sample {
+    flex-grow: 1;
+}
+
+/* side panel */
+#nt-setup {
+    width: 300px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+#nt-setup-panel {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    filter: drop-shadow(rgba(0, 0, 0, 0.7) 0px 0px 1px);
+    background: rgb(239, 239, 239);
+}
