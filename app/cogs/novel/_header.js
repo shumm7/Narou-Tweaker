@@ -10,7 +10,10 @@ export function _header(){
     chrome.storage.local.get(null, (data) => {
         $(".l-scrollheader").after("<div id='novel_header'><ul id='head_nav'></ul></div>")
 
-        const isCustomHeader = data.novelCustomHeader
+        const customHeaderType = data.novelCustomHeaderType
+        if(customHeaderType!=="1" && customHeaderType!=="2"){
+            return true
+        }
 
         const ncode = getNcode()
         let index
@@ -37,16 +40,7 @@ export function _header(){
         $(".c-navigater--totop-up").remove()
 
         /* Right Menu Bar */
-        if(isCustomHeader){
-            $("body").addClass("narou-tweaker-header--mode-1")
-            $("#novelnavi_right").remove()
-
-            $("#novel_header").before(`<div id="novel_header_right">
-                <ul id="head_nav">
-                </ul>
-            </div>`)
-            $(".wrap_menu_novelview_after").empty()
-        }else{
+        if(customHeaderType=="1"){
             $("body").addClass("narou-tweaker-header--mode-0")
             if(!data.novelLegacyHeaderIcon){
                 $("body").addClass("narou-tweaker-header--hide-icon") //アイコンを隠す
@@ -81,6 +75,16 @@ export function _header(){
             }else{
                 $(".wrap_menu_novelview_after ul").empty()
             }
+        }
+        else if(customHeaderType=="2"){
+            $("body").addClass("narou-tweaker-header--mode-1")
+            $("#novelnavi_right").remove()
+
+            $("#novel_header").before(`<div id="novel_header_right">
+                <ul id="head_nav">
+                </ul>
+            </div>`)
+            $(".wrap_menu_novelview_after").empty()
         }
 
         
@@ -219,15 +223,15 @@ export function _header(){
         if(elm.length){
             elm.text("")
             if(elm.hasClass("js-bookmark_setting_button")){ //ブックマーク登録済み
-                if(isCustomHeader){
+                if(customHeaderType==="2"){
                     elm.append(`<i class="fa-solid fa-book-bookmark"></i><span class="title">${text}<br><span style="font-size: 90%;">（設定変更）</span></span>`)
-                }else{
+                }else if(customHeaderType==="1"){
                     elm.append(`<i class="fa-solid fa-book-bookmark"></i><span class="title">${text}<span style="font-size: 90%;">（設定変更）</span></span>`)
                 }
             }else if(elm.hasClass("js-add_bookmark")){ //ブックマーク未登録
-                if(isCustomHeader){
+                if(customHeaderType==="2"){
                     elm.append(`<i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（登録）</span></span>`)
-                }else{
+                }else if(customHeaderType==="1"){
                     elm.append(`<i class="fa-solid fa-book"></i><span class="title">${text}<span style="font-size: 90%;">（登録）</span></span>`)
                 }
             }
@@ -235,17 +239,17 @@ export function _header(){
         }
         else if($("#novel_header li.booklist .c-bookmark-button--disabled").length){ //非ログイン状態
             is_login = false
-            if(isCustomHeader){
+            if(customHeaderType==="2"){
                 elm = $("#novel_header li.booklist")
                 elm.addClass("enactive")
                 elm.find(".c-bookmark-button--disabled").remove()
                 elm.prepend(`<a><i class="fa-solid fa-book"></i><span class="title">${text}<br><span style="font-size: 90%;">（要ログイン）</span></span></a>`)
-            }else{
+            }else if(customHeaderType==="1"){
             }
         } else { //ログイン済み（自分の作品）
-            if(isCustomHeader){
+            if(customHeaderType==="2"){
                 $("#novel_header li.booklist").remove()
-            }else{
+            }else if(customHeaderType==="1"){
                 $("#novel_header ul").append(`
                     <li class="booklist enactive">
                         <span class="c-bookmark-button c-bookmark-button--disabled">${text}に追加</span>
@@ -258,9 +262,9 @@ export function _header(){
         elm = $("#novel_header li.booklist")
         if(!elm.length){
             // enactive
-            if(isCustomHeader){
+            if(customHeaderType==="2"){
                 $("#novel_header ul").append('<li class="booklist enactive"><a><i class="fa-solid fa-book"></i><span class="title">ブックマーク</span></a></li>')
-            }else{
+            }else if(customHeaderType==="1"){
                 $("#novel_header ul").append('<li class="booklist enactive"><span class="c-bookmark-button c-bookmark-button--disabled">ブックマークに追加</span></li>')
             }
         }
@@ -280,9 +284,9 @@ export function _header(){
         if(elm.length){
             elm.find("span.p-icon").remove()
             elm.text("")
-            if(isCustomHeader){
+            if(customHeaderType==="2"){
                 elm.append('<i class="fa-solid fa-table-list"></i><span class="title">お気に入りep<br>一覧</span>')
-            }else{
+            }else if(customHeaderType==="1"){
                 elm.append('<i class="fa-solid fa-table-list"></i><span class="title">お気に入りep一覧</span>')
             }
         }else{
@@ -320,23 +324,23 @@ export function _header(){
                             var l = $(".narou")
                             if(data.nocgenre==1){
                                 l.find("a").prop("href", "https://noc.syosetu.com/")
-                                if(isCustomHeader){
+                                if(customHeaderType==="2"){
                                     l.find(".title")[0].innerHTML = "ノクターン<br>ノベルズ"
-                                }else{
+                                }else if(customHeaderType==="1"){
                                     l.find(".title").text("ノクターンノベルズ")
                                 }
                             }else if(data.nocgenre==2 || data.nocgenre==3){
                                 l.find("a").prop("href", "https://mnlt.syosetu.com/")
-                                if(isCustomHeader){
+                                if(customHeaderType==="2"){
                                     l.find(".title")[0].innerHTML = "ムーンライト<br>ノベルズ"
-                                }else{
+                                }else if(customHeaderType==="1"){
                                     l.find(".title").text("ムーンライトノベルズ")
                                 }
                             }else if(data.nocgenre==4){
                                 l.find("a").prop("href", "https://mid.syosetu.com/")
-                                if(isCustomHeader){
+                                if(customHeaderType==="2"){
                                     l.find(".title")[0].innerHTML = "ミッドナイト<br>ノベルズ"
-                                }else{
+                                }else if(customHeaderType==="1"){
                                     l.find(".title").text("ミッドナイトノベルズ")
                                 }
                             }
@@ -486,9 +490,9 @@ export function _header(){
                 if(history){
                     const episode = history[0]
                     if(episode){
-                        if(isCustomHeader){
+                        if(customHeaderType==="2"){
                             $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<br><span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
-                        }else{
+                        }else if(customHeaderType==="1"){
                             $("li.history").append(`<a href="https://ncode.syosetu.com/${ncode}/${episode}/"><i class="fa-solid fa-clock-rotate-left"></i><span class="title">直近の閲覧履歴<span style="font-size: 90%;">（エピソード${episode}）</span></span></a>`)
                         }
                     }else{
@@ -521,7 +525,7 @@ export function _header(){
             if(box.hasClass("show")){
                 box.removeClass("show")
             }else{
-                if(isCustomHeader){
+                if(customHeaderType==="2"){
                     if($(window).width()/2<position.left){
                         var top = position.top
                         var left = position.left - box.width()
@@ -531,7 +535,7 @@ export function _header(){
                         var left = position.left
                         box.css({top: `calc(${top}px - .5em)`, left: `calc(${left}px + 4em)`})
                     }
-                }else{
+                }else if(customHeaderType==="1"){
                     if($(window).height()/2<position.top){
                         var top = position.top - box.height()
                         var left = position.left - box.width()/2
@@ -801,7 +805,7 @@ export function _header(){
         resetHeader(data.novelCustomHeaderLeft, data.novelCustomHeaderRight)
 
         /* Header Scroll */
-        if(isCustomHeader){
+        if(customHeaderType==="2"){
             const scrollElement = document.querySelector("#novel_header, #novel_header_right");
             if(scrollElement!=null){
                 scrollElement.addEventListener("wheel", (e) => {
@@ -811,7 +815,7 @@ export function _header(){
                     }
                 });
             }
-        }else{
+        }else if(customHeaderType==="1"){
             const scrollElement = document.querySelector("#novel_header ul");
             if(scrollElement!=null){
                 scrollElement.addEventListener("wheel", (e) => {

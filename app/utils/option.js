@@ -44,7 +44,7 @@ export const defaultOption = {
 
     /* Novel */
     novelCustomStyle: true,
-    novelCustomHeader: true,
+    novelCustomHeaderType: "2",
     novelLegacyHeaderIcon: true,
     novelVertical: false,
     novelCustomHeaderScrollHidden: false,

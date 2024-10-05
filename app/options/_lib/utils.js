@@ -22,6 +22,7 @@ export function optionHide(){
         var data_for
         var action_value
         var action_mode
+        var compare_mode
         var data_type
 
         /* data_for (前提となる設定項目のID) */
@@ -49,18 +50,12 @@ export function optionHide(){
 
         /* mode */
         if(elm.is("[mode]")){
-            action_mode = $(this).attr("mode").trim().split(/ +/)
-        }else{
-            action_mode = new Array(data_for.length).fill("show")
+            action_mode = $(this).attr("mode")
         }
 
-        if(data_for.length > action_mode.length){
-            var k = action_mode.length
-            for(var i=0; i < data_for.length-action_mode.length; i++){
-                action_mode.push(action_mode[k-1])
-            }
-        }else if(data_for.length < action_value.length){
-            action_mode = action_mode.slice(0, data_for.length)
+        /* logic */
+        if(elm.is("[data-rule]")){
+            compare_mode = $(this).attr("data-rule")
         }
 
         /* data_type (トリガー値の型) */
@@ -79,7 +74,7 @@ export function optionHide(){
             data_type = data_type.slice(0, data_for.length)
         }
 
-        function change(value, action_value, mode, type){
+        function change(value, action_value, type, mode, compare_mode){
 
             function compare(source, value, type){
                 if(type){
@@ -98,8 +93,26 @@ export function optionHide(){
                 }
                 return String(source)===String(value)
             }
+            
 
-            if(compare(value, action_value, type)){
+            var bool = false
+            if(value.length>0){
+                if(compare_mode=="and"){
+                    book = true
+                }
+
+                $.each(value, function(k, v){
+                    if(compare_mode=="and"){
+                        bool = bool && compare(v, action_value[k], type[k])
+                    }else{
+                        bool = bool || compare(v, action_value[k], type[k])
+                    }
+                })
+            }else{
+                bool = false
+            }
+
+            if(bool){
                 if(mode==="hide"){
                     elm.addClass("option-hide--hidden")
                 }
@@ -129,19 +142,37 @@ export function optionHide(){
         }
 
         chrome.storage.local.get(data_for, function(data){
+            var values = []
+            var actions = []
+            var types = []
+
             $.each(data_for, function(i, key){
                 if(key in data){
-                    change(data[key], action_value[i], action_mode[i], data_type[i])
+                    values.push(data[key])
+                    actions.push(action_value[i])
+                    types.push(data_type[i])
                 }
             })
+            if(values.length>0){
+                change(values, actions, types, action_mode, compare_mode)
+            }
         })
 
         chrome.storage.local.onChanged.addListener(function(changes){
+            var values = []
+            var actions = []
+            var types = []
+
             $.each(data_for, function(i, key){
                 if(changes[key]){
-                    change(changes[key].newValue, action_value[i], action_mode[i], data_type[i])
+                    values.push(changes[key].newValue)
+                    actions.push(action_value[i])
+                    types.push(data_type[i])
                 }
             })
+            if(values.length>0){
+                change(values, actions, types, action_mode, compare_mode)
+            }
             
         })
     })

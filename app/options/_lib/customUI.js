@@ -180,13 +180,13 @@ export const customUIList = {
     ui_novelCustomHeaderDraggable: `
         <div id="novel_header_icon" style="display: flex; flex-flow: row; width: 100%;">
             <div class="draggable_area_outer" style="width: 33%;">
-                <div class="title option-hide" data-for="novelCustomHeader" data="true">左</div>
-                <div class="title option-hide" data-for="novelCustomHeader" data="false">上部</div>
+                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">左</div>
+                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">上部</div>
                 <div class="draggable_area" id="left" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer" style="width: 33%;">
-                <div class="title option-hide" data-for="novelCustomHeader" data="true">右</div>
-                <div class="title option-hide" data-for="novelCustomHeader" data="false">下部</div>
+                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">右</div>
+                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">下部</div>
                 <div class="draggable_area" id="right" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer" style="width: 33%;">

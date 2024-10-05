@@ -666,28 +666,33 @@ export const optionList = [
     },
 
     {
-        id: "novelCustomHeader",
-        title: "シンプルなヘッダ",
+        id: "novelCustomHeaderType",
+        title: "ヘッダのデザイン",
         description: {
-            text: "ページに表示されるヘッダを、シンプルなデザインに変更します。",
-            keywords: ["しんぷるなへっだ", "レイアウト", "デザイン", "外観", "ヘッダ", "シンプルなヘッダ"],
+            text: "小説ページに表示されるヘッダのデザインを変更します。",
+            keywords: ["へっだのでざいん", "レイアウト", "デザイン", "外観", "ヘッダ", "シンプルなヘッダ"],
         },
         ui: {
-            type: "toggle",
+            type: "dropdown",
             name: "default",
+            data: [
+                {value: "0", title: "オフ（小説家になろう標準）"},
+                {value: "1", title: "モダン"},
+                {value: "2", title: "ミニマル（推奨）"},
+            ]
         },
         location: {
             page: "novel",
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomHeader,
+            default: defaultOption.novelCustomHeaderType,
             hasValue: true,
         }
     },
 
     {
-        id: "novelCustomHeaderMode",
+        id: "novelCustomHeaderScrollMode",
         title: "ヘッダの追従モード",
         description: {
             text: "ヘッダの配置場所を設定します。",
@@ -708,8 +713,13 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomHeaderMode,
+            default: defaultOption.novelCustomHeaderScrollMode,
             hasValue: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         }
     },
 
@@ -733,7 +743,7 @@ export const optionList = [
             default: defaultOption.novelCustomHeaderScrollHidden,
             hasValue: true,
             requirement: {
-                dataFor: ["novelCustomHeaderMode"],
+                dataFor: ["novelCustomHeaderScrollMode"],
                 data: "scroll",
                 mode: "show"
             },
@@ -761,6 +771,11 @@ export const optionList = [
         value: {
             hasValue: false,
             related: ["novelCustomHeaderLeft", "novelCustomHeaderRight"],
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         }
     },
 
@@ -779,6 +794,11 @@ export const optionList = [
         value: {
             hasValue: false,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         }
     },
 
@@ -803,6 +823,11 @@ export const optionList = [
             default: defaultOption.novelCustomHeaderShowEnactiveItems,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         },
     },
 
@@ -828,6 +853,11 @@ export const optionList = [
             default: defaultOption.novelCustomHeaderSocialShowsBrandName,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         },
     },
 
@@ -853,6 +883,11 @@ export const optionList = [
             default: defaultOption.novelCustomHeaderQRCodeCurrentLocation,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         },
     },
 
@@ -877,6 +912,11 @@ export const optionList = [
             default: defaultOption.novelCustomHeaderQRCodeShowURL,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
+                data: ["1", "2"],
+                mode: "show"
+            },
         },
     },
     
@@ -4277,6 +4317,7 @@ export function getOptionElement(option, forSearch){
         var hsDataFor = requirement.dataFor
         var hsData = requirement.data
         var hsMode = requirement.mode
+        var hsRule = requirement.rule
 
         if(!Array.isArray(hsDataFor)){
             hsDataFor = [hsDataFor]
@@ -4285,9 +4326,6 @@ export function getOptionElement(option, forSearch){
         const len = hsDataFor.length
         if(!Array.isArray(hsData)){
             hsData = new Array(len).fill(hsData)
-        }
-        if(!Array.isArray(hsMode)){
-            hsMode = new Array(len).fill(hsMode)
         }
 
         var hsDataType = new Array(len)
@@ -4309,10 +4347,13 @@ export function getOptionElement(option, forSearch){
             elm.attr("data", hsData.join(" "))
         }
         if(hsMode){
-            elm.attr("mode", hsMode.join(" "))
+            elm.attr("mode", hsMode)
         }
         if(hsDataType){
             elm.attr("data-type", hsDataType.join(" "))
+        }
+        if(hsRule){
+            elm.attr("data-rule", hsRule)
         }
     }
 
