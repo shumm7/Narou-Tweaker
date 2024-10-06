@@ -41,6 +41,10 @@
         "libs/font-awesome/css/all.css",
         "common.css",
         "cogs/novel/main.css",
+        "cogs/novel/novelPage.css",
+        "cogs/novel/novelMisc.css",
+        "cogs/novel/novelHeader.css",
+        "cogs/novel/novelModal.css",
         "cogs/novel/novelVertical.css",
         "cogs/novel/novelTop.css"
       ],
@@ -195,55 +199,16 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "cogs/novel/main.js",
-        "cogs/novel/_header.js",
-        "cogs/novel/_novel.js",
-        "cogs/novel/_novelcom.js",
-        "cogs/novel/_novelTop.js",
-        "cogs/novel/_modal.js",
-        "cogs/novel/_skin.js",
-        "cogs/novel/_correction.js",
-        "cogs/novel/utils.js",
+        "/cogs/novel/*.js",
+        "/cogs/novel/css/*.js",
 
-        "cogs/narou/main.js",
-        "cogs/narou/_syuppan.js",
-        "cogs/narou/_ageauth.js",
-
-        "cogs/yomou/main.js",
-        "cogs/yomou/utils.js",
-        "cogs/yomou/_rank.js",
-        "cogs/yomou/css/main.js",
-
-        "cogs/workspace/main.js",
-        "cogs/workspace/utils.js",
-        "cogs/workspace/_favorite.js",
-        "cogs/workspace/_reaction.js",
-        "cogs/workspace/_reactionTools.js",
-        "cogs/workspace/_misc.js",
-        "cogs/workspace/_header.js",
-        "cogs/workspace/_editor.js",
-        "cogs/workspace/_editorTools.js",
-        "cogs/workspace/_editorCss.js",
-
-        "cogs/mypage/main.js",
-        "cogs/mypage/utils.js",
-        "cogs/mypage/_general.js",
-        "cogs/mypage/_blog.js",
-        "cogs/mypage/_profile.js",
-        "cogs/mypage/_misc.js",
-
-        "cogs/kasasagi/main.js",
-        "cogs/kasasagi/utils.js",
-        "cogs/kasasagi/_general.js",
-        "cogs/kasasagi/_chapter.js",
-        "cogs/kasasagi/_dayPV.js",
-        "cogs/kasasagi/_dayUnique.js",
-        "cogs/kasasagi/_monthPV.js",
-        "cogs/kasasagi/_monthUnique.js",
-
-        "cogs/mitemin/main.js",
-        "cogs/mitemin/utils.js",
-        "cogs/mitemin/_general.js"
+        "/cogs/narou/*.js",
+        "/cogs/yomou/*.js",
+        "/cogs/workspace/*.js",
+        "/cogs/workspace/css/*.js",
+        "/cogs/mypage/*.js",
+        "/cogs/kasasagi/*.js",
+        "/cogs/mitemin/*.js"
       ],
       "matches": [
         "*://*.syosetu.com/*",
@@ -254,15 +219,7 @@
     },
     {
       "resources": [
-        "utils/text.js",
-        "utils/api.js",
-        "utils/ui.js",
-        "utils/misc.js",
-        "utils/ncode.js",
-        "utils/option.js",
-        "utils/header.js",
-        "utils/skin.js",
-        "utils/char_localize.js"
+        "/utils/*.js"
       ],
       "matches": ["<all_urls>"]
     },

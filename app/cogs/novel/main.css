@@ -10,941 +10,143 @@ html:has(.narou-tweaker-cursor-hide) {
     pointer-events: none !important;
 }
 
-/* Attention Mark */
-.nt-novel-attention-label {
-	padding: 0 10px;
-	background: #eaeaea;
-	border-radius: 20px;
-	margin: 0 3px;
-}
-/*.narou-tweaker-vertical .nt-novel-attention-label {
-	padding: 10px 0;
-	margin: 3px 0;
-}*/
-.nt-novel-attention-label a {
-	color: inherit !important;
-}
-.nt-novel-attention-label i {
-	margin-right: 5px;
-}
-/*.narou-tweaker-vertical .nt-novel-attention-label > i {
-	margin-right: 0;
-	margin-bottom: .2em;
-}*/
-.nt-novel-attention-label:first-child {
-	margin-left: 0;
-}
-.nt-novel-attention-label.nt-novel-attention-label--rating-r18 {
-	background-color: #f00;
-	color: #fff;
-	font-weight: bold;
-}
-.nt-novel-attention-label.nt-novel-attention-label--rating-r15 {
-	background: #B200B2;
-	color: #fff;
-	font-weight: bold;
-}
-.nt-novel-attention-label.nt-novel-attention-label--official {
+/* color */
+.js-customlayout1 {
+	--color-custom-text--sub: var(--color-text--sub);
+
+	/* ヘッダ */
+	--color-custom-header-item: var(--color-custom-text--sub);
+	--color-custom-header-item--visited: var(--color-custom-link-visited);
+	--color-custom-header-item--hover: var(--color-custom-text);
+	--color-custom-header-item--disabled: var(--color-link-disabled);
 
 }
 
-/* Header */
-#novel_header::-webkit-scrollbar,
-#novel_header ul::-webkit-scrollbar,
-#novel_header_right::-webkit-scrollbar,
-#novel_header_right *::-webkit-scrollbar {
-	/* スクロールバー無効化 */
-	display: none;
-}
-.novel-icon-wrapper ul li {
-	/* テキストの自動折り返しを無効化 */
-	text-wrap: nowrap;
-}
-.novel-icon-wrapper ul li.enactive a,
-.novel-icon-wrapper ul li.booklist .button_bookmark.logout {
-	/* enactiveタグの付いたliのカーソル設定 */
-	cursor: default !important;
-}
-.novel-icon-wrapper ul li.disabled {
-	/* disabledタグの付いたliを非表示 */
-	display:none !important;
-}
-body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.enactive {
-	/* enactiveタグの付いたliを非表示 */
-	display: none !important;
-}
-.narou-tweaker-header--mode-1--hide-icon .novel-icon-wrapper ul li i {
-	/* アイコンの非表示設定 */
-	display:none !important;
+:root {
+	/* 作品情報ページ */
+	--color-custom-novelinfo-datatable-header-text: var(--color-site-text);
+	--color-custom-novelinfo-datatable-header-bg: #eee;
+	--color-custom-novelinfo-datatable-border: #fff;
+	--color-custom-novelinfo-table-border: #ddd;
+	--color-custom-novelinfo-header-border: var(--color-ui-border);
 }
 
-/* モダンなヘッダ ON */
-.narou-tweaker-header--mode-1 .novel-icon-wrapper {
-	/* 外側 基本設定 */
-	position: absolute !important;
-	top: 0 !important;
-	width: auto !important;
-	height: auto !important;
-	text-align: center !important;
-	padding: 2em .3em !important;
-	z-index: 10 !important;
-	background: none !important;
-	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif !important;
-}
-.narou-tweaker-header--mode-1 #novel_header {
-	/* 左側メニュー 位置　*/
-	left: 0;
-}
-.narou-tweaker-header--mode-1 #novel_header_right {
-	/* 右側メニュー 位置　*/
-	right: 0;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul {
-	/* ul 基本設定 */
-	display: flex !important;
-	flex-flow: column !important;
-	margin: 0 !important;
-	margin-top: .3em !important;
-	width: auto !important;
-	align-items: center !important;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li {
-	/* li 基本設定 */
-	font-size: 130% !important;
-	min-height: 55px !important;
-	width: 60px !important;
-	padding: 0 !important;
-	margin: 0 !important;
-	background: none !important;
-	text-indent: inherit !important;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li:nth-last-child(1) {
-	/* 末尾のliの下部にmarginを設定（overflow時に画面からはみ出す問題への対処） */
-	margin-bottom: 3em;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button {
-	/* アイコンのa,form,buttonタグ用 */
-	display: flex !important;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
-	cursor: pointer;
-	width: 100%;
-	font-size: inherit !important;
-	padding: 0 !important;
-	height: auto !important;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > * {
-	/* アイコンのa,formタグ用 */
-	border: none !important;
-	background: none !important;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li a > span,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form > input,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button > span {
-	/* アイコンの題名 */
-	margin-top: .5em;
-	text-align: center;
-	font-size: 50%;
-	font-weight: bold;
-	white-space: nowrap;
-	transition: color .2s;
-	color: transparent;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > a:hover > span,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form:hover > input,
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > div > button:hover > span {
-	/* アイコンの題名（ホバー時） */
-	color: inherit;
-	transition: color .2s;
-	font-size: 50%;
-	margin-top: .5em;
-	background: none;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper ul li > form > input {
-	/* 縦書きPDFアイコンの配置を修正 */
-	border: none;
-	padding: 0;
-}
-.narou-tweaker-header--mode-1.narou-tweaker--series .novel-icon-wrapper ul {
-	/* シリーズページのul設定 */
-	font-size: 13px !important;
-}
-.narou-tweaker-header--mode-1.narou-tweaker--series #novel_header ul li {
-	/* シリーズページのul設定 */
-	border-left: none;
-}
-.narou-tweaker-header--mode-1 .novel-icon-wrapper .p-favepisode-form__button {
-	/* お気に入りep */
-    border: none !important;
-}
-
-
-/* モダンなヘッダ OFF */
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul {
-	/* ul 基本設定 */
-	display: flex;
-	flex-flow: row;
-	flex-wrap: nowrap;
-	overflow-x: scroll;
-	overflow-y: hidden;
-}
-.narou-tweaker-header--mode-0 #novel_header_right ul {
-	/* ul 基本設定 */
-	align-items: center;
-}
-.narou-tweaker-header--mode-0 #novel_header {
-	/* header 基本設定 */
-	z-index: 3;
-	top: 0;
-    height: 48px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-	border-bottom: 1px solid var(--color-ui-border);
-	background-color: var(--color-bg-neverchange);
-	box-sizing: border-box;
-    width: 100%;
-}
-.narou-tweaker-header--mode-0 #novel_header ul {
-	/* header nav 基本設定 */
-	width: 730px;
-    height: 32px;
-    margin-right: auto;
-    margin-left: auto;
-	justify-content: start;
-}
-.narou-tweaker-header--mode-0 #novel_header_right {
-	/* フッタ用 header 基本設定 */
-	box-sizing: border-box;
-    width: 100%;
-    border-bottom: 1px solid var(--color-ui-border);
-	border-top: 1px solid var(--color-ui-border);
-    background-color: var(--color-bg-neverchange);
-    height: 48px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
-.narou-tweaker-header--mode-0 #novel_header_right ul {
-	/* フッタ用 ul 基本設定 */
-	display: flex;
-    width: 730px;
-    height: 32px;
-    margin-right: auto;
-    margin-left: auto;
-}
-.narou-tweaker-header--mode-0 #novel_header_right ul li {
-	/* フッタ用 li 基本設定 */
-    text-align: center;
-    display: inline-block;
-    font-weight: bold;
-    font-size: 13px;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li {
-    padding: 0;
-}
-.narou-tweaker-header--mode-0 #novel_header_right ul li > *{
-	/* フッタ用 aタグ基本設定 */
-	display: inline-block;
-    padding: 3px 10px;
-}
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li > *{
-	/* カーソルを変更 */
-	cursor: pointer;
-}
-.narou-tweaker-header--mode-0 #novel_header ul li form:hover {
-	/* form のホバー時の表示修正 */
-    background: #fafafa;
-}
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li i {
-	/* アイコンの横にマージンを設定 */
-	margin-right: .3em;
-}
-.narou-tweaker-header--mode-0 #novel_header_right ul li > a:hover,
-.narou-tweaker-header--mode-0 #novel_header_right ul li > form:hover > input,
-.narou-tweaker-header--mode-0 #novel_header_right ul li > div > button:hover > span {
-	/* ホバー時の背景色 */
-	background-color: var(--color-link-globalnav-bg--hover);
+:root:has(.narou-tweaker--novelcom-page) {
+    --color-site: #18b7cd;
+    --color-site-base: #fff;
+    --color-site-text: #444;
+    --color-site-link: #03c;
+    --color-site-link--visited: #857;
+    --color-site-link--hover: #393;
+    --color-text: #444;
+    --color-text--sub: #999;
+    --color-text--danger: #d00;
+    --color-text--error: #f03e3e;
+    --color-bg: #fff;
+    --color-bg-neverchange: #fff;
+    --color-bg-announce: #fdfdfd;
+    --color-bg-menu-sp: #f6f6f6;
+    --color-bg-adjust-sp: #fcfcfa;
+    --color-bg-adjust-sp-close: #ccc;
+    --color-bg-adjust-sp-text: #fff;
+    --color-link: #03c;
+    --color-link--visited: #857;
+    --color-link--hover: #393;
+    --color-link-globalnav: #666;
+    --color-link-globalnav-bg--hover: #fafafa;
+    --color-link-login: #d00;
+    --color-link-disabled: #ccc;
+    --color-ui-accent: #18b7cd;
+    --color-ui-border: #ccc;
+    --color-ui-border--emphasis: #999;
+    --color-ui-bg: #fff;
+    --color-ui-form-border: rgba(133, 213, 225, 0.5);
+    --color-ui-form-bg: #dee2e6;
+    --color-ui-form-bg--site: #e3eef1;
+    --color-ui-form-bg--input: #fff;
+    --color-ui-form-bg--disable: #e9ecef;
+    --color-ui-form-check-border: #868e96;
+    --color-ui-form-checked: #228be6;
+    --color-ui-button-yellow-bg: #fffcde;
+    --color-ui-button-yellow-border: #fcd27e;
+    --color-ui-button-aqua-bg: #ddeefa;
+    --color-ui-button-aqua-border: #aaccdc;
+    --color-ui-button-palegray-bg: #f0f0f0;
+    --color-ui-button-palegray-border: #000;
+    --color-ui-button-beige-bg: #f6f6ee;
+    --color-ui-button-beige-border: #bbc;
+    --color-ui-button-gray-bg: #ddd;
+    --color-ui-button-gray-border: #bbc;
+    --color-ui-button-blue-bg: #1b8ef3;
+    --color-ui-button-blue-border: #1b8ef3;
+    --color-ui-button-blue-text: #fff;
+    --color-ui-button-outline-bg: #fff;
+    --color-ui-button-outline-border: #dee2e6;
+    --color-ui-button-outline-text: #1b8ef3;
+    --color-ui-button-submit-text-sp: #666;
+    --color-ui-button-submit-border-sp: #aba;
+    --color-ui-button-submit-bg-from-sp: #fff;
+    --color-ui-button-submit-bg-to-sp: #cde;
+    --color-good-empty: #dee2e6;
+    --color-good-active: #15aabf;
+    --color-good-border: #dee2e6;
+    --color-good-bg: #fff;
+    --color-good-intro-box-border: #f1f3f5;
+    --color-good-intro-box-bg: #f8f9fa;
+    --color-bookmark-add-bg: #fffaf4;
+    --color-bookmark-add-bg--hover: #fff7ee;
+    --color-bookmark-add-border: #f4c28d;
+    --color-bookmark-add-border--hover: #ed9f4a;
+    --color-bookmark-add-text: #efac6a;
+    --color-bookmark-add-text--hover: #e57c13;
+    --color-bookmark-change-bg: #f5f7ff;
+    --color-bookmark-change-bg--hover: #edf0ff;
+    --color-bookmark-change-border: #8e9ff5;
+    --color-bookmark-change-border--hover: #4a65ed;
+    --color-bookmark-change-text: #6a80ef;
+    --color-bookmark-change-text--hover: #1236e5;
+    --color-bookmark-disabled-bg: #fafafa;
+    --color-bookmark-disabled-border: #ccc;
+    --color-bookmark-disabled-text: #aaa;
+    --color-favep-empty: #ced4da;
+    --color-favep-active: #f59f00;
+    --color-favep-border: #dee2e6;
+    --color-jumplink-bg: #cdd;
+    --color-jumplink-text: #666;
+    --color-jumplink-text-shadow: #fff;
+    --color-adjust-layout-bg-close: #f3f3f3;
+    --color-adjust-layout-bg-console-display: #f3f3f3;
+    --color-adjust-layout-bg-button-hover: #eff;
+    --color-adjust-layout-bg-title: #eef3ff;
+    --color-under-nav-border: #999;
+    --color-recommend-border: #999;
+    --color-recommend-bg: #eee;
+    --color-recommend-item-bg: #fff;
+    --color-recommend-title-bg: #ffe;
+    --color-recommend-title-visited: #999;
+    --color-recommend-title-hover: #000;
+    --color-recommend-user-text: #00a069;
+    --color-recommend-user-bg: #cfe;
+    --color-rankingtag-inline-bg: #f8f9fa;
+    --color-rankingtag-fieldset-border: #333;
+    --color-novelpoint-form-border: #f1f3f5;
+    --color-novelpoint-form-bg: #f8f9fa;
+    --color-toast-text: #fff;
+    --color-toast-bg--addend: rgba(24, 183, 205, 0.8);
+    --color-toast-bg--error: rgba(240, 70, 70, 0.8);
+    --color-modal-text-message: #3aa;
+    --color-preview-announce-bg: #eee;
+    --color-preview-announce-border: #333;
+    --color-preview-noinput-text: #999;
+    --color-preview-noinput-border: #ccc;
+    --color-menu-text-sp: #666;
+    --color-caution-spacer-1: #666;
+    --color-caution-spacer-2: #999;
+    --color-caution-spacer-3: #bbb;
+    --color-caution-spacer-4: #ddd;
+    --color-impression-toggle-sp: #fcfcfc;
+    --color-favep-title: #0d6572;
+    --color-favep-note: #868e96;
+    --color-favep-ep-bg: #f1f3f5;
 }
 
-
-/* 縦書きPDFアイコン */
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf form {
-	display: flex;
-	align-items: center;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page .novel-icon-wrapper ul li.pdf form {
-    border-left: 1px solid #cccccc;
-}
-.narou-tweaker-header--mode-0 #novel_header ul li.pdf form {
-    padding: 5px 10px;
-	color: #666666;
-}
-.narou-tweaker-header--mode-0 .novel-icon-wrapper ul li.pdf .c-menu__item--pdflink {
-    padding: 0;
-    border-left: none !important;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page .novel-icon-wrapper ul li.pdf .pdflilnk {
-    padding: 0;
-    border-left: none !important;
-}
-#novel_header_right ul li.pdf form > *:hover {
-	background: transparent;
-}
-#novel_header_right ul li.pdf form > * {
-	font-size: inherit !important;
-}
-
-/* ブックマークアイコン */
-.narou-tweaker-header--mode-0 #novel_header ul li.booklist {
-	margin: 0 5px !important;
-}
-
-/* お気に入りep */
-.narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add {
-	font-size: 13px;
-}
-.narou-tweaker-header--mode-0 .novel-icon-wrapper .p-favepisode-form {
-    padding: 8.1px 10px;
-    border-left: 1px solid #cccccc;
-}
-.narou-tweaker-header--mode-0 .novel-icon-wrapper .favlist_add button {
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    color: #666666;
-    font-weight: bold;
-    font-size: inherit !important;
-    font-family: inherit;
-    width: unset;
-    height: unset;
-    display: flex;
-    align-items: center;
-	margin-top: 0;
-    display: flex;
-    align-items: center;
-}
-
-ul#head_nav li a, .c-menu__item--pdflink {
-    padding: 5px 10px;
-    font-weight: bold;
-    display: block;
-}
-ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
-    color: #666666;
-    border-left: 1px solid #cccccc;
-}
-
-/* しおり */
-.narou-tweaker-header--mode-0 ul li.siori > *:hover {
-	background: transparent !important;
-}
-.narou-tweaker-header--mode-0 #novel_header ul li.siori,
-.narou-tweaker-header--mode-0 #novel_header ul li.bookmark {
-	width: auto !important;
-	text-indent: inherit !important;
-	background: none !important;
-	padding: 11px 0 0 0 !important;
-	margin: 0 !important;
-}
-.narou-tweaker-header--mode-0 #novel_header ul li.siori > a:hover,
-.narou-tweaker-header--mode-0 #novel_header ul li.bookmark > a:hover {
-	background: #fafafa !important;
-}
-.narou-tweaker-header--mode-0 #novel_header ul li.siori > * {
-	font-size: 13px !important;
-	font-weight: bold !important;
-	padding: 5px 10px !important;
-}
-.narou-tweaker-header--mode-0 ul li.bookmark > a,
-.narou-tweaker-header--mode-0 ul li.siori > a {
-	display: block !important; 
-}
-.narou-tweaker-header--mode-0 #novel_header ul li.bookmark > a,
-.narou-tweaker-header--mode-0 #novel_header ul li.siori > a {
-	border-left: 1px solid #cccccc !important;
-}
-
-/* スクロールボタン */
-#scroll-icon .scroll-icon-inner.disabled {
-	display: none !important;
-}
-
-/* クリック済みのアイコン */
-.narou-tweaker-header--mode-0 #novel_header ul li.typo a:visited, /*誤字報告*/
-.narou-tweaker-header--mode-0 #novel_header ul li.impression a:visited, /* 感想 */
-.narou-tweaker-header--mode-0 #novel_header ul li.review a:visited /*レビュー */ {
-	color: #999;
-}
-
-/* お気に入りep */
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button::before {
-    content: none !important;
-}
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button .active-icon{
-	display: none;
-}
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .active-icon {
-	display: block;
-}
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .enactive-icon {
-	display: none;
-}
-
-
-
-/* 検索ボックス */
-#novel_header_search_box.show {
-	opacity: 100%;
-	pointer-events: all;
-}
-#novel_header_search_box {
-	position: fixed;
-    pointer-events: none;
-	transition: opacity .2s;
-	opacity: 0;
-	z-index: 999999;
-}
-#novel_header_search_box > form {
-	display: flex;
-	flex-direction: row;
-	padding: .5em 1em;
-    background: rgba(0, 0, 0, .4);
-    border-radius: .4em;
-}
-#novel_header_search_button {
-	text-wrap: nowrap;
-	padding: 0 .5em;
-	margin-left: .5em;
-}
-#novel_header_search_field {
-	text-wrap: nowrap;
-	padding: 0 .5em;
-}
-
-/* QRコード */
-#qrcode-outer {
-	position: fixed;
-	opacity: 0;
-	visibility: hidden;
-	transition: 0.2s all ease-in;
-	z-index: 500;
-}
-#qrcode-outer.show {
-	opacity: 1;
-	visibility: visible;
-	transition: 0.2s all ease-in;
-}
-#qrcode-background {
-    position: fixed;
-    top: 0;
-	width: 100vw;
-	height: 100vh;
-    z-index: 49;
-	transition: 0.2s all ease-in;
-	z-index: 501;
-}
-.show #qrcode-background {
-	background: rgba(0,0,0,.7);
-	transition: 0.2s all ease-in;
-}
-#qrcode-display {
-	display: flex;
-	position: fixed;
-	flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-	top: 50vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
-	z-index: 502;
-}
-#qrcode-display img {
-	border: 10px solid #fff;
-
-}
-#qrcode-text {
-	color: #666;
-	background: #fafafa;
-	margin-top: .5em;
-	padding: .3em 1em;
-	border-radius: .5em;
-	width: 250px;
-	text-align: center;
-}
-
-
-/* Header */
-#novel_header.header-mode--absolute,
-.narou-tweaker-header--mode-1 #novel_header_right.header-mode--absolute {
-    position: absolute !important;
-}
-#novel_header.header-mode--scroll,
-.narou-tweaker-header--mode-1 #novel_header_right.header-mode--scroll {
-    position: fixed !important;
-}
-#novel_header.header-mode--fixed,
-.narou-tweaker-header--mode-1 #novel_header_right.header-mode--fixed{
-    position: fixed !important;
-}
-.narou-tweaker-header--mode-1 #novel_header.header-mode--scroll,
-.narou-tweaker-header--mode-1 #novel_header_right.header-mode--scroll,
-.narou-tweaker-header--mode-1 #novel_header.header-mode--fixed,
-.narou-tweaker-header--mode-1 #novel_header_right.header-mode--fixed {
-	overflow-y: scroll;
-	max-height: 100vh;
-}
-#novel_header.header-mode--scroll,
-#novel_header_right.header-mode--scroll{
-    transition: .2s;
-}
-#novel_header.hide.header-mode--scroll{
-    transform:translateY(-60px);
-}
-.narou-tweaker-header--mode-1 #novel_header.hide.header-mode--scroll{
-    transform:translateX(-80px);
-}
-.narou-tweaker-header--mode-1 #novel_header_right.hide.header-mode--scroll{
-    transform:translateX(80px);
-}
-
-
-/* Series Page - Header */
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header {
-	width: 100%;
-	border-bottom: 1px solid #ccc;
-	z-index: 3;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul {
-	margin: 0 auto;
-	padding: 0;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li {
-	margin: 0;
-    float: left;
-    display: block;
-    font-size: 13px;
-	border-left: none;
-	padding: 0;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li a {
-    padding: 5px 10px;
-    color: #666666;
-    font-weight: bold;
-    display: block;
-    border-left: 1px solid #cccccc;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li > a:hover {
-	background: #fafafa !important;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist {
-	margin: 0 0 0 10px;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist {
-    padding: 0;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .c-bookmark-button,
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul .c-bookmark-button {
-	font-size:12px;
-	padding: 5px;
-	border-style:solid;
-	border-width:2px;
-	text-align:center;
-	font-weight:bold;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .c-bookmark-button--disabled,
-.narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist .c-bookmark-button--disabled {
-	background:#fafafa;
-	border-color:#cccccc;
-	color:#aaaaaa;
-	display:block;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header_right {
-    box-sizing: border-box;
-    margin-top: 10px;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series .box_menu_novelview_after {
-	margin: 0 auto;
-    width: 740px;
-}
-.narou-tweaker-header--mode-0.narou-tweaker--series .menu_novelview_after {
-	padding: 10px 0;
-    font-size: 0;
-}
-
-/* Option Menu */
-#novel-option-background {
-	display: none;
-    position: fixed;
-    top: 0;
-	width: 100vw;
-	height: 100vh;
-    z-index: 49;
-	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
-}
-#novel-option-background.show {
-	display: block;
-}
-#novel-option {
-    top: 0;
-    right: calc(-300px - env(safe-area-inset-left) - 50px);
-    height: 100%;
-    position: fixed;
-    width: calc(300px + env(safe-area-inset-left));
-    background: #efefef;
-    z-index: 50;
-    filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
-    transition: .3s;
-	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
-	font-size: 14px;
-	text-align: left;
-}
-#novel-option.show {
-    transform: translateX(calc(-300px - env(safe-area-inset-left) - 50px));
-}
-#novel-option--header {
-    height: 70px;
-    background: #ddd;
-}
-
-#novel-option--header ul {
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	margin-left: constant(safe-area-inset-left);
-	margin-left: env(safe-area-inset-left);
-    padding-left: 20px;
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: -ms-flexbox;
-	display: flex;
-}
-#novel-option--header ul li {
-	list-style-type: none;
-	padding: 0 .3em;
-}
-#novel-option--header ul li button {
-	height: 100%;
-	padding-top: 0;
-	padding-bottom: 0;
-	font-size: .9em;
-    background: 0 0;
-    border: none;
-    -webkit-appearance: button;
-    cursor: pointer;
-}
-
-#novel-option--header ul li button span {
-    display: inline-block;
-	height: 100%;
-	line-height: 60px;
-	border-radius: 0;
-	border: none;
-	border-top: 4px solid transparent;
-	box-sizing: border-box;
-	padding: 0 .5em;
-}
-#novel-option--header ul li.active button span {
-	border-top-color: #222 !important;
-}
-#novel-option--header ul li button span:hover {
-	border-top-color: var(--kasasagi-blue);
-}
-#novel-option--contents {
-	height: 100%;
-	overflow-y: scroll;
-	padding: .5em;
-}
-#novel-option--contents::-webkit-scrollbar{
-	display: none;
-}
-.novel-option--content {
-	display: none;
-	padding: .5em
-}
-.novel-option--content-inner {
-	margin-bottom: 2em;
-}
-.novel-option--content.active {
-	display: block;
-}
-.novel-option-header {
-	font-weight: bold;
-    font-size: 140%;
-    margin: .3em;
-}
-.novel-option-subheader {
-	font-weight: bold;
-    margin: .3em;
-}
-.novel-option--textfield {
-	padding: .3em;
-    font-size: inherit;
-    margin: .1em;
-}
-
-/* Skin */
-#novel-option--skin-description,
-#novel-option--font-family-description {
-	margin-top: .5em;
-	margin-left: .3em;
-}
-#novel-option--skin-description:before,
-#novel-option--font-family-description:before {
-	content: "選択中";
-	font-weight: bold;
-	margin-right: .5em;
-}
-
-/* Font Family */
-#novel-option--font-family {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	margin-bottom: 1em;
-}
-#novel-option--font-family-sample {
-	padding: 5px 10px;
-	border: 1px solid rgb(221, 221, 221);
-	margin: 5px 0;
-	margin-bottom: 10px;
-	line-height: 180%;
-    font-size: 100%;
-}
-.novel-option--font-button {
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
-}
-.novel-option--font-button-box {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 60px;
-	height: 60px;
-	border: 1px solid #ddd;
-	background: #fff;
-	margin: .5em 1em;
-	cursor: pointer;
-}
-.novel-option--font-button-box:hover {
-	background: #fafafa;
-}
-.novel-option--font-button.active .novel-option--font-button-box{
-	border: 1px solid var(--kasasagi-blue);
-}
-.novel-option--font-button-description {
-	font-size: 90%;
-}
-
-/* Font Size / Line Height */
-.novel-option--font-number-change-button {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border: 1px solid #ddd;
-	background: #fff;
-	width: 30px;
-	height: 30px;
-	cursor: pointer;
-}
-.novel-option--font-number-change-button:hover{
-	background: #fafafa;
-}
-#novel-option--font-size,
-#novel-option--line-height,
-#novel-option--page-width,
-#novel-option--vertical {
-	display: flex;
-	flex-flow: row;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 1em;
-}
-#novel-option--font-size-input,
-#novel-option--line-height-input,
-#novel-option--page-width-input {
-	font-size: 110%;
-	width: 50%;
-	border: 1px solid #ddd;
-	text-align: center;
-	height: 30px;
-	padding: 0;
-}
-
-/* Header */
-.novel-option--content-inner#option-header {
-	margin-bottom: 200px;
-}
-
-/* Correction */
-#novel-option--correction-syntax,
-#novel-option--correction-symbols {
-	margin-bottom: 1em;
-}
-.novel-option--toggle {
-	margin-bottom: .7em;
-	text-wrap: nowrap;
-}
-
-/* Replace Patterns (Correction) */
-#novel-option--correction-replace--patterns-outer {
-	background: #f8f8f8;
-    padding: .3em .3em;
-	overflow-y: scroll;
-	height: 10em;
-    border-radius: .5em;
-	border: 1px solid #ddd;
-}
-#novel-option--correction-replace--patterns {
-}
-#novel-option--correction-replace--patterns::-webkit-scrollbar{
-	display: none;
-}
-.novel-option--correction-replace--pattern-box,
-#novel-option--correction-replace--pattern-box-addition {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	max-width: 100%;
-	padding: .5em;
-	margin: .5em 0;
-	border: 1px solid #ddd;
-	background: #fff;
-	border-radius: .5em;
-}
-#novel-option--correction-replace--pattern-box-addition {
-	justify-content: center;
-}
-#novel-option--correction-replace--pattern-box-addition:hover {
-	transition: background-color .3s ease;
-	background: #fafafa;
-	cursor: pointer;
-}
-
-.novel-option--correction-replace--fields {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-}
-.novel-option--correction-replace--fields input {
-	width: 45%;
-	padding: .1em .3em;
-}
-.novel-option--correction-replace--fields span {
-	font-size: 12px;
-	margin: 0 .2em;
-}
-.novel-option--correction-replace--index {
-	font-size: 12px;
-	color: #999;
-	padding: .1em;
-}
-.novel-option--correction-replace--move-buttons {
-	display: flex;
-	flex-direction: column;
-	font-size: 14px;
-}
-.novel-option--correction-replace--move-buttons .novel-option--correction-replace--move-back {
-	margin-top: -50%;
-}
-.novel-option--correction-replace--icons {
-	transition: color .3s ease;
-	color:#bbb;
-	font-size: 14px;
-	margin: 0 .2em;
-	cursor: pointer;
-}
-.novel-option--correction-replace--icons:hover {
-	color:#999;
-}
-.novel-option--correction-replace--icons.enabled {
-	color:rgb(51, 154, 244);
-}
-.novel-option--correction-replace--icons.enabled:hover {
-	color:rgb(0, 58, 133);
-}
-.novel-option--correction-replace--active-button {
-	margin-right: 0 .2em;
-}
-.novel-option--correction-replace--remove-button {
-	margin-left: auto;
-	margin-right: .2em;
-}
-
-/* Author Skin */
-#novel-option--import-author-skin-button {
-    display: inline-block;
-    width: auto;
-    cursor: pointer;
-    text-align: center;
-    appearance: none;
-    transition: all 0.2s ease 0s;
-    white-space: nowrap;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(221, 221, 221);
-    border-image: initial;
-    border-radius: 0.5em;
-    padding: .3em 1em;
-}
-#novel-option--import-author-skin-button:active,
-#novel-option--import-author-skin-button:focus,
-#novel-option--import-author-skin-button:hover {
-    background-color: rgb(250, 250, 250);
-}
-.novel-option--import-author-skin--notice-warn {
-	font-weight: bold;
-	color: red;
-}
-.novel-option--import-author-skin--notice-info {
-	font-weight: bold;
-}
-#author-skin-warning {
-	margin: 10px;
-	font-weight: bold;
-	text-align: center;
-	font-size: 13px;
-	filter: invert(100%) grayscale(100%) contrast(100);
-}
-
-/* Novel Page*/
-.narou-tweaker .novel-titles {
-    line-height: normal;
-	word-break: break-word;
-	text-align: left;
-}
-.narou-tweaker .novel-titles .novel-title {
-    line-height: normal;
-	font-weight: bold;
-	word-break: break-word;
-	word-break: auto-phrase;
-}
-.narou-tweaker .novel-titles .novel-author {
-	margin-top: .5em;
-	font-size: 90%;
-}
-.narou-tweaker .novel-titles#ep-0,
-.narou-tweaker .novel-titles#ep-1 {
-	text-align: center;
-	margin-top: 4em;
-	margin-bottom: 4em;
-}
-.narou-tweaker .novel-titles#ep-0 .novel-title,
-.narou-tweaker .novel-titles#ep-1 .novel-title {
-	font-size: 3em;
-}
-.narou-tweaker .novel-titles#ep-0 .novel-author,
-.narou-tweaker .novel-titles#ep-1 .novel-author {
-	text-align: center;
-	font-size: 2em;
-	margin-top: .5em;
-}
-.narou-tweaker .novel-chapter {
-	text-align: center;
-	font-size: 90%;
-}
-.p-novel__body p.correction-original{
-	display: none;
-}
