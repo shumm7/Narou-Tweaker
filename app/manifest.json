@@ -60,33 +60,11 @@
     {
       "js": [
         "libs/jquery-3.7.1.min.js",
-        "cogs/novel/css/_commonCss.js"
+        "cogs/novel/css/common.js"
       ],
       "matches": [
 				"*://ncode.syosetu.com/*",
         "*://novel18.syosetu.com/*",
-        "*://novelcom.syosetu.com/*",
-        "*://novelcom18.syosetu.com/*"
-			],
-      "run_at":"document_start"
-    },
-    {
-      "js": [
-        "libs/jquery-3.7.1.min.js",
-        "cogs/novel/css/novelCss.js"
-      ],
-      "matches": [
-				"*://ncode.syosetu.com/*",
-        "*://novel18.syosetu.com/*"
-			],
-      "run_at":"document_start"
-    },
-    {
-      "js": [
-        "libs/jquery-3.7.1.min.js",
-        "cogs/novel/css/novelcomCss.js"
-      ],
-      "matches": [
         "*://novelcom.syosetu.com/*",
         "*://novelcom18.syosetu.com/*"
 			],

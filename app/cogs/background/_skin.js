@@ -138,7 +138,7 @@ function makeSkin(){
         `
 
         chrome.storage.local.set({
-            novelAppliedSkinCSS: makeSkinCSS(skin),
+            novelAppliedSkinCSS: makeSkinCSS(skin, data),
             novelAppliedFontCSS: rule,
             novelSkinCustomCSS: skin.css,
             novelFontCustomCSS: fontCss
