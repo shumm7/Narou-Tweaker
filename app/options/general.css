@@ -229,6 +229,7 @@ input[type=file] {
     white-space: nowrap;
     transition: width 0.2s ease-in-out;
     font-size: 16px;
+    z-index: 1;
 }
 #sidebar.hide {
     width: 0px;
@@ -529,4 +530,147 @@ input[type=file] {
     text-align:center;
     color: #999;
     font-size: 12px;
+}
+
+@media not screen and (width: 400px) {
+	:root:has(.option-popup) {
+        max-width: none;
+        min-width: 380px;
+	}
+}
+
+/* popup */
+.option-popup {
+
+    #container {
+        flex-direction: column-reverse;
+        font-size: 14px;
+    }
+
+    #header {
+        #header-title--description {
+            display: none;
+        }
+    }
+
+    #sidebar {
+        width: 100vw;
+        height: 50px;
+        top: unset;
+        bottom: 0;
+        transition: none;
+    }
+
+    #sidebar-header {
+        display: none;
+    }
+
+    #sidebar-middle {
+        flex-direction: row;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        #sidebar-search {
+            display: none;
+        }
+
+        #sidebar-items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            font-size: 120%;
+            height: 100%;
+            width: 100%;
+            border: none;
+        }
+        .sidebar-item:hover{
+            background-color: #fafafa;
+        }
+        .sidebar-item:not(:last-child) {
+            border-right: 1px solid #ddd;
+        }
+        .sidebar-item a{
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar-item--title {
+            display: none;
+        }
+
+    }
+
+    #sidebar-bottom {
+        display: none;
+    }
+
+    #contents {
+        margin-top: 0;
+        margin-bottom: auto;
+
+        .contents-container {
+            padding: 10px 5px;
+        }
+
+        .contents-option-head {
+            min-width: 100px;
+            margin-right: 10px;
+        }
+
+        .contents-wide:has(.contents-wide-column) > .contents-option-head {
+            min-width: 50px;
+            width: 17%;
+        }
+    }
+
+    .dropdown select {
+        min-width: unset;
+    }
+
+    /* オプション項目 */
+    .contents-wide[name="novelCustomHeaderData"] .contents-option,
+    .contents-wide[name="workspaceCustomHeaderData"] .contents-option,
+    .contents-wide[name="workspaceCustomHeaderMenuData"] .contents-option {
+        flex-direction: column;
+
+        .contents-option-content {
+            width: 100%;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        .contents-option-head {
+            margin-bottom: 10px;
+        }
+        #novel_header_icon,
+        #workspace_header_icon,
+        #workspace_menu_icon {
+            width: 100%;
+        }
+
+        .draggable_area_outer {
+            margin: 2px;
+            padding: 5px;
+            max-width: 25vw;
+        }
+        .draggable_area {
+            max-width: 110px;
+        }
+        .icon-element {
+            margin: 0;
+            padding: 2px 3px ;
+        }
+    }
 }

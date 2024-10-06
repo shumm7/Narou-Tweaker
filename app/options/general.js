@@ -5,10 +5,16 @@ import { defaultOption, updateOption } from "/utils/option.js"
 import { getOptionFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
-var currentPage
+let isPopup = false
+let currentPage
 
 export function setup(){
     currentPage = $("#option-page-id").val()
+
+    var params = new URLSearchParams(location.search)
+    if(params.get("popup")==="1"){
+        isPopup = true
+    }
 
     setupDOM()
     setupContents()
@@ -25,13 +31,23 @@ function setupDOM(){
     /* Remove JS error message */
     $('#js-failed').remove();
 
+    /* popup */
+    if(isPopup){
+        $("body").addClass("option-popup")
+    }
+
     /* Sidebars */
     var sidebarDOMItems = ""
     $.each(optionCategoryList, function(idx, category){
         if(category.sidebar || category.sidebar===undefined){
+            var url = `/options/${category.id}/index.html`
+            if(isPopup){
+                url += "?popup=1"
+            }
+
             var elm = $(`
                 <div class="sidebar-item" name="${category.id}">
-                    <a href="/options/${category.id}/index.html" target="_self">
+                    <a href="${url}" target="_self">
                         <span class="sidebar-item--title">${category.title}</span>
                     </a>
                 </div>

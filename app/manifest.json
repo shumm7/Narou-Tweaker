@@ -21,10 +21,7 @@
     "open_in_tab": true
 	},
   "action": {
-    "default_popup": "options/popup/index.html"
-  },
-  "side_panel": {
-    "default_path": "cogs/sidepanel/index/index.html"
+    "default_popup": "options/general/index.html?popup=1"
   },
   "content_scripts": [
     {
