@@ -19,7 +19,6 @@ html:has(.narou-tweaker-cursor-hide) {
 	--color-custom-header-item--visited: var(--color-custom-link-visited);
 	--color-custom-header-item--hover: var(--color-custom-text);
 	--color-custom-header-item--disabled: var(--color-link-disabled);
-
 }
 
 :root {
@@ -31,6 +30,30 @@ html:has(.narou-tweaker-cursor-hide) {
 	--color-custom-novelinfo-header-border: var(--color-ui-border);
 }
 
+
+/* 色設定初期化 */
+.narou-tweaker--novelcom-page.js-customlayout1,
+.narou-tweaker--novelcom-page .js-customlayout1 {
+    --00-text: #444;
+    --01-link: #03c;
+    --02-link-visited: #857;
+    --03-link-hover: #393;
+    --04-bg: #fff;
+    --color-custom-announce-border: var(--01-link);
+    --color-custom-body-bg: var(--04-bg);
+    --color-custom-epilist-underline: transparent;
+    --color-custom-epilist-underline-favorited: var(--00-text);
+    --color-custom-epilist-underline-hover: #9df;
+    --color-custom-link: var(--01-link);
+    --color-custom-link-hover: var(--03-link-hover);
+    --color-custom-link-visited: var(--02-link-visited);
+    --color-custom-pager-border-disabled: #44444433;
+    --color-custom-pager-text-disabled: #44444480;
+    --color-custom-text: var(--00-text);
+    --color-custom-bkmfix-box: #e7f5ff;
+    --color-custom-bkmfix-text: #1971c2;
+    --color-custom-favep-empty: #ced4da;
+}
 :root:has(.narou-tweaker--novelcom-page) {
     --color-site: #18b7cd;
     --color-site-base: #fff;
@@ -149,4 +172,3 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-favep-note: #868e96;
     --color-favep-ep-bg: #f1f3f5;
 }
-

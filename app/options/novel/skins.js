@@ -7,11 +7,12 @@ export function restoreSkins(){
     chrome.storage.local.get(null, function(data){
         chrome.storage.sync.get(null, function(g_data){
             var skins = g_data.novelSkins
-            if(Array.isArray(skins)){
+            if(!Array.isArray(skins)){
                 skins = []
             }
             skins = localNovelSkin.concat(skins)
 
+            $("#novelSkinSelected").empty()
             $.each(skins, function(i, skin){
                 $("#novelSkinSelected").append(`<option value="${i}">${skin.name}</option>`)
             })
@@ -48,7 +49,7 @@ export function restoreSkins(){
         chrome.storage.local.get(null, function(data){
             chrome.storage.sync.get(null, function(g_data){
                 var skins = g_data.novelSkins
-                if(Array.isArray(skins)){
+                if(!Array.isArray(skins)){
                     skins = []
                 }
                 skins = localNovelSkin.concat(skins)

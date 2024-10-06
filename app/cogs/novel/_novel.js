@@ -41,8 +41,10 @@ export function _novel(){
             }
         }else if(pageDetail=="series"){
             $("body").addClass("narou-tweaker--series")
+            $("body").addClass("js-customlayout1")
         }else{
             $("body").addClass("narou-tweaker--novelcom-page")
+            $("body").addClass("js-customlayout1")
         }
         _cursorHide()
     })

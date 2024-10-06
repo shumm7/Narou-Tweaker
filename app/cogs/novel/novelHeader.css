@@ -27,11 +27,6 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	/* アイコンの非表示設定 */
 	display:none !important;
 }
-.narou-tweaker-header--mode-0 .l-scrollheader,
-.narou-tweaker-header--mode-1 .l-scrollheader {
-    /* ヘッダの残像を非表示 */
-    display: none !important;
-}
 
 /* モダンなヘッダ ON */
 .narou-tweaker-header--mode-1 .novel-icon-wrapper {

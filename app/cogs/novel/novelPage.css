@@ -39,29 +39,13 @@
 	display: none;
 }
 
-.narou-tweaker .c-announce-box {
-	background-color: var(--color-custom-body-bg);
-	color: var(--color-custom-text);
-}
-
-
 .narou-tweaker .novel-titles a,
 .narou-tweaker #novel_vertical_items .novel-titles a /* 縦書き */ {
     color: inherit;
 }
-.narou-tweaker .novel-titles .novel-title,
-.narou-tweaker .novel-titles .novel-author,
-.narou-tweaker .novel-chapter {
-    color: var(--color-custom-text--sub);
-}
-.narou-tweaker .novel-titles#ep-0 .novel-title,
-.narou-tweaker .novel-titles#ep-1 .novel-title {
-    color: var(--color-custom-text);
-}
 
 
 
-/* Novelcom Page */
 body.narou-tweaker--novelcom-page {
 	background: var(--color-custom-body-bg);
 	color: var(--color-text);
