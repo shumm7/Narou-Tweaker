@@ -1,17 +1,50 @@
 
 /* 小説ページ */
-.narou-tweaker--custom-skin.narou-tweaker--novel-page .c-novel-attention {
-	background-color: var(--color-custom-attention-bg); /* 警告ボックス */
-	border-color: var(--color-custom-attention-border);
-	color: var(--color-custom-attention-text);
+.narou-tweaker--custom-skin.narou-tweaker--novel-page {
+	.c-novel-attention {
+		background-color: var(--color-custom-attention-bg); /* 警告ボックス */
+		border-color: var(--color-custom-attention-border);
+		color: var(--color-custom-attention-text);
+	}
+	.c-novel-attention .c-novel-attention__warning {
+		color: var(--color-custom-attention-text--danger); /* 警告ボックス（強調） */
+	}
+
+	.p-novel__text--preface,
+	.p-novel__text--afterword {
+		border-color: var( --color-custom-novel-border); /* まえがき・あとがきの区切り線 */
+	}
+
+	.p-novel__number {
+		color: var(--color-custom-novel-number-text); /* エピソード数 */
+	}
 }
-.narou-tweaker--custom-skin.narou-tweaker--novel-page .c-novel-attention .c-novel-attention__warning {
-    color: var(--color-custom-attention-text--danger); /* 警告ボックス（強調） */
-}
-.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__text--preface,
-.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__text--afterword {
-	border-color: var( --color-custom-novel-border); /* まえがき・あとがきの区切り線 */
-}
-.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__number {
-	color: var(--color-custom-novel-number-text); /* エピソード数 */
+
+
+
+/* シリーズページ */
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--series {
+	background: var(--color-custom-body-bg);
+	color: var(--color-custom-text);
+
+	#content,
+    .serieslist .ex,
+    .serieslist .novel_info {
+        /* 本文文字色*/
+        color: var(--color-custom-text);
+    }
+
+	.narou-tweaker--series .serieslist {
+        border-color: var(--color-custom-novel-border);
+    }
+
+	a:link {
+        color: var(--color-custom-link);
+    }
+    a:visited {
+        color: var(--color-custom-link-visited);
+    }
+    a:hover {
+        color: var(--color-custom-link-hover);
+    }
 }

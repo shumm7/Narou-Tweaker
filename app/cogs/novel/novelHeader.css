@@ -119,11 +119,11 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	border: none;
 	padding: 0;
 }
-.narou-tweaker-header--mode-1.narou-tweaker--series .novel-icon-wrapper ul {
+.narou-tweaker-header--mode-1.narou-tweaker--novel-page--series .novel-icon-wrapper ul {
 	/* シリーズページのul設定 */
 	font-size: 13px !important;
 }
-.narou-tweaker-header--mode-1.narou-tweaker--series #novel_header ul li {
+.narou-tweaker-header--mode-1.narou-tweaker--novel-page--series #novel_header ul li {
 	/* シリーズページのul設定 */
 	border-left: none;
 }
@@ -468,16 +468,16 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 
 
 /* Series Page - Header */
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header {
 	width: 100%;
 	border-bottom: 1px solid #ccc;
 	z-index: 3;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul {
 	margin: 0 auto;
 	padding: 0;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul li {
 	margin: 0;
     float: left;
     display: block;
@@ -485,23 +485,23 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	border-left: none;
 	padding: 0;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li a {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul li a {
     padding: 5px 10px;
     color: #666666;
     font-weight: bold;
     display: block;
     border-left: 1px solid #cccccc;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li > a:hover {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul li > a:hover {
 	background: #fafafa !important;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul li.booklist {
 	margin: 0 0 0 10px;
 }
 .narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist {
     padding: 0;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul .c-bookmark-button,
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul .c-bookmark-button,
 .narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul .c-bookmark-button {
 	font-size:12px;
 	padding: 5px;
@@ -510,22 +510,22 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	text-align:center;
 	font-weight:bold;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header ul li.booklist .c-bookmark-button--disabled,
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header ul li.booklist .c-bookmark-button--disabled,
 .narou-tweaker-header--mode-0.narou-tweaker--novelcom-page #novel_header ul li.booklist .c-bookmark-button--disabled {
 	background:#fafafa;
 	border-color:#cccccc;
 	color:#aaaaaa;
 	display:block;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series #novel_header_right {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series #novel_header_right {
     box-sizing: border-box;
     margin-top: 10px;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series .box_menu_novelview_after {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series .box_menu_novelview_after {
 	margin: 0 auto;
     width: 740px;
 }
-.narou-tweaker-header--mode-0.narou-tweaker--series .menu_novelview_after {
+.narou-tweaker-header--mode-0.narou-tweaker--novel-page--series .menu_novelview_after {
 	padding: 10px 0;
     font-size: 0;
 }

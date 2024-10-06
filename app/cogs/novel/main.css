@@ -86,7 +86,9 @@ html:has(.narou-tweaker-cursor-hide) {
 
 /* 色設定初期化 */
 .narou-tweaker--novelcom-page.js-customlayout1,
-.narou-tweaker--novelcom-page .js-customlayout1 {
+.narou-tweaker--novelcom-page .js-customlayout1,
+.narou-tweaker--novel-page--series.js-customlayout1,
+.narou-tweaker--novel-page--series .js-customlayout1  {
     --00-text: #444;
     --01-link: #03c;
     --02-link-visited: #857;
@@ -107,7 +109,8 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-custom-bkmfix-text: #1971c2;
     --color-custom-favep-empty: #ced4da;
 }
-:root:has(.narou-tweaker--novelcom-page) {
+:root:has(.narou-tweaker--novelcom-page),
+:root:has(.narou-tweaker--novel-page--series) {
     --color-site: #18b7cd;
     --color-site-base: #fff;
     --color-site-text: #444;

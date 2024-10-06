@@ -1,8 +1,7 @@
 .narou-tweaker--custom-skin.narou-tweaker--novelcom-page {
     background: var(--color-custom-body-bg);
     color: var(--color-custom-text);
-}
-.narou-tweaker--custom-skin.narou-tweaker--novelcom-page {
+
     a:link {
         color: var(--color-custom-link);
     }

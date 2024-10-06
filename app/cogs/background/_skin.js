@@ -109,7 +109,7 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
-        narou-tweaker--custom-style.narou-tweaker--series #container {
+        narou-tweaker--custom-style.narou-tweaker--novel-page--series #container {
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }

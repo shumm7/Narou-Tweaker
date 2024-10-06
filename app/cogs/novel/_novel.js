@@ -40,7 +40,6 @@ export function _novel(){
                 novelTopAttention()
             }
         }else if(pageDetail=="series"){
-            $("body").addClass("narou-tweaker--series")
             $("body").addClass("js-customlayout1")
         }else{
             $("body").addClass("narou-tweaker--novelcom-page")
