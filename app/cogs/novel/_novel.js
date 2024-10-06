@@ -1,6 +1,6 @@
-import { replaceUrl, getDatetimeStringWithoutSecond } from "/utils/text.js"
+import { replaceUrl, getDatetimeStringWithoutSecond } from "../../utils/text.js"
 import { getEpisode, checkNovelPageDetail, isR18 } from "./utils.js"
-import { getNcode } from "/utils/ncode.js";
+import { getNcode } from "../../utils/ncode.js";
 import { escapeRegex, getNovelSearchURL, getNovelTagURL } from "../../utils/text.js";
 import { novelTop } from "./_novelTop.js";
 

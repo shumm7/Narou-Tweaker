@@ -1,9 +1,9 @@
-import { check, defaultValue } from "/utils/misc.js"
-import { localFont, localSkins, defaultOption, replacePattern, localFontFamily } from "/utils/option.js";
-import { formatSkinData, generateNoDuplicateName } from "/utils/skin.js";
-import { escapeHtml, getDatetimeString } from "/utils/text.js";
+import { check, defaultValue } from "../../utils/misc.js"
+import { localFont, localSkins, defaultOption, replacePattern, localFontFamily } from "../../utils/option.js";
+import { formatSkinData, generateNoDuplicateName } from "../../utils/skin.js";
+import { escapeHtml, getDatetimeString } from "../../utils/text.js";
 import { correction, restoreCorrectionMode } from "./_correction.js";
-import { getNcode } from "/utils/ncode.js";
+import { getNcode } from "../../utils/ncode.js";
 
 export function _optionModal(){
     /* Option Modal */

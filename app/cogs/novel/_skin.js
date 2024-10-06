@@ -1,4 +1,4 @@
-import { formatSkinData, makeSkinCSS } from "/utils/skin.js";
+import { formatSkinData, makeSkinCSS } from "../../utils/skin.js";
 
 /* Skin */
 export function removeDefaultSkinClass(){

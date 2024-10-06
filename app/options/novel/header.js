@@ -1,4 +1,4 @@
-import { getExceptedIcon, novelIconList, workspaceIconList, workspaceMenuIconList } from "/utils/header.js"
+import { getExceptedIcon, novelIconList, workspaceIconList, workspaceMenuIconList } from "../../utils/header.js"
 
 export function setSortable(){
     /* Novel Header */

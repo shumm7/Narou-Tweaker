@@ -1,4 +1,4 @@
-import { escapeHtml, replaceUrl } from "/utils/text.js"
+import { escapeHtml, replaceUrl } from "../../utils/text.js"
 import { checkXmypage, getUserId } from "./utils.js"
 
 export function _profile(){

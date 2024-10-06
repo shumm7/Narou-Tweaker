@@ -1,5 +1,5 @@
-import { getDateString, getDatetimeString } from "/utils/text.js"
-import { saveJson } from "/utils/misc.js"
+import { getDateString, getDatetimeString } from "../../utils/text.js"
+import { saveJson } from "../../utils/misc.js"
 import { getNcode, getValueFromTables, makeGraph } from "./utils.js"
 
 /* Day PV */

@@ -1,4 +1,4 @@
-import { updateOption,fixOption } from "/utils/option.js";
+import { updateOption,fixOption } from "../../utils/option.js";
 import { actionListener } from "./_action.js";
 import { messageListener } from "./_process.js";
 import { sidepanelListener } from "./_sidepanel.js";

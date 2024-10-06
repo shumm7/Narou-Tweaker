@@ -1,6 +1,6 @@
 import { restoreOptions } from "../general.js";
 import { buttonHide, optionHide } from "../utils.js";
-import { addFontAwesomeOriginaIcons } from "/utils/header.js"
+import { addFontAwesomeOriginaIcons } from "../../utils/header.js"
 import { addFontEditButtonEvent, restoreFont } from "../novel/font.js";
 import { addReplacePatternEditButtonEvent, restoreReplacePattern } from "../novel/correction.js";
 import { addSkinEditButtonEvent, restoreSkins } from "../novel/skins.js"

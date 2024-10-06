@@ -1,6 +1,6 @@
-import { defaultValue } from "/utils/misc.js"
-import { defaultOption, localFont, localSkins, localFontFamily } from "/utils/option.js"
-import { makeSkinCSS } from "/utils/skin.js"
+import { defaultValue } from "../../utils/misc.js"
+import { defaultOption, localFont, localSkins, localFontFamily } from "../../utils/option.js"
+import { makeSkinCSS, localNovelSkin } from "../../utils/skin.js"
 
 export function skinListener(){
     makeSkin()

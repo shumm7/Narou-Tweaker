@@ -1,6 +1,6 @@
-import { addExclamationIconBalloon } from "/utils/ui.js"
-import { getDateString, getDatetimeString } from "/utils/text.js"
-import { saveJson } from "/utils/misc.js"
+import { addExclamationIconBalloon } from "../../utils/ui.js"
+import { getDateString, getDatetimeString } from "../../utils/text.js"
+import { saveJson } from "../../utils/misc.js"
 import { makeGraph, getValueFromTables, getNcode } from "./utils.js"
 
 /* Day Unique */

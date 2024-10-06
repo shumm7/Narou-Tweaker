@@ -1,7 +1,7 @@
-import { getDateString, getYesterday, getDatetimeString, getDateStringJapanese, parseIntWithComma, escapeHtml } from "/utils/text.js";
-import {getBigGenre, getGenre, getNovelType, getNovelEnd, getNocgenre} from "/utils/api.js"
-import { addQuestionIconBalloon, addExclamationIconBalloon } from "/utils/ui.js";
-import { saveJson } from "/utils/misc.js";
+import { getDateString, getYesterday, getDatetimeString, getDateStringJapanese, parseIntWithComma, escapeHtml } from "../../utils/text.js";
+import {getBigGenre, getGenre, getNovelType, getNovelEnd, getNocgenre} from "../../utils/api.js"
+import { addQuestionIconBalloon, addExclamationIconBalloon } from "../../utils/ui.js";
+import { saveJson } from "../../utils/misc.js";
 import { getNcode } from "./utils.js";
 import { minuteStringJapanese } from "../../utils/text.js";
 

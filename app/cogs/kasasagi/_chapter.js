@@ -1,7 +1,7 @@
 import { getNcode } from "./utils.js";
-import { getDatetimeString } from "/utils/text.js";
-import { saveJson } from "/utils/misc.js";
-import { addExclamationIconBalloon } from "/utils/ui.js";
+import { getDatetimeString } from "../../utils/text.js";
+import { saveJson } from "../../utils/misc.js";
+import { addExclamationIconBalloon } from "../../utils/ui.js";
 
 /* Chapter Unique */
 export function _chapterUnique(){

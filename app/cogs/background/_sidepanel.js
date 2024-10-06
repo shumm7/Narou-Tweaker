@@ -1,4 +1,4 @@
-import { getNcode } from "/utils/ncode.js";
+import { getNcode } from "../../utils/ncode.js";
 import { checkNovelPageDetail, getEpisode } from "../novel/utils.js";
 
 /* Require permissions: 

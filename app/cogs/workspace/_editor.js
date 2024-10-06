@@ -1,7 +1,7 @@
 import { convertRubyTags, convertSasieTags, countLines, countManuscriptPaper, countTime, getDateString, minuteStringJapanese } from "../../utils/text.js"
 import { setDisplayEvent } from "./_editorCss.js"
 import { _toolCovertKakuyomuRubyDot, _toolExportAll, _toolExportEach, _toolIndent, _toolRuby, _toolRubyDot, _toolSasie, _toolSearch } from "./_editorTools.js"
-import { escapeHtml, countCharacters, indexToNcode } from "/utils/text.js"
+import { escapeHtml, countCharacters, indexToNcode } from "../../utils/text.js"
 
 let isEventLocked = false
 const formElement = "#usernoveldatamangeForm,#wright_form,#usernoveldatainputForm"

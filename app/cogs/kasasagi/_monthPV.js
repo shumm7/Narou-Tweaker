@@ -1,5 +1,5 @@
-import { getDateString, getDatetimeString } from "/utils/text.js"
-import { saveJson } from "/utils/misc.js"
+import { getDateString, getDatetimeString } from "../../utils/text.js"
+import { saveJson } from "../../utils/misc.js"
 import { makeGraph, getValueFromTables, getNcode } from "./utils.js"
 
 var graph

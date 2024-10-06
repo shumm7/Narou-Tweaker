@@ -1,6 +1,6 @@
 import { getNcode } from "../novel/utils.js"
 import { checkXmypage } from "./utils.js"
-import { escapeHtml } from "/utils/text.js"
+import { escapeHtml } from "../../utils/text.js"
 
 export function _general(){
     /* Show User ID */

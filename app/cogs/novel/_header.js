@@ -1,7 +1,7 @@
 import { checkNovelPageDetail, getEpisode, isR18 } from "./utils.js"
-import { getNcode } from "/utils/ncode.js";
-import { ncodeToIndex } from "/utils/text.js"
-import { getExceptedIcon, addFontAwesomeOriginaIcons } from "/utils/header.js"
+import { getNcode } from "../../utils/ncode.js";
+import { ncodeToIndex } from "../../utils/text.js"
+import { getExceptedIcon, addFontAwesomeOriginaIcons } from "../../utils/header.js"
 
 /* Header */
 export function _header(){

@@ -1,4 +1,4 @@
-import { indexToNcode } from "/utils/text.js"
+import { indexToNcode } from "../../utils/text.js"
 import { popHiddenList, popReadList, pushHiddenList, pushReadList } from "./_reactionTools.js"
 
 export function _reaction(){
