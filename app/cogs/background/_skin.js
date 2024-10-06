@@ -88,6 +88,7 @@ function makeSkin(){
         const verticalVh = 20 * (1 - widthRatio) + 5
 
         rule += `
+
         .p-novel__text {
             line-height: ${lineHeight}% !important;
             font-size: ${fontSize}% !important;

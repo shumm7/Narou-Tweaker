@@ -357,8 +357,27 @@ export function makeSkinCSS(skin, local){
                 }
             }
         })
-        rule += `.js-customlayout1,.narou-tweaker--custom-skin.js-customlayout1{${root}}`
+        rule += `:root,body,.js-customlayout1,.narou-tweaker--custom-skin.js-customlayout1{${root}}`
     }
+
+    // スキンが適用されるまでの一時的な繋ぎ（画面のチラツキ防止）
+    rule += `
+        body:not(.narou-tweaker--custom-skin) {
+            background: var(--color-custom-body-bg);
+            color: var(--color-custom-text);
+        }
+        body:not(.narou-tweaker--custom-skin) {
+            a:link {
+                color: var(--color-custom-link);
+            }
+            a:visited {
+                color: var(--color-custom-link-visited);
+            }
+            a:hover {
+                color: var(--color-custom-link-hover);
+            }
+        }
+    `
 
     if(local.novelCustomStyle){
         rule += `
