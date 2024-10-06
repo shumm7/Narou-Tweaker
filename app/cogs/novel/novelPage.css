@@ -1,93 +1,17 @@
 
-/* Novel Page*/
-.narou-tweaker .novel-titles {
-    line-height: normal;
-	word-break: break-word;
-	text-align: left;
+/* 小説ページ */
+.narou-tweaker--custom-skin.narou-tweaker--novel-page .c-novel-attention {
+	background-color: var(--color-custom-attention-bg); /* 警告ボックス */
+	border-color: var(--color-custom-attention-border);
+	color: var(--color-custom-attention-text);
 }
-.narou-tweaker .novel-titles .novel-title {
-    line-height: normal;
-	font-weight: bold;
-	word-break: break-word;
-	word-break: auto-phrase;
+.narou-tweaker--custom-skin.narou-tweaker--novel-page .c-novel-attention .c-novel-attention__warning {
+    color: var(--color-custom-attention-text--danger); /* 警告ボックス（強調） */
 }
-.narou-tweaker .novel-titles .novel-author {
-	margin-top: .5em;
-	font-size: 90%;
+.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__text--preface,
+.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__text--afterword {
+	border-color: var( --color-custom-novel-border); /* まえがき・あとがきの区切り線 */
 }
-.narou-tweaker .novel-titles#ep-0,
-.narou-tweaker .novel-titles#ep-1 {
-	text-align: center;
-	margin-top: 4em;
-	margin-bottom: 4em;
-}
-.narou-tweaker .novel-titles#ep-0 .novel-title,
-.narou-tweaker .novel-titles#ep-1 .novel-title {
-	font-size: 3em;
-}
-.narou-tweaker .novel-titles#ep-0 .novel-author,
-.narou-tweaker .novel-titles#ep-1 .novel-author {
-	text-align: center;
-	font-size: 2em;
-	margin-top: .5em;
-}
-.narou-tweaker .novel-chapter {
-	text-align: center;
-	font-size: 90%;
-}
-.p-novel__body p.correction-original{
-	display: none;
-}
-
-.narou-tweaker .novel-titles a,
-.narou-tweaker #novel_vertical_items .novel-titles a /* 縦書き */ {
-    color: inherit;
-}
-
-
-
-body.narou-tweaker--novelcom-page {
-	background: var(--color-custom-body-bg);
-	color: var(--color-text);
-}
-
-/* 作品情報ページ */
-.narou-tweaker--novelcom-page #contents_main {
-	color: var(--color-custom-text);
-	background-color: var(--color-custom-body-bg);
-	background-image: none;
-}
-.narou-tweaker--novelcom-page #contents_main #novel_attention {
-	background-color: var(--color-bg-neverchange);
-	border: 5px solid var(--color-ui-border);
-	color: var(--color-text);
-}
-.narou-tweaker--novelcom-page #contents_main #novel_attention .attention {
-    color: var(--color-text--danger)
-}
-.narou-tweaker--novelcom-page #contents_main a:link {
-	color: var(--color-custom-link);
-}
-.narou-tweaker--novelcom-page #contents_main a:visited {
-	color: var(--color-custom-link-visited);
-}
-.narou-tweaker--novelcom-page #contents_main a:hover {
-	color: var(--color-custom-link-hover);
-}
-
-.narou-tweaker--novelcom-page #noveltable1 th,
-.narou-tweaker--novelcom-page #noveltable2 th,
-.narou-tweaker--novelcom-page #onazi .th {
-	color: var(--color-custom-novelinfo-datatable-header-text);
-	background: var(--color-custom-novelinfo-datatable-header-bg);
-}
-.narou-tweaker--novelcom-page #noveltable1 th, .narou-tweaker--novelcom-page #noveltable2 th,
-.narou-tweaker--novelcom-page #noveltable1 td, .narou-tweaker--novelcom-page #noveltable2 td{
-	border-color: var(--color-custom-novelinfo-datatable-border);
-}
-.narou-tweaker--novelcom-page h1 {
-	border-color: var(--color-custom-novelinfo-header-border);
-}
-.narou-tweaker--novelcom-page #onazi {
-	border-color: var(--color-custom-novelinfo-table-border);
+.narou-tweaker--custom-skin.narou-tweaker--novel-page .p-novel__number {
+	color: var(--color-custom-novel-number-text); /* エピソード数 */
 }

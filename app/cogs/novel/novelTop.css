@@ -1,8 +1,23 @@
-/* novelview */
+/* 目次 */
+.narou-tweaker--custom-style .p-novel__summary .more {
+	color: var(--color-custom-link); /* あらすじの「続きを読む」ボタンの色を変更 */
+}
+
+/* 閲覧履歴表示ボックス */
 .novelview_history-box {
 	margin-bottom: 20px;
-	background: #eeeeee;
+	background: var(--color-nt-historybox-bg);
+	color: var(--color-nt-historybox-text);
 	padding: 10px;
+}
+.novelview_history-box a:link {
+    color: var(--color-nt-historybox-link)
+}
+.novelview_history-box a:visited {
+    color: var(--color-nt-historybox-link-visited)
+}
+.novelview_history-box a:hover {
+    color: var(--color-nt-historybox-link-hover)
 }
 .novelview_history-item {
 	display: flex;

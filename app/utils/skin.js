@@ -145,19 +145,124 @@ export const localNovelSkin = [
                 type: "color",
             },
             {
-                key: "color-text",
-                value: "00-text",
+                key: "color-custom-link-disabled",
+                value: "#666",
+                type: "color",
+            },
+            {
+                key: "color-custom-bg--sub",
+                value: "#2f2f2f",
+                type: "color",
+            },
+            {
+                key: "color-custom-border--sub",
+                value: "rgba(255, 255, 255, 0.1)",
+                type: "color",
+            },
+            {
+                key: "color-custom-text--danger",
+                value: "#ff1f1f",
+                type: "color"
+            },  
+            {
+                key: "color-custom-attention-bg",
+                value: "color-custom-bg",
+                type: "color",
+            },
+            {
+                key: "color-custom-attention-text",
+                value: "color-custom-text",
                 type: "variable",
             },
             {
-                key: "color-bg",
-                value: "04-bg",
+                key: "color-custom-attention-border",
+                value: "rgba(255, 255, 255, 0.1)",
+                type: "color",
+            },
+            {
+                key: "color-custom-pager-border-disabled",
+                value: "color-custom-link-disabled",
+                type: "variable",
+            },
+            {
+                key: "color-custom-pager-text-disabled",
+                value: "color-custom-link-disabled",
                 type: "variable",
             },
             {
                 key: "color-custom-epilist-underline-hover",
                 value: "rgba(152, 189, 235, 0.7)",
                 type: "color",
+            },
+            {
+                key: "color-custom-header-item",
+                value: "rgba(255, 255, 255, 0.3)",
+                type: "color",
+            },
+            {
+                key: "color-custom-header-item--visited",
+                value: "rgba(114, 142, 176, 0.7)",
+                type: "color",
+            },
+            {
+                key: "color-custom-header-item--hover",
+                value: "rgba(152, 189, 235, 0.7)",
+                type: "color",
+            },
+            {
+                key: "color-custom-header-item--disabled",
+                value: "#333",
+                type: "color",
+            },
+            {
+                key: "color-custom-novelinfo-table-border",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelinfo-datatable-border",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-box-bg",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-box-border",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-box-bg--res",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-box-border--res",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-form-bg",
+                value: "transparent",
+                type: "color",
+            },
+            {
+                key: "color-custom-novelcom-form-border",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-episode-bg",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-warning-bg",
+                value: "color-custom-bg--sub",
+                type: "variable",
             },
 
 
@@ -244,14 +349,14 @@ export function makeSkinCSS(skin){
             if(s){
                 if(typeof s.value ==="string" && typeof s.key ==="string"){
                     if(s.type=="variable"){
-                        root += `--${s.key}:var(--${s.value});`
+                        root += `--${s.key}:var(--${s.value})!important;`
                     }else{
-                        root += `--${s.key}:${s.value};`
+                        root += `--${s.key}:${s.value}!important;`
                     }
                 }
             }
         })
-        rule += `.js-customlayout1,:root{${root}}`
+        rule += `.narou-tweaker--custom-skin.js-customlayout1{${root}}`
     }
 
     return rule

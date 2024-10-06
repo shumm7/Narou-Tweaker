@@ -1,4 +1,4 @@
-/* Header */
+/* ヘッダ基本 */
 #novel_header::-webkit-scrollbar,
 #novel_header ul::-webkit-scrollbar,
 #novel_header_right::-webkit-scrollbar,
@@ -27,6 +27,7 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 	/* アイコンの非表示設定 */
 	display:none !important;
 }
+
 
 /* モダンなヘッダ ON */
 .narou-tweaker-header--mode-1 .novel-icon-wrapper {
@@ -129,6 +130,11 @@ body:not(.narou-tweaker-header--show-enactive-icon) .novel-icon-wrapper ul li.en
 .narou-tweaker-header--mode-1 .novel-icon-wrapper .p-favepisode-form__button {
 	/* お気に入りep */
     border: none !important;
+}
+.narou-tweaker-header--mode-1 #pageBottom,
+.narou-tweaker-header--mode-1 #pageTop {
+	/* 既存のスクロールボタン無効化 */
+	display: none !important;
 }
 
 
@@ -329,16 +335,16 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 }
 
 /* お気に入りep */
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button::before {
+.narou-tweaker--custom-style .novel-icon-wrapper .p-favepisode-form__button::before {
     content: none !important;
 }
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button .active-icon{
+.narou-tweaker--custom-style .novel-icon-wrapper .p-favepisode-form__button .active-icon{
 	display: none;
 }
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .active-icon {
+.narou-tweaker--custom-style .novel-icon-wrapper .p-favepisode-form__button.is-active .active-icon {
 	display: block;
 }
-.narou-tweaker .novel-icon-wrapper .p-favepisode-form__button.is-active .enactive-icon {
+.narou-tweaker--custom-style .novel-icon-wrapper .p-favepisode-form__button.is-active .enactive-icon {
 	display: none;
 }
 
@@ -557,7 +563,7 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 .novel-icon-wrapper ul li.enactive > form:hover,
 .novel-icon-wrapper ul li.enactive > a:active,
 .novel-icon-wrapper ul li.enactive > form:active {
-    color: var(--color-custom-header-item--disabled);
+    color: var(--color-custom-header-item--disabled) !important;
 }
 
 /*

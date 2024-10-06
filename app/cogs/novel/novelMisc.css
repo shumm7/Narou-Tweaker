@@ -1,3 +1,9 @@
+/* correction */
+.p-novel__body p.correction-original{
+	display: none;
+}
+
+
 /* Attention Mark */
 .nt-novel-attention-label {
 	padding: 0 10px;

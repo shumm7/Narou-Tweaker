@@ -22,10 +22,14 @@ export function _header(){
         }
         const episode = getEpisode()
         const pageType = checkNovelPageDetail()
-        const atom = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']").prop("href")
+        var atomElm = $("link[href^='https://api.syosetu.com/writernovel/'][title='Atom']")
+        let atom
+        if(atomElm.length){
+            const atom = atomElm.prop("href")
+        }
         const r18 = isR18()
         var userid
-        if(pageType!="series"){
+        if(pageType!="series" && atom){
             if(location.hostname == "ncode.syosetu.com" || location.hostname == "novelcom.syosetu.com"){
                 userid = atom.match(/https:\/\/api\.syosetu\.com\/writernovel\/(\d+)\.Atom/)[1]
             }else if(location.hostname == "novel18.syosetu.com" || location.hostname == "novelcom18.syosetu.com"){

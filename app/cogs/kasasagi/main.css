@@ -1,25 +1,25 @@
 @charset "UTF-8";
 
 /* Miscs */
-body.narou-tweaker {
+body.narou-tweaker--custom-style {
   font-weight: 400;
   font-size: 14px;
   color: #333;
   font-family: -apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",Meiryo,"Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif !important;
   background-color: var(--background-screen);
 }
-.narou-tweaker #container{
+.narou-tweaker--custom-style #container{
 	background-color: var(--background-front);
 	padding: 10px;
 }
-.narou-tweaker li.chapter-graph-list__item>div>div{
+.narou-tweaker--custom-style li.chapter-graph-list__item>div>div{
     height:16px !important;
     background:#2299ff !important;
 }
-.narou-tweaker #datepicker_form{
+.narou-tweaker--custom-style #datepicker_form{
 	padding-left: 10px;
 }
-.narou-tweaker #access_all {
+.narou-tweaker--custom-style #access_all {
 	padding-top: 0;
 	margin: 20px 0px 40px 0px;
 }
@@ -39,22 +39,22 @@ body.narou-tweaker {
 }
 
 /* モダンレイアウト適用時の総合ページの表示崩れ対策 */
-.narou-tweaker #today_data,
-.narou-tweaker #yesterday_data {
+.narou-tweaker--custom-style #today_data,
+.narou-tweaker--custom-style #yesterday_data {
 	width: 450px;
 	margin-bottom: 1em;
 }
-.narou-tweaker .oneday_access_table table {
+.narou-tweaker--custom-style .oneday_access_table table {
     width: 250px;
 	margin: auto;
 }
-.narou-tweaker .oneday_graph table {
+.narou-tweaker--custom-style .oneday_graph table {
     width: 450px;
 }
-.narou-tweaker #yesterday_data {
+.narou-tweaker--custom-style #yesterday_data {
 	margin-left: 10px;
 }
-.narou-tweaker .oneday_access_table{
+.narou-tweaker--custom-style .oneday_access_table{
 	float: none;
 	margin-bottom: .5em;
 	margin-left: 5px;

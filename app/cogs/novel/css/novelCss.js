@@ -6,21 +6,64 @@ function insertCss(){
         let rule = ""
         
         /* 本文ページなどのUI調整 */
-        rule += `
-        .narou-tweaker .c-announce-box {
-            background-color: var(--color-custom-body-bg);
-            color: var(--color-custom-text);
+        if(data.novelCustomStyle){
+                
+            rule += `
+            .c-announce-box {
+                background-color: var(--color-custom-body-bg);
+                color: var(--color-custom-text);
+            }
+            .novel-titles .novel-title,
+            .novel-titles .novel-author,
+            .novel-chapter {
+                color: var(--color-custom-text--sub);
+            }
+            .novel-titles#ep-0 .novel-title,
+            .novel-titles#ep-1 .novel-title {
+                color: var(--color-custom-text);
+            }
+
+            .novel-titles {
+                line-height: normal;
+                word-break: break-word;
+                text-align: left;
+            }
+            .novel-titles .novel-title {
+                line-height: normal;
+                font-weight: bold;
+                word-break: break-word;
+                word-break: auto-phrase;
+            }
+            .novel-titles .novel-author {
+                margin-top: .5em;
+                font-size: 90%;
+            }
+            .novel-titles#ep-0,
+            .novel-titles#ep-1 {
+                text-align: center;
+                margin-top: 4em;
+                margin-bottom: 4em;
+            }
+            .novel-titles#ep-0 .novel-title,
+            .novel-titles#ep-1 .novel-title {
+                font-size: 3em;
+            }
+            .novel-titles#ep-0 .novel-author,
+            .novel-titles#ep-1 .novel-author {
+                text-align: center;
+                font-size: 2em;
+                margin-top: .5em;
+            }
+            .novel-chapter {
+                text-align: center;
+                font-size: 90%;
+            }
+            .novel-titles a,
+            #novel_vertical_items .novel-titles a {
+                color: inherit;
+            }
+            `
         }
-        .narou-tweaker .novel-titles .novel-title,
-        .narou-tweaker .novel-titles .novel-author,
-        .narou-tweaker .novel-chapter {
-            color: var(--color-custom-text--sub);
-        }
-        .narou-tweaker .novel-titles#ep-0 .novel-title,
-        .narou-tweaker .novel-titles#ep-1 .novel-title {
-            color: var(--color-custom-text);
-        }
-        `
 
         /* ヘッダ有効化時の残像を非表示 */
         if(data.novelCustomHeaderType == "1" || data.novelCustomHeaderType=="2"){

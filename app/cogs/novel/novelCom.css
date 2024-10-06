@@ -1,0 +1,172 @@
+.narou-tweaker--custom-skin.narou-tweaker--novelcom-page {
+    background: var(--color-custom-body-bg);
+    color: var(--color-custom-text);
+}
+.narou-tweaker--custom-skin.narou-tweaker--novelcom-page {
+    a:link {
+        color: var(--color-custom-link);
+    }
+    a:visited {
+        color: var(--color-custom-link-visited);
+    }
+    a:hover {
+        color: var(--color-custom-link-hover);
+    }
+}
+
+
+/* 作品情報ページ */
+.narou-tweaker--custom-style.narou-tweaker--novel-page--info {
+    #contents_main {
+        color: var(--color-custom-text);
+        background-color: var(--color-custom-body-bg);
+        background-image: none;
+    }
+    #contents_main #novel_attention {
+        background-color: var(--color-custom-attention-bg);
+        border-color: var(--color-custom-attention-border);
+        color: var(--color-custom-text);
+    }
+    #contents_main #novel_attention .attention {
+        color: var(--color-custom-text--danger)
+    }
+    #noveltype_notend {
+        border-color: var(--color-custom-novelinfo-noveltype-border);
+        background: var(--color-custom-novelinfo-noveltype-bg);
+        color: var(--color-custom-novelinfo-noveltype-text);
+    }
+
+    #noveltable1 th,
+    #noveltable2 th,
+    #onazi .th {
+        color: var(--color-custom-novelinfo-datatable-header-text);
+        background: var(--color-custom-novelinfo-datatable-header-bg);
+    }
+    #noveltable1 th,
+    #noveltable2 th,
+    #noveltable1 td,
+    #noveltable2 td{
+        border-color: var(--color-custom-novelinfo-datatable-border);
+    }
+    h1 {
+        border-color: var(--color-custom-novelinfo-header-border);
+    }
+    #onazi {
+        border-color: var(--color-custom-novelinfo-table-border);
+    }
+}
+
+
+/* 感想・レビュー */
+.narou-tweaker--custom-style.narou-tweaker--novel-page--impression,
+.narou-tweaker--custom-style.narou-tweaker--novel-page--review {
+    .contents_header {
+        border-color: var(--color-custom-novelcom-header-border);
+    }
+    .waku {
+        border-color: var(--color-custom-novelcom-box-border);
+    }
+    .comment_h2 {
+        background-color: var(--color-custom-novelcom-box-bg);
+        border-color: var(--color-custom-novelcom-box-border);
+        color: var(--color-custom-novelcom-box-text);
+    }
+    .comment_info {
+        border-color: var(--color-custom-novelcom-box-border);
+    }
+    .res {
+        background-color: var(--color-custom-novelcom-box-bg--res);
+        border-color: var(--color-custom-novelcom-box-border--res);
+        color: var(--color-custom-novelcom-box-text--res);
+    }
+    .rescomment {
+        background-color: var(--color-custom-novelcom-box-bg--res);
+        border-color: var(--color-custom-novelcom-box-border--res);
+    }
+    .no_posted_impression {
+        background-color: var(--color-custom-novelcom-episode-bg);
+        color: var(--color-custom-novelcom-episode-text);
+    }
+    #hyoukalan {
+        background-color: var(--color-custom-novelcom-form-bg);
+        border-color: var(--color-custom-novelcom-form-border);
+        color: var(--color-custom-novelcom-form-text);
+    }
+    .novelreport_attention {
+        color: var(--color-custom-text--danger)
+    }
+    .nothing {
+        background-color: var(--color-custom-novelcom-warning-bg);
+        color: var(--color-custom-text);
+    }
+    .userblock {
+        border-color: var(--color-custom-novelcom-box-border);
+    }
+    #novel_footer {
+        border-color: var(--color-custom-novel-border);
+    }
+
+    #impression textarea {
+        line-height: 1.8;
+        display: block;
+        min-height: 8em;
+        resize: vertical;
+
+        font-size: 12.6px;
+        padding: 5px 10px;
+        border: 2px solid var(--color-ui-form-border);
+        border-radius: 5px;
+        background-color: var(--color-ui-bg);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        box-sizing: border-box;
+    }
+    #impression textarea:focus {
+        outline: 0;
+        -webkit-box-shadow: 0 0 0 2px var(--color-form-shadow-focus);
+        box-shadow: 0 0 0 2px var(--color-form-shadow-focus);
+    }
+    #impression textarea:disabled {
+        cursor: not-allowed;
+        opacity: 1;
+        color: var(--color-text--disable);
+        background-color: var(--color-ui-form-bg--disable);
+    }
+
+    .button {
+        border-color: var(--color-ui-button-yellow-border);
+        background-color: var(--color-ui-button-yellow-bg)
+    }
+    .button:visited {
+        color: var(--color-text)
+    }
+    .button:hover {
+        color: var(--color-text);
+        border-color: var(--color-ui-button-aqua-border);
+        background-color: var(--color-ui-button-aqua-bg)
+    }
+}
+
+/* pdf */
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--pdf {
+    .verticalpdf-create--created {
+        background-color: var(--color-custom-pdf-bg--created);
+        color: var(--color-custom-pdf-text--created);
+    }
+    .verticalpdf-download-button--created:link {
+        background-color: var(--color-ui-button-blue-bg);
+        color: var(--color-ui-button-blue-text);
+    }
+    .verticalpdf-download-button--created:hover {
+        background-color: var(--color-ui-button-blue-bg--hover);
+        color: var(--color-ui-button-blue-text);
+    }
+}
+
+/* TXT */
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--txt {
+    form {
+        color: #000;
+    }
+}

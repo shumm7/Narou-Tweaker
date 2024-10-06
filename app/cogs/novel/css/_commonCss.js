@@ -1,3 +1,5 @@
+$("body").addClass("narou-tweaker--custom-style")
+$("body").addClass("narou-tweaker--custom-skin")
 
 chrome.storage.local.get(null, (data)=>{
     /* Skin Custom CSS */

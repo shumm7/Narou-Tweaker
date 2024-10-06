@@ -108,12 +108,12 @@ function makeSkin(){
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
-        .narou-tweaker--series #container {
+        narou-tweaker--custom-style.narou-tweaker--series #container {
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         }
-        .narou-tweaker .novel-titles#ep-0,
-        .narou-tweaker .novel-titles#ep-1 {
+        .narou-tweaker--custom-style .novel-titles#ep-0,
+        .narou-tweaker--custom-style .novel-titles#ep-1 {
             font-family: ${fontFamily_Current};
             text-rendering: ${textRendering};
         

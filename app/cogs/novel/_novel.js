@@ -8,7 +8,7 @@ export function _novel(){
     chrome.storage.local.get(null, (data) => {
         const pageDetail = checkNovelPageDetail()
         if(data.novelCustomStyle){
-            $("body").addClass("narou-tweaker")
+            $("body").addClass("narou-tweaker--custom-skin")
             $("#footer").remove()
 
             if(pageDetail=="novel"){

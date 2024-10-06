@@ -42,6 +42,7 @@
         "common.css",
         "cogs/novel/main.css",
         "cogs/novel/novelPage.css",
+        "cogs/novel/novelCom.css",
         "cogs/novel/novelMisc.css",
         "cogs/novel/novelHeader.css",
         "cogs/novel/novelModal.css",
