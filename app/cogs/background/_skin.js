@@ -5,9 +5,10 @@ import { makeSkinCSS, localNovelSkin } from "../../utils/skin.js"
 export function skinListener(){
     makeSkin()
 
+    /* local */
     chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.skins!=undefined ||
-            changes.selectedSkin!=undefined ||
+        if(
+            changes.novelSkinSelected!=undefined ||
             changes.fontSelectedFontFamily!=undefined ||
             changes.fontFontFamilyList!=undefined ||
             changes.fontFontSize!=undefined ||
@@ -17,7 +18,7 @@ export function skinListener(){
         ){
             makeSkin()
         }
-        if(changes.skins!=undefined ||
+        if(
             changes.workspaceEditorSelectedSkin!=undefined ||
             changes.workspaceEditorSelectedFontFamily!=undefined ||
             changes.workspaceEditorFontFamilyList!=undefined ||
@@ -29,15 +30,40 @@ export function skinListener(){
             makeEditorSkin()
         }
     })
+
+    /* sync */
+    chrome.storage.sync.onChanged.addListener(function(changes){
+        if(
+            changes.novelSkins!=undefined
+        ){
+            makeSkin()
+        }
+        if(
+            changes.novelSkins!=undefined
+        ){
+            makeEditorSkin()
+        }
+    })
 }
 
 function makeSkin(){
     chrome.storage.local.get(null, (data) => {
-        const skin_idx = defaultValue(data.selectedSkin, defaultOption.selectedSkin)
-        const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
-        const skin = skins[skin_idx]
+        var skins = data.novelSkins
+        if(Array.isArray(skins)){
+            skins = []
+        }
+        skins = localNovelSkin.concat(skins)
 
-        var rule = ""
+        var selected = data.novelSkinSelected
+        if(selected < 0){
+            selected = 0
+        }else if(selected >= skins.length){
+            selected = skins.length - 1
+        }
+        const skin = skins[selected]
+
+
+        let rule = ""
 
         /* Font */
         const selectedFontFamily = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
@@ -112,7 +138,7 @@ function makeSkin(){
         `
 
         chrome.storage.local.set({
-            novelAppliedSkinCSS: makeSkinCSS(skin, data.novelCustomStyle),
+            novelAppliedSkinCSS: makeSkinCSS(skin),
             novelAppliedFontCSS: rule,
             novelSkinCustomCSS: skin.css,
             novelFontCustomCSS: fontCss
@@ -121,6 +147,7 @@ function makeSkin(){
 }
 
 function makeEditorSkin(){
+    /*
     chrome.storage.local.get(null, (data) => {
         const skin_idx = defaultValue(data.workspaceEditorSelectedSkin, defaultOption.workspaceEditorSelectedSkin)
         const skins = localSkins.concat(defaultValue(data.skins, defaultOption.skins))
@@ -229,5 +256,13 @@ function makeEditorSkin(){
             workspaceEditorSkinCustomCSS: skin.css,
             workspaceEditorFontCustomCSS: fontCss
         })
+    })
+    */
+
+    chrome.storage.local.set({ //wip
+        workspaceEditorAppliedSkinCSS: "",
+        workspaceEditorAppliedFontCSS: "",
+        workspaceEditorSkinCustomCSS: "",
+        workspaceEditorFontCustomCSS: ""
     })
 }

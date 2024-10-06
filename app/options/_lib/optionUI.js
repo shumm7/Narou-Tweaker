@@ -1,4 +1,4 @@
-import { defaultOption } from "/utils/option.js";
+import { defaultOption } from "../../utils/option.js";
 import { customUIList } from "./customUI.js";
 import { getOptionCategory, getOptionFromId, getOptionPageFromId } from "./optionLib.js";
 
@@ -1100,7 +1100,7 @@ export const optionList = [
 
     /* スキン (style) */
     {
-        id: "novelSkin",
+        id: "novelSkinSelect",
         title: "スキン",
         description: {
             text: "小説ページの外観を変更します。",
@@ -1108,7 +1108,7 @@ export const optionList = [
         },
         ui: {
             type: "custom",
-            name: "wide",
+            name: "default",
             data: "ui_novelSkinSelect",
         },
         location: {
@@ -1117,51 +1117,7 @@ export const optionList = [
         },
         value: {
             hasValue: false,
-            related: ["skins", "selectedSkin"],
-        },
-    },
-
-    {
-        id: "novelSkinExport",
-        title: "スキンのエクスポート",
-        description: {
-            text: "現在、選択中のスキンをデータとして出力します。",
-            keywords: ["すきんのえくすぽーと", "エクスポート", "スキン"],
-        },
-        ui: {
-            type: "custom",
-            name: "default",
-            data: "ui_novelSkinExportButtons",
-        },
-        location: {
-            page: "novel",
-            category: "style",
-        },
-        value: {
-            hasValue: false,
-            isAdvanced: true,
-        },
-    },
-
-    {
-        id: "novelSkinImport",
-        title: "スキンのインポート",
-        description: {
-            text: "外部からスキンを取り込むことができます。",
-            keywords: ["すきんのいんぽーと", "インポート", "スキン"],
-        },
-        ui: {
-            type: "custom",
-            name: "default",
-            data: "ui_novelSkinImportButtons",
-        },
-        location: {
-            page: "novel",
-            category: "style",
-        },
-        value: {
-            hasValue: false,
-            isAdvanced: true,
+            related: ["novelSkins", "novelSkinSelected"],
         },
     },
 

@@ -165,6 +165,9 @@ export const defaultOption = {
     novelAuthorCustomSkin: true,
     novelAuthorCustomSkinWarning: true,
 
+    novelSkins: [], //v2
+    novelSkinSelected: 0, //v2
+
     /* Font */
     fontSelectedFontFamily: 0,
     fontFontFamilyList: [],
