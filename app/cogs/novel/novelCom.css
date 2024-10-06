@@ -14,9 +14,14 @@
     }
 }
 
+.narou-tweaker--custom-style.narou-tweaker--novelcom-page {
+    font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+    font-size: 14px;
+}
+
 
 /* 作品情報ページ */
-.narou-tweaker--custom-style.narou-tweaker--novel-page--info {
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--info {
     #contents_main {
         color: var(--color-custom-text);
         background-color: var(--color-custom-body-bg);
@@ -54,14 +59,20 @@
     #onazi {
         border-color: var(--color-custom-novelinfo-table-border);
     }
+    #ncode {
+        color: var(--color-custom-text--sub);
+    }
 }
 
 
 /* 感想・レビュー */
-.narou-tweaker--custom-style.narou-tweaker--novel-page--impression,
-.narou-tweaker--custom-style.narou-tweaker--novel-page--review {
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--impression,
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--review {
+    .attention {
+        color: var(--color-custom-text--danger)
+    }
     .contents_header {
-        border-color: var(--color-custom-novelcom-header-border);
+        border-color: var(--color-custom-novel-header-border);
     }
     .waku {
         border-color: var(--color-custom-novelcom-box-border);
@@ -105,8 +116,26 @@
     #novel_footer {
         border-color: var(--color-custom-novel-border);
     }
+    .review_waku {
+        background-color: var(--color-custom-novelcom-box-bg--review);
+        border-color: var(--color-custom-novelcom-box-border--review);
+        color: var(--color-custom-novelcom-box-text--review);
+    }
+    .hyoukawaku_in {
+        background-color: var(--color-custom-body-bg);
+    }
+    .review_user {
+        border-color: var(--color-custom-novelcom-box-border);
+    }
+    #review label {
+        color: var(--color-custom-text--sub);
+    }
+    h1 {
+        border-color: var(--color-custom-novel-header-border);
+    }
 
-    #impression textarea {
+    #impression textarea,
+    #review textarea {
         line-height: 1.8;
         display: block;
         min-height: 8em;
@@ -120,14 +149,34 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
+        
     }
-    #impression textarea:focus {
-        outline: 0;
+    #review input[type="text"] {
+        font-size: 12.6px;
+        padding: 5px 10px;
+        border: 2px solid var(--color-ui-form-border);
+        border-radius: 5px;
+        background-color: var(--color-ui-bg);
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        line-height: 1.5;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        height: 32.9px
+    }
+    #impression textarea:focus,
+    #review textarea:focus,
+    #review input[type="text"]:focus {
+        outline: 1px;
         -webkit-box-shadow: 0 0 0 2px var(--color-form-shadow-focus);
         box-shadow: 0 0 0 2px var(--color-form-shadow-focus);
     }
-    #impression textarea:disabled {
+    #review textarea:disabled,
+    #impression textarea:disabled,
+    #review input[type="text"]:disabled {
         cursor: not-allowed;
         opacity: 1;
         color: var(--color-text--disable);
@@ -167,6 +216,29 @@
 /* TXT */
 .narou-tweaker--custom-skin.narou-tweaker--novel-page--txt {
     form {
-        color: #000;
+        color: var(--color-site-text);
+    }
+}
+
+/* 誤字報告 */
+.narou-tweaker--custom-skin.narou-tweaker--novel-page--report {
+    .content_title {
+        border-color: var(--color-custom-novel-header-border);
+    }
+    p[data-original] span:hover {
+        background-color: var(--color-custom-novelreport-highlight);
+    }
+    .table_novelreport {
+        border-color: var(--color-custom-novelreport-box-border);
+    }
+    .table_novelreport th {
+        background-color: var(--color-custom-novelreport-box-bg);
+    }
+    .novelreport_novelview {
+        border-color: var(--color-custom-novelreport-box-border);
+    }
+
+    .attention {
+        color: var(--color-custom-text--danger)
     }
 }

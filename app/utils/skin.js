@@ -245,6 +245,16 @@ export const localNovelSkin = [
                 type: "variable",
             },
             {
+                key: "color-custom-novelcom-box-bg--review",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelcom-box-border--review",
+                value: "color-custom-border--sub",
+                type: "variable",
+            },
+            {
                 key: "color-custom-novelcom-form-bg",
                 value: "transparent",
                 type: "color",
@@ -260,8 +270,28 @@ export const localNovelSkin = [
                 type: "variable",
             },
             {
+                key: "color-custom-novelcom-episode-text",
+                value: "color-custom-text--sub",
+                type: "variable",
+            },
+            {
                 key: "color-custom-novelcom-warning-bg",
                 value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelreport-highlight",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelreport-box-bg",
+                value: "color-custom-bg--sub",
+                type: "variable",
+            },
+            {
+                key: "color-custom-novelreport-box-border",
+                value: "color-custom-border--sub",
                 type: "variable",
             },
 
@@ -378,13 +408,14 @@ export function makeSkinCSS(skin, local){
             }
         }
     `
-
-    if(local.novelCustomStyle){
-        rule += `
+    rule += `
         .c-announce-box {
             background-color: var(--color-custom-body-bg);
             color: var(--color-custom-text);
         }
+    `
+    if(local.novelCustomStyle){
+        rule += `
         .novel-titles .novel-title,
         .novel-titles .novel-author,
         .novel-chapter {

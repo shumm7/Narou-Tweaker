@@ -55,7 +55,6 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-custom-novelinfo-noveltype-text: #fafafa;
     --color-custom-novelinfo-noveltype-bg: #333;
     --color-custom-novelinfo-noveltype-border: #666;
-    --color-custom-novelinfo-ncode: var(--color-custom-text--sub);
 
     /* 感想・レビュー */
     --color-custom-novelcom-box-bg: #f6f6f6;
@@ -64,6 +63,9 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-custom-novelcom-box-bg--res: #FFFFEE;
     --color-custom-novelcom-box-border--res: #ccc;
     --color-custom-novelcom-box-text--res: inherit;
+    --color-custom-novelcom-box-bg--review: #FFFFEE;
+    --color-custom-novelcom-box-border--review:#AAAA33;
+    --color-custom-novelcom-box-text--review: inherit;
     --color-custom-novelcom-episode-bg: #adb6bf;
     --color-custom-novelcom-episode-text: inherit;
     --color-custom-novelcom-form-bg: #FEFEFE;
@@ -74,6 +76,11 @@ html:has(.narou-tweaker-cursor-hide) {
     /* pdf */
     --color-custom-pdf-bg--created: #e6fcf5;
     --color-custom-pdf-text--created: #000;
+
+    /* 誤字報告 */
+    --color-custom-novelreport-highlight: #eee;
+    --color-custom-novelreport-box-bg: #eee;
+    --color-custom-novelreport-box-border: #ccc;
 }
 
 

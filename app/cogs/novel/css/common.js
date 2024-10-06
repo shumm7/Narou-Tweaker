@@ -1,7 +1,10 @@
-$("body").addClass("narou-tweaker--custom-style")
 $("body").addClass("narou-tweaker--custom-skin")
 
 chrome.storage.local.get(null, (data)=>{
+    if(data.novelCustomStyle){
+        $("body").addClass("narou-tweaker--custom-style")
+    }
+
     /* Skin Custom CSS */
     if("novelSkinCustomCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--skin-user" class="narou-tweaker-style"></style>`)
