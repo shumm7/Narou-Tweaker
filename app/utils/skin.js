@@ -357,7 +357,7 @@ export function makeSkinCSS(skin, local){
                 }
             }
         })
-        rule += `.narou-tweaker--custom-skin.js-customlayout1{${root}}`
+        rule += `.js-customlayout1,.narou-tweaker--custom-skin.js-customlayout1{${root}}`
     }
 
     if(local.novelCustomStyle){
