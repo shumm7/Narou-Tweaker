@@ -23,9 +23,6 @@
   "action": {
     "default_popup": "options/popup/index.html"
   },
-  "side_panel": {
-    "default_path": "cogs/sidepanel/index/index.html"
-  },
   "content_scripts": [
     {
       "js": [

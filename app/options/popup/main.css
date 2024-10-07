@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    width: 400px;
+    height: 600px;
+}
+html::-webkit-scrollbar {
+    display: none;
+}

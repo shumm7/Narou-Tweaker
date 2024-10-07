@@ -164,7 +164,6 @@ input[type="submit"].ui-button {
 
 .dropdown select {
     appearance: none;
-    min-width: 200px;
     height: 2.5em;
     padding: .4em calc(.8em + 30px) .4em .8em;
     border: 1px solid #d0d0d0;
@@ -185,6 +184,7 @@ label.toggle {
 	position: relative;
 	padding-left: 60px;
 	cursor: pointer;
+	height: 30px;
 }
 
 label.toggle::before, label.toggle::after {
