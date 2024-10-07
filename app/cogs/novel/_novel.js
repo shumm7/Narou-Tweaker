@@ -7,8 +7,9 @@ import { novelTop } from "./_novelTop.js";
 export function _novel(){
     chrome.storage.local.get(null, (data) => {
         const pageDetail = checkNovelPageDetail()
+        $("body").addClass("narou-tweaker--custom-skin")
         if(data.novelCustomStyle){
-            $("body").addClass("narou-tweaker--custom-skin")
+            $("body").addClass("narou-tweaker--custom-style")
             $("#footer").remove()
 
             if(pageDetail=="novel"){
