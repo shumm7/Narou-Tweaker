@@ -294,7 +294,7 @@ export function formatSkinDataV1(raw){
     if(typeof raw !== "object"){
         raw = {}
     }
-    
+
     // name
     if("name" in raw === false){raw.name = "" }
     if(typeof raw.name != typeof ""){raw.name = "" }
@@ -613,38 +613,38 @@ export function makeSkinCSSV1(skin, novel_css){
         color: ${s.sublist.color};
     }
     
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:visited,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:visited,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:visited > *{
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > a:visited,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:visited,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:visited > *{
         color: ${s.sublist.visited} !important;
     }
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form > *,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:link,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:link,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:link > * {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > a,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form > *,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > a:link,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:link,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:link > * {
         color: ${s.sublist.color} !important;
     }
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:hover,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > a:active,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:hover > *,
-    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.enactive) > form:active > * {
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > a:hover,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > a:active,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:hover,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:active,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:hover > *,
+    .narou-tweaker-header--mode-0 .wrap_menu_novelview_after .box_menu_novelview_after ul li:not(.inactive) > form:active > * {
         color: ${s.sublist.hover} !important;
         background: transparent;
     }
-    .narou-tweaker-header--mode-0 #novel_header ul li.siori:not(.enactive) > * {
+    .narou-tweaker-header--mode-0 #novel_header ul li.siori:not(.inactive) > * {
         color: #666666 !important;
     }
     
-    .novel-icon-wrapper ul li.enactive > a,
-    .novel-icon-wrapper ul li.enactive > form,
-    .novel-icon-wrapper ul li.enactive > a:hover,
-    .novel-icon-wrapper ul li.enactive > form:hover,
-    .novel-icon-wrapper ul li.enactive > a:active,
-    .novel-icon-wrapper ul li.enactive > form:active {
+    .novel-icon-wrapper ul li.inactive > a,
+    .novel-icon-wrapper ul li.inactive > form,
+    .novel-icon-wrapper ul li.inactive > a:hover,
+    .novel-icon-wrapper ul li.inactive > form:hover,
+    .novel-icon-wrapper ul li.inactive > a:active,
+    .novel-icon-wrapper ul li.inactive > form:active {
         /* Enactive アイコン */
         color: ${s.novel.background_second} !important;
     }

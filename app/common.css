@@ -122,7 +122,7 @@
 	--narou-tweaker--color-ui-toggle--handle: var(--narou-tweaker--color-bg1);
 	--narou-tweaker--color-ui-toggle--border: rgba(0, 0, 0, .3);
 	--narou-tweaker--color-ui-toggle--active: var(--narou-tweaker--color-key1);
-	--narou-tweaker--color-ui-toggle--enactive: rgba(27, 142, 243, .1);
+	--narou-tweaker--color-ui-toggle--inactive: rgba(27, 142, 243, .1);
 
 	/* dropdown */
 	--narou-tweaker--color-ui-dropdown--bg: var(--narou-tweaker--color-bg1);
@@ -287,7 +287,7 @@ label.toggle::before, label.toggle::after {
 }
 
 label.toggle::before {
-	background-color: var(--narou-tweaker--color-ui-toggle--enactive);
+	background-color: var(--narou-tweaker--color-ui-toggle--inactive);
 	border: 1.4px solid var(--narou-tweaker--color-ui-toggle--border);
 	border-radius: 12px;
 	height: 20px;

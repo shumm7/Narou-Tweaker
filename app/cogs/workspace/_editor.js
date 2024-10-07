@@ -1103,10 +1103,10 @@ function novelPadding(elm){
     if(diffs>0){
         $(elm).css("padding-bottom", diffs)
         $(elm).removeClass("nt-active-padding")
-        $(elm).addClass("nt-enactive-padding")
+        $(elm).addClass("nt-inactive-padding")
     }else{
         $(elm).css("padding-bottom", 200)
-        $(elm).removeClass("nt-enactive-padding")
+        $(elm).removeClass("nt-inactive-padding")
         $(elm).addClass("nt-active-padding")
     }
 }
