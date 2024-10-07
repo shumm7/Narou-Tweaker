@@ -419,11 +419,11 @@ export function makeSkinCSS(skin, local){
         .novel-titles .novel-title,
         .novel-titles .novel-author,
         .novel-chapter {
-            color: var(--color-custom-text--sub);
+            color: var(--color-custom-text--sub) !important;
         }
         .novel-titles#ep-0 .novel-title,
         .novel-titles#ep-1 .novel-title {
-            color: var(--color-custom-text);
+            color: var(--color-custom-text) !important;
         }
 
         .novel-titles {
@@ -463,7 +463,7 @@ export function makeSkinCSS(skin, local){
         }
         .novel-titles a,
         #novel_vertical_items .novel-titles a {
-            color: inherit;
+            color: inherit !important;
         }
         `
     }

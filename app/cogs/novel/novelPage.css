@@ -18,6 +18,32 @@
 	.p-novel__number {
 		color: var(--color-custom-novel-number-text); /* エピソード数 */
 	}
+	.p-novel__bookmarker-no { /* しおり */
+		a:link {
+			color: var(--color-custom-link);
+		}
+		a:visited {
+			color: var(--color-custom-link-visited);
+		}
+		a:hover {
+			color: var(--color-custom-link-hover);
+		}
+	}
+
+	.c-announce-box .c-announce {
+		a:link {
+			color: var(--color-custom-link);
+		}
+		a:visited {
+			color: var(--color-custom-link-visited);
+		}
+		a:hover {
+			color: var(--color-custom-link-hover);
+		}
+		.c-announce__emphasis {
+			color: var(--color-custom-text--danger);
+		}
+	}
 }
 
 
