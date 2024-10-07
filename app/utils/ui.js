@@ -35,25 +35,3 @@ export function addQuestionIconBalloon(html, href){
 export function addExclamationIconBalloon(html, href){
     return balloonGeneral(html, "fa-circle-exclamation", href)
 }
-
-export function getPageZoom()
-{
-    //RETURN: 1.0 for 100%, and so on
-    var zoom = 1;
-
-    try
-    {
-        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-        svg.setAttribute('version', '1.1');
-        document.body.appendChild(svg);
-        zoom = svg.currentScale;
-        document.body.removeChild(svg);
-    }
-    catch(e)
-    {
-        console.error("Zoom method failed: " + e.message);
-    }
-
-    return zoom;
-}
