@@ -17,21 +17,21 @@
     height: 100%;
     position: fixed;
     width: calc(300px + env(safe-area-inset-left));
-    background: #efefef;
+    background: var(--narou-tweaker--color-ui-modal--bg);
     z-index: 50;
     filter: drop-shadow(0px 0px 1px rgba(0,0,0,.7));
     transition: .3s;
 	font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
 	font-size: 14px;
 	text-align: left;
-	color: #444;
+	color: var(--narou-tweaker--color-ui-modal--text);
 }
 #novel-option.show {
     transform: translateX(calc(-300px - env(safe-area-inset-left) - 50px));
 }
 #novel-option--header {
     height: 70px;
-    background: #ddd;
+    background: var(--narou-tweaker--color-ui-modal--bg-sub);
 }
 
 #novel-option--header ul {
@@ -72,10 +72,10 @@
 	padding: 0 .5em;
 }
 #novel-option--header ul li.active button span {
-	border-top-color: #222 !important;
+	border-top-color: var(--narou-tweaker--color-ui-modal--tab-selected) !important;
 }
 #novel-option--header ul li button span:hover {
-	border-top-color: var(--kasasagi-blue);
+	border-top-color: var(--narou-tweaker--color-ui-modal--tab-hover);
 }
 #novel-option--contents {
 	height: 100%;
@@ -132,7 +132,8 @@
 }
 #novel-option--font-family-sample {
 	padding: 5px 10px;
-	border: 1px solid rgb(221, 221, 221);
+	border: 1px solid var(--narou-tweaker--color-ui-modal--box-border);
+	background: var(--narou-tweaker--color-ui-modal--box-bg);
 	margin: 5px 0;
 	margin-bottom: 10px;
 	line-height: 180%;
@@ -150,16 +151,14 @@
 	align-items: center;
 	width: 60px;
 	height: 60px;
-	border: 1px solid #ddd;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--button-border);
+	background: var(--narou-tweaker--color-ui-modal--button-bg);
+	color: var(--narou-tweaker--color-ui-modal--button-text);
 	margin: .5em 1em;
 	cursor: pointer;
 }
 .novel-option--font-button-box:hover {
-	background: #fafafa;
-}
-.novel-option--font-button.active .novel-option--font-button-box{
-	border: 1px solid var(--kasasagi-blue);
+	background: var(--narou-tweaker--color-ui-modal--button-bg-hover);
 }
 .novel-option--font-button-description {
 	font-size: 90%;
@@ -170,14 +169,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #ddd;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--button-border);
+	background: var(--narou-tweaker--color-ui-modal--button-bg);
+	color: var(--narou-tweaker--color-ui-modal--button-text);
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
 }
 .novel-option--font-number-change-button:hover{
-	background: #fafafa;
+	background: var(--narou-tweaker--color-ui-modal--button-bg-hover);
 }
 #novel-option--font-size,
 #novel-option--line-height,
@@ -194,7 +194,7 @@
 #novel-option--page-width-input {
 	font-size: 110%;
 	width: 50%;
-	border: 1px solid #ddd;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--border);
 	text-align: center;
 	height: 30px;
 	padding: 0;
@@ -217,12 +217,11 @@
 
 /* Replace Patterns (Correction) */
 #novel-option--correction-replace--patterns-outer {
-	background: #f8f8f8;
+	background: transparent;
     padding: .3em .3em;
 	overflow-y: scroll;
 	height: 10em;
-    border-radius: .5em;
-	border: 1px solid #ddd;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--border);
 }
 #novel-option--correction-replace--patterns {
 }
@@ -237,16 +236,17 @@
 	max-width: 100%;
 	padding: .5em;
 	margin: .5em 0;
-	border: 1px solid #ddd;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--border);
+	background: var(--narou-tweaker--color-ui-modal--button-bg);
 	border-radius: .5em;
 }
 #novel-option--correction-replace--pattern-box-addition {
+	color: var(--narou-tweaker--color-ui-modal--text-sub);
 	justify-content: center;
 }
 #novel-option--correction-replace--pattern-box-addition:hover {
 	transition: background-color .3s ease;
-	background: #fafafa;
+	background: var(--narou-tweaker--color-ui-modal--button-bg-hover);
 	cursor: pointer;
 }
 
@@ -265,7 +265,7 @@
 }
 .novel-option--correction-replace--index {
 	font-size: 12px;
-	color: #999;
+	color: var(--narou-tweaker--color-ui-modal--text-sub);
 	padding: .1em;
 }
 .novel-option--correction-replace--move-buttons {
@@ -278,19 +278,19 @@
 }
 .novel-option--correction-replace--icons {
 	transition: color .3s ease;
-	color:#bbb;
+	color: var(--narou-tweaker--color-ui-modal--text-sub);
 	font-size: 14px;
 	margin: 0 .2em;
 	cursor: pointer;
 }
 .novel-option--correction-replace--icons:hover {
-	color:#999;
+	color: var(--narou-tweaker--color-ui-modal--text);
 }
 .novel-option--correction-replace--icons.enabled {
-	color:rgb(51, 154, 244);
+	color:var(--narou-tweaker--color-ui-modal--button-bg-accent);
 }
 .novel-option--correction-replace--icons.enabled:hover {
-	color:rgb(0, 58, 133);
+	color:var(--narou-tweaker--color-ui-modal--button-bg-accent-disabled);
 }
 .novel-option--correction-replace--active-button {
 	margin-right: 0 .2em;

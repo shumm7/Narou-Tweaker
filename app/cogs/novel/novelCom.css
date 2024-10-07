@@ -135,6 +135,9 @@
     h1 {
         border-color: var(--color-custom-novel-header-border);
     }
+    .p-quick-setting__label {
+        color: var(--color-custom-text--sub);
+    }
 
     #impression textarea,
     #review textarea {

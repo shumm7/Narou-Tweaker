@@ -11,112 +11,14 @@ export const localNovelSkin = [
         name: "標準設定〔小説家になろう〕",
         description: "サイトのデフォルト",
         customizable: false,
-        show: true,
         version: 2,
-        style: [
-            {
-                key: "00-text",
-                value: "#444",
-                type: "color",
-            },
-            {
-                key: "01-link",
-                value: "#03c",
-                type: "color",
-            },
-            {
-                key: "02-link-visited",
-                value: "#857",
-                type: "color",
-            },
-            {
-                key: "03-link-hover",
-                value: "#393",
-                type: "color",
-            },
-            {
-                key: "04-bg",
-                value: "#fff",
-                type: "color",
-            },
-            {   
-                key: "color-custom-announce-border",
-                value: "01-link",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-body-bg",
-                value: "04-bg",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-epilist-underline",
-                value: "transparent",
-                type: "color"
-            },
-            {   
-                key: "color-custom-epilist-underline-favorited",
-                value: "00-text",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-epilist-underline-hover",
-                value: "#9df",
-                type: "color"
-            },
-            {   
-                key: "color-custom-link",
-                value: "01-link",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-link-hover",
-                value: "03-link-hover",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-link-visited",
-                value: "02-link-visited",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-pager-border-disabled",
-                value: "#44444433",
-                type: "color"
-            },
-            {   
-                key: "color-custom-pager-text-disabled",
-                value: "#44444480",
-                type: "color"
-            },
-            {   
-                key: "color-custom-text",
-                value: "00-text",
-                type: "variable"
-            },
-            {   
-                key: "color-custom-bkmfix-box",
-                value: "#e7f5ff",
-                type: "color"
-            },
-            {   
-                key: "color-custom-bkmfix-text",
-                value: "#1971c2",
-                type: "color"
-            },
-            {   
-                key: "color-custom-favep-empty",
-                value: "#ced4da",
-                type: "color"
-            },
-        ],
+        style: [],
         css: ""
     },
     {
         name: "ダーク（基本）",
         description: "Narou Tweaker オリジナル",
         customizable: false,
-        show: true,
         version: 2,
         style: [
             {

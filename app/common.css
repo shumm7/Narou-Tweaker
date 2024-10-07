@@ -60,10 +60,97 @@
 
 /* Variables */
 :root {
+    --kasasagi-blue: #2299ff;
     --background-screen: #f1f3f5;
     --background-front: #fff;
 
-    --kasasagi-blue: #2299ff;
+
+	/* base coloe */
+	--narou-tweaker--color-text1: #444;
+	--narou-tweaker--color-text2: #999;
+	--narou-tweaker--color-text3: #222;
+	--narou-tweaker--color-text4: #fff;
+	--narou-tweaker--color-link: #0033cc;
+	--narou-tweaker--color-link-visited: #885577;
+	--narou-tweaker--color-link-hover: #339933;
+	--narou-tweaker--color-bg1: #fff;
+	--narou-tweaker--color-bg2: #ddd;
+	--narou-tweaker--color-bg3: #fafafa;
+	--narou-tweaker--color-bg4: #efefef;
+	--narou-tweaker--color-bg5: #eeee;
+	--narou-tweaker--color-bg6: #333;
+	--narou-tweaker--color-key1: #2299ff;
+	--narou-tweaker--color-key2: #339af4;
+	--narou-tweaker--color-key3: #003a85;
+	--narou-tweaker--color-border1: #d0d0d0;
+
+	--narou-tweaker--color-custom-text1: var(--narou-tweaker--color-text1);
+	--narou-tweaker--color-custom-text2: var(--narou-tweaker--color-text2);
+	--narou-tweaker--color-custom-text3: var(--narou-tweaker--color-text3);
+	--narou-tweaker--color-custom-text4: var(--narou-tweaker--color-text4);
+	--narou-tweaker--color-custom-text5: var(--narou-tweaker--color-text5);
+	--narou-tweaker--color-custom-link: var(--narou-tweaker--color-link);
+	--narou-tweaker--color-custom-link-visited: var(--narou-tweaker--color-link-visited);
+	--narou-tweaker--color-custom-link-hover: var(--narou-tweaker--color-link-hover);
+	--narou-tweaker--color-custom-bg1: var(--narou-tweaker--color-bg1);
+	--narou-tweaker--color-custom-bg2: var(--narou-tweaker--color-bg2);
+	--narou-tweaker--color-custom-bg3: var(--narou-tweaker--color-bg3);
+	--narou-tweaker--color-custom-bg4: var(--narou-tweaker--color-bg4);
+	--narou-tweaker--color-custom-bg5: var(--narou-tweaker--color-bg5);
+	--narou-tweaker--color-custom-bg6: var(--narou-tweaker--color-bg6);
+	--narou-tweaker--color-custom-key1: var(--narou-tweaker--color-key1);
+	--narou-tweaker--color-custom-key2: var(--narou-tweaker--color-key2);
+	--narou-tweaker--color-custom-key3: var(--narou-tweaker--color-key3);
+	--narou-tweaker--color-custom-border1: var(--narou-tweaker--color-border1);
+
+
+	/* ui */
+	--narou-tweaker--color-ui-code--bg: #ddd;
+	--narou-tweaker--color-ui-code--text: #666;
+
+	/* baloon */
+	--narou-tweaker--color-ui-baloon--hover: var(--narou-tweaker--color-custom-key1);
+	--narou-tweaker--color-ui-baloon--text: var(--narou-tweaker--color-custom-text4);
+	--narou-tweaker--color-ui-baloon--bg: var(--narou-tweaker--color-custom-bg6);
+	
+	/* button */
+	--narou-tweaker--color-ui-button--text: var(--narou-tweaker--color-text4);
+	--narou-tweaker--color-ui-button--bg: var(--narou-tweaker--color-key1);
+	--narou-tweaker--color-ui-button--bg-hover: var(--narou-tweaker--color-key2);
+
+	/* toggle */
+	--narou-tweaker--color-ui-toggle--handle: var(--narou-tweaker--color-bg1);
+	--narou-tweaker--color-ui-toggle--border: rgba(0, 0, 0, .3);
+	--narou-tweaker--color-ui-toggle--active: var(--narou-tweaker--color-key1);
+	--narou-tweaker--color-ui-toggle--enactive: rgba(27, 142, 243, .1);
+
+	/* dropdown */
+	--narou-tweaker--color-ui-dropdown--bg: var(--narou-tweaker--color-bg1);
+	--narou-tweaker--color-ui-dropdown--text: var(--narou-tweaker--color-text1);
+	--narou-tweaker--color-ui-dropdown--border: var(--narou-tweaker--color-border1);
+
+	/* modal */
+	--narou-tweaker--color-ui-modal--text: var(--narou-tweaker--color-custom-text1);
+	--narou-tweaker--color-ui-modal--text-sub: var(--narou-tweaker--color-custom-text2);
+	--narou-tweaker--color-ui-modal--bg: var(--narou-tweaker--color-custom-bg4);
+	--narou-tweaker--color-ui-modal--bg-sub: var(--narou-tweaker--color-custom-bg2);
+	--narou-tweaker--color-ui-modal--border: var(--narou-tweaker--color-custom-border1);
+	--narou-tweaker--color-ui-modal--tab-selected: var(--narou-tweaker--color-ui-modal--text);
+	--narou-tweaker--color-ui-modal--tab-hover: var(--narou-tweaker--color-custom-key1);
+	--narou-tweaker--color-ui-modal--box-border: var(--narou-tweaker--color-ui-modal--border);
+	--narou-tweaker--color-ui-modal--box-bg: var(--narou-tweaker--color-custom-bg3);
+	--narou-tweaker--color-ui-modal--box-bg-sub: var(--narou-tweaker--color-custom-bg5);
+	--narou-tweaker--color-ui-modal--box-text: var(--narou-tweaker--color-ui-modal--text);
+	--narou-tweaker--color-ui-modal--button-border: var(--narou-tweaker--color-custom-border1);
+	--narou-tweaker--color-ui-modal--button-text: var(--narou-tweaker--color-custom-text1);
+	--narou-tweaker--color-ui-modal--button-text-hover: var(--narou-tweaker--color-custom-text2);
+	--narou-tweaker--color-ui-modal--button-text-disabled: var(--narou-tweaker--color-custom-text5);
+	--narou-tweaker--color-ui-modal--button-bg: var(--narou-tweaker--color-custom-bg1);
+	--narou-tweaker--color-ui-modal--button-bg-hover: var(--narou-tweaker--color-custom-bg3);
+	--narou-tweaker--color-ui-modal--button-bg-disabled: var(--narou-tweaker--color-custom-bg5);
+	--narou-tweaker--color-ui-modal--button-bg-accent: var(--narou-tweaker--color-custom-key1);
+	--narou-tweaker--color-ui-modal--button-bg-accent-disabled: var(--narou-tweaker--color-custom-key3);
+	--narou-tweaker--color-ui-modal--button-bg-accent-hover: var(--narou-tweaker--color-custom-key2);
 }
 
 /* button */
@@ -79,7 +166,7 @@ input[type="submit"].ui-button {
 	-webkit-appearance: button;
 }
 .ui-button {
-	color: #fff;
+	color: var(--narou-tweaker--color-ui-button--text);
 	font-size: 14px;
 	line-height: 1.7;
 	display: inline-block;
@@ -92,20 +179,20 @@ input[type="submit"].ui-button {
 	border: none;
 	border-radius: 25px;
 	outline: 0;
-	background-color: #1b8ef3;
+	background-color: var(--narou-tweaker--color-ui-button--bg);
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	padding: .7em 3em !important;
 }
 .ui-button:active, .ui-button:focus, .ui-button:hover {
-	color: #fff;
-	background-color: #339af4;
+	color: var(--narou-tweaker--color-ui-button--text);
+	background-color: var(--narou-tweaker--color-ui-button--bg-hover);
 }
 
 /* ui.js */
 .ui-balloon--icon:hover{
-    color: var(--kasasagi-blue);
+    color: var(--narou-tweaker--color-ui-baloon--hover);
 }
 
 .ui-balloon .ui-balloon--text.disabled {
@@ -118,8 +205,8 @@ input[type="submit"].ui-button {
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;  
     border-radius: 8px;
-    background: #333;
-    color: #fff;
+    background: var(--narou-tweaker--color-ui-baloon--bg);
+    color: var(--narou-tweaker--color-ui-baloon--text);
     font-size: 16px;
     font-weight: normal;
     max-width: 200px;
@@ -134,8 +221,8 @@ input[type="submit"].ui-button {
     height: 0;
     margin-left: -10px;
     border: solid transparent;
-    border-color: rgba(51, 51, 51, 0);
-    border-bottom-color: #333;
+    border-color: transparent;
+    border-bottom-color: var(--narou-tweaker--color-ui-baloon--bg);
     border-width: 10px;
     pointer-events: none;
     content: " ";
@@ -156,7 +243,7 @@ input[type="submit"].ui-button {
     right: 15px;
     width: 10px;
     height: 7px;
-    background-color: #535353;
+    background-color: var(--narou-tweaker--color-ui-dropdown--text);
     clip-path: polygon(0 0, 100% 0, 50% 100%);
     content: '';
     pointer-events: none;
@@ -167,10 +254,10 @@ input[type="submit"].ui-button {
     min-width: 200px;
     height: 2.5em;
     padding: .4em calc(.8em + 30px) .4em .8em;
-    border: 1px solid #d0d0d0;
+    border: 1px solid var(--narou-tweaker--color-ui-dropdown--border);
     border-radius: 25px;
-    background-color: #fff;
-    color: #333333;
+    background-color: var(--narou-tweaker--color-ui-dropdown--bg);
+    color: var(--narou-tweaker--color-ui-dropdown--color);
     font-size: 1em;
     cursor: pointer;
 	width: 100%;
@@ -194,14 +281,14 @@ label.toggle::before, label.toggle::after {
 	top: 50%;
 	left: 0px;
 	transform: translateY(-50%);
-	border: 1.4px solid rgba(0, 0, 0, .3);
+	border: 1.4px solid var(--narou-tweaker--color-ui-toggle--border);
 	border-radius: 50%;
 	transition: .2s;
 }
 
 label.toggle::before {
-	background-color: rgba(27, 142, 243, .1);
-	border: 1.4px solid rgba(0, 0, 0, .3);
+	background-color: var(--narou-tweaker--color-ui-toggle--enactive);
+	border: 1.4px solid var(--narou-tweaker--color-ui-toggle--border);
 	border-radius: 12px;
 	height: 20px;
 	width: 40px;
@@ -210,7 +297,7 @@ label.toggle::before {
 }
 
 label.toggle::after {
-	background-color: #fff;
+	background-color: var(--narou-tweaker--color-ui-toggle--handle);
 	border-radius: 50%;
 	height: 23px;
 	width: 23px;
@@ -219,7 +306,7 @@ label.toggle::after {
 }
 
 input.toggle:checked+label.toggle::before {
-	background-color: rgb(27, 142, 243);
+	background-color: var(--narou-tweaker--color-ui-toggle--active);
 }
 
 input.toggle:checked+label.toggle::after {

@@ -174,8 +174,7 @@ function restoreFontOptions(){
         $("#nt-display-option--font-family #font-family").val(String(selected))
         $("#nt-display-option--font-family-description").text(defaultValue(fontlist[selected], {}).description)
         $("#nt-display-option--font-family #font-family").css("font-family", defaultValue(fontlist[selected], {}).font)
-        $("#nt-display-option--font-family-sample").css("font-family", defaultValue(fontlist[selected], {}).font)
-
+        
         var fSize = defaultValue(data.workspaceEditorFontSize, defaultOption.workspaceEditorFontSize)
         if(fSize>0) {fSize = "+"+fSize}
         $("#nt-display-option--font-size-input").val(fSize)

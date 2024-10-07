@@ -1,48 +1,99 @@
+.narou-tweaker-custom-editor {
+	--narou-tweaker--color-ui-editor-link: var(--narou-tweaker--color-custom-link);
+	--narou-tweaker--color-ui-editor-link-visited: var(--narou-tweaker--color-custom-link-visited);
+	--narou-tweaker--color-ui-editor-link-hover: var(--narou-tweaker--color-custom-link-hover);
+	--narou-tweaker--color-ui-editor-bg: var(--narou-tweaker--color-custom-bg1);
+	--narou-tweaker--color-ui-editor-text: var(--narou-tweaker--color-custom-text1);
+	--narou-tweaker--color-ui-editor-text-sub: var(--narou-tweaker--color-text2);
+	--narou-tweaker--color-ui-editor-border: var(--narou-tweaker--color-custom-border1);
+
+	--narou-tweaker--color-ui-editor-tab--text: var(--narou-tweaker--color-ui-editor-text);
+	--narou-tweaker--color-ui-editor-tab--bg: var(--narou-tweaker--color-ui-editor-bg);
+	--narou-tweaker--color-ui-editor-tab--border: var(--narou-tweaker--color-ui-editor-border);
+	--narou-tweaker--color-ui-editor-tab--button: var(--narou-tweaker--color-ui-editor-tab--text);
+	--narou-tweaker--color-ui-editor-tab--button-active: var(--narou-tweaker--color-custom-key1);
+	--narou-tweaker--color-ui-editor-tab--button-bg: var(--narou-tweaker--color-ui-editor-bg);
+	--narou-tweaker--color-ui-editor-tab--button-bg-hover: var(--narou-tweaker--color-custom-bg3);
+
+	--narou-tweaker--color-ui-editor-modal--text: var(--narou-tweaker--color-ui-modal--text);
+	--narou-tweaker--color-ui-editor-modal--text-sub: var(--narou-tweaker--color-ui-modal--text-sub);
+	--narou-tweaker--color-ui-editor-modal--bg: var(--narou-tweaker--color-ui-modal--bg);
+	--narou-tweaker--color-ui-editor-modal--bg-sub: var(--narou-tweaker--color-ui-modal--bg-sub);
+	--narou-tweaker--color-ui-editor-modal--border: var(--narou-tweaker--color-ui-modal--border);
+	--narou-tweaker--color-ui-editor-modal--tab-selected: var(--narou-tweaker--color-ui-modal--tab-selected);
+	--narou-tweaker--color-ui-editor-modal--tab-hover: var(--narou-tweaker--color-ui-modal--tab-hover);
+	--narou-tweaker--color-ui-editor-modal--box-border: var(--narou-tweaker--color-ui-modal--box-border);
+	--narou-tweaker--color-ui-editor-modal--box-bg: var(--narou-tweaker--color-ui-modal--box-bg);
+	--narou-tweaker--color-ui-editor-modal--box-bg-sub: var(--narou-tweaker--color-ui-modal--box-bg-sub);
+	--narou-tweaker--color-ui-editor-modal--box-text: var(--narou-tweaker--color-ui-modal--box-text);
+	--narou-tweaker--color-ui-editor-modal--button-border: var(--narou-tweaker--color-ui-modal--button-border);
+	--narou-tweaker--color-ui-editor-modal--button-text: var(--narou-tweaker--color-ui-modal--button-text);
+	--narou-tweaker--color-ui-editor-modal--button-text-hover: var(--narou-tweaker--color-ui-modal--button-text-hover);
+	--narou-tweaker--color-ui-editor-modal--button-text-disabled: var(--narou-tweaker--color-ui-modal--button-text-disabled);
+	--narou-tweaker--color-ui-editor-modal--button-bg: var(--narou-tweaker--color-ui-modal--button-bg);
+	--narou-tweaker--color-ui-editor-modal--button-bg-hover: var(--narou-tweaker--color-ui-modal--button-bg-hover);
+	--narou-tweaker--color-ui-editor-modal--button-bg-disabled: var(--narou-tweaker--color-ui-modal--button-bg-disabled);
+	--narou-tweaker--color-ui-editor-modal--button-bg-accent: var(--narou-tweaker--color-ui-modal--button-bg-accent);
+	--narou-tweaker--color-ui-editor-modal--button-bg-accent-disabled: var(--narou-tweaker--color-ui-modal--button-bg-accent-disabled);
+	--narou-tweaker--color-ui-editor-modal--button-bg-accent-hover: var(--narou-tweaker--color-ui-modal--button-bg-accent-hover);
+
+	--narou-tweaker--color-ui-editor-banner--bg: var(--narou-tweaker--color-custom-bg6);
+	--narou-tweaker--color-ui-editor-banner--text: var(--narou-tweaker--color-custom-text4);
+	--narou-tweaker--color-ui-editor-banner--warning-bg: #b38e00;
+	--narou-tweaker--color-ui-editor-banner--warning-text: #fffae6;
+	--narou-tweaker--color-ui-editor-banner--danger-bg: #b80000;
+	--narou-tweaker--color-ui-editor-banner--danger-text: #ffebeb;
+
+	--narou-tweaker--color-ui-editor-search--mark: yellow;
+	--narou-tweaker--color-ui-editor-search--mark-focused: orange;
+}
+
 body.narou-tweaker-custom-editor {
 	display: block;
 	position: absolute;
-	background: #ffffff;
+	background: var(--narou-tweaker--color-ui-editor-bg);
 	min-width: unset;
 	width: 100vw;
 	min-height: 100vh;
 	overflow-x: hidden;
 	overflow-y: auto;
-	color: #444;
+	color: var(--narou-tweaker--color-ui-editor-text);
 	font-size: 14px;
 }
 
 /*** elements ***/
 .narou-tweaker-custom-editor a {
 	text-decoration: none;
-	color: #0033cc;
+	color: var(--narou-tweaker--color-ui-editor-link);
 	outline:none;
 }
 
 .narou-tweaker-custom-editor a:visited {
-	color:#885577;
+	color:var(--narou-tweaker--color-ui-editor-link-visited);
 }
 
 .narou-tweaker-custom-editor a:hover {
 	text-decoration: none;
-	color: #339933;
+	color: var(--narou-tweaker--color-ui-editor-link-hover);
 }
 .narou-tweaker-custom-editor .nt-button {
 	background: transparent;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #ddd;
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--button-border);
+	color: var(--narou-tweaker--color-ui-editor-modal--button-text);
 	border-radius: 3px;
 	padding: 10px;
 	white-space: nowrap;
 	height: 100%;
 }
 .narou-tweaker-custom-editor .nt-button:hover {
-	background-color: #fafafa;
+	background-color: var(--narou-tweaker--color-ui-editor-modal--button-bg);
 }
 .narou-tweaker-custom-editor .nt-button:disabled {
-	background-color: #eee;
-	color: #aaa;
+	background-color: var(--narou-tweaker--color-ui-editor-modal--button-bg-disabled);
+	color: var(--narou-tweaker--color-ui-editor-modal--button-text-disabled);
 }
 .narou-tweaker-custom-editor .c-up-panel__button {
 	padding: 5px 10px !important;
@@ -107,7 +158,7 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-panel .nt-panel--header {
 	height: 50px;
     box-sizing: border-box;
-	background: rgb(221, 221, 221);
+	background: var(--narou-tweaker--color-ui-editor-modal--bg-sub);
 }
 .narou-tweaker-custom-editor .nt-panel .nt-panel--content {
 	padding: 8px 15px 0;
@@ -115,8 +166,7 @@ body.narou-tweaker-custom-editor {
     box-sizing: border-box;
     width: 100%;
     height: calc(100% - 50px);
-	border-top: 1px solid #ddd;
-	background-color: rgb(239, 239, 239);
+	background-color: var(--narou-tweaker--color-ui-editor-modal--bg);
 }
 
 /*** sidepanel header ***/
@@ -124,6 +174,7 @@ body.narou-tweaker-custom-editor {
 	height: 100%;
 	display: flex;
 	justify-content: flex-start;
+	color: var(--narou-tweaker--color-ui-editor-modal--text);
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item {
 	height: 100%;
@@ -145,10 +196,10 @@ body.narou-tweaker-custom-editor {
 	padding-right: 5px; 
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item:hover .nt-panel--tab-button {
-	border-top-color: var(--kasasagi-blue);
+	border-top-color: var(--narou-tweaker--color-ui-editor-modal--tab-hover);
 }
 .narou-tweaker-custom-editor .nt-panel--tab-item.nt-selected .nt-panel--tab-button {
-	border-top-color: rgb(34, 34, 34) !important;
+	border-top-color: var(--narou-tweaker--color-ui-editor-modal--tab-selected) !important;
 }
 .narou-tweaker-custom-editor .nt-panel--tab-button > i {
 	margin-right: 3px;
@@ -175,7 +226,7 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-panel--tab-content h4.underline {
 	padding-bottom: .25em;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid var(--narou-tweaker--color-ui-modal--button-border);
 }
 .narou-tweaker-custom-editor .nt-panel--tab-content p {
 	font-size: 12px;
@@ -189,14 +240,14 @@ body.narou-tweaker-custom-editor {
 	color:inherit;
 }
 .narou-tweaker-custom-editor .nt-panel--tab-content .box {
-	border: 1px solid #ddd;
-	background: #fafafa;
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
+	background: var(--narou-tweaker--color-ui-editor-modal--box-bg);
 	padding: 5px 10px;
 	margin: 3px 0;
 }
 .narou-tweaker-custom-editor .nt-panel--tab-content .border {
 	margin: 5px 5px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid var(--narou-tweaker--color-ui-editor-modal--border);
 }
 .narou-tweaker-custom-editor #nt-panel--tab-freememo,
 .narou-tweaker-custom-editor #nt-panel--tab-content--freememo,
@@ -222,7 +273,7 @@ body.narou-tweaker-custom-editor {
 	justify-content: flex-start;
 	align-items: center;
 	width: 100%;
-	background-color: #fafafa;
+	background-color: var(--narou-tweaker--color-ui-editor-modal--button-bg);
 	border-width: 2px;
 	margin-bottom: 5px;
 	overflow: hidden;
@@ -232,8 +283,8 @@ body.narou-tweaker-custom-editor {
 	margin-bottom: 0;
 }
 .narou-tweaker-custom-editor .nt-notation-button:hover {
-	background-color: #fafafa;
-	border-color: #333;
+	background-color: var(--narou-tweaker--color-ui-editor-modal--button-bg-hover);
+	outline: -webkit-focus-ring-color auto 1px;
 }
 .narou-tweaker-custom-editor a:has(.nt-notation-button){
 	color: inherit;
@@ -254,7 +305,7 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-notation-button .nt-notation-button--label + .nt-notation-button--sample {
 	padding-left: .75em;
-	border-left: 1px solid #ddd;
+	border-left: 1px solid var(--narou-tweaker--color-ui-editor-modal--button-bg);
 }
 .narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-row {
 	text-align: left;
@@ -271,8 +322,8 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-notation-button .nt-notation--sample-code .code {
     font-weight: bold;
-	color: #666;
-    background: #ddd;
+	color: var(--narou-tweaker--color-ui-code--text);
+    background: var(--narou-tweaker--color-ui-code--bg);
 	padding: 0 4px;
 	border-radius: 3px;
 }
@@ -302,14 +353,6 @@ body.narou-tweaker-custom-editor {
 	justify-content: center;
 	margin-bottom: 1em;
 }
-.narou-tweaker-custom-editor #nt-display-option--font-family-sample {
-	padding: 5px 10px;
-	border: 1px solid rgb(221, 221, 221);
-	margin: 5px 0;
-	margin-bottom: 10px;
-	line-height: 180%;
-    font-size: 100%;
-}
 .narou-tweaker-custom-editor .nt-display-option--font-button {
 	display: flex;
 	flex-flow: column;
@@ -322,16 +365,13 @@ body.narou-tweaker-custom-editor {
 	align-items: center;
 	width: 60px;
 	height: 60px;
-	border: 1px solid #ddd;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--button-border);
+	background: var(--narou-tweaker--color-ui-editor-modal--button-bg);
 	margin: .5em 1em;
 	cursor: pointer;
 }
 .narou-tweaker-custom-editor .nt-display-option--font-button-box:hover {
-	background: #fafafa;
-}
-.narou-tweaker-custom-editor .nt-display-option--font-button.active .nt-display-option--font-button-box{
-	border: 1px solid var(--kasasagi-blue);
+	background: var(--narou-tweaker--color-ui-editor-modal--button-bg-hover);
 }
 .narou-tweaker-custom-editor .nt-display-option--font-button-description {
 	font-size: 90%;
@@ -342,14 +382,14 @@ body.narou-tweaker-custom-editor {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: 1px solid #ddd;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--button-border);
+	background: var(--narou-tweaker--color-ui-editor-modal--button-bg);
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
 }
 .nt-display-option--font-number-change-button:hover{
-	background: #fafafa;
+	background: var(--narou-tweaker--color-ui-editor-modal--button-bg-hover);
 }
 #nt-display-option--font-size,
 #nt-display-option--line-height,
@@ -366,7 +406,8 @@ body.narou-tweaker-custom-editor {
 #nt-display-option--page-width-input {
 	font-size: 110%;
 	width: 50%;
-	border: 1px solid #ddd;
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--button-border);
+	background: var(--narou-tweaker--color-ui-editor-modal--button-bg);
 	text-align: center;
 	height: 30px;
 	padding: 0;
@@ -405,8 +446,9 @@ body.narou-tweaker-custom-editor {
 	position: fixed;
     top: 0;
 	height: 50px;
-	border-bottom: 1px solid #ddd;
-	background: #fff;
+	border-bottom: 1px solid var(--narou-tweaker--color-ui-editor-tab--border);
+	background: var(--narou-tweaker--color-ui-editor-tab--bg);
+	color: var(--narou-tweaker--color-ui-editor-tab--text);
 	z-index: 3;
 }
 .narou-tweaker-custom-editor .nt-editor--header .nt-editor--header-items {
@@ -441,7 +483,7 @@ body.narou-tweaker-custom-editor {
 	margin-right: 10px;
 }
 .narou-tweaker-custom-editor .nt-editor--panel-vertical-devide {
-	border-right: 1px solid #ddd;
+	border-right: 1px solid var(--narou-tweaker--color-ui-editor-tab--border);
 	padding-left: 10px;
 	margin-right: 10px;
 	height: 100%;
@@ -474,7 +516,7 @@ body.narou-tweaker-custom-editor {
 	padding: 0;
 }
 .narou-tweaker-custom-editor #nt-editor--panel-close:hover{
-	color: var(--kasasagi-blue);
+	color: var(--narou-tweaker--color-ui-editor-tab--button-active);
 }
 .narou-tweaker-custom-editor .nt-editor--header-items .c-button-combo--lg {
 	width: unset;
@@ -485,9 +527,10 @@ body.narou-tweaker-custom-editor {
 	height: 50px;
 	position: fixed;
     bottom: 0;
-	border-top: 1px solid #ddd;
+	border-top: 1px solid var(--narou-tweaker--color-ui-editor-tab--border);
 	z-index: 3;
-	background: #fff;
+	background: var(--narou-tweaker--color-ui-editor-tab--bg);
+	color: var(--narou-tweaker--color-ui-editor-tab--text);
 	display: flex;
     justify-content: space-between;
 }
@@ -499,7 +542,8 @@ body.narou-tweaker-custom-editor {
 	flex-direction: row;
 	align-items: center;
 	text-wrap: nowrap;
-	background-color: #fff;
+	color: var(--narou-tweaker--color-ui-editor-tab--button);
+	background-color: var(--narou-tweaker--color-ui-editor-tab--button-bg);
 }
 .narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-left {
 	justify-content: flex-start;
@@ -536,11 +580,11 @@ body.narou-tweaker-custom-editor {
 	cursor: pointer;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-tab-item:hover {
-	background-color: #fafafa;
+	background-color: var(--narou-tweaker--color-ui-editor-tab--button-bg-hover);
 }
 .narou-tweaker-custom-editor .nt-editor--footer-tab-item.nt-selected {
-	border-top: 3px solid var(--kasasagi-blue);
-	color: var(--kasasagi-blue);
+	border-top: 3px solid var(--narou-tweaker--color-ui-editor-tab--button-active);
+	color: var(--narou-tweaker--color-ui-editor-tab--button-active);
 	font-weight: bold;
 }
 .narou-tweaker-custom-editor .nt-editor--footer-items.nt-editor-footer-left .nt-editor--footer-tab-item {
@@ -578,7 +622,7 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-editor--footer-textcount .nt-editor--footer-textcount-unit{
 	font-size: 12px;
-	color: rgb(153, 153, 153);
+	color: var(--narou-tweaker--color-ui-editor-text-sub);
 	margin-left: 5px;
 }
 
@@ -616,9 +660,9 @@ body.narou-tweaker-custom-editor {
 	right: 0;
 }
 .narou-tweaker-custom-editor .nt-editor--body-content-banner {
-    background: #333;
+    background: var(--narou-tweaker--color-ui-editor-banner--bg);
 	border: none;
-	color: #fff;
+	color: var(--narou-tweaker--color-ui-editor-banner--text);
 	font-size: 12px;
 	height: auto;
 	width: 100%;
@@ -626,13 +670,13 @@ body.narou-tweaker-custom-editor {
 	text-align: center;
 }
 .narou-tweaker-custom-editor .nt-editor--body-content-banner.c-alert--warning {
-	color: #b38e00;
-	background-color: #fffae6;
+	color: var(--narou-tweaker--color-ui-editor-banner--warning-bg);
+	background-color: var(--narou-tweaker--color-ui-editor-banner--warning-text);
 	font-weight: bold;
 }
 .narou-tweaker-custom-editor .nt-editor--body-content-banner.c-alert--danger {
-	color: #b80000;
-	background-color: #ffebeb;
+	color: var(--narou-tweaker--color-ui-editor-banner--danger-bg);
+	background-color: var(--narou-tweaker--color-ui-editor-banner--danger-text);
 	font-weight: bold;
 }
 .narou-tweaker-custom-editor .nt-editor--body-content-banner a {
@@ -664,7 +708,7 @@ body.narou-tweaker-custom-editor {
 	align-items: baseline;
 	gap: 5px;
 	font-size: 12px;
-    color: #999;
+    color: var(--narou-tweaker--color-ui-editor-text-sub);
 }
 .narou-tweaker-custom-editor input[name="subtitle"] {
 	font-size: 170%;
@@ -677,7 +721,7 @@ body.narou-tweaker-custom-editor {
 	background-color: transparent;
 }
 .narou-tweaker-custom-editor input[name="subtitle"]:focus {
-	border-bottom: 2px solid var(--kasasagi-blue)
+	border-bottom: 2px solid var(--narou-tweaker--color-custom-key2);
 }
 .narou-tweaker-custom-editor .nt-editor--main-novel {
 	margin-top: 30px;
@@ -700,7 +744,7 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-editor--preface,
 .narou-tweaker-custom-editor .nt-editor--postscript,
 .narou-tweaker-custom-editor .nt-editor--freememo {
-	color: rgb(68, 68, 68);
+	color: var(--narou-tweaker--color-ui-editor-text);
     max-width: 600px;
     margin: 0px auto;
 	margin-top: 50px;
@@ -828,10 +872,10 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark{
 	border-radius: 3px;
   	color: transparent;
-	background-color: yellow;
+	background-color: var(--narou-tweaker--color-ui-editor-search--mark);
 }
 .narou-tweaker-custom-editor .nt-field--backdrop .nt-field--highlight mark.focused{
-	background-color: orange;
+	background-color: var(--narou-tweaker--color-ui-editor-search--mark-focused);
 }
 
 
@@ -845,8 +889,8 @@ body.narou-tweaker-custom-editor {
 	position: fixed;
 	bottom: 60px;
 	left: 10px;
-	background: rgb(250, 250, 250);
-	border: 1px solid rgb(221, 221, 221);
+	background: var(--narou-tweaker--color-ui-modal--box-bg);
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
 	border-radius: 3px;
 	resize:horizontal;
 	overflow: hidden;
@@ -919,24 +963,24 @@ body.narou-tweaker-custom-editor {
 	padding: 0 0;
 }
 .narou-tweaker-custom-editor .nt-search-box--button:hover {
-	color: var(--kasasagi-blue)
+	color: var(--narou-tweaker--color-ui-modal--button-bg-accent-hover);
 }
 .narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle {
 	padding: 1px;
 	border-radius: 2px;
 }
 .narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle:hover {
-	color: #999;
+	color: var(--narou-tweaker--color-ui-editor-modal--button-text-hover);
 }
 .narou-tweaker-custom-editor .nt-search-box--button.nt-search-box--button-toggle.nt-active {
-	border: 1px solid var(--kasasagi-blue);
-	color: var(--kasasagi-blue)
+	border: 1px solid var(--narou-tweaker--color-ui-modal--button-bg-accent-hover);
+	color: var(--narou-tweaker--color-ui-modal--button-bg-accent-hover);
 }
 
 .narou-tweaker-custom-editor .nt-search-box--field,
 .narou-tweaker-custom-editor .nt-search-box--field-dummy-outer {
-	border: 1px solid #bbb;
-	background: #fff;
+	border: 1px solid var(--narou-tweaker--color-ui-modal--button-border);
+	background: var(--narou-tweaker--color-ui-modal--button-bg);
 	border-radius: 1px;
 	padding: 2px 5px;
 	width: 100%;
@@ -962,7 +1006,7 @@ body.narou-tweaker-custom-editor {
 
 .narou-tweaker-custom-editor .nt-search-box--field-dummy-outer:has(.nt-search-box--field-dummy:focus),
 .narou-tweaker-custom-editor .nt-search-box--field-dummy-outer:has(.nt-search-box--field-dummy:active) {
-	outline: 2px solid black;
+	outline: -webkit-focus-ring-color auto 1px;
 }
 .narou-tweaker-custom-editor .nt-search-box--field-above {
 	display: flex;
@@ -990,8 +1034,8 @@ body.narou-tweaker-custom-editor {
 .narou-tweaker-custom-editor .nt-editor--reserve-date { 
 	float: right;
 	font-size: 12px;
-	background: rgb(250, 250, 250);
-	border: 1px solid rgb(221, 221, 221);
+	background: var(--narou-tweaker--color-ui-editor-modal--box-bg);
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
 	border-radius: 3px;
 	margin: 5px;
 	width: 220px;
@@ -1005,7 +1049,7 @@ body.narou-tweaker-custom-editor {
 	display: flex;
 	justify-content: flex-start;
 	align-items: baseline;
-	background: #eee;
+	background: var(--narou-tweaker--color-ui-editor-modal--box-bg-sub);
 }
 .narou-tweaker-custom-editor .nt-editor--reserve-date--header i{
 	margin-right: 5px;
@@ -1031,7 +1075,7 @@ body.narou-tweaker-custom-editor {
 	cursor: pointer;
 	width: 90%;
 	text-align: center;
-	border: 1px solid rgb(221, 221, 221);
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
 	border-radius: 3px;
 	font-size: 14px;
 	padding: 5px 0;
@@ -1048,7 +1092,7 @@ body.narou-tweaker-custom-editor {
 	padding-right: 25px;
 	margin-right: 3px;
 	cursor: pointer;
-	border: 1px solid rgb(221, 221, 221);
+	border: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
 	border-radius: 3px;
 	text-align: center;
 }
@@ -1057,7 +1101,7 @@ body.narou-tweaker-custom-editor {
 }
 .narou-tweaker-custom-editor .nt-editor--reserve-date--clear .nt-editor--reserve-date--item-content {
 	margin-top: 5px;
-	border-top: 1px solid rgb(221, 221, 221);
+	border-top: 1px solid var(--narou-tweaker--color-ui-editor-modal--box-border);
 	padding-top: 5px;
 }
 .narou-tweaker-custom-editor .p-up-novel-input__reserve-clear {
