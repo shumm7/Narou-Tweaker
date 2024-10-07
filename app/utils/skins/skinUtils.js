@@ -3,6 +3,7 @@ import { formatSkinDataV2, localNovelSkinV2, maxLocalSkins, maxSyncSkins } from 
 
 // todo 拡張機能のアップデート時にスキンが自動削除されないようにする
 // 拡張機能のアップデート時に自動的にv1スキンをv2スキンへ変換するようにする
+// これらの関数のテスト
 
 /* 使用可能なスキンの個数を取得 */
 export function skinsCount(storage_local){
@@ -99,7 +100,7 @@ export function getActiveSkins(storage_local, storage_sync){
 
     var ret = []
     for (let i = 0; i < index.length; i++) {
-        ret.push(getSkin(i, storage_local, storage_sync))
+        ret.push(getSkinByIndex(i, storage_local, storage_sync))
     }
     return ret
 }
