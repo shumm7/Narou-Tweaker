@@ -221,7 +221,8 @@
     },
     {
       "resources": [
-        "/utils/*.js"
+        "/utils/*.js",
+        "/utils/skins/*.js"
       ],
       "matches": ["<all_urls>"]
     },

@@ -165,6 +165,11 @@ export const defaultOption = {
     novelAuthorCustomSkin: true,
     novelAuthorCustomSkinWarning: true,
 
+    activeNovelSkins: [
+        {src: "internal", key: 0, show: true},
+        {src: "internal", key: 1, show: true}
+    ],
+    localNovelSkinIndex: [],
     novelSkins: [], //v2
     novelSkinSelected: 0, //v2
 
