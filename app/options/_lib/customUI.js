@@ -44,18 +44,20 @@ export const customUIList = {
             <p>
                 幅広い拡張性と高いユーザビリティで、より快適に小説を楽しむことが出来ます。
             </p>
-            <div id="downloads">
-                <div class="download-item">
-                    <a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
-                        <span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
-                        <span class="download-item--title">Chrome</span>
-                    </a>
-                </div>
-                <div class="download-item">
-                    <a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
-                        <span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
-                        <span class="download-item--title">FireFox</span>
-                    </a>
+            <div id="downloads-outer">
+                <div id="downloads">
+                    <div class="download-item">
+                        <a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
+                            <span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
+                            <span class="download-item--title">Chrome</span>
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
+                            <span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
+                            <span class="download-item--title">FireFox</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -178,18 +180,18 @@ export const customUIList = {
     `,
 
     ui_novelCustomHeaderDraggable: `
-        <div id="novel_header_icon" style="display: flex; flex-flow: row; width: 100%;">
-            <div class="draggable_area_outer" style="width: 33%;">
+        <div class="draggable_area_container" id="novel_header_icon">
+            <div class="draggable_area_outer">
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="2">左</div>
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="1">上部</div>
                 <div class="draggable_area" id="left" name="novel-header"></div>
             </div>
-            <div class="draggable_area_outer" style="width: 33%;">
+            <div class="draggable_area_outer">
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="2">右</div>
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="1">下部</div>
                 <div class="draggable_area" id="right" name="novel-header"></div>
             </div>
-            <div class="draggable_area_outer" style="width: 33%;">
+            <div class="draggable_area_outer">
                 <div class="title">非表示</div>
                 <div class="draggable_area" id="disabled" name="novel-header"></div>
             </div>
@@ -491,7 +493,7 @@ export const customUIList = {
     `,
 
     ui_workspaceCustomHeaderDraggable: `
-        <div id="workspace_header_icon" style="display: flex; flex-flow: row;">
+        <div class="draggable_area_container" id="workspace_header_icon">
             <div class="draggable_area_outer draggable_area_header">
                 <div class="title">表示</div>
                 <div class="draggable_area" id="active" name="workspace-header"></div>
@@ -504,7 +506,7 @@ export const customUIList = {
     `,
 
     ui_workspaceCustomHeaderMenuDraggable: `
-        <div id="workspace_menu_icon" style="display: flex; flex-flow: row; flex-wrap: wrap;">
+        <div class="draggable_area_container" id="workspace_menu_icon">
             <div class="draggable_area_outer draggable_area_menu">
                 <div class="title">左</div>
                 <div class="draggable_area" id="left" name="workspace-header-menu"></div>

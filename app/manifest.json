@@ -21,7 +21,7 @@
     "open_in_tab": true
 	},
   "action": {
-    "default_popup": "options/general/index.html?popup=1"
+    "default_popup": "options/popup/index.html"
   },
   "content_scripts": [
     {

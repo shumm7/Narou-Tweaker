@@ -119,7 +119,7 @@ export const optionCategoryList = [
         title: "小説を読もう！",
         description: "ランキングや検索ページの表示を設定することが出来ます。",
         id: "yomou",
-        icon: "fa-solid fa-magnifying-glass",
+        icon: "fa-solid fa-crown",
         targetUrl: ["yomou.syosetu.com", "noc.syosetu.com", "mnlt.syosetu.com", "mid.syosetu.com"],
         defaultCategory: "rank",
         categories: [
@@ -4202,7 +4202,10 @@ export function getOptionElement(option, forSearch){
             var item = $(`
                 <div class="search-result--items">
                     <div class="search-result--items-disabled">
-                        <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">このオプションはここでは設定できません。</a>
+                            <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">
+                                <div class="search-result--items-disabled-box">このオプションはここでは設定できません。</div>
+                            </a>
+                        </span>
                     </div>
                 </div>
             `)
