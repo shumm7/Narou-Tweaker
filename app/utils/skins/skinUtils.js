@@ -105,8 +105,11 @@ export function getActiveSkins(storage_local, storage_sync){
     return ret
 }
 
-/* 新しいスキンを追加（show=trueで使用可能なスキン一覧にも追加する / indexは省略可） */
-export function insertSkin(skinIndex, skin, src, show){
+
+
+
+/* 新しいスキンを追加（keyを指定 / show=trueで使用可能なスキン一覧にも追加する / indexは省略可） */
+export function addSkin(skinIndex, skin, src, key, show){
     try{
         if(src!=="local" && src!=="sync"){
             src = "local"
@@ -135,32 +138,36 @@ export function insertSkin(skinIndex, skin, src, show){
                 }
 
                 /* 登録時のキーを設定 */
-                var key = 0
-                index.forEach(function(data){
-                    if(data.src === "local" && data.key===key){
-                        key += 1
-                    }
-                })
+                if(key===undefined){
+                    key = 0
+                    index.forEach(function(data){
+                        if(data.src === "local" && data.key===key){
+                            key += 1
+                        }
+                    })
+                }
 
                 /* データを設定 */
-                var dict = {}
-                dict[`novelSkin_${key}`] = skin
+                if(!isNaN(Number(key))){
+                    var dict = {}
+                    dict[`novelSkin_${key}`] = skin
 
-                if(!skinList.includes(key)){
-                    skinList.push(key)
-                    dict["novelSkinIndex"] = skinList
-                }
-
-                if(show){
-                    if(skinIndex===undefined){
-                        dict["activeNovelSkins"] = index.splice(skinIndex, index.length, {src: "local", key: key, show: show})
-                    }else{
-                        dict["activeNovelSkins"] = index.splice(skinIndex, 0, {src: "local", key: key, show: show})
+                    if(!skinList.includes(key)){
+                        skinList.push(key)
+                        dict["novelSkinIndex"] = skinList
                     }
-                }
 
-                /* データを反映 */
-                chrome.storage.local.set(dict, function(){})
+                    if(show){
+                        if(skinIndex===undefined){
+                            dict["activeNovelSkins"] = index.splice(index.length, 0, {src: "local", key: key})
+                        }else{
+                            dict["activeNovelSkins"] = index.splice(skinIndex, 0, {src: "local", key: key})
+                        }
+                    }
+
+                    /* データを反映 */
+                    chrome.storage.local.set(dict, function(){})
+                }
             })
 
         }else if(src=="sync"){
@@ -186,36 +193,40 @@ export function insertSkin(skinIndex, skin, src, show){
                 }
 
                 /* 登録時のキーを設定 */
-                var key = 0
-                index.forEach(function(data){
-                    if(data.src === "sync" && data.key===key){
-                        key += 1
-                    }
-                })
+                if(key===undefined){
+                    key = 0
+                    index.forEach(function(data){
+                        if(data.src === "local" && data.key===key){
+                            key += 1
+                        }
+                    })
+                }
 
                 /* データを設定 */
-                var dict = {}
-                dict[`novelSkin_${key}`] = skin
+                if(!isNaN(Number(key))){
+                    var dict = {}
+                    dict[`novelSkin_${key}`] = skin
 
-                if(!skinList.includes(key)){
-                    skinList.push(key)
-                    dict["novelSkinIndex"] = skinList
-                }
-
-                if(show){
-                    if(skinIndex===undefined){
-                        dict["activeNovelSkins"] = index.splice(skinIndex, index.length, {src: "sync", key: key, show: show})
-                    }else{
-                        dict["activeNovelSkins"] = index.splice(skinIndex, 0, {src: "sync", key: key, show: show})
+                    if(!skinList.includes(key)){
+                        skinList.push(key)
+                        dict["novelSkinIndex"] = skinList
                     }
-                }
 
-                /* データを反映 */
-                chrome.storage.sync.set(dict, function(){
                     if(show){
-                        chrome.storage.local.set({activeNovelSkins: index})
+                        if(skinIndex===undefined){
+                            dict["activeNovelSkins"] = index.splice(index.length, 0, {src: "sync", key: key})
+                        }else{
+                            dict["activeNovelSkins"] = index.splice(skinIndex, 0, {src: "sync", key: key})
+                        }
                     }
-                })
+
+                    /* データを反映 */
+                    chrome.storage.sync.set(dict, function(){
+                        if(show){
+                            chrome.storage.local.set({activeNovelSkins: index})
+                        }
+                    })
+                }
             })
             })
 
@@ -225,9 +236,22 @@ export function insertSkin(skinIndex, skin, src, show){
     }
 }
 
+/* 新しいスキンを追加（keyは自動決定 / show=trueで使用可能なスキン一覧にも追加する / indexは省略可） */
+export function insertSkin(skinIndex, skin, src, show){
+    try{
+        addSkin(skinIndex, skin, src, undefined, show)
+    }catch{
+        
+    }
+}
+
 /* 新しいスキンを末尾に追加（show=trueで使用可能なスキン一覧にも追加する / indexは省略可） */
 export function appendSkin(skin, src, show){
-    return insertSkin(undefined, skin, src, show)
+    try{
+        return insertSkin(undefined, skin, src, show)
+    }catch{
+        
+    }
 }
 
 /* storage上からスキンを削除 */
@@ -409,6 +433,8 @@ export function removeSkinByIndex(skinIndex){
     }
 }
 
+
+
 /* 使用可能なスキン一覧からスキンを削除 */
 export function inactivateSkin(skinIndex){
     try{
@@ -474,6 +500,7 @@ export function activateSkin(skinIndex, src, key){
                     currentSelectedSkin = index.length
                 }
             }
+
             /* 挿入場所を決定 */
             if(skinIndex===undefined){
                 skinIndex = index.length
@@ -518,6 +545,72 @@ export function activateSkin(skinIndex, src, key){
                     }
                 })
             }
+            }
+        })
+    }catch{
+
+    }
+}
+
+/* 使用可能なスキンを指定回数だけ移動 */
+export function moveSkin(skinIndex, count){
+    try{
+        count = Number(count)
+        if(isNaN(count)){
+            return
+        }
+        if(count == 0){
+            return
+        }
+
+        chrome.storage.local.get(null, function(local_storage){
+            /* 使用可能なスキン一覧を取得 */
+            var index
+            if(Array.isArray(local_storage.activeNovelSkins)){
+                index = local_storage.activeNovelSkins
+            }else{
+                index = defaultOption.activeNovelSkins
+            }
+
+            /* 選択中のスキンを取得 */
+            var currentSelectedSkin = Number(local_storage.novelSkinSelected)
+            if(isNaN(currentSelectedSkin)){
+                currentSelectedSkin = 0
+            }else{
+                if(currentSelectedSkin<0){
+                    currentSelectedSkin = 0
+                }else if(currentSelectedSkin>=index.length){
+                    currentSelectedSkin = index.length
+                }
+            }
+
+            if(skinIndex >= 0 && skinIndex < index.length){
+                var data = index[skinIndex]
+                var l = index.splice(skinIndex, 1)
+
+                var toIndex = skinIndex + count
+                if(toIndex < 0){
+                    toIndex = 0
+                }
+                if(toIndex > index.length - 1){
+                    toIndex = index.length - 1
+                }
+
+                l = l.splice(toIndex, 0, data)
+
+                if(currentSelectedSkin===skinIndex){
+                    currentSelectedSkin = toIndex
+                }else if(currentSelectedSkin===toIndex){
+                    currentSelectedSkin += 1
+                }
+
+                if(currentSelectedSkin<0){
+                    currentSelectedSkin = 0
+                }else if(currentSelectedSkin>=l.length){
+                    currentSelectedSkin = l.length
+                }
+
+                chrome.storage.set({novelSkinSelected: currentSelectedSkin, activeNovelSkin: l}, function(){})
             }
         })
     }catch{
