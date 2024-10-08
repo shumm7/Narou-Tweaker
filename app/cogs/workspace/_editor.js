@@ -1066,7 +1066,7 @@ function editorSkinChangeEvent(){
         }
     }
 
-    chrome.storage.local.onChanged.addListener(function(changes){
+    chrome.storage.session.onChanged.addListener(function(changes){
         if(changes.workspaceEditorSkinCustomCSS!=undefined){
             if($("#narou-tweaker-style--editor-skin-user").length){
                 $("#narou-tweaker-style--editor-skin-user").text(changes.workspaceEditorSkinCustomCSS.newValue)

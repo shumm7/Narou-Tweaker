@@ -68,6 +68,7 @@ chrome.storage.sync.get(null, function(data){
 actionListener()
 
 /* CSS */
+chrome.storage.session.setAccessLevel({accessLevel: "TRUSTED_AND_UNTRUSTED_CONTEXTS"})
 skinListener()
 yomouCssListener()
 

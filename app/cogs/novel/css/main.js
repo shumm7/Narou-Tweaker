@@ -1,5 +1,5 @@
 
-chrome.storage.local.get(null, (data)=>{
+chrome.storage.session.get(null, (data)=>{
     /* Skin Custom CSS */
     if("novelSkinCustomCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--skin-user" class="narou-tweaker-style"></style>`)
@@ -49,7 +49,7 @@ chrome.storage.local.get(null, (data)=>{
     }
 })
 
-chrome.storage.local.onChanged.addListener(function(changes){
+chrome.storage.session.onChanged.addListener(function(changes){
     if(changes.novelSkinCustomCSS!=undefined){
         if($("#narou-tweaker-style--skin-user").length){
             $("#narou-tweaker-style--skin-user").text(changes.novelSkinCustomCSS.newValue)

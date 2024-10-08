@@ -274,18 +274,8 @@ export const ignoreOptions = [
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
     "novelCustomCSS",
-    "novelAppliedSkinCSS",
-    "novelAppliedFontCSS",
-    "novelSkinCustomCSS",
-    "novelFontCustomCSS",
-    "workspaceEditorAppliedSkinCSS",
-    "workspaceEditorAppliedFontCSS",
-    "workspaceEditorSkinCustomCSS",
-    "workspaceEditorFontCustomCSS",
     "yomouRank_CustomCSS",
-    "yomouRank_AppliedCSS",
     "yomouRankTop_CustomCSS",
-    "yomouRankTop_AppliedCSS"
 ]
 
 
