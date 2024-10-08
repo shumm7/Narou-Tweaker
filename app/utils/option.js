@@ -1,34 +1,6 @@
 import { novelIconList, workspaceIconList, workspaceMenuIconList } from "./header.js"
-import { getExtensionVersion } from "./misc.js"
-
-export const ignoreOptions = [
-    "extOptionsVersion",
-    "extOptionSidePanelShow",
-    "novelOptionModalSelected",
-    "novelCustomCSS",
-    "novelAppliedSkinCSS",
-    "novelAppliedFontCSS",
-    "novelSkinCustomCSS",
-    "novelFontCustomCSS",
-    "workspaceEditorAppliedSkinCSS",
-    "workspaceEditorAppliedFontCSS",
-    "workspaceEditorSkinCustomCSS",
-    "workspaceEditorFontCustomCSS",
-    "yomouRank_CustomCSS",
-    "yomouRank_AppliedCSS",
-    "yomouRankTop_CustomCSS",
-    "yomouRankTop_AppliedCSS"
-]
-
-export const forceResetOptions = [
-    "extIgnoreOptionIndex",
-    "extIgnoreSyncOptionIndex",
-    "extIgnoreSessionOptionIndex"
-]
 
 export const defaultOption = {
-    extOptionsVersion: getExtensionVersion(),
-
     /* Extension */
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
@@ -715,33 +687,27 @@ export function getUpdatedOption(data){
     }
 }
 
-export function updateOption(force, data){
-
-    function update(data){
-        var currentOptionVersion = defaultOption.extOptionsVersion
-        if(currentOptionVersion != data.extOptionsVersion || force){
-            var o = defaultOption
-            Object.keys(o).forEach(function(key){
-                if(!forceResetOptions.includes(key)){
-                    if(checkOptionValue(key, data[key])){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
-                        }
-                    }
-                }
-            })
-
-            chrome.storage.local.set(o, function(){})
-        }
+function exceptionProcess_local(oldDict, newDict){
+    
+    // novelCustomHeader -> novelCustomHeaderType
+    if(oldDict.novelCustomHeader === true){
+        console.log(`Converted value: { novelCustomHeader: true } -> { novelCustomHeaderType: "2" } `)
+        newDict.novelCustomHeaderType = "2"
+    }else if(oldDict.novelCustomHeader === false){
+        console.log(`Converted value: { novelCustomHeader: false } -> { novelCustomHeaderType: "1" } `)
+        newDict.novelCustomHeaderType = "1"
     }
 
-    if(data){
-        update(data)
-    }else{
-        chrome.storage.local.get(null, function(data) {
-            update(data)
-        })
-    }
+    // extIgnoreOptionIndex
+    newDict.extIgnoreOptionIndex = defaultOption.extIgnoreOptionIndex
+
+    // extIgnoreSyncOptionIndex
+    newDict.extIgnoreSyncOptionIndex = defaultOption.extIgnoreSyncOptionIndex
+
+    // extIgnoreSessionOptionIndex
+    newDict.extIgnoreSessionOptionIndex = defaultOption.extIgnoreSessionOptionIndex
+
+    return newDict
 }
 
 export function fixOption(local, sync){
@@ -751,13 +717,11 @@ export function fixOption(local, sync){
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
                     if(checkOptionValue(key, data[key])){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
-                        }
+                        o[key] = data[key]
                     }
                 })
 
-                chrome.storage.local.set(o, function(){
+                chrome.storage.local.set(exceptionProcess_local(data, o), function(){
                     console.log("Fixed option data (local).")
                 })
             })
@@ -771,9 +735,7 @@ export function fixOption(local, sync){
                 Object.keys(o).forEach(function(key){
                     if(data[key]!=undefined){
                         if( typeof(o[key]) == typeof(data[key])){
-                            //if(!ignoreOptions.includes(key)){
-                                o[key] = data[key]
-                            //}
+                            o[key] = data[key]
                         }
                     }
                 })

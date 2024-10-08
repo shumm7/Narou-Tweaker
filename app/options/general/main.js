@@ -1,10 +1,7 @@
-import { defaultValue, getExtensionVersion } from "/utils/misc.js";
-import { defaultOption, fixOption } from "/utils/option.js";
 import { setup } from "../general.js";
+import { defaultOption, fixOption, getUpdatedOption } from "../../utils/option.js";
 import { escapeHtml, getDatetimeStringForFilename } from "/utils/text.js";
-import { getUpdatedOption } from "/utils/option.js";
-import { saveJson } from "../../utils/misc.js";
-import { updateOption } from "../../utils/option.js";
+import { saveJson, defaultValue, getExtensionVersion } from "../../utils/misc.js";
 
 setup()
 

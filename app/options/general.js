@@ -1,7 +1,7 @@
 import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/utils.js";
 import { getOptionElement, optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
-import { defaultOption, updateOption } from "/utils/option.js"
+import { defaultOption } from "/utils/option.js"
 import { getOptionFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
@@ -330,8 +330,6 @@ function restoreValues(data, ignore){
   }
 
 export function restoreOptions(){
-    updateOption()
-  
     chrome.storage.local.onChanged.addListener(function(changes){
       chrome.storage.local.get(null, function(data) {
         restoreValues(data, true)

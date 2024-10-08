@@ -677,7 +677,7 @@ export const optionList = [
             name: "default",
             data: [
                 {value: "0", title: "オフ（小説家になろう標準）"},
-                {value: "1", title: "モダン"},
+                {value: "1", title: "ベーシック"},
                 {value: "2", title: "ミニマル（推奨）"},
             ]
         },

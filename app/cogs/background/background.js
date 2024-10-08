@@ -1,4 +1,4 @@
-import { updateOption,fixOption } from "/utils/option.js";
+import { fixOption } from "../../utils/option.js";
 import { actionListener } from "./_action.js";
 import { messageListener } from "./_process.js";
 import { sidepanelListener } from "./_sidepanel.js";
@@ -6,7 +6,6 @@ import { skinListener } from "./_skin.js";
 import { yomouCssListener } from "./_yomou.js";
 
 /* Update Option Data */
-updateOption()
 chrome.runtime.onInstalled.addListener((details) => {
     if(details.reason === "update"){
         console.log("Updated: fixing option...")
