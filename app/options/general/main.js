@@ -482,12 +482,10 @@ function insertOptionData(){
                         return false
                     }
                 }else{
-                    const json = `{"__temp__":${value}}`
-                    var dict = {}
+                    const json = `{"${key}":${value}}`
+                    var dict
                     try {
-                        var dict_temp
-                        dict_temp = JSON.parse(json)
-                        dict[key] = dict_temp["__temp__"]
+                        dict = JSON.parse(json)
                     }catch(e){
                         $("#option-insert--error").text(`構文の解釈に失敗しました: ${e}`)
                         console.warn(e)
