@@ -1,5 +1,5 @@
 import { setup } from "../general.js";
-import { defaultOption, fixOption, getUpdatedOption } from "../../utils/option.js";
+import { defaultOption, fixOption, formatOption } from "../../utils/option.js";
 import { escapeHtml, getDatetimeStringForFilename } from "/utils/text.js";
 import { saveJson, defaultValue, getExtensionVersion } from "../../utils/misc.js";
 
@@ -7,7 +7,7 @@ setup()
 
 document.addEventListener('DOMContentLoaded', function(){
     showPatchnotes()
-    exportOptionText()
+    exportLocalOptionText()
     exportSyncOptionText()
     exportSessionOptionText()
     removeOptionData()
@@ -18,11 +18,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 /* 設定データを閲覧 */
-function exportOptionText() {
+function exportLocalOptionText() {
     function change(){
         chrome.storage.local.get(null, (data)=>{
             try{
-                const ignores = data.extIgnoreOptionIndex.split(/\s/)
+                var input = $("#exportLocalOptionText_Input")
+                const ignores = input.val().split(/\s/)
                 $.each(ignores, function(_, elm){
                     if(elm in data){
                         delete data[elm]
@@ -30,7 +31,66 @@ function exportOptionText() {
                 })
 
                 var text = JSON.stringify(data, null, 4)
-                var field = $("#exportOptionText_Output")
+                var field = $("#exportLocalOptionText_Output")
+                field.text(text)
+                field.trigger("input")
+            }catch(e){
+            }
+        })
+    }
+    change()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        change()
+    })
+    $("#exportLocalOptionText_Input").on("input", function(e){
+        change()
+    })
+}
+
+function exportSyncOptionText() {
+    function change(){
+        chrome.storage.sync.get(null, (data)=>{
+            try{
+                var input = $("#exportSyncOptionText_Input")
+                const ignores = input.val().split(/\s/)
+                $.each(ignores, function(_, elm){
+                    if(elm in data){
+                        delete data[elm]
+                    }
+                })
+
+                var text = JSON.stringify(data, null, 4)
+                var field = $("#exportSyncOptionText_Output")
+                field.text(text)
+                field.trigger("input")
+            }catch(e){
+            }
+        })
+    }
+
+    change()
+    chrome.storage.sync.onChanged.addListener(function(changes){
+        change()
+    })
+    $("#exportSyncOptionText_Input").on("input", function(e){
+        change()
+    })
+}
+
+function exportSessionOptionText() {
+    function change(){
+        chrome.storage.session.get(null, (data)=>{
+            try{
+                var input = $("#exportSessionOptionText_Input")
+                const ignores = input.val().split(/\s/)
+                $.each(ignores, function(_, elm){
+                    if(elm in data){
+                        delete data[elm]
+                    }
+                })
+
+                var text = JSON.stringify(data, null, 4)
+                var field = $("#exportSessionOptionText_Output")
                 field.text(text)
                 field.trigger("input")
             }catch(e){
@@ -39,74 +99,11 @@ function exportOptionText() {
         })
     }
     change()
-    chrome.storage.local.onChanged.addListener(function(changes){
-        change()
-    })
-}
-
-function exportSyncOptionText() {
-    function change(){
-        chrome.storage.local.get(null, (local)=>{
-            chrome.storage.sync.get(null, (data)=>{
-                try{
-                    const ignores = local.extIgnoreSyncOptionIndex.split(/\s/)
-                    $.each(ignores, function(_, elm){
-                        if(elm in data){
-                            delete data[elm]
-                        }
-                    })
-
-                    var text = JSON.stringify(data, null, 4)
-                    var field = $("#exportSyncOptionText_Output")
-                    field.text(text)
-                    field.trigger("input")
-                }catch(e){
-
-                }
-            })
-        })
-    }
-    change()
-    chrome.storage.sync.onChanged.addListener(function(changes){
-        change()
-    })
-    chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.extIgnoreSyncOptionIndex!=undefined){
-            change()
-        }
-    })
-}
-
-function exportSessionOptionText() {
-    function change(){
-        chrome.storage.local.get(null, (local)=>{
-            chrome.storage.session.get(null, (data)=>{
-                try{
-                    const ignores = local.extIgnoreSessionOptionIndex.split(/\s/)
-                    $.each(ignores, function(_, elm){
-                        if(elm in data){
-                            delete data[elm]
-                        }
-                    })
-
-                    var text = JSON.stringify(data, null, 4)
-                    var field = $("#exportSessionOptionText_Output")
-                    field.text(text)
-                    field.trigger("input")
-                }catch(e){
-                    
-                }
-            })
-        })
-    }
-    change()
     chrome.storage.session.onChanged.addListener(function(changes){
         change()
     })
-    chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.extIgnoreSessionOptionIndex!=undefined){
-            change()
-        }
+    $("#exportSessionOptionText_Input").on("input", function(e){
+        change()
     })
 }
 
@@ -152,10 +149,10 @@ function exportOptionData(){
         chrome.storage.local.get(null, function(data) {
             var date = getDatetimeStringForFilename()
             console.log(date)
-            var d = getUpdatedOption(data)
+            var d = formatOption(data)
             console.log(d)
             if(d){
-                saveJson(getUpdatedOption(data), `nt-option-${date}.json`)
+                saveJson(formatOption(data), `nt-option-${date}.json`)
             }
         });
     })
@@ -163,7 +160,7 @@ function exportOptionData(){
         $("#option-export-output").css("display", "block")
         chrome.storage.local.get(null, function(data) {
             var field = $("#option-export-output--field")
-            var d = getUpdatedOption(data)
+            var d = formatOption(data)
             if(d){
                 field.val(JSON.stringify(d, null, "\t"))
                 field.trigger("input")
@@ -226,7 +223,7 @@ function importOptionData(){
             var raw
             try{
                 raw = JSON.parse($("#option-import-input--field").val())
-                var option = getUpdatedOption(raw)
+                var option = formatOption(raw)
                 if(option){
                     chrome.storage.local.set(option, function(){
                         var field = $("#option-import-input--field")

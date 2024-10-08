@@ -5,9 +5,6 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "novelCustomCSS novelAppliedSkinCSS novelAppliedFontCSS novelSkinCustomCSS novelFontCustomCSS correctionReplacePatterns skins fontFontFamilyList yomouRank_AppliedCSS yomouRank_CustomCSS yomouRankTop_AppliedCSS yomouRankTop_CustomCSS workspaceEditorAppliedFontCSS workspaceEditorAppliedSkinCSS",
-    extIgnoreSyncOptionIndex: "",
-    extIgnoreSessionOptionIndex: "",
 
     /* Narou */
     narouSkipAgeauth: false,
@@ -270,6 +267,26 @@ export const defaultGlobalOption = {
     history_data: {},
     workspaceImpressionMarked: {},
 }
+
+export const ignoreOptions = [
+    /* いかなるときでも値を引き継がない設定項目 */
+    "extOptionSidePanelShow",
+    "novelOptionModalSelected",
+    "novelCustomCSS",
+    "novelAppliedSkinCSS",
+    "novelAppliedFontCSS",
+    "novelSkinCustomCSS",
+    "novelFontCustomCSS",
+    "workspaceEditorAppliedSkinCSS",
+    "workspaceEditorAppliedFontCSS",
+    "workspaceEditorSkinCustomCSS",
+    "workspaceEditorFontCustomCSS",
+    "yomouRank_CustomCSS",
+    "yomouRank_AppliedCSS",
+    "yomouRankTop_CustomCSS",
+    "yomouRankTop_AppliedCSS"
+]
+
 
 export const localSkins = [
     {
@@ -669,7 +686,7 @@ export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
 ]
 
-export function getUpdatedOption(data){
+export function formatOption(data){
     function update(data){
         var o = defaultOption
         Object.keys(o).forEach(function(key){
@@ -679,7 +696,7 @@ export function getUpdatedOption(data){
                 }
             }
         })
-        return o
+        return exceptionProcess_local(data, o)
     }
 
     if(data){
@@ -717,7 +734,9 @@ export function fixOption(local, sync){
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
                     if(checkOptionValue(key, data[key])){
-                        o[key] = data[key]
+                        if(!ignoreOptions.includes(key)){
+                            o[key] = data[key]
+                        }
                     }
                 })
 
