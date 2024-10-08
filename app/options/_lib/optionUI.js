@@ -454,7 +454,6 @@ export const optionList = [
     {
         id: "extDebug",
         title: "デバッグ機能",
-        noindex: true,
         description: {
             text: "デバッグ機能を有効化します。",
             attention: "開発者向けの機能です。不具合が発生する可能性がありますのでご注意ください。",
@@ -463,6 +462,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "config",
+            noindex: true,
         },
         ui: {
             type: "toggle",
@@ -585,7 +585,6 @@ export const optionList = [
     {
         id: "extDebug_ShowOption",
         title: "設定データを閲覧",
-        noindex: true,
         description: {
             text: "保存されている設定データを文字列で表示します。",
             small: "（local/sync/sessionのデータを表示しています）",
@@ -599,6 +598,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "debug",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -609,7 +609,6 @@ export const optionList = [
     {
         id: "extDebug_InsertOption",
         title: "設定データを変更",
-        noindex: true,
         description: {
             text: "設定データを書き換えます。",
             keywords: ["せっていでーたをへんこう", "設定データ", "local", "sync", "session"],
@@ -622,6 +621,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "debug",
+            noindex: true,
         },
         value: {
             hasValue: false,
@@ -632,7 +632,6 @@ export const optionList = [
     {
         id: "extDebug_MonitorOption",
         title: "設定データの変更を監視",
-        noindex: true,
         description: {
             text: "設定データの変更を監視します。",
             keywords: ["せっていでーたのへんこうをかんし", "設定データ", "local", "sync", "session"],
@@ -645,6 +644,7 @@ export const optionList = [
         location: {
             page: "general",
             category: "debug",
+            noindex: true,
         },
         value: {
             hasValue: false,

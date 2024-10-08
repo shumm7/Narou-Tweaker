@@ -267,11 +267,6 @@ export const defaultGlobalOption = {
     workspaceImpressionMarked: {},
 }
 
-export const ignoreOptions = [
-    
-]
-
-
 export const localSkins = [
     {
         "name": "ライト〔標準〕",
@@ -675,9 +670,7 @@ export function formatOption(data){
         var o = defaultOption
         Object.keys(o).forEach(function(key){
             if(checkOptionValue(key, data[key])){
-                if(!ignoreOptions.includes(key)){
-                    o[key] = data[key]
-                }
+                o[key] = data[key]
             }
         })
         return exceptionProcess_local(data, o)
@@ -709,9 +702,7 @@ export function fixOption(local, sync){
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
                     if(checkOptionValue(key, data[key])){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
-                        }
+                        o[key] = data[key]
                     }
                 })
 
