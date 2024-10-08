@@ -160,7 +160,7 @@ export const customUIList = {
                     <textarea class="textarea syntax-highlight" id="exportLocalOptionText_Output" readonly data="json"></textarea>
                 </div>
                 <label for="exportLocalOptionText_Input">無視するインデックス</label>
-                <input type="text" id="exportLocalOptionText_Input" style="width: 100%;" placeholder="スペース区切り" value="correctionReplacePatterns skins fontFontFamilyList yomouRankTop_CustomCSS yomouRank_CustomCSS">
+                <input type="text" id="exportLocalOptionText_Input" style="width: 100%;" placeholder="スペース区切り" value="correctionReplacePatterns skins fontFontFamilyList novelCustomCSS yomouRankTop_CustomCSS yomouRank_CustomCSS">
             </div>
             <div style="margin-top: 10px;" class="option-list--item">
                 <div class="export-option-text">

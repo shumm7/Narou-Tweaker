@@ -273,9 +273,6 @@ export const ignoreOptions = [
     /* いかなるときでも値を引き継がない設定項目 */
     "extOptionSidePanelShow",
     "novelOptionModalSelected",
-    "novelCustomCSS",
-    "yomouRank_CustomCSS",
-    "yomouRankTop_CustomCSS",
 ]
 
 
@@ -705,15 +702,6 @@ function exceptionProcess_local(oldDict, newDict){
         console.log(`Converted value: { novelCustomHeader: false } -> { novelCustomHeaderType: "1" } `)
         newDict.novelCustomHeaderType = "1"
     }
-
-    // extIgnoreOptionIndex
-    newDict.extIgnoreOptionIndex = defaultOption.extIgnoreOptionIndex
-
-    // extIgnoreSyncOptionIndex
-    newDict.extIgnoreSyncOptionIndex = defaultOption.extIgnoreSyncOptionIndex
-
-    // extIgnoreSessionOptionIndex
-    newDict.extIgnoreSessionOptionIndex = defaultOption.extIgnoreSessionOptionIndex
 
     return newDict
 }
