@@ -9,9 +9,12 @@ html {
     overflow-x: hidden;
     width: 400px;
     height: 600px;
+    
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 html::-webkit-scrollbar {
-    display: none;
+    display: none; /*chrome/safari*/
 }
 
 body {

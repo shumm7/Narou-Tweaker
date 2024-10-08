@@ -9,9 +9,11 @@ a {
 }
 html {
     overflow-x: hidden;
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 html::-webkit-scrollbar {
-    display: none;
+    display: none; /*chrome/safari*/
 }
 
 #container {
@@ -175,6 +177,7 @@ input[type="number"] {
     pointer-events: none;
     overflow-y: auto;
     font-family: "BizinGothicDiscord", monospace;
+    
 }
 .syntax-highlight-wrap pre::-webkit-scrollbar {
     opacity: 0;
@@ -265,6 +268,7 @@ input[type=file] {
         border-radius: 10px;
         flex: 1;
         min-width: 0;
+        max-width: 300px;
         overflow-x: hidden;
         flex-basis: 120px;
     }
@@ -532,9 +536,11 @@ input[type=file] {
     border-bottom: 1px solid #ddd;
     overflow-x: scroll;
     overflow-y: hidden;
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 #header-menu-left-items::-webkit-scrollbar {
-    display: none;
+    display: none; /*chrome/safari*/
 }
 .header-menu-item {
     display: flex;
@@ -710,6 +716,7 @@ input[type=file] {
             margin: 0;
             padding: 5px 2px;
             gap: .2em;
+            max-width: unset;
         }
         .draggable_area {
             width: 100%;

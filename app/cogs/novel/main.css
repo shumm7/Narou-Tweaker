@@ -53,8 +53,16 @@ html:has(.narou-tweaker-cursor-hide) {
 #novel_header ul::-webkit-scrollbar,
 #novel_header_right::-webkit-scrollbar,
 #novel_header_right *::-webkit-scrollbar {
-	/* スクロールバー無効化 */
+	/* スクロールバー無効化 chrome/safari */
 	display: none;
+}
+#novel_header,
+#novel_header ul,
+#novel_header_right,
+#novel_header_right * {
+	/* スクロールバー無効化 edge/firefox */
+	-ms-overflow-style: none;
+  	scrollbar-width: none;
 }
 .novel-icon-wrapper ul li {
 	/* テキストの自動折り返しを無効化 */
@@ -655,9 +663,11 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	height: 100%;
 	overflow-y: scroll;
 	padding: .5em;
+	-ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 #novel-option--contents::-webkit-scrollbar{
-	display: none;
+	display: none; /*chrome/safari*/
 }
 .novel-option--content {
 	display: none;
@@ -799,9 +809,11 @@ ul#head_nav li a:not(.c-bookmark-button), .c-menu__item-pdf {
 	border: 1px solid #ddd;
 }
 #novel-option--correction-replace--patterns {
+	-ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 #novel-option--correction-replace--patterns::-webkit-scrollbar{
-	display: none;
+	display: none;/*chrome/safari*/
 }
 .novel-option--correction-replace--pattern-box,
 #novel-option--correction-replace--pattern-box-addition {
