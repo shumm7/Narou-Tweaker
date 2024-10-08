@@ -87,21 +87,22 @@ function setupDOM(){
 
 
     /* Sidepanel Events */
-    chrome.storage.local.get("extOptionSidePanelShow", function(data){
+    chrome.storage.session.get("extOptionSidePanelShow", function(data){
         _sidepanelHide(data.extOptionSidePanelShow)
     })
     $("#sidebar-icon--hide").on("click", function(){
-        chrome.storage.local.set({extOptionSidePanelShow: false}, function(){})
+        chrome.storage.session.set({extOptionSidePanelShow: false}, function(){})
     })
     $("#sidebar-open").on("click", function(){
-        chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})
+        chrome.storage.session.set({extOptionSidePanelShow: true}, function(){})
     })
-    chrome.storage.local.onChanged.addListener(function(changes){
+    chrome.storage.session.onChanged.addListener(function(changes){
         if(changes.extOptionSidePanelShow!=undefined){
             _sidepanelHide(changes.extOptionSidePanelShow.newValue)
         }
     })
     function _sidepanelHide(mode){
+        if(mode==undefined){mode = true}
         if(mode){
             $("#sidebar").removeClass("hide")
         }else{
@@ -453,7 +454,7 @@ function urlScheme(){
         }
     }
     if(p_panel!==null){
-        chrome.storage.local.get(["extOptionSidePanelShow"], d =>{
+        chrome.storage.session.get(["extOptionSidePanelShow"], d =>{
             if(p_panel==="1"){
                 if(!d.extOptionSidePanelShow){
                     chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})

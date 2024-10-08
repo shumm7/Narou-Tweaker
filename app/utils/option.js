@@ -4,7 +4,6 @@ export const defaultOption = {
     /* Extension */
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
-    extOptionSidePanelShow: true,
     extDebug: false,
 
     /* Narou */
@@ -15,6 +14,7 @@ export const defaultOption = {
     /* Novel */
     novelCustomStyle: true,
     novelCustomHeaderType: "2",
+    novelCustomCSS: "",
     novelLegacyHeaderIcon: true,
     novelVertical: false,
     novelCustomHeaderScrollHidden: false,
@@ -25,7 +25,6 @@ export const defaultOption = {
     novelCustomHeaderSocialShowsBrandName: false,
     novelCustomHeaderQRCodeCurrentLocation: true,
     novelCustomHeaderQRCodeShowURL: false,
-    novelOptionModalSelected: 0,
     novelPrefaceAutoURL: true,
     novelAfterwordAutoURL: true,
     novelShowAllExtext: false,
@@ -34,7 +33,6 @@ export const defaultOption = {
     novelCursorHide: false,
     novelCursorHideTimeout: 5,
     novelAttentionBanner: false,
-
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
     workspaceCustomHeaderScrollHidden: false,
@@ -270,9 +268,7 @@ export const defaultGlobalOption = {
 }
 
 export const ignoreOptions = [
-    /* いかなるときでも値を引き継がない設定項目 */
-    "extOptionSidePanelShow",
-    "novelOptionModalSelected",
+    
 ]
 
 

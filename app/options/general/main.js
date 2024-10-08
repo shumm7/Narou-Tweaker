@@ -25,8 +25,9 @@ function removeOptionData(){
     $("#removeOptionData").on("click", function(){
         if(window.confirm('スキンを含む、保存されているデータが全てリセットされます。\nこの操作は元に戻せません。')){
             chrome.storage.local.clear(()=>{
-                chrome.storage.local.set(defaultOption)
                 console.log("Reset all options.")
+                chrome.storage.local.set(defaultOption)
+                console.log("Set all options.")
 
                 /* notify */
                 chrome.notifications.create(null, {
