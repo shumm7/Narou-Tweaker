@@ -1,7 +1,9 @@
 import { novelIconList, workspaceIconList, workspaceMenuIconList } from "./header.js"
+import { getExtensionVersion } from "./misc.js"
 
 export const defaultOption = {
     /* Extension */
+    extOptionsVersion: getExtensionVersion(),
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extDebug: false,
@@ -734,6 +736,11 @@ export function fixOption(local, sync){
 }   
 
 export function checkOptionValue(key, value){
+    //強制的に値を変更する
+    if(key === "extOptionsVersion"){
+        return false
+    }
+
     if(typeof(defaultOption[key]) === typeof(value) && value!==undefined){
         if(key==="novelCustomHeaderLeft" || key==="novelCustomHeaderRight"){
             if(!Array.isArray(value)){return false}

@@ -453,6 +453,7 @@ function monitorOptionChanged(){
     }
 }
 
+/* 設定データの直接変更 */
 function insertOptionData(){
     try {
         $("#option-insert--button").on("click", function(){

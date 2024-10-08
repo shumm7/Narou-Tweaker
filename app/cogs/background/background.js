@@ -32,20 +32,6 @@ chrome.runtime.onInstalled.addListener((details) => {
     }
 })
 
-chrome.storage.local.onChanged.addListener(function(changes){
-    if(changes.extOptionsVersion!=undefined){
-        if(typeof changes.extOptionsVersion.newValue != "undefined"){
-            console.log("Narou Tweaker's option was updated: "+changes.extOptionsVersion.oldValue+" -> "+changes.extOptionsVersion.newValue)
-            console.log(changes)
-        }
-    }
-    else if(changes.extAdvancedSettings!=undefined){
-        if(changes.extAdvancedSettings.newValue==false){
-            chrome.storage.local.set({extExperimentalFeatures: false}, function(){})
-        }
-    }
-})
-
 /* Reset Options */
 chrome.storage.local.set({novelOfficialTags: undefined})
 
