@@ -139,7 +139,7 @@ function makeSkin(){
         `
 
         chrome.storage.session.set({
-            novelAppliedSkinCSS: makeSkinCSS(skin, data.novelCustomStyle),
+            novelAppliedSkinCSS: makeSkinCSS(skin, data),
             novelAppliedFontCSS: rule,
             novelSkinCustomCSS: skin.css,
             novelFontCustomCSS: fontCss
@@ -260,7 +260,7 @@ function makeEditorSkin(){
     })
     */
 
-    chrome.storage.local.set({ //wip
+    chrome.storage.session.set({ //wip
         workspaceEditorAppliedSkinCSS: "",
         workspaceEditorAppliedFontCSS: "",
         workspaceEditorSkinCustomCSS: "",
