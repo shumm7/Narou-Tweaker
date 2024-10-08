@@ -53,7 +53,7 @@ function setupDOM(){
     var sidebar = $(`
         <div id="sidebar-inner">
             <div id="sidebar-header">
-                <img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/>
+                <a href="/options/general/index.html" target="_self"><img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/></a>
                 <div class="sidebar-icon" id="sidebar-icon--help">
                     <!--<a href="/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>

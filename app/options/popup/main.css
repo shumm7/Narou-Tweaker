@@ -13,3 +13,8 @@ html {
 html::-webkit-scrollbar {
     display: none;
 }
+
+body {
+    width: 400px;
+    height: 600px;
+}
