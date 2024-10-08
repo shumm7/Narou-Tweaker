@@ -4,7 +4,7 @@
   "description": "__MSG_extDescription__",
   "author": "__MSG_extAuthor__",
   "default_locale": "ja",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "manifest_version": 3,
   "icons": {
     "16": "assets/icons/icon_16.png",
@@ -23,9 +23,18 @@
   "action": {
     "default_popup": "options/popup/index.html"
   },
-  "side_panel": {
-    "default_path": "cogs/sidepanel/index/index.html"
-  },
+  "permissions": [
+    "storage",
+    "downloads",
+    "tabs",
+    "cookies",
+    "notifications"
+  ],
+  "host_permissions": [
+    "*://*.syosetu.com/*",
+    "*://*.eparet.net/*",
+    "*://*.mitemin.net/*"
+  ],
   "content_scripts": [
     {
       "js": [
@@ -222,12 +231,7 @@
     {
       "resources": [
         "/utils/*.js",
-        "/utils/skins/*.js"
-      ],
-      "matches": ["<all_urls>"]
-    },
-    {
-      "resources": [
+        "/utils/skins/*.js",
         "/assets/fonts/*.otf",
         "/assets/fonts/*.woff",
         "/assets/fonts/*.ttf",
@@ -236,17 +240,5 @@
       ],
       "matches": ["<all_urls>"]
     }
-  ],
-  "permissions": [
-    "storage",
-    "downloads",
-    "tabs",
-    "cookies",
-    "notifications"
-  ],
-  "host_permissions": [
-    "*://*.syosetu.com/*",
-    "*://*.eparet.net/*",
-    "*://*.mitemin.net/*"
   ]
 }

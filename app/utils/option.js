@@ -1,41 +1,12 @@
 import { novelIconList, workspaceIconList, workspaceMenuIconList } from "./header.js"
 import { getExtensionVersion } from "./misc.js"
 
-export const ignoreOptions = [
-    "extOptionsVersion",
-    "extOptionSidePanelShow",
-    "novelOptionModalSelected",
-    "novelCustomCSS",
-    "novelAppliedSkinCSS",
-    "novelAppliedFontCSS",
-    "novelSkinCustomCSS",
-    "novelFontCustomCSS",
-    "workspaceEditorAppliedSkinCSS",
-    "workspaceEditorAppliedFontCSS",
-    "workspaceEditorSkinCustomCSS",
-    "workspaceEditorFontCustomCSS",
-    "yomouRank_CustomCSS",
-    "yomouRank_AppliedCSS",
-    "yomouRankTop_CustomCSS",
-    "yomouRankTop_AppliedCSS"
-]
-
-export const forceResetOptions = [
-    "extIgnoreOptionIndex",
-    "extIgnoreSyncOptionIndex",
-    "extIgnoreSessionOptionIndex"
-]
-
 export const defaultOption = {
-    extOptionsVersion: getExtensionVersion(),
-
     /* Extension */
+    extOptionsVersion: getExtensionVersion(),
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
-    extOptionSidePanelShow: true,
-    extIgnoreOptionIndex: "novelCustomCSS novelAppliedSkinCSS novelAppliedFontCSS novelSkinCustomCSS novelFontCustomCSS correctionReplacePatterns skins fontFontFamilyList yomouRank_AppliedCSS yomouRank_CustomCSS yomouRankTop_AppliedCSS yomouRankTop_CustomCSS workspaceEditorAppliedFontCSS workspaceEditorAppliedSkinCSS",
-    extIgnoreSyncOptionIndex: "",
-    extIgnoreSessionOptionIndex: "",
+    extDebug: false,
 
     /* Narou */
     narouSkipAgeauth: false,
@@ -45,6 +16,7 @@ export const defaultOption = {
     /* Novel */
     novelCustomStyle: true,
     novelCustomHeaderType: "2",
+    novelCustomCSS: "",
     novelLegacyHeaderIcon: true,
     novelVertical: false,
     novelCustomHeaderScrollHidden: false,
@@ -55,7 +27,6 @@ export const defaultOption = {
     novelCustomHeaderSocialShowsBrandName: false,
     novelCustomHeaderQRCodeCurrentLocation: true,
     novelCustomHeaderQRCodeShowURL: false,
-    novelOptionModalSelected: 0,
     novelPrefaceAutoURL: true,
     novelAfterwordAutoURL: true,
     novelShowAllExtext: false,
@@ -64,7 +35,6 @@ export const defaultOption = {
     novelCursorHide: false,
     novelCursorHideTimeout: 5,
     novelAttentionBanner: false,
-
     /* Workspace */
     workspaceCustomHeader: ["user", "message", "home", "menu"],
     workspaceCustomHeaderScrollHidden: false,
@@ -705,17 +675,15 @@ export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
 ]
 
-export function getUpdatedOption(data){
+export function formatOption(data){
     function update(data){
         var o = defaultOption
         Object.keys(o).forEach(function(key){
             if(checkOptionValue(key, data[key])){
-                if(!ignoreOptions.includes(key)){
-                    o[key] = data[key]
-                }
+                o[key] = data[key]
             }
         })
-        return o
+        return exceptionProcess_local(data, o)
     }
 
     if(data){
@@ -723,33 +691,18 @@ export function getUpdatedOption(data){
     }
 }
 
-export function updateOption(force, data){
-
-    function update(data){
-        var currentOptionVersion = defaultOption.extOptionsVersion
-        if(currentOptionVersion != data.extOptionsVersion || force){
-            var o = defaultOption
-            Object.keys(o).forEach(function(key){
-                if(!forceResetOptions.includes(key)){
-                    if(checkOptionValue(key, data[key])){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
-                        }
-                    }
-                }
-            })
-
-            chrome.storage.local.set(o, function(){})
-        }
+function exceptionProcess_local(oldDict, newDict){
+    
+    // novelCustomHeader -> novelCustomHeaderType
+    if(oldDict.novelCustomHeader === true){
+        console.log(`Converted value: { novelCustomHeader: true } -> { novelCustomHeaderType: "2" } `)
+        newDict.novelCustomHeaderType = "2"
+    }else if(oldDict.novelCustomHeader === false){
+        console.log(`Converted value: { novelCustomHeader: false } -> { novelCustomHeaderType: "1" } `)
+        newDict.novelCustomHeaderType = "1"
     }
 
-    if(data){
-        update(data)
-    }else{
-        chrome.storage.local.get(null, function(data) {
-            update(data)
-        })
-    }
+    return newDict
 }
 
 export function fixOption(local, sync){
@@ -759,13 +712,11 @@ export function fixOption(local, sync){
                 var o = defaultOption
                 Object.keys(o).forEach(function(key){
                     if(checkOptionValue(key, data[key])){
-                        if(!ignoreOptions.includes(key)){
-                            o[key] = data[key]
-                        }
+                        o[key] = data[key]
                     }
                 })
 
-                chrome.storage.local.set(o, function(){
+                chrome.storage.local.set(exceptionProcess_local(data, o), function(){
                     console.log("Fixed option data (local).")
                 })
             })
@@ -779,9 +730,7 @@ export function fixOption(local, sync){
                 Object.keys(o).forEach(function(key){
                     if(data[key]!=undefined){
                         if( typeof(o[key]) == typeof(data[key])){
-                            //if(!ignoreOptions.includes(key)){
-                                o[key] = data[key]
-                            //}
+                            o[key] = data[key]
                         }
                     }
                 })
@@ -795,6 +744,11 @@ export function fixOption(local, sync){
 }   
 
 export function checkOptionValue(key, value){
+    //強制的に値を変更する
+    if(key === "extOptionsVersion"){
+        return false
+    }
+
     if(typeof(defaultOption[key]) === typeof(value) && value!==undefined){
         if(key==="novelCustomHeaderLeft" || key==="novelCustomHeaderRight"){
             if(!Array.isArray(value)){return false}

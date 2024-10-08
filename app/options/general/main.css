@@ -14,6 +14,7 @@
     font-weight: bold;
     font-size: 200%;
     margin: 10px;
+    text-align: center;
 }
 #intro .version,
 #intro .version a {
@@ -27,6 +28,9 @@
 .description p {
     padding-bottom: 5px;
     text-indent: 1em;
+}
+.description svg {
+    padding-left: 5px;
 }
 
 .version p {
@@ -50,20 +54,27 @@
     padding-bottom: 5px;
 }
 
+#downloads-outer {
+    display: flex;
+    justify-content: center;
+}
 #downloads {
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    margin: 20px 0;
+    padding: 20px 0;
+    gap: 4em;
+}
+.download-item {
+    flex: 1;
+    min-width: 0;
 }
 .download-item > a {
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 5em;
     color: #666;
 }
 .download-item > a:hover{
@@ -76,7 +87,14 @@
     font-size: 120%;
     font-weight: bold;
 }
-
+.release-date {
+    color: #666;
+}
+.release-icons {
+    display: flex;
+    gap: 5px;
+    color: #666;
+}
 .release-icons i {
     margin-left: 3px;
 }
@@ -85,6 +103,7 @@
     border-radius: 3px;
     color: white;
     margin-left: 3px;
+    margin-right: 3px;
     padding: 1px 3px;
     font-size: 90%;
 }
@@ -116,4 +135,30 @@
 .option-import-warning {
 	font-weight: bold;
 	color: red;
+}
+
+
+@media screen and (max-width: 600px) {
+    .contents-container[name="version"] {
+        .contents-option-head {
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+        .contents-item--heading {
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+        }
+        .current-version {
+            margin-right: 5px;
+        }
+        .contents-item--description {
+            flex-direction: row;
+            align-items: center;
+            margin-left: .5em;
+            font-size: 70%;
+        }
+    }
 }

@@ -31,7 +31,7 @@ export function _optionModal(){
         $("#novel-option--header ul").append("<li class='novel-option--header-tab novel-option-tab-"+index+"'><button type='button'><span class='novel-option--header-tab'>"+title+"</span></button></li>")
         $("#novel-option--contents").append("<div class='novel-option--content novel-option-tab-"+index+"'></div>")
         $(".novel-option--header-tab.novel-option-tab-"+index+" button").on("click", ()=>{
-            chrome.storage.local.set({"novelOptionModalSelected": index}, function(){
+            chrome.storage.session.set({"novelOptionModalSelected": index}, function(){
                 $("#novel-option .novel-option--header-tab").removeClass("active")
                 $("#novel-option .novel-option--content").removeClass("active")
                 $("#novel-option .novel-option-tab-" + index).addClass("active")
@@ -60,12 +60,12 @@ export function _optionModal(){
         });
     }
 
-    chrome.storage.local.get(["novelOptionModalSelected"], function(data){
-        var tab = $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, defaultOption.novelOptionModalSelected))
+    chrome.storage.session.get(["novelOptionModalSelected"], function(data){
+        var tab = $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, 0))
         if(tab.length){
             tab.addClass("active")
         }else{
-            chrome.storage.local.set({novelOptionModalSelected: 0}, function(){
+            chrome.storage.session.set({novelOptionModalSelected: 0}, function(){
                 $("#novel-option .novel-option-tab-0").addClass("active")
             })
         }

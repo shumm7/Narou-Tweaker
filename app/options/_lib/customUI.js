@@ -44,18 +44,20 @@ export const customUIList = {
             <p>
                 幅広い拡張性と高いユーザビリティで、より快適に小説を楽しむことが出来ます。
             </p>
-            <div id="downloads">
-                <div class="download-item">
-                    <a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
-                        <span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
-                        <span class="download-item--title">Chrome</span>
-                    </a>
-                </div>
-                <div class="download-item">
-                    <a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
-                        <span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
-                        <span class="download-item--title">FireFox</span>
-                    </a>
+            <div id="downloads-outer">
+                <div id="downloads">
+                    <div class="download-item">
+                        <a href="https://chromewebstore.google.com/detail/narou-tweaker/ihenjmpgnkmihnoogkokhgboafifphlp">
+                            <span class="download-item--icon"><i class="fa-brands fa-chrome"></i></span>
+                            <span class="download-item--title">Chrome</span>
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <a href="https://addons.mozilla.org/ja/firefox/addon/narou-tweaker/">
+                            <span class="download-item--icon"><i class="fa-brands fa-firefox-browser"></i></span>
+                            <span class="download-item--title">FireFox</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,7 +124,7 @@ export const customUIList = {
     ui_extImportButton: `
         <div id="option-import">
             <div id="option-import-buttons">
-                <label id="import-options-label">
+                <label id="import-options-label" class="button">
                     <i class="fa-solid fa-upload"></i> ファイルから読み込む
                     <input id="option-import-json" type="file" accept="application/json">
                 </label>
@@ -151,45 +153,111 @@ export const customUIList = {
 		</div>
     `,
 
-    ui_extOptionList: `
+    ui_extDebug_OptionList: `
         <div style="display: flex; flex-direction: column; width: 100%;" class="option-list">
             <div class="option-list--item">
                 <div class="export-option-text">
-                    <textarea class="textarea syntax-highlight" id="exportOptionText_Output" readonly data="json"></textarea>
+                    <textarea class="textarea syntax-highlight" id="exportLocalOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="extIgnoreOptionIndex">無視するインデックス</label>
-                <input type="text" class="options" id="extIgnoreOptionIndex" style="width: 100%;" placeholder="スペース区切り">
+                <label for="exportLocalOptionText_Input">無視するインデックス</label>
+                <input type="text" id="exportLocalOptionText_Input" style="width: 100%;" placeholder="スペース区切り" value="correctionReplacePatterns skins fontFontFamilyList novelCustomCSS yomouRankTop_CustomCSS yomouRank_CustomCSS">
             </div>
             <div style="margin-top: 10px;" class="option-list--item">
                 <div class="export-option-text">
                     <textarea class="textarea syntax-highlight" id="exportSyncOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="extIgnoreSyncOptionIndex">無視するインデックス</label>
-                <input type="text" class="options" id="extIgnoreSyncOptionIndex" style="width: 100%;" placeholder="スペース区切り">
+                <label for="exportSyncOptionText_Input">無視するインデックス</label>
+                <input type="text" id="exportSyncOptionText_Input" style="width: 100%;" placeholder="スペース区切り">
             </div>
             <div style="margin-top: 10px;" class="option-list--item">
                 <div class="export-option-text">
                     <textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="extIgnoreSessionOptionIndex">無視するインデックス</label>
-                <input type="text" class="options" id="extIgnoreSessionOptionIndex" style="width: 100%;" placeholder="スペース区切り">
+                <label for="exportSessionOptionText_Input">無視するインデックス</label>
+                <input type="text" id="exportSessionOptionText_Input" style="width: 100%;" placeholder="スペース区切り">
+            </div>
+        </div>
+    `,
+
+    ui_extDebug_InsertOptionForm: `
+        <div style="display: flex; flex-direction: column; width: 100%;" class="option-insert">
+            <div class="option-insert--items" style="display: flex; flex-direction: row; align-items: flex-start; gap: 15px; margin-bottom: 10px;">
+                <div class="option-insert--item option-insert--item-storage">
+                    <div class="textfield">
+                        <label for="option-insert--storage">名前</label>
+                        <div class="dropdown">
+                            <select value="local" id="option-insert--storage">
+                                <option value="local">local</option>
+                                <option value="sync">sync</option>
+                                <option value="session">session</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="option-insert--item option-insert--item-key">
+                    <div class="textfield">
+                        <label for="option-insert--key">キー</label>
+                        <input name="option-insert--key" type="text" id="option-insert--key" placeholder="キーを入力...">
+                    </div>
+                </div>
+            </div>
+            <div class="option-insert--items" style="margin-bottom: 15px;">
+                <div class="option-insert--item option-insert--item-value">
+                    <div class="textfield">
+                        <label for="option-insert--value">値（JSON形式）</label>
+                        <textarea class="textarea" id="option-insert--value" placeholder="値を入力..." style="margin-top: 0;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="option-insert--items" style="display: flex; flex-direction: row; align-items: center; gap: 15px; margin-bottom: 10px;">
+                <div class="option-insert--item option-insert--item-button">
+                    <button class="button" type="button" id="option-insert--button">実行</button>
+                </div>
+                <div class="option-insert--item option-insert--item-message">
+                    <div id="option-insert--error" style="font-weight: bold; color: red; font-size: 90%;"></div>
+                </div>
+            </div>
+
+        </div>
+    
+    `,
+
+    ui_extDebug_OptionMonitor: `
+        <div style="display: flex; flex-direction: column; width: 100%;" class="option-monitor">
+            <div class="option-monitor--item">
+                <div class="option-monitor--text">
+                    <textarea class="textarea" id="option-monitor--output"></textarea>
+                </div>
+                <div class="option-monitor--option" style="display: flex; flex-direction: row; align-items: center;">
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-local" name="option-monitor--option-local" checked/>
+                    <label class="ui-checkbox" for="option-monitor--option-local" style="padding-right: 15px;">local</label>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-sync" name="option-monitor--option-sync"/>
+                    <label class="ui-checkbox" for="option-monitor--option-sync" style="padding-right: 15px;">sync</label>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-session" name="option-monitor--option-session"/>
+                    <label class="ui-checkbox" for="option-monitor--option-session" style="padding-right: 15px;">session</label>
+                </div>
+                <div class="option-monitor--option" style="display: flex; flex-direction: row; align-items: center; margin-top: 10px;">
+                    <button class="button" type="button" id="option-monitor--clear" style="margin-right: 15px;">クリア</button>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--mode-reset" name="option-monitor--mode-reset" checked/>
+                    <label class="ui-checkbox" for="option-monitor--mode-reset" style="padding-right: 15px;">更新時に表示をクリア</label>
+                </div>
             </div>
         </div>
     `,
 
     ui_novelCustomHeaderDraggable: `
-        <div id="novel_header_icon" style="display: flex; flex-flow: row; width: 100%;">
-            <div class="draggable_area_outer" style="width: 33%;">
+        <div class="draggable_area_container" id="novel_header_icon">
+            <div class="draggable_area_outer">
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="2">左</div>
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="1">上部</div>
                 <div class="draggable_area" id="left" name="novel-header"></div>
             </div>
-            <div class="draggable_area_outer" style="width: 33%;">
+            <div class="draggable_area_outer">
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="2">右</div>
                 <div class="title option-hide" data-for="novelCustomHeaderType" data="1">下部</div>
                 <div class="draggable_area" id="right" name="novel-header"></div>
             </div>
-            <div class="draggable_area_outer" style="width: 33%;">
+            <div class="draggable_area_outer">
                 <div class="title">非表示</div>
                 <div class="draggable_area" id="disabled" name="novel-header"></div>
             </div>
@@ -343,7 +411,7 @@ export const customUIList = {
     `,
 
     ui_workspaceCustomHeaderDraggable: `
-        <div id="workspace_header_icon" style="display: flex; flex-flow: row;">
+        <div class="draggable_area_container" id="workspace_header_icon">
             <div class="draggable_area_outer draggable_area_header">
                 <div class="title">表示</div>
                 <div class="draggable_area" id="active" name="workspace-header"></div>
@@ -356,7 +424,7 @@ export const customUIList = {
     `,
 
     ui_workspaceCustomHeaderMenuDraggable: `
-        <div id="workspace_menu_icon" style="display: flex; flex-flow: row; flex-wrap: wrap;">
+        <div class="draggable_area_container" id="workspace_menu_icon">
             <div class="draggable_area_outer draggable_area_menu">
                 <div class="title">左</div>
                 <div class="draggable_area" id="left" name="workspace-header-menu"></div>

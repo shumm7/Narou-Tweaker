@@ -251,7 +251,6 @@ input[type="submit"].ui-button {
 
 .dropdown select {
     appearance: none;
-    min-width: 200px;
     height: 2.5em;
     padding: .4em calc(.8em + 30px) .4em .8em;
     border: 1px solid var(--narou-tweaker--color-ui-dropdown--border);
@@ -272,6 +271,7 @@ label.toggle {
 	position: relative;
 	padding-left: 60px;
 	cursor: pointer;
+	height: 30px;
 }
 
 label.toggle::before, label.toggle::after {
@@ -311,4 +311,48 @@ input.toggle:checked+label.toggle::before {
 
 input.toggle:checked+label.toggle::after {
 	left: 26px;
+}
+
+
+/* checkbox */
+input.ui-checkbox[type="checkbox"] {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #606060;
+    vertical-align: -5px;
+    cursor: pointer;
+    transition: border-color 0.1s linear;
+    flex-shrink: 0; 
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+input.ui-checkbox[type="checkbox"]:checked {
+    border-color: var(--kasasagi-blue);
+    transition: border-color 0.1s linear;
+}
+
+input.ui-checkbox[type="checkbox"]:before {
+    position: absolute;
+    content: "";
+    border-right: 2px solid var(--kasasagi-blue);
+    border-bottom: 2px solid var(--kasasagi-blue);
+    top: 2px;
+    left: 7px;
+    width: 6px;
+    height: 12px;
+    transform: rotate(50deg);
+    opacity: 0;
+    transition: opacity 0.1s linear;
+}
+
+input.ui-checkbox[type="checkbox"]:checked:before {
+    opacity: 1;
+    transition: opacity 0.1s linear;
+}
+label.ui-checkbox {
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
 }

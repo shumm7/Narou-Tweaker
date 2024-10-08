@@ -258,6 +258,49 @@ export function optionHide(){
             }
         })
     })
+
+    $(".debug-option-hide").each(function(){
+        var elm = $(this)
+
+        function change(value){
+            $(".option--debug-message").empty()
+            if(value){
+                elm.removeClass("option-hide--debug")
+                $(".option--debug-message").append("【デバッグ機能】開発者向けの機能です。不具合が発生する可能性がありますので、ご注意ください。")
+            }else{
+                elm.addClass("option-hide--debug")
+                $(".option--debug-message").append("「デバッグ機能」が無効のため使用できません。")
+            }
+        }
+
+        // Elements 
+        if(!elm.hasClass("option-hide--debug-processed")){
+            if(elm.find(".search-result--items-title").length){
+                elm.find(".search-result--items-title").prepend(
+                    `<i class="fa-solid fa-bug" style="margin-right: 5px;"></i>`
+                )
+            }else{
+                elm.find(".contents-item--heading:first").prepend(
+                    `<i class="fa-solid fa-bug" style="margin-right: 5px;"></i>`
+                )
+            }
+            elm.find(".contents-item--description:first").prepend(
+                `<div class="option--debug-message"></div>`
+            )
+            elm.addClass("option-hide--debug-processed")
+        }
+
+            
+        chrome.storage.local.get(["extDebug"], function(data){
+            change(data.extDebug)
+        })
+
+        chrome.storage.local.onChanged.addListener(function(changes){
+            if(changes.extDebug!=undefined){
+                change(changes.extDebug.newValue)
+            }
+        })
+    })
 }
 
 export function colorPicker(){

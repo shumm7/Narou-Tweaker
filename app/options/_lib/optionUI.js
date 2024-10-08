@@ -26,6 +26,13 @@ export const optionCategoryList = [
         defaultCategory: "introduction",
         categories: [
             {
+                title: "デバッグ",
+                id: "debug",
+                description: {
+                    attention: "【デバッグモード】開発者向けの機能です。不具合が発生する可能性がありますのでご注意ください。"
+                }
+            },
+            {
                 title: "Narou Tweaker",
                 id: "introduction",
             },
@@ -119,7 +126,7 @@ export const optionCategoryList = [
         title: "小説を読もう！",
         description: "ランキングや検索ページの表示を設定することが出来ます。",
         id: "yomou",
-        icon: "fa-solid fa-magnifying-glass",
+        icon: "fa-solid fa-crown",
         targetUrl: ["yomou.syosetu.com", "noc.syosetu.com", "mnlt.syosetu.com", "mid.syosetu.com"],
         defaultCategory: "rank",
         categories: [
@@ -444,6 +451,30 @@ export const optionList = [
         }
     },
 
+    {
+        id: "extDebug",
+        title: "デバッグ機能",
+        description: {
+            text: "デバッグ機能を有効化します。",
+            small: "[Ctrl + Alt + O]",
+            attention: "開発者向けの機能です。不具合が発生する可能性がありますのでご注意ください。",
+            keywords: ["高度", "でばっぐきのう", "環境設定", "上級者", "でばっぐ", "実験", "テスト", "基本設定", "開発", "開発者向け", "デバッグ"],
+        },
+        location: {
+            page: "general",
+            category: "config",
+            noindex: true,
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        value: {
+            hasValue: true,
+            default: defaultOption.extDebug,
+        }
+    },
+
     /* データ (data) */
     {
         id: "extExportOption",
@@ -532,29 +563,6 @@ export const optionList = [
         },
     },
 
-    {
-        id: "extShowOption",
-        title: "設定データを閲覧",
-        description: {
-            text: "保存されている設定データを文字列で表示します。",
-            small: "（local/sync/sessionのデータを表示しています）",
-            keywords: ["せっていでーたをえつらん", "設定データ", "local", "sync", "session", "JSON"],
-        },
-        ui: {
-            type: "custom",
-            name: "default",
-            data: "ui_extOptionList",
-        },
-        location: {
-            page: "general",
-            category: "data",
-        },
-        value: {
-            hasValue: false,
-            isAdvanced: true,
-        }
-    },
-
     /* パッチノート (version) */
     {
         id: "extPatchnotes",
@@ -572,6 +580,77 @@ export const optionList = [
         value: {
             hasValue: false,
         },
+    },
+
+    /* デバッグモード */
+    {
+        id: "extDebug_ShowOption",
+        title: "設定データを閲覧",
+        description: {
+            text: "保存されている設定データを文字列で表示します。",
+            small: "（local/sync/sessionのデータを表示しています）",
+            keywords: ["せっていでーたをえつらん", "設定データ", "local", "sync", "session", "JSON"],
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extDebug_OptionList",
+        },
+        location: {
+            page: "general",
+            category: "debug",
+            noindex: true,
+        },
+        value: {
+            hasValue: false,
+            isDebug: true,
+        }
+    },
+
+    {
+        id: "extDebug_InsertOption",
+        title: "設定データを変更",
+        description: {
+            text: "設定データを書き換えます。",
+            keywords: ["せっていでーたをへんこう", "設定データ", "local", "sync", "session"],
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extDebug_InsertOptionForm",
+        },
+        location: {
+            page: "general",
+            category: "debug",
+            noindex: true,
+        },
+        value: {
+            hasValue: false,
+            isDebug: true,
+        }
+    },
+
+    {
+        id: "extDebug_MonitorOption",
+        title: "設定データの変更を監視",
+        description: {
+            text: "設定データの変更を監視します。",
+            keywords: ["せっていでーたのへんこうをかんし", "設定データ", "local", "sync", "session"],
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extDebug_OptionMonitor",
+        },
+        location: {
+            page: "general",
+            category: "debug",
+            noindex: true,
+        },
+        value: {
+            hasValue: false,
+            isDebug: true,
+        }
     },
 
     /* 小説家になろう */
@@ -677,7 +756,7 @@ export const optionList = [
             name: "default",
             data: [
                 {value: "0", title: "オフ（小説家になろう標準）"},
-                {value: "1", title: "モダン"},
+                {value: "1", title: "ベーシック"},
                 {value: "2", title: "ミニマル（推奨）"},
             ]
         },
@@ -1838,12 +1917,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineWord,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1868,11 +1952,53 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineNumber,
             hasValue: true,
+            isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
+        },
+    },
+
+    {
+        id: "correctionVerticalLayout_IgnoreCombineNumberInWord",
+        title: "単語中の数字を無視する",
+        description: {
+            text: "数値の表記方法を変更します。",
+            small: "前後に半角英字のある数字を、縦中横処理から無視します。",
+            keywords: ["たんごちゅうのすうじをむしする", "縦中横", "文字の向き", "文章校正", "縦書き"],
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        location: {
+            page: "novel",
+            category: "correction",
+            hasParent: true,
+            parent: "parent_correctionVertical",
+        },
+        value: {
+            default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
+            hasValue: true,
+            /*
+            requirement: {
+                dataFor: ["correctionVerticalLayout_CombineNumber"],
+                data: 0,
+                mode: "hide"
+            },
+            */
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
             isAdvanced: true,
         },
     },
@@ -1898,42 +2024,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineExclamation,
             hasValue: true,
             isAdvanced: true,
-        },
-    },
-
-    {
-        id: "correctionVerticalLayout_IgnoreCombineNumberInWord",
-        title: "単語中の数字を無視する",
-        description: {
-            text: "数値の表記方法を変更します。",
-            small: "前後に半角英字のある数字を、縦中横処理から無視します。",
-            keywords: ["たんごちゅうのすうじをむしする", "縦中横", "文字の向き", "文章校正", "縦書き"],
-        },
-        ui: {
-            type: "toggle",
-            name: "default",
-        },
-        location: {
-            page: "novel",
-            category: "correction",
-            hasParent: true,
-            parent: "parent_correctionVertical"
-        },
-        value: {
-            default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
-            hasValue: true,
             requirement: {
-                dataFor: ["correctionVerticalLayout_CombineNumber"],
-                data: 0,
-                mode: "hide"
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
             },
-            isAdvanced: true,
         },
     },
 
@@ -1958,12 +2059,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayWord,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1988,12 +2094,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayExclamation,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -3904,6 +4015,7 @@ export function getOptionElement(option, forSearch){
     const requirement = option.value.requirement
     const isExperimental = option.value.isExperimental
     const isAdvanced = option.value.isAdvanced
+    const isDebug = option.value.isDebug
     const hasParent = option.location.hasParent
     const parent = option.location.parent
 
@@ -3948,7 +4060,7 @@ export function getOptionElement(option, forSearch){
                 elm.find(".contents-option").append(`<div class="contents-option-content"></div>`)
             }
 
-            if(uiName==="default" || uiName===undefined){
+            if(uiName==="default" || uiName === "toggle" || uiName===undefined){
                 var item = $(`<input type="checkbox" id="${id}" class="options toggle">`)
                 if(uiStyle){
                     item.css(uiStyle)
@@ -3962,6 +4074,22 @@ export function getOptionElement(option, forSearch){
                     ${item[0].outerHTML}
                     <label for="${id}" class="toggle"></label>
                     ${uiSuffix}
+                `)
+
+                elm.find(".contents-option-content").append(toggleElm)
+            }else if(uiName==="checkbox"){
+                var item = $(`<input type="checkbox" id="${id}" class="options ui-checkbox">`)
+                if(uiStyle){
+                    item.css(uiStyle)
+                }
+                if(uiClass){
+                    item.addClass(uiClass)
+                }
+
+                var toggleElm = $(`
+                    ${uiPrefix}
+                    ${item[0].outerHTML}
+                    <label for="${id}" class="tui-checkbox">${uiSuffix}</label>
                 `)
 
                 elm.find(".contents-option-content").append(toggleElm)
@@ -4158,7 +4286,10 @@ export function getOptionElement(option, forSearch){
             var item = $(`
                 <div class="search-result--items">
                     <div class="search-result--items-disabled">
-                        <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">このオプションはここでは設定できません。</a>
+                            <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">
+                                <div class="search-result--items-disabled-box">このオプションはここでは設定できません。</div>
+                            </a>
+                        </span>
                     </div>
                 </div>
             `)
@@ -4319,6 +4450,9 @@ export function getOptionElement(option, forSearch){
     }
     if(isExperimental){
         elm.addClass("experimental-hide")
+    }
+    if(isDebug){
+        elm.addClass("debug-option-hide")
     }
 
     /* Style */

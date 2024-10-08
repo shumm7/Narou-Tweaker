@@ -76,9 +76,12 @@
     border-top: none;
 	border-right: 3px double #999999;
 }
-
+.narou-tweaker-vertical .p-novel__body {
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
+}
 .narou-tweaker-vertical .p-novel__body::-webkit-scrollbar {
-    display: none;
+    display: none; /*chrome/safari*/
 }
 
 

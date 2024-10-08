@@ -81,7 +81,7 @@ def makePatchnoteMarkdown(codeDir):
         "novel": "📗 小説ページ",
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
-        "yomou": "🔍️ 小説を読もう！",
+        "yomou": "👑 小説を読もう！",
         "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
         "general": "⚒️ 全般"
@@ -105,7 +105,7 @@ def makePatchnoteHTML(codeDir):
         "novel": "📗 小説ページ",
         "workspace": "🖊️ ユーザホーム",
         "mypage": "👤 ユーザページ",
-        "yomou": "🔍️ 小説を読もう！",
+        "yomou": "👑 小説を読もう！",
         "mitemin": "🎨 みてみん",
         "kasasagi": "📊 KASASAGI",
         "general": "⚒️ 全般"
@@ -187,11 +187,10 @@ def build_gecko():
     manifest["browser_specific_settings"] = {
         "gecko": { "id": "{29c0c2f1-2092-4808-9709-6aa5fb8562d7}" }
     }
-    manifest.pop("side_panel")
-    if("contextMenus" in manifest["permissions"]):
-        manifest["permissions"].remove("contextMenus")
-    if("sidePanel" in manifest["permissions"]):
-        manifest["permissions"].remove("sidePanel")
+    #if("contextMenus" in manifest["permissions"]):
+    #    manifest["permissions"].remove("contextMenus")
+    #if("sidePanel" in manifest["permissions"]):
+    #    manifest["permissions"].remove("sidePanel")
     set_manifest(codeDir, manifest)
 
     # Remove Debug

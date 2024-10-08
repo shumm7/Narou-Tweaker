@@ -97,7 +97,7 @@ function makeRankCSS(){
             `
         }
 
-        chrome.storage.local.set({yomouRank_AppliedCSS: rule})
+        chrome.storage.session.set({yomouRank_AppliedCSS: rule})
     })
 }
 
@@ -181,6 +181,6 @@ function makeRankTopCSS(){
             `
         }
 
-        chrome.storage.local.set({yomouRankTop_AppliedCSS: rule})
+        chrome.storage.session.set({yomouRankTop_AppliedCSS: rule})
     })
 }

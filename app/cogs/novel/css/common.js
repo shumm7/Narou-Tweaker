@@ -1,10 +1,6 @@
 $("body").addClass("narou-tweaker--custom-skin")
 
-chrome.storage.local.get(null, (data)=>{
-    if(data.novelCustomStyle){
-        $("body").addClass("narou-tweaker--custom-style")
-    }
-
+chrome.storage.session.get(null, (data)=>{
     /* Skin Custom CSS */
     if("novelSkinCustomCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--skin-user" class="narou-tweaker-style"></style>`)
@@ -43,7 +39,9 @@ chrome.storage.local.get(null, (data)=>{
 
     /* Author CSS */
     $("html").append(`<style type="text/css" id="narou-tweaker-style--author-css" class="narou-tweaker-style"></style>`)
+})
 
+chrome.storage.local.get(null, (data)=>{
     /* User CSS */
     if("novelCustomCSS" in data){
         var l = $(`<style type="text/css" id="narou-tweaker-style--user-css" class="narou-tweaker-style"></style>`)
@@ -54,7 +52,7 @@ chrome.storage.local.get(null, (data)=>{
     }
 })
 
-chrome.storage.local.onChanged.addListener(function(changes){
+chrome.storage.session.onChanged.addListener(function(changes){
     if(changes.novelSkinCustomCSS!=undefined){
         if($("#narou-tweaker-style--skin-user").length){
             $("#narou-tweaker-style--skin-user").text(changes.novelSkinCustomCSS.newValue)
@@ -76,7 +74,8 @@ chrome.storage.local.onChanged.addListener(function(changes){
             $("#narou-tweaker-style--font").text(changes.novelAppliedFontCSS.newValue)
         }
     }
-
+})
+chrome.storage.local.onChanged.addListener(function(changes){
     if(changes.novelCustomCSS!=undefined){
         if($("#narou-tweaker-style--user-css").length){
             $("#narou-tweaker-style--user-css").text(changes.novelCustomCSS.newValue)

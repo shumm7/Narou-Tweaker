@@ -32,7 +32,6 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-custom-attention-text: var(--color-text);
     --color-custom-attention-text--danger: var(--color-custom-text--danger);
 
-
     /* 閲覧履歴ボックス*/
     --color-nt-historybox-bg: var(--color-custom-bg--sub);
     --color-nt-historybox-text: var(--color-custom-text);

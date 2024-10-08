@@ -1,11 +1,11 @@
 import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/utils.js";
 import { getOptionElement, optionCategoryList, optionList } from "./_lib/optionUI.js";
-import { check, defaultValue, getExtensionVersion } from "../../utils/misc.js"
-import { defaultOption, updateOption } from "../../utils/option.js"
+import { defaultOption } from "../../utils/option.js"
+import { check, defaultValue } from "/utils/misc.js"
 import { getOptionFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
-var currentPage
+let currentPage
 
 export function setup(){
     currentPage = $("#option-page-id").val()
@@ -29,9 +29,11 @@ function setupDOM(){
     var sidebarDOMItems = ""
     $.each(optionCategoryList, function(idx, category){
         if(category.sidebar || category.sidebar===undefined){
+            var url = `/options/${category.id}/index.html`
+
             var elm = $(`
                 <div class="sidebar-item" name="${category.id}">
-                    <a href="/options/${category.id}/index.html" target="_self">
+                    <a href="${url}" target="_self">
                         <span class="sidebar-item--title">${category.title}</span>
                     </a>
                 </div>
@@ -51,7 +53,7 @@ function setupDOM(){
     var sidebar = $(`
         <div id="sidebar-inner">
             <div id="sidebar-header">
-                <img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/>
+                <a href="/options/general/index.html" target="_self"><img class="brand-icon" src="/assets/icons/icon.png" width="30" height="30"/></a>
                 <div class="sidebar-icon" id="sidebar-icon--help">
                     <!--<a href="/options/help/index.html"><i class="fa-solid fa-circle-question"></i></a>-->
                 </div>
@@ -85,21 +87,22 @@ function setupDOM(){
 
 
     /* Sidepanel Events */
-    chrome.storage.local.get("extOptionSidePanelShow", function(data){
+    chrome.storage.session.get("extOptionSidePanelShow", function(data){
         _sidepanelHide(data.extOptionSidePanelShow)
     })
     $("#sidebar-icon--hide").on("click", function(){
-        chrome.storage.local.set({extOptionSidePanelShow: false}, function(){})
+        chrome.storage.session.set({extOptionSidePanelShow: false}, function(){})
     })
     $("#sidebar-open").on("click", function(){
-        chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})
+        chrome.storage.session.set({extOptionSidePanelShow: true}, function(){})
     })
-    chrome.storage.local.onChanged.addListener(function(changes){
+    chrome.storage.session.onChanged.addListener(function(changes){
         if(changes.extOptionSidePanelShow!=undefined){
             _sidepanelHide(changes.extOptionSidePanelShow.newValue)
         }
     })
     function _sidepanelHide(mode){
+        if(mode==undefined){mode = true}
         if(mode){
             $("#sidebar").removeClass("hide")
         }else{
@@ -161,18 +164,34 @@ function setupDOM(){
 
     if(currentCategory.targetUrl !== undefined){
         $("#header-title--description").append(`
-            <p>
+            <p class="header-title--description-text">
                 ${currentCategory.description}<br>
                 <span style="font-size:80%;">対象ページ：${currentCategory.targetUrl.join(" / ")}
             </p>
+            <div class="header-title--description-search">
+                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
         `)
     }else{
         $("#header-title--description").append(`
-            <p>${currentCategory.description}</p>
+            <p class="header-title--description-text">${currentCategory.description}</p>
+            <div class="header-title--description-search">
+                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
         `)
     }
 
-    /* Header Tabs */
+    /* Header Tab */
+    const scrollElement = document.querySelector("#header-menu-left-items");
+    if(scrollElement!=null){
+        scrollElement.addEventListener("wheel", (e) => {
+            if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return;
+            e.preventDefault();
+            scrollElement.scrollLeft += e.deltaY;
+        });
+    }
+
+    /* Header Tab Items */
     const defaultCategory = currentCategory.defaultCategory
     $.each(currentCategory.categories, function(_, tab){
         $("#main").append(`<div class="contents-container header-menu-target" name="${tab.id}"></div>`)
@@ -234,6 +253,23 @@ function setupDOM(){
         params.set("category", name)
 
         window.history.replaceState(null, "", `/options/${currentPage}/index.html?${params.toString()}`)
+
+        /* popup時に自動でタブをスクロール */
+        var outer = document.getElementById( "header-menu-left-items" )
+        var button = $(this)[0]
+        const scrollWidth = outer.scrollWidth
+        const width = outer.clientWidth
+        const buttonSize = button.clientWidth
+        if(width < scrollWidth){
+            const scrollLeft = outer.scrollLeft //スクロール量
+            const absoluteLeft = button.offsetLeft - outer.offsetLeft //オブジェクトの通常位置
+            const currentLeft = absoluteLeft - scrollLeft //オブジェクトの現在の位置
+
+            const centerLeft = width/2 - buttonSize/2 //目標とする位置
+            const target = centerLeft - currentLeft // 必要なスクロール量
+            const canMove =  scrollLeft - target >=0 ? scrollLeft - target : 0 //現在のスクロール量からどれだけスクロールさせればいいか
+            outer.scrollLeft = canMove
+        }
     })
 }
 
@@ -295,8 +331,6 @@ function restoreValues(data, ignore){
   }
 
 export function restoreOptions(){
-    updateOption()
-  
     chrome.storage.local.onChanged.addListener(function(changes){
       chrome.storage.local.get(null, function(data) {
         restoreValues(data, true)
@@ -420,7 +454,7 @@ function urlScheme(){
         }
     }
     if(p_panel!==null){
-        chrome.storage.local.get(["extOptionSidePanelShow"], d =>{
+        chrome.storage.session.get(["extOptionSidePanelShow"], d =>{
             if(p_panel==="1"){
                 if(!d.extOptionSidePanelShow){
                     chrome.storage.local.set({extOptionSidePanelShow: true}, function(){})
