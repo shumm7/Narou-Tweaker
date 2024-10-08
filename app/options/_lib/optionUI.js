@@ -1961,12 +1961,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineWord,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -1991,11 +1996,53 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineNumber,
             hasValue: true,
+            isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
+        },
+    },
+
+    {
+        id: "correctionVerticalLayout_IgnoreCombineNumberInWord",
+        title: "単語中の数字を無視する",
+        description: {
+            text: "数値の表記方法を変更します。",
+            small: "前後に半角英字のある数字を、縦中横処理から無視します。",
+            keywords: ["たんごちゅうのすうじをむしする", "縦中横", "文字の向き", "文章校正", "縦書き"],
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        location: {
+            page: "novel",
+            category: "correction",
+            hasParent: true,
+            parent: "parent_correctionVertical",
+        },
+        value: {
+            default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
+            hasValue: true,
+            /*
+            requirement: {
+                dataFor: ["correctionVerticalLayout_CombineNumber"],
+                data: 0,
+                mode: "hide"
+            },
+            */
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
             isAdvanced: true,
         },
     },
@@ -2021,42 +2068,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_CombineExclamation,
             hasValue: true,
             isAdvanced: true,
-        },
-    },
-
-    {
-        id: "correctionVerticalLayout_IgnoreCombineNumberInWord",
-        title: "単語中の数字を無視する",
-        description: {
-            text: "数値の表記方法を変更します。",
-            small: "前後に半角英字のある数字を、縦中横処理から無視します。",
-            keywords: ["たんごちゅうのすうじをむしする", "縦中横", "文字の向き", "文章校正", "縦書き"],
-        },
-        ui: {
-            type: "toggle",
-            name: "default",
-        },
-        location: {
-            page: "novel",
-            category: "correction",
-            hasParent: true,
-            parent: "parent_correctionVertical"
-        },
-        value: {
-            default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
-            hasValue: true,
             requirement: {
-                dataFor: ["correctionVerticalLayout_CombineNumber"],
-                data: 0,
-                mode: "hide"
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
             },
-            isAdvanced: true,
         },
     },
 
@@ -2081,12 +2103,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayWord,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
@@ -2111,12 +2138,17 @@ export const optionList = [
             page: "novel",
             category: "correction",
             hasParent: true,
-            parent: "parent_correctionVertical"
+            parent: "parent_correctionVertical",
         },
         value: {
             default: defaultOption.correctionVerticalLayout_SidewayExclamation,
             hasValue: true,
             isAdvanced: true,
+            requirement: {
+                dataFor: ["novelVertical"],
+                data: true,
+                mode: "show"
+            },
         },
     },
 
