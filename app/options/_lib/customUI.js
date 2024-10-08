@@ -124,7 +124,7 @@ export const customUIList = {
     ui_extImportButton: `
         <div id="option-import">
             <div id="option-import-buttons">
-                <label id="import-options-label">
+                <label id="import-options-label" class="button">
                     <i class="fa-solid fa-upload"></i> ファイルから読み込む
                     <input id="option-import-json" type="file" accept="application/json">
                 </label>
@@ -153,7 +153,7 @@ export const customUIList = {
 		</div>
     `,
 
-    ui_extOptionList: `
+    ui_extDebug_OptionList: `
         <div style="display: flex; flex-direction: column; width: 100%;" class="option-list">
             <div class="option-list--item">
                 <div class="export-option-text">
@@ -175,6 +175,72 @@ export const customUIList = {
                 </div>
                 <label for="exportSessionOptionText_Input">無視するインデックス</label>
                 <input type="text" id="exportSessionOptionText_Input" style="width: 100%;" placeholder="スペース区切り">
+            </div>
+        </div>
+    `,
+
+    ui_extDebug_InsertOptionForm: `
+        <div style="display: flex; flex-direction: column; width: 100%;" class="option-insert">
+            <div class="option-insert--items" style="display: flex; flex-direction: row; align-items: flex-start; gap: 15px; margin-bottom: 10px;">
+                <div class="option-insert--item option-insert--item-storage">
+                    <div class="textfield">
+                        <label for="option-insert--storage">名前</label>
+                        <div class="dropdown">
+                            <select value="local" id="option-insert--storage">
+                                <option value="local">local</option>
+                                <option value="sync">sync</option>
+                                <option value="session">session</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="option-insert--item option-insert--item-key">
+                    <div class="textfield">
+                        <label for="option-insert--key">キー</label>
+                        <input name="option-insert--key" type="text" id="option-insert--key" placeholder="キーを入力...">
+                    </div>
+                </div>
+            </div>
+            <div class="option-insert--items" style="margin-bottom: 15px;">
+                <div class="option-insert--item option-insert--item-value">
+                    <div class="textfield">
+                        <label for="option-insert--value">値（JSON形式）</label>
+                        <textarea class="textarea" id="option-insert--value" placeholder="値を入力..." style="margin-top: 0;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="option-insert--items" style="display: flex; flex-direction: row; align-items: center; gap: 15px; margin-bottom: 10px;">
+                <div class="option-insert--item option-insert--item-button">
+                    <button class="button" type="button" id="option-insert--button">実行</button>
+                </div>
+                <div class="option-insert--item option-insert--item-message">
+                    <div id="option-insert--error" style="font-weight: bold; color: red; font-size: 90%;"></div>
+                </div>
+            </div>
+
+        </div>
+    
+    `,
+
+    ui_extDebug_OptionMonitor: `
+        <div style="display: flex; flex-direction: column; width: 100%;" class="option-monitor">
+            <div class="option-monitor--item">
+                <div class="option-monitor--text">
+                    <textarea class="textarea" id="option-monitor--output"></textarea>
+                </div>
+                <div class="option-monitor--option" style="display: flex; flex-direction: row; align-items: center;">
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-local" name="option-monitor--option-local" checked/>
+                    <label class="ui-checkbox" for="option-monitor--option-local" style="padding-right: 15px;">local</label>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-sync" name="option-monitor--option-sync"/>
+                    <label class="ui-checkbox" for="option-monitor--option-sync" style="padding-right: 15px;">sync</label>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--option-session" name="option-monitor--option-session"/>
+                    <label class="ui-checkbox" for="option-monitor--option-session" style="padding-right: 15px;">session</label>
+                </div>
+                <div class="option-monitor--option" style="display: flex; flex-direction: row; align-items: center; margin-top: 10px;">
+                    <button class="button" type="button" id="option-monitor--clear" style="margin-right: 15px;">クリア</button>
+                    <input class="ui-checkbox" type="checkbox" id="option-monitor--mode-reset" name="option-monitor--mode-reset" checked/>
+                    <label class="ui-checkbox" for="option-monitor--mode-reset" style="padding-right: 15px;">更新時に表示をクリア</label>
+                </div>
             </div>
         </div>
     `,

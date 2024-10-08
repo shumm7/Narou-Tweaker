@@ -1,111 +1,24 @@
 import { setup } from "../general.js";
 import { defaultOption, fixOption, formatOption } from "../../utils/option.js";
-import { escapeHtml, getDatetimeStringForFilename } from "/utils/text.js";
+import { escapeHtml, getDatetimeStringForFilename, getDatetimeString } from "/utils/text.js";
 import { saveJson, defaultValue, getExtensionVersion } from "../../utils/misc.js";
 
 setup()
 
 document.addEventListener('DOMContentLoaded', function(){
+    debugMode()
     showPatchnotes()
-    exportLocalOptionText()
-    exportSyncOptionText()
-    exportSessionOptionText()
     removeOptionData()
     fixOptionData()
     exportOptionData()
     importOptionData()
+
+    /* debugmode */
+    exportOptionText()
+    monitorOptionChanged()
+    insertOptionData()
 })
 
-
-/* 設定データを閲覧 */
-function exportLocalOptionText() {
-    function change(){
-        chrome.storage.local.get(null, (data)=>{
-            try{
-                var input = $("#exportLocalOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
-
-                var text = JSON.stringify(data, null, 4)
-                var field = $("#exportLocalOptionText_Output")
-                field.text(text)
-                field.trigger("input")
-            }catch(e){
-            }
-        })
-    }
-    change()
-    chrome.storage.local.onChanged.addListener(function(changes){
-        change()
-    })
-    $("#exportLocalOptionText_Input").on("input", function(e){
-        change()
-    })
-}
-
-function exportSyncOptionText() {
-    function change(){
-        chrome.storage.sync.get(null, (data)=>{
-            try{
-                var input = $("#exportSyncOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
-
-                var text = JSON.stringify(data, null, 4)
-                var field = $("#exportSyncOptionText_Output")
-                field.text(text)
-                field.trigger("input")
-            }catch(e){
-            }
-        })
-    }
-
-    change()
-    chrome.storage.sync.onChanged.addListener(function(changes){
-        change()
-    })
-    $("#exportSyncOptionText_Input").on("input", function(e){
-        change()
-    })
-}
-
-function exportSessionOptionText() {
-    function change(){
-        chrome.storage.session.get(null, (data)=>{
-            try{
-                var input = $("#exportSessionOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
-
-                var text = JSON.stringify(data, null, 4)
-                var field = $("#exportSessionOptionText_Output")
-                field.text(text)
-                field.trigger("input")
-            }catch(e){
-                
-            }
-        })
-    }
-    change()
-    chrome.storage.session.onChanged.addListener(function(changes){
-        change()
-    })
-    $("#exportSessionOptionText_Input").on("input", function(e){
-        change()
-    })
-}
 
 /* 設定データをリセット/修復 */
 function removeOptionData(){
@@ -343,4 +256,263 @@ function showPatchnotes(){
             </div>
         `)
     });
+}
+
+
+/* デバッグモード */
+/* デバッグモード初期設定 */
+function debugMode(){
+    /* change debug mode */
+    function tabMode(isDebug){
+        var tab = $(`.header-menu-item[name="debug"]`)
+
+        if(tab.length){
+            if(isDebug){
+                tab.css("display", "")
+            }else{
+                tab.css("display", "none")
+                if(tab.hasClass("selected")){
+                    $(`.header-menu-item[name="config"]`).click()
+                }
+            }
+        }
+    }
+
+    /* デバッグモードを表示 */
+    chrome.storage.local.get(["extDebug"], function(data){
+        tabMode(data.extDebug)
+
+        if(data.extDebug){
+            $(`.contents-wide[name="extDebug"]`).css("display", "")
+        }else{
+            $(`.contents-wide[name="extDebug"]`).css("display", "none")
+        }
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extDebug!=undefined){
+            tabMode(changes.extDebug.newValue)
+
+            if(changes.extDebug.newValue){
+                $(`.contents-wide[name="extDebug"]`).css("display", "")
+            }else{
+                $(`.contents-wide[name="extDebug"]`).css("display", "none")
+            }
+        }
+    })
+
+    /* Ctrl + Alt + O でデバッグモードオプションを表示 */
+    $(window).keydown(function(e){
+        if(e.ctrlKey){
+        if(e.altKey){
+        if(e.key === "o"){
+            console.log("event")
+            $(`.contents-wide[name="extDebug"]`).css("display", "")
+        }
+        }
+        }
+    });
+}
+
+/* 設定データを閲覧 */
+function exportOptionText() {
+    /* local */
+    function changeLocal(){
+        chrome.storage.local.get(null, (data)=>{
+            try{
+                var input = $("#exportLocalOptionText_Input")
+                const ignores = input.val().split(/\s/)
+                $.each(ignores, function(_, elm){
+                    if(elm in data){
+                        delete data[elm]
+                    }
+                })
+
+                var text = JSON.stringify(data, null, 4)
+                var field = $("#exportLocalOptionText_Output")
+                field.text(text)
+                field.trigger("input")
+            }catch(e){
+            }
+        })
+    }
+    changeLocal()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        changeLocal()
+    })
+    $("#exportLocalOptionText_Input").on("input", function(e){
+        changeLocal()
+    })
+
+    /* sync */
+    function changeSync(){
+        chrome.storage.sync.get(null, (data)=>{
+            try{
+                var input = $("#exportSyncOptionText_Input")
+                const ignores = input.val().split(/\s/)
+                $.each(ignores, function(_, elm){
+                    if(elm in data){
+                        delete data[elm]
+                    }
+                })
+
+                var text = JSON.stringify(data, null, 4)
+                var field = $("#exportSyncOptionText_Output")
+                field.text(text)
+                field.trigger("input")
+            }catch(e){
+            }
+        })
+    }
+
+    changeSync()
+    chrome.storage.sync.onChanged.addListener(function(changes){
+        changeSync()
+    })
+    $("#exportSyncOptionText_Input").on("input", function(e){
+        changeSync()
+    })
+
+    function changeSession(){
+        chrome.storage.session.get(null, (data)=>{
+            try{
+                var input = $("#exportSessionOptionText_Input")
+                const ignores = input.val().split(/\s/)
+                $.each(ignores, function(_, elm){
+                    if(elm in data){
+                        delete data[elm]
+                    }
+                })
+
+                var text = JSON.stringify(data, null, 4)
+                var field = $("#exportSessionOptionText_Output")
+                field.text(text)
+                field.trigger("input")
+            }catch(e){
+                
+            }
+        })
+    }
+    changeSession()
+    chrome.storage.session.onChanged.addListener(function(changes){
+        changeSession()
+    })
+    $("#exportSessionOptionText_Input").on("input", function(e){
+        changeSession()
+    })
+}
+
+/* 設定データの変更履歴 */
+function monitorOptionChanged(){
+    try{
+        function addText(storageName, changes){
+            var field = $("#option-monitor--output")
+
+            var currentLine = ""
+            if(!$("#option-monitor--mode-reset").prop('checked')){
+                currentLine = field.val()
+            }
+
+            var keys = Object.keys(changes)
+            if(keys.length>1){
+                var addLine = `# [${storageName}] ${getDatetimeString()} @ ${keys.length} values changed\n`
+            }else{
+                var addLine = `# [${storageName}] ${getDatetimeString()} @ ${keys.length} value changed\n`
+            }
+            $.each(keys, function(_, key){
+                try{
+                    addLine += `\t${key}: ` + JSON.stringify(changes[key]) + "\n"
+                }catch{
+
+                }
+            })
+            addLine += "\n"
+            field.val(currentLine + addLine)
+        }
+
+        $("#option-monitor--clear").on("click", function(e){
+            $("#option-monitor--output").val("")
+        })
+        chrome.storage.local.onChanged.addListener(function(changes){
+            if($("#option-monitor--option-local").prop('checked')){
+                addText("local", changes)
+            }
+        })
+        chrome.storage.sync.onChanged.addListener(function(changes){
+            if($("#option-monitor--option-sync").prop('checked')){
+                addText("sync", changes)
+            }
+        })
+        chrome.storage.session.onChanged.addListener(function(changes){
+            if($("#option-monitor--option-session").prop('checked')){
+                addText("session", changes)
+            }
+        })
+    }catch(e){
+        console.warn(e)
+    }
+}
+
+function insertOptionData(){
+    try {
+        $("#option-insert--button").on("click", function(){
+            try {
+                $("#option-insert--error").text("")
+                const storage = $("#option-insert--storage").val()
+                const key = $("#option-insert--key").val().trim()
+                const value = $("#option-insert--value").val().trim()
+
+                if(key.length==0){
+                    $("#option-insert--error").text(`キーは必ず指定してください: ${key}`)
+                    return false
+                }
+                if(value.length==0){
+                    if(window.confirm('値が指定されていません。指定されたキーの設定データを削除しますが、よろしいですか？')){
+                        if(storage=="local"){
+                            chrome.storage.local.remove(key)
+                        }else if(storage=="sync"){
+                            chrome.storage.sync.remove(key)
+                        }else if(storage=="session"){
+                            chrome.storage.session.remove(key)
+                        }else{
+                            $("#option-insert--error").text(`不正なストレージが指定されました: ${key}`)
+                            return false
+                        }
+                    }else{
+                        $("#option-insert--error").text(`操作がキャンセルされました`)
+                        return false
+                    }
+                }else{
+                    const json = `{"__temp__":${value}}`
+                    var dict = {}
+                    try {
+                        var dict_temp
+                        dict_temp = JSON.parse(json)
+                        dict[key] = dict_temp["__temp__"]
+                    }catch(e){
+                        $("#option-insert--error").text(`構文の解釈に失敗しました: ${e}`)
+                        console.warn(e)
+                        return false
+                    }
+
+                    if(storage=="local"){
+                        chrome.storage.local.set(dict)
+                    }else if(storage=="sync"){
+                        chrome.storage.sync.set(dict)
+                    }else if(storage=="session"){
+                        chrome.storage.session.set(dict)
+                    }else{
+                        $("#option-insert--error").text(`不正なストレージが指定されました: ${key}`)
+                        return false
+                    }
+                }
+
+            }catch(e){
+                $("#option-insert--error").text(`操作に失敗しました: ${e}`)
+                console.warn(e)
+            }
+        })
+    }catch(e){
+        $("#option-insert--error").text(`操作に失敗しました: ${e}`)
+        console.warn(e)
+    }
 }

@@ -52,26 +52,30 @@ html::-webkit-scrollbar {
 .option-hide--advanced {
     display: none !important;
 }
-.option-hide--experimental .contents-option-content {
-    pointer-events: none;
-    filter: grayscale(1);
-}
+.option-hide--experimental,
+.option-hide--debug {
+    .contents-option-content {
+        pointer-events: none;
+        filter: grayscale(1);
+    }
 
     /* toggle */
-    .option-hide--experimental .contents-option-content label.toggle::before{
+    .contents-option-content label.toggle::before{
         background-color: #666;
     }
-    .option-hide--experimental .contents-option-content label.toggle::after{
+    .contents-option-content label.toggle::after{
         background-color: #999;
     }
     /* field / dropdown */
-    .option-hide--experimental .contents-option-content input[type="text"],
-    .option-hide--experimental .contents-option-content input[type="number"],
-    .option-hide--experimental .contents-option-content textarea,
-    .option-hide--experimental .contents-option-content select {
+    .contents-option-content input[type="text"],
+    .contents-option-content input[type="number"],
+    .contents-option-content textarea,
+    .contents-option-content select {
         background-color: #ddd;
     }
+}
 
+.option--debug-message,
 .option--experimental-message {
     color: red;
     font-weight: bold;
@@ -84,9 +88,11 @@ html::-webkit-scrollbar {
     margin: 3px;
     margin-bottom: 10px;
 }
+.option--debug-message a,
 .option--experimental-message a {
     color: inherit;
 }
+.option--debug-message a:hover,
 .option--experimental-message a:hover {
     text-decoration: underline;
 }
@@ -216,8 +222,7 @@ input[type="number"] {
     outline: 0px;
     padding: .3em 1em !important;
 }
-.button:active, .button:focus, .button:hover,
-#import-options-label:active, #import-options-label:focus, #import-options-label:hover {
+.button:active, .button:focus, .button:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(51, 154, 244);
 }
