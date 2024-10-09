@@ -300,6 +300,38 @@ export const customUIList = {
             </div>
         </div>
     `,
+    
+    ui_novelSkinSelector: `
+        <div class="contents-option-head">
+            <div class="contents-item--heading"></div>
+            <div class="contents-item--description"></div>
+        </div>
+        <div class="contents-option-content">
+            <div id="skin-selector">
+                <div id="skin-selector--current" class="skin-selector--draggable-outer">
+                    <div class="skin-selector--draggable-header">使用可能なスキン</div>
+                    <div class="skin-selector--draggable">
+                        <div class="skin-selector--draggable-item active" name="skin-1">
+                            <div class="skin-selector--draggable-item--storage" title="ローカル"><i class="fa-solid fa-box"></i></div>
+                            <div class="skin-selector--draggable-item--title">スキンaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                            <div class="skin-selector--draggable-item--sample">あAa</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="skin-selector--available" class="skin-selector--draggable-outer">
+                    <div class="skin-selector--draggable-header">候補</div>
+                    <div class="skin-selector--draggable">
+                        <div class="skin-selector--draggable-item" name="skin-1">
+                            <div class="skin-selector--draggable-item--storage" title="クラウド"><i class="fa-solid fa-cloud"></i></div>
+                            <div class="skin-selector--draggable-item--title">スキン</div>
+                            <div class="skin-selector--draggable-item--sample">あAa</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
 
     ui_novelFontSelect: `
         <div class="contents-option-head">

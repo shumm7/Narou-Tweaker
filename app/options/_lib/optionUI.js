@@ -1313,6 +1313,30 @@ export const optionList = [
         },
     },
 
+    /* スキンエディター */
+    
+    {
+        id: "novelSkinSelector",
+        title: "スキン",
+        description: {
+            text: "小説ページの外観を変更します。",
+            keywords: ["すきん", "レイアウト", "デザイン", "外観", "スキン", "スキン設定", "CSS"],
+        },
+        ui: {
+            type: "custom",
+            name: "wide",
+            data: "ui_novelSkinSelector",
+        },
+        location: {
+            page: "novel/skin-editor",
+            category: "skin",
+        },
+        value: {
+            hasValue: false,
+            related: [],
+        },
+    },
+
 
     /* 書体 (font) */
     {

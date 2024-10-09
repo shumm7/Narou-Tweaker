@@ -1,0 +1,99 @@
+#skin-selector {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 5px;
+    height: 300px;
+}
+
+.skin-selector--draggable-outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+.skin-selector--draggable-header {
+    font-size: 90%;
+    font-weight: bold;
+    margin-bottom: 3px;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.skin-selector--draggable {
+    background: #fff;
+    border: 1px solid #eee;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 10px 5px;
+    border-radius: 5px;
+
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
+
+    ::-webkit-scrollbar {
+        display: none; /*chrome/safari*/
+    }
+}
+
+.skin-selector--draggable-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border: 1px solid #eee;
+    border-radius: 25px;
+    background: #fafafa;
+    cursor: pointer;
+    overflow-x: hidden;
+
+    .skin-selector--draggable-item--storage {
+        padding-right: 10px;
+    }
+
+    .skin-selector--draggable-item--title {
+        margin-left: 0;
+        margin-right: auto;
+        overflow-x: hidden;
+        text-wrap: nowrap;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .skin-selector--draggable-item--sample {
+        border: 1px solid #eee;
+        background: #333;
+        color: #fff;
+        margin-left: 8px;
+        margin-right: 5px;
+        min-width: 45px;
+        max-width: 45px;
+        height: 100%;
+        text-align: center;
+    }
+    @media screen and (max-width: 600px) {
+        .skin-selector--draggable-item--sample {
+            display: none;
+        }
+    }
+}
+.skin-selector--draggable-item:not(:last-child){
+    margin-bottom: 5px;
+}
+.skin-selector--draggable-item.selected {
+    outline: #aaa solid 2px;
+}
+.skin-selector--draggable-item.active {
+    color: #2299ff;
+}
