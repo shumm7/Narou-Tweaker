@@ -91,9 +91,9 @@
 .skin-selector--draggable-item:not(:last-child){
     margin-bottom: 5px;
 }
-.skin-selector--draggable-item.selected {
+.skin-selector--draggable-item.focused {
     outline: #aaa solid 2px;
 }
-.skin-selector--draggable-item.active {
+.skin-selector--draggable-item.selected {
     color: #2299ff;
 }

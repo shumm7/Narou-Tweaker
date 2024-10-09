@@ -134,7 +134,7 @@ export const optionCategoryList = [
                 id: "skin",
             },
         ],
-        sidebar: false,
+        sidebar: true,
         noindex: true,
     },
     {
