@@ -123,6 +123,20 @@ export const optionCategoryList = [
         ]
     },
     {
+        title: "スキンエディタ",
+        description: "スキンのデータを作成することができます。",
+        id: "novel/skin-editor",
+        defaultCategory: "skin",
+        categories: [
+            {
+                title: "スキン",
+                id: "skin",
+            },
+        ],
+        sidebar: false,
+        noindex: true,
+    },
+    {
         title: "小説を読もう！",
         description: "ランキングや検索ページの表示を設定することが出来ます。",
         id: "yomou",
