@@ -132,7 +132,7 @@ function setupDOM(){
             
                 const params = new URLSearchParams(location.search)
                 params.set("s", words.join(" "))
-                location.replace(`/options/search/index.html?${params.toString()}`)
+                location.assign(`/options/search/index.html?${params.toString()}`)
             }else{
                 $("#search-box").focus()
             }
