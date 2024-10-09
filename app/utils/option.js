@@ -9,7 +9,7 @@ export const defaultOption = {
     extDebug: false,
 
     /* Narou */
-    narouSkipAgeauth: false,
+    //narouSkipAgeauth: false,
     narouSyuppanShowBookImage: true,
     narouSyuppanShowBookViewImage: true,
 
