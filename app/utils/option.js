@@ -694,6 +694,57 @@ function exceptionProcess_local(oldDict, newDict){
         newDict.novelCustomHeaderType = "1"
     }
 
+    // novelCustomHeaderLeft / novelCustomHeaderRight
+    Array("novelCustomHeaderLeft", "novelCustomHeaderRight").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in novelIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+
+    // workspaceCustomHeader
+    Array("workspaceCustomHeader").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in workspaceIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+    
+    // workspaceCustomMenu_Left / workspaceCustomMenu_Middle / workspaceCustomMenu_Right
+    Array("workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in workspaceMenuIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+
     return newDict
 }
 
@@ -742,40 +793,7 @@ export function checkOptionValue(key, value){
     }
 
     if(typeof(defaultOption[key]) === typeof(value) && value!==undefined){
-        if(key==="novelCustomHeaderLeft" || key==="novelCustomHeaderRight"){
-            if(!Array.isArray(value)){return false}
-            var res = true
-            Object.keys(value).forEach(function(v){
-                if(!(v in novelIconList)){
-                    res = false
-                    return false
-                }
-            })
-            return res
-        }
-        else if(key==="workspaceCustomHeader"){
-            if(!Array.isArray(value)){return false}
-            var res = true
-            Object.keys(value).forEach(function(v){
-                if(!(v in workspaceIconList)){
-                    res = false
-                    return false
-                }
-            })
-            return res
-        }
-        else if(key==="workspaceCustomMenu_Left" || key==="workspaceCustomMenu_Middle" || key==="workspaceCustomMenu_Right"){
-            if(!Array.isArray(value)){return false}
-            var res = true
-            Object.keys(value).forEach(function(v){
-                if(!(v in workspaceMenuIconList)){
-                    res = false
-                    return false
-                }
-            })
-            return res
-        }
-        else if(key==="kasasagiGraphType_GeneralDay"
+        if(key==="kasasagiGraphType_GeneralDay"
             || key==="kasasagiGraphType_GeneralTotal"
             || key==="kasasagiGraphType_ChapterUnique"
             || key==="kasasagiGraphType_DayPV"
@@ -806,7 +824,16 @@ export function checkOptionValue(key, value){
         else{
             return true
         }
-
+    }else if(key==="novelCustomHeaderLeft"||
+        key==="novelCustomHeaderRight" ||
+        key==="workspaceCustomHeader" ||
+        key==="workspaceCustomMenu_Left" ||
+        key==="workspaceCustomMenu_Middle" ||
+        key==="workspaceCustomMenu_Right"
+    ){
+        if(!Array.isArray(value)){
+            return false
+        }
     }else{
         return false
     }
