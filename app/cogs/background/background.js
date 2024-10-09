@@ -34,6 +34,14 @@ chrome.runtime.onInstalled.addListener((details) => {
 
 /* Reset Options */
 chrome.storage.local.set({novelOfficialTags: undefined})
+chrome.storage.local.onChanged.addListener(function(changes){
+    if(changes.extOptionsVersion!=undefined){
+        if(typeof changes.extOptionsVersion.newValue != "undefined"){
+            console.log("Narou Tweaker's option was updated: "+changes.extOptionsVersion.oldValue+" -> "+changes.extOptionsVersion.newValue)
+            console.log(changes)
+        }
+    }
+})
 
 /* Count */
 chrome.storage.sync.get(null, function(data){
