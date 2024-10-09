@@ -126,6 +126,7 @@ export const optionCategoryList = [
         title: "スキンエディタ",
         description: "スキンのデータを作成することができます。",
         id: "novel/skin-editor",
+        parent: "novel",
         defaultCategory: "skin",
         categories: [
             {
