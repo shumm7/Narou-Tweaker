@@ -71,7 +71,7 @@ export const localNovelSkinV2 = [
             },  
             {
                 key: "color-custom-attention-bg",
-                value: "color-custom-bg",
+                value: "color-custom-body-bg",
                 type: "variable",
             },
             {

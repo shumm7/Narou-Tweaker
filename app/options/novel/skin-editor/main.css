@@ -81,6 +81,7 @@
         max-width: 45px;
         height: 100%;
         text-align: center;
+        border-radius: 3px;
     }
     @media screen and (max-width: 600px) {
         .skin-selector--draggable-item--sample {

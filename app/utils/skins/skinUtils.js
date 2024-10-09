@@ -150,6 +150,42 @@ export function getAvailableSkinList(storage_local){
     }
 }
 
+/* 表示中でないスキンの情報を一覧で取得 */
+export function getUnavailableSkinList(storage_local, storage_sync){
+    /* 使用可能なスキン一覧を取得 */
+    try{
+        var availableSkinList = getAvailableSkinList(storage_local)
+        
+        if(Array.isArray(availableSkinList)){
+            var allSkinList = []
+            var ret = []
+
+            Array("internal", "local", "sync").forEach(function(src){
+                allSkinList = getSkinList(src, storage_local, storage_sync)
+
+                if(Array.isArray(allSkinList)){
+                    allSkinList.forEach(function(allSkinInfo){
+                        var exist = false
+                        availableSkinList.forEach(function(skinInfo){
+                            if(skinInfo.src === allSkinInfo.src && skinInfo.key === allSkinInfo.key){
+                                exist = true
+                            }
+                        })
+
+                        if(!exist){
+                            ret.push(allSkinInfo)
+                        }
+                    })
+                }
+            })
+            return ret
+        }
+
+    }catch(e){
+        console.warn(e)
+    }
+}
+
 
 
 

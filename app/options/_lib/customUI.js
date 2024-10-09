@@ -308,7 +308,7 @@ export const customUIList = {
         </div>
         <div class="contents-option-content">
             <div id="skin-selector">
-                <div id="skin-selector--current" class="skin-selector--draggable-outer">
+                <div id="skin-selector--available" class="skin-selector--draggable-outer">
                     <div class="skin-selector--draggable-header">使用可能なスキン</div>
                     <div class="skin-selector--draggable">
                         <div class="skin-selector--draggable-item active" name="skin-1">
@@ -318,7 +318,7 @@ export const customUIList = {
                         </div>
                     </div>
                 </div>
-                <div id="skin-selector--available" class="skin-selector--draggable-outer">
+                <div id="skin-selector--unavailable" class="skin-selector--draggable-outer">
                     <div class="skin-selector--draggable-header">候補</div>
                     <div class="skin-selector--draggable">
                         <div class="skin-selector--draggable-item" name="skin-1">

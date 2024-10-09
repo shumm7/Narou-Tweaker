@@ -1,4 +1,4 @@
-import { getAvailableSkinList, getSelectedSkinIndex, getSkin } from "../../../utils/skins/skinUtils.js";
+import { getAvailableSkinList, getSelectedSkinIndex, getSkin, getUnavailableSkinList } from "../../../utils/skins/skinUtils.js";
 import { escapeHtml } from "../../../utils/text.js";
 
 export function skinSelector(){
@@ -23,8 +23,8 @@ function setSortable(){
         })
 
         /* D&Dを可能にする */
-        if($("#skin-selector--current .skin-selector--draggable").length){
-            Sortable.create($("#skin-selector--current .skin-selector--draggable")[0], {
+        if($("#skin-selector--available .skin-selector--draggable").length){
+            Sortable.create($("#skin-selector--available .skin-selector--draggable")[0], {
                 handle: '.skin-selector--draggable-item',
                 sort: 1,
                 group: {
@@ -43,11 +43,18 @@ function setSortable(){
 }
 
 function restoreItems(storage_local, storage_sync){
-    /* スキンの候補 */
-    $("#skin-selector--available .skin-selector--draggable .selected").removeClass("selected")
+    /* 使用可能でないスキン一覧 */
+    $("#skin-selector--unavailable .skin-selector--draggable").empty()
+    var unavailableSkinList = getUnavailableSkinList(storage_local, storage_sync)
+    $.each(unavailableSkinList, function(i, skinInfo){
+        var elm = getSkinElement(skinInfo, getSkin(skinInfo.src, skinInfo.key, storage_local, storage_sync))
+
+        $("#skin-selector--unavailable .skin-selector--draggable").append(elm)
+    })
+
 
     /* 使用可能なスキン一覧 */
-    $("#skin-selector--current .skin-selector--draggable").empty()
+    $("#skin-selector--available .skin-selector--draggable").empty()
 
     var availableSkinList = getAvailableSkinList(storage_local)
     const selectedSkinIndex = getSelectedSkinIndex(storage_local)
@@ -59,7 +66,7 @@ function restoreItems(storage_local, storage_sync){
             elm.addClass(["selected"])
         }
 
-        $("#skin-selector--current .skin-selector--draggable").append(elm)
+        $("#skin-selector--available .skin-selector--draggable").append(elm)
     })
 
     /* クリック時（スキンをフォーカス） */
@@ -87,12 +94,10 @@ function getSkinElement(skinInfo, skinData){
         </div>
     `)
     
-    if(skinData.review){
-        if(skinData.preview.text){
+    if(skinData.preview){
+        if(skinData.preview.text && skinData.preview.background){
             elm.find(".skin-selector--draggable-item--sample").css("color", skinData.preview.text)
-        }
-        if(skinData.preview.background){
-            elm.find(".skin-selector--draggable-item--sample").css("color", skinData.preview.background)
+            elm.find(".skin-selector--draggable-item--sample").css("background", skinData.preview.background)
         }
     }else{
         elm.find(".skin-selector--draggable-item--sample").remove()
@@ -107,7 +112,7 @@ function storeItems(){
 
         var list = []
         var selected
-        $("#skin-selector--current .skin-selector--draggable-item").each(function(e){
+        $("#skin-selector--available .skin-selector--draggable-item").each(function(e){
             var key = Number($(this).attr("skin-key"))
             var src = $(this).attr("skin-src")
             if(src !=="internal" && src!=="local" && src!=="sync"){
