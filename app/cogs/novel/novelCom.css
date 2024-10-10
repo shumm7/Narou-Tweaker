@@ -29,7 +29,7 @@
     #contents_main #novel_attention {
         background-color: var(--color-custom-attention-bg);
         border-color: var(--color-custom-attention-border);
-        color: var(--color-custom-text);
+        color: var(--color-custom-attention-text);
     }
     #contents_main #novel_attention .attention {
         color: var(--color-custom-text--danger)
@@ -110,7 +110,7 @@
     }
     .nothing {
         background-color: var(--color-custom-novelcom-warning-bg);
-        color: var(--color-custom-text);
+        color: var(--color-custom-novelcom-form-text);
     }
     .userblock {
         border-color: var(--color-custom-novelcom-box-border);

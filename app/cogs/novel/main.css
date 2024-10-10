@@ -16,10 +16,14 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-ui-button-blue-bg--hover: #339af4;
 }
 .js-customlayout1 {
+    --color-custom-border: var(--color-ui-border);
 	--color-custom-text--sub: var(--color-text--sub);
     --color-custom-text--danger: var(--color-text--danger);
-	--color-custom-bg--sub: var(--color-bg--sub);
-	--color-custom-link-disabled: var(--color-link-disabled);
+    /*--color-custom-bg--sub: var(--color-bg--sub);*/
+	/*--color-custom-link-disabled: var(--color-link-disabled);*/
+	--color-custom-bg--sub: var(--color-custom-pager-border-disabled);
+    --color-custom-border--sub: var(--color-custom-pager-border-disabled);
+	--color-custom-link-disabled: var(--color-custom-pager-text-disabled);
 
     /* 小説ページ */
     --color-custom-novel-header-border: var(--color-ui-border);
@@ -27,7 +31,7 @@ html:has(.narou-tweaker-cursor-hide) {
     --color-custom-novel-number-text: var(--color-text--sub);
 
     /* 注意ボックス */
-    --color-custom-attention-border: var(--color-ui-border);
+    --color-custom-attention-border: var(--color-custom-border);
     --color-custom-attention-bg: var(--color-bg-neverchange);
     --color-custom-attention-text: var(--color-text);
     --color-custom-attention-text--danger: var(--color-custom-text--danger);
@@ -48,7 +52,7 @@ html:has(.narou-tweaker-cursor-hide) {
     /* 作品情報ページ */
 	--color-custom-novelinfo-datatable-header-text: var(--color-custom-text);
 	--color-custom-novelinfo-datatable-header-bg: var(--color-custom-bg--sub);
-	--color-custom-novelinfo-datatable-border: var(--color-ui-bg);
+	--color-custom-novelinfo-datatable-border: var(--color-custom-border);
 	--color-custom-novelinfo-table-border: #ddd;
 	--color-custom-novelinfo-header-border: var(--color-custom-novel-header-border);
     --color-custom-novelinfo-noveltype-text: #fafafa;
@@ -58,18 +62,18 @@ html:has(.narou-tweaker-cursor-hide) {
     /* 感想・レビュー */
     --color-custom-novelcom-box-bg: #f6f6f6;
     --color-custom-novelcom-box-border: #ddd;
-    --color-custom-novelcom-box-text: inherit;
+    --color-custom-novelcom-box-text: var(--color-text);
     --color-custom-novelcom-box-bg--res: #FFFFEE;
     --color-custom-novelcom-box-border--res: #ccc;
-    --color-custom-novelcom-box-text--res: inherit;
+    --color-custom-novelcom-box-text--res: var(--color-text);
     --color-custom-novelcom-box-bg--review: #FFFFEE;
     --color-custom-novelcom-box-border--review:#AAAA33;
-    --color-custom-novelcom-box-text--review: inherit;
+    --color-custom-novelcom-box-text--review: var(--color-text);
     --color-custom-novelcom-episode-bg: #adb6bf;
-    --color-custom-novelcom-episode-text: inherit;
+    --color-custom-novelcom-episode-text: #ffffff;
     --color-custom-novelcom-form-bg: #FEFEFE;
     --color-custom-novelcom-form-border: #ddd;
-    --color-custom-novelcom-form-text: inherit;
+    --color-custom-novelcom-form-text: var(--color-text);
     --color-custom-novelcom-warning-bg: var(--color-bg-neverchange);
 
     /* pdf */

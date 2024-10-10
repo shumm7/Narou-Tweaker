@@ -68,31 +68,6 @@ export const localNovelSkinV2 = [
                 key: "color-custom-text--danger",
                 value: "#ff1f1f",
                 type: "color"
-            },  
-            {
-                key: "color-custom-attention-bg",
-                value: "color-custom-body-bg",
-                type: "variable",
-            },
-            {
-                key: "color-custom-attention-text",
-                value: "color-custom-text",
-                type: "variable",
-            },
-            {
-                key: "color-custom-attention-border",
-                value: "rgba(255, 255, 255, 0.1)",
-                type: "color",
-            },
-            {
-                key: "color-custom-pager-border-disabled",
-                value: "color-custom-link-disabled",
-                type: "variable",
-            },
-            {
-                key: "color-custom-pager-text-disabled",
-                value: "color-custom-link-disabled",
-                type: "variable",
             },
             {
                 key: "color-custom-epilist-underline-hover",
@@ -110,96 +85,27 @@ export const localNovelSkinV2 = [
                 type: "color",
             },
             {
-                key: "color-custom-header-item--hover",
-                value: "rgba(152, 189, 235, 0.7)",
-                type: "color",
-            },
-            {
                 key: "color-custom-header-item--disabled",
-                value: "#333",
-                type: "color",
-            },
-            {
-                key: "color-custom-novelinfo-table-border",
                 value: "color-custom-border--sub",
-                type: "variable",
+                type: "variable"
             },
             {
-                key: "color-custom-novelinfo-datatable-border",
-                value: "color-custom-border--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-bg",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-border",
-                value: "color-custom-border--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-bg--res",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-border--res",
-                value: "color-custom-border--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-bg--review",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-box-border--review",
-                value: "color-custom-border--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-form-bg",
-                value: "transparent",
-                type: "color",
-            },
-            {
-                key: "color-custom-novelcom-form-border",
-                value: "color-custom-border--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-episode-bg",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-episode-text",
-                value: "color-custom-text--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelcom-warning-bg",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelreport-highlight",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelreport-box-bg",
-                value: "color-custom-bg--sub",
-                type: "variable",
-            },
-            {
-                key: "color-custom-novelreport-box-border",
-                value: "color-custom-border--sub",
-                type: "variable",
+                key: "color-custom-header-item--hover",
+                value: "color-custom-epilist-underline-hover",
+                type: "variable"
             },
         ],
+        css: ""
+    },
+    {
+        name: "sample",
+        description: "サイトのデフォルト",
+        version: 2,
+        preview: {
+            text: "#444",
+            background: "#fff"
+        },
+        style: [],
         css: ""
     },
 ]
