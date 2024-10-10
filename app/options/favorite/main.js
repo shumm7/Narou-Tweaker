@@ -6,7 +6,9 @@ import { restoreOptions, setup } from "../general.js";
 setup()
 setupContents()
 
-
+/*
+ToDo: customタイプのオプションの処理
+*/
 
 function markFavoriteOptions(list){
     $(".contents-item--button-favorite.selected").removeClass("selected")

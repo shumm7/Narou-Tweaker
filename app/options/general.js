@@ -2,7 +2,7 @@ import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/uti
 import { getOptionElement, optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
 import { defaultOption } from "/utils/option.js"
-import { getOptionFromId } from "./_lib/optionLib.js";
+import { getOptionFromId, getOptionPageFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
 let currentPage
@@ -29,21 +29,31 @@ function setupDOM(){
     var sidebarDOMItems = ""
     $.each(optionCategoryList, function(idx, category){
         if(category.sidebar || category.sidebar===undefined){
-            var url = `/options/${category.id}/index.html`
-
-            var elm = $(`
-                <div class="sidebar-item" name="${category.id}">
-                    <a href="${url}" target="_self">
-                        <span class="sidebar-item--title">${category.title}</span>
-                    </a>
-                </div>
-            `)
-
-            if(category.icon){
-                elm.find("a").prepend(`<i class="${category.icon}"></i>`)
+            var elm
+            if(category.separator){
+                elm = $(`
+                    <div class="sidebar-separator" name="${category.id}"></div>
+                `)
+            }else{
+                var url = `/options/${category.id}/index.html`
+                elm = $(`
+                    <div class="sidebar-item" name="${category.id}">
+                        <a href="${url}" target="_self">
+                            <span class="sidebar-item--title">${category.title}</span>
+                        </a>
+                    </div>
+                `)
+    
+                if(category.icon){
+                    elm.find("a").prepend(`<i class="${category.icon}"></i>`)
+                }
+            }
+            if(category.hideOnPopup){
+                elm.addClass("sidebar-item--hide-on-popup")
             }
             sidebarDOMItems += elm[0].outerHTML
         }
+
 
         if(category.id===currentPage){
             currentCategory = category
@@ -139,9 +149,24 @@ function setupDOM(){
         }
     })
 
-
     /* Set Title */
-    $("head title").text(`環境設定 > ${currentCategory.title} ｜ Narou Tweaker`)
+    function getName(id, _pre){
+        var cat = getOptionPageFromId(id)
+        if(cat===undefined){
+            if(_pre){
+                return _pre
+            }else{
+                return "環境設定"
+            }
+        }
+        if(cat.parent === undefined){
+            return `${cat.title} < 環境設定`
+        }else{
+            return `${cat.title} < ${getName(cat.parent, _pre)}`
+        }
+    }
+
+    $("head title").text(`${getName(currentCategory.id)} ｜ Narou Tweaker`)
     
     
     /* Footer */
@@ -171,12 +196,18 @@ function setupDOM(){
             <div class="header-title--description-search">
                 <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
             </div>
+            <div class="header-title--description-favorite">
+                <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+            </div>
         `)
     }else{
         $("#header-title--description").append(`
             <p class="header-title--description-text">${currentCategory.description}</p>
             <div class="header-title--description-search">
                 <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
+            <div class="header-title--description-favorite">
+                <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
             </div>
         `)
     }

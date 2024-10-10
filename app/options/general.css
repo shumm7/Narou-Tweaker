@@ -363,6 +363,10 @@ input[type=file] {
     padding-left: 15px; 
     border-left: 5px solid transparent;
 }
+.sidebar-separator {
+    margin: 0 15px;
+    border-top: 1px solid #ccc;
+}
 .sidebar-item.selected {
     font-weight: bold; 
     border-left: 5px solid var(--kasasagi-blue);
@@ -523,16 +527,20 @@ input[type=file] {
 .header-title--description-text {
     display: block;
 }
-.header-title--description-search {
+.header-title--description-search,
+.header-title--description-favorite {
     display: none;
     font-size: 130%;
     padding-right: 20px;
 }
-.header-title--description-search a:link {
+.header-title--description-search a:link,
+.header-title--description-favorite a:link {
     color: inherit;
 }
 .header-title--description-search a:hover,
-.header-title--description-search a:focus {
+.header-title--description-search a:focus,
+.header-title--description-favorite a:hover,
+.header-title--description-favorite a:focus {
     color: #ccc;
 }
 
@@ -712,10 +720,15 @@ input[type=file] {
     }
     /* ヘッダの説明文  */
     #header-title--description {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
         .header-title--description-text {
             display: none;
         }
-        .header-title--description-search {
+        .header-title--description-search,
+        .header-title--description-favorite {
             display: block;
         }
     }
@@ -833,6 +846,9 @@ input[type=file] {
         }
         .sidebar-item:not(:last-child) {
             border-right: 1px solid #ddd;
+        }
+        .sidebar-item--hide-on-popup {
+            display: none !important;
         }
         .sidebar-item a{
             display: flex;

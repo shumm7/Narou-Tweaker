@@ -59,6 +59,29 @@ export const optionCategoryList = [
         ]
     },
     {
+        title: "お気に入り",
+        description: "お気に入りのオプションを登録できます。",
+        id: "favorite",
+        icon: "fa-solid fa-heart",
+        defaultCategory: "general",
+        categories: [
+            {
+                title: "全般",
+                id: "general",
+            },
+        ],
+        tabs: false,
+        hideOnPopup: true,
+    },
+    {
+        title: "favorite-separator",
+        id: "favorite-separator",
+        categories: [],
+        noindex: true,
+        separator: true,
+        hideOnPopup: true,
+    },
+    {
         title: "小説家になろう",
         description: "小説家になろうの表示を設定することが出来ます。",
         id: "narou",
@@ -284,20 +307,6 @@ export const optionCategoryList = [
                 }
             },
         ]
-    },
-    {
-        title: "お気に入り",
-        description: "お気に入りのオプションを登録できます。",
-        id: "favorite",
-        icon: "fa-solid fa-heart",
-        defaultCategory: "general",
-        categories: [
-            {
-                title: "全般",
-                id: "general",
-            },
-        ],
-        tabs: false,
     },
 ]
 
