@@ -4940,7 +4940,7 @@ export function getOptionElement(option, mode){
     /* Buttons */
     if(buttons){
         var buttonElm = $(`<div class="contents-item--buttons"></div>`)
-
+        /*
         if(buttons.favorite){
             buttonElm.append(`
                 <div class="contents-item--button-item contents-item--button-favorite">
@@ -4952,7 +4952,8 @@ export function getOptionElement(option, mode){
                     </div>
                 </div>
             `)
-        }
+        }*/
+
         if(buttons.reset){
             buttonElm.append(`
                 <div class="contents-item--button-item contents-item--button-reset">
@@ -5001,6 +5002,7 @@ export function getOptionElement(option, mode){
         }
 
         // favorite button
+        /* wip
         elm.find(".contents-item--button-favorite--off").on("click", function(e){ //OFF -> ON
             var outer = $(`.option-outer[name="${id}"]`)
             if(outer.find(".contents-wide-column").length){
@@ -5019,6 +5021,7 @@ export function getOptionElement(option, mode){
         elm.find(".contents-item--button-favorite--on").on("click", function(e){ //ON -> OFF
             elm.find(".contents-item--button-favorite").removeClass("selected")
         })
+        */
 
     }
 
