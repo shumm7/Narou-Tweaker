@@ -712,7 +712,7 @@ export const optionList = [
             hasValue: true,
         }
     },
-
+    /*
     {
         id: "narouSkipAgeauth",
         title: "アダルトコンテンツの年齢認証をスキップ",
@@ -735,6 +735,7 @@ export const optionList = [
             isExperimental: true,
         }
     },
+    */
 
     /* 小説ページ */
     /* 全般 (general) */

@@ -22,3 +22,10 @@ body {
     width: 400px;
     height: 600px;
 }
+
+#option-popup {
+    max-height: 100vh !important;
+    max-width: 100vw !important;
+    position: fixed;
+    top: 0;
+}

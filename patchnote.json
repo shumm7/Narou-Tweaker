@@ -2,10 +2,62 @@
     "version": 0,
     "data": [
         {
+            "version": "0.4.5",
+            "date": "2024-10-10",
+            "release": {
+                "chrome": null,
+                "gecko": true
+            },
+            "patchnote": {
+                "ja": {
+                    "narou": [
+                        "「アダルトコンテンツの年齢認証をスキップ」機能を削除"
+                    ],
+                    "general": [
+                        "オプションページ：ポップアップ時、ボトムタブの下側までスクロールできてしまうことがある問題を修正",
+                        "オプションページ：サイドバーから検索を使用したとき、ブラウザのセッション履歴が残らない問題を修正"
+                    ]
+                }
+            }
+        },
+        {
+            "version": "0.4.4",
+            "date": "2024-10-09",
+            "release": {
+                "chrome": true,
+                "gecko": true
+            },
+            "patchnote": {
+                "ja": {
+                    "general": [
+                        "オプションページ：faviconを設定",
+                        "オプションページ：ポップアップ時、ブラウザのページズームを100%より大きくしているとページが見切れてしまう問題を修正",
+                        "一部設定項目が拡張機能の更新時に初期化されてしまう不具合を修正"
+                    ]
+                }
+            }
+        },
+        {
+            "version": "0.4.3.1",
+            "date": "2024-10-09",
+            "url": "https://github.com/shumm7/Narou-Tweaker/releases/tag/0.4.2",
+            "release": {
+                "chrome": true,
+                "gecko": false
+            },
+            "patchnote": {
+                "ja": {
+                    "general": [
+                        "このバージョンは0.4.2のロールバックです。0.4.3に致命的な不具合が発見されたため、リリースされました。"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.4.3",
             "date": "2024-10-09",
             "release": {
-                "chrome": null,
+                "chrome": true,
                 "gecko": true
             },
             "patchnote": {
