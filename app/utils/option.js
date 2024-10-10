@@ -7,6 +7,7 @@ export const defaultOption = {
     extAdvancedSettings: false,
     extExperimentalFeatures: false,
     extDebug: false,
+    extFavoriteOptions: [],
 
     /* Narou */
     //narouSkipAgeauth: false,

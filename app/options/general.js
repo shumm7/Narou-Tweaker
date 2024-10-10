@@ -294,6 +294,24 @@ function setupContents(){
             }
         }
     })
+
+    function markFavoriteOptions(list){
+        $(".contents-item--button-favorite.selected").removeClass("selected")
+        if(Array.isArray(list)){
+            $.each(list, function(_, id){
+                $(`.option-outer[name=${id}] > .contents-option-head > .contents-item--buttons .contents-item--button-favorite`).addClass("selected")
+            })
+        }
+    }
+
+    chrome.storage.local.get("extFavoriteOptions", function(data){
+        markFavoriteOptions(data.extFavoriteOptions)
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extFavoriteOptions){
+            markFavoriteOptions(changes.extFavoriteOptions.newValue)
+        }
+    })
 }
 
 

@@ -1,7 +1,7 @@
 import { defaultOption } from "../../utils/option.js";
 import { escapeHtml } from "../../utils/text.js";
 import { customUIList } from "./customUI.js";
-import { getOptionCategory, getOptionFromId, getOptionPageFromId } from "./optionLib.js";
+import { getOptionCategory, getOptionFromId, getOptionPageFromId, removeFavoriteOption, appendFavoriteOption } from "./optionLib.js";
 
 export const optionCategoryList = [
     {
@@ -4940,19 +4940,31 @@ export function getOptionElement(option, mode){
     /* Buttons */
     if(buttons){
         var buttonElm = $(`<div class="contents-item--buttons"></div>`)
-        /*
+
         if(buttons.favorite){
-            buttonElm.append(`
-                <div class="contents-item--button-item contents-item--button-favorite">
-                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--off">
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
-                        <i class="fa-solid fa-heart"></i>
-                    </div>
+            var buttonIconElm_Off = $(`
+                <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--off">
+                    <i class="fa-regular fa-heart"></i>
                 </div>
             `)
-        }*/
+            buttonIconElm_Off.on("click", function(e){
+                appendFavoriteOption(id)
+            })
+
+            var buttonIconElm_On = $(`
+                <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            `)
+            buttonIconElm_On.on("click", function(e){
+                removeFavoriteOption(id)
+            })
+
+            var buttonOuterElm = $(`<div class="contents-item--button-item contents-item--button-favorite"></div>`)
+            buttonOuterElm.append(buttonIconElm_Off)
+            buttonOuterElm.append(buttonIconElm_On)
+            buttonElm.append(buttonOuterElm)
+        }
 
         if(buttons.reset){
             buttonElm.append(`
@@ -5000,28 +5012,6 @@ export function getOptionElement(option, mode){
                 }
             })
         }
-
-        // favorite button
-        /* wip
-        elm.find(".contents-item--button-favorite--off").on("click", function(e){ //OFF -> ON
-            var outer = $(`.option-outer[name="${id}"]`)
-            if(outer.find(".contents-wide-column").length){
-                outer.children(".contents-option-head").find(".contents-item--button-favorite").addClass("selected")
-                outer.find(".contents-wide-column .contents-item--button-favorite--off").trigger("click")
-            }else{
-                var parent = $(`.option-outer:has(.contents-wide-column .option-outer[name="${id}"])`)
-                if(parent.length){
-                    parent.children(".contents-option-head").find(".contents-item--button-favorite").addClass("selected")
-                    outer.find(".contents-item--button-favorite").addClass("selected")
-                }else{
-                    outer.find(".contents-item--button-favorite").addClass("selected")
-                }
-            }
-        })
-        elm.find(".contents-item--button-favorite--on").on("click", function(e){ //ON -> OFF
-            elm.find(".contents-item--button-favorite").removeClass("selected")
-        })
-        */
 
     }
 
