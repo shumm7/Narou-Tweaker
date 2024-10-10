@@ -299,7 +299,7 @@ function setupContents(){
         $(".contents-item--button-favorite.selected").removeClass("selected")
         if(Array.isArray(list)){
             $.each(list, function(_, id){
-                $(`.option-outer[name=${id}] > .contents-option-head > .contents-item--buttons .contents-item--button-favorite`).addClass("selected")
+                $(`.option-outer[name=${id}] > .contents-option-head > .contents-item--buttons .contents-item--button-favorite, .option-outer[name=${id}] > .contents-option > .contents-option-head > .contents-item--buttons .contents-item--button-favorite`).addClass("selected")
             })
         }
     }

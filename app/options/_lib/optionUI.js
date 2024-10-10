@@ -284,7 +284,21 @@ export const optionCategoryList = [
                 }
             },
         ]
-    }
+    },
+    {
+        title: "お気に入り",
+        description: "お気に入りのオプションを登録できます。",
+        id: "favorite",
+        icon: "fa-solid fa-heart",
+        defaultCategory: "general",
+        categories: [
+            {
+                title: "全般",
+                id: "general",
+            },
+        ],
+        tabs: false,
+    },
 ]
 
 export const optionList = [
@@ -839,7 +853,7 @@ export const optionList = [
     },
 
     {
-        id: "novelCustomHeaderScrollMode",
+        id: "novelCustomHeaderMode",
         title: "ヘッダの追従モード",
         description: {
             text: "ヘッダの配置場所を設定します。",
@@ -860,7 +874,7 @@ export const optionList = [
             category: "general",
         },
         value: {
-            related: ["novelCustomHeaderScrollMode"],
+            related: ["novelCustomHeaderMode"],
             buttons: {
                 reset: true,
                 favorite: true,
