@@ -23,12 +23,12 @@ function setSortable(){
         })
 
         /* D&Dを可能にする */
-        if($("#skin-selector--available .skin-selector--draggable").length){
-            Sortable.create($("#skin-selector--available .skin-selector--draggable")[0], {
-                handle: '.skin-selector--draggable-item',
+        if($("#skin-selector--selector--available .skin-selector--selector--draggable").length){
+            Sortable.create($("#skin-selector--selector--available .skin-selector--selector--draggable")[0], {
+                handle: '.skin-selector--selector--draggable-item',
                 sort: 1,
                 group: {
-                    name: 'skin-selector--draggable-item',
+                    name: 'skin-selector--selector--draggable-item',
                     pull: true,
                     put: true
                 },
@@ -44,17 +44,17 @@ function setSortable(){
 
 function restoreItems(storage_local, storage_sync){
     /* 使用可能でないスキン一覧 */
-    $("#skin-selector--unavailable .skin-selector--draggable").empty()
+    $("#skin-selector--selector--unavailable .skin-selector--selector--draggable").empty()
     var unavailableSkinList = getUnavailableSkinList(storage_local, storage_sync)
     $.each(unavailableSkinList, function(i, skinInfo){
         var elm = getSkinElement(skinInfo, getSkin(skinInfo.src, skinInfo.key, storage_local, storage_sync))
 
-        $("#skin-selector--unavailable .skin-selector--draggable").append(elm)
+        $("#skin-selector--selector--unavailable .skin-selector--selector--draggable").append(elm)
     })
 
 
     /* 使用可能なスキン一覧 */
-    $("#skin-selector--available .skin-selector--draggable").empty()
+    $("#skin-selector--selector--available .skin-selector--selector--draggable").empty()
 
     var availableSkinList = getAvailableSkinList(storage_local)
     const selectedSkinIndex = getSelectedSkinIndex(storage_local)
@@ -66,11 +66,11 @@ function restoreItems(storage_local, storage_sync){
             elm.addClass(["selected"])
         }
 
-        $("#skin-selector--available .skin-selector--draggable").append(elm)
+        $("#skin-selector--selector--available .skin-selector--selector--draggable").append(elm)
     })
 
     /* クリック時（スキンをフォーカス） */
-    $("#skin-selector .skin-selector--draggable-item").on("click", function(e){
+    $("#skin-selector--selector .skin-selector--selector--draggable-item").on("click", function(e){
         //$("#skin-selector .skin-selector--draggable-item.focused").removeClass("focused")
         //$(this).addClass("focused")
     })
@@ -79,28 +79,28 @@ function restoreItems(storage_local, storage_sync){
 function getSkinElement(skinInfo, skinData){
     var srcText = ""
     if(skinInfo.src==="internal"){
-        srcText = `<div class="skin-selector--draggable-item--storage" title="標準"><i class="fa-solid fa-pen-fancy"></i></div>`
+        srcText = `<div class="skin-selector--selector--draggable-item--storage" title="標準"><i class="fa-solid fa-pen-fancy"></i></div>`
     }else if(skinInfo.src==="local"){
-        srcText = `<div class="skin-selector--draggable-item--storage" title="ローカル"><i class="fa-solid fa-box"></i></div>`
+        srcText = `<div class="skin-selector--selector--draggable-item--storage" title="ローカル"><i class="fa-solid fa-box"></i></div>`
     }else if(skinInfo.src==="sync"){
-        srcText = `<div class="skin-selector--draggable-item--storage" title="クラウド"><i class="fa-solid fa-cloud"></i></div>`
+        srcText = `<div class="skin-selector--selector--draggable-item--storage" title="クラウド"><i class="fa-solid fa-cloud"></i></div>`
     }
 
     var elm = $(`
-        <div class="skin-selector--draggable-item" skin-key="${escapeHtml(skinInfo.key)}" skin-src="${escapeHtml(skinInfo.src)}">
+        <div class="skin-selector--selector--draggable-item" skin-key="${escapeHtml(skinInfo.key)}" skin-src="${escapeHtml(skinInfo.src)}">
             ${srcText}
-            <div class="skin-selector--draggable-item--title">${escapeHtml(skinData.name)}</div>
-            <div class="skin-selector--draggable-item--sample">あAa</div>
+            <div class="skin-selector--selector--draggable-item--title">${escapeHtml(skinData.name)}</div>
+            <div class="skin-selector--selector--draggable-item--sample">あAa</div>
         </div>
     `)
     
     if(skinData.preview){
         if(skinData.preview.text && skinData.preview.background){
-            elm.find(".skin-selector--draggable-item--sample").css("color", skinData.preview.text)
-            elm.find(".skin-selector--draggable-item--sample").css("background", skinData.preview.background)
+            elm.find(".skin-selector--selector--draggable-item--sample").css("color", skinData.preview.text)
+            elm.find(".skin-selector--selector--draggable-item--sample").css("background", skinData.preview.background)
         }
     }else{
-        elm.find(".skin-selector--draggable-item--sample").remove()
+        elm.find(".skin-selector--selector--draggable-item--sample").remove()
     }
 
     return elm
@@ -112,7 +112,7 @@ function storeItems(){
 
         var list = []
         var selected
-        $("#skin-selector--available .skin-selector--draggable-item").each(function(e){
+        $("#skin-selector--selector--available .skin-selector--selector--draggable-item").each(function(e){
             var key = Number($(this).attr("skin-key"))
             var src = $(this).attr("skin-src")
             if(src !=="internal" && src!=="local" && src!=="sync"){
