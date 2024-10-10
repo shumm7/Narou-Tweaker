@@ -22,7 +22,6 @@ html:has(.narou-tweaker-cursor-hide) {
     /*--color-custom-bg--sub: var(--color-bg--sub);*/
 	/*--color-custom-link-disabled: var(--color-link-disabled);*/
 	--color-custom-bg--sub: var(--color-custom-pager-border-disabled);
-    --color-custom-border--sub: var(--color-custom-pager-border-disabled);
 	--color-custom-link-disabled: var(--color-custom-pager-text-disabled);
 
     /* 小説ページ */
