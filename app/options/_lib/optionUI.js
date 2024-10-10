@@ -306,7 +306,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -329,7 +332,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -347,7 +353,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -365,7 +374,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -383,7 +395,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -402,7 +417,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -424,8 +442,11 @@ export const optionList = [
             category: "config"
         },
         value: {
-            hasValue: true,
-            default: defaultOption.extAdvancedSettings,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extAdvancedSettings"],
         }
     },
 
@@ -446,8 +467,11 @@ export const optionList = [
             name: "default",
         },
         value: {
-            hasValue: true,
-            default: defaultOption.extExperimentalFeatures,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extExperimentalFeatures"],
         }
     },
 
@@ -470,8 +494,11 @@ export const optionList = [
             name: "default",
         },
         value: {
-            hasValue: true,
-            default: defaultOption.extDebug,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extDebug"],
         }
     },
 
@@ -493,7 +520,10 @@ export const optionList = [
             category: "data",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
         },
     },
 
@@ -515,7 +545,10 @@ export const optionList = [
             category: "data",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
         },
     },
 
@@ -537,7 +570,10 @@ export const optionList = [
             category: "data",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
         },
     },
 
@@ -558,7 +594,10 @@ export const optionList = [
             category: "data",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -578,7 +617,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
         },
     },
 
@@ -602,7 +644,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isDebug: true,
         }
     },
@@ -625,7 +670,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isDebug: true,
         }
     },
@@ -648,7 +696,10 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isDebug: true,
         }
     },
@@ -672,8 +723,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.narouSyuppanShowBookImage,
-            hasValue: true,
+            related: ["narouSyuppanShowBookImage"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -693,8 +747,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.narouSyuppanShowBookViewImage,
-            hasValue: true,
+            related: ["narouSyuppanShowBookViewImage"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
     /*
@@ -715,8 +772,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.narouSkipAgeauth,
-            hasValue: true,
+            related: ["narouSkipAgeauth"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
         }
     },
@@ -740,8 +800,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomStyle,
-            hasValue: true,
+            related: ["novelCustomStyle"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -766,8 +829,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomHeaderType,
-            hasValue: true,
+            related: ["novelCustomHeaderType"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -793,8 +859,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomHeaderScrollMode,
-            hasValue: true,
+            related: ["novelCustomHeaderScrollMode"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
                 data: ["1", "2"],
@@ -820,8 +889,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.novelCustomHeaderScrollHidden,
-            hasValue: true,
+            related: ["novelCustomHeaderScrollHidden"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelCustomHeaderScrollMode"],
                 data: "scroll",
@@ -849,8 +921,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            hasValue: false,
             related: ["novelCustomHeaderLeft", "novelCustomHeaderRight"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
                 data: ["1", "2"],
@@ -872,7 +947,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
@@ -900,8 +979,11 @@ export const optionList = [
             parent: "parent_novelCustomHeaderOption"
         },
         value: {
-            default: defaultOption.novelCustomHeaderShowEnactiveItems,
-            hasValue: true,
+            related: ["novelCustomHeaderShowEnactiveItems"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
@@ -930,8 +1012,11 @@ export const optionList = [
             parent: "parent_novelCustomHeaderOption"
         },
         value: {
-            default: defaultOption.novelCustomHeaderSocialShowsBrandName,
-            hasValue: true,
+            related: ["novelCustomHeaderSocialShowsBrandName"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
@@ -960,8 +1045,11 @@ export const optionList = [
             parent: "parent_novelCustomHeaderOption"
         },
         value: {
-            default: defaultOption.novelCustomHeaderQRCodeCurrentLocation,
-            hasValue: true,
+            related: ["novelCustomHeaderQRCodeCurrentLocation"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
@@ -989,8 +1077,11 @@ export const optionList = [
             parent: "parent_novelCustomHeaderOption"
         },
         value: {
-            default: defaultOption.novelCustomHeaderQRCodeShowURL,
-            hasValue: true,
+            related: ["novelCustomHeaderQRCodeShowURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelCustomHeaderType", "novelCustomHeaderType"],
@@ -1017,8 +1108,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelShowAllExtext,
-            hasValue: true,
+            related: ["novelShowAllExtext"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         }
     },
@@ -1039,8 +1133,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelPrefaceAutoURL,
-            hasValue: true,
+            related: ["novelPrefaceAutoURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1060,8 +1157,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelAfterwordAutoURL,
-            hasValue: true,
+            related: ["novelAfterwordAutoURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1081,8 +1181,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelForceMypageLink,
-            hasValue: true,
+            related: ["novelForceMypageLink"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1102,8 +1205,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelShowHistoryOnSublist,
-            hasValue: true,
+            related: ["novelShowHistoryOnSublist"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1123,8 +1229,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelCursorHide,
-            hasValue: true,
+            related: ["novelCursorHide"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
         }
     },
@@ -1145,8 +1254,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelCursorHideTimeout,
-            hasValue: true,
+            related: ["novelCursorHideTimeout"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
             requirement: {
                 dataFor: ["novelCursorHide"],
@@ -1172,8 +1284,11 @@ export const optionList = [
             category: "novel",
         },
         value: {
-            default: defaultOption.novelAttentionBanner,
-            hasValue: true,
+            related: ["novelAttentionBanner"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
         },
     },
@@ -1196,7 +1311,10 @@ export const optionList = [
             category: "style",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             related: ["skins", "selectedSkin"],
         },
     },
@@ -1218,7 +1336,10 @@ export const optionList = [
             category: "style",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -1240,7 +1361,10 @@ export const optionList = [
             category: "style",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -1262,8 +1386,11 @@ export const optionList = [
             category: "style",
         },
         value: {
-            default: defaultOption.novelCustomCSS,
-            hasValue: true,
+            related: ["novelCustomCSS"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -1284,8 +1411,11 @@ export const optionList = [
             category: "style",
         },
         value: {
-            default: defaultOption.novelAuthorCustomSkin,
-            hasValue: true,
+            related: ["novelAuthorCustomSkin"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1305,8 +1435,11 @@ export const optionList = [
             category: "style",
         },
         value: {
-            default: defaultOption.novelAuthorCustomSkinWarning,
-            hasValue: true,
+            related: ["novelAuthorCustomSkinWarning"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelAuthorCustomSkin"],
                 data: true,
@@ -1333,7 +1466,10 @@ export const optionList = [
             category: "style",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelAuthorCustomSkin"],
                 data: true,
@@ -1362,7 +1498,10 @@ export const optionList = [
             category: "font",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             related: ["fontFontFamilyList", "fontSelectedFontFamily"],
         },
     },
@@ -1384,8 +1523,11 @@ export const optionList = [
             category: "font",
         },
         value: {
-            default: defaultOption.novelVertical,
-            hasValue: true,
+            related: ["novelVertical"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1406,7 +1548,10 @@ export const optionList = [
             category: "font",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             related: ["fontFontSize"],
         },
     },
@@ -1428,7 +1573,10 @@ export const optionList = [
             category: "font",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             related: ["fontLineHeight"],
         },
     },
@@ -1450,7 +1598,10 @@ export const optionList = [
             category: "font",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             related: ["fontWidth"],
         },
     },
@@ -1472,7 +1623,10 @@ export const optionList = [
             hide: true,
         },
         value: {
-            hasValue: true,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1490,7 +1644,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1507,7 +1665,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -1524,7 +1686,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             isAdvanced: true,
         }
     },
@@ -1545,7 +1711,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["novelVertical"],
                 data: true,
@@ -1568,7 +1738,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: false,
+                favorite: true,
+            },
         }
     },
 
@@ -1590,8 +1764,11 @@ export const optionList = [
             parent: "parent_correctionGrammer"
         },
         value: {
-            default: defaultOption.correctionIndent,
-            hasValue: true,
+            related: ["correctionIndent"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1614,8 +1791,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionNormalizeEllipses,
-            hasValue: true,
+            related: ["correctionNormalizeEllipses"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1638,8 +1818,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionNormalizeDash,
-            hasValue: true,
+            related: ["correctionNormalizeDash"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1662,8 +1845,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionNormalizeExclamation,
-            hasValue: true,
+            related: ["correctionNormalizeExclamation"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1686,8 +1872,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionRepeatedSymbols,
-            hasValue: true,
+            related: ["correctionRepeatedSymbols"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1710,8 +1899,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionPeriodWithBrackets,
-            hasValue: true,
+            related: ["correctionPeriodWithBrackets"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1734,8 +1926,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionNoSpaceExclamation,
-            hasValue: true,
+            related: ["correctionNoSpaceExclamation"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1758,8 +1953,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionOddEllipses,
-            hasValue: true,
+            related: ["correctionOddEllipses"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1782,8 +1980,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionOddDash,
-            hasValue: true,
+            related: ["correctionOddDash"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1806,8 +2007,11 @@ export const optionList = [
             parent: "parent_correctionSymbol"
         },
         value: {
-            default: defaultOption.correctionWaveDash,
-            hasValue: true,
+            related: ["correctionWaveDash"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -1830,8 +2034,11 @@ export const optionList = [
             parent: "parent_correctionLocalize"
         },
         value: {
-            default: defaultOption.correctionNumber,
-            hasValue: true,
+            related: ["correctionNumber"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -1860,8 +2067,11 @@ export const optionList = [
             parent: "parent_correctionLocalize"
         },
         value: {
-            default: defaultOption.correctionNumberShort,
-            hasValue: true,
+            related: ["correctionNumberShort"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["correctionNumber"],
                 data: true,
@@ -1895,8 +2105,11 @@ export const optionList = [
             parent: "parent_correctionLocalize"
         },
         value: {
-            default: defaultOption.correctionNumberLong,
-            hasValue: true,
+            related: ["correctionNumberLong"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["correctionNumber"],
                 data: true,
@@ -1930,8 +2143,11 @@ export const optionList = [
             parent: "parent_correctionLocalize"
         },
         value: {
-            default: defaultOption.correctionNumberSymbol,
-            hasValue: true,
+            related: ["correctionNumberSymbol"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["correctionNumber"],
                 data: true,
@@ -1965,8 +2181,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_CombineWord,
-            hasValue: true,
+            related: ["correctionVerticalLayout_CombineWord"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelVertical"],
@@ -2000,8 +2219,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_CombineNumber,
-            hasValue: true,
+            related: ["correctionVerticalLayout_CombineNumber"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelVertical"],
@@ -2030,8 +2252,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_IgnoreCombineNumberInWord,
-            hasValue: true,
+            related: ["correctionVerticalLayout_IgnoreCombineNumberInWord"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             /*
             requirement: {
                 dataFor: ["correctionVerticalLayout_CombineNumber"],
@@ -2072,8 +2297,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_CombineExclamation,
-            hasValue: true,
+            related: ["correctionVerticalLayout_CombineExclamation"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelVertical"],
@@ -2107,8 +2335,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_SidewayWord,
-            hasValue: true,
+            related: ["correctionVerticalLayout_SidewayWord"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelVertical"],
@@ -2142,8 +2373,11 @@ export const optionList = [
             parent: "parent_correctionVertical",
         },
         value: {
-            default: defaultOption.correctionVerticalLayout_SidewayExclamation,
-            hasValue: true,
+            related: ["correctionVerticalLayout_SidewayExclamation"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
             requirement: {
                 dataFor: ["novelVertical"],
@@ -2171,8 +2405,11 @@ export const optionList = [
             parent: "parent_correctionMisc"
         },
         value: {
-            default: defaultOption.correctionShowIllustration,
-            hasValue: true,
+            related: ["correctionShowIllustration"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2194,8 +2431,11 @@ export const optionList = [
             parent: "parent_correctionMisc"
         },
         value: {
-            default: defaultOption.correctionRemoveIllustrationLink,
-            hasValue: true,
+            related: ["correctionRemoveIllustrationLink"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["correctionShowIllustration"],
                 data: true,
@@ -2223,7 +2463,11 @@ export const optionList = [
             category: "correction",
         },
         value: {
-            hasValue: false,
+            related: ["correctionReplacePatterns"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2246,7 +2490,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -2263,7 +2511,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         }
     },
@@ -2286,8 +2538,11 @@ export const optionList = [
             parent: "parent_yomouRank_data",
         },
         value: {
-            default: defaultOption.yomouRank_ShowDescription,
-            hasValue: true,
+            related: ["yomouRank_ShowDescription"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2309,8 +2564,11 @@ export const optionList = [
             parent: "parent_yomouRank_data",
         },
         value: {
-            default: defaultOption.yomouRank_ShowTags,
-            hasValue: true,
+            related: ["yomouRank_ShowTags"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2332,8 +2590,11 @@ export const optionList = [
             parent: "parent_yomouRank_data",
         },
         value: {
-            default: defaultOption.yomouRank_ShowNovelInfoLink,
-            hasValue: true,
+            related: ["yomouRank_ShowNovelInfoLink"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2355,8 +2616,11 @@ export const optionList = [
             parent: "parent_yomouRank_data",
         },
         value: {
-            default: defaultOption.yomouRank_ShowKasasagi,
-            hasValue: true,
+            related: ["yomouRank_ShowKasasagi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2378,8 +2642,11 @@ export const optionList = [
             parent: "parent_yomouRank_data",
         },
         value: {
-            default: defaultOption.yomouRank_ShowRaWi,
-            hasValue: true,
+            related: ["yomouRank_ShowRaWi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2401,8 +2668,11 @@ export const optionList = [
             parent: "parent_yomouRank_point",
         },
         value: {
-            default: defaultOption.yomouRank_DevidePointsUnit,
-            hasValue: true,
+            related: ["yomouRank_DevidePointsUnit"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -2425,8 +2695,11 @@ export const optionList = [
             parent: "parent_yomouRank_point",
         },
         value: {
-            default: defaultOption.yomouRank_PointsColor,
-            hasValue: true,
+            related: ["yomouRank_PointsColor"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -2448,8 +2721,11 @@ export const optionList = [
             category: "rank",
         },
         value: {
-            default: defaultOption.yomouRank_CustomCSS,
-            hasValue: true,
+            related: ["yomouRank_CustomCSS"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -2471,7 +2747,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -2489,8 +2769,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowPoints,
-            hasValue: true,
+            related: ["yomouRankTop_ShowPoints"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2512,8 +2795,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowDescription,
-            hasValue: true,
+            related: ["yomouRankTop_ShowDescription"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2535,8 +2821,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowTags,
-            hasValue: true,
+            related: ["yomouRankTop_ShowTags"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2558,8 +2847,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowLength,
-            hasValue: true,
+            related: ["yomouRankTop_ShowLength"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2581,8 +2873,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowNovelInfoLink,
-            hasValue: true,
+            related: ["yomouRankTop_ShowNovelInfoLink"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2604,8 +2899,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowUpdateDate,
-            hasValue: true,
+            related: ["yomouRankTop_ShowUpdateDate"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2627,8 +2925,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowKasasagi,
-            hasValue: true,
+            related: ["yomouRankTop_ShowKasasagi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2650,8 +2951,11 @@ export const optionList = [
             parent: "parent_yomouRankTop_data"
         },
         value: {
-            default: defaultOption.yomouRankTop_ShowRaWi,
-            hasValue: true,
+            related: ["yomouRankTop_ShowRaWi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
     
@@ -2672,8 +2976,11 @@ export const optionList = [
             category: "ranktop",
         },
         value: {
-            default: defaultOption.yomouRankTop_CustomCSS,
-            hasValue: true,
+            related: ["yomouRankTop_CustomCSS"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true,
         },
     },
@@ -2698,7 +3005,10 @@ export const optionList = [
             category: "general",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             related: ["workspaceCustomHeader"],
         },
     },
@@ -2720,7 +3030,10 @@ export const optionList = [
             category: "general",
         },
         value: {
-            hasValue: false,
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             related: ["workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right"],
         },
     },
@@ -2747,8 +3060,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.workspaceCustomHeaderMode,
-            hasValue: true,
+            related: ["workspaceCustomHeaderMode"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
         },
     },
@@ -2770,8 +3086,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.workspaceCustomHeaderScrollHidden,
-            hasValue: true,
+            related: ["workspaceCustomHeaderScrollHidden"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["workspaceCustomHeaderMode"],
                 data: "scroll",
@@ -2799,8 +3118,11 @@ export const optionList = [
             category: "manage",
         },
         value: {
-            default: defaultOption.workspaceNovelmanageDeleteConfirm,
-            hasValue: true,
+            related: ["workspaceNovelmanageDeleteConfirm"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2820,8 +3142,11 @@ export const optionList = [
             category: "manage",
         },
         value: {
-            default: defaultOption.workspaceUserblogmanageDeleteConfirm,
-            hasValue: true,
+            related: ["workspaceUserblogmanageDeleteConfirm"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2841,8 +3166,11 @@ export const optionList = [
             category: "manage",
         },
         value: {
-            default: defaultOption.workspaceNovelmanageShowPointAverage,
-            hasValue: true,
+            related: ["workspaceNovelmanageShowPointAverage"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true
         },
     },
@@ -2864,8 +3192,11 @@ export const optionList = [
             category: "editor",
         },
         value: {
-            default: defaultOption.workspaceCustomEditor,
-            hasValue: true,
+            related: ["workspaceCustomEditor"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2883,7 +3214,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -2910,8 +3245,11 @@ export const optionList = [
             parent: "parent_workspaceFavorite_Bookmark",
         },
         value: {
-            default: defaultOption.workspaceBookmarkLayout,
-            hasValue: true,
+            related: ["workspaceBookmarkLayout"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2938,8 +3276,11 @@ export const optionList = [
             parent: "parent_workspaceFavorite_Bookmark",
         },
         value: {
-            default: defaultOption.workspaceBookmarkCategoryLayout,
-            hasValue: true,
+            related: ["workspaceBookmarkCategoryLayout"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -2961,8 +3302,11 @@ export const optionList = [
             parent: "parent_workspaceFavorite_Bookmark",
         },
         value: {
-            default: defaultOption.workspaceBookmarkReplaceEpisode,
-            hasValue: true,
+            related: ["workspaceBookmarkReplaceEpisode"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isExperimental: true,
         },
     },
@@ -2981,7 +3325,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3003,8 +3351,11 @@ export const optionList = [
             parent: "parent_workspaceReaction_Impression",
         },
         value: {
-            default: defaultOption.workspaceImpressionMarkedButton,
-            hasValue: true,
+            related: ["workspaceImpressionMarkedButton"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3026,8 +3377,11 @@ export const optionList = [
             parent: "parent_workspaceReaction_Impression",
         },
         value: {
-            default: defaultOption.workspaceImpressionHideButton,
-            hasValue: true,
+            related: ["workspaceImpressionHideButton"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3049,8 +3403,11 @@ export const optionList = [
             parent: "parent_workspaceReaction_Impression",
         },
         value: {
-            default: defaultOption.workspaceImpressionMarkAsReadWhenReply,
-            hasValue: true,
+            related: ["workspaceImpressionMarkAsReadWhenReply"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["workspaceImpressionMarkedButton"],
                 data: true,
@@ -3078,8 +3435,11 @@ export const optionList = [
             parent: "parent_workspaceReaction_Impression",
         },
         value: {
-            default: defaultOption.workspaceImpressionHideWhenMarked,
-            hasValue: true,
+            related: ["workspaceImpressionHideWhenMarked"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["workspaceImpressionMarkedButton", "workspaceImpressionHideButton"],
                 data: true,
@@ -3107,8 +3467,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.mypageShowUserId,
-            hasValue: true,
+            related: ["mypageShowUserId"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3128,8 +3491,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.mypageShowFavUserId,
-            hasValue: true,
+            related: ["mypageShowFavUserId"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3146,7 +3512,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3168,8 +3538,11 @@ export const optionList = [
             parent: "mypageNovellistData"
         },
         value: {
-            default: defaultOption.mypageNovellistShowReaction,
-            hasValue: true,
+            related: ["mypageNovellistShowReaction"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3191,8 +3564,11 @@ export const optionList = [
             parent: "mypageNovellistData"
         },
         value: {
-            default: defaultOption.mypageNovellistShowLength,
-            hasValue: true,
+            related: ["mypageNovellistShowLength"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3214,8 +3590,11 @@ export const optionList = [
             parent: "mypageNovellistData"
         },
         value: {
-            default: defaultOption.mypageNovellistShowKasasagi,
-            hasValue: true,
+            related: ["mypageNovellistShowKasasagi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3237,8 +3616,11 @@ export const optionList = [
             parent: "mypageNovellistData"
         },
         value: {
-            default: defaultOption.mypageNovellistShowRaWi,
-            hasValue: true,
+            related: ["mypageNovellistShowRaWi"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3258,8 +3640,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.mypageDisableExternalURLWarning,
-            hasValue: true,
+            related: ["mypageDisableExternalURLWarning"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             isAdvanced: true
         },
     },
@@ -3281,8 +3666,11 @@ export const optionList = [
             category: "blog",
         },
         value: {
-            default: defaultOption.mypageBlogAutoURL,
-            hasValue: true,
+            related: ["mypageBlogAutoURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3302,8 +3690,11 @@ export const optionList = [
             category: "blog",
         },
         value: {
-            default: defaultOption.mypageBlogCommentAutoURL,
-            hasValue: true,
+            related: ["mypageBlogCommentAutoURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3324,8 +3715,11 @@ export const optionList = [
             category: "profile",
         },
         value: {
-            default: defaultOption.mypageProfileStatics,
-            hasValue: true,
+            related: ["mypageProfileStatics"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3345,8 +3739,11 @@ export const optionList = [
             category: "profile",
         },
         value: {
-            default: defaultOption.mypageProfileBooklist,
-            hasValue: true,
+            related: ["mypageProfileBooklist"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3366,8 +3763,11 @@ export const optionList = [
             category: "profile",
         },
         value: {
-            default: defaultOption.mypageProfileAutoURL,
-            hasValue: true,
+            related: ["mypageProfileAutoURL"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3389,8 +3789,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.miteminShowIcodeField,
-            hasValue: true,
+            related: ["miteminShowIcodeField"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3412,8 +3815,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.kasasagiCustomStyle,
-            hasValue: true,
+            related: ["kasasagiCustomStyle"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3433,8 +3839,11 @@ export const optionList = [
             category: "general",
         },
         value: {
-            default: defaultOption.kasasagiExportButton,
-            hasValue: true,
+            related: ["kasasagiExportButton"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
     
@@ -3452,7 +3861,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3474,8 +3887,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralDay",
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_GeneralDay,
-            hasValue: true,
+            related: ["kasasagiShowGraph_GeneralDay"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3501,8 +3917,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralDay",
         },
         value: {
-            default: defaultOption.kasasagiGraphType_GeneralDay,
-            hasValue: true,
+            related: ["kasasagiGraphType_GeneralDay"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_GeneralDay"],
                 data: true,
@@ -3525,7 +3944,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3547,8 +3970,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralTotal",
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_GeneralTotal,
-            hasValue: true,
+            related: ["kasasagiShowGraph_GeneralTotal"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3574,8 +4000,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralTotal",
         },
         value: {
-            default: defaultOption.kasasagiGraphType_GeneralTotal,
-            hasValue: true,
+            related: ["kasasagiGraphType_GeneralTotal"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_GeneralTotal"],
                 data: true,
@@ -3598,7 +4027,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3620,8 +4053,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralAPI",
         },
         value: {
-            default: defaultOption.kasasagiShowTable_API,
-            hasValue: true,
+            related: ["kasasagiShowTable_API"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3643,8 +4079,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralAPI",
         },
         value: {
-            default: defaultOption.kasasagiShowTable_Rank,
-            hasValue: true,
+            related: ["kasasagiShowTable_Rank"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3666,8 +4105,11 @@ export const optionList = [
             parent: "parent_kasasagiGeneralAPI",
         },
         value: {
-            default: defaultOption.kasasagiShowTable_ExternalLink,
-            hasValue: true,
+            related: ["kasasagiShowTable_ExternalLink"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3688,8 +4130,11 @@ export const optionList = [
             category: "episode",
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_ChapterUnique,
-            hasValue: true,
+            related: ["kasasagiShowGraph_ChapterUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3713,8 +4158,11 @@ export const optionList = [
             category: "episode",
         },
         value: {
-            default: defaultOption.kasasagiGraphType_ChapterUnique,
-            hasValue: true,
+            related: ["kasasagiGraphType_ChapterUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_ChapterUnique"],
                 data: true,
@@ -3740,8 +4188,11 @@ export const optionList = [
             category: "episode",
         },
         value: {
-            default: defaultOption.kasasagiShowTable_GeneralDay,
-            hasValue: true,
+            related: ["kasasagiShowTable_GeneralDay"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3759,7 +4210,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3781,8 +4236,11 @@ export const optionList = [
             parent: "parent_kasasagiDayPV"
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_DayPV,
-            hasValue: true,
+            related: ["kasasagiShowGraph_DayPV"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3808,8 +4266,11 @@ export const optionList = [
             parent: "parent_kasasagiDayPV"
         },
         value: {
-            default: defaultOption.kasasagiGraphType_DayPV,
-            hasValue: true,
+            related: ["kasasagiGraphType_DayPV"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_DayPV"],
                 data: true,
@@ -3832,7 +4293,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3854,8 +4319,11 @@ export const optionList = [
             parent: "parent_kasasagiDayUnique"
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_DayUnique,
-            hasValue: true,
+            related: ["kasasagiShowGraph_DayUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3881,8 +4349,11 @@ export const optionList = [
             parent: "parent_kasasagiDayUnique"
         },
         value: {
-            default: defaultOption.kasasagiGraphType_DayUnique,
-            hasValue: true,
+            related: ["kasasagiGraphType_DayUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_DayUnique"],
                 data: true,
@@ -3906,7 +4377,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -3928,8 +4403,11 @@ export const optionList = [
             parent: "parent_kasasagiMonthPV"
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_MonthPV,
-            hasValue: true,
+            related: ["kasasagiShowGraph_MonthPV"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -3955,8 +4433,11 @@ export const optionList = [
             parent: "parent_kasasagiMonthPV"
         },
         value: {
-            default: defaultOption.kasasagiGraphType_MonthPV,
-            hasValue: true,
+            related: ["kasasagiGraphType_MonthPV"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_MonthPV"],
                 data: true,
@@ -3979,7 +4460,11 @@ export const optionList = [
             noindex: true,
         },
         value: {
-            hasValue: false,
+            related: "child",
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         }
     },
 
@@ -4001,8 +4486,11 @@ export const optionList = [
             parent: "parent_kasasagiMonthUnique"
         },
         value: {
-            default: defaultOption.kasasagiShowGraph_MonthUnique,
-            hasValue: true,
+            related: ["kasasagiShowGraph_MonthUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
         },
     },
 
@@ -4028,8 +4516,11 @@ export const optionList = [
             parent: "parent_kasasagiMonthUnique"
         },
         value: {
-            default: defaultOption.kasasagiGraphType_MonthUnique,
-            hasValue: true,
+            related: ["kasasagiGraphType_MonthUnique"],
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
             requirement: {
                 dataFor: ["kasasagiShowGraph_MonthUnique"],
                 data: true,
@@ -4056,7 +4547,7 @@ export function getOptionElement(option, forSearch){
     const uiClass = option.ui.class
     var uiPrefix = option.ui.prefix
     var uiSuffix = option.ui.suffix
-    const hasValue = option.value.hasValue
+    const resetButton = option.value.resetButton
     const requirement = option.value.requirement
     const isExperimental = option.value.isExperimental
     const isAdvanced = option.value.isAdvanced
