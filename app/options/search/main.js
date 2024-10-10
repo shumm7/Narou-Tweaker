@@ -90,7 +90,7 @@ function search(searchWords){
         $(`.contents-container[name="general"]`).append(elm)
 
         $.each(result.slice(0, 10), function(_, r){
-            var elm = getOptionElement(r, true)
+            var elm = getOptionElement(r, "search")
 
             optionHide()
             restoreOptions()

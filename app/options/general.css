@@ -247,6 +247,13 @@ input[type=file] {
         max-width: 100%;
         height: auto;
     }
+
+    .contents-item--buttons {
+        display: none;
+    }
+    .contents-item--buttons-vertical {
+        display: flex;
+    }
 }
 
 .draggable_area_container {
@@ -652,6 +659,35 @@ input[type=file] {
     font-size: 80%;
 }
 
+/* Buttons */
+.contents-item--buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 80%;
+    color: #666;
+}
+.contents-item--buttons-vertical {
+    margin: 0;
+    float: right;
+    display: none;
+}
+.contents-item--button-icon {
+    cursor: pointer;
+}
+.contents-item--button-icon:hover{
+    color: var(--kasasagi-blue);
+}
+.contents-item--button-favorite--on {
+    display: none;
+}
+.contents-item--button-favorite.selected .contents-item--button-favorite--on {
+    display: block;
+}
+.contents-item--button-favorite.selected .contents-item--button-favorite--off {
+    display: none;
+}
 
 /* Footer */
 #footer {
@@ -713,6 +749,14 @@ input[type=file] {
     }
     .contents-option-content {
         padding-right: 0;
+    }
+
+    /* Buttons */
+    .contents-item--buttons {
+        display: none;
+    }
+    .contents-item--buttons-vertical {
+        display: flex;
     }
 
     /* D&Dオブジェクト */

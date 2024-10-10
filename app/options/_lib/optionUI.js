@@ -1,4 +1,5 @@
-import { defaultOption } from "/utils/option.js";
+import { defaultOption } from "../../utils/option.js";
+import { escapeHtml } from "../../utils/text.js";
 import { customUIList } from "./customUI.js";
 import { getOptionCategory, getOptionFromId, getOptionPageFromId } from "./optionLib.js";
 
@@ -1688,7 +1689,7 @@ export const optionList = [
         value: {
             related: "child",
             buttons: {
-                reset: false,
+                reset: true,
                 favorite: true,
             },
             isAdvanced: true,
@@ -1713,7 +1714,7 @@ export const optionList = [
         value: {
             related: "child",
             buttons: {
-                reset: false,
+                reset: true,
                 favorite: true,
             },
             requirement: {
@@ -1740,7 +1741,7 @@ export const optionList = [
         value: {
             related: "child",
             buttons: {
-                reset: false,
+                reset: true,
                 favorite: true,
             },
         }
@@ -4532,7 +4533,7 @@ export const optionList = [
 
 ]
 
-export function getOptionElement(option, forSearch){
+export function getOptionElement(option, mode){
     const page = option.location.page
     const category = option.location.category
     const id = option.id
@@ -4547,7 +4548,8 @@ export function getOptionElement(option, forSearch){
     const uiClass = option.ui.class
     var uiPrefix = option.ui.prefix
     var uiSuffix = option.ui.suffix
-    const resetButton = option.value.resetButton
+    const buttons = option.value.buttons
+    const related = option.value.related
     const requirement = option.value.requirement
     const isExperimental = option.value.isExperimental
     const isAdvanced = option.value.isAdvanced
@@ -4558,12 +4560,12 @@ export function getOptionElement(option, forSearch){
     var elm
     
     /* Outer */
-    if(hasParent && !forSearch){
-        elm = $(`<div class="contents-option" name="${id}"></div>`)
+    if(hasParent && mode!=="search"){
+        elm = $(`<div class="contents-option option-outer" name="${id}"></div>`)
     }else{
-        elm = $(`<div class="contents-wide" name="${id}"><div class="contents-option"></div></div>`)
+        elm = $(`<div class="contents-wide option-outer" name="${id}"><div class="contents-option"></div></div>`)
     }
-    if(forSearch){
+    if(mode==="search"){
         elm.addClass(["search-result-box", "search-result--option"])
     }
     
@@ -4793,7 +4795,7 @@ export function getOptionElement(option, forSearch){
                 elm.find(".contents-option-content").append(item)
             }
         }
-        else if(uiType === "custom" && !forSearch){
+        else if(uiType === "custom" && mode!=="search"){
             if(elm.hasClass("contents-option")){
                 elm.append(`<div class="contents-option-content"></div>`)
             }else{
@@ -4811,7 +4813,7 @@ export function getOptionElement(option, forSearch){
                 }
             }
         }
-        else if(forSearch){ //検索用例外設定
+        else if(mode==="search"){ //検索用例外設定
             if(elm.hasClass("contents-option")){
                 elm.append(`<div class="contents-option-content"></div>`)
             }else{
@@ -4841,7 +4843,7 @@ export function getOptionElement(option, forSearch){
 
         //title
         if(title){
-            if(!forSearch){
+            if(mode!=="search"){
                 if(!elm.find(".contents-item--heading").length){
                     elm.find(".contents-option-head").append(`<div class="contents-item--heading">${title}</div>`)
                 }else{
@@ -4932,6 +4934,70 @@ export function getOptionElement(option, forSearch){
                 elm.find(".contents-item--description").empty()
                 elm.find(".contents-item--description").append(descriptionText.join(""))
             }
+        }
+    }
+
+    /* Buttons */
+    if(buttons){
+        var buttonElm = $(`<div class="contents-item--buttons"></div>`)
+
+        if(buttons.favorite){
+            buttonElm.append(`
+                <div class="contents-item--button-item contents-item--button-favorite">
+                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--off">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            `)
+        }
+        if(buttons.reset){
+            buttonElm.append(`
+                <div class="contents-item--button-item contents-item--button-reset">
+                    <div class="contents-item--button-icon contents-item--button-reset-icon">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </div>
+                </div>
+            `)
+        }
+
+
+        elm.find(".contents-option-head").append(buttonElm)
+        var p = buttonElm.clone()
+        p.addClass("contents-item--buttons-vertical")
+        elm.find(".contents-option-head").prepend(p)
+
+        // reset button event
+        if(related==="child"){
+            elm.find(".contents-item--button-reset") .on("click", function(e){
+                if(window.confirm(`現在表示されている設定データをリセットします。よろしいですか？\n親項目：${title}`)){
+                    $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).addClass("button-reset--skip-dialog")
+                    $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).trigger("click")
+                }
+            })
+        }else if(Array.isArray(related)){
+            elm.find(".contents-item--button-reset").on("click", function(){
+                var reset = () => {
+                    var ret = {}
+                    $.each(related, function(_, key){
+                        if(key in defaultOption){
+                            ret[key] = defaultOption[key]
+                        }
+                    })
+                    chrome.storage.local.set(ret, function(){})
+                }
+
+                if($(this).hasClass("button-reset--skip-dialog")){
+                    $(this).removeClass("button-reset--skip-dialog")
+                    reset()
+                }else{
+                    if(window.confirm(`この設定データをリセットします。よろしいですか？\n項目：${title}`)){
+                        reset()
+                    }
+                }
+            })
         }
     }
 
