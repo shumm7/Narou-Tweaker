@@ -1,10 +1,15 @@
 /* ヘッダ基本 */
-#novel_header::-webkit-scrollbar,
-#novel_header ul::-webkit-scrollbar,
-#novel_header_right::-webkit-scrollbar,
-#novel_header_right *::-webkit-scrollbar {
+#novel_header,
+#novel_header ul,
+#novel_header_right,
+#novel_header_right * {
 	/* スクロールバー無効化 */
-	display: none;
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
+	
+	::-webkit-scrollbar {
+		display: none;
+	}
 }
 .novel-icon-wrapper ul li {
 	/* テキストの自動折り返しを無効化 */

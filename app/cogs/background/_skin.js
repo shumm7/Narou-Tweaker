@@ -140,9 +140,9 @@ function makeSkin(){
 
         chrome.storage.session.set({
             novelAppliedSkinCSS: makeSkinCSS(skin, data),
-            novelAppliedFontCSS: rule,
-            novelSkinCustomCSS: skin.css,
-            novelFontCustomCSS: fontCss
+            novelAppliedFontCSS: "",//rule,
+            novelSkinCustomCSS: "",//skin.css,
+            novelFontCustomCSS: "",//fontCss
         })
     })
 }

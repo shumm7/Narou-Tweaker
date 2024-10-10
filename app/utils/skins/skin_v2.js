@@ -8,6 +8,10 @@ export const localNovelSkinV2 = [
         name: "標準設定〔小説家になろう〕",
         description: "サイトのデフォルト",
         version: 2,
+        preview: {
+            text: "#444",
+            background: "#fff"
+        },
         style: [],
         css: ""
     },
@@ -15,6 +19,10 @@ export const localNovelSkinV2 = [
         name: "ダーク（基本）",
         description: "Narou Tweaker オリジナル",
         version: 2,
+        preview: {
+            text: "rgba(255, 255, 255, 0.92)",
+            background: "#1d2020"
+        },
         style: [
             {
                 key: "00-text",
@@ -63,7 +71,7 @@ export const localNovelSkinV2 = [
             },  
             {
                 key: "color-custom-attention-bg",
-                value: "color-custom-bg",
+                value: "color-custom-body-bg",
                 type: "variable",
             },
             {

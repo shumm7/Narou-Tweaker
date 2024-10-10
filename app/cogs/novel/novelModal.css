@@ -81,9 +81,11 @@
 	height: 100%;
 	overflow-y: scroll;
 	padding: .5em;
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 #novel-option--contents::-webkit-scrollbar{
-	display: none;
+	display: none; /*chrome*/
 }
 .novel-option--content {
 	display: none;
@@ -224,6 +226,8 @@
 	border: 1px solid var(--narou-tweaker--color-ui-modal--border);
 }
 #novel-option--correction-replace--patterns {
+    -ms-overflow-style: none; /*edge*/
+  	scrollbar-width: none; /*firefox*/
 }
 #novel-option--correction-replace--patterns::-webkit-scrollbar{
 	display: none;

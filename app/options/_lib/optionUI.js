@@ -123,6 +123,21 @@ export const optionCategoryList = [
         ]
     },
     {
+        title: "スキンエディタ",
+        description: "スキンのデータを作成することができます。",
+        id: "novel/skin-editor",
+        parent: "novel",
+        defaultCategory: "skin",
+        categories: [
+            {
+                title: "スキン",
+                id: "skin",
+            },
+        ],
+        sidebar: true,
+        noindex: true,
+    },
+    {
         title: "小説を読もう！",
         description: "ランキングや検索ページの表示を設定することが出来ます。",
         id: "yomou",
@@ -1295,6 +1310,30 @@ export const optionList = [
                 mode: "show"
             },
             isAdvanced: true,
+        },
+    },
+
+    /* スキンエディター */
+    
+    {
+        id: "novelSkinSelector",
+        title: "スキン",
+        description: {
+            text: "小説ページの外観を変更します。",
+            keywords: ["すきん", "レイアウト", "デザイン", "外観", "スキン", "スキン設定", "CSS"],
+        },
+        ui: {
+            type: "custom",
+            name: "wide",
+            data: "ui_novelSkinSelector",
+        },
+        location: {
+            page: "novel/skin-editor",
+            category: "skin",
+        },
+        value: {
+            hasValue: false,
+            related: [],
         },
     },
 

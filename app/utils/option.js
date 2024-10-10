@@ -135,13 +135,25 @@ export const defaultOption = {
     novelAuthorCustomSkin: true,
     novelAuthorCustomSkinWarning: true,
 
-    activeNovelSkins: [
-        {src: "internal", key: 0, show: true},
-        {src: "internal", key: 1, show: true}
+    // v2
+    novelSkinsAvailable: [
+        {src: "internal", key: 0},
+        {src: "internal", key: 1},
+        {src: "local", key: 0},
     ],
-    localNovelSkinIndex: [],
-    novelSkins: [], //v2
-    novelSkinSelected: 0, //v2
+    novelSkinIndex: [0],
+    novelSkinSelected: 0,
+    novelSkin_0: {
+        name: "スキン",
+        description: "サンプル",
+        version: 2,
+        preview: {
+            text: "red",
+            background: "yellow"
+        },
+        style: [],
+        css: ""
+    },
 
     /* Font */
     fontSelectedFontFamily: 0,

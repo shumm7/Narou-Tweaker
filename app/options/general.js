@@ -2,7 +2,7 @@ import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/uti
 import { getOptionElement, optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { defaultOption } from "../../utils/option.js"
 import { check, defaultValue } from "/utils/misc.js"
-import { getOptionFromId } from "./_lib/optionLib.js";
+import { getOptionFromId, getOptionPageFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
 let currentPage
@@ -141,7 +141,23 @@ function setupDOM(){
 
 
     /* Set Title */
-    $("head title").text(`環境設定 > ${currentCategory.title} ｜ Narou Tweaker`)
+    function getName(id, _pre){
+        var cat = getOptionPageFromId(id)
+        if(cat===undefined){
+            if(_pre){
+                return _pre
+            }else{
+                return "環境設定"
+            }
+        }
+        if(cat.parent === undefined){
+            return `${cat.title} < 環境設定`
+        }else{
+            return `${cat.title} < ${getName(cat.parent, _pre)}`
+        }
+    }
+
+    $("head title").text(`${getName(currentCategory.id)} ｜ Narou Tweaker`)
     
     
     /* Footer */

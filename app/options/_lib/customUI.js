@@ -300,6 +300,56 @@ export const customUIList = {
             </div>
         </div>
     `,
+    
+    ui_novelSkinSelector: `
+        <div class="contents-option-head" style="padding-right: 0;">
+            <div class="contents-item--heading"></div>
+            <div class="contents-item--description"></div>
+        </div>
+        <div class="contents-option-content" id="skin-selector">
+            <div id="skin-selector--selector">
+                <div id="skin-selector--selector--available" class="skin-selector--selector--draggable-outer">
+                    <div class="skin-selector--selector--draggable-header">使用可能なスキン</div>
+                    <div class="skin-selector--selector--draggable">
+                        <div class="skin-selector--selector--draggable-item active" name="skin-1">
+                            <div class="skin-selector--selector--draggable-item--storage" title="ローカル"><i class="fa-solid fa-box"></i></div>
+                            <div class="skin-selector--selector--draggable-item--title">スキンaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                            <div class="skin-selector--selector--draggable-item--sample">あAa</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="skin-selector--selector--unavailable" class="skin-selector--selector--draggable-outer">
+                    <div class="skin-selector--selector--draggable-header">候補</div>
+                    <div class="skin-selector--selector--draggable">
+                        <div class="skin-selector--selector--draggable-item" name="skin-1">
+                            <div class="skin-selector--selector--draggable-item--storage" title="クラウド"><i class="fa-solid fa-cloud"></i></div>
+                            <div class="skin-selector--selector--draggable-item--title">スキン</div>
+                            <div class="skin-selector--selector--draggable-item--sample">あAa</div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div id="skin-selector--editor">
+                <div id="skin-selector--editor--control">
+                    <div id="skin-selector--editor--control-title">スキン名</div>
+                    <div id="skin-selector--editor--control-description">スキン説明文。あいうえおかきくけこ。</div>
+                    <!--
+                    <div id="skin-selectorr--editor--preview" class="skin-preview">
+                        <p>　この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。</p>
+                        <div style="height: 1em;"></div>
+                        <div class="subtitle-dummy">
+                            <div class="dummy-link">1.目次テスト</div>
+                            <div class="dummy-link dummy-link-visited">2.訪問済み</div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+            </div>
+        </div>
+    `,
 
     ui_novelFontSelect: `
         <div class="contents-option-head">

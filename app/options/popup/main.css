@@ -12,9 +12,10 @@ html {
     
     -ms-overflow-style: none; /*edge*/
   	scrollbar-width: none; /*firefox*/
-}
-html::-webkit-scrollbar {
-    display: none; /*chrome/safari*/
+
+    ::-webkit-scrollbar {
+        display: none; /*chrome/safari*/
+    }
 }
 
 body {
