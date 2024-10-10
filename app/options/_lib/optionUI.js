@@ -4999,6 +4999,27 @@ export function getOptionElement(option, mode){
                 }
             })
         }
+
+        // favorite button
+        elm.find(".contents-item--button-favorite--off").on("click", function(e){ //OFF -> ON
+            var outer = $(`.option-outer[name="${id}"]`)
+            if(outer.find(".contents-wide-column").length){
+                outer.children(".contents-option-head").find(".contents-item--button-favorite").addClass("selected")
+                outer.find(".contents-wide-column .contents-item--button-favorite--off").trigger("click")
+            }else{
+                var parent = $(`.option-outer:has(.contents-wide-column .option-outer[name="${id}"])`)
+                if(parent.length){
+                    parent.children(".contents-option-head").find(".contents-item--button-favorite").addClass("selected")
+                    outer.find(".contents-item--button-favorite").addClass("selected")
+                }else{
+                    outer.find(".contents-item--button-favorite").addClass("selected")
+                }
+            }
+        })
+        elm.find(".contents-item--button-favorite--on").on("click", function(e){ //ON -> OFF
+            elm.find(".contents-item--button-favorite").removeClass("selected")
+        })
+
     }
 
     /* Hide Settings */
