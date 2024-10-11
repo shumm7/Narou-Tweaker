@@ -5019,7 +5019,7 @@ export function getOptionElement(option, mode){
 
 
         elm.find(".contents-option-head").append(buttonElm)
-        var p = buttonElm.clone()
+        var p = buttonElm.clone(true)
         p.addClass("contents-item--buttons-vertical")
         elm.find(".contents-option-head").prepend(p)
 
