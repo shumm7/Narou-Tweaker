@@ -9,6 +9,7 @@ export const defaultOption = {
     extFavoriteOptions: [],
     extPopupDefaultPage: "__auto__", 
     extOptionPageButtons: true,
+    extNotifications: true,
 
     /* Narou */
     //narouSkipAgeauth: false,

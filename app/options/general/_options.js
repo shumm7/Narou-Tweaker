@@ -165,6 +165,31 @@ export const general_optionsList = [
     },
 
     {
+        id: "extNotifications",
+        title: "通知",
+        description: {
+            text: "拡張機能からの通知を許可します。",
+            small: "例えば、拡張機能がアップデートされたときに通知が来るようになります。",
+            keywords: ["つうち", "環境設定", "通知", "基本設定", "拡張機能"],
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        location: {
+            page: "general",
+            category: "config"
+        },
+        value: {
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extNotifications"],
+        }
+    },
+
+    {
         id: "extAdvancedSettings",
         title: "高度な設定",
         description: {
