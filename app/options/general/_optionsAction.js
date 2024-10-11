@@ -1,9 +1,9 @@
 
-import { defaultOption, fixOption, formatOption } from "../../utils/option.js";
+import { defaultOption } from "../../utils/option.js";
 import { getDatetimeStringForFilename, getDatetimeString, escapeHtml } from "../../utils/text.js";
 import { saveJson } from "../../utils/misc.js";
 import { optionCategoryList } from "../_lib/optionUI.js";
-import { getOptionPageFromId } from "../_lib/optionLib.js";
+import { getOptionPageFromId, fixOption, formatOption } from "../_lib/optionLib.js";
 
 /* 基本設定 */
 /* デフォルトページ（ポップアップ時） */

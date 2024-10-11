@@ -420,7 +420,7 @@ export function fixOption(local, sync){
     }
 }   
 
-export function checkOptionValue(key, value){
+function checkOptionValue(key, value){
     /* falseで値を更新する */
     /* trueで更新しない */
 
