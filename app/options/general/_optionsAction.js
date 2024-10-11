@@ -207,23 +207,38 @@ export function general_importOptionData(){
 /* デバッグ機能 */
 /* 設定データを閲覧 */
 export function general_exportOptionText() {
+    var whitelist = false
+
     /* local */
     function changeLocal(){
         chrome.storage.local.get(null, (data)=>{
             try{
-                var input = $("#exportLocalOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
+                if(whitelist){
+                    var input = $("#exportLocalOptionText_Input_Whitelist")
+                    const appears = input.val().split(/\s/)
+                    var ret = {}
+                    $.each(appears, function(_, elm){
+                        if(elm in data){
+                            ret[elm] = data[elm]
+                        }
+                    })
+                    data = ret
+                }else{
+                    var input = $("#exportLocalOptionText_Input_Blacklist")
+                    const ignores = input.val().split(/\s/)
+                    $.each(ignores, function(_, elm){
+                        if(elm in data){
+                            delete data[elm]
+                        }
+                    })
+                }
 
                 var text = JSON.stringify(data, null, 4)
                 var field = $("#exportLocalOptionText_Output")
                 field.text(text)
                 field.trigger("input")
             }catch(e){
+                console.warn(e)
             }
         })
     }
@@ -232,19 +247,33 @@ export function general_exportOptionText() {
     function changeSync(){
         chrome.storage.sync.get(null, (data)=>{
             try{
-                var input = $("#exportSyncOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
+                if(whitelist){
+                    var input = $("#exportSyncOptionText_Input_Whitelist")
+                    const appears = input.val().split(/\s/)
+                    var ret = {}
+                    $.each(appears, function(_, elm){
+                        if(elm in data){
+                            ret[elm] = data[elm]
+                        }
+                    })
+                    data = ret
+
+                }else{
+                    var input = $("#exportSyncOptionText_Input_Blacklist")
+                    const ignores = input.val().split(/\s/)
+                    $.each(ignores, function(_, elm){
+                        if(elm in data){
+                            delete data[elm]
+                        }
+                    })
+                }
 
                 var text = JSON.stringify(data, null, 4)
                 var field = $("#exportSyncOptionText_Output")
                 field.text(text)
                 field.trigger("input")
             }catch(e){
+                console.warn(e)
             }
         })
     }
@@ -253,20 +282,32 @@ export function general_exportOptionText() {
     function changeSession(){
         chrome.storage.session.get(null, (data)=>{
             try{
-                var input = $("#exportSessionOptionText_Input")
-                const ignores = input.val().split(/\s/)
-                $.each(ignores, function(_, elm){
-                    if(elm in data){
-                        delete data[elm]
-                    }
-                })
+                if(whitelist){
+                    var input = $("#exportSessionOptionText_Input_Whitelist")
+                    const appears = input.val().split(/\s/)
+                    var ret = {}
+                    $.each(appears, function(_, elm){
+                        if(elm in data){
+                            ret[elm] = data[elm]
+                        }
+                    })
+                    data = ret
+                }else{
+                    var input = $("#exportSessionOptionText_Input_Blacklist")
+                    const ignores = input.val().split(/\s/)
+                    $.each(ignores, function(_, elm){
+                        if(elm in data){
+                            delete data[elm]
+                        }
+                    })
+                }
 
                 var text = JSON.stringify(data, null, 4)
                 var field = $("#exportSessionOptionText_Output")
                 field.text(text)
                 field.trigger("input")
             }catch(e){
-                
+                console.warn(e)
             }
         })
     }
@@ -276,7 +317,7 @@ export function general_exportOptionText() {
         chrome.storage.local.onChanged.addListener(function(changes){
             changeLocal()
         })
-        $("#exportLocalOptionText_Input").on("input", function(e){
+        $("#exportLocalOptionText_Input_Blacklist, #exportLocalOptionText_Input_Whitelist").on("input", function(e){
             changeLocal()
         })
 
@@ -284,7 +325,7 @@ export function general_exportOptionText() {
         chrome.storage.sync.onChanged.addListener(function(changes){
             changeSync()
         })
-        $("#exportSyncOptionText_Input").on("input", function(e){
+        $("#exportSyncOptionText_Input_Blacklist, #exportSyncOptionText_Input_Black_Whitelist").on("input", function(e){
             changeSync()
         })
 
@@ -292,9 +333,25 @@ export function general_exportOptionText() {
         chrome.storage.session.onChanged.addListener(function(changes){
             changeSession()
         })
-        $("#exportSessionOptionText_Input").on("input", function(e){
+        $("#exportSessionOptionText_Input_Blacklist, #exportSessionOptionText_Input_Whitelist").on("input", function(e){
             changeSession()
         })
+
+        // モード切替
+        $("#option-list--mode-whitelist").on("change", function(){
+            whitelist = $(this).prop("checked")
+            if(whitelist){
+                $(".option-list--show-whitelist").css("display", "")
+                $(".option-list--show-blacklist").css("display", "none")
+            }else{
+                $(".option-list--show-whitelist").css("display", "none")
+                $(".option-list--show-blacklist").css("display", "")
+            }
+            changeLocal()
+            changeSync()
+            changeSession()
+        })
+
     }catch(e){
         console.warn(e)
     }
