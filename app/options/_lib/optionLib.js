@@ -95,7 +95,7 @@ export function appendFavoriteOption(id){
         }
 
         var opt = getOptionFromId(id)
-        var targetIdx = list.length
+        var targetIdx = 0
         var objectIds = []
         if(opt){
             objectIds.push(opt.id)
