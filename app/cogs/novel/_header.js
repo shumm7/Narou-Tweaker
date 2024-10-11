@@ -13,8 +13,6 @@ export function _header(){
 
         if(customHeaderType!=="1" && customHeaderType!=="2"){
             return true
-        }else{
-            $(".p-adjust-layout__controller .p-adjust-layout__list #color1").click() /* なろう標準の配色を標準設定に */
         }
 
         const ncode = getNcode()

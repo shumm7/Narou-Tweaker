@@ -475,3 +475,22 @@ function novelTopAttention(){
         }
     })
 }
+
+export function _setCookie(){
+    chrome.storage.local.get(null, function(data){
+        if(data.novelCustomStyle){
+            var expire = new Date()
+            expire.setFullYear(expire.getFullYear() + 1)
+
+            const cookieDetails = {
+                url: location.origin,
+                path:'/',
+                domain:'.syosetu.com',
+                expirationDate: expire.getTime(),
+                name: 'novellayout',
+                value: '1'
+            }
+            chrome.runtime.sendMessage({action: "cookies", function: "set", data: cookieDetails}, function(response){})
+        }
+    })
+}

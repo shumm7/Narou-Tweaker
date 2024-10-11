@@ -1,6 +1,6 @@
 import { _header, changeHeaderScrollMode } from "./_header.js";
 import { _authorSkin } from "./_skin.js";
-import { _novel } from "./_novel.js";
+import { _novel, _setCookie } from "./_novel.js";
 import { _optionModal } from "./_modal.js";
 import { _novelcom } from "./_novelcom.js";
 import { checkNovelPageDetail } from "./utils.js";
@@ -21,7 +21,6 @@ if(pageDetail!=="pdf" && pageDetail!=="txt" && pageDetail!==undefined){
 /* Option Menu */
 _optionModal();
 
-
 /* Novel Page */
 _novel()
 
@@ -30,3 +29,6 @@ _novelcom()
 
 /* Author Skin */
 _authorSkin()
+
+/* cookie */
+_setCookie()
