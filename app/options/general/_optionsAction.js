@@ -1,8 +1,50 @@
 
 import { defaultOption, fixOption, formatOption } from "../../utils/option.js";
-import { getDatetimeStringForFilename, getDatetimeString } from "../../utils/text.js";
+import { getDatetimeStringForFilename, getDatetimeString, escapeHtml } from "../../utils/text.js";
 import { saveJson } from "../../utils/misc.js";
+import { optionCategoryList } from "../_lib/optionUI.js";
+import { getOptionPageFromId } from "../_lib/optionLib.js";
 
+/* 基本設定 */
+/* デフォルトページ（ポップアップ時） */
+export function general_popupDefaultPage_Dropdown(){
+    $("#extPopupDefaultPage_Dropdown").on("change", function(e){
+        var pageId = $(this).val()
+        if(pageId!=="__auto__"){
+            var page = getOptionPageFromId(pageId)
+            if((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id){
+                chrome.storage.local.set({extPopupDefaultPage: pageId})
+            }else{
+                chrome.storage.local.set({extPopupDefaultPage: "__auto__"})
+            }
+        }else{
+            chrome.storage.local.set({extPopupDefaultPage: pageId})
+        }
+    })
+
+    function restoreDropdown(value){
+        var elm = $("#extPopupDefaultPage_Dropdown")
+        
+        elm.empty()
+        elm.append(`<option value="__auto__">自動（閲覧中のページに合わせる）</option>`)
+        $.each(optionCategoryList, function(_, page){
+            if((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id){
+                elm.append(`<option value="${escapeHtml(page.id)}">ページ「${escapeHtml(page.title)}」</option>`)
+            }
+        })
+        elm.val(value)
+    }
+
+    chrome.storage.local.get("extPopupDefaultPage", function(data){
+        restoreDropdown(data.extPopupDefaultPage)
+    })
+
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extPopupDefaultPage){
+            restoreDropdown(changes.extPopupDefaultPage.newValue)
+        }
+    })
+}
 
 /* 設定データ */
 /* 設定データをリセット */

@@ -1,4 +1,4 @@
-import { general_exportOptionData, general_exportOptionText, general_fixOptionData, general_importOptionData, general_insertOptionData, general_monitorOptionChanged, general_removeOptionData } from "./_optionsAction.js";
+import { general_exportOptionData, general_exportOptionText, general_fixOptionData, general_importOptionData, general_insertOptionData, general_monitorOptionChanged, general_popupDefaultPage_Dropdown, general_removeOptionData } from "./_optionsAction.js";
 
 export const general_optionsList = [
     /* Narou Tweaker (introduction) */
@@ -113,6 +113,32 @@ export const general_optionsList = [
 
 
     /* 基本設定 (config) */
+    {
+        id: "extPopupDefaultPageSelector",
+        title: "デフォルトページ（ポップアップ時）",
+        description: {
+            text: "拡張機能のアイコンをクリックしたときに、一番最初に表示するページを設定します。",
+            keywords: ["でふぉるとぺーじ（ぽっぷあっぷじ）", "環境設定", "基本設定", "ページ", "拡張機能", "ポップアップ"],
+        },
+        ui: {
+            type: "custom",
+            name: "default",
+            data: "ui_extPopupDefaultPage_Dropdown",
+            action: general_popupDefaultPage_Dropdown,
+        },
+        location: {
+            page: "general",
+            category: "config"
+        },
+        value: {
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extPopupDefaultPage"],
+        }
+    },
+
     {
         id: "extAdvancedSettings",
         title: "高度な設定",

@@ -1,10 +1,12 @@
 import { optionCategoryList, optionList } from "./optionUI.js";
+import { novelIconList, workspaceIconList, workspaceMenuIconList } from "../../utils/header.js"
+import { defaultGlobalOption, defaultOption } from "../../utils/option.js";
 
 
 /* Option Category */
 export function getOptionPageFromId(id){
     var ret = undefined
-    $.each(optionCategoryList, function(_, v){
+    optionCategoryList.forEach(function(v){
         if(v.id === id){
             ret = v
             return true
@@ -256,4 +258,221 @@ export function moveFavoriteOption(id, pos){
 
 
     })
+}
+
+
+/* format */
+export function formatOption(data){
+    function update(data){
+        var o = defaultOption
+        Object.keys(o).forEach(function(key){
+            if(checkOptionValue(key, data[key])){
+                o[key] = data[key]
+            }
+        })
+        return exceptionProcess_local(data, o)
+    }
+
+    if(data){
+        return update(data)
+    }
+}
+
+function exceptionProcess_local(oldDict, newDict){
+    
+    // novelCustomHeader -> novelCustomHeaderType
+    if(oldDict.novelCustomHeader === true){
+        console.log(`Converted value: { novelCustomHeader: true } -> { novelCustomHeaderType: "2" } `)
+        newDict.novelCustomHeaderType = "2"
+    }else if(oldDict.novelCustomHeader === false){
+        console.log(`Converted value: { novelCustomHeader: false } -> { novelCustomHeaderType: "1" } `)
+        newDict.novelCustomHeaderType = "1"
+    }
+
+    // novelCustomHeaderLeft / novelCustomHeaderRight
+    Array("novelCustomHeaderLeft", "novelCustomHeaderRight").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in novelIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+
+    // workspaceCustomHeader
+    Array("workspaceCustomHeader").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in workspaceIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+    
+    // workspaceCustomMenu_Left / workspaceCustomMenu_Middle / workspaceCustomMenu_Right
+    Array("workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right").forEach(function(key){
+        if(key in newDict){
+            if(Array.isArray(newDict[key])){
+                var array = []
+                for(var i = 0; i < newDict[key].length; i++){
+                    if(newDict[key][i] in workspaceMenuIconList){
+                        array.push(newDict[key][i])
+                    }
+                }
+                newDict[key] = array
+            }else{
+                newDict[key] = defaultOption[key]
+            }
+        }
+    })
+
+    if("extFavoriteOptions" in newDict){
+        if(Array.isArray(newDict.extFavoriteOptions)){
+            var list = []
+            newDict.extFavoriteOptions.forEach(function(option){
+                var optionData = getOptionFromId(option)
+                if(optionData){
+                    if(optionData.value){
+                        if(optionData.value.buttons){
+                            if(optionData.value.buttons.favorite){
+                                list.push(optionData.id)
+                            }
+                        }
+                    }
+                }
+            })
+            var listNoDuplicate = list.filter((e, i) => {
+                return list.indexOf(e) == i;
+            }) 
+            newDict.extFavoriteOptions = listNoDuplicate
+        }else{
+            newDict.extFavoriteOptions = defaultOption.extFavoriteOptions
+        }
+    }
+
+    if("extPopupDefaultPage" in newDict){
+        var pageId = newDict.extPopupDefaultPage
+
+        if(pageId!=="__auto__"){
+            var page = getOptionPageFromId(pageId)
+            if(page){
+                if(!((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id)){
+                    newDict.extPopupDefaultPage = "__auto__"
+                }
+            }else{
+                newDict.extPopupDefaultPage = "__auto__"
+            }
+        }
+    }
+
+    return newDict
+}
+
+export function fixOption(local, sync){
+    if(local){
+        chrome.storage.local.get(null, (data)=>{
+            chrome.storage.local.clear(()=>{
+                var o = defaultOption
+                Object.keys(o).forEach(function(key){
+                    if(checkOptionValue(key, data[key])){
+                        o[key] = data[key]
+                    }
+                })
+
+                chrome.storage.local.set(exceptionProcess_local(data, o), function(){
+                    console.log("Fixed option data (local).")
+                })
+            })
+        })
+    }
+    
+    if(sync){
+        chrome.storage.sync.get(null, (data)=>{
+            chrome.storage.sync.clear(()=>{
+                var o = defaultGlobalOption
+                Object.keys(o).forEach(function(key){
+                    if(data[key]!=undefined){
+                        if( typeof(o[key]) == typeof(data[key])){
+                            o[key] = data[key]
+                        }
+                    }
+                })
+
+                chrome.storage.sync.set(o, function(){
+                    console.log("Fixed option data (sync).")
+                })
+            })
+        })
+    }
+}   
+
+export function checkOptionValue(key, value){
+    /* falseで値を更新する */
+    /* trueで更新しない */
+
+    //強制的に値を変更する
+    if(key === "extOptionsVersion"){
+        return false
+    }
+
+    if(typeof(defaultOption[key]) === typeof(value) && value!==undefined){
+        if(key==="kasasagiGraphType_GeneralDay"
+            || key==="kasasagiGraphType_GeneralTotal"
+            || key==="kasasagiGraphType_ChapterUnique"
+            || key==="kasasagiGraphType_DayPV"
+            || key==="kasasagiGraphType_DayUnique"
+            || key==="kasasagiGraphType_MonthPV"
+            || key==="kasasagiGraphType_MonthUnique"
+        ){
+            if(value!=="bar" && value!=="line"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else if(key==="novelCustomHeaderMode" || key==="workspaceCustomHeaderMode"){
+            if(value!=="absolute" || value!=="fixed" || value!=="scroll"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else if(key==="correctionNumberShort" || key==="correctionNumberLong" || key==="correctionNumberSymbol"){
+            if(value!=="default" || value!=="half" || value!=="full" || value!=="kanji"){
+                return false
+            }else{
+                return true
+            }
+        }
+        else{
+            return true
+        }
+    }else if(key==="novelCustomHeaderLeft"||
+        key==="novelCustomHeaderRight" ||
+        key==="workspaceCustomHeader" ||
+        key==="workspaceCustomMenu_Left" ||
+        key==="workspaceCustomMenu_Middle" ||
+        key==="workspaceCustomMenu_Right"
+    ){
+        if(!Array.isArray(value)){
+            return false
+        }
+    }else{
+        return false
+    }
+
 }
