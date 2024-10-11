@@ -1,6 +1,6 @@
 import { getOptionFromId } from "../_lib/optionLib.js";
 import { getOptionElement } from "../_lib/optionUI.js";
-import { optionHide } from "../_lib/utils.js";
+import { optionHide, syntaxHighlight } from "../_lib/utils.js";
 import { restoreOptions, setup } from "../general.js";
 
 setup()
@@ -53,7 +53,8 @@ function setupContents(scroll){
                 }
             }
         })
-
+        
+        syntaxHighlight()
         optionHide()
         restoreOptions()
         markFavoriteOptions(data.extFavoriteOptions)

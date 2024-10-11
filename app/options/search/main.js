@@ -64,6 +64,7 @@ function search(searchWords){
         })
 
         optionHide()
+        syntaxHighlight()
         restoreOptions()
 
         /* 結果が10件以上の場合 */
