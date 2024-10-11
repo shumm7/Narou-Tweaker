@@ -285,6 +285,13 @@ input[type=file] {
         max-width: 100%;
         height: auto;
     }
+
+    .contents-item--buttons {
+        display: none;
+    }
+    .contents-item--buttons-vertical {
+        display: flex;
+    }
 }
 
 .draggable_area_container {
@@ -394,6 +401,10 @@ input[type=file] {
     padding: 5px 0;
     padding-left: 15px; 
     border-left: 5px solid transparent;
+}
+.sidebar-separator {
+    margin: 0 15px;
+    border-top: 1px solid #ccc;
 }
 .sidebar-item.selected {
     font-weight: bold; 
@@ -556,17 +567,19 @@ input[type=file] {
 .header-title--description-text {
     display: block;
 }
-.header-title--description-search {
+.header-title--icons {
     display: none;
+}
+.header-title--icons--icon {
     font-size: 130%;
     padding-right: 20px;
 }
-.header-title--description-search a:link {
+.header-title--icons--icon a:link {
     color: inherit;
 }
-.header-title--description-search a:hover,
-.header-title--description-search a:focus {
-    color: var(--narou-tweaker--option--color-header-text-hover);
+.header-title--icons--icon a:hover,
+.header-title--icons--icon a:focus {
+    color: #ccc;
 }
 
 /* Header Menu */
@@ -694,6 +707,38 @@ input[type=file] {
     font-size: 80%;
 }
 
+/* Buttons */
+.contents-item--buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 80%;
+    color: #666;
+}
+.contents-item--buttons-vertical {
+    margin: 0;
+    float: right;
+    display: none;
+}
+.contents-item--button-icon {
+    cursor: pointer;
+}
+.contents-item--button-icon:hover{
+    color: var(--kasasagi-blue);
+}
+.contents-item--button-separator {
+    border-right: 1px solid #eee;
+}
+.contents-item--button-favorite--on {
+    display: none;
+}
+.contents-item--button-favorite.selected .contents-item--button-favorite--on {
+    display: block;
+}
+.contents-item--button-favorite.selected .contents-item--button-favorite--off {
+    display: none;
+}
 
 /* Footer */
 #footer {
@@ -718,11 +763,15 @@ input[type=file] {
     }
     /* ヘッダの説明文  */
     #header-title--description {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+
         .header-title--description-text {
             display: none;
         }
-        .header-title--description-search {
-            display: block;
+        .header-title--icons {
+            display: flex;
         }
     }
 
@@ -755,6 +804,14 @@ input[type=file] {
     }
     .contents-option-content {
         padding-right: 0;
+    }
+
+    /* Buttons */
+    .contents-item--buttons {
+        display: none;
+    }
+    .contents-item--buttons-vertical {
+        display: flex;
     }
 
     /* D&Dオブジェクト */
@@ -832,6 +889,9 @@ input[type=file] {
         }
         .sidebar-item:not(:last-child) {
             border-right: 1px solid var(--narou-tweaker--option--color-tab-border);
+        }
+        .sidebar-item--hide-on-popup {
+            display: none !important;
         }
         .sidebar-item a{
             display: flex;

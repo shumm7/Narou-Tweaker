@@ -1,56 +1,59 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption, localFont, localFontFamily } from "../../utils/option.js"
 import { generateNoDuplicateName } from "../../utils/skin.js";
+import { restoreSkins } from "./_optionsAction_Skin.js";
 
 /* Font Settings */
 /* フォントの表示設定 */
 export function restoreFont(){
-    chrome.storage.local.get(null, (data)=>{
-      const fontList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
+  chrome.storage.local.get(null, (data)=>{
+    const fontList = localFontFamily.concat(defaultValue(data.fontFontFamilyList, defaultOption.fontFontFamilyList))
 
-      $("#font-family-dropdown").empty()
-      $.each(fontList, function(i, font){
-        if(font.show==true){
-          var opt = $(`<option value="${i}">${font.name}</option>`)
-          opt.css("font-family", font.font)
-          $("#font-family-dropdown").append(opt)
-        }
-      })
-      const index = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
-      const selectedFont = fontList[index]
-      $("#font-family-dropdown").val(String(index))
-      $("#font-family-dropdown").css("font-family", selectedFont.font)
-      $("#font-family-option--editting").text((index+1)+": " + selectedFont.name)
-
-      $(".option-font[name='font-name']").val(selectedFont.name)
-      $(".option-font[name='font-description']").val(selectedFont.description)
-      $(".option-font[name='font-data']").val(selectedFont.font)
-      $(".option-font[name='font-css']").val(selectedFont.css)
-      $(".option-font[name='font-css']").trigger("input")
-      $(".option-font[name='font-license']").val(selectedFont.license)
-
-      if(selectedFont.customizable){
-        $(".option-font").prop("disabled", false)
-        $("#font-family-option--buttons button[name='save']").prop("disabled", false)
-        $("#font-family-option--buttons button[name='delete']").prop("disabled", false)
-      }else{
-        $(".option-font").prop("disabled", true)
-        $("#font-family-option--buttons button[name='save']").prop("disabled", true)
-        $("#font-family-option--buttons button[name='delete']").prop("disabled", true)
+    $("#font-family-dropdown").empty()
+    $.each(fontList, function(i, font){
+      if(font.show==true){
+        var opt = $(`<option value="${i}">${font.name}</option>`)
+        opt.css("font-family", font.font)
+        $("#font-family-dropdown").append(opt)
       }
-      
-      var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
-      if(fSize>0) {fSize = "+"+fSize}
-      $("#font-size-input").val(fSize)
-  
-      var lHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight)
-      if(lHeight>0) {lHeight = "+"+lHeight}
-      $("#line-height-input").val(lHeight)
-  
-      var pWidth = defaultValue(data.fontWidth, defaultOption.fontWidth)
-      $("#page-width-input").val(Number((pWidth * 100).toFixed(1)))
     })
-  }
+    const index = defaultValue(data.fontSelectedFontFamily, defaultOption.fontSelectedFontFamily)
+    const selectedFont = fontList[index]
+    $("#font-family-dropdown").val(String(index))
+    $("#font-family-dropdown").css("font-family", selectedFont.font)
+    $("#font-family-option--editting").text((index+1)+": " + selectedFont.name)
+
+    $(".option-font[name='font-name']").val(selectedFont.name)
+    $(".option-font[name='font-description']").val(selectedFont.description)
+    $(".option-font[name='font-data']").val(selectedFont.font)
+    $(".option-font[name='font-css']").val(selectedFont.css)
+    $(".option-font[name='font-css']").trigger("input")
+    $(".option-font[name='font-license']").val(selectedFont.license)
+
+    if(selectedFont.customizable){
+      $(".option-font").prop("disabled", false)
+      $("#font-family-option--buttons button[name='save']").prop("disabled", false)
+      $("#font-family-option--buttons button[name='delete']").prop("disabled", false)
+    }else{
+      $(".option-font").prop("disabled", true)
+      $("#font-family-option--buttons button[name='save']").prop("disabled", true)
+      $("#font-family-option--buttons button[name='delete']").prop("disabled", true)
+    }
+    
+    var fSize = defaultValue(data.fontFontSize, defaultOption.fontFontSize)
+    if(fSize>0) {fSize = "+"+fSize}
+    $("#font-size-input").val(fSize)
+
+    var lHeight = defaultValue(data.fontLineHeight, defaultOption.fontLineHeight)
+    if(lHeight>0) {lHeight = "+"+lHeight}
+    $("#line-height-input").val(lHeight)
+
+    var pWidth = defaultValue(data.fontWidth, defaultOption.fontWidth)
+    $("#page-width-input").val(Number((pWidth * 100).toFixed(1)))
+
+    restoreSkins()
+  })
+}
 
 /* フィールドからフォントの設定を取得し、Objectを返す */
 function getFontData(){
@@ -64,7 +67,7 @@ function getFontData(){
     license: $("#font-license").val()
   }
 }
-  
+
 
 /* 選択中のフォントを保存 */
 function saveSelectedFont(){

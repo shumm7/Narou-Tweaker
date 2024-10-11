@@ -307,6 +307,7 @@ export function addFontAwesomeOriginaIcons(){
         ]
     })
 
+    /* Feedly */
     FontAwesome.library.add({
             prefix: 'fab',
             iconName: 'feedly',
