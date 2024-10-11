@@ -44,7 +44,7 @@ export function getOptionCategory(category, categoryId){
 /* Option Data */
 export function getOptionFromId(id){
     var ret = undefined
-    $.each(optionList, function(_, v){
+    optionList.forEach(function(v){
         if(v.id === id){
             ret = v
             return true
@@ -181,5 +181,79 @@ export function removeFavoriteOption(id){
 
             chrome.storage.local.set({extFavoriteOptions: list})
         }
+    })
+}
+
+export function moveFavoriteOption(id, pos){
+    chrome.storage.local.get("extFavoriteOptions", function(data){
+        var list = data.extFavoriteOptions
+        if(!Array.isArray(list)){
+            list = []
+        }
+        if(!list.includes(id)){
+            return false
+        }
+
+        /* リストにある要素が親 -> 子を別のリストに分離 */
+        var childsList = {}
+        $.each(list, function(_, parentId){
+            var childs = getOptionChildsFromId(parentId)
+            $.each(childs, function(_, child){
+                if(list.includes(child.id)){
+                    if(Array.isArray(childsList[parentId])){
+                        childsList[parentId].push(child.id)
+                    }else{
+                        childsList[parentId] = [child.id]
+                    }
+                    list = list.filter((v)=>v!==child.id)
+                }
+            })
+        })
+
+        /* リストにある要素が子 */
+        $.each(list, function(_, childId){
+            var parentId = getOptionParentFromId(childId)
+            if(list.includes(parentId)){
+                if(Array.isArray(childsList[parentId])){
+                    childsList[parentId].push(childId)
+                }else{
+                    childsList[parentId] = [childId]
+                }
+                if(childId===id){
+                    id = parentId
+                }
+                list = list.filter((v)=>v!==childId)
+            }
+        })
+
+        /* リストの要素を移動 */
+        var current = list.indexOf(id)
+        if(current >= 0){
+            var target = current + pos
+            if(target < 0){
+                target = 0
+            }
+            if(target > list.length){
+                target = list.length
+            }
+            if(target === current){
+                return false
+            }
+
+            var tail = list.slice(current + 1)
+            list.splice(current)
+            Array.prototype.push.apply(list, tail);
+            list.splice(target, 0, id);
+
+            $.each(list, function(_, id){
+                if(id in childsList){
+                    list.splice(list.indexOf(id) + 1, 0, ...childsList[id])
+                }
+            })
+
+            chrome.storage.local.set({extFavoriteOptions: list})
+        }
+
+
     })
 }

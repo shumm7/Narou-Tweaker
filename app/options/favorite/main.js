@@ -15,7 +15,7 @@ function markFavoriteOptions(list){
     }
 }
 
-function setupContents(){
+function setupContents(scroll){
     chrome.storage.local.get("extFavoriteOptions", function(data){
         var list = data.extFavoriteOptions
         if(!Array.isArray(list)){
@@ -63,6 +63,11 @@ function setupContents(){
                 markFavoriteOptions(changes.extFavoriteOptions.newValue)
             }
         })
+
+        if(scroll!==undefined){
+            $(window).scrollTop(scroll)
+            $(`.contents-container[name="general"]`).css("height", "")
+        }
     })
 }
 
@@ -70,7 +75,11 @@ function setupContents(){
 
 chrome.storage.local.onChanged.addListener(function(changes){
     if(changes.extFavoriteOptions){
-        $(`.contents-container[name="general"]`).empty()
-        setupContents()
+        var outer = $(`.contents-container[name="general"]`)
+        const scroll = $(window).scrollTop()
+        const height = outer.innerHeight()
+        outer.css("height", height)
+        outer.empty()
+        setupContents(scroll, height)
     }
 })

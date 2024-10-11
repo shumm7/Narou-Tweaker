@@ -113,7 +113,7 @@ export const novel_optionsList = [
                 favorite: true,
             },
             requirement: {
-                dataFor: ["novelCustomHeaderScrollMode"],
+                dataFor: ["novelCustomHeaderMode"],
                 data: "scroll",
                 mode: "show"
             },

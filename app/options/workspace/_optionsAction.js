@@ -30,11 +30,8 @@ export function workspace_customHeaderSortable(){
                 }
             },
             animation: 150,
-            onAdd: function (e) {
+            onSort: function (e) {
                 storeWorkspaceHeader();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeader();
             },
         });
         Sortable.create($(".draggable_area[name='workspace-header']#disabled")[0], {
@@ -47,11 +44,8 @@ export function workspace_customHeaderSortable(){
                 put: true,
             },
             animation: 150,
-            onAdd: function (e) {
-            storeWorkspaceHeader();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeader();
+            onSort: function (e) {
+                storeWorkspaceHeader();
             },
             
         });
@@ -76,15 +70,24 @@ export function workspace_customHeaderSortable(){
             ${c}
         </div>`
     }
-    chrome.storage.local.get(["workspaceCustomHeader"], function(data){
-        restore(data.workspaceCustomHeader, "active")
-        restore(getExceptedIcon([data.workspaceCustomHeader], workspaceIconList), "disabled")
 
+    function restoreSortable(){
         function restore(data, position){
             $(".draggable_area[name='workspace-header']#"+position).empty()
             $.each(data, (_, icon)=>{
                 $(".draggable_area[name='workspace-header']#"+position).append(getWorkspaceHeaderIconElement(icon))
             })
+        }
+        chrome.storage.local.get(["workspaceCustomHeader"], function(data){
+            restore(data.workspaceCustomHeader, "active")
+            restore(getExceptedIcon([data.workspaceCustomHeader], workspaceIconList), "disabled")
+        })
+    }
+
+    restoreSortable()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.workspaceCustomHeader){
+            restoreSortable()
         }
     })
 }
@@ -119,11 +122,8 @@ export function workspace_customHeaderMenuSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
+            onSort: function (e) {
                 storeWorkspaceHeaderMenu();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeaderMenu();
             },
         });
         Sortable.create($(".draggable_area[name='workspace-header-menu']#middle")[0], {
@@ -135,11 +135,8 @@ export function workspace_customHeaderMenuSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
+            onSort: function (e) {
                 storeWorkspaceHeaderMenu();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeaderMenu();
             },
         });
         Sortable.create($(".draggable_area[name='workspace-header-menu']#right")[0], {
@@ -151,11 +148,8 @@ export function workspace_customHeaderMenuSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
+            onSort: function (e) {
                 storeWorkspaceHeaderMenu();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeaderMenu();
             },
         });
         Sortable.create($(".draggable_area[name='workspace-header-menu']#disabled")[0], {
@@ -167,11 +161,8 @@ export function workspace_customHeaderMenuSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
+            onSort: function (e) {
                 storeWorkspaceHeaderMenu();
-            },
-            onChange: function (e) {
-            storeWorkspaceHeaderMenu();
             },
         });
     }
@@ -186,16 +177,26 @@ export function workspace_customHeaderMenuSortable(){
             <span class="title">${icon.text}</span>
         </div>`
     }
-    chrome.storage.local.get(["workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right"], function(data){
-        restore(data.workspaceCustomMenu_Left, "left")
-        restore(data.workspaceCustomMenu_Middle, "middle")
-        restore(data.workspaceCustomMenu_Right, "right")
-        restore(getExceptedIcon([data.workspaceCustomMenu_Left, data.workspaceCustomMenu_Middle, data.workspaceCustomMenu_Right], workspaceMenuIconList), "disabled")
+
+    function restoreSortable(){
         function restore(data, position){
             $(".draggable_area[name='workspace-header-menu']#"+position).empty()
             $.each(data, (_, icon)=>{
                 $(".draggable_area[name='workspace-header-menu']#"+position).append(getWorkspaceHeaderMenuIconElement(icon))
             })
+        }
+        chrome.storage.local.get(["workspaceCustomMenu_Left", "workspaceCustomMenu_Middle", "workspaceCustomMenu_Right"], function(data){
+            restore(data.workspaceCustomMenu_Left, "left")
+            restore(data.workspaceCustomMenu_Middle, "middle")
+            restore(data.workspaceCustomMenu_Right, "right")
+            restore(getExceptedIcon([data.workspaceCustomMenu_Left, data.workspaceCustomMenu_Middle, data.workspaceCustomMenu_Right], workspaceMenuIconList), "disabled")
+        })
+    }
+
+    restoreSortable()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.workspaceCustomMenu_Left || changes.workspaceCustomMenu_Middle || changes.workspaceCustomMenu_Right){
+            restoreSortable()
         }
     })
 }

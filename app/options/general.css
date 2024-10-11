@@ -685,6 +685,9 @@ input[type=file] {
 .contents-item--button-icon:hover{
     color: var(--kasasagi-blue);
 }
+.contents-item--button-separator {
+    border-right: 1px solid #eee;
+}
 .contents-item--button-favorite--on {
     display: none;
 }

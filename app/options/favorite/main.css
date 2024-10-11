@@ -1,165 +1,22 @@
-*[name="extSearch"] .contents-option{
-    min-height: 80px;
-}
-
-/* 検索ボックス */
-#search-box-outer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    align-items: flex-start;
-    justify-content: center;
-}
-
-#search-box--text {
-    width: 100%;
-}
-
-#search-box {
-    width: 100%;
-    min-width: 50px;
-    max-width: 300px;
-}
-
-#search-box--suggestion {
-    color: #666;
-    margin: 5px;
-}
-
-/* 検索結果 */
-.search-result--items-title a {
-    color: inherit;
-}
-.search-result--items-title a:hover{
-    color: #555;
-}
-.search-result--items {
-    display: flex;
-    flex-direction: column;
-}
-.search-result--items-location {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    background: #eee;
-    padding: 3px 5px;
-}
-.search-result--items-crumbs {
-    display: flex;
-    flex-flow: column;
-    font-weight: bold;
-    font-size: 80%;
-    margin-bottom: 3px;
-}
-.search-result--items-crumbs-item {
-    white-space: nowrap;
-}
-.search-result--items-crumbs-item:not(.search-result--items-id)::after {
-    content: ">";
-    color: #999;
-    margin: 0 5px;
-}
-.search-result--items-crumbs-item a {
-    color: #666;
-}
-.search-result--items-crumbs-item a:hover,
-.search-result--items-crumbs-item a:focus {
-    color: #aaa;
-}
-.search-result--items-id {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 2px;
-    gap: 3px;
-}
-.search-result--items-id-tag {
-    padding: 1px 7px;
-    border-radius: 10px;
-    font-size: 90%;
-    border:1px solid #e0e0e0;
-    background: #f7f7f7;
-    margin-bottom: 4px;
-}
-.search-result--items-id-tag::before {
-    content: "#";
-    margin-right: 2px;
-}
-#search-result--information {
-    display: flex;
-    width: 100%;
-}
-
-/* 検索アイテム */
-.search-result--items-disabled {
-    font-weight: bold;
-    height: 100%;
-}
-.search-result--items-disabled .search-result--items-disabled-box {
-    border:1px solid #e0e0e0;
-    background: #f7f7f7;
-    padding: 30px 30px;
-}
-.search-result--items-disabled a {
-    color: inherit;
-}
-.search-result--items-disabled a:hover,
-.search-result--items-disabled a:focus {
-    color: #555;
-}
-
 /* 非表示イベント */
-.search-result--option.option-hide--advanced,
-.search-result--option.option-hide--hidden {
+.option-hide--hidden:not(.option-hide--force-hide) {
     display: block !important;
 }
-.search-result--option.option-hide--advanced .contents-option-content:not(:has(.search-result--items-disabled)),
-.search-result--option.option-hide--hidden .contents-option-content:not(:has(.search-result--items-disabled)) {
+.option-hide--hidden .contents-option-content:not(:has(.search-result--items-disabled)) {
     pointer-events: none;
     filter: grayscale(1);
 }
 /* toggle */
-.option-hide--advanced .contents-option-content label.toggle::before,
 .option-hide--hidden .contents-option-content label.toggle::before{
     background-color: #666;
 }
-.option-hide--advanced .contents-option-content label.toggle::after,
 .option-hide--hidden .contents-option-content label.toggle::after{
     background-color: #999;
 }
 /* field / dropdown */
-.option-hide--advanced .contents-option-content input[type="text"],
-.option-hide--advanced .contents-option-content input[type="number"],
-.option-hide--advanced .contents-option-content textarea,
-.option-hide--advanced .contents-option-content select,
 .option-hide--hidden .contents-option-content input[type="text"],
 .option-hide--hidden .contents-option-content input[type="number"],
 .option-hide--hidden .contents-option-content textarea,
 .option-hide--hidden .contents-option-content select {
     background-color: #ddd;
-}
-
-
-/* popup */
-@media screen and (max-width: 600px) {
-    #search-box {
-        max-width: unset;
-    }
-    .search-result-box {
-        .contents-item--heading {
-            display: flex;
-            flex-direction: row;
-            align-items: baseline;
-        }
-        .search-result--items-crumbs {
-            flex-flow: row;
-        }
-        .contents-option-content {
-            padding-left: 10px;
-        }
-    }
-    .search-result--items-disabled {
-        margin-top: 10px;
-    }
 }

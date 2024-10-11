@@ -256,13 +256,13 @@ export const customUIList = {
     ui_novelCustomHeaderDraggable: `
         <div class="draggable_area_container" id="novel_header_icon">
             <div class="draggable_area_outer">
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">左</div>
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">上部</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType" data="2">左</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType novelCustomHeaderType" data="0 1">上部</div>
                 <div class="draggable_area" id="left" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer">
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">右</div>
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">下部</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType" data="2">右</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType novelCustomHeaderType" data="0 1">下部</div>
                 <div class="draggable_area" id="right" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer">

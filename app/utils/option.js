@@ -1,3 +1,5 @@
+import { getOptionFromId } from "../options/_lib/optionLib.js"
+import { optionList } from "../options/_lib/optionUI.js"
 import { novelIconList, workspaceIconList, workspaceMenuIconList } from "./header.js"
 import { getExtensionVersion } from "./misc.js"
 
@@ -747,6 +749,27 @@ function exceptionProcess_local(oldDict, newDict){
         }
     })
 
+    if("extFavoriteOptions" in newDict){
+        if(Array.isArray(newDict.extFavoriteOptions)){
+            var list = []
+            newDict.extFavoriteOptions.forEach(function(option){
+                var optionData = getOptionFromId(option)
+                if(optionData){
+                    if(optionData.value){
+                        if(optionData.value.buttons){
+                            if(optionData.value.buttons.favorite){
+                                list.push(optionData.id)
+                            }
+                        }
+                    }
+                }
+            })
+            newDict.extFavoriteOptions = list
+        }else{
+            newDict.extFavoriteOptions = defaultOption.extFavoriteOptions
+        }
+    }
+
     return newDict
 }
 
@@ -789,6 +812,9 @@ export function fixOption(local, sync){
 }   
 
 export function checkOptionValue(key, value){
+    /* falseで値を更新する */
+    /* trueで更新しない */
+
     //強制的に値を変更する
     if(key === "extOptionsVersion"){
         return false

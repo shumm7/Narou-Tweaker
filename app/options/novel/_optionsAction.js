@@ -37,10 +37,7 @@ export function novel_customHeaderSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
-                storeNovelHeader();
-            },
-            onChange: function (e) {
+            onSort: function (e) {
                 storeNovelHeader();
             },
         });
@@ -53,11 +50,8 @@ export function novel_customHeaderSortable(){
                 put: true
             },
             animation: 150,
-            onAdd: function (e) {
-            storeNovelHeader();
-            },
-            onChange: function (e) {
-            storeNovelHeader();
+            onSort: function (e) {
+                storeNovelHeader();
             },
         });
         Sortable.create($(".draggable_area[name='novel-header']#disabled")[0], {
@@ -70,11 +64,8 @@ export function novel_customHeaderSortable(){
                 put: true,
             },
             animation: 150,
-            onAdd: function (e) {
-            storeNovelHeader();
-            },
-            onChange: function (e) {
-            storeNovelHeader();
+            onSort: function (e) {
+                storeNovelHeader();
             },
         });
     }
@@ -90,17 +81,27 @@ export function novel_customHeaderSortable(){
             <span class="title">`+text+`</span>
         </div>`
     }
-    chrome.storage.local.get(["novelCustomHeaderLeft", "novelCustomHeaderRight"], function(data){
-        restore(data.novelCustomHeaderLeft, "left")
-        restore(data.novelCustomHeaderRight, "right")
-        restore(getExceptedIcon([data.novelCustomHeaderLeft, data.novelCustomHeaderRight]), "disabled")
 
+    function restoreSortable(){
         function restore(data, position){
             $(".draggable_area[name='novel-header']#"+position).empty()
             $.each(data, (_, icon)=>{
                 if(icon in novelIconList)
                 $(".draggable_area[name='novel-header']#"+position).append(getNovelHeaderIconElement(icon))
             })
+        }
+    
+        chrome.storage.local.get(["novelCustomHeaderLeft", "novelCustomHeaderRight"], function(data){
+            restore(data.novelCustomHeaderLeft, "left")
+            restore(data.novelCustomHeaderRight, "right")
+            restore(getExceptedIcon([data.novelCustomHeaderLeft, data.novelCustomHeaderRight]), "disabled")
+        })
+    }
+    
+    restoreSortable()
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.novelCustomHeaderLeft || changes.novelCustomHeaderRight){
+            restoreSortable()
         }
     })
 }

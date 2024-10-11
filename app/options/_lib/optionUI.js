@@ -1,6 +1,6 @@
 import { defaultOption } from "../../utils/option.js";
 import { customUIList } from "./customUI.js";
-import { getOptionCategory, getOptionFromId, getOptionPageFromId, removeFavoriteOption, appendFavoriteOption } from "./optionLib.js";
+import { getOptionCategory, getOptionFromId, getOptionPageFromId, removeFavoriteOption, appendFavoriteOption, getOptionChildsFromId, getOptionParentFromId, moveFavoriteOption } from "./optionLib.js";
 
 import { general_optionsList } from "../general/_options.js";
 import { narou_optionsList } from "../narou/_options.js";
@@ -782,76 +782,125 @@ export function getOptionElement(option, mode){
         var buttonElm = $(`<div class="contents-item--buttons"></div>`)
 
         if(buttons.favorite){
-            var buttonIconElm_Off = $(`
-                <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--off">
-                    <i class="fa-regular fa-heart"></i>
-                </div>
-            `)
-            buttonIconElm_Off.on("click", function(e){
-                appendFavoriteOption(id)
-            })
-
-            var buttonIconElm_On = $(`
-                <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-            `)
-            buttonIconElm_On.on("click", function(e){
-                removeFavoriteOption(id)
-            })
-
+            /* favorite buttons */
             var buttonOuterElm = $(`<div class="contents-item--button-item contents-item--button-favorite"></div>`)
-            buttonOuterElm.append(buttonIconElm_Off)
-            buttonOuterElm.append(buttonIconElm_On)
-            buttonElm.append(buttonOuterElm)
+
+            if(mode==="favorite"){
+                /* arrows */
+                if(!hasParent){
+                    var buttonIconElm_Up = $(`
+                        <div class="contents-item--button-icon contents-item--button-favorite--prev">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </div>
+                    `).on("click", function(e){
+                        moveFavoriteOption(id, -1)
+                    })
+        
+                    var buttonIconElm_Down = $(`
+                        <div class="contents-item--button-icon contents-item--button-favorite--next">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </div>
+                    `).on("click", function(e){
+                        moveFavoriteOption(id, 1)
+                    })
+        
+                    buttonElm.append(buttonIconElm_Up)
+                    buttonElm.append(buttonIconElm_Down)
+                    buttonElm.append(`<div class="contents-item--button-item contents-item--button-separator"></div>`)
+                }
+
+                
+                /* remove button */
+                var buttonIconElm_On = $(`
+                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                `).on("click", function(e){
+                    removeFavoriteOption(id)
+                })
+    
+                buttonOuterElm.append(buttonIconElm_On)
+                buttonElm.append(buttonOuterElm)
+
+            }else{
+                var buttonIconElm_Off = $(`
+                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--off">
+                        <i class="fa-regular fa-heart"></i>
+                    </div>
+                `).on("click", function(e){
+                    appendFavoriteOption(id)
+                })
+    
+                var buttonIconElm_On = $(`
+                    <div class="contents-item--button-icon contents-item--button-favorite-icon contents-item--button-favorite--on">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                `).on("click", function(e){
+                    removeFavoriteOption(id)
+                })
+    
+                buttonOuterElm.append(buttonIconElm_Off)
+                buttonOuterElm.append(buttonIconElm_On)
+                buttonElm.append(buttonOuterElm)
+            }
         }
 
+        // separator
+        if(buttons.favorite && buttons.reset){
+            buttonElm.append(`<div class="contents-item--button-item contents-item--button-separator"></div>`)
+        }
+
+        // reset button
         if(buttons.reset){
-            buttonElm.append(`
+            var buttonElm_Reset = $(`
                 <div class="contents-item--button-item contents-item--button-reset">
                     <div class="contents-item--button-icon contents-item--button-reset-icon">
                         <i class="fa-solid fa-rotate-left"></i>
                     </div>
                 </div>
             `)
+
+            // reset button event
+            if(related==="child"){
+                buttonElm_Reset.on("click", function(e){
+                    if(window.confirm(`現在表示されている設定データをリセットします。よろしいですか？\n親項目：${title}`)){
+                        $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).addClass("button-reset--skip-dialog")
+                        $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).trigger("click")
+                    }
+                })
+                buttonElm.append(buttonElm_Reset)
+            }else if(Array.isArray(related)){
+                buttonElm_Reset.on("click", function(){
+                    var reset = () => {
+                        var ret = {}
+                        $.each(related, function(_, key){
+                            if(key in defaultOption){
+                                ret[key] = defaultOption[key]
+                            }
+                        })
+                        chrome.storage.local.set(ret, function(){})
+                    }
+
+                    if($(this).hasClass("button-reset--skip-dialog")){
+                        $(this).removeClass("button-reset--skip-dialog")
+                        reset()
+                    }else{
+                        if(window.confirm(`この設定データをリセットします。よろしいですか？\n項目：${title}`)){
+                            reset()
+                        }
+                    }
+                })
+                buttonElm.append(buttonElm_Reset)
+            }
         }
 
-
+        
+        
+        /* place elements */
         elm.find(".contents-option-head").append(buttonElm)
         var p = buttonElm.clone(true)
         p.addClass("contents-item--buttons-vertical")
         elm.find(".contents-option-head").prepend(p)
-
-        // reset button event
-        if(related==="child"){
-            elm.find(".contents-item--button-reset") .on("click", function(e){
-                if(window.confirm(`現在表示されている設定データをリセットします。よろしいですか？\n親項目：${title}`)){
-                    $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).addClass("button-reset--skip-dialog")
-                    $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).trigger("click")
-                }
-            })
-        }else if(Array.isArray(related)){
-            elm.find(".contents-item--button-reset").on("click", function(){
-                var reset = () => {
-                    var ret = {}
-                    $.each(related, function(_, key){
-                        if(key in defaultOption){
-                            ret[key] = defaultOption[key]
-                        }
-                    })
-                    chrome.storage.local.set(ret, function(){})
-                }
-
-                if($(this).hasClass("button-reset--skip-dialog")){
-                    $(this).removeClass("button-reset--skip-dialog")
-                    reset()
-                }else{
-                    if(window.confirm(`この設定データをリセットします。よろしいですか？\n項目：${title}`)){
-                        reset()
-                    }
-                }
-            })
-        }
 
     }
 
