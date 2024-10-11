@@ -193,21 +193,31 @@ function setupDOM(){
                 ${currentCategory.description}<br>
                 <span style="font-size:80%;">対象ページ：${currentCategory.targetUrl.join(" / ")}
             </p>
-            <div class="header-title--description-search">
-                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
-            </div>
-            <div class="header-title--description-favorite">
-                <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+            <div class="header-title--icons">
+                <div class="header-title--icons--icon header-title--icons--icon-general">
+                    <a href="/options/general/index.html" target="_self"><i class="fa-solid fa-gear"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-search">
+                    <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-favorite">
+                    <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+                </div>
             </div>
         `)
     }else{
         $("#header-title--description").append(`
             <p class="header-title--description-text">${currentCategory.description}</p>
-            <div class="header-title--description-search">
-                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
-            </div>
-            <div class="header-title--description-favorite">
-                <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+            <div class="header-title--icons">
+                <div class="header-title--icons--icon header-title--icons--icon-general">
+                    <a href="/options/general/index.html" target="_self"><i class="fa-solid fa-gear"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-search">
+                    <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-favorite">
+                    <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+                </div>
             </div>
         `)
     }

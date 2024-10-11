@@ -27,6 +27,7 @@ export const optionCategoryList = [
         id: "general",
         icon: "fa-solid fa-gear",
         defaultCategory: "introduction",
+        hideOnPopup: true,
         categories: [
             {
                 title: "デバッグ",
