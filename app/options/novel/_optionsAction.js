@@ -1,7 +1,7 @@
 import { addFontAwesomeOriginaIcons, getExceptedIcon, novelIconList } from "../../utils/header.js"
 import { replacePattern } from "../../../utils/option.js"
-import { addFontEditButtonEvent, restoreFont } from "../novel/font.js"
-import { addSkinEditButtonEvent, restoreSkins } from "../novel/skins.js"
+import { addFontEditButtonEvent, restoreFont } from "./_optionsAction_Font.js"
+import { addSkinEditButtonEvent, restoreSkins } from "./_optionsAction_Skin.js"
 
 /* 全般 */
 export function novel_customHeaderSortable(){

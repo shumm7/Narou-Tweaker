@@ -1,9 +1,7 @@
 import { defaultOption } from "../../utils/option.js";
 import { customUIList } from "./customUI.js";
 import { getOptionCategory, getOptionFromId, getOptionPageFromId, removeFavoriteOption, appendFavoriteOption } from "./optionLib.js";
-import { general_exportOptionData, general_exportOptionText, general_fixOptionData, general_importOptionData, general_insertOptionData, general_monitorOptionChanged, general_removeOptionData } from "./_pageGeneral.js";
-import { workspace_customHeaderMenuSortable, workspace_customHeaderSortable } from "./_pageWorkspace.js";
-import { novel_customHeaderSortable, novel_fontEditor, novel_replacePattern, novel_skinEditor } from "./_pageNovel.js";
+
 import { general_optionsList } from "../general/_options.js";
 import { narou_optionsList } from "../narou/_options.js";
 import { novel_optionsList } from "../novel/_options.js";

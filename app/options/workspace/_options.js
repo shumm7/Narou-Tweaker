@@ -1,3 +1,5 @@
+import { workspace_customHeaderMenuSortable, workspace_customHeaderSortable } from "./_optionsAction.js";
+
 export const workspace_optionsList = [
     /* 全般 (general) */
     {

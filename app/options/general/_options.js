@@ -1,3 +1,5 @@
+import { general_exportOptionData, general_exportOptionText, general_fixOptionData, general_importOptionData, general_insertOptionData, general_monitorOptionChanged, general_removeOptionData } from "./_optionsAction.js";
+
 export const general_optionsList = [
     /* Narou Tweaker (introduction) */
     {

@@ -1,3 +1,5 @@
+import { novel_customHeaderSortable, novel_fontEditor, novel_replacePattern, novel_skinEditor } from "./_optionsAction.js";
+
 export const novel_optionsList = [
     /* 全般 (general) */
     {
