@@ -869,40 +869,35 @@ export function getOptionElement(option, mode){
                         <i class="fa-solid fa-rotate-left"></i>
                     </div>
                 </div>
-            `)
+            `).on("click", function(e){
+                if(window.confirm(`この設定データをリセットします。よろしいですか？\n項目：${title}`)){
 
-            // reset button event
-            if(related==="child"){
-                buttonElm_Reset.on("click", function(e){
-                    if(window.confirm(`現在表示されている設定データをリセットします。よろしいですか？\n親項目：${title}`)){
-                        $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).addClass("button-reset--skip-dialog")
-                        $(`.option-outer[name="${id}"] .contents-wide-column .contents-item--button-reset`).trigger("click")
-                    }
-                })
-                buttonElm.append(buttonElm_Reset)
-            }else if(Array.isArray(related)){
-                buttonElm_Reset.on("click", function(){
-                    var reset = () => {
-                        var ret = {}
-                        $.each(related, function(_, key){
-                            if(key in defaultOption){
-                                ret[key] = defaultOption[key]
+                    var reset = (option, ret) => {
+                        if(option.value){
+                            if(Array.isArray(option.value.related)){
+                                $.each(option.value.related, function(_, key){
+                                    if(key in defaultOption){
+                                        ret[key] = defaultOption[key]
+                                    }
+                                })
+                            }else if(option.value.related === "child"){
+                                var childs = getOptionChildsFromId(option.id)
+                                $.each(childs, function(_, child){
+                                    ret = reset(child, ret)
+                                })
                             }
-                        })
-                        chrome.storage.local.set(ret, function(){})
+                        }
+                        return ret
                     }
 
-                    if($(this).hasClass("button-reset--skip-dialog")){
-                        $(this).removeClass("button-reset--skip-dialog")
-                        reset()
-                    }else{
-                        if(window.confirm(`この設定データをリセットします。よろしいですか？\n項目：${title}`)){
-                            reset()
-                        }
-                    }
-                })
-                buttonElm.append(buttonElm_Reset)
-            }
+                    var ret = {}
+                    var option = getOptionFromId(id)
+                    ret = reset(option, ret)
+                    chrome.storage.local.set(ret, function(){})
+                }
+            })
+
+            buttonElm.append(buttonElm_Reset)
         }
 
         
