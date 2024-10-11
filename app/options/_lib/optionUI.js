@@ -11,6 +11,8 @@ import { mypage_optionsList } from "../mypage/_options.js";
 import { mitemin_optionsList } from "../mitemin/_options.js";
 import { kasasagi_optionsList } from "../kasasagi/_options.js";
 
+import { skinEditor_skinSelector } from "../novel/skin-editor/_optionsAction.js";
+
 export const optionCategoryList = [
     {
         title: "検索",
@@ -401,6 +403,34 @@ export const optionList = [
 
     /* 小説ページ */
     ...novel_optionsList,
+
+    /* スキンエディター */
+    
+    {
+        id: "novelSkinSelector",
+        title: "スキン",
+        description: {
+            text: "小説ページの外観を変更します。",
+            keywords: ["すきん", "レイアウト", "デザイン", "外観", "スキン", "スキン設定", "CSS"],
+        },
+        ui: {
+            type: "custom",
+            name: "wide",
+            data: "ui_novelSkinSelector",
+            action: skinEditor_skinSelector,
+        },
+        location: {
+            page: "novel/skin-editor",
+            category: "skin",
+        },
+        value: {
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
+            related: [],
+        },
+    },
     
     /* 小説を読もう！ */
     ...yomou_optionsList,
