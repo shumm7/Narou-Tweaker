@@ -152,6 +152,11 @@
 		margin: 0;
 		box-sizing: border-box;
 	}
+}
+
+.option-outer[name="novelFontSize"],
+.option-outer[name="novelFontLineHeight"],
+.option-outer[name="novelFontWidth"] {
 	.font-number-change-button {
 		display: flex;
 		justify-content: center;
