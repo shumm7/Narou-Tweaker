@@ -48,8 +48,10 @@ function setupDOM(){
                     elm.find("a").prepend(`<i class="${category.icon}"></i>`)
                 }
             }
-            if(category.hideOnPopup){
-                elm.addClass("sidebar-item--hide-on-popup")
+            if(category.popup){
+                if(category.popup.hide){
+                    elm.addClass("sidebar-item--hide-on-popup")
+                }
             }
             sidebarDOMItems += elm[0].outerHTML
         }

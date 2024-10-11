@@ -12,8 +12,16 @@ export function general_popupDefaultPage_Dropdown(){
         var pageId = $(this).val()
         if(pageId!=="__auto__"){
             var page = getOptionPageFromId(pageId)
-            if((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id){
-                chrome.storage.local.set({extPopupDefaultPage: pageId})
+            if(page){
+                if(page.popup){
+                    if(page.popup.defaultPage && page.title && page.id){
+                        chrome.storage.local.set({extPopupDefaultPage: pageId})
+                    }else{
+                        chrome.storage.local.set({extPopupDefaultPage: "__auto__"})
+                    }
+                }else{
+                    chrome.storage.local.set({extPopupDefaultPage: "__auto__"})
+                }
             }else{
                 chrome.storage.local.set({extPopupDefaultPage: "__auto__"})
             }
@@ -28,8 +36,10 @@ export function general_popupDefaultPage_Dropdown(){
         elm.empty()
         elm.append(`<option value="__auto__">自動（閲覧中のページに合わせる）</option>`)
         $.each(optionCategoryList, function(_, page){
-            if((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id){
-                elm.append(`<option value="${escapeHtml(page.id)}">ページ「${escapeHtml(page.title)}」</option>`)
+            if(page.popup){
+                if(page.popup.defaultPage && page.title && page.id){
+                    elm.append(`<option value="${escapeHtml(page.id)}">ページ「${escapeHtml(page.title)}」</option>`)
+                }
             }
         })
         elm.val(value)

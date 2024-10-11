@@ -25,6 +25,9 @@ export const optionCategoryList = [
         ],
         tabs: false,
         sidebar: false,
+        popup: {
+            defaultPage: true
+        },
         noindex: true,
     },
     {
@@ -33,7 +36,10 @@ export const optionCategoryList = [
         id: "general",
         icon: "fa-solid fa-gear",
         defaultCategory: "introduction",
-        hideOnPopup: true,
+        popup: {
+            hide: true,
+            defaultPage: true
+        },
         categories: [
             {
                 title: "デバッグ",
@@ -80,7 +86,10 @@ export const optionCategoryList = [
             },
         ],
         tabs: false,
-        hideOnPopup: true,
+        popup: {
+            hide: true,
+            defaultPage: true
+        },
     },
     {
         title: "favorite-separator",
@@ -88,7 +97,9 @@ export const optionCategoryList = [
         categories: [],
         noindex: true,
         separator: true,
-        hideOnPopup: true,
+        popup: {
+            hide: true,
+        },
     },
     {
         title: "小説家になろう",
@@ -97,6 +108,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-house",
         targetUrl: ["*.syosetu.com", "eparet.net"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",
@@ -114,6 +128,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-book",
         targetUrl: ["ncode.syosetu.com", "novelcom.syosetu.com", "novel18.syosetu.com", "novelcom18.syosetu.com"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",
@@ -162,6 +179,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-crown",
         targetUrl: ["yomou.syosetu.com", "noc.syosetu.com", "mnlt.syosetu.com", "mid.syosetu.com"],
         defaultCategory: "rank",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "ランキング",
@@ -186,6 +206,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-pen-nib",
         targetUrl: ["syosetu.com"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",
@@ -231,6 +254,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-user",
         targetUrl: ["mypage.syosetu.com", "xmypage.syosetu.com"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",
@@ -262,6 +288,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-palette",
         targetUrl: ["mitemin.net", "eparet.net"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",
@@ -279,6 +308,9 @@ export const optionCategoryList = [
         icon: "fa-solid fa-chart-line",
         targetUrl: ["kasasagi.hinaproject.com"],
         defaultCategory: "general",
+        popup: {
+            defaultPage: true
+        },
         categories: [
             {
                 title: "全般",

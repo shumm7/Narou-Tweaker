@@ -370,7 +370,11 @@ function exceptionProcess_local(oldDict, newDict){
         if(pageId!=="__auto__"){
             var page = getOptionPageFromId(pageId)
             if(page){
-                if(!((page.tabs===undefined || page.tabs) && !page.separator && page.title && page.id)){
+                if(page.popup){
+                    if(!(page.popup.defaultPage && page.title && page.id)){
+                        newDict.extPopupDefaultPage = "__auto__"
+                    }
+                }else{
                     newDict.extPopupDefaultPage = "__auto__"
                 }
             }else{
