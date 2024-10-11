@@ -399,10 +399,12 @@ export function getOptionElement(option, mode){
     
     /* Outer */
     if(hasParent && mode!=="search"){
-        elm = $(`<div class="contents-option option-outer" name="${id}"></div>`)
+        elm = $(`<div class="contents-option" name="${id}"></div>`)
     }else{
-        elm = $(`<div class="contents-wide option-outer" name="${id}"><div class="contents-option"></div></div>`)
+        elm = $(`<div class="contents-wide" name="${id}"><div class="contents-option"></div></div>`)
     }
+    
+    elm.addClass("option-outer")
     if(mode==="search"){
         elm.addClass(["search-result-box", "search-result--option"])
     }
@@ -683,14 +685,15 @@ export function getOptionElement(option, mode){
 
         //title
         if(title){
-            if(mode!=="search"){
+            if(mode === "favorite"){
                 if(!elm.find(".contents-item--heading").length){
-                    elm.find(".contents-option-head").append(`<div class="contents-item--heading">${title}</div>`)
+                    elm.find(".contents-option-head").append(`<div class="contents-item--heading"><a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${title}</a></div>`)
                 }else{
                     elm.find(".contents-item--heading").empty()
-                    elm.find(".contents-item--heading").append(title)
+                    elm.find(".contents-item--heading").append(`<a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${title}</a>`)
                 }
-            }else{
+            }
+            else if(mode==="search"){
                 var crumbs = ""
                 var optionTag = ""
                 /*
@@ -748,6 +751,14 @@ export function getOptionElement(option, mode){
                             <a href="/options/${page}/index.html?id=${id}&focus=1" target="_self">${title}</a>
                         </div>
                     `)
+                }
+            }
+            else{
+                if(!elm.find(".contents-item--heading").length){
+                    elm.find(".contents-option-head").append(`<div class="contents-item--heading">${title}</div>`)
+                }else{
+                    elm.find(".contents-item--heading").empty()
+                    elm.find(".contents-item--heading").append(title)
                 }
             }
         }

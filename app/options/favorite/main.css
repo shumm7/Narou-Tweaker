@@ -20,3 +20,11 @@
 .option-hide--hidden .contents-option-content select {
     background-color: #ddd;
 }
+
+/* タイトル */
+.contents-item--heading a {
+    color: inherit;
+}
+.contents-item--heading a:hover{
+    color: #555;
+}
