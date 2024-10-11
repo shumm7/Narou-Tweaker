@@ -1,0 +1,30 @@
+/* 非表示イベント */
+.option-hide--hidden:not(.option-hide--force-hide) {
+    display: block !important;
+}
+.option-hide--hidden .contents-option-content:not(:has(.search-result--items-disabled)) {
+    pointer-events: none;
+    filter: grayscale(1);
+}
+/* toggle */
+.option-hide--hidden .contents-option-content label.toggle::before{
+    background-color: #666;
+}
+.option-hide--hidden .contents-option-content label.toggle::after{
+    background-color: #999;
+}
+/* field / dropdown */
+.option-hide--hidden .contents-option-content input[type="text"],
+.option-hide--hidden .contents-option-content input[type="number"],
+.option-hide--hidden .contents-option-content textarea,
+.option-hide--hidden .contents-option-content select {
+    background-color: #ddd;
+}
+
+/* タイトル */
+.contents-item--heading a {
+    color: inherit;
+}
+.contents-item--heading a:hover{
+    color: #555;
+}

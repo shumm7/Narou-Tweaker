@@ -102,6 +102,14 @@ export const customUIList = {
         </div>
     `,
 
+    ui_extPopupDefaultPage_Dropdown: `
+        <div class="dropdown">
+            <select id="extPopupDefaultPage_Dropdown">
+                
+            </select>
+        </div>
+    `,
+
     ui_extVersion_Patchnotes: `
         <p>
             Narou Tweakerの更新履歴を表示します。<br>
@@ -155,26 +163,48 @@ export const customUIList = {
 
     ui_extDebug_OptionList: `
         <div style="display: flex; flex-direction: column; width: 100%;" class="option-list">
+            <div class="option-list--option" style="display: flex; flex-direction: row; align-items: center; margin-top: 10px;">
+                <input class="ui-checkbox" type="checkbox" id="option-list--mode-whitelist" name="option-list--mode-whitelist"/>
+                <label class="ui-checkbox" for="option-list--mode-whitelist" style="padding-right: 15px;">ホワイトリスト</label>
+            </div>
             <div class="option-list--item">
                 <div class="export-option-text">
                     <textarea class="textarea syntax-highlight" id="exportLocalOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="exportLocalOptionText_Input">無視するインデックス</label>
-                <input type="text" id="exportLocalOptionText_Input" style="width: 100%;" placeholder="スペース区切り" value="correctionReplacePatterns skins fontFontFamilyList novelCustomCSS yomouRankTop_CustomCSS yomouRank_CustomCSS">
+                <div class="option-list--show-blacklist" style="width: 100%;">
+                    <label class="option-list--show-blacklist" for="exportLocalOptionText_Input_Blacklist">無視するインデックス</label>
+                    <input class="option-list--show-blacklist" type="text" id="exportLocalOptionText_Input_Blacklist" style="width: 100%;" placeholder="スペース区切り" value="correctionReplacePatterns skins fontFontFamilyList novelCustomCSS yomouRankTop_CustomCSS yomouRank_CustomCSS">
+                </div>
+                <div class="option-list--show-whitelist" style="display: none; width: 100%;">
+                    <label for="exportLocalOptionText_Input_Whitelist">表示するインデックス</label>
+                    <input type="text" id="exportLocalOptionText_Input_Whitelist" style="width: 100%;" placeholder="スペース区切り">
+                </div>
             </div>
             <div style="margin-top: 10px;" class="option-list--item">
                 <div class="export-option-text">
                     <textarea class="textarea syntax-highlight" id="exportSyncOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="exportSyncOptionText_Input">無視するインデックス</label>
-                <input type="text" id="exportSyncOptionText_Input" style="width: 100%;" placeholder="スペース区切り">
+                <div class="option-list--show-blacklist" style="width: 100%;">
+                    <label for="exportSyncOptionText_Input_Blacklist">無視するインデックス</span></label>
+                    <input type="text" id="exportSyncOptionText_Input_Blacklist" style="width: 100%;" placeholder="スペース区切り">
+                </div>
+                <div class="option-list--show-whitelist" style="display: none; width: 100%;">
+                    <label for="exportSyncOptionText_Input_Whitelist">表示するインデックス</span></label>
+                    <input type="text" id="exportSyncOptionText_Input_Whitelist" style="width: 100%;" placeholder="スペース区切り">
+                </div>
             </div>
             <div style="margin-top: 10px;" class="option-list--item">
                 <div class="export-option-text">
                     <textarea class="textarea syntax-highlight" id="exportSessionOptionText_Output" readonly data="json"></textarea>
                 </div>
-                <label for="exportSessionOptionText_Input">無視するインデックス</label>
-                <input type="text" id="exportSessionOptionText_Input" style="width: 100%;" placeholder="スペース区切り">
+                <div class="option-list--show-blacklist" style="width: 100%;">
+                    <label for="exportSessionOptionText_Input_Blacklist">無視するインデックス</label>
+                    <input type="text" id="exportSessionOptionText_Input_Blacklist" style="width: 100%;" placeholder="スペース区切り">
+                </div>
+                <div class="option-list--show-whitelist" style="display: none; width: 100%;">
+                    <label for="exportSessionOptionText_Input_Whitelist">表示するインデックス</label>
+                    <input type="text" id="exportSessionOptionText_Input_Whitelist" style="width: 100%;" placeholder="スペース区切り">
+                </div>
             </div>
         </div>
     `,
@@ -248,13 +278,13 @@ export const customUIList = {
     ui_novelCustomHeaderDraggable: `
         <div class="draggable_area_container" id="novel_header_icon">
             <div class="draggable_area_outer">
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">左</div>
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">上部</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType" data="2">左</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType novelCustomHeaderType" data="0 1">上部</div>
                 <div class="draggable_area" id="left" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer">
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="2">右</div>
-                <div class="title option-hide" data-for="novelCustomHeaderType" data="1">下部</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType" data="2">右</div>
+                <div class="title option-hide option-hide--force-hide" data-for="novelCustomHeaderType novelCustomHeaderType" data="0 1">下部</div>
                 <div class="draggable_area" id="right" name="novel-header"></div>
             </div>
             <div class="draggable_area_outer">

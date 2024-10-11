@@ -1,4 +1,4 @@
-import { escapeHtml } from "/utils/text.js"
+import { escapeHtml } from "../../utils/text.js"
 
 export function syuppan(){
     chrome.storage.local.get(null, function(data){

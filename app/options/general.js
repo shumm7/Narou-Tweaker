@@ -2,7 +2,7 @@ import { buttonHide, colorPicker, optionHide, syntaxHighlight } from "./_lib/uti
 import { getOptionElement, optionCategoryList, optionList } from "./_lib/optionUI.js";
 import { check, defaultValue, getExtensionVersion } from "/utils/misc.js"
 import { defaultOption } from "/utils/option.js"
-import { getOptionFromId } from "./_lib/optionLib.js";
+import { getOptionFromId, getOptionPageFromId } from "./_lib/optionLib.js";
 
 const manifest = chrome.runtime.getManifest()
 let currentPage
@@ -12,6 +12,7 @@ export function setup(){
 
     setupDOM()
     setupContents()
+    hideOptionButtons()
     buttonHide()
     optionHide()
     syntaxHighlight()
@@ -29,21 +30,33 @@ function setupDOM(){
     var sidebarDOMItems = ""
     $.each(optionCategoryList, function(idx, category){
         if(category.sidebar || category.sidebar===undefined){
-            var url = `/options/${category.id}/index.html`
-
-            var elm = $(`
-                <div class="sidebar-item" name="${category.id}">
-                    <a href="${url}" target="_self">
-                        <span class="sidebar-item--title">${category.title}</span>
-                    </a>
-                </div>
-            `)
-
-            if(category.icon){
-                elm.find("a").prepend(`<i class="${category.icon}"></i>`)
+            var elm
+            if(category.separator){
+                elm = $(`
+                    <div class="sidebar-separator" name="${category.id}"></div>
+                `)
+            }else{
+                var url = `/options/${category.id}/index.html`
+                elm = $(`
+                    <div class="sidebar-item" name="${category.id}">
+                        <a href="${url}" target="_self">
+                            <span class="sidebar-item--title">${category.title}</span>
+                        </a>
+                    </div>
+                `)
+    
+                if(category.icon){
+                    elm.find("a").prepend(`<i class="${category.icon}"></i>`)
+                }
+            }
+            if(category.popup){
+                if(category.popup.hide){
+                    elm.addClass("sidebar-item--hide-on-popup")
+                }
             }
             sidebarDOMItems += elm[0].outerHTML
         }
+
 
         if(category.id===currentPage){
             currentCategory = category
@@ -139,9 +152,24 @@ function setupDOM(){
         }
     })
 
-
     /* Set Title */
-    $("head title").text(`環境設定 > ${currentCategory.title} ｜ Narou Tweaker`)
+    function getName(id, _pre){
+        var cat = getOptionPageFromId(id)
+        if(cat===undefined){
+            if(_pre){
+                return _pre
+            }else{
+                return "環境設定"
+            }
+        }
+        if(cat.parent === undefined){
+            return `${cat.title} < 環境設定`
+        }else{
+            return `${cat.title} < ${getName(cat.parent, _pre)}`
+        }
+    }
+
+    $("head title").text(`${getName(currentCategory.id)} ｜ Narou Tweaker`)
     
     
     /* Footer */
@@ -168,15 +196,31 @@ function setupDOM(){
                 ${currentCategory.description}<br>
                 <span style="font-size:80%;">対象ページ：${currentCategory.targetUrl.join(" / ")}
             </p>
-            <div class="header-title--description-search">
-                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <div class="header-title--icons">
+                <div class="header-title--icons--icon header-title--icons--icon-general">
+                    <a href="/options/general/index.html" target="_self"><i class="fa-solid fa-gear"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-search">
+                    <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-favorite">
+                    <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+                </div>
             </div>
         `)
     }else{
         $("#header-title--description").append(`
             <p class="header-title--description-text">${currentCategory.description}</p>
-            <div class="header-title--description-search">
-                <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <div class="header-title--icons">
+                <div class="header-title--icons--icon header-title--icons--icon-general">
+                    <a href="/options/general/index.html" target="_self"><i class="fa-solid fa-gear"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-search">
+                    <a href="/options/search/index.html" target="_self"><i class="fa-solid fa-magnifying-glass"></i></a>
+                </div>
+                <div class="header-title--icons--icon header-title--icons--icon-favorite">
+                    <a href="/options/favorite/index.html" target="_self"><i class="fa-solid fa-heart"></i></a>
+                </div>
             </div>
         `)
     }
@@ -290,8 +334,38 @@ function setupContents(){
                     }else{
                         $(`.contents-container[name="${category}"]`).append(elm)
                     }
+
+                    if(option.ui){
+                        if(typeof option.ui.action==="function"){
+                            option.ui.action()
+                        }else if(Array.isArray(option.ui.action)){
+                            option.ui.action.forEach(function(func){
+                                if(typeof func==="function"){
+                                    func()
+                                }
+                            })
+                        }
+                    }
                 }
             }
+        }
+    })
+
+    function markFavoriteOptions(list){
+        $(".contents-item--button-favorite.selected").removeClass("selected")
+        if(Array.isArray(list)){
+            $.each(list, function(_, id){
+                $(`.option-outer[name=${id}] > .contents-option-head > .contents-item--buttons .contents-item--button-favorite, .option-outer[name=${id}] > .contents-option > .contents-option-head > .contents-item--buttons .contents-item--button-favorite`).addClass("selected")
+            })
+        }
+    }
+
+    chrome.storage.local.get("extFavoriteOptions", function(data){
+        markFavoriteOptions(data.extFavoriteOptions)
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extFavoriteOptions){
+            markFavoriteOptions(changes.extFavoriteOptions.newValue)
         }
     })
 }
@@ -406,6 +480,26 @@ export function restoreOptions(){
             $(this).select()
         })
     })
+}
+
+/* Hide Option Buttons */
+function hideOptionButtons(){
+    function toggle(mode){
+        if(mode){
+            $(".contents-item--buttons").css("display", "")
+        }else{
+            $(".contents-item--buttons").css("display", "none")
+        }
+    }
+
+    chrome.storage.local.get("extOptionPageButtons", function(data){
+        toggle(data.extOptionPageButtons)
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extOptionPageButtons){
+            toggle(changes.extOptionPageButtons.newValue)
+        }
+    }) 
 }
 
 
