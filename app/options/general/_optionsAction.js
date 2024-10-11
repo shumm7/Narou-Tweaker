@@ -44,7 +44,6 @@ export function general_fixOptionData(){
 
 /* 設定データのエクスポート */
 export function general_exportOptionData(){
-    console.log("a")
     /* Export Button */
     $("#option-export-json").on("click", (e)=>{
         chrome.storage.local.get(null, function(data) {

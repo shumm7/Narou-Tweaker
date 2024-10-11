@@ -764,7 +764,10 @@ function exceptionProcess_local(oldDict, newDict){
                     }
                 }
             })
-            newDict.extFavoriteOptions = list
+            var listNoDuplicate = list.filter((e, i) => {
+                return list.indexOf(e) == i;
+            }) 
+            newDict.extFavoriteOptions = listNoDuplicate
         }else{
             newDict.extFavoriteOptions = defaultOption.extFavoriteOptions
         }
