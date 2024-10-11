@@ -321,6 +321,18 @@ function setupContents(){
                     }else{
                         $(`.contents-container[name="${category}"]`).append(elm)
                     }
+
+                    if(option.ui){
+                        if(typeof option.ui.action==="function"){
+                            option.ui.action()
+                        }else if(Array.isArray(option.ui.action)){
+                            option.ui.action.forEach(function(func){
+                                if(typeof func==="function"){
+                                    func()
+                                }
+                            })
+                        }
+                    }
                 }
             }
         }

@@ -1,7 +1,9 @@
 import { defaultOption } from "../../utils/option.js";
-import { escapeHtml } from "../../utils/text.js";
 import { customUIList } from "./customUI.js";
 import { getOptionCategory, getOptionFromId, getOptionPageFromId, removeFavoriteOption, appendFavoriteOption } from "./optionLib.js";
+import { general_exportOptionData, general_exportOptionText, general_fixOptionData, general_importOptionData, general_insertOptionData, general_monitorOptionChanged, general_removeOptionData } from "./_pageGeneral.js";
+import { workspace_customHeaderMenuSortable, workspace_customHeaderSortable } from "./_pageWorkspace.js";
+import { novel_customHeaderSortable, novel_fontEditor, novel_replacePattern, novel_skinEditor } from "./_pageNovel.js";
 
 export const optionCategoryList = [
     {
@@ -537,7 +539,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_extExportButton"
+            data: "ui_extExportButton",
+            action: general_exportOptionData,
         },
         location: {
             page: "general",
@@ -562,7 +565,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_extImportButton"
+            data: "ui_extImportButton",
+            action: general_importOptionData,
         },
         location: {
             page: "general",
@@ -587,7 +591,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_extResetButton"
+            data: "ui_extResetButton",
+            action: general_removeOptionData,
         },
         location: {
             page: "general",
@@ -611,7 +616,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_extFixButton"
+            data: "ui_extFixButton",
+            action: general_fixOptionData,
         },
         location: {
             page: "general",
@@ -661,6 +667,7 @@ export const optionList = [
             type: "custom",
             name: "default",
             data: "ui_extDebug_OptionList",
+            action: general_exportOptionText,
         },
         location: {
             page: "general",
@@ -687,6 +694,7 @@ export const optionList = [
             type: "custom",
             name: "default",
             data: "ui_extDebug_InsertOptionForm",
+            action: general_insertOptionData
         },
         location: {
             page: "general",
@@ -713,6 +721,7 @@ export const optionList = [
             type: "custom",
             name: "default",
             data: "ui_extDebug_OptionMonitor",
+            action: general_monitorOptionChanged,
         },
         location: {
             page: "general",
@@ -939,6 +948,7 @@ export const optionList = [
             type: "custom",
             name: "default",
             data: "ui_novelCustomHeaderDraggable",
+            action: novel_customHeaderSortable,
         },
         location: {
             page: "novel",
@@ -1329,6 +1339,7 @@ export const optionList = [
             type: "custom",
             name: "wide",
             data: "ui_novelSkinSelect",
+            action: novel_skinEditor,
         },
         location: {
             page: "novel",
@@ -1339,7 +1350,7 @@ export const optionList = [
                 reset: true,
                 favorite: true,
             },
-            related: ["skins", "selectedSkin"],
+            related: ["selectedSkin"],
         },
     },
 
@@ -1516,6 +1527,7 @@ export const optionList = [
             type: "custom",
             name: "wide",
             data: "ui_novelFontSelect",
+            action: novel_fontEditor,
         },
         location: {
             page: "novel",
@@ -2481,6 +2493,7 @@ export const optionList = [
             type: "custom",
             name: "wide",
             data: "ui_correctionReplacePatternList",
+            action: novel_replacePattern,
         },
         location: {
             page: "novel",
@@ -3022,7 +3035,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_workspaceCustomHeaderDraggable"
+            data: "ui_workspaceCustomHeaderDraggable",
+            action: workspace_customHeaderSortable,
         },
         location: {
             page: "workspace",
@@ -3047,7 +3061,8 @@ export const optionList = [
         ui: {
             type: "custom",
             name: "default",
-            data: "ui_workspaceCustomHeaderMenuDraggable"
+            data: "ui_workspaceCustomHeaderMenuDraggable",
+            action: workspace_customHeaderMenuSortable,
         },
         location: {
             page: "workspace",
@@ -4818,7 +4833,7 @@ export function getOptionElement(option, mode){
                 elm.find(".contents-option-content").append(item)
             }
         }
-        else if(uiType === "custom" && mode!=="search"){
+        else if(uiType === "custom"){
             if(elm.hasClass("contents-option")){
                 elm.append(`<div class="contents-option-content"></div>`)
             }else{
@@ -4836,6 +4851,7 @@ export function getOptionElement(option, mode){
                 }
             }
         }
+        /*
         else if(mode==="search"){ //検索用例外設定
             if(elm.hasClass("contents-option")){
                 elm.append(`<div class="contents-option-content"></div>`)
@@ -4857,6 +4873,7 @@ export function getOptionElement(option, mode){
 
             elm.find(".contents-option-content").append(item)
         }
+        */
     }
 
     /* Title / Description */

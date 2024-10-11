@@ -6,10 +6,6 @@ import { restoreOptions, setup } from "../general.js";
 setup()
 setupContents()
 
-/*
-ToDo: customタイプのオプションの処理
-*/
-
 function markFavoriteOptions(list){
     $(".contents-item--button-favorite.selected").removeClass("selected")
     if(Array.isArray(list)){
@@ -40,6 +36,18 @@ function setupContents(){
                             $(`.contents-container[name="general"] .contents-wide[name="${parent}"] .contents-wide-column`).append(elm)
                         }else{
                             $(`.contents-container[name="general"]`).append(elm)
+                        }
+
+                        if(option.ui){
+                            if(typeof option.ui.action==="function"){
+                                option.ui.action()
+                            }else if(Array.isArray(option.ui.action)){
+                                option.ui.action.forEach(function(func){
+                                    if(typeof func==="function"){
+                                        func()
+                                    }
+                                })
+                            }
                         }
                     }
                 }

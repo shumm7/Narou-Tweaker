@@ -16,50 +16,6 @@ $("#search-box").on("input", function(e){
     search(searchWords)
 })
 
-function splitWords(splitWords){
-    var list = []
-    var word = ""
-    var startBracket = false
-    var startBracketPos = -1
-
-    var chars = [...splitWords.trim()]
-    $.each(chars, function(idx, c){
-        if(c.match(/\"/)){
-            if(!startBracket && word.length==0){
-                startBracket = true //ブラケット開始
-                startBracketPos = idx
-                word += c
-            }else{
-                if(idx < chars.length-1){
-                    if(chars[idx+1].match(/\s/) && idx - startBracketPos>1){
-                        list.push(word + c)
-                        word = ""
-                        startBracket = false
-                        startBracketPos = -1
-                    }else{
-                        word += c
-                    }
-                }
-                else{
-                    list.push(word + c)
-                    word = ""
-                } 
-            }
-        }else if(c.match(/\s/) && !startBracket){
-            if(word.length>0){
-                list.push(word)
-                word = ""
-            }
-        }else{
-            word += c
-        }
-    })
-    if(word.length>0){
-        list.push(word)
-    }
-    return list
-}
-
 function search(searchWords){
     const words = splitWords(searchWords)
     
@@ -89,15 +45,28 @@ function search(searchWords){
 
         $(`.contents-container[name="general"]`).append(elm)
 
-        $.each(result.slice(0, 10), function(_, r){
-            var elm = getOptionElement(r, "search")
-
-            optionHide()
-            restoreOptions()
+        $.each(result.slice(0, 10), function(_, option){
+            var elm = getOptionElement(option, "search")
             
             $(`.contents-container[name="general"]`).append(elm)
+
+            if(option.ui){
+                if(typeof option.ui.action==="function"){
+                    option.ui.action()
+                }else if(Array.isArray(option.ui.action)){
+                    option.ui.action.forEach(function(func){
+                        if(typeof func==="function"){
+                            func()
+                        }
+                    })
+                }
+            }
         })
 
+        optionHide()
+        restoreOptions()
+
+        /* 結果が10件以上の場合 */
         if(result.length>10){
             elm = $(`
                 <div class="contents-wide search-result-box search-result--option">
@@ -107,6 +76,7 @@ function search(searchWords){
             $(`.contents-container[name="general"]`).append(elm)
         }
     }else{
+        /* 結果が0件の場合 */
         if(words.length>0){
             var elm = $(`
                 <div class="contents-wide search-result-box search-result--option">
@@ -119,6 +89,8 @@ function search(searchWords){
     }
 }
 
+
+/* オプションを検索して、結果を取得 */
 function searchOption(searchWords){
     /*
     const modeTitle = $(`#search-target--title`).prop('checked')
@@ -386,6 +358,7 @@ function searchOption(searchWords){
     return searchResult
 }
 
+/* カテゴリを検索して、結果を取得 */
 function searchCategory(searchWords){
     var searchResult = []
     $.each(optionCategoryList, function(_, v){
@@ -440,6 +413,50 @@ function searchCategory(searchWords){
 }
 
 
+/* キーワードを分割 */
+function splitWords(splitWords){
+    var list = []
+    var word = ""
+    var startBracket = false
+    var startBracketPos = -1
+
+    var chars = [...splitWords.trim()]
+    $.each(chars, function(idx, c){
+        if(c.match(/\"/)){
+            if(!startBracket && word.length==0){
+                startBracket = true //ブラケット開始
+                startBracketPos = idx
+                word += c
+            }else{
+                if(idx < chars.length-1){
+                    if(chars[idx+1].match(/\s/) && idx - startBracketPos>1){
+                        list.push(word + c)
+                        word = ""
+                        startBracket = false
+                        startBracketPos = -1
+                    }else{
+                        word += c
+                    }
+                }
+                else{
+                    list.push(word + c)
+                    word = ""
+                } 
+            }
+        }else if(c.match(/\s/) && !startBracket){
+            if(word.length>0){
+                list.push(word)
+                word = ""
+            }
+        }else{
+            word += c
+        }
+    })
+    if(word.length>0){
+        list.push(word)
+    }
+    return list
+}
 
 
 /* 得点付け関数 */
@@ -452,6 +469,7 @@ function getSearchScore(target, word, mult){
     }
     return 10 * stringSimilarity(target.toLowerCase(), word.toLowerCase()) * mult
 }
+
 function countMult_include(target, searchWord, mult){
     if(!target){
         return 0
@@ -466,6 +484,7 @@ function countMult_include(target, searchWord, mult){
         return 1 + mult * (s - 1)
     }
 }
+
 function countMult(target, searchWord, mult){
     if(!target){
         return 0
