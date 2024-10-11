@@ -1,7 +1,7 @@
 import { fixOption } from "../../options/_lib/optionLib.js";
 import { actionListener } from "./_action.js";
 import { messageListener } from "./_process.js";
-import { sidepanelListener } from "./_sidepanel.js";
+//import { sidepanelListener } from "./_sidepanel.js";
 import { skinListener } from "./_skin.js";
 import { yomouCssListener } from "./_yomou.js";
 

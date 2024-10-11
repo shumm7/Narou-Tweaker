@@ -1,4 +1,5 @@
 import { novel_customHeaderSortable, novel_fontEditor, novel_replacePattern, novel_skinEditor } from "./_optionsAction.js";
+import { skinEditor_skinSelector } from "./skin-editor/_optionsAction.js";
 
 export const novel_optionsList = [
     /* 全般 (general) */
@@ -514,7 +515,7 @@ export const novel_optionsList = [
 
     /* スキン (style) */
     {
-        id: "novelSkin",
+        id: "novelSkinSelect",
         title: "スキン",
         description: {
             text: "小説ページの外観を変更します。",
@@ -522,7 +523,7 @@ export const novel_optionsList = [
         },
         ui: {
             type: "custom",
-            name: "wide",
+            name: "default",
             data: "ui_novelSkinSelect",
             action: novel_skinEditor,
         },
@@ -532,60 +533,10 @@ export const novel_optionsList = [
         },
         value: {
             buttons: {
-                reset: true,
-                favorite: true,
-            },
-            related: ["selectedSkin"],
-        },
-    },
-
-    {
-        id: "novelSkinExport",
-        title: "スキンのエクスポート",
-        description: {
-            text: "現在、選択中のスキンをデータとして出力します。",
-            keywords: ["すきんのえくすぽーと", "エクスポート", "スキン"],
-        },
-        ui: {
-            type: "custom",
-            name: "default",
-            data: "ui_novelSkinExportButtons",
-        },
-        location: {
-            page: "novel",
-            category: "style",
-        },
-        value: {
-            buttons: {
                 reset: false,
-                favorite: true,
+                favorite: false,
             },
-            isAdvanced: true,
-        },
-    },
-
-    {
-        id: "novelSkinImport",
-        title: "スキンのインポート",
-        description: {
-            text: "外部からスキンを取り込むことができます。",
-            keywords: ["すきんのいんぽーと", "インポート", "スキン"],
-        },
-        ui: {
-            type: "custom",
-            name: "default",
-            data: "ui_novelSkinImportButtons",
-        },
-        location: {
-            page: "novel",
-            category: "style",
-        },
-        value: {
-            buttons: {
-                reset: false,
-                favorite: true,
-            },
-            isAdvanced: true,
+            related: ["novelSkins"],
         },
     },
 
@@ -699,6 +650,33 @@ export const novel_optionsList = [
         },
     },
 
+    /* スキンエディター */
+    
+    {
+        id: "novelSkinSelector",
+        title: "スキン",
+        description: {
+            text: "小説ページの外観を変更します。",
+            keywords: ["すきん", "レイアウト", "デザイン", "外観", "スキン", "スキン設定", "CSS"],
+        },
+        ui: {
+            type: "custom",
+            name: "wide",
+            data: "ui_novelSkinSelector",
+            action: skinEditor_skinSelector,
+        },
+        location: {
+            page: "novel/skin-editor",
+            category: "skin",
+        },
+        value: {
+            buttons: {
+                reset: false,
+                favorite: false,
+            },
+            related: [],
+        },
+    },
 
     /* 書体 (font) */
     {
