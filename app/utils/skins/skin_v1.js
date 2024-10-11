@@ -345,7 +345,7 @@ export function makeSkinCSSV1(skin, novel_css){
         --03-link-hover: ${s.link.color_hover};
         --04-bg: ${s.novel.background};
     }
-    .js-customlayout1 {
+    *[class^="js-customlayout"] {
         --00-text: ${s.novel.color};
         --01-link: ${s.link.color_link};
         --02-link-visited: ${s.link.color_visited};

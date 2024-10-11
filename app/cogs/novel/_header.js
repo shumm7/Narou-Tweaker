@@ -8,11 +8,13 @@ export function _header(){
     addFontAwesomeOriginaIcons()
 
     chrome.storage.local.get(null, (data) => {
+        const customHeaderType = data.novelCustomHeaderType
         $(".l-scrollheader").after("<div id='novel_header'><ul id='head_nav'></ul></div>")
 
-        const customHeaderType = data.novelCustomHeaderType
         if(customHeaderType!=="1" && customHeaderType!=="2"){
             return true
+        }else{
+            $(".p-adjust-layout__controller .p-adjust-layout__list #color1").click() /* なろう標準の配色を標準設定に */
         }
 
         const ncode = getNcode()

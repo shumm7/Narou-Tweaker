@@ -2,7 +2,7 @@ function generateSkinVariable(style){
     if(Array.isArray(style)){
         var root = ""
 
-        /* .js-customlayout1 */
+        /* .js-customlayout */
         style.forEach(function(s){
             if(s){
                 if(typeof s.value ==="string" && typeof s.key ==="string"){
@@ -14,7 +14,7 @@ function generateSkinVariable(style){
                 }
             }
         })
-        return `:root,body,.js-customlayout1,.narou-tweaker--custom-skin.js-customlayout1{${root}}`
+        return `:root,body,*[class^="js-customlayout"],.narou-tweaker--custom-skin[class^="js-customlayout"]{${root}}`
     }else{
         return ""
     }
