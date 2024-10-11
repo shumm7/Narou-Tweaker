@@ -102,6 +102,14 @@ export const customUIList = {
         </div>
     `,
 
+    ui_extPopupDefaultPage_Dropdown: `
+        <div class="dropdown">
+            <select id="extPopupDefaultPage_Dropdown">
+                
+            </select>
+        </div>
+    `,
+
     ui_extVersion_Patchnotes: `
         <p>
             Narou Tweakerの更新履歴を表示します。<br>

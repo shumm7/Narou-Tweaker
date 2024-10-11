@@ -1,7 +1,7 @@
 import { check, defaultValue } from "../../utils/misc.js"
 import { defaultOption, localFont, localFontFamily } from "../../utils/option.js"
 import { generateNoDuplicateName } from "../../utils/skin.js";
-import { restoreSkins } from "./skins.js";
+import { restoreSkins } from "./_optionsAction_Skin.js";
 
 /* Font Settings */
 /* フォントの表示設定 */
