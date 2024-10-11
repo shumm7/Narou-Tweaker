@@ -140,6 +140,31 @@ export const general_optionsList = [
     },
 
     {
+        id: "extOptionPageButtons",
+        title: "オプションページのボタン",
+        description: {
+            text: "オプションページに表示される各種ボタン類の表示を切り替えます。",
+            attention: "画面上に表示するかどうかの設定です。機能がオフになるわけではありません。",
+            keywords: ["おぷしょんぺーじのぼたん", "環境設定", "お気に入り", "リセット", "オプションページ", "基本設定"],
+        },
+        location: {
+            page: "general",
+            category: "config",
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        value: {
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extOptionPageButtons"],
+        }
+    },
+
+    {
         id: "extAdvancedSettings",
         title: "高度な設定",
         description: {
