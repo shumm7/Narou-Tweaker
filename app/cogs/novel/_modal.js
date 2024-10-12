@@ -6,70 +6,74 @@ import { correction, restoreCorrectionMode } from "./_correction.js";
 import { getNcode } from "/utils/ncode.js";
 
 export function _optionModal(){
-    /* Option Modal */
-    $("body").prepend("<aside id='novel-option'></aside>")
-    $("#novel-option").before("<div id='novel-option-background'></div>")
-    $("#novel-option").append("<div id='novel-option--header'></div>")
-    $("#novel-option").append("<div id='novel-option--contents'></div>")
-    
-    $("#novel-option-background").on("click", ()=>{
-        if($("#novel-option").hasClass("show")){
-            $("#novel-option").removeClass("show")
-        }else{
-            $("#novel-option").addClass("show")
-        }
-        if($("#novel-option-background").hasClass("show")){
-            $("#novel-option-background").removeClass("show")
-        }else{
-            $("#novel-option-background").addClass("show")
-        }
-    })
-
-    /* Modal Header */
-    $("#novel-option--header").append("<ul></ul>")
-    function addTab(index, title){
-        $("#novel-option--header ul").append("<li class='novel-option--header-tab novel-option-tab-"+index+"'><button type='button'><span class='novel-option--header-tab'>"+title+"</span></button></li>")
-        $("#novel-option--contents").append("<div class='novel-option--content novel-option-tab-"+index+"'></div>")
-        $(".novel-option--header-tab.novel-option-tab-"+index+" button").on("click", ()=>{
-            chrome.storage.session.set({"novelOptionModalSelected": index}, function(){
-                $("#novel-option .novel-option--header-tab").removeClass("active")
-                $("#novel-option .novel-option--content").removeClass("active")
-                $("#novel-option .novel-option-tab-" + index).addClass("active")
-            })
+    try{
+        /* Option Modal */
+        $("body").prepend("<aside id='novel-option'></aside>")
+        $("#novel-option").before("<div id='novel-option-background'></div>")
+        $("#novel-option").append("<div id='novel-option--header'></div>")
+        $("#novel-option").append("<div id='novel-option--contents'></div>")
+        
+        $("#novel-option-background").on("click", ()=>{
+            if($("#novel-option").hasClass("show")){
+                $("#novel-option").removeClass("show")
+            }else{
+                $("#novel-option").addClass("show")
+            }
+            if($("#novel-option-background").hasClass("show")){
+                $("#novel-option-background").removeClass("show")
+            }else{
+                $("#novel-option-background").addClass("show")
+            }
         })
-    }
 
-    addTab(0, "表示")
-    setOptionContentsDisplay(0)
-
-    addTab(1, "文章校正")
-    setOptionContentsCorrection(1)
-
-    //addTab(2, "統計")
-    
-    if($(".novelrankingtag a:has(img[alt='Narou Tweaker 作者スキン'])").length){
-        addTab(99, "作者スキン")
-        setOptionContentsAuthorSkin(99)
-    }
-    
-    const scrollElement = document.querySelector("#novel-option--contents");
-    if(scrollElement!=null){
-        scrollElement.addEventListener("wheel", (e) => {
-            e.preventDefault();
-            scrollElement.scrollTop += e.deltaY;
-        });
-    }
-
-    chrome.storage.session.get(["novelOptionModalSelected"], function(data){
-        var tab = $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, 0))
-        if(tab.length){
-            tab.addClass("active")
-        }else{
-            chrome.storage.session.set({novelOptionModalSelected: 0}, function(){
-                $("#novel-option .novel-option-tab-0").addClass("active")
+        /* Modal Header */
+        $("#novel-option--header").append("<ul></ul>")
+        function addTab(index, title){
+            $("#novel-option--header ul").append("<li class='novel-option--header-tab novel-option-tab-"+index+"'><button type='button'><span class='novel-option--header-tab'>"+title+"</span></button></li>")
+            $("#novel-option--contents").append("<div class='novel-option--content novel-option-tab-"+index+"'></div>")
+            $(".novel-option--header-tab.novel-option-tab-"+index+" button").on("click", ()=>{
+                chrome.storage.session.set({"novelOptionModalSelected": index}, function(){
+                    $("#novel-option .novel-option--header-tab").removeClass("active")
+                    $("#novel-option .novel-option--content").removeClass("active")
+                    $("#novel-option .novel-option-tab-" + index).addClass("active")
+                })
             })
         }
-    })
+
+        addTab(0, "表示")
+        setOptionContentsDisplay(0)
+
+        addTab(1, "文章校正")
+        setOptionContentsCorrection(1)
+
+        //addTab(2, "統計")
+        
+        if($(".novelrankingtag a:has(img[alt='Narou Tweaker 作者スキン'])").length){
+            addTab(99, "作者スキン")
+            setOptionContentsAuthorSkin(99)
+        }
+        
+        const scrollElement = document.querySelector("#novel-option--contents");
+        if(scrollElement!=null){
+            scrollElement.addEventListener("wheel", (e) => {
+                e.preventDefault();
+                scrollElement.scrollTop += e.deltaY;
+            });
+        }
+
+        chrome.storage.session.get(["novelOptionModalSelected"], function(data){
+            var tab = $("#novel-option .novel-option-tab-"+defaultValue(data.novelOptionModalSelected, 0))
+            if(tab.length){
+                tab.addClass("active")
+            }else{
+                chrome.storage.session.set({novelOptionModalSelected: 0}, function(){
+                    $("#novel-option .novel-option-tab-0").addClass("active")
+                })
+            }
+        })
+    }catch(e){
+        console.warn(e)
+    }
 
 }
 
