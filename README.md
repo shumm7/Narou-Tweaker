@@ -25,6 +25,7 @@
 * [polygonplanet/encoding.js](https://github.com/polygonplanet/encoding.js) Copyright (c) 2012 polygonplanet
 * [madapaja/jquery.selection](https://github.com/madapaja/jquery.selection) Copyright © 2010-2012 Koji Iwasaki (@madapaja).
 * [amsul/pickadate.js](https://github.com/amsul/pickadate.js) Copyright 2014 Amsul, http://amsul.ca
+* [microsoft/vscode-codicons](https://github.com/microsoft/vscode-codicons) Copyright (c) Microsoft Corporation.
 
 ### Fonts
 * Bizin Gothic ([yuru7/bizin-gothic](https://github.com/yuru7/bizin-gothic))<br>Copyright (c) 2022 Yuko Otawara, with Reserved Font Name "Bizin Gothic"<br>This Font Software is licensed under the SIL Open Font License, Version 1.1.
