@@ -127,6 +127,7 @@
       ],
       "css": [
         "libs/font-awesome/css/all.css",
+        "libs/codicon/codicon.css",
         "libs/pickadate.js/lib/themes/default.css",
         "libs/pickadate.js/lib/themes/default.date.css",
         "common.css",
@@ -277,7 +278,8 @@
         "/assets/fonts/*.woff",
         "/assets/fonts/*.ttf",
         "/libs/font-awesome/webfonts/*.ttf",
-        "/libs/font-awesome/webfonts/*.woff2"
+        "/libs/font-awesome/webfonts/*.woff2",
+        "/libs/codicon/codicon.ttf"
       ],
       "matches": ["<all_urls>"]
     }
