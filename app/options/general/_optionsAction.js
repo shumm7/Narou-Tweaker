@@ -61,17 +61,21 @@ export function general_popupDefaultPage_Dropdown(){
 export function general_removeOptionData(){
     $("#removeOptionData").on("click", function(){
         if(window.confirm('スキンを含む、保存されているデータが全てリセットされます。\nこの操作は元に戻せません。')){
-            chrome.storage.local.clear(()=>{
-                console.log("Reset all options.")
-                chrome.storage.local.set(defaultOption)
-                console.log("Set all options.")
+            chrome.storage.local.get("extNotifications", function(data){
+                chrome.storage.local.clear(()=>{
+                    console.log("Reset all options.")
+                    chrome.storage.local.set(defaultOption)
+                    console.log("Set all options.")
 
-                /* notify */
-                chrome.notifications.create(null, {
-                    iconUrl: "/assets/icons/icon_48.png",
-                    type: "basic",
-                    title: "Narou Tweakerがリセットされました",
-                    message: ``
+                    /* notify */
+                    if(data.extNotifications){
+                        chrome.notifications.create(null, {
+                            iconUrl: "/assets/icons/icon_48.png",
+                            type: "basic",
+                            title: "Narou Tweakerがリセットされました",
+                            message: ``
+                        })
+                    }
                 })
             })
         }
@@ -83,12 +87,16 @@ export function general_fixOptionData(){
     $("#fixOptionData").on("click", function(){
         if(window.confirm('この操作を行うと、異なるバージョンのNarou Tweakerを利用している他のブラウザで不具合が発生する可能性があります。\n最新版に更新した上で実行してください。')){
             fixOption(true, true)
-
-            chrome.notifications.create(null, {
-                iconUrl: "/assets/icons/icon_48.png",
-                type: "basic",
-                title: "Narou Tweakerが修復されました",
-                message: `保存されたデータはそのままです。`
+            
+            chrome.storage.local.get("extNotifications", function(data){
+                if(data.extNotifications){
+                    chrome.notifications.create(null, {
+                        iconUrl: "/assets/icons/icon_48.png",
+                        type: "basic",
+                        title: "Narou Tweakerが修復されました",
+                        message: `保存されたデータはそのままです。`
+                    })
+                }
             })
         }
     })

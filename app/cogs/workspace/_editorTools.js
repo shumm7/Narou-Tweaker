@@ -399,7 +399,6 @@ export function _toolSearch(){
         `))
     })
     setCount(0)
-    $("head").append(`<link href="https://cdn.jsdelivr.net/npm/@vscode/codicons@0.0.35/dist/codicon.min.css" rel="stylesheet">`)
     if(searchMode.case){$(".nt-search-box--mode-case").addClass("nt-active")}
     if(searchMode.word){$(".nt-search-box--mode-word").addClass("nt-active")}
     if(searchMode.regex){$(".nt-search-box--mode-regex").addClass("nt-active")}

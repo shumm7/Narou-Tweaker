@@ -12,6 +12,7 @@ export function setup(){
 
     setupDOM()
     setupContents()
+    hideOptionButtons()
     buttonHide()
     optionHide()
     syntaxHighlight()
@@ -479,6 +480,26 @@ export function restoreOptions(){
             $(this).select()
         })
     })
+}
+
+/* Hide Option Buttons */
+function hideOptionButtons(){
+    function toggle(mode){
+        if(mode){
+            $(".contents-item--buttons").css("display", "")
+        }else{
+            $(".contents-item--buttons").css("display", "none")
+        }
+    }
+
+    chrome.storage.local.get("extOptionPageButtons", function(data){
+        toggle(data.extOptionPageButtons)
+    })
+    chrome.storage.local.onChanged.addListener(function(changes){
+        if(changes.extOptionPageButtons){
+            toggle(changes.extOptionPageButtons.newValue)
+        }
+    }) 
 }
 
 

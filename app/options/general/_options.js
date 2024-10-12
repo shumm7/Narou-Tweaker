@@ -140,6 +140,56 @@ export const general_optionsList = [
     },
 
     {
+        id: "extOptionPageButtons",
+        title: "オプションページのボタン",
+        description: {
+            text: "オプションページに表示される各種ボタン類の表示を切り替えます。",
+            attention: "画面上に表示するかどうかの設定です。機能がオフになるわけではありません。",
+            keywords: ["おぷしょんぺーじのぼたん", "環境設定", "お気に入り", "リセット", "オプションページ", "基本設定"],
+        },
+        location: {
+            page: "general",
+            category: "config",
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        value: {
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extOptionPageButtons"],
+        }
+    },
+
+    {
+        id: "extNotifications",
+        title: "通知",
+        description: {
+            text: "拡張機能からの通知を許可します。",
+            small: "例えば、拡張機能がアップデートされたときに通知が来るようになります。",
+            keywords: ["つうち", "環境設定", "通知", "基本設定", "拡張機能"],
+        },
+        ui: {
+            type: "toggle",
+            name: "default",
+        },
+        location: {
+            page: "general",
+            category: "config"
+        },
+        value: {
+            buttons: {
+                reset: true,
+                favorite: true,
+            },
+            related: ["extNotifications"],
+        }
+    },
+
+    {
         id: "extAdvancedSettings",
         title: "高度な設定",
         description: {

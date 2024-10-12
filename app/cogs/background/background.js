@@ -13,19 +13,23 @@ chrome.runtime.onInstalled.addListener((details) => {
 
         if(details.previousVersion !== chrome.runtime.getManifest().version){
             const id = `narou-tweaker--updated-version-${details.previousVersion}-to-${chrome.runtime.getManifest().version}`
-            chrome.notifications.create(id, {
-                iconUrl: "/assets/icons/icon_48.png",
-                type: "basic",
-                title: "Narou Tweakerがアップデートされました",
-                message: `${details.previousVersion} -> ${chrome.runtime.getManifest().version}`,
-                buttons: [{
-                    title: "パッチノート",
-                }]
-            })
-            chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex){
-                console.log(details)
-                if(notificationId === id && buttonIndex===0){
-                    chrome.tabs.create({url: "/options/general/index.html?category=version"});
+            chrome.storage.local.get("extNotifications", function(data){
+                if(data.extNotifications){
+                    chrome.notifications.create(id, {
+                        iconUrl: "/assets/icons/icon_48.png",
+                        type: "basic",
+                        title: "Narou Tweakerがアップデートされました",
+                        message: `${details.previousVersion} -> ${chrome.runtime.getManifest().version}`,
+                        buttons: [{
+                            title: "パッチノート",
+                        }]
+                    })
+                    chrome.notifications.onButtonClicked.addListener(function(notificationId, buttonIndex){
+                        console.log(details)
+                        if(notificationId === id && buttonIndex===0){
+                            chrome.tabs.create({url: "/options/general/index.html?category=version"});
+                        }
+                    })
                 }
             })
         }
