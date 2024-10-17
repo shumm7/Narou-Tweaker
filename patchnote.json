@@ -2,6 +2,22 @@
     "version": 0,
     "data": [
         {
+            "version": "0.4.7",
+            "date": "2024-10-17",
+            "release": {
+                "chrome": null,
+                "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "general": [
+                        "通知のオン・オフを切り替える機能を追加",
+                        "軽微な不具合修正"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.4.6",
             "date": "2024-10-12",
             "release": {
