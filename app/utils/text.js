@@ -315,7 +315,7 @@ export function countTime(string){
 /* Ncode Parse */
 /* https://zenn.dev/qnighy/articles/5faa90ddfef843 */
 /* By Masaki Hara (2021/07/17)*/
-const RE_NCODE = /^n(\d{4})([a-z]*)$/i;
+const RE_NCODE = /^n(\d+)([a-zA-Z]+)$/i;
 
 function parseBase26(s) {
     const sl = s.toLowerCase();
@@ -342,7 +342,7 @@ export function ncodeToIndex(ncode) {
     const match = RE_NCODE.exec(ncode);
     if (!match) throw new Error(`Not an ncode: ${JSON.stringify(ncode)}`);
     const lo = parseInt(match[1], 10);
-    const hi = parseBase26(match[2]);
+    const hi = parseBase26(match[2].toLowerCase());
     return hi * 9999 + lo;
 }
 
