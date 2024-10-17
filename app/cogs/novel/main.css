@@ -10,6 +10,7 @@ html:has(.narou-tweaker-cursor-hide) {
     pointer-events: none !important;
 }
 
+
 /* Attention Mark */
 .nt-novel-attention-label {
 	padding: 0 10px;
