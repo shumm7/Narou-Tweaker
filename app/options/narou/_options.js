@@ -48,7 +48,7 @@ export const narou_optionsList = [
             },
         }
     },
-    /*
+    
     {
         id: "narouSkipAgeauth",
         title: "アダルトコンテンツの年齢認証をスキップ",
@@ -74,5 +74,5 @@ export const narou_optionsList = [
             isExperimental: true,
         }
     },
-    */
+    
 ]
