@@ -22,12 +22,20 @@ export function removeDefaultSkinClass(){
 
 /* Author Skin */
 export function _authorSkin(){
-    changeAuthorSkin()
-    chrome.storage.local.onChanged.addListener(function(changes){
-        if(changes.novelAuthorCustomSkin!=undefined || changes.novelAuthorCustomSkinWarning!=undefined){
-            changeAuthorSkin()
-        }
-    })
+    try{
+        changeAuthorSkin()
+        chrome.storage.local.onChanged.addListener(function(changes){
+            try{
+                if(changes.novelAuthorCustomSkin!=undefined || changes.novelAuthorCustomSkinWarning!=undefined){
+                    changeAuthorSkin()
+                }
+            }catch(e){
+                console.warn(e)
+            }
+        })
+    }catch(e){
+        console.warn(e)
+    }
 
     function changeAuthorSkin(){
         chrome.storage.local.get(["novelAuthorCustomSkin"], (data)=>{

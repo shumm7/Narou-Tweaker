@@ -32,75 +32,155 @@ const className = {
 export function correction(){
     if($(".p-novel__body").length && checkNovelPageDetail()=="novel"){
         chrome.storage.local.get(null, (data) => {
-            resetCorrection()
+            try{
+                resetCorrection()
 
-            // 記号
-            if(data.correctionNormalizeEllipses){
-                correctionNormalizeEllipses()
-            }
-            if(data.correctionNormalizeDash){
-                correctionNormalizeDash()
-            }
-            if(data.correctionNormalizeExclamation){
-                correctionNormalizeExclamation()
-            }
-            if(data.correctionRepeatedSymbols){
-                correctionRepeatedSymbols()
-            }
-            if(data.correctionPeriodWithBrackets){
-                correctionPeriodWithBrackets()
-            }
-            if(data.correctionNoSpaceExclamation){
-                correctionNoSpaceExclamation()
-            }
-            if(data.correctionOddEllipses){
-                correctionOddEllipses()
-            }
-            if(data.correctionOddDash){
-                correctionOddDash()
-            }
-            if(data.correctionWaveDash){
-                correctionWaveDash()
-            }
+                // 記号
+                if(data.correctionNormalizeEllipses){
+                    try{
+                        correctionNormalizeEllipses()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionNormalizeDash){
+                    try{
+                        correctionNormalizeDash()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionNormalizeExclamation){
+                    try{
+                        correctionNormalizeExclamation()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionRepeatedSymbols){
+                    try{
+                        correctionRepeatedSymbols()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionPeriodWithBrackets){
+                    try{
+                        correctionPeriodWithBrackets()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionNoSpaceExclamation){
+                    try{
+                        correctionNoSpaceExclamation()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionOddEllipses){
+                    try{
+                        correctionOddEllipses()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionOddDash){
+                    try{
+                        correctionOddDash()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionWaveDash){
+                    try{
+                        correctionWaveDash()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
 
-            // 構文
-            if(data.correctionIndent){
-                correctionIndent()
-            }
+                // 構文
+                if(data.correctionIndent){
+                    try{
+                        correctionIndent()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
 
-            // 数値
-            if(data.correctionNumber){
-                correctionNumber({short: data.correctionNumberShort, long:data.correctionNumberLong, symbol:data.correctionNumberSymbol})
-            }
+                // 数値
+                if(data.correctionNumber){
+                    try{
+                        correctionNumber({short: data.correctionNumberShort, long:data.correctionNumberLong, symbol:data.correctionNumberSymbol})
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
 
-            // 置換
-            if(data.correctionReplacePatterns.length>0){
-                correctionReplaceFromPatterns(data.correctionReplacePatterns)
-            }
+                // 置換
+                if(data.correctionReplacePatterns.length>0){
+                    try{
+                        correctionReplaceFromPatterns(data.correctionReplacePatterns)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
 
-            // 縦書き設定
-            if(data.novelVertical && data.correctionVerticalLayout_CombineWord){
-                verticalLayout_CombineWord(data.correctionVerticalLayout_CombineWord)
-            }
-            if(data.novelVertical && data.correctionVerticalLayout_CombineNumber){
-                verticalLayout_CombineNumber(data.correctionVerticalLayout_CombineNumber, data.correctionVerticalLayout_IgnoreCombineNumberInWord)
-            }
-            if(data.novelVertical && data.correctionVerticalLayout_CombineExclamation){
-                verticalLayout_CombineExclamation(data.correctionVerticalLayout_CombineExclamation)
-            }
-            if(data.novelVertical && data.correctionVerticalLayout_SidewayWord){
-                verticalLayout_SidewayWord(data.correctionVerticalLayout_SidewayWord)
-            }
-            if(data.novelVertical && data.correctionVerticalLayout_SidewayExclamation){
-                verticalLayout_SidewayExclamation(data.correctionVerticalLayout_SidewayExclamation)
-            }
+                // 縦書き設定
+                if(data.novelVertical && data.correctionVerticalLayout_CombineWord){
+                    try{
+                        verticalLayout_CombineWord(data.correctionVerticalLayout_CombineWord)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.novelVertical && data.correctionVerticalLayout_CombineNumber){
+                    try{
+                        verticalLayout_CombineNumber(data.correctionVerticalLayout_CombineNumber, data.correctionVerticalLayout_IgnoreCombineNumberInWord)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.novelVertical && data.correctionVerticalLayout_CombineExclamation){
+                    try{
+                        verticalLayout_CombineExclamation(data.correctionVerticalLayout_CombineExclamation)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.novelVertical && data.correctionVerticalLayout_SidewayWord){
+                    try{
+                        verticalLayout_SidewayWord(data.correctionVerticalLayout_SidewayWord)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.novelVertical && data.correctionVerticalLayout_SidewayExclamation){
+                    try{
+                        verticalLayout_SidewayExclamation(data.correctionVerticalLayout_SidewayExclamation)
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
 
-            // その他
-            if(!data.correctionShowIllustration){
-                removeIllustration()
-            }
-            if(data.correctionRemoveIllustrationLink){
-                removeIllustrationLink()
+                // その他
+                if(!data.correctionShowIllustration){
+                    try{
+                        removeIllustration()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+                if(data.correctionRemoveIllustrationLink){
+                    try{
+                        removeIllustrationLink()
+                    }catch(e){
+                        console.warn(e)
+                    }
+                }
+            }catch(e){
+                console.warn(e)
             }
 
         })

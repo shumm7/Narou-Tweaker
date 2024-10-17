@@ -237,12 +237,14 @@ export function convertRubyTags(text, toTags, additionalKanji){
 		re = new RegExp('[' + sticks + ']([^' + sticks + '\n]{' + min + ',' + max + '})《([^' + sticks + '》]{' + min + ',' + max + '})》', 'g');
 		to = '<ruby>$1<rp>(</rp><rt>$2</rt><rp>)</rp></ruby>';
 		text = text.replace(re, to);
-		
+
+        /*
 		// フリガナの開始記号が[《(（]かつ[》)）]の場合
         // [\|｜]([^《\(（\n]{1,10})([\|｜])([ぁ-んァ-ヶー.・…]{1,10})(》\)）)
 		re = new RegExp('[' + sticks + ']([^' + startBrackets + '\n]{' + min + ',' + max + '})([' + sticks + '])([' + kana + ']{' + min + ',' + max + '})(' + endBrackets + ')', 'g');
 		to = '<ruby>$1<rp>(</rp><rt>$3</rt><rp>)</rp></ruby>';
 		text = text.replace(re, to);
+        */
 
 		// ルビを振りたい文字の開始記号の縦棒がなく、フリガナが括弧で囲まれている場合
         // ([A-zＡ-ｚ一-龠]{1,10})[ 　]{1}([A-zＡ-ｚ一-龠]{1,10})([《\(（])([ぁ-んァ-ヶー.・…]{1,10})[ 　]{1}([ぁ-んァ-ヶー.・…]{1,10})([》\)）])
