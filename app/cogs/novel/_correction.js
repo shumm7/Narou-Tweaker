@@ -201,7 +201,7 @@ function replaceText(_elem, regexp, replace, isReplaceAll) {
     $.each(nodes, function(_, w) {
         if(isAllowedTags(w.tagName)){
             if(w.innerHTML==undefined){
-                $.each($.parseHTML(replaceHtml(w.data)), function(_, x) {
+                $.each($.parseHTML(replaceHtml(w.textContent)), function(_, x) {
                     w.before(x);
                 });
                 w.remove();
@@ -257,24 +257,24 @@ function correctionNormalizeEllipses(){
     /* 三点リーダー(・・・) → 三点リーダー（……） */
     $(".p-novel__body p.correction-replaced").each(function(){
         if($(this).text().match(/・{2,}/)){
-            $(this).after(replaceText(this, /・{2,}/g, function(s){
+            replaceText(this, /・{2,}/g, function(s){
                 var l = s.length
                 var p = 1
                 if(l>=2){
                     p = Math.round(l/3)
                 }
                 return "……".repeat(p)
-            }))
+            })
         }
         if($(this).text().match(/\.{3,}/)){
-            $(this).after(replaceText(this, /\.{3,}/g, function(s){
+            replaceText(this, /\.{3,}/g, function(s){
                 var l = s.length
                 var p = 1
                 if(l>=3){
                     p = Math.round(l/3)
                 }
                 return "……".repeat(p)
-            }))
+            })
         }
     })
 }
@@ -394,10 +394,10 @@ function correctionWaveDash(){
     const tag = "<span class='text-sideways'>"
 
     $(".p-novel__body p.correction-replaced").each(function(){
-        wrapTextWithTag($(this), /～{2,}/g, tag, function(s, t){
-            var t = $(tag)
-            t.text("〰".repeat(s.length))
-            return t[0].outerHTML
+        wrapTextWithTag($(this), /～{2,}/g, $(tag), function(s, t){
+            var tag = $(t)
+            tag.text("〰".repeat(s.length))
+            return tag[0].outerHTML
         })
     })
 }

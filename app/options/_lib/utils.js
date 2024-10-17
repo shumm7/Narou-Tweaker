@@ -339,7 +339,6 @@ export function syntaxHighlight(){
         var dummyWrapper = wrapper.find("pre")
         var dummy = dummyWrapper.find("code")
 
-        resizeTextArea()
         var dataset
         textarea.on("input", function(){
             dummy[0].innerHTML = hljs.highlight(textarea.val() + "\u200b", {language: language}).value;
@@ -360,11 +359,5 @@ export function syntaxHighlight(){
                 clearInterval(resizeInt)
             }
         });
-
-        function resizeTextArea() {
-            dummy.addClass("resizing");
-            wrapper.css("height", `${dummy.scrollHeight + 20}px`)
-            dummy.removeClass("resizing");
-        }
     })
 }
