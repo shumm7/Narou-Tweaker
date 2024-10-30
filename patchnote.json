@@ -2,11 +2,32 @@
     "version": 0,
     "data": [
         {
-            "version": "0.4.7",
-            "date": "2024-10-17",
+            "version": "0.4.8",
+            "date": "2024-10-30",
             "release": {
                 "chrome": null,
                 "gecko": null
+            },
+            "patchnote": {
+                "ja": {
+                    "novel": [
+                        "ブックマークページのレイアウト崩れ修正"
+                    ],
+                    "narou": [
+                        "「アダルトコンテンツの年齢認証をスキップ」が復活"
+                    ],
+                    "general": [
+                        "一部の作品でNコードを正常に取得できなかった不具合を修正"
+                    ]
+                }
+            }
+        },
+        {
+            "version": "0.4.7",
+            "date": "2024-10-17",
+            "release": {
+                "chrome": true,
+                "gecko": true
             },
             "patchnote": {
                 "ja": {
