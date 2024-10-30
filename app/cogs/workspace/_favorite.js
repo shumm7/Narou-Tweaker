@@ -64,8 +64,8 @@ function bookmarkLayout(){
                 middle.append(date)
                 middle.append(complete)
 
-                var current_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(1)")
-                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(2)")
+                var current_ep = outer.find(".p-up-bookmark-item__button.c-button:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button.c-button:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
                 var unread = outer.find(".p-up-bookmark-item__unread-num")
 
@@ -98,7 +98,7 @@ function bookmarkLayout(){
                 if(is_latest && latest_ep.length){
                     episode.append($(`<span class="p-up-bookmark-item__episode__latest">`).append(latest_ep))
                 }
-                outer.find(".p-up-bookmark-item__button").remove()
+                outer.find(".p-up-bookmark-item__button-group").remove()
                 outer.find(".p-up-bookmark-item__info").remove()
                 middle.append(episode)
                 
@@ -147,8 +147,8 @@ function bookmarkLayout(){
                 list_elm.append(label)
                 list_elm.append(title)
 
-                var current_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(1)")
-                var latest_ep = outer.find(".p-up-bookmark-item__button .c-button:nth-child(2)")
+                var current_ep = outer.find(".p-up-bookmark-item__button.c-button:nth-child(1)")
+                var latest_ep = outer.find(".p-up-bookmark-item__button.c-button:nth-child(2)")
                 var episode = $(`<span class="p-up-bookmark-item__episode">`)
                 var unread = outer.find(".p-up-bookmark-item__unread-num")
                 
