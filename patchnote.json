@@ -2,11 +2,26 @@
     "version": 0,
     "data": [
         {
+            "version": "0.4.8.1",
+            "date": "2024-11-03",
+            "release": {
+                "chrome": null,
+                "gecko": false
+            },
+            "patchnote": {
+                "ja": {
+                    "narou": [
+                        "「アダルトコンテンツの年齢認証をスキップ」を削除"
+                    ]
+                }
+            }
+        },
+        {
             "version": "0.4.8",
             "date": "2024-10-30",
             "release": {
-                "chrome": null,
-                "gecko": null
+                "chrome": false,
+                "gecko": true
             },
             "patchnote": {
                 "ja": {
