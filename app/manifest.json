@@ -32,7 +32,6 @@
   ],
   "host_permissions": [
     "*://*.syosetu.com/*",
-    "*://*.eparet.net/*",
     "*://*.mitemin.net/*"
   ],
   "content_scripts": [
@@ -100,8 +99,7 @@
         "cogs/narou/main.css"
       ],
       "matches": [
-				"*://*.syosetu.com/*",
-        "*://*.eparet.net/*"
+				"*://*.syosetu.com/*"
 			],
       "run_at":"document_end"
     },
@@ -196,8 +194,7 @@
         "cogs/mitemin/main.css"
       ],
       "matches": [
-				"*://*.mitemin.net/*",
-				"*://*.eparet.net/*"
+				"*://*.mitemin.net/*"
 			],
       "run_at":"document_end"
     }
@@ -258,7 +255,6 @@
       "matches": [
         "*://*.syosetu.com/*",
         "*://*.mitemin.net/*",
-        "*://*.eparet.net/*",
         "*://kasasagi.hinaproject.com/*"
       ]
     },

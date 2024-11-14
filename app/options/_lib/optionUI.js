@@ -106,7 +106,7 @@ export const optionCategoryList = [
         description: "小説家になろうの表示を設定することが出来ます。",
         id: "narou",
         icon: "fa-solid fa-house",
-        targetUrl: ["*.syosetu.com", "eparet.net"],
+        targetUrl: ["*.syosetu.com"],
         defaultCategory: "general",
         popup: {
             defaultPage: true
@@ -286,7 +286,7 @@ export const optionCategoryList = [
         description: "みてみん・えぱれっとの表示を設定することが出来ます。",
         id: "mitemin",
         icon: "fa-solid fa-palette",
-        targetUrl: ["mitemin.net", "eparet.net"],
+        targetUrl: ["mitemin.net"],
         defaultCategory: "general",
         popup: {
             defaultPage: true
