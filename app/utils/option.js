@@ -7,7 +7,7 @@ export const defaultOption = {
     extExperimentalFeatures: false,
     extDebug: false,
     extFavoriteOptions: [],
-    extPopupDefaultPage: "__auto__", 
+    extPopupDefaultPage: "__auto__",
     extOptionPageButtons: true,
     extNotifications: true,
 
@@ -24,7 +24,16 @@ export const defaultOption = {
     novelVertical: false,
     novelCustomHeaderScrollHidden: false,
     novelCustomHeaderMode: "scroll",
-    novelCustomHeaderLeft: ["home", "info", "impression", "review", "pdf", "favepisode", "favlist_add", "booklist"],
+    novelCustomHeaderLeft: [
+        "home",
+        "info",
+        "impression",
+        "review",
+        "pdf",
+        "favepisode",
+        "favlist_add",
+        "booklist",
+    ],
     novelCustomHeaderRight: ["option"],
     novelCustomHeaderShowEnactiveItems: false,
     novelCustomHeaderSocialShowsBrandName: false,
@@ -84,7 +93,7 @@ export const defaultOption = {
     yomouRankTop_ShowRaWi: false,
     yomouRankTop_CustomCSS: "",
     //yomouRankTop_DailyShowList: ["101", "102", "201", "202", "301", "302", "303", "304", "305", "306", "307", "401", "402", "403", "404", "9901", "9902", "9903", "9999"],
-    
+
     /* Mypage */
     mypageShowUserId: true,
     mypageNovellistShowReaction: false,
@@ -98,36 +107,6 @@ export const defaultOption = {
     mypageProfileAutoURL: true,
     mypageBlogAutoURL: true,
     mypageBlogCommentAutoURL: false,
-
-    /* Kasasagi */
-    kasasagiCustomStyle: true,
-    kasasagiExportButton: true,
-
-    kasasagiShowGraph_GeneralDay: true,
-    kasasagiShowGraph_GeneralTotal: false,
-    kasasagiShowGraph_ChapterUnique: true,
-    kasasagiShowGraph_DayPV: true,
-    kasasagiShowGraph_DayUnique: true,
-    kasasagiShowGraph_MonthPV: true,
-    kasasagiShowGraph_MonthUnique: true,
-    
-    kasasagiGraphType_GeneralDay: "bar",
-    kasasagiGraphType_GeneralTotal: "bar",
-    kasasagiGraphType_ChapterUnique: "bar",
-    kasasagiGraphType_DayPV: "bar",
-    kasasagiGraphType_DayUnique: "bar",
-    kasasagiGraphType_MonthPV: "bar",
-    kasasagiGraphType_MonthUnique: "bar",
-
-    kasasagiShowTable_API: true,
-    kasasagiShowTable_Rank: true,
-    kasasagiShowTable_ExternalLink: true,
-    kasasagiShowTable_GeneralDay: true,
-    kasasagiShowTable_ChapterUnique: true,
-    //kasasagiShowTable_DayPV: true, //Unused
-    //kasasagiShowTable_DayUnique: true, //Unused
-    //kasasagiShowTable_MonthPV: true, //Unused
-    //kasasagiShowTable_MonthUnique: true, //Unused
 
     /* Mitemin */
     miteminShowIcodeField: true,
@@ -175,92 +154,92 @@ export const defaultOption = {
             "active": false,
             "pattern": "兎に角",
             "regex": false,
-            "replacement": "とにかく"
+            "replacement": "とにかく",
         },
         {
             "active": false,
             "pattern": "兎も角",
             "regex": false,
-            "replacement": "ともかく"
+            "replacement": "ともかく",
         },
         {
             "active": false,
             "pattern": "態々",
             "regex": false,
-            "replacement": "わざわざ"
+            "replacement": "わざわざ",
         },
         {
             "active": false,
             "pattern": "殆ど",
             "regex": false,
-            "replacement": "ほとんど"
+            "replacement": "ほとんど",
         },
         {
             "active": false,
             "pattern": "偶々",
             "regex": false,
-            "replacement": "たまたま"
+            "replacement": "たまたま",
         },
         {
             "active": false,
             "pattern": "勿論",
             "regex": false,
-            "replacement": "もちろん"
+            "replacement": "もちろん",
         },
         {
             "active": false,
             "pattern": "一際",
             "regex": false,
-            "replacement": "ひときわ"
+            "replacement": "ひときわ",
         },
         {
             "active": false,
             "pattern": "流石",
             "regex": false,
-            "replacement": "さすが"
+            "replacement": "さすが",
         },
         {
             "active": false,
             "pattern": "其れ",
             "regex": false,
-            "replacement": "それ"
+            "replacement": "それ",
         },
         {
             "active": false,
             "pattern": "其の",
             "regex": false,
-            "replacement": "その"
+            "replacement": "その",
         },
         {
             "active": false,
             "pattern": "而も",
             "regex": false,
-            "replacement": "しかも"
+            "replacement": "しかも",
         },
         {
             "active": false,
             "pattern": "而る",
             "regex": false,
-            "replacement": "しかる"
+            "replacement": "しかる",
         },
         {
             "active": false,
             "pattern": "而れ",
             "regex": false,
-            "replacement": "しかれ"
+            "replacement": "しかれ",
         },
         {
             "active": false,
             "pattern": "凄く",
             "regex": false,
-            "replacement": "すごく"
+            "replacement": "すごく",
         },
         {
             "active": false,
             "pattern": "凄い",
             "regex": false,
-            "replacement": "すごい"
-        }
+            "replacement": "すごい",
+        },
     ],
 }
 
@@ -282,20 +261,20 @@ export const localSkins = [
             "link": {
                 "color_hover": "rgb(98, 84, 255)",
                 "color_link": "rgb(26, 13, 171)",
-                "color_visited": "#681da8"
+                "color_visited": "#681da8",
             },
             "novel": {
                 "background": "#ffffff",
                 "background_second": "#eeeeee",
-                "color": "rgba(0, 0, 0, 0.87)"
+                "color": "rgba(0, 0, 0, 0.87)",
             },
             "sublist": {
                 "color": "rgba(0, 0, 0, 0.5)",
                 "hover": "rgba(67, 51, 242, 0.7)",
-                "visited": "rgba(50, 38, 181, 0.7)"
-            }
+                "visited": "rgba(50, 38, 181, 0.7)",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "ダーク〔標準〕",
@@ -306,20 +285,20 @@ export const localSkins = [
             "link": {
                 "color_hover": "rgb(152, 189, 235)",
                 "color_link": "rgb(83, 155, 245)",
-                "color_visited": "rgb(135, 122, 245)"
+                "color_visited": "rgb(135, 122, 245)",
             },
             "novel": {
                 "background": "#1d2020",
                 "background_second": "rgb(47, 50, 50)",
-                "color": "rgba(255, 255, 255, 0.92)"
+                "color": "rgba(255, 255, 255, 0.92)",
             },
             "sublist": {
                 "color": "rgba(255, 255, 255, 0.3)",
                 "hover": "rgba(152, 189, 235, 0.7)",
-                "visited": "rgba(114, 142, 176, 0.7)"
-            }
+                "visited": "rgba(114, 142, 176, 0.7)",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "生成り〔標準〕",
@@ -330,20 +309,20 @@ export const localSkins = [
             "link": {
                 "color_hover": "rgb(98, 84, 255)",
                 "color_link": "rgb(26, 13, 171)",
-                "color_visited": "#681da8"
+                "color_visited": "#681da8",
             },
             "novel": {
                 "background": "#f7f6eb",
                 "background_second": "#eeeeee",
-                "color": "rgba(0, 0, 0, 0.87)"
+                "color": "rgba(0, 0, 0, 0.87)",
             },
             "sublist": {
                 "color": "rgba(0, 0, 0, 0.3)",
                 "hover": "rgba(67, 51, 242, 0.7)",
-                "visited": "rgba(50, 38, 181, 0.7)"
-            }
+                "visited": "rgba(50, 38, 181, 0.7)",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "水色〔標準〕",
@@ -354,20 +333,20 @@ export const localSkins = [
             "link": {
                 "color_hover": "rgb(98, 84, 255)",
                 "color_link": "rgb(26, 13, 171)",
-                "color_visited": "#681da8"
+                "color_visited": "#681da8",
             },
             "novel": {
                 "background": "#dfecf4",
                 "background_second": "#b7d2e4",
-                "color": "rgba(0, 0, 0, 0.87)"
+                "color": "rgba(0, 0, 0, 0.87)",
             },
             "sublist": {
                 "color": "rgba(0, 0, 0, 0.5)",
                 "hover": "rgba(67, 51, 242, 0.7)",
-                "visited": "rgba(50, 38, 181, 0.7)"
-            }
+                "visited": "rgba(50, 38, 181, 0.7)",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "標準設定〔小説家になろう〕",
@@ -378,20 +357,20 @@ export const localSkins = [
             "novel": {
                 "background": "#fff",
                 "background_second": "#dfdfdf",
-                "color": "#444"
+                "color": "#444",
             },
             "link": {
                 "color_link": "#03c",
                 "color_visited": "#857",
-                "color_hover": "#393"
+                "color_hover": "#393",
             },
             "sublist": {
                 "color": "#444",
                 "hover": "#9df",
-                "visited": "#73a6bf"
-            }
+                "visited": "#73a6bf",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "ブラックモード1〔小説家になろう〕",
@@ -402,20 +381,20 @@ export const localSkins = [
             "novel": {
                 "background": "#000",
                 "background_second": "#202020",
-                "color": "#fff"
+                "color": "#fff",
             },
             "link": {
                 "color_link": "#fcf",
                 "color_visited": "#857",
-                "color_hover": "#f03"
+                "color_hover": "#f03",
             },
             "sublist": {
                 "color": "#fff",
                 "hover": "#f03",
-                "visited": "#bf0026"
-            }
+                "visited": "#bf0026",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "ブラックモード2〔小説家になろう〕",
@@ -426,20 +405,20 @@ export const localSkins = [
             "novel": {
                 "background": "#000",
                 "background_second": "#202020",
-                "color": "#ccc"
+                "color": "#ccc",
             },
             "link": {
                 "color_link": "#ff9",
                 "color_visited": "#857",
-                "color_hover": "#cf0"
+                "color_hover": "#cf0",
             },
             "sublist": {
                 "color": "#ccc",
                 "hover": "#cf0",
-                "visited": "#99bf00"
-            }
+                "visited": "#99bf00",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "通常1〔小説家になろう〕",
@@ -450,20 +429,20 @@ export const localSkins = [
             "novel": {
                 "background": "#ccf",
                 "background_second": "#d9d9ff",
-                "color": "#444"
+                "color": "#444",
             },
             "link": {
                 "color_link": "#00f",
                 "color_visited": "#009",
-                "color_hover": "#00f"
+                "color_hover": "#00f",
             },
             "sublist": {
                 "color": "#444",
                 "hover": "#00f",
-                "visited": "#0000bf"
-            }
+                "visited": "#0000bf",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "通常2〔小説家になろう〕",
@@ -474,20 +453,20 @@ export const localSkins = [
             "novel": {
                 "background": "#cfc",
                 "background_second": "#b3dfb3",
-                "color": "#444"
+                "color": "#444",
             },
             "link": {
                 "color_link": "#00f",
                 "color_visited": "#009",
-                "color_hover": "#00f"
+                "color_hover": "#00f",
             },
             "sublist": {
                 "color": "#444",
                 "hover": "#00f",
-                "visited": "#0000bf"
-            }
+                "visited": "#0000bf",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "シンプル〔小説家になろう〕",
@@ -498,20 +477,20 @@ export const localSkins = [
             "novel": {
                 "background": "#fafafa",
                 "background_second": "#dbdbdb",
-                "color": "#444"
+                "color": "#444",
             },
             "link": {
                 "color_link": "#00f",
                 "color_visited": "#009",
-                "color_hover": "#393"
+                "color_hover": "#393",
             },
             "sublist": {
                 "color": "#444",
                 "hover": "#393",
-                "visited": "#267326"
-            }
+                "visited": "#267326",
+            },
         },
-        "css": ""
+        "css": "",
     },
     {
         "name": "おすすめ設定〔小説家になろう〕",
@@ -522,21 +501,21 @@ export const localSkins = [
             "novel": {
                 "background": "#edf7ff",
                 "background_second": "#cfd8df",
-                "color": "#000"
+                "color": "#000",
             },
             "link": {
                 "color_link": "#00f",
                 "color_visited": "#009",
-                "color_hover": "#00f"
+                "color_hover": "#00f",
             },
             "sublist": {
                 "color": "#444",
                 "hover": "#00f",
-                "visited": "#0000bf"
-            }
+                "visited": "#0000bf",
+            },
         },
-        "css": ""
-    }
+        "css": "",
+    },
 ]
 
 export const localFontFamily = [
@@ -546,7 +525,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "メイリオ", "Meiryo", 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "明朝体〔デフォルト〕",
@@ -554,7 +533,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, '游明朝',YuMincho,'ヒラギノ明朝 Pr6N','Hiragino Mincho Pr6N','ヒラギノ明朝 ProN','Hiragino Mincho ProN','ヒラギノ明朝 StdN','Hiragino Mincho StdN',HiraMinProN-W3,'HGS明朝B','HG明朝B',serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "Noto Sans〔標準〕",
@@ -562,7 +541,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "Noto Sans JP", sans-serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "游ゴシック〔標準〕",
@@ -570,7 +549,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "Yu Gothic", 游ゴシック, YuGothic, 游ゴシック体, sans-serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "源暎エムゴ〔標準〕",
@@ -579,7 +558,7 @@ export const localFontFamily = [
         "show": true,
         "font": `NTSymbol, "源暎エムゴ", sans-serif`,
         "css": "",
-        "license": `Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+        "license": `Copyright (c) 2020-2021, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`,
     },
     {
         "name": "BIZ UDPゴシック〔標準〕",
@@ -587,7 +566,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "BIZ UDPGothic", sans-serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "新コミック体〔標準〕",
@@ -596,7 +575,7 @@ export const localFontFamily = [
         "show": true,
         "font": `NTSymbol, "新コミック体", sans-serif`,
         "css": "",
-        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
+        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`,
     },
     {
         "name": "DotGothic16〔標準〕",
@@ -605,7 +584,7 @@ export const localFontFamily = [
         "show": true,
         "font": `NTSymbol, "DotGothic16", sans-serif`,
         "css": "",
-        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`
+        "license": `Copyright (C) 2014 Adobe Systems Incorporated. All Rights Reserved.\nCopyright (C) 2014 FONT910. All Rights Reserved.\nLicensed under the Apache License, Version 2.0 (http://www.apache.org/licenses/LICENSE-2.0)`,
     },
     {
         "name": "Noto Serif〔標準〕",
@@ -613,7 +592,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "Noto Serif JP", serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "BIZ UDP明朝〔標準〕",
@@ -621,7 +600,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "BIZ UDPMincho", serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "さわらび明朝〔標準〕",
@@ -629,7 +608,7 @@ export const localFontFamily = [
         "customizable": false,
         "show": true,
         "font": `NTSymbol, "Sawarabi Mincho", serif`,
-        "css": ""
+        "css": "",
     },
     {
         "name": "源暎こぶり明朝〔標準〕",
@@ -638,7 +617,7 @@ export const localFontFamily = [
         "show": true,
         "font": `NTSymbol, "源暎こぶり明朝", serif`,
         "css": "",
-        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`,
     },
     {
         "name": "源暎ちくご明朝〔標準〕",
@@ -647,7 +626,7 @@ export const localFontFamily = [
         "show": true,
         "font": `NTSymbol, "源暎ちくご明朝", serif`,
         "css": "",
-        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`
+        "license": `Copyright (c) 2017-2022, おたもん (http://okoneya.jp/font/), with Reserved Font Name '源暎' and 'GenEi'.\nThis Font Software is licensed under the SIL Open Font License, Version 1.1.`,
     },
 ]
 
@@ -655,17 +634,17 @@ export const localFont = {
     "font-size": 100,
     "line-height": 180,
     "text-rendering": "optimizeLegibility",
-    "width": 600
+    "width": 600,
 }
 
 export const replacePattern = {
     pattern: "",
     replacement: "",
     regex: false,
-    active: true
+    active: true,
 }
 
 export const narouNetwrokUrlPattern = [
     /^(h?)(ttps?:\/\/(.*)\.syosetu\.com)/,
-    /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/
+    /^(h?)(ttps?:\/\/kasasagi\.hinaproject\.com)/,
 ]
